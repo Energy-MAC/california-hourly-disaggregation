@@ -1,0 +1,17 @@
+"""
+SCE dataset.
+
+This one is not actually a scraper.
+
+Go to https://drpep.sce.com/drpep/?page=Page#data_s=id%3AdataSource_2-substations%3A673
+
+On the left side of the screen, at the second to bottom-left icon of a cloud,
+press it, this is "Bulk Download".
+
+We want Historical Substation Load Profiles -> Download All.
+
+Unzip this file and place it in /data/raw/sce/
+
+NOTE: Can just do the scraper:
+python scripts/scrape_sce.py layer --layer-id 2
+"""
