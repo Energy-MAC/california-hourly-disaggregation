@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(python scripts/scrape_pacificorp.py attributes)",
+      "Bash(ls data/processed/)",
+      "Bash(ls notebooks/)",
+      "Bash(python scripts/process_eia_interchange.py)",
+      "Bash(pip install *)",
+      "Bash(mkdir \"c:\\\\Users\\\\cloit\\\\Documents\\\\california-hourly-disaggregation\\\\data\\\\processed\\\\iepr\" 2>/dev/null; echo done)",
+      "Bash(python scripts/process_iepr.py)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\cloit\\Documents\\california-hourly-disaggregation\\data\\processed"
+    ]
+  }
+}

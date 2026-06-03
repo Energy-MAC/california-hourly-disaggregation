@@ -59,6 +59,7 @@ class EIAClient:
         endpoint: str,
         params: dict,
         page_size: int = _DEFAULT_PAGE_SIZE,
+        start_offset: int = 0,
     ):
         """
         Yield (rows, total_count) for each API page until all records are fetched.
@@ -71,13 +72,15 @@ class EIAClient:
             Query parameters (excluding api_key, offset, length).
         page_size : int
             Rows per request. EIA maximum is 5000.
+        start_offset : int
+            API offset to begin from. Non-zero when resuming an interrupted scrape.
 
         Yields
         ------
         tuple[list[dict], int]
             (page_rows, total_record_count)
         """
-        offset = 0
+        offset = start_offset
         total: int | None = None
         while True:
             payload = self._fetch_page(endpoint, params, offset, page_size)
