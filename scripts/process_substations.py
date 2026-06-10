@@ -3,7 +3,7 @@ Normalizes raw substation data from all utilities into two tidy CSVs.
 
 Output files
 ------------
-  data/processed/substations/substation_locations.csv
+  data/processed/substations/substation_attributes.csv
       utility, substation_name, latitude, longitude
 
   data/processed/substations/substation_load_profiles.csv
@@ -31,6 +31,9 @@ Source schema notes
 
   PacifiCorp (pacificorp_layer1_*.csv)
       Name, longitude, latitude; no load data
+
+    Example Call:
+    python scripts/process_substations.py
 """
 from __future__ import annotations
 
@@ -72,7 +75,9 @@ ATTR_COLS = [
 ]
 PROFILE_COLS = [
     "utility", "substation_name", "latitude", "longitude",
-    "year", "month", "hour", "min_load", "max_load",
+    "year", "month", "hour", 
+    "min_load",         # all utilities in MW (PGE: converted from kW; SDGE: converted from kW; SCE: native MW)
+    "max_load",         # all utilities in MW
 ]
 
 
@@ -88,6 +93,8 @@ def load_pge() -> pd.DataFrame:
         df = df.rename(columns={"subname": "substation_name", "high": "max_load", "low": "min_load"})
         df["utility"] = "pge"
         df["year"] = ""
+        df['min_load'] = df['min_load'].astype(float) / 1000
+        df['max_load'] = df['max_load'].astype(float) / 1000
         frames.append(df[PROFILE_COLS])
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=PROFILE_COLS)
 
@@ -184,6 +191,10 @@ def load_sdge() -> pd.DataFrame:
             if col not in pivoted.columns:
                 pivoted[col] = ""
 
+        # Raw SDGE profiles are in kW; convert to MW for consistency with PGE and SCE.
+        pivoted["min_load"] = pd.to_numeric(pivoted["min_load"], errors="coerce") / 1000
+        pivoted["max_load"] = pd.to_numeric(pivoted["max_load"], errors="coerce") / 1000
+
         frames.append(pivoted[PROFILE_COLS])
 
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=PROFILE_COLS)
@@ -203,9 +214,9 @@ def load_pacificorp() -> pd.DataFrame:
 
 # ── Attribute enrichment ─────────────────────────────────────────────────────
 
-def _enrich_locations(locs: pd.DataFrame) -> pd.DataFrame:
+def _enrich_attributes(attributesFull: pd.DataFrame) -> pd.DataFrame:
     """
-    Join available physical attributes onto the locations DataFrame.
+    Join available physical attributes onto the attributes DataFrame.
 
     Sources (each is optional — silently skipped if file absent):
       SDGE: data/raw/sdge/sdge_substation_attributes.csv
@@ -227,21 +238,23 @@ def _enrich_locations(locs: pd.DataFrame) -> pd.DataFrame:
             existing_der, net_min_daytime_load_mw, circuit_count.
             Scrape with: python scripts/scrape_pacificorp.py attributes
     """
-    locs = locs.copy()
+    attributesFull = attributesFull.copy()
     for col in ATTR_COLS:
-        locs[col] = ""
+        attributesFull[col] = ""
 
     # SDGE — FeatureServer names are uppercase; load-profile names are title-case.
     # Join case-insensitively by normalising both sides to uppercase.
     sdge_attrs_path = ROOT / "data/raw/sdge/sdge_substation_attributes.csv"
     if sdge_attrs_path.exists():
+        #There are no duplicate substation names in the SDGE attributes file, but we'll drop_duplicates just in case to avoid a potential explosion of rows during the join.
         attrs = pd.read_csv(sdge_attrs_path, dtype=str).drop_duplicates("substation_name")
+        attrs['voltage_kv'] = attrs['voltage_kv'].str.replace('kV', '')
         attrs_idx = attrs.set_index(attrs["substation_name"].str.upper())
-        sdge_mask = locs["utility"] == "sdge"
-        lookup_keys = locs.loc[sdge_mask, "substation_name"].str.upper()
+        sdge_mask = attributesFull["utility"] == "sdge"
+        lookup_keys = attributesFull.loc[sdge_mask, "substation_name"].str.upper()
         for col in ATTR_COLS:
             if col in attrs_idx.columns:
-                locs.loc[sdge_mask, col] = lookup_keys.map(attrs_idx[col]).fillna("")
+                attributesFull.loc[sdge_mask, col] = lookup_keys.map(attrs_idx[col]).fillna("")
 
     # SCE — Table 3 sub_name uses mixed case; bulk download SUBSTATION uses different
     # casing for "P.T." abbreviations. Join case-insensitively via uppercase normalisation.
@@ -254,15 +267,15 @@ def _enrich_locations(locs: pd.DataFrame) -> pd.DataFrame:
     if sce_attrs_path.exists():
         sce_attrs = pd.read_csv(sce_attrs_path, dtype=str).drop_duplicates("substation_name")
         sce_attrs_idx = sce_attrs.set_index(sce_attrs["substation_name"].str.upper())
-        sce_mask = locs["utility"] == "sce"
-        lookup_keys = locs.loc[sce_mask, "substation_name"].str.upper()
+        sce_mask = attributesFull["utility"] == "sce"
+        lookup_keys = attributesFull.loc[sce_mask, "substation_name"].str.upper()
         for col in ATTR_COLS:
             if col in sce_attrs_idx.columns:
-                locs.loc[sce_mask, col] = lookup_keys.map(sce_attrs_idx[col]).fillna("")
+                attributesFull.loc[sce_mask, col] = lookup_keys.map(sce_attrs_idx[col]).fillna("")
         # Convert nominal voltage to real voltage using SCE's system voltage map.
-        nominal = pd.to_numeric(locs.loc[sce_mask, "voltage_kv"], errors="coerce")
+        nominal = pd.to_numeric(attributesFull.loc[sce_mask, "voltage_kv"], errors="coerce")
         real_kv = nominal.map(_SCE_VOLTAGE_MAP)
-        locs.loc[sce_mask, "voltage_kv"] = (
+        attributesFull.loc[sce_mask, "voltage_kv"] = (
             real_kv.where(real_kv.notna(), "").astype(str).replace("nan", "")
         )
 
@@ -275,7 +288,7 @@ def _enrich_locations(locs: pd.DataFrame) -> pd.DataFrame:
             .drop_duplicates("substation_name")
             .set_index("substation_name")
         )
-        pge_mask = locs["utility"] == "pge"
+        pge_mask = attributesFull["utility"] == "pge"
 
         # Direct string mappings
         _pge_direct = {
@@ -287,8 +300,8 @@ def _enrich_locations(locs: pd.DataFrame) -> pd.DataFrame:
         }
         for out_col, raw_col in _pge_direct.items():
             if raw_col in pge_attrs.columns:
-                locs.loc[pge_mask, out_col] = (
-                    locs.loc[pge_mask, "substation_name"].map(pge_attrs[raw_col]).fillna("")
+                attributesFull.loc[pge_mask, out_col] = (
+                    attributesFull.loc[pge_mask, "substation_name"].map(pge_attrs[raw_col]).fillna("")
                 )
 
         # kW → MW conversion
@@ -301,31 +314,31 @@ def _enrich_locations(locs: pd.DataFrame) -> pd.DataFrame:
             if raw_col in pge_attrs.columns:
                 mw_vals = (
                     pd.to_numeric(
-                        locs.loc[pge_mask, "substation_name"].map(pge_attrs[raw_col]),
+                        attributesFull.loc[pge_mask, "substation_name"].map(pge_attrs[raw_col]),
                         errors="coerce",
                     ) / 1000
                 ).round(6)
-                locs.loc[pge_mask, out_col] = mw_vals.where(mw_vals.notna(), "").astype(str).replace("nan", "")
+                attributesFull.loc[pge_mask, out_col] = mw_vals.where(mw_vals.notna(), "").astype(str).replace("nan", "")
 
     # PacifiCorp — DG Readiness names use title case with possible trailing spaces;
-    # layer 1 (locations source) uses all-caps.  Join via strip().upper() on both sides.
+    # layer 1 (attributes source) uses all-caps.  Join via strip().upper() on both sides.
     pac_attrs_path = ROOT / "data/raw/pacificorp/pacificorp_substation_attributes.csv"
     if pac_attrs_path.exists():
         pac_attrs = pd.read_csv(pac_attrs_path, dtype=str).drop_duplicates("substation_name")
         # Build index keyed on strip().upper() of the raw name
         pac_attrs_idx = pac_attrs.set_index(pac_attrs["substation_name"].str.strip().str.upper())
-        pac_mask = locs["utility"] == "pacificorp"
-        lookup_keys = locs.loc[pac_mask, "substation_name"].str.strip().str.upper()
+        pac_mask = attributesFull["utility"] == "pacificorp"
+        lookup_keys = attributesFull.loc[pac_mask, "substation_name"].str.strip().str.upper()
         for col in ("existing_der", "net_min_daytime_load_mw", "circuit_count"):
             if col in pac_attrs_idx.columns:
-                locs.loc[pac_mask, col] = lookup_keys.map(pac_attrs_idx[col]).fillna("")
+                attributesFull.loc[pac_mask, col] = lookup_keys.map(pac_attrs_idx[col]).fillna("")
 
     # Normalise attr columns: numeric coercion from .loc assignment can turn
     # our initial "" sentinels into NaN — convert everything back to plain strings.
     for col in ATTR_COLS:
-        locs[col] = locs[col].fillna("").astype(str).replace("nan", "")
+        attributesFull[col] = attributesFull[col].fillna("").astype(str).replace("nan", "")
 
-    return locs
+    return attributesFull
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -357,21 +370,21 @@ def main() -> None:
     mb = out_profiles.stat().st_size / 1024 / 1024
     print(f"\nLoad profiles : {len(profiles):,} rows -> {out_profiles.relative_to(ROOT)}  ({mb:.1f} MB)")
 
-    # ── Locations (deduplicated, then enriched) ────────────────────────────────
-    profile_locs = profiles[LOC_COLS].drop_duplicates(["utility", "substation_name"])
-    locations = pd.concat([profile_locs, pac[LOC_COLS]], ignore_index=True)
-    locations = locations.drop_duplicates(["utility", "substation_name"])
-    locations = _enrich_locations(locations)
+    # ── Attributes (deduplicated, then enriched) ────────────────────────────────
+    profile_attrs = profiles[LOC_COLS].drop_duplicates(["utility", "substation_name"])
+    attributes = pd.concat([profile_attrs, pac[LOC_COLS]], ignore_index=True)
+    attributes = attributes.drop_duplicates(["utility", "substation_name"])
+    attributes = _enrich_attributes(attributes)
 
-    out_locs = OUT_DIR / "substation_locations.csv"
-    locations[LOC_COLS + ATTR_COLS].to_csv(out_locs, index=False)
+    out_attrs = OUT_DIR / "substation_attributes.csv"
+    attributes[LOC_COLS + ATTR_COLS].to_csv(out_attrs, index=False)
 
-    print(f"Locations     : {len(locations):,} rows -> {out_locs.relative_to(ROOT)}")
+    print(f"Attributes     : {len(attributes):,} rows -> {out_attrs.relative_to(ROOT)}")
 
     # ── Summary by utility ────────────────────────────────────────────────────
     print()
     print("Substations per utility:")
-    for util, grp in locations.groupby("utility"):
+    for util, grp in attributes.groupby("utility"):
         n_coords = grp[["latitude", "longitude"]].replace("", pd.NA).dropna().shape[0]
         n_voltage = (grp["voltage_kv"].replace("", pd.NA).dropna().shape[0])
         print(f"  {util:<12}  {len(grp):>5} substations  "

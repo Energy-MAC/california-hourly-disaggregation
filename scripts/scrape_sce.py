@@ -52,6 +52,7 @@ from src.data.sce.sce_scraper import (
     convert_layer2_to_mw,
     discover_layer,
     discover_service,
+    scrape_ica_layer_substations,
     scrape_layer,
     scrape_substation_attributes,
 )
@@ -68,6 +69,12 @@ def cmd_discover(args: argparse.Namespace) -> None:
 
 def cmd_attributes(args: argparse.Namespace) -> None:
     out = scrape_substation_attributes(output_dir=Path(args.output_dir))
+    mb = out.stat().st_size / 1024 / 1024
+    print(f"\nOutput: {out}  ({mb:.1f} MB)")
+
+
+def cmd_ica_substations(args: argparse.Namespace) -> None:
+    out = scrape_ica_layer_substations(output_dir=Path(args.output_dir))
     mb = out.stat().st_size / 1024 / 1024
     print(f"\nOutput: {out}  ({mb:.1f} MB)")
 
@@ -107,7 +114,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    # ── attributes ────────────────────────────────────────────────────────────
+    # ── attributes (ICA Tables Table 3) ──────────────────────────────────────
     pv = sub.add_parser(
         "attributes",
         help="Scrape per-substation physical/DER attributes from ICA_Tables Table 3 (voltage, gen, load, customer mix).",
@@ -116,15 +123,34 @@ def build_parser() -> argparse.ArgumentParser:
                     help=f"Output directory. Default: {DATA_RAW_DIR}")
     pv.set_defaults(func=cmd_attributes)
 
-    # ── convert-to-mw [DEPRECATED] ───────────────────────────────────────────
+    # ── ica-substations (ICA_Layer layer 0, alternative) ──────────────────────
+    pias = sub.add_parser(
+        "ica-substations",
+        help=(
+            "Scrape ICA_Layer/Substations (layer 0) as an alternative attributes source. "
+            "Writes sce_ica_layer_substations_alt.csv (~735 substations with geometry, "
+            "SUB_TYPE, SUBSTATION_VOLTAGE ratio string, and DER capacity fields). "
+            "Compare against 'attributes' output to decide which is the superset."
+        ),
+    )
+    pias.add_argument("--output-dir", default=str(DATA_RAW_DIR), metavar="PATH",
+                      help=f"Output directory. Default: {DATA_RAW_DIR}")
+    pias.set_defaults(func=cmd_ica_substations)
+
+    # ── convert-to-mw ────────────────────────────────────────────────────────
     pm = sub.add_parser(
         "convert-to-mw",
-        help="[DEPRECATED] Convert layer2 Amps to MW. Produced inaccurate results; use DRPEP bulk download instead.",
+        help=(
+            "Convert layer2 Amps to MW using per-substation voltage from "
+            "sce_substation_attributes.csv. Writes sce_layer2_mw_part001.csv "
+            "with MIN_LOAD_A/MAX_LOAD_A (Amps) and MIN_LOAD/MAX_LOAD (MW)."
+        ),
     )
     pm.add_argument("--voltage-csv", default=None, metavar="PATH",
-                    help="Path to sce_substation_voltages.csv. Auto-built if absent.")
+                    help="Optional path to a voltage CSV with a dominant_voltage_kv column. "
+                         "Defaults to sce_substation_attributes.csv in --output-dir.")
     pm.add_argument("--output-dir", default=str(DATA_RAW_DIR), metavar="PATH",
-                    help=f"Directory containing layer2 CSVs and voltage CSV. Default: {DATA_RAW_DIR}")
+                    help=f"Directory containing layer2 CSVs. Default: {DATA_RAW_DIR}")
     pm.set_defaults(func=cmd_convert_to_mw)
 
     # ── discover ──────────────────────────────────────────────────────────────

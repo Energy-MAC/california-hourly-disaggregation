@@ -155,7 +155,7 @@ def scrape_layer(
     max_file_mb : float
         Rotate to a new chunk file when the current CSV reaches this size (MB).
     page_size : int
-        Records per API request. Most ArcGIS servers cap at 1000–2000.
+        Records per API request. Most ArcGIS servers cap at 1000-2000.
 
     Returns
     -------
@@ -205,6 +205,83 @@ def scrape_layer(
         max_file_mb=max_file_mb,
         resume=resume,
     )
+
+
+# ── Substation attributes — ICA_Layer/Substations (layer 0, alternative) ─────
+
+#: All attribute + geometry columns returned from ICA_Layer/Substations
+_ICA_LAYER_SUBST_COLS = [
+    "SUB_NAME", "SUBST_ID", "SYS_NAME",
+    "SUB_TYPE", "SUB_TYPE_LEGEND",
+    "SUBSTATION_VOLTAGE",            # ratio string, e.g. "66/12 kV"
+    "EXISTING_GEN", "QUEUED_GEN", "TOTAL_GEN",
+    "PROJECTED_LOAD", "PENETRATION_LEVEL", "MAX_REMAIN_CAP",
+    "NOTE", "OBJECTID",
+    "longitude", "latitude",         # WGS84, from geometry
+]
+
+
+def scrape_ica_layer_substations(output_dir: Path = DATA_RAW_DIR) -> Path:
+    """
+    Scrape ICA_Layer/Substations (FeatureServer layer 0) as an alternative
+    per-substation attributes source.
+
+    Source
+    ------
+    ICA_Layer FeatureServer, layer 0 (Substations)
+    https://services5.arcgis.com/z6hI6KRjKHvhNO0r/ArcGIS/rest/services/ICA_Layer/FeatureServer/0
+
+    ~735 records as of 2025.
+
+    Comparison with scrape_substation_attributes() (ICA Tables Table 3)
+    -------------------------------------------------------------------
+    Feature                  ICA_Layer/Substations   ICA Tables Table 3
+    ----------------------   ----------------------   ------------------
+    Coverage                 ~735 substations         ~1220 substations
+    Geometry (lat/lon)       YES (built-in)           NO
+    SUB_TYPE / legend        YES                      NO
+    Voltage representation   ratio string "66/12 kV"  dominant circuit kV (float)
+    Circuit count            NO                       YES
+    Customer mix (res/com)   NO                       YES
+
+    Both cover: SUBST_ID, SYS_NAME, EXISTING_GEN, QUEUED_GEN, TOTAL_GEN,
+    PROJECTED_LOAD, PENETRATION_LEVEL, MAX_REMAIN_CAP.
+
+    Output
+    ------
+    data/raw/sce/sce_ica_layer_substations_alt.csv
+
+    Column names match the raw ArcGIS field names (uppercase).
+    Geometry is flattened to longitude / latitude (WGS84).
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    client = ArcGISClient(_SCE_ICA_LAYER_URL)
+
+    print("Fetching ICA_Layer/Substations (layer 0) ...")
+    rows_out: list[dict] = []
+
+    for rows, total in client.paginate_layer(
+        0,
+        out_fields="*",
+        order_by="OBJECTID",
+        include_geometry=True,
+        out_sr=4326,
+    ):
+        rows_out.extend(rows)
+        print(f"  {len(rows_out)}/{total}", end="\r")
+
+    print(f"\n  {len(rows_out)} substations fetched.")
+
+    out_path = output_dir / "sce_ica_layer_substations_alt.csv"
+    with open(out_path, "w", newline="", encoding="utf-8") as fh:
+        writer = _csv.DictWriter(fh, fieldnames=_ICA_LAYER_SUBST_COLS, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows_out)
+
+    print(f"  {len(rows_out)} rows -> {out_path}")
+    return out_path
 
 
 # ── Substation attributes (Table 3) ──────────────────────────────────────────
@@ -372,43 +449,80 @@ def scrape_substation_attributes(
 
 # ── Amps -> MW conversion (Table 2) ──────────────────────────────────────────
 
+#: Fixed output column order for sce_layer2_mw_part001.csv
+_LAYER2_MW_FIELDS = [
+    "YEAR", "MONTH", "HOUR", "SUBSTATION",
+    "MIN_LOAD_A", "MAX_LOAD_A",   # original Amp values preserved
+    "MIN_LOAD", "MAX_LOAD",       # converted MW values
+    "MONTHLABEL", "OBJECTID", "longitude", "latitude",
+]
+
+
 def convert_layer2_to_mw(
     voltage_csv: Optional[Path] = None,
     output_dir: Path = DATA_RAW_DIR,
 ) -> Path:
     """
-    [DEPRECATED] Convert sce_layer2_*.csv (Amps) to MW via per-substation voltage.
+    Convert sce_layer2_*_part*.csv (MIN_LOAD / MAX_LOAD in Amps) to MW using
+    per-substation voltage, and write sce_layer2_mw_part001.csv.
 
-    The conversion produced inaccurate results. Use the DRPEP bulk download
-    (scripts/ingest_sce_bulk_download.py) for MW data instead.
-    Output files are in data/raw/sce/deprecated/.
-
-    Original docstring: Convert existing sce_layer2_*.csv (MIN_LOAD / MAX_LOAD in Amps) to MW and
-    write sce_layer2_mw_part001.csv with the same schema.
-
-    Loads per-substation voltage from sce_substation_voltages.csv (runs
-    scrape_substation_voltages() first if the file is absent).
+    The original Amp values are preserved as MIN_LOAD_A / MAX_LOAD_A columns.
+    The converted MW values use the standard MIN_LOAD / MAX_LOAD column names
+    so that the output combines directly with sce_bulk_download_all.csv (which
+    is already in MW) in ingest_sce_combined.py.
 
     Conversion: MW = Amps x sqrt(3) x 0.95 x V_kV / 1000
+    (three-phase line-to-line, power factor 0.95)
 
-    Substations with no voltage entry are written unconverted and listed at the end.
+    Voltage source (in priority order)
+    -----------------------------------
+    1. voltage_csv argument if provided (expected column: dominant_voltage_kv)
+    2. sce_substation_attributes.csv in output_dir (column: voltage_kv)
+       Run: python scripts/scrape_sce.py attributes
+
+    Substations with no voltage entry have MIN_LOAD / MAX_LOAD written as empty
+    string and are listed at the end of the run.
+
+    Output schema
+    -------------
+    YEAR, MONTH, HOUR, SUBSTATION,
+    MIN_LOAD_A, MAX_LOAD_A,   (Amps — original scraped values)
+    MIN_LOAD, MAX_LOAD,       (MW   — converted; empty if no voltage available)
+    MONTHLABEL, OBJECTID, longitude, latitude
     """
     output_dir = Path(output_dir)
-    if voltage_csv is None:
-        voltage_csv = output_dir / "sce_substation_voltages.csv"
-    if not voltage_csv.exists():
-        raise FileNotFoundError(
-            f"{voltage_csv} not found. This function is deprecated; "
-            "see sce_substation_attributes.csv for voltage data."
-        )
 
+    # ── Build voltage lookup ──────────────────────────────────────────────────
     voltage_lookup: dict[str, Optional[float]] = {}
-    with open(voltage_csv, newline="", encoding="utf-8") as fh:
-        for row in _csv.DictReader(fh):
-            kv_str = row.get("dominant_voltage_kv", "")
-            voltage_lookup[row["substation_name"]] = float(kv_str) if kv_str else None
-    print(f"Loaded voltage for {len(voltage_lookup)} substations.")
 
+    if voltage_csv is not None:
+        voltage_csv = Path(voltage_csv)
+        if not voltage_csv.exists():
+            raise FileNotFoundError(f"Voltage CSV not found: {voltage_csv}")
+        with open(voltage_csv, newline="", encoding="utf-8") as fh:
+            for row in _csv.DictReader(fh):
+                kv_str = row.get("dominant_voltage_kv", "")
+                voltage_lookup[row["substation_name"]] = float(kv_str) if kv_str else None
+        print(f"Loaded voltage for {len(voltage_lookup)} substations from {voltage_csv.name}.")
+    else:
+        attrs_path = output_dir / "sce_substation_attributes.csv"
+        if not attrs_path.exists():
+            raise FileNotFoundError(
+                f"{attrs_path} not found.\n"
+                "Run: python scripts/scrape_sce.py attributes"
+            )
+        with open(attrs_path, newline="", encoding="utf-8") as fh:
+            for row in _csv.DictReader(fh):
+                kv_str = str(row.get("voltage_kv", "") or "").strip()
+                try:
+                    voltage_lookup[row["substation_name"]] = float(kv_str) if kv_str else None
+                except ValueError:
+                    voltage_lookup[row["substation_name"]] = None
+        n_with_volt = sum(1 for v in voltage_lookup.values() if v is not None)
+        print(f"Loaded voltage for {n_with_volt}/{len(voltage_lookup)} substations "
+              f"from {attrs_path.name}.")
+
+    # ── Convert and write ─────────────────────────────────────────────────────
     layer2_files = sorted(output_dir.glob("sce_layer2_earliest_latest_*.csv"))
     if not layer2_files:
         raise FileNotFoundError(f"No sce_layer2_earliest_latest_*.csv in {output_dir}")
@@ -418,16 +532,18 @@ def convert_layer2_to_mw(
     rows_written = 0
 
     with open(out_path, "w", newline="", encoding="utf-8") as fout:
-        writer: Optional[_csv.DictWriter] = None
+        writer = _csv.DictWriter(fout, fieldnames=_LAYER2_MW_FIELDS, extrasaction="ignore")
+        writer.writeheader()
         for src in layer2_files:
             with open(src, newline="", encoding="utf-8-sig") as fin:
-                reader = _csv.DictReader(fin)
-                if writer is None:
-                    writer = _csv.DictWriter(fout, fieldnames=reader.fieldnames)
-                    writer.writeheader()
-                for row in reader:
+                for row in _csv.DictReader(fin):
                     sub = row["SUBSTATION"]
                     v_kv = voltage_lookup.get(sub)
+
+                    # Preserve original Amp values under renamed columns
+                    row["MIN_LOAD_A"] = row["MIN_LOAD"]
+                    row["MAX_LOAD_A"] = row["MAX_LOAD"]
+
                     if v_kv is not None:
                         try:
                             row["MIN_LOAD"] = round(
@@ -437,15 +553,19 @@ def convert_layer2_to_mw(
                                 float(row["MAX_LOAD"]) * _SQRT3 * _PF * v_kv / 1000, 6
                             )
                         except (ValueError, TypeError):
-                            pass
+                            row["MIN_LOAD"] = ""
+                            row["MAX_LOAD"] = ""
                     else:
                         no_voltage.add(sub)
+                        row["MIN_LOAD"] = ""
+                        row["MAX_LOAD"] = ""
+
                     writer.writerow(row)
                     rows_written += 1
 
     print(f"Wrote {rows_written:,} rows -> {out_path}")
     if no_voltage:
-        print(f"  {len(no_voltage)} substations had no voltage (left unconverted):")
+        print(f"  {len(no_voltage)} substations had no voltage (MIN_LOAD/MAX_LOAD left empty):")
         for s in sorted(no_voltage):
             print(f"    {s}")
     return out_path

@@ -1,0 +1,86 @@
+Substation Source Gap Analysis
+Generated: 2026-06-09
+Script: scripts/compare_substations.py
+========================================
+
+Summary: there ARE a few systematic patterns worth knowing. Most missing
+substations fall into identifiable categories rather than being random noise.
+
+─────────────────────────────────────────────
+PGE: 42 attrs-only (not in loads)
+─────────────────────────────────────────────
+38 of 42 (90%) are flagged redacted="Yes" in pge_substation_attributes.csv.
+PGE publishes capacity attributes for redacted substations in GRIP but omits
+their load profiles from the map layer. The remaining 4 are likely name
+mismatches (e.g. "POTTER VALLEY PH" vs "POTTER VALLEY P H" is one such pair
+in the file). Conclusion: redaction explains the PGE gap entirely.
+
+─────────────────────────────────────────────
+SCE: ~472 T3 substations not in loads / ~481 not in alt
+─────────────────────────────────────────────
+The same group drives both gaps (the overlap is almost complete).
+73% of the T3-only substations have voltage_kv = NaN, versus essentially none
+in the substations that have load profiles. The T3 entries without voltage all
+carry a note_sub about deliverability (ICA interconnection capacity language),
+suggesting they appear in SCE's ICA capacity table as "studied" nodes but do
+not have metered load histories exposed via the scraper or bulk download.
+58-63 of them are P.T. (pass-through) substations — these are switching nodes
+that route load but have no individual meter.
+
+Conclusion: T3 is padded with ICA deliverability entries for nodes that either
+(a) have no metered load (P.T./switching), or (b) are transmission/capacity
+study nodes that SCE tracks for interconnection purposes but does not publish
+load profiles for.
+
+─────────────────────────────────────────────
+SCE: 30 alt (ICA_Layer) substations not in loads
+─────────────────────────────────────────────
+SUB_TYPE breakdown: 12 "A -- District Pole Top", 12 "S -- Sub-transmission",
+4 "T -- Transmission", 2 "D -- Distribution".
+Pole-top and sub/transmission substations typically serve bulk transmission or
+very small distribution taps that are not included in the per-substation ICA
+load-profile tables. They appear in the ICA_Layer geometry (so they have
+lat/lon and capacity fields) but are absent from the Substation Load Profile
+layer that the scraper and bulk download pull from.
+
+Conclusion: type A/S/T nodes are geometry-registered but not load-profiled.
+
+─────────────────────────────────────────────
+SCE scrape vs bulk: 39 scrape-only / 3 bulk-only
+─────────────────────────────────────────────
+Bulk-only (3): "Globemaster P.T.", "Mailbox P.T.", "Masonry P.T." — all P.T.,
+all year 2025-2026. The scrape only captured through 2024; the bulk download
+was newer and picked up recently added P.T. substations. Temporal coverage
+difference, not a content difference.
+
+Scrape-only (39): spread across 2017-2024, no year concentration. Many are
+P.T. substations (at least 10+ visible in the name list). These likely
+represent substations that were present in the live API when scraped but were
+not included in the bulk export (perhaps decommissioned, renamed, or excluded
+from the bulk-download snapshot). No clear single cause — this is probably
+messy data.
+
+─────────────────────────────────────────────
+Utility vs basin name-join gaps (B/C sections)
+─────────────────────────────────────────────
+The "only in source" substations that do not name-match the basin are
+plausibly real substations not in the 2022 CEC dataset (basin is a 2022
+snapshot; utility data covers 2017-2026). The spatial join shows that
+name-matched pairs are consistently within 1 km (91% agreement at 0-1 km
+for PGE/SCE), so the coordinate quality of matched pairs is high. The
+unmatched fraction is not due to coordinate error — those substations are
+genuinely absent from the basin dataset.
+
+─────────────────────────────────────────────
+Bottom line for source selection
+─────────────────────────────────────────────
+- Use alt (ICA_Layer) when you need lat/lon: its coordinate quality matches
+  basin at median 0.1 km; it covers 95% of the substations that have load
+  profiles.
+- T3 adds ~480 substations over alt, but those extras are mostly P.T. nodes
+  and ICA deliverability entries without load data — they are unlikely to be
+  useful for load disaggregation.
+- Bulk download is slightly smaller than scrape but covers 2025-2026; scrape
+  has 39 extras spread across years with no clear pattern.
+- PGE: the 42 attrs-only substations will never have load data (redacted);
+  safe to treat attrs as a superset and loads as the operational subset.
