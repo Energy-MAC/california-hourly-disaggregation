@@ -1,0 +1,4 @@
+source,YEAR,MONTH,HOUR,SUBSTATION,MIN_LOAD_A,MAX_LOAD_A,MIN_LOAD,MAX_LOAD,MONTHLABEL,OBJECTID,longitude,latitude
+bulk,2025,0,0,Globemaster P.T.,,,0.0,0.0,"JAN, 00",,,
+bulk,2026,0,0,Mailbox P.T.,,,0.06,0.08,"JAN, 00",,,
+bulk,2026,0,0,Masonry P.T.,,,0.06,0.08,"JAN, 00",,,

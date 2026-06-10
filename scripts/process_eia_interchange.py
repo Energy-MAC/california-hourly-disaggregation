@@ -145,7 +145,7 @@ def process_region(out_dir: Path = OUT_DIR) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     frames = []
-    for glob in ("*region-data_BANC-CISO-*", "*region-data_CAL_*"):
+    for glob in ["eia_rto-region-data_BANC-CISO-*"]:#, "*region-data_CAL_*"
         paths = sorted(RAW_DIR.glob(glob))
         if not paths:
             print(f"  (no files matched {glob} — skipping)")

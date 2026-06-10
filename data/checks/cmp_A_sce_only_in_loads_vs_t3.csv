@@ -1,0 +1,6 @@
+source,YEAR,MONTH,HOUR,SUBSTATION,MIN_LOAD_A,MAX_LOAD_A,MIN_LOAD,MAX_LOAD,MONTHLABEL,OBJECTID,longitude,latitude
+scrape,2022,5,12,Copy P.T.,-1.3,5.5,,,"JUN, 12",2284.0,,
+scrape,2018,0,5,Line Creek,19.42,29.92,,,"JAN, 05",8636.0,,
+scrape,2018,11,12,Siphon P.T.,6.28,12.15,,,"DEC, 12",10465.0,,
+scrape,2022,0,2,Rincon P.T.,0.88,1.2,,,"JAN, 02",22031.0,,
+scrape,2018,0,1,Sherwood P.T.,23.43,36.47,,,"JAN, 01",25332.0,,

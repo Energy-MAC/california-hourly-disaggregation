@@ -1,0 +1,424 @@
+,substation_name,subst_id,sys_name,existing_gen,queued_gen,total_gen,projected_load,der_penetration,max_remain_cap,voltage_kv,circuit_count,res_pct,com_pct,agr_pct,ind_pct,other_pct,res_total,com_total,agr_total,ind_total,other_total,note_sub
+0,Acequia P.t.,2229.0,Rector 220/66 System,0.0,0.0,0.0,0.14,0.0,0.33,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+2,Aerojet,1201.0,Rio Hondo 220/66 System,0.0,0.0,0.0,3.28,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+5,Airchem,538.0,El Nido 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+6,Alamitos,118.0,Alamitos 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+7,Alamo,220.0,Bailey 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+12,Aliso Energy,1106.0,Santiago 220/66 System,0.0,0.0,0.0,1.2,0.0,10.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+16,Alpha Beta,1113.0,Olinda 220/66 System,0.0,0.0,0.0,1.97,0.0,2.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+18,Alton,973.0,Johanna 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+19,Altwind,7.0,Devers 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+20,Alumax,272.0,Vista C 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+25,Amboy,1627.0,Devers 220/115 System,0.0,0.0,0.0,0.56,0.0,2.5,12.0,1.0,0.0,34.0,0.0,0.0,66.0,0.0,17.0,0.0,0.0,33.0,Deliverability in this area has not been determined by previous interconnection studies.
+26,Amco,531.0,La Fresa 220/66 System,0.0,0.0,0.0,14.02,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+27,Ameron,1048.0,Etiwanda A 220/66 System,0.0,0.0,0.0,33.53,0.0,80.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+31,Apl,1263.0,Hinson 220/66 System,0.0,0.0,0.0,6.05,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+32,Apollo,920.0,Barre 220/66 System,0.0,0.0,0.0,4.2,0.0,22.39,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+33,Appgen,16.0,Saugus 220/66 System,0.0,0.0,0.0,0.0,0.0,118.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+35,Aqua Mansa,280.0,Vista A 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+37,Arbors,1271.0,Etiwanda 220/66 System,0.0,0.0,0.0,26.0,0.0,50.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+38,Arbwind,54.0,Windhub 220/66 System,0.0,0.0,0.0,0.1,0.0,21.6,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+42,Arco,1104.0,Hinson 220/66 System,0.0,0.0,0.0,4.89,0.0,7.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+49,Astro,1103.0,Lighthipe 220/66 System,0.0,0.0,0.0,1.89,0.0,12.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+55,Avocado P.t.,1279.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+56,Ayersman P.t.,1280.0,Goleta 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+57,Azusa,450.0,Rio Hondo 220/66 System,0.0,0.0,0.0,49.5,0.0,84.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+58,Badillo,451.0,Rio Hondo 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+62,Baker,1780.0,Kramer 220/115 System,0.0,0.0,0.0,5.6,0.0,5.6,12.0,3.0,12.5461,23.6162,0.0,0.0,63.8376,34.0,64.0,0.0,0.0,173.0,Interconnection studies in this area have identified inadequate deliverability.
+68,Banwind,104.0,Devers 220/115 System,0.0,0.0,0.0,38.8,0.0,42.6,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+89,Big Bend Bia,1848.0,Parker 161/66 System,0.0,0.0,0.0,2.08,0.0,5.0,12.0,1.0,23.8806,22.3881,0.0,0.0,53.7313,16.0,15.0,0.0,0.0,36.0,Interconnection studies in this area have identified inadequate deliverability.
+91,Big Creek 2,559.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,3.0,12.0,3.0,0.0,2.5641,0.0,0.0,97.4359,0.0,1.0,0.0,0.0,38.0,Interconnection studies in this area have identified inadequate deliverability.
+92,Big Creek 3,150.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,2.4,2.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified inadequate deliverability.
+93,Big Creek 3 0,151.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+94,Big Creek 4,154.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,2.0,Interconnection studies in this area have identified inadequate deliverability.
+95,Big Creek 4 0,153.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.1,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+96,Big Creek 8,148.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified inadequate deliverability.
+97,Big Creek 8 0,149.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+99,Bigfoot P.t.,1289.0,Rector 220/66 System,0.0,0.0,0.0,0.12,0.0,0.75,4.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,23.0,Interconnection studies in this area have identified inadequate deliverability.
+100,Bird Springs P.t.,1306.0,Vestal 220/66 System,0.0,0.0,0.0,0.01,0.0,0.1,2.4,1.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,Interconnection studies in this area have identified inadequate deliverability.
+104,Bishop Creek Plant 3,182.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+106,Bishop Creek Plant 5,184.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,3.8,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+107,Bishop Creek Plant 6,185.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,2.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+109,Black Meadows,1290.0,Parker 161/66 System,0.0,0.0,0.0,0.56,0.0,2.5,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,33.0,Interconnection studies in this area have identified inadequate deliverability.
+110,Black Mountain,1775.0,Victor 220/115 System,0.0,0.0,0.0,11.0,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+114,Blue Ridge P.t.,1296.0,Victor 220/115 System,0.0,0.0,0.0,0.11,0.0,0.31,2.4,1.0,20.8333,20.8333,0.0,0.0,58.3333,5.0,5.0,0.0,0.0,14.0,Interconnection studies in this area have identified adequate deliverability.
+120,Boost,1200.0,Del Amo 220/66 System,0.0,0.0,0.0,1.57,0.0,28.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,6.0,Interconnection studies in this area have identified adequate deliverability.
+122,Borax U.s.,1639.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+123,Borel,159.0,Windhub 220/66 System,0.0,0.0,0.0,11.0,0.0,11.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+126,Bousic Canyon,1051.0,Victor 220/115 System,0.0,0.0,0.0,0.0,0.0,7.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+129,Boxcar Wind,97.0,Windhub 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+134,Brew,1163.0,Rio Hondo 220/66 System,0.0,0.0,0.0,6.42,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+141,Brookings P.t.,1301.0,Vista 220/115 System,0.0,0.0,0.0,0.0,0.0,0.05,4.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+146,Buckwind,59.0,Devers 220/115 System,0.0,0.0,0.0,20.0,0.0,20.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+154,Cain Ranch P.t.,2242.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Interconnection studies in this area have identified inadequate deliverability.
+156,Cal Cement,686.0,Windhub 220/66 System,0.0,0.0,0.0,34.9,0.0,44.8,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+159,Cal-Nev P.t.,1328.0,Vista 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+161,Calcadia P.t.,1322.0,Eldorado 220/115 System,0.0,0.0,0.0,0.02,0.0,0.08,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,4.0,Interconnection studies in this area have identified inadequate deliverability.
+166,Calgen,10.0,Kramer 220/115 System,0.0,0.0,0.0,5.78,0.0,30.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+170,Camgen,12.0,Santa Clara 220/66 System,0.0,0.0,0.0,2.39,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+172,Camp 10,1061.0,Big Creek 220/220 System,0.0,0.0,0.0,0.05,0.0,0.5,7.0,1.0,9.0909,18.1818,0.0,0.0,72.7273,1.0,2.0,0.0,0.0,8.0,Interconnection studies in this area have identified inadequate deliverability.
+174,Camp Baldy P.t.,1325.0,Padua 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+175,Camp Nelson P.t.,1326.0,Springville 220/66 System,0.0,0.0,0.0,0.4,0.0,1.5,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+178,Canalino P.t.,2161.0,Goleta 220/66 System,0.0,0.0,0.0,0.06,0.0,0.17,2.4,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,2.0,Interconnection studies in this area have identified adequate deliverability.
+180,Canwind,55.0,Windhub 220/66 System,0.0,0.0,0.0,0.12,0.0,65.8,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+185,Capsule,734.0,San Bernardino 220/66 System,0.0,0.0,0.0,0.28,0.0,6.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+187,Capwind,56.0,Mirage 220/115 System,0.0,0.0,0.0,15.33,0.0,20.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+190,Carbogen,57.0,Hinson 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+191,Carbonic,1188.0,Hinson 220/66 System,0.0,0.0,0.0,4.24,0.0,5.63,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+195,Carnival,2238.0,Hinson 220/66 System,0.0,0.0,0.0,7.8,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+203,Casper P.t.,1330.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.04,0.0,0.09,4.0,1.0,16.6667,50.0,25.0,0.0,8.3333,2.0,6.0,3.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+205,Cavalry P.t.,2200.0,Kramer 220/115 System,0.0,0.0,0.0,0.39,0.0,3.75,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,27.0,Interconnection studies in this area have identified inadequate deliverability.
+208,Centennial,1872.0,Bailey 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+212,Century,801.0,Vista A 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+213,Certified,1162.0,Lighthipe 220/66 System,0.0,0.0,0.0,5.11,0.0,11.2,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+214,Chalet P.t.,1333.0,Valley 'Ab' 500/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+218,Charmin,1017.0,Santa Clara 220/66 System,0.0,0.0,0.0,5.65,0.0,22.4,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+222,Chemcorp,1133.0,Hinson 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+226,China Ranch P.t.,1336.0,Valley Electric 220/25,0.0,0.0,0.0,0.04,0.0,0.1,2.4,1.0,0.0,42.8571,0.0,0.0,57.1429,0.0,3.0,0.0,0.0,4.0,Interconnection studies in this area have identified adequate deliverability.
+228,Chino Canyon,1052.0,Devers 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+232,Chip,1214.0,Santiago 220/66 System,0.0,0.0,0.0,19.57,0.0,22.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+236,Cimgen,28.0,Chino 220/66 System,0.0,0.0,0.0,3.46,0.0,25.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+239,Claremont,1126.0,Padua 220/66 System,0.0,0.0,0.0,14.36,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+241,Cleargen,105.0,Mira Loma 220/66 System,0.0,0.0,0.0,2.39,0.0,40.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+242,Coalgas,135.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+245,College,1108.0,Alamitos 220/66 System,0.0,0.0,0.0,10.93,0.0,25.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+248,Colossus,1253.0,Saugus 220/66 System,0.0,0.0,0.0,6.21,0.0,14.0,16.0,2.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,22.0,Interconnection studies in this area have identified adequate deliverability.
+250,Colton Cement,779.0,Vista A 220/66 System,0.0,0.0,0.0,0.7,0.0,30.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+252,Compress,1058.0,La Fresa 220/66 System,0.0,0.0,0.0,63.8,0.0,112.0,12.0,16.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,24.0,Interconnection studies in this area have identified adequate deliverability.
+258,Converse Flats,1653.0,El Casco 220/115 System,0.0,0.0,0.0,0.61,0.0,1.0,12.0,1.0,43.75,12.5,0.0,0.0,43.75,35.0,10.0,0.0,0.0,35.0,Deliverability in this area has not been determined by previous interconnection studies.
+259,Cool Water,131.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+260,Corners,1176.0,Lighthipe 220/66 System,0.0,0.0,0.0,2.7,0.0,4.98,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+267,Coso,1892.0,Kramer 220/115 System,0.0,0.0,0.0,7.0,0.0,7.0,12.0,1.0,9.0909,22.7273,0.0,0.0,68.1818,4.0,10.0,0.0,0.0,30.0,Interconnection studies in this area have identified inadequate deliverability.
+271,Coulter P.t.,1340.0,Vista 220/115 System,0.0,0.0,0.0,0.01,0.0,0.03,2.4,1.0,0.0,50.0,0.0,0.0,50.0,0.0,1.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+272,Counts P.t.,1342.0,Springville 220/66 System,0.0,0.0,0.0,0.02,0.0,0.15,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+276,Coygen,25.0,Santiago 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+277,Crafton Hills,1269.0,El Casco 220/115 System,0.0,0.0,0.0,6.8,0.0,16.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+278,Crank P.t.,2275.0,Santiago 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+282,Crestmore,797.0,Vista A 220/66 System,0.0,0.0,0.0,0.31,0.0,25.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+290,Cyber,1984.0,El Nido 220/66 System,0.0,0.0,0.0,20.0,0.0,20.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+293,Daggett,1655.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,1.0,29.8658,13.0872,0.0,0.0,57.047,89.0,39.0,0.0,0.0,170.0,Interconnection studies in this area have identified inadequate deliverability.
+294,Dairymans,32.0,Rector 220/66 System,0.0,0.0,0.0,11.2,0.0,11.2,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+298,Databank,1091.0,Mira Loma 220/66 System,0.0,0.0,0.0,4.39,0.0,14.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,6.0,Interconnection studies in this area have identified adequate deliverability.
+299,Dawn,2176.0,Antelope 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+303,Deigaard P.t.,1354.0,Goleta 220/66 System,0.0,0.0,0.0,0.22,0.0,0.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+314,Devil Canyon,217.0,Vista 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+316,Diemer,1937.0,Villa Park 220/66 System,0.0,0.0,0.0,2.06,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+318,Dinkey Creek P.t.,1351.0,Big Creek 220/220 System,0.0,0.0,0.0,0.16,0.0,0.3,4.0,1.0,50.0,10.0,0.0,0.0,40.0,20.0,4.0,0.0,0.0,16.0,Interconnection studies in this area have identified inadequate deliverability.
+319,Dinosaur,2051.0,El Casco 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+321,Dock,1266.0,Hinson 220/66 System,0.0,0.0,0.0,6.9,0.0,100.2,25.0,3.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,3.0,Interconnection studies in this area have identified adequate deliverability.
+324,Dolphin P.t.,2160.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.29,0.0,0.75,4.0,1.0,8.3333,8.3333,0.0,0.0,83.3333,1.0,1.0,0.0,0.0,10.0,Interconnection studies in this area have identified adequate deliverability.
+326,Domhill,1030.0,Lighthipe 220/66 System,0.0,0.0,0.0,2.2,0.0,13.88,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+328,Douglas,469.0,El Nido 220/66 System,0.0,0.0,0.0,8.44,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+329,Douglas Park,1865.0,Del Amo 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+330,Dougoil,1142.0,Center 220/66 System,0.0,0.0,0.0,0.0,0.0,16.8,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+332,Downeymed,1871.0,Center 220/66 System,0.0,0.0,0.0,5.46,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+334,Drews,279.0,Vista A 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+336,Drinkwater P.t. Pb,2257.0,Saugus 220/66 System,0.0,0.0,0.0,0.0,0.0,0.3,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+340,Dunn Siding,1657.0,Eldorado 220/115 System,0.0,0.0,0.0,0.87,0.0,5.0,12.0,1.0,0.0,37.5,0.0,0.0,62.5,0.0,9.0,0.0,0.0,15.0,Interconnection studies in this area have identified inadequate deliverability.
+341,Dutchwind,44.0,Windhub 220/66 System,0.0,0.0,0.0,0.03,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+352,Edwards A.f.b.,1049.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+356,El Real Pump.,1098.0,Hinson 220/66 System,0.0,0.0,0.0,1.91,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+357,El Segundo,121.0,El Nido 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+359,Elaine P.t.,1368.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.04,0.0,0.1,2.4,1.0,72.7273,0.0,0.0,0.0,27.2727,8.0,0.0,0.0,0.0,3.0,Interconnection studies in this area have identified adequate deliverability.
+360,Elcans,1191.0,Rector 220/66 System,0.0,0.0,0.0,11.2,0.0,11.2,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified inadequate deliverability.
+366,Ellwood,123.0,Goleta 220/66 System,0.0,0.0,0.0,0.0,0.0,48.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+370,Enwind,60.0,Windhub 220/66 System,0.0,0.0,0.0,0.15,0.0,47.1,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+373,Escondido P.t.,1373.0,Saugus 220/66 System,0.0,0.0,0.0,0.0,0.0,1.0,12.0,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Interconnection studies in this area have identified adequate deliverability.
+377,Etiwanda 'A',111.0,Etiwanda A 220/66 System,0.0,0.0,0.0,138.52,0.0,138.52,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+380,Ettalee P.t.,1371.0,Valley Electric 220/25,0.0,0.0,0.0,0.05,0.0,0.15,4.0,1.0,0.0,53.3333,0.0,0.0,46.6667,0.0,8.0,0.0,0.0,7.0,Interconnection studies in this area have identified adequate deliverability.
+382,Exgen,52.0,Goleta 220/66 System,0.0,0.0,0.0,49.0,0.0,50.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+387,Falls P.t.,1384.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.02,0.0,0.1,2.4,1.0,83.3333,0.0,0.0,0.0,16.6667,5.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified inadequate deliverability.
+389,Federalgen,61.0,Laguna Bell De 220/66 System,0.0,0.0,0.0,5.3,0.0,40.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+391,Ferncreek,188.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+393,Fibre,1255.0,Vista A 220/66 System,0.0,0.0,0.0,1.2,0.0,22.4,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+396,Finance,1242.0,Rio Hondo 220/66 System,0.0,0.0,0.0,3.43,0.0,14.8,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+398,Fish Valley,192.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+402,Flowind,30.0,Windhub 220/66 System,0.0,0.0,0.0,0.1,0.0,40.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+404,Fontana P.h.,166.0,Etiwanda 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+406,Forge,1231.0,Etiwanda 220/66 System,0.0,0.0,0.0,6.93,0.0,14.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,11.0,Interconnection studies in this area have identified adequate deliverability.
+407,Fort Irwin,1054.0,Kramer 220/115 System,0.0,0.0,0.0,13.2,0.0,22.4,12.0,4.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,570.0,Interconnection studies in this area have identified inadequate deliverability.
+408,Fortune P.t.,2301.0,Valley 500/115 System,0.0,0.0,0.0,2.92,0.0,10.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,5.0,Deliverability in this area has not been determined by previous interconnection studies.
+409,Forty Eight St. P.t.,1381.0,La Cienega 220/66 System,0.0,0.0,0.0,0.0,0.0,0.5,4.0,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Interconnection studies in this area have identified adequate deliverability.
+414,Fuel,554.0,Hinson 220/66 System,0.0,0.0,0.0,2.7,0.0,8.31,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+416,Furnace,1072.0,Etiwanda 220/66 System,0.0,0.0,0.0,1.9,0.0,80.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+418,Gaffey P.t.,1386.0,La Fresa 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+420,Galaxy,1119.0,El Nido 220/66 System,0.0,0.0,0.0,4.89,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+424,Galvanizing,1152.0,Etiwanda 220/66 System,0.0,0.0,0.0,4.1,0.0,22.4,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+429,Gatx,1177.0,Hinson 220/66 System,0.0,0.0,0.0,4.89,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+433,Gene,236.0,Mwd 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+434,George A.f.b.,1671.0,Victor 220/115 System,0.0,0.0,0.0,2.14,0.0,15.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+436,Getty,1125.0,Santa Clara 220/66 System,0.0,0.0,0.0,16.21,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+440,Glen Ivy,1674.0,Valley 500/115 System,0.0,0.0,0.0,0.0,0.0,5.65,12.0,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Deliverability in this area has not been determined by previous interconnection studies.
+443,Glow,2172.0,Antelope 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+444,Goldhill,1798.0,Victor 220/115 System,0.0,0.0,0.0,34.25,0.0,50.0,33.0,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Interconnection studies in this area have identified adequate deliverability.
+445,Goldminer P.t.,2202.0,Kramer 220/115 System,0.0,0.0,0.0,1.89,0.0,5.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,35.0,Interconnection studies in this area have identified inadequate deliverability.
+446,Goldstone,1675.0,Kramer 220/115 System,0.0,0.0,0.0,0.8,0.0,3.75,12.0,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Interconnection studies in this area have identified inadequate deliverability.
+452,Gould,1901.0,Gould 220/66 System,0.0,0.0,0.0,4.09,0.0,14.0,16.0,3.0,83.6775,3.8348,0.0,0.0,12.4877,851.0,39.0,0.0,0.0,127.0,Interconnection studies in this area have identified adequate deliverability.
+455,Grapevine P.t.,1388.0,Valley Electric 220/25,0.0,0.0,0.0,0.04,0.0,1.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,7.0,Deliverability in this area has not been determined by previous interconnection studies.
+458,Great Oak,1866.0,Valley 'D' 500/115 System,0.0,0.0,0.0,8.74,0.0,20.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+460,Green Valley P.t.,1390.0,Antelope 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+465,Growers,2280.0,Vestal 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+466,Gunsite P.t.,1393.0,El Casco 220/115 System,0.0,0.0,0.0,0.05,0.0,0.25,2.4,1.0,0.0,33.3333,0.0,0.0,66.6667,0.0,1.0,0.0,0.0,2.0,Deliverability in this area has not been determined by previous interconnection studies.
+467,Haagen,1149.0,Rector 220/66 System,0.0,0.0,0.0,4.79,0.0,5.6,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+471,Hanjin,1249.0,Hinson 220/66 System,0.0,0.0,0.0,5.39,0.0,14.0,12.0,2.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,2.0,Interconnection studies in this area have identified adequate deliverability.
+472,Harper Lake,2205.0,Kramer 220/115 System,0.0,0.0,0.0,0.33,0.0,5.0,12.0,1.0,18.1818,0.0,0.0,0.0,81.8182,2.0,0.0,0.0,0.0,9.0,Interconnection studies in this area have identified inadequate deliverability.
+484,Heritage,691.0,Saugus 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+487,Hexfet,1254.0,Valley 'D' 500/115 System,0.0,0.0,0.0,9.15,0.0,20.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+491,Highgrove,139.0,Vista 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+493,Hillgen,35.0,Walnut 220/66 System,0.0,0.0,0.0,23.7,0.0,50.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+499,Hollywood Park,2246.0,El Nido 220/66 System,0.0,0.0,0.0,11.2,0.0,52.17,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+503,Hopeful,1236.0,Rio Hondo 220/66 System,0.0,0.0,0.0,14.33,0.0,25.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+504,Hossack P.t.,1406.0,Springville 220/66 System,0.0,0.0,0.0,0.03,0.0,0.1,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+505,Hot Water P.t.,1407.0,Valley Electric 220/25,0.0,0.0,0.0,0.35,0.0,0.75,12.0,1.0,15.0,25.0,0.0,0.0,60.0,3.0,5.0,0.0,0.0,12.0,Interconnection studies in this area have identified adequate deliverability.
+508,Hub,793.0,Vista A 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+509,Hughesair,1172.0,El Nido 220/66 System,0.0,0.0,0.0,14.54,0.0,50.39,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+510,Hughtron,1121.0,La Fresa 220/66 System,0.0,0.0,0.0,0.0,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+511,Hunter,273.0,Vista C 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+512,Huntington Beach,122.0,Ellis 'A' 220/66 System,0.0,0.0,0.0,0.0,0.0,133.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+513,Huntington P.t.,2320.0,Big Creek 220/220 System,0.0,0.0,0.0,0.33,0.0,1.0,12.0,1.0,20.0,40.0,0.0,0.0,40.0,1.0,2.0,0.0,0.0,2.0,Interconnection studies in this area have identified inadequate deliverability.
+516,Hutt P.t.,1411.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,1.0,12.0,1.0,0.0,18.1818,0.0,0.0,81.8182,0.0,2.0,0.0,0.0,9.0,Interconnection studies in this area have identified inadequate deliverability.
+517,Hygen,799.0,Etiwanda 220/66 System,0.0,0.0,0.0,16.0,0.0,20.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+518,Ice House P.t.,1417.0,Padua 220/66 System,0.0,0.0,0.0,0.06,0.0,0.1,2.4,1.0,25.0,0.0,0.0,0.0,75.0,3.0,0.0,0.0,0.0,9.0,Interconnection studies in this area have identified adequate deliverability.
+519,Icegen,23.0,Lighthipe 220/66 System,0.0,0.0,0.0,0.0,0.0,50.39,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+520,Idyllbrook P.t.,1418.0,Valley 'Ab' 500/115 System,0.0,0.0,0.0,0.0,0.0,1.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+524,Indigo,103.0,Devers 220/115 System,0.0,0.0,0.0,135.0,0.0,135.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+525,Industrial Asphalt,1078.0,Vista 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+528,Injection,1111.0,Alamitos 220/66 System,0.0,0.0,0.0,0.0,0.0,16.67,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+529,Inland,1097.0,Etiwanda 220/66 System,0.0,0.0,0.0,29.39,0.0,56.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+530,Inspiration P.t.,2291.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,2.4,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Interconnection studies in this area have identified inadequate deliverability.
+534,Iron Mt. (Mwd),237.0,Mwd 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+536,Iron Mt. Sce,238.0,Mwd 220/220 System,0.0,0.0,0.0,0.0,0.0,2.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+538,Irvine Park P.t.,1419.0,Villa Park 220/66 System,0.0,0.0,0.0,0.0,0.0,0.08,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+541,Ivanpah,2137.0,Eldorado 220/115 System,0.0,0.0,0.0,0.0,0.0,560.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+544,J.p.l.,1096.0,Gould 220/66 System,0.0,0.0,0.0,18.79,0.0,44.79,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+554,Johanna 'A',2133.0,Johanna 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+555,Johanna 'B',2132.0,Johanna 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+557,Jose,1060.0,Rio Hondo 220/66 System,0.0,0.0,0.0,5.0,0.0,5.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+559,Julian Hinds,235.0,Mwd 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+562,Kagle Canyon P.t.,1429.0,Saugus 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+563,Kaweah 1,167.0,Rector 220/66 System,0.0,0.0,0.0,3.23,0.0,8.7,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+564,Kaweah 2,168.0,Rector 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+565,Kaweah 3,169.0,Rector 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+566,Kearney P.t.,1436.0,La Cienega 220/66 System,0.0,0.0,0.0,0.0,0.0,0.17,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+567,Keeler P.t.,1430.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.17,0.0,0.35,2.4,1.0,51.2195,14.6341,0.0,0.0,34.1463,21.0,6.0,0.0,0.0,14.0,Interconnection studies in this area have identified inadequate deliverability.
+571,Kerrgen,106.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+573,Kimberly P.t.,1434.0,San Bernardino 220/66 System,0.0,0.0,0.0,0.29,0.0,0.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+574,Kinder,1265.0,Barre 220/66 System,0.0,0.0,0.0,2.63,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+577,Koefler P.t.,1433.0,Kramer 220/115 System,0.0,0.0,0.0,0.08,0.0,0.08,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+582,La Colina,276.0,Vista 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,1.0,80.0,0.0,0.0,0.0,20.0,4.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+596,Lakegen,86.0,Vestal 220/66 System,0.0,0.0,0.0,10.0,0.0,11.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+597,Lakeside P.t.,1440.0,Moorpark 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+601,Lancaster,653.0,Antelope 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,12.0,72.6921,10.7261,0.0443,0.0221,16.5154,6567.0,969.0,4.0,2.0,1492.0,Interconnection studies in this area have identified adequate deliverability.
+603,Langford P.t.,1451.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.03,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,4.0,Interconnection studies in this area have identified inadequate deliverability.
+604,Lanpri,1206.0,Antelope 220/66 System,0.0,0.0,0.0,3.61,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+607,Latchford Glass,1112.0,Laguna Bell De 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+614,Leatherneck,2025.0,Devers 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+616,Lehman,1117.0,Santa Clara 220/66 System,0.0,0.0,0.0,9.7,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+624,Lime Rock,1079.0,Victor 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+626,Linde,783.0,Etiwanda 220/66 System,0.0,0.0,0.0,0.0,0.0,17.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+628,Lindsay,576.0,Springville 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,7.0,59.1241,7.2701,6.2774,0.0584,27.2701,2025.0,249.0,215.0,2.0,934.0,Interconnection studies in this area have identified inadequate deliverability.
+629,Liquid,1161.0,Rio Hondo 220/66 System,0.0,0.0,0.0,9.0,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+632,Lizard P.t.,1442.0,Mirage 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+635,Loma Linda Hosp.,1068.0,San Bernardino 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+639,Look Out P.t.,1450.0,Windhub 220/66 System,0.0,0.0,0.0,0.0,0.0,0.05,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+643,Lourich,1193.0,Rector 220/66 System,0.0,0.0,0.0,7.2,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+651,Lytle Creek P.h.,165.0,Etiwanda 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+653,Macneil,2028.0,Eagle Rock 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+656,Magmagen,67.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+659,Mammoth,2090.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+660,Mandalay,124.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+663,Marina P.t.,1462.0,Alamitos 220/66 System,0.0,0.0,0.0,0.35,0.0,1.0,4.0,1.0,0.0,33.3333,0.0,0.0,66.6667,0.0,10.0,0.0,0.0,20.0,Interconnection studies in this area have identified adequate deliverability.
+667,Mars,1063.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,7.5,4.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified inadequate deliverability.
+670,Masonry P.t.,2271.0,Victor 220/115 System,0.0,0.0,0.0,1.96,0.0,10.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+676,Mcgen,22.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,108.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+678,Mebane P.t.,1472.0,Windhub 220/66 System,0.0,0.0,0.0,0.06,0.0,0.3,12.0,1.0,5.8824,0.0,0.0,0.0,94.1176,1.0,0.0,0.0,0.0,16.0,Interconnection studies in this area have identified adequate deliverability.
+685,Military,1207.0,Kramer 220/115 System,0.0,0.0,0.0,4.87,0.0,11.83,12.0,3.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,299.0,Interconnection studies in this area have identified inadequate deliverability.
+686,Mill Creek No.1 0,163.0,El Casco 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+687,Mill Creek No.2 0,164.0,El Casco 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+692,Mirage,1612.0,Devers 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+693,Missile,1223.0,Santa Clara 220/66 System,0.0,0.0,0.0,7.91,0.0,22.47,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+695,Mobgen,14.0,La Fresa 220/66 System,0.0,0.0,0.0,41.3,0.0,43.2,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+696,Mobiloil,497.0,La Fresa 220/66 System,0.0,0.0,0.0,100.04,0.0,196.0,12.0,37.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,60.0,Interconnection studies in this area have identified adequate deliverability.
+700,Mojave Siphon (Cdwr),222.0,Vista 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+701,Monaco U.g.s.,1470.0,La Fresa 220/66 System,0.0,0.0,0.0,0.0,0.0,0.75,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+706,Moog,1248.0,La Fresa 220/66 System,0.0,0.0,0.0,3.8,0.0,5.6,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+710,Moraga,1650.0,Valley 500/115 System,0.0,0.0,0.0,0.38,0.0,1.0,12.0,16.0,61.5744,24.5363,0.055,0.1099,13.7244,4482.0,1786.0,4.0,8.0,999.0,Deliverability in this area has not been determined by previous interconnection studies.
+716,Morwind,63.0,Windhub 220/66 System,0.0,0.0,0.0,0.14,0.0,56.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+718,Mountain Pass,1790.0,Kramer 220/115 System,0.0,0.0,0.0,6.26,0.0,9.37,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+720,Mountwind,64.0,Devers 220/115 System,0.0,0.0,0.0,89.0,0.0,89.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+723,Mt. Givens P.t.,1481.0,Big Creek 220/220 System,0.0,0.0,0.0,0.03,0.0,0.05,2.4,1.0,25.0,0.0,0.0,0.0,75.0,1.0,0.0,0.0,0.0,3.0,Interconnection studies in this area have identified inadequate deliverability.
+731,Mt. Wilson P.t.,1902.0,Gould 220/66 System,0.0,0.0,0.0,3.88,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+735,Mwd,234.0,Mwd 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+736,Mwd Coyote Creek,26.0,Olinda 220/66 System,0.0,0.0,0.0,0.0,0.0,3.75,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+737,Mwd Etiwanda,93.0,Etiwanda 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+738,Mwd Lake Mathews 4,45.0,Mira Loma 220/66 System,0.0,0.0,0.0,4.19,0.0,4.3,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+739,Mwd Perris,49.0,Valley 'Ab' 500/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+740,Mwd Rio Hondo 4,51.0,Center 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+741,Mwd San Dimas 4,40.0,Padua 220/66 System,0.0,0.0,0.0,0.24,0.0,9.9,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+743,Mwd Temescal 4,53.0,Mira Loma 220/66 System,0.0,0.0,0.0,0.0,0.0,2.8,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+744,Mwd Venice,50.0,La Cienega 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+745,Mwd Yorba Linda,29.0,Villa Park 220/66 System,0.0,0.0,0.0,5.0,0.0,5.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+751,Natural,1953.0,Saugus 220/66 System,0.0,0.0,0.0,39.2,0.0,56.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+752,Navy Mole,1115.0,Hinson 220/66 System,0.0,0.0,0.0,1.49,0.0,25.0,12.0,2.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,7.0,Interconnection studies in this area have identified adequate deliverability.
+760,Ni Oxnard Chp,2237.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+761,Niagara,2217.0,Etiwanda 220/66 System,0.0,0.0,0.0,13.2,0.0,28.0,12.0,2.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,7.0,Interconnection studies in this area have identified adequate deliverability.
+763,Nietos,1202.0,Center 220/66 System,0.0,0.0,0.0,13.41,0.0,24.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+765,Noble P.t.,1482.0,Kramer 220/115 System,0.0,0.0,0.0,0.04,0.0,0.1,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,4.0,Interconnection studies in this area have identified inadequate deliverability.
+769,Norseal,985.0,Alamitos 220/66 System,0.0,0.0,0.0,3.2,0.0,27.41,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+774,Northrop,1148.0,La Fresa 220/66 System,0.0,0.0,0.0,11.28,0.0,44.8,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+782,Oaktree P.t.,1497.0,Gould 220/66 System,0.0,0.0,0.0,0.31,0.0,0.33,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+783,Oakwind,71.0,Windhub 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+785,Observatory P.t.,1905.0,Gould 220/66 System,0.0,0.0,0.0,0.13,0.0,0.3,4.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+797,Onshore,1228.0,Goleta 220/66 System,0.0,0.0,0.0,2.0,0.0,11.2,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+800,Orcogen,20.0,Ellis 'A' 220/66 System,0.0,0.0,0.0,8.39,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+801,Orcosan,1934.0,Ellis 'C' 220/66 System,0.0,0.0,0.0,18.41,0.0,56.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+804,Ortega,1021.0,Goleta 220/66 System,0.0,0.0,0.0,8.46,0.0,27.9,33.0,1.0,0.0,33.3333,0.0,0.0,66.6667,0.0,1.0,0.0,0.0,2.0,Interconnection studies in this area have identified adequate deliverability.
+805,Oso,633.0,Bailey 220/66 System,0.0,0.0,0.0,9.78,0.0,9.78,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+808,Oxbow,1043.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+809,Oxgen,83.0,Santa Clara 220/66 System,0.0,0.0,0.0,45.0,0.0,48.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+810,Pacific Wind,96.0,Windhub 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+811,Pacline,1129.0,Lighthipe 220/66 System,0.0,0.0,0.0,14.3,0.0,22.29,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+813,Pahrump P.t.,2083.0,Valley Electric 220/25,0.0,0.0,0.0,0.12,0.0,1.5,25.0,1.0,48.0,4.0,0.0,0.0,48.0,12.0,1.0,0.0,0.0,12.0,Deliverability in this area has not been determined by previous interconnection studies.
+818,Palm Village,1721.0,Mirage 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,6.0,52.6575,25.836,0.0704,0.0,21.4361,1496.0,734.0,2.0,0.0,609.0,Interconnection studies in this area have identified inadequate deliverability.
+820,Palogen,75.0,La Fresa 220/66 System,0.0,0.0,0.0,0.0,0.0,11.2,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+822,Pan Aero,47.0,Devers 220/115 System,0.0,0.0,0.0,0.13,0.0,29.9,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+823,Panchito P.t.,1929.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.01,0.0,0.75,4.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+824,Pandol,1155.0,Vestal 220/66 System,0.0,0.0,0.0,0.0,0.0,44.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+842,Penitentiary P.t.,2215.0,Eagle Mountain 220/220 System,0.0,0.0,0.0,0.0,0.0,6.52,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified inadequate deliverability.
+845,Permanente,1066.0,Victor 220/115 System,0.0,0.0,0.0,26.0,0.0,56.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+849,Pharmacy,1151.0,Moorpark 220/66 System,0.0,0.0,0.0,22.76,0.0,56.0,16.0,4.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,40.0,Interconnection studies in this area have identified adequate deliverability.
+855,Pimiento P.t.,2252.0,Goleta 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+856,Pinnacles,214.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+858,Pipe,788.0,Etiwanda 220/66 System,0.0,0.0,0.0,2.37,0.0,36.2,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+859,Pitchgen,76.0,Saugus 220/66 System,0.0,0.0,0.0,7.15,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+864,Plastic,1219.0,Chino 220/66 System,0.0,0.0,0.0,13.13,0.0,28.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+866,Plesgen,91.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+867,Pluess,1247.0,Victor 220/115 System,0.0,0.0,0.0,9.0,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+868,Polaris,465.0,El Nido 220/66 System,0.0,0.0,0.0,22.4,0.0,22.4,16.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,5.0,Interconnection studies in this area have identified adequate deliverability.
+869,Polaris 4,464.0,El Nido 220/66 System,0.0,0.0,0.0,8.82,0.0,9.37,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+870,Polypro,1259.0,Hinson 220/66 System,0.0,0.0,0.0,10.87,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+872,Poole,179.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.2,0.0,1.5,12.0,1.0,0.0,16.6667,0.0,0.0,83.3333,0.0,5.0,0.0,0.0,25.0,Interconnection studies in this area have identified inadequate deliverability.
+874,Portal 4,155.0,Big Creek 220/220 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+876,Portuguese Bend P.t.,1512.0,La Fresa 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+877,Poso Park P.t.,1518.0,Vestal 220/66 System,0.0,0.0,0.0,0.02,0.0,0.05,2.4,1.0,37.5,0.0,0.0,0.0,62.5,3.0,0.0,0.0,0.0,5.0,Interconnection studies in this area have identified inadequate deliverability.
+880,Primm,2167.0,Eldorado 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+881,Prison,1064.0,Blythe (Walc) 161/33 System,0.0,0.0,0.0,10.0,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+882,Procal,1153.0,Center 220/66 System,0.0,0.0,0.0,28.0,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+883,Process,2191.0,Hinson 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+884,Procgen,41.0,Santa Clara 220/66 System,0.0,0.0,0.0,33.39,0.0,51.2,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+886,Protein,1267.0,Rector 220/66 System,0.0,0.0,0.0,16.0,0.0,22.39,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+889,Purewater,2069.0,El Casco 220/115 System,0.0,0.0,0.0,1.36,0.0,16.8,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+891,Queen Mary U.g.s.,1522.0,Hinson 220/66 System,0.0,0.0,0.0,0.75,0.0,0.75,4.0,1.0,0.0,66.6667,0.0,0.0,33.3333,0.0,10.0,0.0,0.0,5.0,Interconnection studies in this area have identified adequate deliverability.
+894,Ralphs,1102.0,Lighthipe 220/66 System,0.0,0.0,0.0,4.6,0.0,13.88,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+896,Rancheria P.t.,1524.0,Big Creek 220/220 System,0.0,0.0,0.0,0.04,0.0,0.1,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+904,Reclaim,1211.0,Moorpark 220/66 System,0.0,0.0,0.0,2.49,0.0,5.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+905,Recovery,1114.0,Ellis 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+906,Rectifier,1806.0,Valley 500/115 System,0.0,0.0,0.0,8.26,0.0,22.4,33.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,2.0,Deliverability in this area has not been determined by previous interconnection studies.
+908,Recycle P.t.,2356.0,Valley 500/115 System,0.0,0.0,0.0,0.0,0.0,5.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,4.0,Deliverability in this area has not been determined by previous interconnection studies.
+910,Red Box P.t.,1906.0,Gould 220/66 System,0.0,0.0,0.0,0.23,0.0,1.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+914,Refinery,1179.0,Lighthipe 220/66 System,0.0,0.0,0.0,4.8,0.0,12.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+915,Refuse,69.0,Laguna Bell Ab 220/66 System,0.0,0.0,0.0,0.0,0.0,12.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+916,Regatta P.t.,2287.0,Big Creek 220/220 System,0.0,0.0,0.0,0.28,0.0,1.0,12.0,1.0,10.8696,6.5217,0.0,0.0,82.6087,5.0,3.0,0.0,0.0,38.0,Interconnection studies in this area have identified inadequate deliverability.
+917,Reno,1123.0,Walnut 220/66 System,0.0,0.0,0.0,6.42,0.0,8.4,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+918,Renwind,73.0,Devers 220/115 System,0.0,0.0,0.0,12.39,0.0,12.92,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+921,Revital,1059.0,Lighthipe 220/66 System,0.0,0.0,0.0,9.92,0.0,9.92,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+923,Richuson P.t.,1533.0,Lighthipe 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+927,Ringmill,1234.0,Lighthipe 220/66 System,0.0,0.0,0.0,5.8,0.0,13.88,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+930,Riteaid,1256.0,Antelope 220/66 System,0.0,0.0,0.0,4.61,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+933,Riverside,274.0,Vista C 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+937,Rockair,1185.0,Antelope 220/66 System,0.0,0.0,0.0,1.7,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+938,Rocket Test,1793.0,Kramer 220/115 System,0.0,0.0,0.0,16.59,0.0,20.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+939,Rolling,1073.0,Etiwanda 220/66 System,0.0,0.0,0.0,35.4,0.0,70.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+943,Rosecrans,496.0,El Nido 220/66 System,0.0,0.0,0.0,0.0,0.0,46.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+945,Roxie P.t.,1536.0,Rio Hondo 220/66 System,0.0,0.0,0.0,0.12,0.0,0.17,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+950,Rush Creek,181.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.31,0.0,0.45,4.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,3.0,Interconnection studies in this area have identified inadequate deliverability.
+957,San Manuel,2300.0,San Bernardino 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+963,San Ysidro P.t.,2119.0,Goleta 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+964,Sangar,418.0,Eagle Rock 220/66 System,0.0,0.0,0.0,0.97,0.0,6.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+966,Santa Ana River 3,162.0,San Bernardino 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+969,Santa Fe Shops,1081.0,San Bernardino 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+974,Santee,1251.0,Walnut 220/66 System,0.0,0.0,0.0,5.7,0.0,11.2,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,6.0,Interconnection studies in this area have identified adequate deliverability.
+978,Sanwind,68.0,Devers 220/115 System,0.0,0.0,0.0,16.8,0.0,16.8,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+985,Scout P.t.,1569.0,Victor 220/115 System,0.0,0.0,0.0,0.02,0.0,0.3,12.0,1.0,0.0,75.0,0.0,0.0,25.0,0.0,3.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+989,Seawind,79.0,Devers 220/115 System,0.0,0.0,0.0,1.85,0.0,28.17,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+991,Segs 1,31.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+992,Segs 2,11.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+993,Segs 3,3.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+994,Segs 4,4.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+995,Segs 5,5.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+996,Segs 6,6.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+997,Segs 7,9.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+999,Serrfgen,74.0,Hinson 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1000,Server,2053.0,El Nido 220/66 System,0.0,0.0,0.0,3.41,0.0,56.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1004,Shellsom,687.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.1,0.0,1.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1005,Shellwatt,1124.0,Hinson 220/66 System,0.0,0.0,0.0,35.8,0.0,106.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1008,Shred,1246.0,Lighthipe 220/66 System,0.0,0.0,0.0,0.29,0.0,7.0,16.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,3.0,Interconnection studies in this area have identified adequate deliverability.
+1009,Shultz,1229.0,Laguna Bell 220/66 System,0.0,0.0,0.0,11.41,0.0,28.0,16.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,11.0,Interconnection studies in this area have identified adequate deliverability.
+1012,Siggen,77.0,Center 220/66 System,0.0,0.0,0.0,0.0,0.0,29.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,1.0,Interconnection studies in this area have identified adequate deliverability.
+1015,Simpson,70.0,Chino 220/66 System,0.0,0.0,0.0,0.37,0.0,46.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1016,Sinker P.t.,2243.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.13,0.0,0.52,12.0,1.0,7.1429,0.0,0.0,0.0,92.8571,1.0,0.0,0.0,0.0,13.0,Interconnection studies in this area have identified inadequate deliverability.
+1019,Skinwater,1875.0,Valley 'D' 500/115 System,0.0,0.0,0.0,2.7,0.0,14.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+1024,Snake P.t.,1541.0,Mirage 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1026,Soco,1135.0,Ellis 220/66 System,0.0,0.0,0.0,5.69,0.0,9.38,33.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,2.0,Interconnection studies in this area have identified adequate deliverability.
+1027,Solar 1,132.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1028,Solar 2,133.0,Kramer 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1032,Sony,1150.0,La Cienega 220/66 System,0.0,0.0,0.0,8.15,0.0,14.0,16.0,2.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,39.0,Interconnection studies in this area have identified adequate deliverability.
+1035,Soport,1198.0,Victor 220/115 System,0.0,0.0,0.0,13.0,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1038,Southbase,1209.0,Kramer 220/115 System,0.0,0.0,0.0,20.12,0.0,28.0,33.0,2.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,2.0,Interconnection studies in this area have identified inadequate deliverability.
+1039,Southdown,1264.0,Victor 220/115 System,0.0,0.0,0.0,11.0,0.0,44.8,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1042,Space,540.0,El Nido 220/66 System,0.0,0.0,0.0,19.57,0.0,40.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1047,Stanhill,546.0,La Cienega 220/66 System,0.0,0.0,0.0,24.09,0.0,56.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1051,Stent,1880.0,Valley 'D' 500/115 System,0.0,0.0,0.0,4.48,0.0,14.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+1055,Stewval P.t.,1557.0,Valley Electric 220/25,0.0,0.0,0.0,0.04,0.0,0.6,25.0,1.0,77.7778,0.0,0.0,0.0,22.2222,7.0,0.0,0.0,0.0,2.0,Deliverability in this area has not been determined by previous interconnection studies.
+1058,Strip,1074.0,Etiwanda 220/66 System,0.0,0.0,0.0,33.2,0.0,80.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1060,Studio,1205.0,Eagle Rock 220/66 System,0.0,0.0,0.0,29.0,0.0,75.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1062,Sugarloaf P.t.,1561.0,Vestal 220/66 System,0.0,0.0,0.0,0.17,0.0,0.17,2.4,1.0,36.5385,5.7692,0.0,0.0,57.6923,19.0,3.0,0.0,0.0,30.0,Interconnection studies in this area have identified inadequate deliverability.
+1064,Summit,804.0,Etiwanda A 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1068,Sunnyhills,1047.0,Barre 220/66 System,0.0,0.0,0.0,1.5,0.0,20.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1076,Tanker,1215.0,Vista 220/115 System,0.0,0.0,0.0,8.76,0.0,28.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1079,Tayshell,635.0,Santa Clara 220/66 System,0.0,0.0,0.0,30.0,0.0,30.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1082,Tejon Peak P.t.,1574.0,Bailey 220/66 System,0.0,0.0,0.0,0.05,0.0,0.1,2.4,1.0,0.0,66.6667,0.0,0.0,33.3333,0.0,4.0,0.0,0.0,2.0,Interconnection studies in this area have identified adequate deliverability.
+1087,Tengen,81.0,Saugus 220/66 System,0.0,0.0,0.0,37.39,0.0,44.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1089,Terawind,80.0,Devers 220/115 System,0.0,0.0,0.0,0.24,0.0,22.5,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+1095,Three M,1239.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1097,Thrive,2007.0,Etiwanda 220/66 System,0.0,0.0,0.0,1.8,0.0,16.8,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,8.0,Interconnection studies in this area have identified adequate deliverability.
+1098,Thrust,719.0,Saugus 220/66 System,0.0,0.0,0.0,0.6,0.0,6.25,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1099,Thumsgen,1927.0,Hinson 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,12.0,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Interconnection studies in this area have identified adequate deliverability.
+1100,Thunderbird,1754.0,Mirage 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1101,Tidelands,1245.0,Hinson 220/66 System,0.0,0.0,0.0,18.2,0.0,22.39,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1103,Tiffanywind,2086.0,Devers 220/115 System,0.0,0.0,0.0,45.0,0.0,45.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+1109,Titans,92.0,Villa Park 220/66 System,0.0,0.0,0.0,12.93,0.0,22.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1110,Tollhouse P.t.,1580.0,Big Creek 220/220 System,0.0,0.0,0.0,0.07,0.0,1.0,4.0,1.0,,,,,,0.0,0.0,0.0,0.0,0.0,Interconnection studies in this area have identified inadequate deliverability.
+1111,Topanga,515.0,Moorpark 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1114,Torrey,639.0,Saugus 220/66 System,0.0,0.0,0.0,3.41,0.0,11.2,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1116,Tortoise,1189.0,Antelope 220/66 System,0.0,0.0,0.0,22.72,0.0,22.72,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1117,Toyota,1208.0,Lighthipe 220/66 System,0.0,0.0,0.0,3.11,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1118,Transwind,78.0,Devers 220/115 System,0.0,0.0,0.0,5.6,0.0,5.6,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+1120,Treatment P.t.,2232.0,Kramer 220/115 System,0.0,0.0,0.0,1.22,0.0,5.0,12.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,4.0,Interconnection studies in this area have identified inadequate deliverability.
+1125,Tule,170.0,Springville 220/66 System,0.0,0.0,0.0,0.24,0.0,2.6,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1126,Tule (Pgae),254.0,Springville 220/66 System,0.0,0.0,0.0,2.2,0.0,2.5,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1132,Ultragen,38.0,Vestal 220/66 System,0.0,0.0,0.0,0.0,0.0,41.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1133,Unimed,1183.0,San Bernardino 220/66 System,0.0,0.0,0.0,21.24,0.0,56.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1134,Unioil,1174.0,Santa Clara 220/66 System,0.0,0.0,0.0,6.0,0.0,16.79,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1135,United Artists,1147.0,Eagle Rock 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1139,Urbana,1640.0,Etiwanda 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1146,Valley Elect. Assoc.,233.0,Vea Stateline-86 System,0.0,0.0,0.0,3.33,0.0,12.0,,,,,,,,,,,,,Deliverability in this area has not been determined by previous interconnection studies.
+1149,Vapor,1261.0,La Fresa 220/66 System,0.0,0.0,0.0,4.8,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1153,Ventura,673.0,Santa Clara 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1157,Vernon City Sys.,278.0,Laguna Bell De 220/66 System,0.0,0.0,0.0,240.03,0.0,300.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1165,Villa Park 'A',2173.0,Villa Park 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1166,Villa Park 'B',2174.0,Villa Park 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1170,Vista 'C',337.0,Vista C 220/66 System,0.0,0.0,0.0,560.0,0.0,560.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1172,Voice Of America,1173.0,Vestal 220/66 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1173,Vulcagen,89.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.0,0.0,0.0,,,,,,,,,,,,,Interconnection studies in this area have identified inadequate deliverability.
+1183,Weesha P.t.,1763.0,El Casco 220/115 System,0.0,0.0,0.0,0.11,0.0,0.25,2.4,1.0,61.7647,0.0,5.8824,0.0,32.3529,21.0,0.0,2.0,0.0,11.0,Deliverability in this area has not been determined by previous interconnection studies.
+1186,Wesbasin,1230.0,El Nido 220/66 System,0.0,0.0,0.0,6.21,0.0,14.0,16.0,1.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,17.0,Interconnection studies in this area have identified adequate deliverability.
+1190,Westex,1145.0,Lighthipe 220/66 System,0.0,0.0,0.0,7.11,0.0,12.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1193,Westpac,721.0,Bailey 220/66 System,0.0,0.0,0.0,23.1,0.0,44.8,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1194,Weymouth,2052.0,Padua 220/66 System,0.0,0.0,0.0,3.53,0.0,10.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1198,White Mt.,206.0,Inyo Sce 220/115 System,0.0,0.0,0.0,0.05,0.0,2.0,12.0,1.0,0.0,50.0,0.0,0.0,50.0,0.0,2.0,0.0,0.0,2.0,Interconnection studies in this area have identified inadequate deliverability.
+1200,Willamette,1190.0,Santa Clara 220/66 System,0.0,0.0,0.0,14.0,0.0,14.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1204,Winding P.t.,2040.0,Eagle Rock 220/66 System,0.0,0.0,0.0,1.47,0.0,1.5,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.
+1210,Yankee P.t.,1605.0,Vestal 220/66 System,0.0,0.0,0.0,0.03,0.0,0.05,2.4,1.0,0.0,66.6667,0.0,0.0,33.3333,0.0,2.0,0.0,0.0,1.0,Interconnection studies in this area have identified inadequate deliverability.
+1218,Ziggy P.t.,2054.0,Kramer 220/115 System,0.0,0.0,0.0,0.04,0.0,0.17,12.0,1.0,0.0,85.7143,0.0,0.0,14.2857,0.0,6.0,0.0,0.0,1.0,Interconnection studies in this area have identified inadequate deliverability.
+1219,Zondwind,87.0,Windhub 220/66 System,0.0,0.0,0.0,0.03,0.0,26.0,,,,,,,,,,,,,Interconnection studies in this area have identified adequate deliverability.

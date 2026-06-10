@@ -1,0 +1,186 @@
+substation_name,circuit_count,existing_der,net_min_daytime_load_mw
+Agness ave,3,0.8669,4.8
+Albina,1,0.0072,1.33
+Applegate,2,1.22228,3.6
+Arlington,1,0.19122,0.4
+Ashland,2,1.23398,0.6
+Athena,2,0.41325,1.4
+Bandon,1,0.06475,0.8
+Beacon,2,0.6676,0.7
+Beall Lane,2,1.36007,3.4
+Beatty,1,0.89964,0.3
+Belknap,4,2.24335,7.0
+Bend,4,1.96825,5.2
+Blalock,1,0.0,0.0
+Bly,1,5.05326,-5.2
+Boise Cascade,1,0.0,0.0
+Bonanza,1,0.65857,0.6
+Bond Street,2,1.21031,3.2
+Brookhurst,5,4.59881,8.7
+Brownsville,1,0.64088,2.3
+Bryant,4,2.0763,6.5
+Buchanan,3,5.96289,7.6
+Buckaroo,3,7.22798,0.2
+Calapooya,2,0.27429,0.9
+Campbell,4,1.26029,6.3
+Cannon Beach,2,0.13899,2.8
+Canyonville,2,0.13173,3.4
+Carnes,1,0.07197,0.5
+Casebeer,1,5.49633,-3.5
+Cave Junction,2,1.06837,5.8
+Caveman,4,1.48868,5.1
+Cherry Lane,1,10.0,-8.0
+Chiloquin,1,10.27202,-8.0
+Chiloquin Market,1,0.31275,0.4
+China Hat,3,1.90091,6.7
+Circle Blvd,1,0.0,0.0
+Clearwater #1,1,0.0,0.0
+Clearwater #2,1,0.04589,0.0
+Cleveland Ave,6,2.76613,9.8
+Cloake,3,0.83464,4.0
+Coburg,1,0.1159,0.3
+Columbia,6,0.84624,10.7
+Coos River,1,0.0869,0.8
+Coquille,3,0.11356,4.4
+Crooked River,2,2.04911,2.1
+Crowfoot,2,0.55286,2.6
+Cully,3,0.86877,3.26
+Culver,1,6.84021,1.9
+Dairy,2,18.95006,-16.5
+Dallas,4,6.70995,10.3
+Dalreed,3,14.8,-11.1
+Deschutes,2,11.39027,-7.0
+Devils Lake,4,0.57699,12.6
+Dixon,2,0.12503,0.8
+Dodge Bridge,2,11.47298,-7.6
+Dowell,2,1.03586,4.5
+Easy Valley,3,2.07174,4.3
+Empire,3,0.47172,3.2
+Enterprise,3,3.5348,4.1
+Fern Hill,2,0.10948,1.5
+Fielder Creek,2,1.05171,3.6
+Foothills,2,1.27488,4.7
+Fraley,2,0.7521,0.9
+Garden Valley,2,0.52463,4.1
+Glendale,2,2.15317,3.1
+Gleneden,2,0.05254,0.4
+Glide,2,0.46495,2.8
+Gold Hill,1,2.18271,2.5
+Gordon Hollow,1,0.0911,1.0
+Goshen,1,0.2376,0.4
+Grant St,4,3.58431,7.7
+Green,2,1.07625,4.3
+Griffin Creek,2,2.32733,4.2
+Hamaker,2,1.98317,0.4
+Harrisburg,1,0.30076,0.7
+Hazelwood,2,0.59654,1.9
+Henley,2,0.35243,0.7
+Hermiston,1,0.22264,1.5
+Hillview,4,10.27946,8.0
+Hinkle,1,1.21693,0.9
+Holladay,3,0.10263,4.71
+Hollywood,5,1.5609,8.48
+Hood River,5,4.37334,10.51
+Hornet,2,4.27945,4.2
+Humbug Creek,1,0.37963,0.7
+Hunters Circle,1,2.37259,2.7
+Illahee Flats,1,0.0,0.0
+Independence,2,2.92099,7.1
+Jacksonville,2,2.58073,3.9
+Jefferson,2,1.07622,4.1
+Jerome Prairie,2,1.56342,3.6
+Jordan Point,1,0.0,1.2
+Joseph,1,0.78788,0.5
+Junction City,2,0.46896,2.8
+Kennedy,3,5.23899,7.5
+Kenwood,1,0.47029,0.32
+Killingsworth,5,0.9118,7.88
+Knappa Svensen,2,0.18119,1.84
+Knott,4,0.86086,7.25
+Lakeport,3,5.11882,3.9
+Lancaster,1,0.24125,1.9
+Lebanon,4,2.60763,6.6
+Lemolo #1,1,0.0,0.3
+Lincoln,2,0.00975,1.65
+Lockhart,5,0.48204,4.3
+Lyons,2,0.35149,4.6
+Madras,4,11.44261,-0.7
+Mallory,2,0.75224,5.75
+Marys River,3,1.96622,4.6
+McKay,2,0.51236,3.3
+Medford,6,1.78118,10.7
+Merlin,4,2.44951,4.6
+Merrill,2,8.8848,-7.5
+Mile Hi,2,21.15034,-16.1
+Minam,1,0.0,0.0
+Modoc,1,0.80575,0.9
+Murder Creek,3,4.49971,0.0
+Myrtle Creek,2,0.39396,3.1
+Myrtle Point,2,0.22184,1.7
+Oak Knoll,2,1.4212,1.1
+Oakland,2,0.26244,1.9
+OBrien,1,1.53751,0.5
+Oremet,1,0.79958,0.0
+Overpass,5,4.94523,8.6
+Pallette,2,0.01684,0.0
+Park Street,5,2.53706,8.3
+Parkrose,5,1.25243,12.15
+Pendleton,6,1.79078,6.0
+Pilot Butte,3,32.20176,-21.9
+Pilot Rock,2,0.13664,1.4
+Powell Butte,1,1.25571,0.5
+Prineville,7,5.14498,12.9
+Prospect Point,1,0.06459,0.3
+Provolt,1,0.73568,1.2
+Queen Ave,4,2.27926,10.5
+Red Blanket,1,0.03404,0.3
+Redmond,7,5.11705,13.7
+Riddle,3,0.97296,4.7
+Riddle Veneer,1,0.0,0.0
+Rogue River,2,1.21121,3.1
+Roseburg,3,1.10776,7.5
+Ross Avenue,2,0.72446,2.6
+Roxy Ann,2,1.98524,2.1
+Ruch,2,0.90548,1.6
+Running Y,1,2.10958,0.8
+Russellville,4,1.13476,8.65
+Sage Road,5,1.3377,7.3
+Scenic,4,2.76537,6.0
+Scio,1,0.40936,1.7
+Seaside,4,0.27235,7.82
+Selma,1,0.28773,1.8
+Shevlin Park,4,6.4977,3.6
+Soda Springs,1,0.0,0.0
+South Dunes,1,0.0,1.1
+SouthGate,2,3.65022,4.5
+Sprague River,1,0.88363,0.6
+State Street,4,0.93377,6.4
+Stayton,4,3.81319,10.2
+Steamboat,1,0.0,0.0
+Stevens Rd,3,8.41134,2.2
+Sutherlin,3,0.28267,3.5
+Sweet Home,4,6.04034,5.4
+Takelma,1,0.85262,2.6
+Talent,4,4.1399,4.1
+Texum,3,6.23638,1.8
+Tiller,1,0.0217,0.3
+Tolo,3,0.7284,1.7
+Turkey Hill,2,10.66761,-9.5
+Umapine,2,0.63978,2.9
+Umatilla,3,0.46455,3.7
+Vernon,5,2.18565,6.92
+Vilas Road,3,11.37524,-2.3
+Village Green,2,0.52326,4.8
+Vine Street,2,2.08608,5.8
+Wallowa,1,0.51634,0.7
+Warm Springs,1,0.39059,0.0
+Warrenton,3,0.33003,8.22
+Wasco,1,0.00896,0.2
+Wecoma Beach,1,0.02278,0.4
+Weston,2,1.18274,0.1
+Westside,6,3.5681,4.3
+White City,7,3.9885,12.8
+Winchester,4,0.82872,5.2
+Winston,2,0.39882,2.0
+Yew Ave,3,2.5731,5.2
+Young's Bay,6,0.50723,5.74
