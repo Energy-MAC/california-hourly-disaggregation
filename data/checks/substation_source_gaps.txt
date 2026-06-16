@@ -3,7 +3,7 @@ Generated: 2026-06-09
 Script: scripts/compare_substations.py
 ========================================
 
-Summary: there ARE a few systematic patterns worth knowing. Most missing
+Summary: there are a few systematic patterns worth knowing. Most missing
 substations fall into identifiable categories rather than being random noise.
 
 ─────────────────────────────────────────────
@@ -11,7 +11,7 @@ PGE: 42 attrs-only (not in loads)
 ─────────────────────────────────────────────
 38 of 42 (90%) are flagged redacted="Yes" in pge_substation_attributes.csv.
 PGE publishes capacity attributes for redacted substations in GRIP but omits
-their load profiles from the map layer. The remaining 4 are likely name
+their load profiles from the map layer. The remaining 4 are name
 mismatches (e.g. "POTTER VALLEY PH" vs "POTTER VALLEY P H" is one such pair
 in the file). Conclusion: redaction explains the PGE gap entirely.
 
@@ -84,3 +84,358 @@ Bottom line for source selection
   has 39 extras spread across years with no clear pattern.
 - PGE: the 42 attrs-only substations will never have load data (redacted);
   safe to treat attrs as a superset and loads as the operational subset.
+
+
+Loading data sources ...
+  basin                   4,442 rows   3205 unique names
+  pge_loads             191,184 rows    664 unique names
+  pge_attrs                 706 rows    706 unique names
+  sce_loads             450,432 rows    748 unique names
+  sce_attrs               1,220 rows   1220 unique names
+  sce_attrs_alt             735 rows    734 unique names
+  sdge_loads              2,376 rows     99 unique names
+  sdge_attrs                107 rows    107 unique names
+  sdge_fail                   8 rows      8 unique names
+  pac_loads               1,148 rows   1142 unique names
+  pac_attrs                 185 rows    185 unique names
+
+Dictionary loaded: data\basinSourceDictionary.csv (77 source->basin pairs across SDGE:9, PGE:49, SCE:10)
+
+========================================================================
+  SECTION A - Within-utility source coverage
+========================================================================
+  Compares substation name sets within each utility's own sources.
+
+  ------------------------------------------------------------
+  PGE
+  ------------------------------------------------------------
+    loads                  664  covered by attrs: 664 (100%)
+    attrs                  706  covered by loads: 664 (94%)
+    only in loads: 0   |   only in attrs: 42
+
+  ------------------------------------------------------------
+  SCE
+  ------------------------------------------------------------
+    source                        n  notes
+    loads (combined)            747
+    loads (scrape)              744  lat/lon available
+    loads (bulk download)       708  no lat/lon
+    attrs (Table 3)           1,214  circuit/customer mix, no lat/lon
+    attrs_alt (ICA_Layer)       733  SUB_TYPE, SUBSTATION_VOLTAGE, lat/lon
+
+    Scrape vs Bulk  [which substations each load source covers]:
+    scrape                 744  covered by bulk: 705 (95%)
+    bulk                   708  covered by scrape: 705 (100%)
+    only in scrape: 39   |   only in bulk: 3
+
+    Scrape vs Table 3:
+    scrape                 744  covered by T3: 739 (99%)
+    T3                   1,214  covered by scrape: 739 (61%)
+    only in scrape: 5   |   only in T3: 475
+
+    Bulk vs Table 3:
+    bulk                   708  covered by T3: 708 (100%)
+    T3                   1,214  covered by bulk: 708 (58%)
+    only in bulk: 0   |   only in T3: 506
+
+    Scrape vs Alt (ICA_Layer):
+    scrape                 744  covered by alt: 700 (94%)
+    alt                    733  covered by scrape: 700 (95%)
+    only in scrape: 44   |   only in alt: 33
+
+    Bulk vs Alt (ICA_Layer):
+    bulk                   708  covered by alt: 699 (99%)
+    alt                    733  covered by bulk: 699 (95%)
+    only in bulk: 9   |   only in alt: 34
+
+    Combined loads vs Table 3:
+    loads                  747  covered by T3: 742 (99%)
+    T3                   1,214  covered by loads: 742 (61%)
+    only in loads: 5   |   only in T3: 472
+
+    Combined loads vs Alt (ICA_Layer):
+    loads                  747  covered by alt: 703 (94%)
+    alt                    733  covered by loads: 703 (96%)
+    only in loads: 44   |   only in alt: 30
+
+    Table 3 vs Alt (ICA_Layer)  [attribute source comparison]:
+    T3                   1,214  covered by alt: 733 (60%)
+    alt                    733  covered by T3: 733 (100%)
+    only in T3: 481   |   only in alt: 0
+
+    In all three sources (combined loads & T3 & alt): 703
+    Scrape in at least one attr source: 739
+    Bulk   in at least one attr source: 708
+
+  ------------------------------------------------------------
+  SDGE
+  ------------------------------------------------------------
+    Failures (scrape errors, excluded from gap counts): 8
+    loads-ex-fail           99  covered by attrs-ex-fail: 99 (100%)
+    attrs-ex-fail           99  covered by loads-ex-fail: 99 (100%)
+    only in loads-ex-fail: 0   |   only in attrs-ex-fail: 0
+
+  ------------------------------------------------------------
+  Pacificorp  (multi-state; basin only covers CA)
+  ------------------------------------------------------------
+    loads                1,141  covered by attrs: 171 (15%)
+    attrs                  185  covered by loads: 171 (92%)
+    only in loads: 970   |   only in attrs: 14
+
+    Sub_Type breakdown in loads: {'Distribution': 738, 'Transmission': 309, 'Trans and Distrib': 101}
+
+========================================================================
+  SECTION B - Name-join vs DataBasin reference
+========================================================================
+  Joins each source to the basin on normalised substation name.
+  A fallback dictionary match is applied for remaining non-matches.
+  For sources with lat/lon: reports haversine distances between matched pairs.
+
+  ------------------------------------------------------------
+  PGE
+  ------------------------------------------------------------
+
+  pge_attrs
+    Basin:  981  |  Source: 706  |  Matched by name: 576 (82% of source, 59% of basin)
+    Additionally matched via dictionary: 49 -> total 625 (89% of source)
+    Only in source (after dict): 81   |   Only in basin: 405
+    Distance (name-matched pairs): n=576  mean=0.9 km  median=0.0  p90=0.1  p99=0.3  max=481.2
+    Within 1 km: 99.3%   Within 5 km: 99.7%
+
+  pge_loads
+    Basin:  981  |  Source: 664  |  Matched by name: 550 (83% of source, 56% of basin)
+    Additionally matched via dictionary: 49 -> total 599 (90% of source)
+    Only in source (after dict): 65   |   Only in basin: 431
+    Distance (name-matched pairs): n=550  mean=1.0 km  median=0.0  p90=0.1  p99=0.3  max=481.2
+    Within 1 km: 99.3%   Within 5 km: 99.6%
+
+  ------------------------------------------------------------
+  SCE
+  ------------------------------------------------------------
+
+  sce_attrs_t3
+    Basin:  926  |  Source: 1,214  |  Matched by name: 754 (62% of source, 81% of basin)
+    Additionally matched via dictionary: 10 -> total 764 (63% of source)
+    Only in source (after dict): 450   |   Only in basin: 172
+    (No lat/lon in this source - distance stats not available)
+
+  sce_attrs_alt
+    Basin:  926  |  Source: 733  |  Matched by name: 525 (72% of source, 57% of basin)
+    Additionally matched via dictionary: 10 -> total 535 (73% of source)
+    Only in source (after dict): 198   |   Only in basin: 401
+    Distance (name-matched pairs): n=525  mean=0.1 km  median=0.1  p90=0.2  p99=1.3  max=8.1
+    Within 1 km: 98.5%   Within 5 km: 99.8%
+
+  sce_loads_scrape  (745 unique substations, lat/lon available)
+
+  sce_loads_scrape
+    Basin:  926  |  Source: 744  |  Matched by name: 524 (70% of source, 57% of basin)
+    Additionally matched via dictionary: 9 -> total 533 (72% of source)
+    Only in source (after dict): 211   |   Only in basin: 402
+    Distance (name-matched pairs): n=512  mean=0.1 km  median=0.1  p90=0.2  p99=1.3  max=8.1
+    Within 1 km: 98.4%   Within 5 km: 99.8%
+
+  sce_loads_bulk  (709 unique substations, no lat/lon)
+
+  sce_loads_bulk
+    Basin:  926  |  Source: 708  |  Matched by name: 515 (73% of source, 56% of basin)
+    Additionally matched via dictionary: 9 -> total 524 (74% of source)
+    Only in source (after dict): 184   |   Only in basin: 411
+    (lat/lon columns present but all NaN in this subset)
+
+  sce_loads_combined  (748 unique substations across both sources)
+
+  sce_loads_combined
+    Basin:  926  |  Source: 747  |  Matched by name: 524 (70% of source, 57% of basin)
+    Additionally matched via dictionary: 9 -> total 533 (71% of source)
+    Only in source (after dict): 214   |   Only in basin: 402
+    Distance (name-matched pairs): n=512  mean=0.1 km  median=0.1  p90=0.2  p99=1.3  max=8.1
+    Within 1 km: 98.4%   Within 5 km: 99.8%
+
+  ------------------------------------------------------------
+  SDGE
+  ------------------------------------------------------------
+
+  sdge_attrs
+    Basin:  144  |  Source: 107  |  Matched by name: 93 (87% of source, 65% of basin)
+    Additionally matched via dictionary: 9 -> total 102 (95% of source)
+    Only in source (after dict): 5   |   Only in basin: 51
+    Distance (name-matched pairs): n=93  mean=1.7 km  median=1.3  p90=3.4  p99=9.4  max=9.7
+    Within 1 km: 36.6%   Within 5 km: 96.8%
+
+  sdge_loads
+    Basin:  144  |  Source: 99  |  Matched by name: 87 (88% of source, 60% of basin)
+    Additionally matched via dictionary: 9 -> total 96 (97% of source)
+    Only in source (after dict): 3   |   Only in basin: 57
+    Distance (name-matched pairs): n=87  mean=1.8 km  median=1.3  p90=3.5  p99=9.4  max=9.7
+    Within 1 km: 34.5%   Within 5 km: 96.6%
+
+  ------------------------------------------------------------
+  Pacificorp  (basin is CA-only; most pac substations are out of CA)
+  ------------------------------------------------------------
+    Basin (CA, pacificorp): 56 substations
+
+  pac_attrs
+    Basin:  56  |  Source: 185  |  Matched by name: 0 (0% of source, 0% of basin)
+    Only in source (after dict): 185   |   Only in basin: 56
+    (No lat/lon in this source - distance stats not available)
+
+  pac_loads
+    Basin:  56  |  Source: 1,141  |  Matched by name: 44 (4% of source, 79% of basin)
+    Only in source (after dict): 1,097   |   Only in basin: 12
+    Distance (name-matched pairs): n=44  mean=0.0 km  median=0.0  p90=0.0  p99=0.2  max=0.3
+    Within 1 km: 100.0%   Within 5 km: 100.0%
+
+========================================================================
+  SECTION C - Spatial nearest-neighbour join vs DataBasin reference
+========================================================================
+  For each source with lat/lon, finds the nearest basin point per substation.
+  Reports how often the name of the nearest basin point matches the source name.
+
+  ------------------------------------------------------------
+  PGE
+  ------------------------------------------------------------
+
+  pge_attrs
+    706 utility points matched to nearest basin point
+    Within 50 km: 705 pairs
+    Name agreement (within 50 km): 569/705 = 80.7%
+    Distance to nearest basin point: n=706  mean=0.6 km  median=0.0  p90=1.3  p99=9.4  max=55.2
+    Agreement by distance band:
+         0-1    km :  629 pairs  name-agree: 569/629 (90%)
+         1-5    km :   53 pairs  name-agree: 0/53 (0%)
+         5-20   km :   22 pairs  name-agree: 0/22 (0%)
+        20-50.0 km :    1 pairs  name-agree: 0/1 (0%)
+
+  pge_loads
+    664 utility points matched to nearest basin point
+    Within 50 km: 664 pairs
+    Name agreement (within 50 km): 543/664 = 81.8%
+    Distance to nearest basin point: n=664  mean=0.5 km  median=0.0  p90=1.0  p99=9.0  max=39.8
+    Agreement by distance band:
+         0-1    km :  597 pairs  name-agree: 543/597 (91%)
+         1-5    km :   46 pairs  name-agree: 0/46 (0%)
+         5-20   km :   20 pairs  name-agree: 0/20 (0%)
+        20-50.0 km :    1 pairs  name-agree: 0/1 (0%)
+
+  ------------------------------------------------------------
+  SCE
+  ------------------------------------------------------------
+
+  sce_attrs_alt
+    733 utility points matched to nearest basin point
+    Within 50 km: 728 pairs
+    Name agreement (within 50 km): 519/728 = 71.3%
+    Distance to nearest basin point: n=733  mean=1.9 km  median=0.1  p90=3.8  p99=37.1  max=73.1
+    Agreement by distance band:
+         0-1    km :  566 pairs  name-agree: 514/566 (91%)
+         1-5    km :  109 pairs  name-agree: 5/109 (5%)
+         5-20   km :   45 pairs  name-agree: 0/45 (0%)
+        20-50.0 km :    8 pairs  name-agree: 0/8 (0%)
+
+  sce_loads_scrape  (745 unique substations with lat/lon)
+  [bulk rows (235,872 rows) omitted - no lat/lon; see Section B for bulk name coverage]
+
+  sce_loads_scrape
+    700 utility points matched to nearest basin point
+    Within 50 km: 696 pairs
+    Name agreement (within 50 km): 506/696 = 72.7%
+    Distance to nearest basin point: n=700  mean=1.7 km  median=0.1  p90=3.4  p99=33.7  max=73.1
+    Agreement by distance band:
+         0-1    km :  551 pairs  name-agree: 501/551 (91%)
+         1-5    km :   99 pairs  name-agree: 5/99 (5%)
+         5-20   km :   39 pairs  name-agree: 0/39 (0%)
+        20-50.0 km :    7 pairs  name-agree: 0/7 (0%)
+
+  ------------------------------------------------------------
+  SDGE
+  ------------------------------------------------------------
+
+  sdge_attrs
+    107 utility points matched to nearest basin point
+    Within 50 km: 107 pairs
+    Name agreement (within 50 km): 84/107 = 78.5%
+    Distance to nearest basin point: n=107  mean=1.6 km  median=1.3  p90=3.0  p99=5.9  max=9.4
+    Agreement by distance band:
+         0-1    km :   41 pairs  name-agree: 33/41 (80%)
+         1-5    km :   63 pairs  name-agree: 49/63 (78%)
+         5-20   km :    3 pairs  name-agree: 2/3 (67%)
+
+  sdge_loads
+    99 utility points matched to nearest basin point
+    Within 50 km: 99 pairs
+    Name agreement (within 50 km): 78/99 = 78.8%
+    Distance to nearest basin point: n=99  mean=1.7 km  median=1.3  p90=3.1  p99=6.0  max=9.4
+    Agreement by distance band:
+         0-1    km :   37 pairs  name-agree: 29/37 (78%)
+         1-5    km :   59 pairs  name-agree: 47/59 (80%)
+         5-20   km :    3 pairs  name-agree: 2/3 (67%)
+
+  ------------------------------------------------------------
+  Pacificorp  (basin is CA-only; most pac substations are outside CA)
+  ------------------------------------------------------------
+    Basin (CA, pacificorp): 56 substations
+    NOTE: many pacificorp loads substations are in Utah/Oregon; large distances expected.
+
+  pac_loads
+    1,141 utility points matched to nearest basin point
+    Within 50 km: 89 pairs
+    Name agreement (within 50 km): 43/89 = 48.3%
+    Distance to nearest basin point: n=1,141  mean=625.0 km  median=724.6  p90=1021.7  p99=1246.6  max=1290.1
+    Agreement by distance band:
+         0-1    km :   56 pairs  name-agree: 43/56 (77%)
+         5-20   km :    5 pairs  name-agree: 0/5 (0%)
+        20-50.0 km :   28 pairs  name-agree: 0/28 (0%)
+
+========================================================================
+  SECTION D - Substation ID joins + dictionary augmentation
+========================================================================
+  Step 1: normalised-name join.  Step 2: two-hop ID join.
+  Step 3: dictionary fallback via data/basinSourceDictionary.csv.
+
+  ------------------------------------------------------------
+  PGE: loads.subid <-> attrs.substation_id
+  ------------------------------------------------------------
+    All ID pairs (loads <-> attrs): 664
+    Same norm name (ID + name agree): 664
+    Name mismatches (same ID, different norm name): 0
+      Loads matched basin by name:  550
+      Attrs matched basin by name:  550
+      New via attrs name (loads miss, attrs hit):  0
+      Conflicts (both match basin, different names): 0
+    Additionally matched via dictionary: 49
+    Remainder (unmatched after name + ID + dict): 65
+    Loads<->attrs coord distance: median=0.00 km  p90=0.0 km  max=0.0 km
+
+  ------------------------------------------------------------
+  SCE: T3.subst_id <-> alt.SUBST_ID
+  ------------------------------------------------------------
+  (SCE loads uses OBJECTID, not subst_id; loads<->attrs ID join not possible)
+    All ID pairs (T3 <-> alt): 675
+    Same norm name (ID + name agree): 675
+    Name mismatches (same ID, different norm name): 0
+      T3  matched basin by name:  469
+      Alt matched basin by name:  469
+      New via T3 name (alt miss, T3 hit): 0
+      Conflicts (both match basin, different names): 0
+    Additionally matched via dictionary: 10
+    Alt remainder (unmatched after name + ID + dict): 198
+
+  ------------------------------------------------------------
+  SDGE: no ID columns available — remainder from name join + dict
+  ------------------------------------------------------------
+    SDGE attrs remainder: 3 (+9 matched via dict)
+    SDGE loads remainder: 3 (+9 matched via dict)
+      attrs: OCEAN RANCH
+      attrs: SALT CREEK
+      attrs: VINE
+      loads: Ocean Ranch
+      loads: Salt Creek
+      loads: Vine
+
+  ------------------------------------------------------------
+  Basin remainders — basin substations not matched by any utility source or dict
+  ------------------------------------------------------------
+  PGE: 990 basin total  |  635 matched (name: 578, dict: 57)  |  355 unmatched
+  SCE: 945 basin total  |  766 matched (name: 756, dict: 10)  |  179 unmatched
+  SDGE: 145 basin total  |  103 matched (name: 94, dict: 9)  |  42 unmatched

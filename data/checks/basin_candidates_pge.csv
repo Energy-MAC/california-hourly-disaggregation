@@ -1,0 +1,6 @@
+SourceName,BasinName,match_rule,source_lat,source_lon,basin_lat,basin_lon,dist_km
+ESTUDILLO,Cherry,spatial,37.727122,-122.138874,37.715814,-122.143927,1.334
+LODI,Industrial,spatial,38.137241,-121.262174,38.129928,-121.251562,1.234
+SF A (POTRERO),Bayshore ,spatial,37.755977,-122.386313,37.74603,-122.403372,1.864
+WHITNEY,Loveridge Road,spatial,38.022558,-121.88567,38.0304,-121.869419,1.669
+YOSEMITE,Bayshore ,spatial,37.729323,-122.397053,37.74603,-122.403372,1.939

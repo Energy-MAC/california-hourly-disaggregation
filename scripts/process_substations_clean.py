@@ -39,8 +39,14 @@ Filtering logic (per utility)
     - Excluded: no metered load profiles exist.
 
   All utilities
-    - Basin lat/lon (DataBasin CA Substations 2022) joined by normalised
-      substation name; dist_to_basin_km added via haversine.
+    - Basin lat/lon (DataBasin CA Substations 2022) joined in two steps:
+        1. Exact normalised-name match against the basin dataset.
+        2. Fallback dictionary lookup via data/basinSourceDictionary.csv for
+           substations whose names differ between the utility source and basin
+           (e.g. "CRESTA PH" -> "Cresta", "DRUM" -> "Drum 1" / "Drum 2").
+           When a source name maps to multiple basin entries the nearest one
+           by haversine distance from util_lat/util_lon is chosen.
+      dist_to_basin_km is computed after both steps.
 
 Output columns
 --------------
@@ -77,10 +83,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT    = Path(__file__).resolve().parents[1]
-RAW     = ROOT / "data" / "raw"
-PROC    = ROOT / "data" / "processed"
-OUT_DIR = PROC / "substations"
+ROOT     = Path(__file__).resolve().parents[1]
+RAW      = ROOT / "data" / "raw"
+PROC     = ROOT / "data" / "processed"
+OUT_DIR  = PROC / "substations"
+DICT_PATH = ROOT / "data" / "basinSourceDictionary.csv"
 
 ATTR_COLS = [
     "utility", "substation_name",
@@ -122,6 +129,30 @@ def is_pt(s: pd.Series) -> pd.Series:
     return s.str.contains(r"p\.?\s*t\.?\s*$", case=False, regex=True, na=False)
 
 
+def _build_dict_map(utility_upper: str) -> dict[str, list[str]]:
+    """
+    Load data/basinSourceDictionary.csv and return a mapping
+      norm(SourceName) -> [norm(BasinName), ...]
+    filtered to the given utility label ("PGE", "SCE", or "SDGE").
+
+    Returns an empty dict if the file does not exist or has no entries for
+    this utility.  One SourceName can map to multiple BasinNames (e.g. DRUM
+    maps to both Drum 1 and Drum 2 in the basin dataset).
+    """
+    if not DICT_PATH.exists():
+        return {}
+    d = pd.read_csv(DICT_PATH)
+    d = d[d["Utility"].str.strip().str.upper() == utility_upper].copy()
+    if d.empty:
+        return {}
+    d["src_norm"] = norm(d["SourceName"])
+    d["bas_norm"] = norm(d["BasinName"])
+    mapping: dict[str, list[str]] = {}
+    for _, row in d.iterrows():
+        mapping.setdefault(row["src_norm"], []).append(row["bas_norm"])
+    return mapping
+
+
 # ── Geometry ──────────────────────────────────────────────────────────────────
 
 def haversine_km(lat1, lon1, lat2, lon2) -> np.ndarray:
@@ -137,18 +168,70 @@ def haversine_km(lat1, lon1, lat2, lon2) -> np.ndarray:
 def _load_basin_lookup(owner_std: str) -> pd.DataFrame:
     b = pd.read_csv(PROC / "substation_misc" / "ca_substations_2022.csv")
     b = b[b["owner_std"] == owner_std].dropna(subset=["latitude", "longitude"]).copy()
+    b = b[b["name"].str.strip().str.lower() != "unknown"].copy()
     b["name_norm"] = norm(b["name"])
     return b.drop_duplicates("name_norm")[["name_norm", "latitude", "longitude"]]
 
 
-def add_basin_coords(attrs: pd.DataFrame, basin: pd.DataFrame) -> pd.DataFrame:
-    """Left-join basin lat/lon by normalised name, compute haversine distance."""
+def add_basin_coords(
+    attrs: pd.DataFrame,
+    basin: pd.DataFrame,
+    dict_map: dict[str, list[str]] | None = None,
+) -> pd.DataFrame:
+    """
+    Left-join basin lat/lon onto attrs, then compute haversine distance.
+
+    Step 1 — exact normalised-name join against the basin lookup table.
+    Step 2 — for rows still missing basin coords, try the basinSourceDictionary
+              mappings in dict_map.  When a source name maps to multiple basin
+              entries, the nearest by haversine from util_lat/util_lon is chosen
+              (first entry used if util coords are also missing).
+    """
     a = attrs.copy()
     a["_norm"] = norm(a["substation_name"])
+
+    # Step 1: exact name join
     merged = a.merge(
         basin.rename(columns={"latitude": "basin_lat", "longitude": "basin_lon"}),
         left_on="_norm", right_on="name_norm", how="left",
-    ).drop(columns=["_norm", "name_norm"])
+    ).drop(columns=["name_norm"])
+
+    # Step 2: dictionary fallback for unmatched rows
+    if dict_map:
+        basin_lat_by_norm = basin.set_index("name_norm")["latitude"]
+        basin_lon_by_norm = basin.set_index("name_norm")["longitude"]
+        for i in merged.index[merged["basin_lat"].isna()]:
+            src_norm = merged.at[i, "_norm"]
+            basin_norms = dict_map.get(src_norm)
+            if not basin_norms:
+                continue
+            cands = [
+                (bn, basin_lat_by_norm[bn], basin_lon_by_norm[bn])
+                for bn in basin_norms
+                if bn in basin_lat_by_norm.index
+            ]
+            if not cands:
+                continue
+            if len(cands) == 1:
+                _, b_lat, b_lon = cands[0]
+            else:
+                u_lat = merged.at[i, "util_lat"]
+                u_lon = merged.at[i, "util_lon"]
+                if pd.notna(u_lat) and pd.notna(u_lon):
+                    dists = [
+                        haversine_km(
+                            np.array([float(u_lat)]), np.array([float(u_lon)]),
+                            np.array([float(b_lat)]), np.array([float(b_lon)]),
+                        )[0]
+                        for _, b_lat, b_lon in cands
+                    ]
+                    _, b_lat, b_lon = cands[int(np.argmin(dists))]
+                else:
+                    _, b_lat, b_lon = cands[0]
+            merged.at[i, "basin_lat"] = float(b_lat)
+            merged.at[i, "basin_lon"] = float(b_lon)
+
+    merged = merged.drop(columns=["_norm"])
 
     has = (merged["basin_lat"].notna() & merged["basin_lon"].notna() &
            merged["util_lat"].notna()  & merged["util_lon"].notna())
@@ -447,17 +530,36 @@ def main() -> None:
 
     # ── Combine and add basin coords ──────────────────────────────────────────
     print("Joining basin coordinates ...")
+    if DICT_PATH.exists():
+        dict_entry_count = len(pd.read_csv(DICT_PATH))
+        print(f"  Dictionary: {DICT_PATH.relative_to(ROOT)} ({dict_entry_count} entries)")
+        dict_maps = {
+            "pge":  _build_dict_map("PGE"),
+            "sce":  _build_dict_map("SCE"),
+            "sdge": _build_dict_map("SDGE"),
+        }
+    else:
+        print("  WARNING: basinSourceDictionary.csv not found; skipping dict augmentation.")
+        dict_maps = {"pge": {}, "sce": {}, "sdge": {}}
+
     all_attrs = []
-    for utility, df, owner_std in [("pge", pge_attrs, "pge"),
-                                    ("sce", sce_attrs, "sce"),
+    for utility, df, owner_std in [("pge",  pge_attrs,  "pge"),
+                                    ("sce",  sce_attrs,  "sce"),
                                     ("sdge", sdge_attrs, "sdge")]:
-        basin  = _load_basin_lookup(owner_std)
-        part   = add_basin_coords(df, basin)
-        n_m    = part["basin_lat"].notna().sum()
-        d_med  = part["dist_to_basin_km"].median()
-        n_c    = part["util_lat"].notna().sum()
+        basin    = _load_basin_lookup(owner_std)
+        # Count name-only matches before dict augmentation for reporting
+        pre_norms   = set(norm(df["substation_name"]))
+        basin_norms = set(basin["name_norm"])
+        n_name_only = len(pre_norms & basin_norms)
+
+        part  = add_basin_coords(df, basin, dict_maps[owner_std])
+        n_m   = part["basin_lat"].notna().sum()
+        n_c   = part["util_lat"].notna().sum()
+        d_med = part["dist_to_basin_km"].median()
+        n_dict = n_m - n_name_only
         print(f"  {utility}: {n_c}/{len(part)} with util coords  |  "
-              f"{n_m}/{len(part)} basin-matched (median {d_med:.1f} km)")
+              f"{n_m}/{len(part)} basin-matched "
+              f"(name: {n_name_only}, dict: {n_dict}, median dist: {d_med:.1f} km)")
         all_attrs.append(part)
 
     attrs_all = pd.concat(all_attrs, ignore_index=True)

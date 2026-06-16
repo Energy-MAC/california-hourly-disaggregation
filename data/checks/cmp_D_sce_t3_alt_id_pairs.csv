@@ -1,0 +1,676 @@
+t3_name,sub_id,t3_norm,alt_name,alt_lat,alt_lon,alt_norm,t3_in_basin,alt_in_basin,names_agree
+Acton,623.0,acton,Acton,34.51048799897755,-118.1972449969698,acton,True,True,True
+Aha P.t.,1272.0,aha,Aha P.T.,33.86588835692363,-114.5337720046856,aha,False,False,True
+Albury P.t.,2049.0,albury,Albury P.T.,33.83891625263318,-118.11677451985788,albury,False,False,True
+Alder,800.0,alder,Alder,34.13536355569119,-117.40896380206628,alder,True,True,True
+Alessandro,1777.0,alessandro,Alessandro,33.902360203824635,-117.2181852584964,alessandro,True,True,True
+Allview P.t.,1277.0,allview,Allview P.T.,34.21479099860479,-117.12502108530076,allview,False,False,True
+Alola,2203.0,alola,Alola,33.96941961867055,-116.88125278288295,alola,False,False,True
+Alon,823.0,alon,Alon,33.8348209992809,-118.24764500383525,alon,True,True,True
+Alpine P.t.,1276.0,alpine,Alpine P.T.,34.238664178957094,-117.23632790733168,alpine,False,False,True
+Amador,430.0,amador,Amador,34.07169126881664,-118.02699178701492,amador,True,True,True
+Amalia,390.0,amalia,Amalia,34.0243532126106,-118.15450003414075,amalia,True,True,True
+Amargo,1626.0,amargo,Amargo,35.00091068417334,-117.64796268028908,amargo,True,True,True
+Amboy,1627.0,amboy,Amboy,34.5494849984677,-115.7434559952921,amboy,True,True,True
+Anaverde,674.0,anaverde,Anaverde,34.56752478148115,-118.1462323315475,anaverde,True,True,True
+Antelope,317.0,antelope,Antelope,34.68734799747701,-118.30024699649252,antelope,True,True,True
+Apple Valley,1628.0,apple valley,Apple Valley,34.44832304690117,-117.2235414064831,apple valley,True,True,True
+Aqueduct,1833.0,aqueduct,Aqueduct,34.415639000690206,-117.35595999917751,aqueduct,True,True,True
+Arcadia,394.0,arcadia,Arcadia,34.143984965719575,-118.02578444208424,arcadia,True,True,True
+Archibald,789.0,archibald,Archibald,33.997768456231,-117.59266187137268,archibald,True,True,True
+Archline,796.0,archline,Archline,34.12086929458526,-117.58409269968844,archline,True,True,True
+Armijo P.t.,2093.0,armijo,Armijo P.T.,34.78433379772276,-117.2490183897524,armijo,False,False,True
+Arrington P.t.,1998.0,arrington,Arrington P.T.,33.829755520215,-118.10043101358654,arrington,False,False,True
+Arro,729.0,arro,Arro,34.14197143239767,-117.28996172243762,arro,True,True,True
+Ashley P.t.,2080.0,ashley,Ashley P.T.,34.44049966667659,-119.65588938914516,ashley,False,False,True
+Athens,848.0,athens,Athens,33.916567263210936,-118.2381892261668,athens,True,True,True
+Atwood,918.0,atwood,Atwood,33.880449002142754,-117.83192699613006,atwood,True,True,True
+Aventura P.t.,1968.0,aventura,Aventura P.T.,33.93141848938346,-116.5041040764268,aventura,True,True,True
+Badwater P.t.,1284.0,badwater,Badwater P.T.,36.455969002788585,-116.8452024905156,badwater,False,False,True
+Bailey,327.0,bailey,Bailey,34.77649100015351,-118.77442899582768,bailey,True,True,True
+Bain,730.0,bain,Bain,34.01006276038666,-117.50628314451394,bain,True,True,True
+Bandage P.t.,2286.0,bandage,Bandage P.T.,33.778606049415224,-116.46392796750416,bandage,False,False,True
+Bandini,395.0,bandini,Bandini,33.99958180854835,-118.17157825781727,bandini,True,True,True
+Banducci,621.0,banducci,Banducci,35.09970798299895,-118.59934938676032,banducci,False,False,True
+Banning,1781.0,banning,Banning,33.92244671648164,-116.87284521205684,banning,True,True,True
+Bard P.t.,1285.0,bard,Bard P.T.,34.16027322450465,-119.18816290220516,bard,False,False,True
+Barre,363.0,barre,Barre,33.80980878510379,-117.98381034849662,barre,True,True,True
+Barwick P.t.,2070.0,barwick,Barwick P.T.,34.421217966055394,-119.80133317026456,barwick,False,False,True
+Bassett,452.0,bassett,Bassett,34.04749361907675,-117.95514105551148,bassett,True,True,True
+Basta,996.0,basta,Basta,33.8691828612384,-117.96020381310754,basta,True,True,True
+Bayside,919.0,bayside,Bayside,33.656856695237245,-117.90677421154508,bayside,True,True,True
+Beaumont,733.0,beaumont,Beaumont,33.93362502624713,-116.98362109716552,beaumont,True,True,True
+Bedford,518.0,bedford,Bedford,34.062880472190464,-118.39930445924148,bedford,False,False,True
+Belding,1709.0,belding,Belding,33.82977539561138,-116.51400567204634,belding,True,True,True
+Belmont,825.0,belmont,Belmont,33.78118737176825,-118.14988916312744,belmont,True,True,True
+Belvedere,397.0,belvedere,Belvedere,34.03650001397044,-118.1790586944638,belvedere,True,True,True
+Belvedere P.t.,1969.0,belvedere,Belvedere P.T.,34.03737294459553,-118.17978155956828,belvedere,True,True,True
+Bessemer P.t.,1297.0,bessemer,Bessemer P.T.,34.40840314814915,-116.72150157839668,bessemer,False,False,True
+Bicknell,398.0,bicknell,Bicknell,34.03368102349242,-118.16247130242016,bicknell,True,True,True
+Big Bend Bia,1848.0,big bend bia,Big Bend Bia,34.25930951807461,-114.16752638762966,big bend bia,True,True,True
+Bigfoot P.t.,1289.0,bigfoot,Bigfoot P.T.,36.60088395546939,-118.73856106944936,bigfoot,False,False,True
+Bird Springs P.t.,1306.0,bird springs,Bird Springs P.T.,35.54790360144478,-118.14249646180583,bird springs,False,False,True
+Bixby,826.0,bixby,Bixby,33.77254515576724,-118.17070239713516,bixby,False,False,True
+Black Meadows,1290.0,black meadows,Black Meadows,34.3487917918322,-114.19596505767748,black meadows,False,False,True
+Bliss,560.0,bliss,Bliss,36.16629775969852,-119.20705393718964,bliss,True,True,True
+Bloomington,1811.0,bloomington,Bloomington,34.04917000383533,-117.3985330021639,bloomington,True,True,True
+Blue Cut P.t.,1291.0,blue cut,Blue Cut P.T.,34.30773098427744,-117.46851743847311,blue cut,False,False,True
+Blue Ridge P.t.,1296.0,blue ridge,Blue Ridge P.T.,34.37737571780408,-117.69271041942166,blue ridge,False,False,True
+Bluff Cove,539.0,bluff cove,Bluff Cove,33.77994268591449,-118.38755229948076,bluff cove,True,True,True
+Blythe (Walc),228.0,blythe walc,Blythe (Walc),33.61169299611282,-114.6805210000251,blythe walc,False,False,True
+Bolsa,921.0,bolsa,Bolsa,33.730408022185884,-118.03324151109152,bolsa,True,True,True
+Borrego,995.0,borrego,Borrego,33.59768363722954,-117.74923154879204,borrego,True,True,True
+Bovine,991.0,bovine,Bovine,33.85103372380987,-118.06390617540563,bovine,True,True,True
+Boxwood,610.0,boxwood,Boxwood,36.12610225574932,-118.82140084606492,boxwood,True,True,True
+Bradbury,440.0,bradbury,Bradbury,34.1341163981833,-117.98732609469344,bradbury,True,True,True
+Brea,1028.0,brea,Brea,33.91929821622321,-117.8490431144892,brea,True,True,True
+Brewster,829.0,brewster,Brewster,33.92072341848696,-118.18848926237656,brewster,True,True,True
+Bridge,532.0,bridge,Bridge,33.880624437876826,-118.3259924983696,bridge,True,True,True
+Brighton,493.0,brighton,Brighton,33.902310831667656,-118.31210985553204,brighton,True,True,True
+Brookhurst,966.0,brookhurst,Brookhurst,33.73715948915509,-117.95580004349053,brookhurst,True,True,True
+Brookings P.t.,1301.0,brookings,Brookings P.T.,34.233039630292566,-117.12977060041212,brookings,False,False,True
+Brown P.t.,1303.0,brown,Brown P.T.,35.9797923321422,-116.2630220375144,brown,False,False,True
+Browning,561.0,browning,Browning,35.7045473762974,-119.20353075858472,browning,True,True,True
+Bryan,922.0,bryan,Bryan,33.73483199858305,-117.80116599692272,bryan,True,True,True
+Bryman,1641.0,bryman,Bryman,34.68592987493426,-117.33817106269278,bryman,True,True,True
+Bullis,878.0,bullis,Bullis,33.90027364027962,-118.20574187651508,bullis,True,True,True
+Bunker,1817.0,bunker,Bunker,33.8283648304304,-117.21173996305129,bunker,True,True,True
+Burnt Mill,772.0,burnt mill,Burnt Mill,34.23455600184966,-117.20177600149432,burnt mill,True,True,True
+Cabazon,1642.0,cabazon,Cabazon,33.91393513181455,-116.78448895599544,cabazon,True,True,True
+Cabrillo,993.0,cabrillo,Cabrillo,33.67169434144606,-117.84750781986958,cabrillo,True,True,True
+Cady,1643.0,cady,Cady,34.8390113539395,-116.66239286066762,cady,True,True,True
+Cajalco,1816.0,cajalco,Cajalco,33.85904200100633,-117.32549900292356,cajalco,True,True,True
+Cal City 'A',1819.0,cal city a,Cal City 'A',35.1431029846686,-117.96986176529046,cal city a,False,False,True
+Cal City 'B',1820.0,cal city b,Cal City 'B',35.1431029846686,-117.96986176529046,cal city b,False,False,True
+Calamar P.t.,1334.0,calamar,Calamar P.T.,33.47177544989847,-117.16950200366703,calamar,False,False,True
+Calden,869.0,calden,Calden,33.9564731732366,-118.23217062742631,calden,True,True,True
+Calectric,1610.0,calectric,Calectric,34.09320376455966,-117.3168459956363,calectric,True,True,True
+Camarillo,1012.0,camarillo,Camarillo,34.21987406168505,-119.0087515903353,camarillo,True,True,True
+Camden,938.0,camden,Camden,33.71334293054773,-117.88328931162948,camden,True,True,True
+Cameron,831.0,cameron,Cameron,33.8192358468031,-118.21711088356317,cameron,True,True,True
+Camp 10,1061.0,camp 10,Camp 10,37.22160058174016,-119.2368371603174,camp 10,True,True,True
+Camp Angelus P.t.,1324.0,camp angelus,Camp Angelus P.T.,34.14634669428895,-116.97974167739488,camp angelus,False,False,True
+Canadian P.t.,822.0,canadian,Canadian P.T.,34.26243754845793,-117.16122250893385,canadian,False,False,True
+Canalino P.t.,2161.0,canalino,Canalino P.T.,34.388460915574804,-119.51362149312124,canalino,False,False,True
+Cantil,1644.0,cantil,Cantil,35.30816674233435,-117.94638875114074,cantil,True,True,True
+Canyon,1004.0,canyon,Canyon,33.871538676482594,-117.74807268223128,canyon,True,True,True
+Canyon Lake,1846.0,canyon lake,Canyon Lake,33.67386312507346,-117.26000862116427,canyon lake,True,True,True
+Capitan,646.0,capitan,Capitan,34.48148358613582,-120.0441513428184,capitan,True,True,True
+Car Wash P.t.,2029.0,car wash,Car Wash P.T.,33.84791938792783,-118.1260117439953,car wash,False,False,True
+Carancho P.t.,1318.0,carancho,Carancho P.T.,33.51114201825317,-117.22239713861714,carancho,False,False,True
+Cardiff,736.0,cardiff,Cardiff,34.102652997705654,-117.27742000393738,cardiff,True,True,True
+Cardinal P.t.,1327.0,cardinal,Cardinal P.T.,34.36169633330616,-117.63690737563212,cardinal,False,False,True
+Carmenita,926.0,carmenita,Carmenita,33.90324389054957,-118.04717314302962,carmenita,True,True,True
+Carodean,1835.0,carodean,Carodean,34.14784296135626,-116.12394915960354,carodean,True,True,True
+Carolina,925.0,carolina,Carolina,33.910013996191246,-117.87969900019525,carolina,True,True,True
+Carpinteria,640.0,carpinteria,Carpinteria,34.40994774778738,-119.51510197812551,carpinteria,True,True,True
+Carson,830.0,carson,Carson,33.8639252787574,-118.21707429703773,carson,True,True,True
+Cascade P.t.,1317.0,cascade,Cascade P.T.,33.551587377901555,-117.28933408908274,cascade,False,False,True
+Casitas,642.0,casitas,Casitas,34.36295580710599,-119.31080331803668,casitas,True,True,True
+Casper P.t.,1330.0,casper,Casper P.T.,34.130415619407664,-119.09556094664534,casper,False,False,True
+Cedar Pines P.t.,1332.0,cedar pines,Cedar Pines P.T.,34.2494706856681,-117.32530879218336,cedar pines,False,False,True
+Cedarwood,972.0,cedarwood,Cedarwood,33.753664475574155,-117.99335611469348,cedarwood,True,True,True
+Center,371.0,center,Center,33.928868599739715,-118.10584791970048,center,True,True,True
+Channel Island,637.0,channel island,Channel Island,34.18173499797494,-119.22229699654076,channel island,True,True,True
+Chase,806.0,chase,Chase,33.844774691488155,-117.53755711248616,chase,True,True,True
+Chatham,605.0,chatham,Chatham,36.41506999948426,-119.29768400447853,chatham,True,True,True
+Chatsworth,688.0,chatsworth,Chatsworth,34.23580401011754,-118.70207951986724,chatsworth,True,True,True
+Cherry,832.0,cherry,Cherry,33.77884099741242,-118.18354200162445,cherry,True,True,True
+Chestnut,974.0,chestnut,Chestnut,33.73291743598918,-117.84905438111056,chestnut,True,True,True
+Chillon P.t.,1335.0,chillon,Chillon P.T.,34.237491161319305,-117.25271894571011,chillon,False,False,True
+China Ranch P.t.,1336.0,china ranch,China Ranch P.T.,35.82827691887815,-116.18903964111246,china ranch,False,False,True
+Chino,330.0,chino,Chino,33.99800099876217,-117.67945500552317,chino,True,True,True
+Chiquita,1023.0,chiquita,Chiquita,33.629716996532885,-117.63206999531124,chiquita,True,True,True
+Chollita P.t.,1321.0,chollita,Chollita P.T.,34.13987057719961,-116.3080615408371,chollita,False,False,True
+Cima,739.0,cima,Cima,35.25530700396468,-115.5170589961386,cima,True,True,True
+Citrus,453.0,citrus,Citrus,34.11883200009951,-117.87186899926029,citrus,True,True,True
+Clark,890.0,clark,Clark,33.79608034211235,-118.10702342803262,clark,True,True,True
+Coffee,1805.0,coffee,Coffee,33.932236354588085,-116.50504522447508,coffee,True,True,True
+Coldbrook P.t.,2050.0,coldbrook,Coldbrook P.T.,33.85935675592398,-118.12132699213583,coldbrook,False,False,True
+Colonia,643.0,colonia,Colonia,34.203997997029866,-119.0967720048126,colonia,True,True,True
+Colton,737.0,colton,Colton,34.05928099568391,-117.31516299984052,colton,False,False,True
+Columbine,598.0,columbine,Columbine,35.83453147955805,-119.21259382724928,columbine,True,True,True
+Compton,887.0,compton,Compton,33.8968740620171,-118.22512802021888,compton,True,True,True
+Concho,1826.0,concho,Concho,33.75688900153803,-116.33419299787862,concho,True,True,True
+Control,187.0,control,Control,37.33542300124301,-118.48085000382235,control,True,True,True
+Converse Flats,1653.0,converse flats,Converse Flats,34.19366413798804,-116.91201653378045,converse flats,True,True,True
+Cornuta,844.0,cornuta,Cornuta,33.88379282288618,-118.12056412504514,cornuta,True,True,True
+Cortez,454.0,cortez,Cortez,34.092668773995285,-117.8790593448018,cortez,True,True,True
+Corum,680.0,corum,Corum,34.93630482935899,-117.95107436777867,corum,True,True,True
+Coso,1892.0,coso,Coso,36.082697937378725,-117.9508794515932,coso,False,False,True
+Cottage Grove,1346.0,cottage grove,Cottage Grove,34.24375366141106,-117.19723414306642,cottage grove,False,False,True
+Cottonwood,1785.0,cottonwood,Cottonwood,34.37348672287697,-116.86154669043889,cottonwood,True,True,True
+Cove P.t.,1366.0,cove,Cove P.T.,33.88973706516375,-116.6051725956054,cove,False,False,True
+Crater,509.0,crater,Crater,34.108029995505106,-118.71436334833967,crater,True,True,True
+Crawford P.t.,1345.0,crawford,Crawford P.T.,37.62900545166868,-118.98708328176254,crawford,False,False,True
+Crest,537.0,crest,Crest,33.76692923592485,-118.3727197248746,crest,True,True,True
+Crestwind U.g.s.,1344.0,crestwind u g s,Crestwind U.G.S.,33.77852113938615,-118.41941446413716,crestwind u g s,False,False,True
+Crown,930.0,crown,Crown,33.608690174598145,-117.86390230589092,crown,True,True,True
+Crump P.t.,1348.0,crump,Crump P.T.,34.08919933252988,-116.92173454047229,crump,False,False,True
+Cucamonga,790.0,cucamonga,Cucamonga,34.08395434683573,-117.59268522261728,cucamonga,True,True,True
+Culver,468.0,culver,Culver,34.01459700392742,-118.40266499797504,culver,True,True,True
+Cummings,644.0,cummings,Cummings,35.11090957384204,-118.49392933183512,cummings,True,True,True
+Cypress,949.0,cypress,Cypress,33.80991268026793,-118.07236092354432,cypress,True,True,True
+Daeley P.t.,2046.0,daeley,Daeley P.T.,33.9283278766198,-118.14182197758188,daeley,False,False,True
+Daggett,1655.0,daggett,Daggett,34.8631924881409,-116.89486358150022,daggett,True,True,True
+Daisy,886.0,daisy,Daisy,33.78857299996503,-118.2000940015866,daisy,False,False,True
+Dalba P.t.,1349.0,dalba,Dalba P.T.,34.20608557579066,-117.12039687304828,dalba,False,False,True
+Dalton,456.0,dalton,Dalton,34.113777954796774,-117.9332777228,dalton,True,True,True
+Declez,743.0,declez,Declez,34.07838299868792,-117.48664800366758,declez,True,True,True
+Deep Springs,203.0,deep springs,Deep Springs,37.37486700132881,-117.977503003681,deep springs,True,True,True
+Defrain,1656.0,defrain,Defrain,33.6599157219618,-114.62269680370996,defrain,True,True,True
+Del Amo,2128.0,del amo,Del Amo,33.84822500287367,-118.09716799786231,del amo,True,True,True
+Del Rosa,798.0,del rosa,Del Rosa,34.15048200034294,-117.2517030051407,del rosa,True,True,True
+Del Sur,645.0,del sur,Del Sur,34.71800399750987,-118.28801500342776,del sur,True,True,True
+Deluz P.t.,1350.0,deluz,Deluz P.T.,33.49973013826498,-117.18461438567844,deluz,False,False,True
+Desert Outpost,1658.0,desert outpost,Desert Outpost,33.80841701514476,-116.47263928522204,desert outpost,True,True,True
+Devers,339.0,devers,Devers,33.93401700227757,-116.57836100060614,devers,True,True,True
+Diamond Bar,405.0,diamond bar,Diamond Bar,34.00400717113695,-117.81169586594292,diamond bar,True,True,True
+Dike,842.0,dike,Dike,33.76237900518144,-118.22216998226938,dike,True,True,True
+Dinkey Creek P.t.,1351.0,dinkey creek,Dinkey Creek P.T.,37.06493512397656,-119.1661012488832,dinkey creek,False,False,True
+Ditmar,520.0,ditmar,Ditmar,33.87237600011136,-118.37840454778362,ditmar,True,True,True
+Doheny,475.0,doheny,Doheny,34.09039725281789,-118.39157019643156,doheny,False,False,True
+Dolphin P.t.,2160.0,dolphin,Dolphin P.T.,34.15954170706311,-119.051375324635,dolphin,False,False,True
+Domeland P.t.,1363.0,domeland,Domeland P.T.,35.791809933097475,-117.851531062441,domeland,False,False,True
+Downey,932.0,downey,Downey,33.93716290704601,-118.12975636922113,downey,True,True,True
+Downs,2027.0,downs,Downs,35.62041331900779,-117.6884528047109,downs,True,True,True
+Drinkwater P.t. Pb,2257.0,drinkwater p t pb,Drinkwater P.T. Pb,34.58798716399067,-118.45490725587705,drinkwater p t pb,False,False,True
+Duarte,422.0,duarte,Duarte,34.13856470583992,-117.96563295453346,duarte,True,True,True
+Dunes,1661.0,dunes,Dunes,33.611349995945176,-114.67926099516676,dunes,True,True,True
+Dunn Siding,1657.0,dunn siding,Dunn Siding,35.04896210066004,-116.44277963649056,dunn siding,True,True,True
+Dysart P.t.,1364.0,dysart,Dysart P.T.,33.896619249714675,-116.90972073182132,dysart,False,False,True
+Eagle Crest P.t.,2208.0,eagle crest,Eagle Crest P.T.,33.72498088808595,-117.26877509370809,eagle crest,False,False,True
+Eagle Mountain,310.0,eagle mountain,Eagle Mountain,33.81142800223903,-115.45355200188276,eagle mountain,False,False,True
+Eagle Rock,283.0,eagle rock,Eagle Rock,34.14996000085006,-118.18440999461907,eagle rock,True,True,True
+Earlimart,564.0,earlimart,Earlimart,35.893572999556234,-119.25176100227374,earlimart,True,True,True
+East Barstow,1662.0,east barstow,East Barstow,34.88981280113665,-117.00156920661708,east barstow,True,True,True
+Eaton,399.0,eaton,Eaton,34.16215700293834,-118.0856959980606,eaton,True,True,True
+Edinger,989.0,edinger,Edinger,33.72704165914478,-117.86833970365298,edinger,True,True,True
+Edwards,1786.0,edwards,Edwards,34.97733316152458,-117.89157335300752,edwards,True,True,True
+Eisenhower,1815.0,eisenhower,Eisenhower,33.807706998789484,-116.49345499860358,eisenhower,True,True,True
+El Casco,1861.0,el casco,El Casco,33.967165609123306,-117.07742912743562,el casco,True,True,True
+El Nido,302.0,el nido,El Nido,33.89601600350098,-118.37257599658405,el nido,True,True,True
+El Sobrante,1669.0,el sobrante,El Sobrante,33.85855174333349,-117.44061908499997,el sobrante,True,True,True
+Elementary P.t.,2038.0,elementary,Elementary P.T.,34.10633553615135,-118.10358632634345,elementary,False,False,True
+Elizabeth Lake,596.0,elizabeth lake,Elizabeth Lake,34.49098850700194,-118.61504490755289,elizabeth lake,True,True,True
+Ellis,374.0,ellis,Ellis,33.68544544480769,-117.9434316308098,ellis,True,True,True
+Elsinore,1667.0,elsinore,Elsinore,33.67450557123915,-117.32588146539794,elsinore,True,True,True
+Ely,931.0,ely,Ely,33.850669276650706,-118.02764770461924,ely,True,True,True
+Emigrant P.t.,1369.0,emigrant,Emigrant P.T.,36.60388225402959,-117.14340065601516,emigrant,False,False,True
+Eric,904.0,eric,Eric,33.8798500049219,-118.09062992806278,eric,True,True,True
+Escala P.t.,2047.0,escala,Escala P.T.,33.505778122375155,-117.33327331429768,escala,False,False,True
+Escondido P.t.,1373.0,escondido,Escondido P.T.,34.489360609943034,-118.32216227118028,escondido,False,False,True
+Estero,696.0,estero,Estero,34.145483384192424,-119.09457121669094,estero,True,True,True
+Estrella,1024.0,estrella,Estrella,33.687249709892,-117.82790152451156,estrella,True,True,True
+Etiwanda,1874.0,etiwanda,Etiwanda,34.0874063550556,-117.52566069325276,etiwanda,True,True,True
+Ettalee P.t.,1371.0,ettalee,Ettalee P.T.,36.30854453683688,-116.41507365047508,ettalee,False,False,True
+Euclid,776.0,euclid,Euclid,34.08207658430842,-117.63291206560012,euclid,True,True,True
+Fairview,933.0,fairview,Fairview,33.69420600217397,-117.8676489323096,fairview,True,True,True
+Falcon Ridge,1882.0,falcon ridge,Falcon Ridge,34.154530066281474,-117.43225566011652,falcon ridge,True,True,True
+Falls P.t.,1384.0,falls,Falls P.T.,37.61929260719179,-119.0183354078835,falls,False,False,True
+Farrell,1807.0,farrell,Farrell,33.84688300284005,-116.5047269975424,farrell,True,True,True
+Fernwood,868.0,fernwood,Fernwood,33.92844212484132,-118.21523574692952,fernwood,True,True,True
+Fighter P.t.,2239.0,fighter,Fighter P.T.,33.818226965303246,-117.51824665701758,fighter,False,False,True
+Fillmore,647.0,fillmore,Fillmore,34.408935811473874,-118.92041982248664,fillmore,True,True,True
+Firehouse,813.0,firehouse,Firehouse,34.04225255129872,-117.62248279227188,firehouse,True,True,True
+Fish Valley,192.0,fish valley,Fish Valley,37.490690346339534,-117.8850037564599,fish valley,False,False,True
+Flagstone P.t.,2031.0,flagstone,Flagstone P.T.,33.81906581179163,-118.12107910289824,flagstone,False,False,True
+Floraday,1010.0,floraday,Floraday,33.93548799543143,-118.09417900279584,floraday,True,True,True
+Fogarty,1834.0,fogarty,Fogarty,33.70081870853662,-117.37384841874932,fogarty,True,True,True
+Forest Home,1670.0,forest home,Forest Home,34.087574182727614,-116.92060648551028,forest home,True,True,True
+Fortune P.t.,2301.0,fortune,Fortune P.T.,33.78847912869119,-116.92905165617078,fortune,False,False,True
+Forty Eight St. P.t.,1381.0,forty eight st,Forty Eight St. P.T.,33.99991006348528,-118.33120425305948,forty eight st,False,False,True
+Francis,771.0,francis,Francis,34.04176760572311,-117.7227327721905,francis,True,True,True
+Frazier Park,632.0,frazier park,Frazier Park,34.81547512233127,-119.01032023127377,frazier park,True,True,True
+Fruitland,839.0,fruitland,Fruitland,33.99612653954061,-118.22661150774924,fruitland,True,True,True
+Fullerton,935.0,fullerton,Fullerton,33.86801014671579,-117.92098061980474,fullerton,True,True,True
+Gabrielino P.t.,2039.0,gabrielino,Gabrielino P.T.,34.084080889069995,-118.09351128524295,gabrielino,False,False,True
+Gage,891.0,gage,Gage,33.96285388729544,-118.15565626543383,gage,False,False,True
+Gale,1787.0,gale,Gale,34.85901038194339,-116.866424742626,gale,True,True,True
+Galileo P.t.,1397.0,galileo,Galileo P.T.,35.218163138249764,-117.7650016012762,galileo,False,False,True
+Gallatin,936.0,gallatin,Gallatin,33.96137148906237,-118.11147605505278,gallatin,True,True,True
+Garfield,402.0,garfield,Garfield,34.126135002802286,-118.14927799541836,garfield,True,True,True
+Garnet,1613.0,garnet,Garnet,33.90145418385204,-116.5439873868186,garnet,True,True,True
+Garvey,403.0,garvey,Garvey,34.06333642914691,-118.0910441257477,garvey,False,False,True
+Gavilan,1725.0,gavilan,Gavilan,33.78453137951131,-117.244404040654,gavilan,True,True,True
+Gaviota,706.0,gaviota,Gaviota,34.47616945495448,-120.19895765529488,gaviota,True,True,True
+Genamic,1192.0,genamic,Genamic,34.090687084227305,-117.56578692312048,genamic,True,True,True
+George A.f.b.,1671.0,george a f b,George A.F.B.,34.57982381229889,-117.36944495127666,george a f b,False,False,True
+Gilbert,945.0,gilbert,Gilbert,33.87688000357716,-117.97285199579584,gilbert,True,True,True
+Gisler,971.0,gisler,Gisler,33.6874929740019,-117.91268546781532,gisler,True,True,True
+Glen Avon,1673.0,glen avon,Glen Avon,34.00596154761225,-117.45752658281909,glen avon,True,True,True
+Glennville,566.0,glennville,Glennville,35.7241343503674,-118.69554791102324,glennville,True,True,True
+Globemaster P.t.,2355.0,globemaster,Globemaster P.T.,33.88042232907234,-117.26437367076043,globemaster,False,False,True
+Goldhill,1798.0,goldhill,Goldhill,34.304594715563255,-116.82219835404692,goldhill,True,True,True
+Goldtown,649.0,goldtown,Goldtown,35.05456290386635,-118.18626607582308,goldtown,True,True,True
+Goleta,320.0,goleta,Goleta,34.47458731297879,-119.88528727978417,goleta,True,True,True
+Gonzales,717.0,gonzales,Gonzales,34.2261977486632,-119.17572336799584,gonzales,True,True,True
+Gorman,650.0,gorman,Gorman,34.78871455256242,-118.8223213307326,gorman,True,True,True
+Goshen,567.0,goshen,Goshen,36.32601238794229,-119.43817686985088,goshen,True,True,True
+Graham,845.0,graham,Graham,33.95932330825726,-118.23688369438952,graham,True,True,True
+Granada,404.0,granada,Granada,34.105522002336,-118.12156799891294,granada,False,False,True
+Grapevine P.t.,1388.0,grapevine,Grapevine P.T.,37.05920306834882,-117.28631243290252,grapevine,False,False,True
+Great Lakes,694.0,great lakes,Great Lakes,34.83671927635196,-118.1569995374843,great lakes,True,True,True
+Green Bear P.t.,1389.0,green bear,Green Bear P.T.,34.21189424600382,-117.07987409261612,green bear,False,False,True
+Greenhorn,601.0,greenhorn,Greenhorn,35.738119403560795,-118.55660120008169,greenhorn,True,True,True
+Greening,1019.0,greening,Greening,33.88151199685372,-118.04771599985176,greening,True,True,True
+Grimshaw P.t.,1392.0,grimshaw,Grimshaw P.T.,35.84798971593569,-116.22601109207082,grimshaw,False,False,True
+Gunsite P.t.,1393.0,gunsite,Gunsite P.T.,34.032046956248955,-116.85622670508616,gunsite,False,False,True
+Hamilton,937.0,hamilton,Hamilton,33.65499499810547,-117.95302900495923,hamilton,True,True,True
+Hanford,568.0,hanford,Hanford,36.323595092106814,-119.64909814786026,hanford,True,True,True
+Harper Lake,2205.0,harper lake,Harper Lake,35.02803309199995,-117.34041708659684,harper lake,True,True,True
+Harvard,1678.0,harvard,Harvard,34.95693116147875,-116.65323533398993,harvard,True,True,True
+Haskell,724.0,haskell,Haskell,34.43778474777862,-118.51439019798472,haskell,True,True,True
+Hathaway,847.0,hathaway,Hathaway,33.7909243823104,-118.14183061471968,hathaway,True,True,True
+Havasu,794.0,havasu,Havasu,34.35454456774613,-114.26128224722392,havasu,True,True,True
+Haveda,529.0,haveda,Haveda,33.82465115637044,-118.34438234661516,haveda,True,True,True
+Havilah,570.0,havilah,Havilah,35.483344632977264,-118.52830260774395,havilah,True,True,True
+Heartwell P.t.,1996.0,heartwell,Heartwell P.T.,33.83079573290369,-118.13356916466896,heartwell,False,False,True
+Hedda,905.0,hedda,Hedda,33.86681562580689,-118.11757574761532,hedda,True,True,True
+Helendale,1679.0,helendale,Helendale,34.739570732100724,-117.32440346481268,helendale,True,True,True
+Hemet,1680.0,hemet,Hemet,33.746928919438126,-116.97559724729147,hemet,True,True,True
+Hesperia,1804.0,hesperia,Hesperia,34.41277900052249,-117.28962499575006,hesperia,True,True,True
+Hession P.t.,1402.0,hession,Hession P.T.,37.173693605683454,-118.28855548537793,hession,False,False,True
+High P.t.,1415.0,high,High P.T.,34.90020773819528,-117.02086988565104,high,False,False,True
+High School P.t.,1401.0,high school,High School P.T.,34.239078122087065,-117.1989983761408,high school,False,False,True
+Highgrove,139.0,highgrove,Highgrove,34.022271000977824,-117.3328150006805,highgrove,True,True,True
+Highland,749.0,highland,Highland,34.107628999650004,-117.18755599934724,highland,True,True,True
+Hillgreen P.t.,2234.0,hillgreen,Hillgreen P.T.,34.05565240486036,-118.40685698214268,hillgreen,False,False,True
+Hinkley,1682.0,hinkley,Hinkley,34.90638578245534,-117.15542788776906,hinkley,True,True,True
+Hinson,351.0,hinson,Hinson,33.81926899922188,-118.22253900322433,hinson,True,True,True
+Holgate,1824.0,holgate,Holgate,35.01556648872467,-117.70476753610514,holgate,True,True,True
+Holiday,1712.0,holiday,Holiday,33.84538927117918,-116.5460117849207,holiday,True,True,True
+Homart,1803.0,homart,Homart,34.07492245983708,-117.29134532065184,homart,True,True,True
+Homewood P.t.,1404.0,homewood,Homewood P.T.,35.890093300896446,-117.33084440229511,homewood,False,False,True
+Hook Creek P.t.,1405.0,hook creek,Hook Creek P.T.,34.25141917140717,-117.1592067069181,hook creek,False,False,True
+Hot Water P.t.,1407.0,hot water,Hot Water P.T.,35.8799801049664,-116.23687440752092,hot water,False,False,True
+Howard,476.0,howard,Howard,33.9224910017214,-118.30727100252447,howard,True,True,True
+Hoyt,423.0,hoyt,Hoyt,34.05246100173005,-118.04787199850246,hoyt,True,True,True
+Huntington P.t.,2320.0,huntington,Huntington P.T.,37.20978963207122,-119.21209805186427,huntington,False,False,True
+Huntington Park,849.0,huntington park,Huntington Park,33.97986101405952,-118.22572520657688,huntington park,False,False,True
+Hutt P.t.,1411.0,hutt,Hutt P.T.,35.0101155908089,-117.32941048726266,hutt,False,False,True
+Ice House P.t.,1417.0,ice house,Ice House P.T.,34.2505413049094,-117.63667425109055,ice house,False,False,True
+Indian Wells,1686.0,indian wells,Indian Wells,33.72944374862638,-116.34321099441657,indian wells,True,True,True
+Industry,457.0,industry,Industry,34.05123311734519,-117.99146038669224,industry,True,True,True
+Inglewood,477.0,inglewood,Inglewood,33.96658424764422,-118.3570986216146,inglewood,True,True,True
+Inspiration P.t.,2291.0,inspiration,Inspiration P.T.,37.217003000677686,-119.23680160069635,inspiration,False,False,True
+Inyo Sce,1615.0,inyo sce,Inyo Sce,37.342078998275525,-118.44081999742586,inyo sce,False,False,True
+Inyokern Town,1687.0,inyokern town,Inyokern Town,35.64795863969852,-117.81573401572578,inyokern town,True,True,True
+Iron Mt. Sce,238.0,iron mt sce,Iron Mt. Sce,34.14755935579616,-115.1204691903449,iron mt sce,False,False,True
+Irvine,942.0,irvine,Irvine,33.68339167134497,-117.7425321542773,irvine,True,True,True
+Isabella,606.0,isabella,Isabella,35.63310199968664,-118.47698199585776,isabella,True,True,True
+Isla Vista,726.0,isla vista,Isla Vista,34.431962660186834,-119.87110826955949,isla vista,True,True,True
+Ivanpah,2137.0,ivanpah,Ivanpah,35.54446791495526,-115.46883209031964,ivanpah,True,True,True
+Ivar,424.0,ivar,Ivar,34.08816132300995,-118.07593935933645,ivar,True,True,True
+Ivyglen,1830.0,ivyglen,Ivyglen,33.76023995734442,-117.4767247025759,ivyglen,True,True,True
+Jay P.t.,1422.0,jay,Jay P.T.,33.865762696313126,-118.20111911507654,jay,False,False,True
+Jefferson,1776.0,jefferson,Jefferson,33.85819000126701,-117.58883199997248,jefferson,True,True,True
+Jersey,898.0,jersey,Jersey,33.87967909325,-118.24798204815698,jersey,True,True,True
+Jessie P.t.,1428.0,jessie,Jessie P.T.,35.008145492353535,-117.65453104542348,jessie,False,False,True
+Job P.t.,1424.0,job,Job P.T.,34.26024138107216,-117.32859690519936,job,False,False,True
+Joburg P.t.,1427.0,joburg,Joburg P.T.,35.36535145949334,-117.64604476373556,joburg,False,False,True
+Johanna,294.0,johanna,Johanna,33.713483846607005,-117.85207412796372,johanna,True,True,True
+Johnsondale P.t.,1425.0,johnsondale,Johnsondale P.T.,35.97431674452949,-118.53925845730728,johnsondale,False,False,True
+Joshua Tree,1688.0,joshua tree,Joshua Tree,34.13599167886379,-116.3152410700874,joshua tree,True,True,True
+Junction,752.0,junction,Junction,36.3074809098986,-116.41003174596273,junction,True,True,True
+June Lake,198.0,june lake,June Lake,37.76752607365519,-119.12426591711588,june lake,True,True,True
+Kagle Canyon P.t.,1429.0,kagle canyon,Kagle Canyon P.T.,34.297525037903924,-118.37638350268448,kagle canyon,False,False,True
+Keeler P.t.,1430.0,keeler,Keeler P.T.,36.48718534720168,-117.87785814921892,keeler,False,False,True
+Kernville,614.0,kernville,Kernville,35.7720581025832,-118.43173950101318,kernville,True,True,True
+Kimball,808.0,kimball,Kimball,33.969727853610216,-117.61814932196484,kimball,True,True,True
+Kliss P.t.,1994.0,kliss,Kliss P.T.,33.8316215574556,-118.09440449446686,kliss,False,False,True
+Kneeland P.t.,1993.0,kneeland,Kneeland P.T.,33.84289039343719,-118.1134240067606,kneeland,False,False,True
+Kuffel P.t.,1432.0,kuffel,Kuffel P.T.,34.247628407195684,-117.18359128053036,kuffel,False,False,True
+La Canada,407.0,la canada,La Canada,34.205101445717894,-118.2105871156432,la canada,True,True,True
+La Cienega,303.0,la cienega,La Cienega,34.00035900376164,-118.37834700117509,la cienega,True,True,True
+La Cumbre P.t.,1439.0,la cumbre,La Cumbre P.T.,34.42221189564841,-119.75525555461176,la cumbre,False,False,True
+La Fresa,299.0,la fresa,La Fresa,33.86854535999439,-118.33214671842512,la fresa,True,True,True
+La Habra,944.0,la habra,La Habra,33.92503519317997,-117.93335597279064,la habra,True,True,True
+La Mirada,946.0,la mirada,La Mirada,33.88865000018771,-118.01457299792752,la mirada,True,True,True
+La Palma,987.0,la palma,La Palma,33.846268089605886,-117.98016977176611,la palma,True,True,True
+La Veta,947.0,la veta,La Veta,33.76643799668279,-117.85248599558908,la veta,True,True,True
+Lacresta P.t.,1438.0,lacresta,Lacresta P.T.,33.512996202449685,-117.29600716876844,lacresta,False,False,True
+Lafayette,986.0,lafayette,Lafayette,33.63545033562937,-117.9354793630941,lafayette,True,True,True
+Laguna Bell,358.0,laguna bell,Laguna Bell,33.976063000676135,-118.14762100305056,laguna bell,True,True,True
+Lakeview,1890.0,lakeview,Lakeview,33.82557942716747,-117.13410471129237,lakeview,False,False,True
+Lakewood,853.0,lakewood,Lakewood,33.830371003925336,-118.1245799965578,lakewood,True,True,True
+Lampson,984.0,lampson,Lampson,33.77796996263328,-117.8983985000712,lampson,True,True,True
+Landing,1851.0,landing,Landing,34.47907908248404,-114.4167265401381,landing,True,True,True
+Lark Ellen,458.0,lark ellen,Lark Ellen,34.08765799971799,-117.92628299981564,lark ellen,True,True,True
+Las Lomas,1859.0,las lomas,Las Lomas,33.71867641955388,-117.7391784103374,las lomas,False,False,True
+Lathrop Wells P.t.,2084.0,lathrop wells,Lathrop Wells P.T.,35.809858164599184,-115.64885522572864,lathrop wells,False,False,True
+Latigo,545.0,latigo,Latigo,34.04437418785732,-118.7769694087438,latigo,True,True,True
+Laurel,573.0,laurel,Laurel,36.23965600441295,-119.47638799617282,laurel,True,True,True
+Lawndale,508.0,lawndale,Lawndale,33.89504519902587,-118.35814536502288,lawndale,True,True,True
+Lemon Cove,574.0,lemon cove,Lemon Cove,36.38771600060615,-119.0260869967028,lemon cove,True,True,True
+Levy,684.0,levy,Levy,34.17355800376603,-119.15651000407496,levy,True,True,True
+Liberty,571.0,liberty,Liberty,36.28296874446285,-119.3326905200063,liberty,True,True,True
+Lighthipe,355.0,lighthipe,Lighthipe,33.88016104886397,-118.17456809026208,lighthipe,True,True,True
+Limestone,1026.0,limestone,Limestone,33.650239003663366,-117.68815000157966,limestone,True,True,True
+Linden,854.0,linden,Linden,33.85912660234861,-118.1856162397323,linden,True,True,True
+Little Rock,654.0,little rock,Little Rock,34.615981101742406,-117.9679391487888,little rock,True,True,True
+Live Oak,738.0,live oak,Live Oak,34.12055540677612,-117.73255728674572,live oak,True,True,True
+Lockheed,702.0,lockheed,Lockheed,34.45915899839863,-118.58032671162694,lockheed,True,True,True
+Locust,855.0,locust,Locust,33.78338437151147,-118.19190309770173,locust,True,True,True
+Loma Vista P.t.,1456.0,loma vista,Loma Vista P.T.,34.28107609803653,-119.2207671258413,loma vista,False,False,True
+Long P.t.,1997.0,long,Long P.T.,33.832458657026784,-118.11569882743052,long,False,False,True
+Longdon,897.0,longdon,Longdon,33.8818326851209,-118.19559190444494,longdon,True,True,True
+Loraine,577.0,loraine,Loraine,35.30841273698387,-118.42027793852826,loraine,True,True,True
+Loucks P.t.,1457.0,loucks,Loucks P.T.,34.52349201299314,-118.25905079195915,loucks,False,False,True
+Lucas,893.0,lucas,Lucas,33.84259412410815,-118.12060564366132,lucas,True,True,True
+Lucerne,1696.0,lucerne,Lucerne,34.4443941910935,-116.94704321537812,lucerne,True,True,True
+Lunada,530.0,lunada,Lunada,33.76031762955384,-118.3787449154016,lunada,False,False,True
+Lundy,189.0,lundy,Lundy,38.043603204948695,-119.17260475041304,lundy,True,True,True
+Luring P.t.,1449.0,luring,Luring P.T.,34.21251796471428,-117.11378982933076,luring,False,False,True
+Lynwood,851.0,lynwood,Lynwood,33.92724108889109,-118.21250088200088,lynwood,True,True,True
+Macarthur,988.0,macarthur,Macarthur,33.63852216201871,-117.86595640340192,macarthur,True,True,True
+Macneil,2028.0,macneil,Macneil,34.172305552354736,-118.34730555450317,macneil,True,True,True
+Madrid,483.0,madrid,Madrid,33.83533381342406,-118.32409750883438,madrid,False,False,True
+Madrone P.t.,1999.0,madrone,Madrone P.T.,33.866905113436665,-117.9613431680313,madrone,False,False,True
+Mailbox P.t.,2299.0,mailbox,Mailbox P.T.,33.88011762253112,-117.2930379258054,mailbox,False,False,True
+Malibu,655.0,malibu,Malibu,34.147638988750195,-118.76062464841829,malibu,True,True,True
+Manhattan,484.0,manhattan,Manhattan,33.87862305133165,-118.39841771902574,manhattan,False,False,True
+Maraschino,1810.0,maraschino,Maraschino,33.92552894082836,-116.98765654041124,maraschino,True,True,True
+Marina P.t.,1462.0,marina,Marina P.T.,33.75758542368183,-118.11558973816268,marina,False,False,True
+Marine,485.0,marine,Marine,34.0072963626934,-118.46621116692296,marine,True,True,True
+Marion,980.0,marion,Marion,33.81745999970494,-118.02681000307484,marion,True,True,True
+Mariposa,578.0,mariposa,Mariposa,35.805895765587906,-119.16023707969768,mariposa,True,True,True
+Marymount,547.0,marymount,Marymount,33.74733200407771,-118.38848000082,marymount,True,True,True
+Mascot,1877.0,mascot,Mascot,36.3420191206668,-119.5921514338543,mascot,True,True,True
+Masonry P.t.,2271.0,masonry,Masonry P.T.,34.61494028730975,-117.16920418221694,masonry,False,False,True
+Maxwell,1690.0,maxwell,Maxwell,33.94767925464396,-117.242774990919,maxwell,True,True,True
+Mayberry,1625.0,mayberry,Mayberry,33.73586677854356,-116.92033833583632,mayberry,True,True,True
+Mayflower,436.0,mayflower,Mayflower,34.11857377863967,-118.0083242114177,mayflower,True,True,True
+Mc Clary P.t.,1463.0,mc clary,Mc Clary P.T.,34.74171966500952,-117.32564177144472,mc clary,False,False,True
+Mcclenny P.t.,1480.0,mcclenny,Mcclenny P.T.,35.82175814352335,-118.63717515972311,mcclenny,False,False,True
+Mckevett P.t.,1461.0,mckevett,Mckevett P.T.,34.357287308524704,-119.05381194228602,mckevett,False,False,True
+Mebane P.t.,1472.0,mebane,Mebane P.T.,35.45955932287375,-118.77988907692443,mebane,False,False,True
+Mentone,1724.0,mentone,Mentone,34.063709998169614,-117.11914899772498,mentone,True,True,True
+Merced,459.0,merced,Merced,34.049374439924925,-117.90667949875004,merced,True,True,True
+Mescalero P.t.,1477.0,mescalero,Mescalero P.T.,34.047846982172274,-116.580192907024,mescalero,False,False,True
+Michillinda,408.0,michillinda,Michillinda,34.12857413233963,-118.06747048456948,michillinda,True,True,True
+Milliken,818.0,milliken,Milliken,34.04387316924229,-117.56808668680424,milliken,True,True,True
+Minaret,209.0,minaret,Minaret,37.65172381549271,-119.0105427778482,minaret,True,True,True
+Minneola,1699.0,minneola,Minneola,34.86456245737038,-116.81726402706413,minneola,False,False,True
+Moab P.t.,1474.0,moab,Moab P.T.,34.15216273942732,-117.70376703395036,moab,False,False,True
+Mockingbird P.t.,1479.0,mockingbird,Mockingbird P.T.,34.042945401159564,-116.58407635527507,mockingbird,False,False,True
+Modena,916.0,modena,Modena,33.788301250200355,-117.80339029717427,modena,True,True,True
+Modoc,656.0,modoc,Modoc,34.43004540243831,-119.71411429816072,modoc,False,False,True
+Moneta,486.0,moneta,Moneta,33.88389261680484,-118.30992656395875,moneta,False,False,True
+Monolith,657.0,monolith,Monolith,35.12576264877239,-118.3824105939484,monolith,True,True,True
+Monrovia,409.0,monrovia,Monrovia,34.14295428462573,-118.002877029618,monrovia,True,True,True
+Montecito,659.0,montecito,Montecito,34.4318675315151,-119.63477064000334,montecito,False,False,True
+Moorpark,322.0,moorpark,Moorpark,34.279573333499826,-118.902358527684,moorpark,True,True,True
+Moraga,1650.0,moraga,Moraga,33.50373842697358,-117.1399280334394,moraga,True,True,True
+Moreno,1700.0,moreno,Moreno,33.9478008651392,-117.17189130228648,moreno,True,True,True
+Morningside,487.0,morningside,Morningside,33.9611984076802,-118.33031271695256,morningside,False,False,True
+Morongo P.t.,1912.0,morongo,Morongo P.T.,34.06381471246918,-116.56047071375936,morongo,False,False,True
+Morro,948.0,morro,Morro,33.552258717456944,-117.77853550630896,morro,True,True,True
+Moulton,958.0,moulton,Moulton,33.60972830580406,-117.69800984712953,moulton,True,True,True
+Mountain Pass A,1791.0,mountain pass a,Mountain Pass A,35.503245795845864,-115.55128033550264,mountain pass a,False,False,True
+Movie,522.0,movie,Movie,33.990248808649305,-118.3943112353228,movie,True,True,True
+Moynier P.t.,1476.0,moynier,Moynier P.T.,34.01331000272637,-118.37931540710947,moynier,False,False,True
+Mt. Givens P.t.,1481.0,mt givens,Mt. Givens P.T.,37.25769472982604,-119.1571062233857,mt givens,False,False,True
+Mt. Tom,208.0,mt tom,Mt. Tom,37.35012841125564,-118.46543749176112,mt tom,True,True,True
+Mt. Vernon,773.0,mt vernon,Mt. Vernon,34.12074958293825,-117.31021776868803,mt vernon,True,True,True
+Mt. Wilson P.t.,1902.0,mt wilson,Mt. Wilson P.T.,34.22481982764218,-118.06558094047053,mt wilson,False,False,True
+Murphy,924.0,murphy,Murphy,33.95412236073975,-118.0428351628798,murphy,True,True,True
+Murrietta 2,1702.0,murrietta 2,Murrietta 2,33.5402055508895,-117.18773358342057,murrietta 2,True,True,True
+Muscoy,1705.0,muscoy,Muscoy,34.15757947295749,-117.33886871434376,muscoy,True,True,True
+Naomi,901.0,naomi,Naomi,33.97556197808886,-118.24830170526418,naomi,True,True,True
+Naples,860.0,naples,Naples,33.768759982218015,-118.13205146268136,naples,False,False,True
+Narod,781.0,narod,Narod,34.04776037427393,-117.67554192030468,narod,True,True,True
+Narrows,951.0,narrows,Narrows,34.00569047028173,-118.0678933396348,narrows,True,True,True
+Native P.t.,2274.0,native,Native P.T.,34.59316650007429,-117.1942017211258,native,False,False,True
+Navy Mole,1115.0,navy mole,Navy Mole,33.74176502611974,-118.22929670816164,navy mole,True,True,True
+Neenach,689.0,neenach,Neenach,34.77497916534034,-118.50139738842196,neenach,True,True,True
+Nelson,1801.0,nelson,Nelson,33.77221271736493,-116.98815952158284,nelson,True,True,True
+Newbury,690.0,newbury,Newbury,34.19537848083874,-118.93117342358124,newbury,True,True,True
+Newcomb,1818.0,newcomb,Newcomb,33.68706500292482,-117.20709999560265,newcomb,True,True,True
+Newhall,708.0,newhall,Newhall,34.37938862145633,-118.559385600556,newhall,True,True,True
+Newmark,412.0,newmark,Newmark,34.04572222443866,-118.12947389420242,newmark,True,True,True
+Nidever P.t.,1483.0,nidever,Nidever P.T.,34.41477339390648,-119.56024246779651,nidever,False,False,True
+Niguel,1001.0,niguel,Niguel,33.5631365000432,-117.71476690636771,niguel,True,True,True
+Noble P.t.,1482.0,noble,Noble P.T.,35.04832727311128,-116.89077649597506,noble,False,False,True
+Nogal P.t.,1490.0,nogal,Nogal P.T.,34.43724984624559,-119.77163885280284,nogal,False,False,True
+Nogales,786.0,nogales,Nogales,34.00698200351981,-117.85519400410632,nogales,True,True,True
+Nola,884.0,nola,Nola,33.85958799601749,-118.27598000294174,nola,True,True,True
+North Bay P.t.,1484.0,north bay,North Bay P.T.,34.2667598256054,-117.18447565362496,north bay,False,False,True
+North Intake,1710.0,north intake,North Intake,33.72879219190996,-114.51806985900689,north intake,True,True,True
+North Muroc,1711.0,north muroc,North Muroc,35.012830143068406,-117.8823300974798,north muroc,True,True,True
+North Oaks,613.0,north oaks,North Oaks,34.415007166234965,-118.45310662371053,north oaks,True,True,True
+Northwind,65.0,northwind,Northwind,35.07525090742226,-118.37277193931456,northwind,True,True,True
+Nugget,1759.0,nugget,Nugget,34.2068208988223,-116.36994277728613,nugget,True,True,True
+O'neill,1027.0,o neill,O'Neill,33.64322429575617,-117.60498583146834,o neill,False,False,True
+Oak Grove,599.0,oak grove,Oak Grove,36.34144202915099,-119.36596083170778,oak grove,True,True,True
+Oak Knoll P.t.,1493.0,oak knoll,Oak Knoll P.T.,34.240001458171314,-117.07325319013972,oak knoll,False,False,True
+Oak Park,551.0,oak park,Oak Park,34.18538100573582,-118.78487940026751,oak park,True,True,True
+Oak Springs P.t.,1821.0,oak springs,Oak Springs P.T.,34.37919488822352,-117.59976798697936,oak springs,False,False,True
+Oasis,681.0,oasis,Oasis,34.64734114501825,-118.09535655203612,oasis,True,True,True
+Observatory P.t.,1905.0,observatory,Observatory P.T.,34.22516158234983,-118.060636636566,observatory,False,False,True
+Ocean Park,488.0,ocean park,Ocean Park,33.9978855360838,-118.478789035256,ocean park,False,False,True
+Oceanview,955.0,oceanview,Oceanview,33.71625509877289,-117.98768317374038,oceanview,True,True,True
+Octol,579.0,octol,Octol,36.12412800402892,-119.39565000121922,octol,True,True,True
+Ojai,660.0,ojai,Ojai,34.4456612532938,-119.24196837511916,ojai,True,True,True
+Oldfield,863.0,oldfield,Oldfield,33.84632124261517,-118.17711840675376,oldfield,True,True,True
+Olinda,379.0,olinda,Olinda,33.94410562448348,-117.92123146814002,olinda,True,True,True
+Olive Lake,1714.0,olive lake,Olive Lake,33.6119060007915,-114.55037200163342,olive lake,True,True,True
+Olympic,489.0,olympic,Olympic,34.05994866826565,-118.38958337500952,olympic,False,False,True
+Ontario,755.0,ontario,Ontario,34.05654799622731,-117.645749003213,ontario,True,True,True
+Orange,956.0,orange,Orange,33.79007400165633,-117.86143500097876,orange,True,True,True
+Ordway,1715.0,ordway,Ordway,34.86545213859486,-117.11555047831143,ordway,True,True,True
+Oro Grande,1716.0,oro grande,Oro Grande,34.602308078599954,-117.33454372645546,oro grande,True,True,True
+Ortega,1021.0,ortega,Ortega,34.41863328199049,-119.58273654055274,ortega,True,True,True
+Outlaw P.t.,1498.0,outlaw,Outlaw P.T.,33.922927640668654,-117.28454260143783,outlaw,False,False,True
+Outlet P.t.,1499.0,outlet,Outlet P.T.,33.928160868458896,-116.81124291582424,outlet,False,False,True
+Padua,313.0,padua,Padua,34.120644996657795,-117.63984999855008,padua,True,True,True
+Pahrump P.t.,2083.0,pahrump,Pahrump P.T.,35.978368346524945,-115.86373004552873,pahrump,False,False,True
+Painted Cave P.t.,1505.0,painted cave,Painted Cave P.T.,34.504194014772914,-119.79124193051912,painted cave,False,False,True
+Palmdale,697.0,palmdale,Palmdale,34.56594303062138,-118.05894382169546,palmdale,True,True,True
+Palos Verdes,490.0,palos verdes,Palos Verdes,33.803860500737535,-118.37906529099078,palos verdes,False,False,True
+Panchito P.t.,1929.0,panchito,Panchito P.T.,34.112904813268074,-119.05964252588136,panchito,False,False,True
+Par P.t.,1504.0,par,Par P.T.,34.4528027686033,-119.79973178870829,par,False,False,True
+Parker Strip,1521.0,parker strip,Parker Strip,34.228937448042785,-114.19485474762315,parker strip,False,False,True
+Parkwood,928.0,parkwood,Parkwood,33.915624736779364,-117.96398012374236,parkwood,True,True,True
+Passons,1007.0,passons,Passons,33.964235003438496,-118.08216899828136,passons,True,True,True
+Pauba,1831.0,pauba,Pauba,33.54190303848778,-117.04398293604586,pauba,True,True,True
+Peacock U.g.s.,1519.0,peacock u g s,Peacock U.G.S.,33.78253081686645,-118.4057875936086,peacock u g s,False,False,True
+Peacor P.t.,1517.0,peacor,Peacor P.T.,34.36998061567038,-116.61118026429408,peacor,False,False,True
+Pearl,491.0,pearl,Pearl,34.021978495066826,-118.458658993392,pearl,True,True,True
+Pechanga,1836.0,pechanga,Pechanga,33.49214943279386,-117.05640121088769,pechanga,True,True,True
+Pedestrian P.t.,2177.0,pedestrian,Pedestrian P.T.,34.072323441886475,-118.1388349149462,pedestrian,False,False,True
+Pedley,756.0,pedley,Pedley,33.95853053680608,-117.52288257084442,pedley,True,True,True
+Peerless,1722.0,peerless,Peerless,35.097878874168764,-117.79535170204684,peerless,True,True,True
+Penitentiary P.t.,2215.0,penitentiary,Penitentiary P.T.,33.56645973758409,-114.91585616302976,penitentiary,False,False,True
+Pepper,1723.0,pepper,Pepper,34.102737060728806,-117.3542788797898,pepper,True,True,True
+Perez,1765.0,perez,Perez,33.88195489732824,-117.588640200006,perez,True,True,True
+Perris P.t.,2077.0,perris,Perris P.T.,33.78411833709477,-117.2446770117877,perris,True,True,True
+Perry,492.0,perry,Perry,33.86597598540991,-118.34851465647648,perry,True,True,True
+Peyton,742.0,peyton,Peyton,33.99551357968687,-117.73535806571996,peyton,True,True,True
+Pheasant P.t.,1506.0,pheasant,Pheasant P.T.,33.96779900311329,-116.89759266587669,pheasant,False,False,True
+Pico,843.0,pico,Pico,33.76557216615716,-118.20652702600002,pico,True,True,True
+Pierpont,662.0,pierpont,Pierpont,34.27390083589774,-119.24822507834864,pierpont,True,True,True
+Pitman,572.0,pitman,Pitman,37.20519869817524,-119.23958635760312,pitman,True,True,True
+Piute,678.0,piute,Piute,34.69113700076236,-117.96875300134876,piute,True,True,True
+Pixley,580.0,pixley,Pixley,35.964856760229296,-119.30281667688432,pixley,True,True,True
+Placentia,1003.0,placentia,Placentia,33.87119299998787,-117.87861599522375,placentia,True,True,True
+Playa,698.0,playa,Playa,34.40494329569494,-119.72827247807678,playa,True,True,True
+Pomona,757.0,pomona,Pomona,34.05836749677421,-117.75532947283664,pomona,True,True,True
+Poplar,581.0,poplar,Poplar,35.9941569999373,-119.14426699475146,poplar,True,True,True
+Potrero,725.0,potrero,Potrero,34.16193136185872,-118.83239843472316,potrero,True,True,True
+Primm,2167.0,primm,Primm,35.6409529977446,-115.3492069963033,primm,False,False,True
+Proctor,444.0,proctor,Proctor,34.02182443022892,-117.96877702559684,proctor,True,True,True
+Pruitt P.t.,2195.0,pruitt,Pruitt P.T.,33.85874370930089,-118.3639673395868,pruitt,False,False,True
+Puente,460.0,puente,Puente,34.00890600193133,-117.93137300283362,puente,True,True,True
+Quartz Hill,699.0,quartz hill,Quartz Hill,34.65937453883543,-118.2284403720392,quartz hill,True,True,True
+Queen Mary U.g.s.,1522.0,queen mary u g s,Queen Mary U.G.S.,33.75011514963357,-118.19134574924804,queen mary u g s,False,False,True
+Quinn,604.0,quinn,Quinn,35.73389725033108,-119.13117581127771,quinn,True,True,True
+Railroad,461.0,railroad,Railroad,33.99703410581549,-117.88747622105431,railroad,True,True,True
+Ramona,413.0,ramona,Ramona,34.07033285280638,-118.12961267056764,ramona,True,True,True
+Rancho,1727.0,rancho,Rancho,34.51751221375964,-117.21422551149456,rancho,True,True,True
+Randall,802.0,randall,Randall,34.11372910596103,-117.45481186020444,randall,True,True,True
+Randolph,859.0,randolph,Randolph,33.98239600018886,-118.20552199780366,randolph,True,True,True
+Randsburg,1792.0,randsburg,Randsburg,35.37985224320661,-117.65357256110528,randsburg,True,True,True
+Ravendale,448.0,ravendale,Ravendale,34.122529169604334,-118.08118741963942,ravendale,True,True,True
+Recycle P.t.,2356.0,recycle,Recycle P.T.,33.769311283559816,-117.22667934052474,recycle,False,False,True
+Red Box P.t.,1906.0,red box,Red Box P.T.,34.260373738057446,-118.1003640930633,red box,False,False,True
+Redman,665.0,redman,Redman,34.762541999383984,-117.96856000517889,redman,True,True,True
+Redondo,494.0,redondo,Redondo,33.84817299949127,-118.3875900004199,redondo,True,True,True
+Regatta P.t.,2287.0,regatta,Regatta P.T.,37.23671983458462,-119.2324602993806,regatta,False,False,True
+Repetto,434.0,repetto,Repetto,34.04784770004844,-118.16279259228568,repetto,True,True,True
+Retreat P.t.,1868.0,retreat,Retreat P.T.,33.80542627194658,-117.5087296597496,retreat,False,False,True
+Rialto,1729.0,rialto,Rialto,34.101252528071704,-117.36818289818122,rialto,True,True,True
+Ridgecrest,1730.0,ridgecrest,Ridgecrest,35.62681208164642,-117.67275024933278,ridgecrest,True,True,True
+Ridgeview P.t.,1695.0,ridgeview,Ridgeview P.T.,33.84523899603052,-116.99926100485908,ridgeview,False,False,True
+Rio Hondo,288.0,rio hondo,Rio Hondo,34.10683585850969,-117.97812610626242,rio hondo,True,True,True
+Ripley,1731.0,ripley,Ripley,33.525370998885414,-114.65458711126404,ripley,True,True,True
+Ritter Ranch,1862.0,ritter ranch,Ritter Ranch,34.579690275477724,-118.20346616201272,ritter ranch,True,True,True
+Rivera,961.0,rivera,Rivera,33.96955441808182,-118.10143727933446,rivera,True,True,True
+Riverway,1903.0,riverway,Riverway,36.35737818036574,-119.31314832956446,riverway,True,True,True
+Roadway,1829.0,roadway,Roadway,34.57597041904508,-117.4122559950478,roadway,True,True,True
+Rolling Hills,527.0,rolling hills,Rolling Hills,33.80827080158421,-118.35497637711136,rolling hills,True,True,True
+Ronnie P.t.,1535.0,ronnie,Ronnie P.T.,33.89370286149141,-118.15910571958877,ronnie,False,False,True
+Rosamond,676.0,rosamond,Rosamond,34.86447300163328,-118.23732500206653,rosamond,True,True,True
+Rosemead,414.0,rosemead,Rosemead,34.09258860183599,-118.08287914257627,rosemead,True,True,True
+Royal,712.0,royal,Royal,34.278596208813866,-118.78059293222798,royal,True,True,True
+Rubidoux,1735.0,rubidoux,Rubidoux,33.99901674325448,-117.41596904208612,rubidoux,True,True,True
+Running Springs,791.0,running springs,Running Springs,34.20782205626276,-117.10405510824,running springs,True,True,True
+Rush,400.0,rush,Rush,34.051221002841935,-118.08136399436002,rush,True,True,True
+San Antonio,762.0,san antonio,San Antonio,34.09336562452708,-117.69790411356152,san antonio,True,True,True
+San Bernardino,141.0,san bernardino,San Bernardino,34.07996331212228,-117.23764594241688,san bernardino,True,True,True
+San Dimas,764.0,san dimas,San Dimas,34.11660000071743,-117.80873800332525,san dimas,True,True,True
+San Fernando,683.0,san fernando,San Fernando,34.27478288631888,-118.45894781084884,san fernando,True,True,True
+San Gabriel,415.0,san gabriel,San Gabriel,34.09850199548855,-118.1001490050346,san gabriel,True,True,True
+San Marcos,715.0,san marcos,San Marcos,34.45246099694084,-119.76092699738685,san marcos,True,True,True
+San Marino,416.0,san marino,San Marino,34.12812802631122,-118.09832528955953,san marino,True,True,True
+San Miguel,709.0,san miguel,San Miguel,34.25591599576859,-119.24186300527784,san miguel,True,True,True
+San Vicente,498.0,san vicente,San Vicente,34.02866397869504,-118.49863429460974,san vicente,False,False,True
+Santa Barbara,667.0,santa barbara,Santa Barbara,34.4231526249233,-119.68520108969594,santa barbara,True,True,True
+Santa Clara,318.0,santa clara,Santa Clara,34.302843003251674,-119.18762300178538,santa clara,True,True,True
+Santa Fe Springs,963.0,santa fe springs,Santa Fe Springs,33.94812011161199,-118.0586989805832,santa fe springs,True,True,True
+Santa Rosa,1796.0,santa rosa,Santa Rosa,33.74892700398827,-116.39217399990532,santa rosa,True,True,True
+Santa Susana,668.0,santa susana,Santa Susana,34.2805606995611,-118.71705922310277,santa susana,True,True,True
+Saticoy,670.0,saticoy,Saticoy,34.30084292118649,-119.16720835318044,saticoy,True,True,True
+Saugus,315.0,saugus,Saugus,34.42305042378108,-118.57679738680848,saugus,True,True,True
+Savage,1676.0,savage,Savage,34.472798199734534,-117.2935258989958,savage,True,True,True
+Sawtelle,524.0,sawtelle,Sawtelle,34.04774706504476,-118.45220285469668,sawtelle,True,True,True
+Scout P.t.,1569.0,scout,Scout P.T.,34.31103076158852,-116.91893140838816,scout,False,False,True
+Seabright,910.0,seabright,Seabright,33.77328789189247,-118.20462787528702,seabright,True,True,True
+Searles,1794.0,searles,Searles,35.699336804497015,-117.39879756375676,searles,True,True,True
+Second Avenue,1738.0,second avenue,Second Avenue,33.69166725838854,-114.57157619474964,second avenue,False,False,True
+Sespe P.t.,1539.0,sespe,Sespe P.T.,34.409905999642085,-118.93540972338351,sespe,False,False,True
+Shandin,748.0,shandin,Shandin,34.16994214942746,-117.33110163065926,shandin,True,True,True
+Shawnee,983.0,shawnee,Shawnee,33.77335503678712,-118.01125537351678,shawnee,True,True,True
+Sherwin,205.0,sherwin,Sherwin,37.56199618416868,-118.67541707394592,sherwin,True,True,True
+Shuttle,584.0,shuttle,Shuttle,34.64344523991096,-118.16401266997,shuttle,True,True,True
+Sierra Madre,417.0,sierra madre,Sierra Madre,34.15828981695313,-118.05452246502422,sierra madre,True,True,True
+Signal Hill,873.0,signal hill,Signal Hill,33.811337811686506,-118.16816655498816,signal hill,True,True,True
+Silver Spur,1741.0,silver spur,Silver Spur,33.69940144429198,-116.38453151272898,silver spur,True,True,True
+Sinker P.t.,2243.0,sinker,Sinker P.T.,37.32371886917248,-118.499682206711,sinker,False,False,True
+Sixteenth Street,1742.0,sixteenth street,Sixteenth Street,34.12892321681423,-117.30429340398936,sixteenth street,True,True,True
+Skiland,193.0,skiland,Skiland,37.63661913523276,-118.9649920577004,skiland,True,True,True
+Skyborne P.t.,1895.0,skyborne,Skyborne P.T.,33.9634093828063,-116.56609080208187,skyborne,False,False,True
+Skylark,1812.0,skylark,Skylark,33.63157278371007,-117.29169251069688,skylark,True,True,True
+Slater,1015.0,slater,Slater,33.69235866914367,-118.0169822483806,slater,True,True,True
+Smiley,785.0,smiley,Smiley,34.02806999785241,-117.16639300179828,smiley,True,True,True
+Snowcreek P.t.,1560.0,snowcreek,Snowcreek P.T.,33.904916760230016,-116.67595756755536,snowcreek,False,False,True
+Solemint,693.0,solemint,Solemint,34.45286218745676,-118.42267722553474,solemint,True,True,True
+Somerset,875.0,somerset,Somerset,33.87411213712543,-118.1429962772186,somerset,True,True,True
+Somis,672.0,somis,Somis,34.26477110560397,-119.0098096206216,somis,True,True,True
+Soper P.t.,1992.0,soper,Soper P.T.,33.86582283709328,-118.1191094431758,soper,False,False,True
+Sophie P.t.,2228.0,sophie,Sophie P.T.,33.72370748245825,-117.2959148993144,sophie,False,False,True
+Soquel,817.0,soquel,Soquel,33.96468399845458,-117.69453800145904,soquel,True,True,True
+South Gate,909.0,south gate,South Gate,33.946621098135765,-118.21314454613564,south gate,True,True,True
+Southridge P.t.,1549.0,southridge,Southridge P.T.,33.79445005439098,-116.50266784848702,southridge,False,False,True
+Southwind,66.0,southwind,Southwind,35.03149211101637,-118.3500052736917,southwind,True,True,True
+Springville,306.0,springville,Springville,36.10803200441783,-118.93841799837114,springville,True,True,True
+Stadium,912.0,stadium,Stadium,33.771905998735384,-118.1000940007785,stadium,True,True,True
+Stadler,1813.0,stadler,Stadler,33.55765478275708,-117.20339744878916,stadler,True,True,True
+State Street,876.0,state street,State Street,33.79016623411935,-118.1987541678778,state street,True,True,True
+Stetson,811.0,stetson,Stetson,33.73329500445457,-117.00759399721343,stetson,True,True,True
+Stewart,964.0,stewart,Stewart,33.94016034737311,-118.1405332828118,stewart,True,True,True
+Stewval P.t.,1557.0,stewval,Stewval P.T.,36.18544769220795,-116.12705299749538,stewval,False,False,True
+Stoddard,763.0,stoddard,Stoddard,34.09969444150969,-117.29255556004196,stoddard,True,True,True
+Strathmore,585.0,strathmore,Strathmore,36.14663499587697,-119.05767500254356,strathmore,True,True,True
+Stroh P.t.,1568.0,stroh,Stroh P.T.,33.83854905420777,-117.52165051890846,stroh,False,False,True
+Styx P.t.,1538.0,styx,Styx P.T.,34.59965106449961,-117.20522467565172,styx,False,False,True
+Sugarloaf P.t.,1561.0,sugarloaf,Sugarloaf P.T.,35.84119712706771,-118.61610103815796,sugarloaf,False,False,True
+Sun City,1887.0,sun city,Sun City,33.68657428124284,-117.14683101567914,sun city,True,True,True
+Sunlight P.t.,1567.0,sunlight,Sunlight P.T.,33.87973365665105,-118.1768934648279,sunlight,False,False,True
+Sunny Dunes,1747.0,sunny dunes,Sunny Dunes,33.813000583701175,-116.54362550571427,sunny dunes,True,True,True
+Surrey U.g.s.,1564.0,surrey u g s,Surrey U.G.S.,33.75575006143004,-118.3499964209899,surrey u g s,False,False,True
+Tahiti,544.0,tahiti,Tahiti,33.97735300085169,-118.43602700278474,tahiti,True,True,True
+Tahquitz P.t.,1573.0,tahquitz,Tahquitz P.T.,33.706694509279565,-116.73267963167255,tahquitz,False,False,True
+Talbert,965.0,talbert,Talbert,33.7140820008966,-117.9197889959811,talbert,True,True,True
+Tamarisk,1624.0,tamarisk,Tamarisk,33.79191236586689,-116.44988631108914,tamarisk,True,True,True
+Tapia,550.0,tapia,Tapia,34.03632128875002,-118.68464815377833,tapia,False,False,True
+Tatanka P.t.,1308.0,tatanka,Tatanka P.T.,34.43997563487477,-119.61407210203724,tatanka,False,False,True
+Team,979.0,team,Team,33.745052055991295,-117.99988488347098,team,True,True,True
+Tejon Peak P.t.,1574.0,tejon peak,Tejon Peak P.T.,34.78746751829648,-118.81914765786487,tejon peak,False,False,True
+Telegraph,1006.0,telegraph,Telegraph,33.932316996259004,-117.99226800438082,telegraph,True,True,True
+Temple,439.0,temple,Temple,34.106083373313496,-118.06831447177188,temple,True,True,True
+Tenaja,1771.0,tenaja,Tenaja,33.58568591002949,-117.25518539978694,tenaja,True,True,True
+Tennessee,758.0,tennessee,Tennessee,34.02788977886522,-117.11081863473538,tennessee,True,True,True
+Terra Bella,586.0,terra bella,Terra Bella,35.963920922490146,-119.0194234862961,terra bella,True,True,True
+Terrace,419.0,terrace,Terrace,34.05727507993439,-118.18238468977091,terrace,True,True,True
+Thornhill,1745.0,thornhill,Thornhill,33.81351258763198,-116.53266202407576,thornhill,True,True,True
+Thousand Oaks,703.0,thousand oaks,Thousand Oaks,34.188342099993754,-118.87204455280695,thousand oaks,True,True,True
+Three Rivers,609.0,three rivers,Three Rivers,36.45169228357878,-118.89043935860252,three rivers,True,True,True
+Timberwine,620.0,timberwine,Timberwine,37.13603914241052,-119.26106387118564,timberwine,False,False,True
+Timoteo,732.0,timoteo,Timoteo,34.062377610723054,-117.24403188200333,timoteo,True,True,True
+Tippecanoe,769.0,tippecanoe,Tippecanoe,34.12086699889711,-117.25843800399126,tippecanoe,True,True,True
+Tipton,587.0,tipton,Tipton,36.05173057551146,-119.30475034619822,tipton,True,True,True
+Topaz,541.0,topaz,Topaz,33.82759337136988,-118.3760024228016,topaz,True,True,True
+Torrance,542.0,torrance,Torrance,33.829617505342334,-118.34459467876938,torrance,True,True,True
+Trask,1011.0,trask,Trask,33.76640699726132,-117.97981700324527,trask,True,True,True
+Triton,1889.0,triton,Triton,33.542546289503576,-117.11486165160484,triton,True,True,True
+Trona,1755.0,trona,Trona,35.77288627156985,-117.37016716637036,trona,True,True,True
+Trophy,770.0,trophy,Trophy,34.039299427293365,-117.81990120259648,trophy,True,True,True
+Tulare,589.0,tulare,Tulare,36.21283164375503,-119.32989254472216,tulare,True,True,True
+Tumbleweed P.t.,1583.0,tumbleweed,Tumbleweed P.T.,35.34632039954138,-117.6399305395016,tumbleweed,False,False,True
+Tyburn P.t.,1577.0,tyburn,Tyburn P.T.,33.76234082276714,-118.4150374659854,tyburn,False,False,True
+Universal,714.0,universal,Universal,34.143280476249465,-118.3563502272626,universal,False,False,True
+Upland,767.0,upland,Upland,34.09358500389584,-117.65009700275988,upland,True,True,True
+Vail,443.0,vail,Vail,34.00650048394172,-118.12826806795012,vail,True,True,True
+Valdez,506.0,valdez,Valdez,34.14792376295858,-118.6317477698814,valdez,True,True,True
+Valley,347.0,valley,Valley,33.74010469194348,-117.15614491519052,valley,True,True,True
+Valley Of The Moon P.t.,1585.0,valley of the moon,Valley Of The Moon P.T.,34.24334825125187,-117.25983834866324,valley of the moon,False,False,True
+Vanderlip P.t.,1587.0,vanderlip,Vanderlip P.T.,33.74749758577968,-118.37109828367488,vanderlip,False,False,True
+Vegas,704.0,vegas,Vegas,34.449549339284125,-119.815908448548,vegas,True,True,True
+Venice Hill,590.0,venice hill,Venice Hill,36.4152409069544,-119.18981522163924,venice hill,True,True,True
+Venida,591.0,venida,Venida,36.32538250623872,-119.13453725693633,venida,True,True,True
+Vera,915.0,vera,Vera,33.76554057259821,-117.9282905316424,vera,True,True,True
+Verdant,1760.0,verdant,Verdant,33.41784425716497,-114.72418516485564,verdant,True,True,True
+Via Huerto P.t.,1588.0,via huerto,Via Huerto P.T.,34.42852551056769,-119.78481610250216,via huerto,False,False,True
+Victoria,501.0,victoria,Victoria,33.85900132801055,-118.3741593441038,victoria,True,True,True
+Vista,334.0,vista,Vista,34.04131699907365,-117.31895400501956,vista,True,True,True
+Vogan P.t.,1995.0,vogan,Vogan P.T.,33.84219925462069,-118.13016962305164,vogan,False,False,True
+Wabash,421.0,wabash,Wabash,34.04484523957108,-118.18648075138452,wabash,True,True,True
+Wakefield,711.0,wakefield,Wakefield,34.35645499933594,-119.05588600318704,wakefield,True,True,True
+Walker Basin,594.0,walker basin,Walker Basin,35.41194348178334,-118.49270940903466,walker basin,True,True,True
+Walnut,289.0,walnut,Walnut,34.008157000711364,-117.94978300159596,walnut,True,True,True
+Washington,968.0,washington,Washington,33.75680600416409,-117.8592219959398,washington,True,True,True
+Watson,879.0,watson,Watson,33.807991928350866,-118.26203446826712,watson,True,True,True
+Weesha P.t.,1763.0,weesha,Weesha P.T.,34.17485310005095,-116.94889555669124,weesha,False,False,True
+Weldon,612.0,weldon,Weldon,35.6652036468452,-118.263673877955,weldon,True,True,True
+West Barstow,1764.0,west barstow,West Barstow,34.892183998090665,-117.04953799793496,west barstow,True,True,True
+Westend P.t.,1594.0,westend,Westend P.T.,35.71685256984399,-117.39855653314392,westend,True,True,True
+Westfall P.m.,1604.0,westfall p m,Westfall P.M.,34.45401946062403,-119.74406674690124,westfall p m,False,False,True
+Wheatland,607.0,wheatland,Wheatland,35.90907032166305,-119.14539393508598,wheatland,True,True,True
+Whipple,1847.0,whipple,Whipple,34.2942366466893,-114.173217778462,whipple,True,True,True
+White Mt.,206.0,white mt,White Mt.,37.41111132174783,-118.1871065087802,white mt,True,True,True
+Whitewater,1767.0,whitewater,Whitewater,33.91842053947277,-116.6515872432899,whitewater,True,True,True
+Wilsona,700.0,wilsona,Wilsona,34.57779896780533,-117.71848290632536,wilsona,True,True,True
+Wimbledon,815.0,wimbledon,Wimbledon,34.04876699907538,-117.52602400147798,wimbledon,True,True,True
+Windsor Hills,505.0,windsor hills,Windsor Hills,33.99634800774487,-118.3595474791942,windsor hills,True,True,True
+Woodruff,899.0,woodruff,Woodruff,33.89984786906628,-118.11810450380652,woodruff,True,True,True
+Woodville,595.0,woodville,Woodville,36.08093763508664,-119.1798849314082,woodville,True,True,True
+Yacht P.t.,2224.0,yacht,Yacht P.T.,33.60777944311863,-117.88379972383537,yacht,False,False,True
+Yankee P.t.,1605.0,yankee,Yankee P.T.,35.62331865392004,-118.4183870538017,yankee,False,False,True
+Yermo,1769.0,yermo,Yermo,34.90380430987028,-116.8304800221454,yermo,True,True,True
+Yorba Linda,994.0,yorba linda,Yorba Linda,33.88733323649356,-117.78769347091476,yorba linda,True,True,True
+Yucaipa,768.0,yucaipa,Yucaipa,34.011475002600925,-117.05063600106736,yucaipa,True,True,True
+Yucca,1770.0,yucca,Yucca,34.110269990643474,-116.42393043693389,yucca,True,True,True
+Zack,195.0,zack,Zack,37.61765946953557,-118.39812584301389,zack,True,True,True
+Zanja,1795.0,zanja,Zanja,34.0771012471024,-117.0482596650986,zanja,True,True,True
+Ziggy P.t.,2054.0,ziggy,Ziggy P.T.,34.98711204178539,-117.53998139159704,ziggy,False,False,True
