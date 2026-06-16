@@ -1,0 +1,127 @@
+EIA-930 Source Comparison: EIA API vs PUDL
+Generated: 2026-06-10
+============================================================
+
+Date ranges:
+  EIA API : 2019-01-01 00:00:00+00:00 -> 2026-06-03 07:00:00+00:00
+  PUDL    : 2015-07-01 08:00:00+00:00 -> 2026-05-03 07:00:00+00:00
+  Overlap : 2019-01-01 00:00:00+00:00 -> 2026-05-03 07:00:00+00:00
+
+BAs covered by both sources:
+  ['BANC', 'CISO', 'IID', 'LDWP', 'NEVP', 'PACW', 'TIDC', 'WALC']
+
+────────────────────────────────────────────────────────────
+Time coverage (B)
+────────────────────────────────────────────────────────────
+  PUDL has every hourly timestamp present in the EIA scrape.
+  No historical gaps detected.
+
+────────────────────────────────────────────────────────────
+Value agreement (C)
+────────────────────────────────────────────────────────────
+  6,454 (BA, hour, metric) triplets exceed ±50 MWh:
+    Demand: 1,621 hours
+    Demand forecast: 55 hours
+    Net generation: 2,431 hours
+    Total interchange: 2,347 hours
+  -> Saved to eia_cmp_C_large_diffs.csv
+
+
+========================================================================
+  SECTION D — NaN values in PUDL processed output
+========================================================================
+
+  NaN counts per BA per metric (n and % of that BA's rows):
+  BA         rows              Demand         Demand fcst             Net gen      Total interchg
+  ------  -------  ------------------  ------------------  ------------------  ------------------
+  BANC     95,016          264 (0.3%)          703 (0.7%)          288 (0.3%)          360 (0.4%)
+  CISO     95,016           49 (0.1%)          192 (0.2%)          176 (0.2%)        2,819 (3.0%)
+  IID      95,016          192 (0.2%)          432 (0.5%)          216 (0.2%)          600 (0.6%)
+  LDWP     95,016          292 (0.3%)          939 (1.0%)          299 (0.3%)          613 (0.6%)
+  NEVP     95,016          241 (0.3%)          349 (0.4%)          241 (0.3%)          333 (0.4%)
+  PACW     95,016          192 (0.2%)          192 (0.2%)        2,187 (2.3%)        3,722 (3.9%)
+  TIDC     95,016           24 (0.0%)          190 (0.2%)           72 (0.1%)          352 (0.4%)
+  WALC     95,016           24 (0.0%)           48 (0.1%)           24 (0.0%)          408 (0.4%)
+  ------  -------  ------------------  ------------------  ------------------  ------------------
+  TOTAL   760,128        1,278 (0.2%)        3,045 (0.4%)        3,503 (0.5%)        9,207 (1.2%)
+
+  ------------------------------------------------------------
+  Temporal detail for BAs/metrics with NaN values
+  ------------------------------------------------------------
+
+  BANC  [2015-07-01 -> 2026-05-03, 95,016 hrs]
+    Demand             264/95,016 NaN  (0.3%)  first=2018-07-01  last=2026-05-03  max_run=240h  [scattered throughout record]
+    Demand fcst        703/95,016 NaN  (0.7%)  first=2018-07-01  last=2026-03-11  max_run=264h  [scattered throughout record]
+    Net gen            288/95,016 NaN  (0.3%)  first=2018-07-01  last=2026-05-03  max_run=240h  [scattered throughout record]
+    Total interchg     360/95,016 NaN  (0.4%)  first=2018-06-30  last=2026-05-03  max_run=264h  [scattered throughout record]
+
+  CISO  [2015-07-01 -> 2026-05-03, 95,016 hrs]
+    Demand              49/95,016 NaN  (0.1%)  first=2017-11-05  last=2026-05-03  max_run=24h  [scattered throughout record]
+    Demand fcst        192/95,016 NaN  (0.2%)  first=2016-01-22  last=2026-03-09  max_run=49h  [scattered throughout record]
+    Net gen            176/95,016 NaN  (0.2%)  first=2016-10-29  last=2026-05-03  max_run=24h  [scattered throughout record]
+    Total interchg   2,819/95,016 NaN  (3.0%)  first=2015-07-14  last=2026-05-03  max_run=528h  [scattered throughout record]
+
+  IID  [2015-07-01 -> 2026-05-03, 95,016 hrs]
+    Demand             192/95,016 NaN  (0.2%)  first=2015-11-01  last=2026-05-03  max_run=25h  [scattered throughout record]
+    Demand fcst        432/95,016 NaN  (0.5%)  first=2015-11-01  last=2025-12-07  max_run=25h  [scattered throughout record]
+    Net gen            216/95,016 NaN  (0.2%)  first=2015-11-01  last=2026-05-03  max_run=25h  [scattered throughout record]
+    Total interchg     600/95,016 NaN  (0.6%)  first=2015-10-31  last=2026-05-03  max_run=49h  [scattered throughout record]
+
+  LDWP  [2015-07-01 -> 2026-05-03, 95,016 hrs]
+    Demand             292/95,016 NaN  (0.3%)  first=2018-06-30  last=2026-05-03  max_run=240h  [scattered throughout record]
+    Demand fcst        939/95,016 NaN  (1.0%)  first=2015-11-01  last=2026-04-04  max_run=264h  [scattered throughout record]
+    Net gen            299/95,016 NaN  (0.3%)  first=2018-01-13  last=2026-05-03  max_run=240h  [scattered throughout record]
+    Total interchg     613/95,016 NaN  (0.6%)  first=2015-10-05  last=2026-05-03  max_run=264h  [scattered throughout record]
+
+  NEVP  [2015-07-01 -> 2026-05-03, 95,016 hrs]
+    Demand             241/95,016 NaN  (0.3%)  first=2015-09-03  last=2026-05-03  max_run=24h  [scattered throughout record]
+    Demand fcst        349/95,016 NaN  (0.4%)  first=2015-09-03  last=2021-03-31  max_run=24h  [scattered throughout record]
+    Net gen            241/95,016 NaN  (0.3%)  first=2015-09-03  last=2026-05-03  max_run=24h  [scattered throughout record]
+    Total interchg     333/95,016 NaN  (0.4%)  first=2015-09-02  last=2026-05-03  max_run=24h  [scattered throughout record]
+
+  PACW  [2015-07-01 -> 2026-05-03, 95,016 hrs]
+    Demand             192/95,016 NaN  (0.2%)  first=2015-07-16  last=2026-05-03  max_run=168h  [scattered throughout record]
+    Demand fcst        192/95,016 NaN  (0.2%)  first=2015-07-16  last=2015-07-24  max_run=192h  [early record only]
+    Net gen          2,187/95,016 NaN  (2.3%)  first=2015-07-16  last=2026-05-03  max_run=192h  [scattered throughout record]
+    Total interchg   3,722/95,016 NaN  (3.9%)  first=2015-07-15  last=2026-05-03  max_run=216h  [scattered throughout record]
+
+  TIDC  [2015-07-01 -> 2026-05-03, 95,016 hrs]
+    Demand              24/95,016 NaN  (0.0%)  first=2026-05-02  last=2026-05-03  max_run=24h  [recent record only]
+    Demand fcst        190/95,016 NaN  (0.2%)  first=2015-11-01  last=2021-12-26  max_run=25h  [scattered throughout record]
+    Net gen             72/95,016 NaN  (0.1%)  first=2018-05-01  last=2026-05-03  max_run=48h  [scattered throughout record]
+    Total interchg     352/95,016 NaN  (0.4%)  first=2016-03-13  last=2026-05-03  max_run=72h  [scattered throughout record]
+
+  WALC  [2015-07-01 -> 2026-05-03, 95,016 hrs]
+    Demand              24/95,016 NaN  (0.0%)  first=2026-05-02  last=2026-05-03  max_run=24h  [recent record only]
+    Demand fcst         48/95,016 NaN  (0.1%)  first=2015-11-02  last=2021-12-02  max_run=24h  [scattered throughout record]
+    Net gen             24/95,016 NaN  (0.0%)  first=2026-05-02  last=2026-05-03  max_run=24h  [recent record only]
+    Total interchg     408/95,016 NaN  (0.4%)  first=2015-11-01  last=2026-05-03  max_run=72h  [scattered throughout record]
+
+  Total NaN (ba, metric, hour) triples: 17,033
+  Saved: eia_cmp_D_pudl_nans.csv
+
+========================================================================
+  SECTION E -- CAL region vs CA8 BA sum vs IEPR statewide
+========================================================================
+
+  Annual comparison (complete years in both CA8 PUDL and CAL region):
+    Year     CA8 TWh     CAL TWh   Delta TWh   Delta %  Note
+  ------  ----------  ----------  ----------  --------  ----
+    2019       331.8       264.4       +67.5     +25.5%  <- NEVP+PACW likely
+    2020       336.6       268.5       +68.1     +25.4%  <- NEVP+PACW likely
+    2021       339.0       269.0       +70.0     +26.0%  <- NEVP+PACW likely
+    2022       344.3       273.9       +70.4     +25.7%  <- NEVP+PACW likely
+    2023       333.0       265.2       +67.8     +25.6%  <- NEVP+PACW likely
+    2024       341.8       270.3       +71.5     +26.5%  <- NEVP+PACW likely
+    2025       342.4       272.7       +69.7     +25.6%  <- NEVP+PACW likely
+
+  Mean CA8 excess over CAL: +69.3 TWh (+25.7%)
+  (Expected: NEVP ~38.5 TWh + PACW ~21 TWh = ~60 TWh excess)
+
+  IEPR BASELINE_NET_LOAD (PGE+SCE+SDGE) vs CAL region (projected years only):
+  Note: IEPR covers CAISO territory only; CAL includes LDWP, BANC, IID etc.
+   Vintage    Year    IEPR TWh     CAL TWh   Delta TWh   Delta %
+  --------  ------  ----------  ----------  ----------  --------
+      2023    2024       217.3       270.3       -53.0     -19.6%
+      2023    2025       219.9       272.7       -52.8     -19.4%
+      2024    2025       219.6       272.7       -53.1     -19.5%

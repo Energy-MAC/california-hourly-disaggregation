@@ -98,7 +98,7 @@ Hourly substation-level min/max load profiles (MW) for three utilities:
 | SCE | DRPEP "Historical Substation Load Profiles" bulk download | Manual ZIP download from drpep.sce.com |
 | SDG&E | Interactive map download API (ZIP per substation) | Public HTTP API |
 
-PacifiCorp does not publish comparable hourly load profiles.
+PacifiCorp, CalPeco, BVEA, and MOUs do not publish comparable hourly load profiles.
 
 ### Utility IOUs — Substation Attributes
 
@@ -348,3 +348,199 @@ python scripts/audit_unused_columns.py
 
 - **PG&E years**: PG&E's published feeder profiles are monthly aggregates without a
   year column.  The `year` field is `NaN` for all PG&E rows in `substation_load_profiles.csv`.
+
+---
+
+## RESOLVE and Statewide Load Forecast Sources
+
+This project compares substation-level profiles against four statewide demand sources.
+The sections below document how each source handles behind-the-meter (BTM) solar,
+why RESOLVE and IEPR differ numerically, and which values are raw vs derived.
+
+### RESOLVE
+
+RESOLVE (the E3/CPUC Integrated Resource Planning model) is the statewide optimization
+model used by CPUC for the 2024-2026 IRP.  Its raw load inputs sit in
+`data/raw/RESOLVE Code Base and Inputs/`.  Processed outputs are in
+`data/processed/resolve/`.
+
+RESOLVE covers six California BA zones: **PGE**, **SCE**, **SDGE**, **IID**, **LDWP**,
+**NCNC**.  It does *not* model NEVP or PACW as California zones (see EIA CA8 note below).
+
+---
+
+### BTM Solar Treatment by Source
+
+The most important difference between sources is how they handle rooftop solar (BTM PV).
+BTM generation reduces the net demand visible to the grid meter, so a source that
+subtracts it will always read lower than one that does not.
+
+| Source | BTM Solar Treatment | Load Metric | Raw vs Derived | ~2024 CA Annual |
+|--------|---------------------|-------------|----------------|-----------------|
+| **EIA-930 (CISO)** | **Net-of-BTM** — rooftop generation reduces the metered demand the grid sees | Net demand at CAISO system boundary | Raw (hourly self-reports from BA) | ~223 TWh |
+| **EIA-930 (CA8 group)** | Net-of-BTM | Sum of 8 BAs: CISO + BANC + IID + LDWP + TIDC + WALC + **NEVP + PACW** | Raw, but includes ~55–60 TWh of out-of-state load from NEVP and PACW | ~285 TWh (overestimates CA) |
+| **EIA CAL region** | Net-of-BTM | Geographic California boundary; NEVP/PACW excluded | Raw | ~270–273 TWh |
+| **IEPR Total CAISO Load** | **Net-of-BTM** — BTM PV reduces the customer demand in the CEC model | Net system load including T&D losses, at the transmission boundary | Raw from CEC workbooks | ~217–220 TWh |
+| **RESOLVE Baseline Consumption** | **Gross (BTM PV removed from demand side, modeled as supply)** | Gross demand before BTM PV subtraction; includes T&D losses | **Derived** from IEPR — see formula below | ~241 TWh (PGE+SCE+SDGE only) |
+
+**Key implication for comparisons:** A direct TWh comparison between RESOLVE Baseline
+and EIA-930 CISO will show an apparent ~17–20 TWh gap in 2024.  The true sources of
+that gap are:
+
+1. **BTM PV (~30 TWh statewide in 2025)** — RESOLVE adds it back; EIA/IEPR subtract it.
+   PGE+SCE+SDGE share of statewide BTM PV is roughly ~17–18 TWh, explaining most of the gap.
+2. **Geographic scope** — RESOLVE covers PGE+SCE+SDGE+IID+LDWP+NCNC; EIA CISO covers
+   only the CAISO footprint (PGE+SCE+SDGE, plus some BANC/TIDC slivers).
+3. **T&D losses** — RESOLVE and IEPR express demand at the generator busbar using a 7.97%
+   gross-up; EIA-930 measures at the BA boundary.
+
+---
+
+### RESOLVE vs IEPR: Modeling Framework Differences
+
+RESOLVE is not an independent demand forecast — it uses IEPR as its load input and
+transforms it for use in a resource optimization.  The key differences are:
+
+#### Load definition
+
+| Dimension | IEPR | RESOLVE |
+|-----------|------|---------|
+| What is reported | "Total CAISO Load" = customer demand + T&D losses, net of BTM generation | "Baseline Consumption" = IEPR with overlays stripped out and BTM PV added back |
+| BTM PV | Subtracted from demand (reduces visible load) | Modeled as a supply-side resource (ELCC-weighted); removed from demand side |
+| BTM Storage | Treated as demand reduction | Modeled explicitly; net losses added to demand |
+| EV load | Included in scenario totals | Modeled as an additive overlay (AATE_LDVs, AATE_MHDVs) |
+| Building electrification (AAFS) | Included in scenario totals | Modeled as AAFS overlay |
+| Energy efficiency (AAEE) | Included in scenario totals | Modeled as AAEE overlay (demand reduction) |
+| Data Centers | Included in scenario totals | Modeled as a separate overlay |
+| Climate impacts | Included in scenario totals | Modeled as a Climate Impacts overlay |
+
+#### Resource adequacy and planning reserve
+
+RESOLVE uses **Perfect Capacity (PCAP)** planning reserve margins where every resource
+is counted at its Effective Load Carrying Capability (ELCC) — not its nameplate capacity.
+IEPR does not model resource adequacy.
+
+PRM targets used in the 2024-2026 IRP (from I&A, Section 3):
+
+| Year | PCAP PRM |
+|------|----------|
+| 2026 | 15.6% |
+| 2030 | 14.5% |
+| 2035 | 14.9% |
+| 2040 | 14.1% |
+
+#### ELCC treatment
+
+RESOLVE computes ELCC from a 3-D surface (solar × 4-hr battery × 8-hr battery penetration)
+across **23 weather years (2000–2022)** compressed to **36 representative days** via affinity
+propagation clustering.  Wind resources use separate 1-D penetration curves (in-state,
+out-of-state, offshore).
+
+#### Geographic zones
+
+| Zone | RESOLVE label | IOU/BA covered |
+|------|--------------|----------------|
+| California CAISO | PGE, SCE, SDGE | PG&E, SCE, SDG&E |
+| Non-CAISO California | IID, LDWP, NCNC | Imperial ID, LADWP, northern co-ops |
+| Pacific Northwest (out-of-state) | NW | BPAT, PACW, PortlandGE |
+| Desert Southwest (out-of-state) | SW | AZPS, NEVP, SRP, WALC |
+
+Neither NEVP nor PACW is treated as a California zone in RESOLVE.
+
+#### Summary of 2024-2026 IRP cycle changes (vs prior IRP)
+
+The February 2026 Inputs & Assumptions document highlights several changes from the prior
+IRP cycle:
+
+- **Updated 23-year weather record** (2000–2022) used for load shapes and ELCC.
+- **New Data Center overlay** added explicitly — data center growth is now a separate
+  demand modifier rather than embedded in baseline.
+- **Revised BTM PV trajectory** — higher near-term adoption driven by updated CEC
+  Behind-the-Meter solar forecast.
+- **ELCC surface recalibration** — updated to 2024 grid conditions (higher solar and
+  battery penetration shift the marginal ELCC curves).
+- **Climate Impacts overlay added** — a new modifier for incremental demand growth due
+  to warming temperatures, separate from IEPR baseline.
+- **MHD Vehicle EV overlay added** — medium- and heavy-duty EV charging is now tracked
+  separately from light-duty.
+
+---
+
+### RESOLVE Baseline + Overlays = IEPR (Mathematical Verification)
+
+The RESOLVE "Baseline Consumption" is derived from the IEPR Total CAISO Load by removing
+all demand-side modifiers that RESOLVE models explicitly, and adding BTM PV back so it
+can be treated as a supply resource.  Reversing the transformation reconstructs IEPR.
+
+From Table 2 of the CPUC 2024-2026 IRP Inputs & Assumptions (February 2026), using 2025
+projected values (GWh):
+
+```
+IEPR Total CAISO Load                  217,688
+  − Light-Duty Vehicle EVs             −  3,024
+  − Med/Heavy Duty Vehicle EVs         −    717
+  − AAFS (Building Electrification)    −    391
+  + AAEE (Energy Efficiency)           +  3,110   ← demand *reduction* so we add it back
+  − Data Centers                       −  2,149
+  − Climate Impacts                    −    213
+  + Behind-the-Meter PV               + 30,154   ← subtracted from IEPR, so add back
+  − BTM Storage Net Losses             −     72
+  ────────────────────────────────────────────
+  = Baseline Consumption               244,386
+```
+
+Rearranged, **RESOLVE Baseline + all overlays ≈ IEPR Total CAISO Load**:
+
+```
+IEPR Total CAISO Load  =  Baseline Consumption
+                          + LDV EVs  + MHD EVs  + AAFS  + Data Centers  + Climate
+                          − AAEE
+                          − BTM PV   + BTM Storage Losses
+```
+
+This identity holds by construction — RESOLVE's Baseline is derived *from* IEPR, and
+running RESOLVE to equilibrium (optimizing overlays against Baseline) reconstructs IEPR
+net demand.  The relationship is definitional, not empirical.
+
+**Note on BTM PV sign convention:** BTM PV *reduces* IEPR Total CAISO Load (customers
+generate their own electricity, reducing grid demand).  RESOLVE adds it back to Baseline
+because it models rooftop solar as a supply-side resource — the demand side "sees" gross
+consumption, and BTM PV generation is subtracted on the supply side by assigning it a
+capacity credit via ELCC.
+
+---
+
+### EIA CA8 Group: NEVP and PACW Out-of-State Load
+
+EIA-930 defines a "California" (CA8) group of 8 balancing authorities for regional
+reporting, inherited from WECC planning conventions.  Two of these BAs — NEVP (NV Energy)
+and PACW (PacifiCorp West) — serve predominantly out-of-state territory and inflate the
+CA8 total relative to actual California demand.
+
+| BA | Primary service territory | CA fraction | Notes |
+|----|--------------------------|-------------|-------|
+| NEVP | Clark County (Las Vegas) and northern Nevada | Negligible | NV Energy's service territory does not extend into California; they are in RESOLVE's SW zone |
+| PACW | Oregon, Washington, Idaho, Wyoming, Utah; small slice of far-northern CA | ~2–4% | PacifiCorp West serves Del Norte, Siskiyou, and Modoc counties in CA, but this is a minor portion of their total load |
+
+The ~55–60 TWh attributed to NEVP + PACW in EIA-930 (2024) is almost entirely out-of-state.
+The actual California load from these two BAs is estimated at **~2–4 TWh combined** —
+primarily the small PacifiCorp West territories in far-northern California.
+
+**Sources and basis for these estimates:**
+
+- CPUC 2024-2026 IRP Inputs & Assumptions (February 2026), Table 99: confirms NEVP is in
+  RESOLVE's SW zone and PACW is in the NW zone — neither is classified as California.
+- EIA Form EIA-861 (Annual Electric Power Industry Report): utility-level retail sales by
+  state, which can be used to isolate CA retail sales for NV Energy and PacifiCorp West.
+  NV Energy reports effectively zero CA retail sales. PacifiCorp West reports minimal CA
+  sales (northern CA service area).
+- EIA-930 BA-level demand data: NEVP total 2024 load ≈ 30–35 TWh (all Nevada);
+  PACW total 2024 load ≈ 40–45 TWh (mostly OR/WA).
+- WECC Transmission Expansion Planning BA maps confirm NEVP = Nevada, PACW = Pacific
+  Northwest.
+
+**Practical implication:** When comparing annual totals across sources, use EIA CISO
+(~223 TWh for 2024) or EIA CAL (~270–273 TWh) rather than EIA CA8 (~285 TWh), as EIA CA8
+overstates California demand by including NEVP's full Nevada load and PACW's Pacific
+Northwest load.  RESOLVE's PGE+SCE+SDGE total (~241 TWh gross, ~211 TWh net of BTM PV)
+is the most directly comparable forecast for the CAISO footprint.

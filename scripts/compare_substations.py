@@ -36,12 +36,29 @@ Notes on sources
   Basin (ref) data/processed/substation_misc/ca_substations_2022.csv
               4,442 CA substations; owner_std in {pge, sce, sdge, pacificorp, ...}
 
+Dictionary augmentation
+-----------------------
+  data/basinSourceDictionary.csv maps utility source names that could not be
+  matched by normalised name to their corresponding basin names (e.g.
+  "CRESTA PH" -> "Cresta", "DRUM" -> "Drum 1" / "Drum 2").  This dictionary
+  was built by manual inspection of the Section D remainders and automated
+  candidate suggestions from scripts/find_basin_name_candidates.py.
+
+  In Sections B and D, after the standard normalised-name join, any source
+  substations still unmatched are looked up in the dictionary.  A substation
+  counts as "matched via dictionary" when its norm(SourceName) appears in the
+  dictionary AND the corresponding norm(BasinName) exists in the basin dataset.
+  Remainders reported and exported always reflect this two-step matching.
+
 Outputs
 -------
   Console: per-section summary tables
   data/checks/cmp_A_*.csv  - substations only in one source (Section A)
-  data/checks/cmp_B_*.csv  - name-join detail tables with distances (Section B)
+  data/checks/cmp_B_*.csv  - name-join detail tables; *_only_in_source.csv
+                             files show substations unmatched by name OR dict
   data/checks/cmp_C_*.csv  - spatial-join detail tables with distances (Section C)
+  data/checks/cmp_D_*.csv  - ID-join details and remainders after name + ID +
+                             dict matching
 
 Usage
 -----
@@ -60,10 +77,11 @@ import numpy as np
 import pandas as pd
 from scipy.spatial import KDTree
 
-ROOT   = Path(__file__).resolve().parents[1]
-RAW    = ROOT / "data" / "raw"
-PROC   = ROOT / "data" / "processed"
-CHECKS = ROOT / "data" / "checks"
+ROOT      = Path(__file__).resolve().parents[1]
+RAW       = ROOT / "data" / "raw"
+PROC      = ROOT / "data" / "processed"
+CHECKS    = ROOT / "data" / "checks"
+DICT_PATH = ROOT / "data" / "basinSourceDictionary.csv"
 CHECKS.mkdir(parents=True, exist_ok=True)
 
 # ── File registry ─────────────────────────────────────────────────────────────
@@ -122,6 +140,31 @@ def norm(s: pd.Series) -> pd.Series:
     s = s.str.replace(_PUNCT,     " ", regex=True)
     s = s.str.replace(_SPACES,    " ", regex=True)
     return s.str.strip().str.lower()
+
+
+def _norm1(s: str) -> str:
+    """Scalar wrapper around norm() for single-string use."""
+    return norm(pd.Series([s]))[0]
+
+
+def _load_dict_all() -> dict[str, dict[str, list[str]]]:
+    """
+    Load data/basinSourceDictionary.csv and return a nested mapping:
+      { utility_lower: { norm(SourceName): [norm(BasinName), ...] } }
+
+    Returns an empty dict if the file does not exist.  One SourceName can map
+    to multiple BasinNames (e.g. DRUM -> ["drum 1", "drum 2"]).
+    """
+    if not DICT_PATH.exists():
+        return {}
+    d = pd.read_csv(DICT_PATH)
+    result: dict[str, dict[str, list[str]]] = {}
+    for _, row in d.iterrows():
+        util   = str(row["Utility"]).strip().lower()
+        src_n  = _norm1(str(row["SourceName"]))
+        bas_n  = _norm1(str(row["BasinName"]))
+        result.setdefault(util, {}).setdefault(src_n, []).append(bas_n)
+    return result
 
 
 # ── Geometry helpers ──────────────────────────────────────────────────────────
@@ -230,7 +273,10 @@ def _set_compare(label_a: str, set_a: set, label_b: str, set_b: set) -> dict:
 
 def _save(df: pd.DataFrame, filename: str) -> None:
     if not df.empty:
-        df.to_csv(CHECKS / filename, index=False)
+        try:
+            df.to_csv(CHECKS / filename, index=False)
+        except PermissionError:
+            print(f"    WARNING: {filename} is locked (open elsewhere); skipping write.")
 
 
 # ── Section A ─────────────────────────────────────────────────────────────────
@@ -367,8 +413,18 @@ def _name_join_single(
     df: pd.DataFrame, key: str,
     basin_sub: pd.DataFrame,
     label: str,
+    dict_map: dict[str, list[str]] | None = None,
 ) -> None:
-    """Name-join one utility source against the basin subset."""
+    """
+    Name-join one utility source against the basin subset.
+
+    dict_map, if provided, is used as a fallback for source substations that
+    did not match by normalised name.  A source substation counts as
+    "matched via dictionary" when its norm(SourceName) appears in dict_map
+    AND at least one of the mapped norm(BasinName) values is present in the
+    basin dataset.  The *_only_in_source.csv output excludes both name-matched
+    and dict-matched substations.
+    """
     util_names  = _name_set(df, key)
     basin_names = set(norm(basin_sub["name"].dropna()))
     both        = util_names & basin_names
@@ -377,10 +433,27 @@ def _name_join_single(
     pct_u = len(both) / len(util_names)  * 100 if util_names  else 0
     pct_b = len(both) / len(basin_names) * 100 if basin_names else 0
 
+    # Dictionary augmentation: how many of the source-only names can be matched
+    # via the basin source dictionary?
+    dict_matched: set[str] = set()
+    if dict_map:
+        for src_n in only_util:
+            bas_norms = dict_map.get(src_n, [])
+            if any(bn in basin_names for bn in bas_norms):
+                dict_matched.add(src_n)
+
+    total_matched = len(both) + len(dict_matched)
+    only_util_after_dict = only_util - dict_matched
+    pct_u_total = total_matched / len(util_names) * 100 if util_names else 0
+
     print(f"\n  {label}")
     print(f"    Basin:  {len(basin_names):,}  |  Source: {len(util_names):,}  |  "
-          f"Matched: {len(both):,} ({pct_u:.0f}% of source, {pct_b:.0f}% of basin)")
-    print(f"    Only in source: {len(only_util):,}   |   Only in basin: {len(only_basin):,}")
+          f"Matched by name: {len(both):,} ({pct_u:.0f}% of source, {pct_b:.0f}% of basin)")
+    if dict_matched:
+        print(f"    Additionally matched via dictionary: {len(dict_matched)} "
+              f"-> total {total_matched:,} ({pct_u_total:.0f}% of source)")
+    print(f"    Only in source (after dict): {len(only_util_after_dict):,}   |   "
+          f"Only in basin: {len(only_basin):,}")
 
     # Distance stats if this source carries lat/lon
     if key in HAS_LATLON and both:
@@ -407,28 +480,33 @@ def _name_join_single(
     elif key not in HAS_LATLON:
         print("    (No lat/lon in this source - distance stats not available)")
 
-    # Save only-in-source list for inspection
-    only_u_rows = df[df[NAME_COL[key]].pipe(norm).isin(only_util)].drop_duplicates(NAME_COL[key])
+    # Save only-in-source list (after both name and dictionary matching)
+    only_u_rows = (df[df[NAME_COL[key]].pipe(norm).isin(only_util_after_dict)]
+                   .drop_duplicates(NAME_COL[key]))
     _save(only_u_rows, f"cmp_B_{label}_only_in_source.csv")
 
 
-def section_b(dfs: dict) -> None:
+def section_b(dfs: dict, dict_all: dict | None = None) -> None:
     _hdr("SECTION B - Name-join vs DataBasin reference")
     print("  Joins each source to the basin on normalised substation name.")
+    print("  A fallback dictionary match is applied for remaining non-matches.")
     print("  For sources with lat/lon: reports haversine distances between matched pairs.")
-    basin = dfs["basin"]
+    basin    = dfs["basin"]
+    dict_all = dict_all or {}
 
     # ── PGE ──────────────────────────────────────────────────────────────────
     _subhdr("PGE")
     basin_pge = basin[basin["owner_std"] == "pge"]
-    _name_join_single(dfs["pge_attrs"], "pge_attrs", basin_pge, "pge_attrs")
-    _name_join_single(dfs["pge_loads"], "pge_loads", basin_pge, "pge_loads")
+    dict_pge  = dict_all.get("pge", {})
+    _name_join_single(dfs["pge_attrs"], "pge_attrs", basin_pge, "pge_attrs", dict_pge)
+    _name_join_single(dfs["pge_loads"], "pge_loads", basin_pge, "pge_loads", dict_pge)
 
     # ── SCE ──────────────────────────────────────────────────────────────────
     _subhdr("SCE")
     basin_sce = basin[basin["owner_std"] == "sce"]
-    _name_join_single(dfs["sce_attrs"],     "sce_attrs",     basin_sce, "sce_attrs_t3")
-    _name_join_single(dfs["sce_attrs_alt"], "sce_attrs_alt", basin_sce, "sce_attrs_alt")
+    dict_sce  = dict_all.get("sce", {})
+    _name_join_single(dfs["sce_attrs"],     "sce_attrs",     basin_sce, "sce_attrs_t3",  dict_sce)
+    _name_join_single(dfs["sce_attrs_alt"], "sce_attrs_alt", basin_sce, "sce_attrs_alt", dict_sce)
 
     sce_all    = dfs["sce_loads"]
     sce_scrape = sce_all[sce_all["source"] == "scrape"]
@@ -436,21 +514,22 @@ def section_b(dfs: dict) -> None:
 
     # Scrape vs basin (has lat/lon)
     print(f"\n  sce_loads_scrape  ({sce_scrape['SUBSTATION'].nunique()} unique substations, lat/lon available)")
-    _name_join_single(sce_scrape, "sce_loads", basin_sce, "sce_loads_scrape")
+    _name_join_single(sce_scrape, "sce_loads", basin_sce, "sce_loads_scrape", dict_sce)
 
     # Bulk vs basin (no lat/lon)
     print(f"\n  sce_loads_bulk  ({sce_bulk['SUBSTATION'].nunique()} unique substations, no lat/lon)")
-    _name_join_single(sce_bulk, "sce_loads", basin_sce, "sce_loads_bulk")
+    _name_join_single(sce_bulk, "sce_loads", basin_sce, "sce_loads_bulk", dict_sce)
 
     # Combined loads vs basin (kept for reference)
     print(f"\n  sce_loads_combined  ({sce_all['SUBSTATION'].nunique()} unique substations across both sources)")
-    _name_join_single(sce_all, "sce_loads", basin_sce, "sce_loads_combined")
+    _name_join_single(sce_all, "sce_loads", basin_sce, "sce_loads_combined", dict_sce)
 
     # ── SDGE ─────────────────────────────────────────────────────────────────
     _subhdr("SDGE")
     basin_sdge = basin[basin["owner_std"] == "sdge"]
-    _name_join_single(dfs["sdge_attrs"], "sdge_attrs", basin_sdge, "sdge_attrs")
-    _name_join_single(dfs["sdge_loads"], "sdge_loads", basin_sdge, "sdge_loads")
+    dict_sdge  = dict_all.get("sdge", {})
+    _name_join_single(dfs["sdge_attrs"], "sdge_attrs", basin_sdge, "sdge_attrs", dict_sdge)
+    _name_join_single(dfs["sdge_loads"], "sdge_loads", basin_sdge, "sdge_loads", dict_sdge)
 
     # ── Pacificorp ────────────────────────────────────────────────────────────
     _subhdr("Pacificorp  (basin is CA-only; most pac substations are out of CA)")
@@ -563,6 +642,342 @@ def section_c(dfs: dict) -> None:
     _spatial_join_single(dfs["pac_loads"], "pac_loads", basin_pac, "pac_loads")
 
 
+# ── Section D ─────────────────────────────────────────────────────────────────
+
+def section_d(dfs: dict, dict_all: dict | None = None) -> None:
+    """
+    ID-based name disambiguation joins, followed by dictionary augmentation.
+
+    Basin uses HIFLD IDs (300001+); utility sources use internal IDs that do not
+    overlap with basin, so there is no direct utility-ID -> basin-ID join.
+
+    Join strategy (three steps, applied in order):
+      Step 1 — exact normalised-name join (same as Section B).
+      Step 2 — two-hop ID join:
+        PGE:  loads.subid == attrs.substation_id  (664/664 overlap)
+              -> try norm(attrs_name) in basin when norm(loads_name) missed
+        SCE:  T3.subst_id == alt.SUBST_ID  (675/735 overlap)
+              -> try norm(T3_name) in basin when norm(alt_name) missed
+        SDGE: no ID columns; skipped.
+      Step 3 — dictionary lookup via data/basinSourceDictionary.csv:
+        Source names still unmatched after steps 1-2 are looked up in the
+        dictionary.  A match is counted when the mapped basin name exists in
+        the basin dataset.  Basin remainders also exclude entries that are
+        targeted by dictionary entries for in-data source names.
+
+    Outputs
+    -------
+      cmp_D_pge_id_name_pairs.csv        all loads<->attrs ID pairs (with basin flags)
+      cmp_D_pge_new_via_id.csv           loads substations newly linked to basin via attrs name
+      cmp_D_pge_loads_remainder.csv      loads substations unmatched after name + ID + dict
+      cmp_D_sce_t3_alt_id_pairs.csv      all T3<->alt ID pairs (with basin flags)
+      cmp_D_sce_new_via_t3.csv           alt substations newly linked via T3 name
+      cmp_D_sce_alt_remainder.csv        alt substations unmatched after name + ID + dict
+      cmp_D_sdge_attrs_remainder.csv     SDGE attrs unmatched after name + dict
+      cmp_D_sdge_loads_remainder.csv     SDGE loads unmatched after name + dict
+      cmp_D_basin_{pge,sce,sdge}_remainder.csv  basin substations not matched by any
+                                                utility source (name or dict)
+    """
+    _hdr("SECTION D - Substation ID joins + dictionary augmentation")
+    print("  Step 1: normalised-name join.  Step 2: two-hop ID join.")
+    print("  Step 3: dictionary fallback via data/basinSourceDictionary.csv.")
+
+    basin    = dfs["basin"]
+    dict_all = dict_all or {}
+
+    # ── PGE ──────────────────────────────────────────────────────────────────
+    _subhdr("PGE: loads.subid <-> attrs.substation_id")
+
+    pge_l = dfs["pge_loads"].copy()
+    pge_a = dfs["pge_attrs"].copy()
+    basin_pge   = basin[basin["owner_std"] == "pge"]
+    basin_norms = set(norm(basin_pge["name"].dropna()))
+
+    # One row per unique substation
+    pge_l_subs = (pge_l[["subname", "subid", "latitude", "longitude"]]
+                  .drop_duplicates("subid").copy())
+    pge_l_subs["loads_norm"] = norm(pge_l_subs["subname"])
+
+    pge_a_subs = (pge_a[["substation_name", "substation_id", "latitude", "longitude"]]
+                  .drop_duplicates("substation_id").copy())
+    pge_a_subs["attrs_norm"] = norm(pge_a_subs["substation_name"])
+
+    # Inner join by ID
+    id_pairs = pd.merge(
+        pge_l_subs.rename(columns={"subid": "sub_id", "subname": "loads_name",
+                                    "latitude": "loads_lat", "longitude": "loads_lon"}),
+        pge_a_subs.rename(columns={"substation_id": "sub_id",
+                                    "substation_name": "attrs_name",
+                                    "latitude": "attrs_lat", "longitude": "attrs_lon"}),
+        on="sub_id",
+    )
+    id_pairs["loads_in_basin"] = id_pairs["loads_norm"].isin(basin_norms)
+    id_pairs["attrs_in_basin"] = id_pairs["attrs_norm"].isin(basin_norms)
+    id_pairs["names_agree"]    = id_pairs["loads_norm"] == id_pairs["attrs_norm"]
+
+    mismatches     = id_pairs[~id_pairs["names_agree"]]
+    new_via_attrs  = id_pairs[~id_pairs["loads_in_basin"] & id_pairs["attrs_in_basin"]]
+    conflicts      = mismatches[mismatches["loads_in_basin"] & mismatches["attrs_in_basin"]]
+    # coords distance for loads<->attrs (same physical station)
+    from_lat = id_pairs["loads_lat"].values.astype(float)
+    from_lon = id_pairs["loads_lon"].values.astype(float)
+    to_lat   = id_pairs["attrs_lat"].values.astype(float)
+    to_lon   = id_pairs["attrs_lon"].values.astype(float)
+    id_pairs["loads_attrs_dist_km"] = haversine_km(from_lat, from_lon, to_lat, to_lon)
+
+    # Also: for new_via_attrs, compute distance to basin
+    basin_pge_locs = (basin_pge[["name", "latitude", "longitude"]].copy()
+                      .assign(name_norm=lambda d: norm(d["name"]))
+                      .drop_duplicates("name_norm")
+                      .set_index("name_norm"))
+    new_via_attrs  = new_via_attrs.copy()
+    new_via_attrs["basin_lat"] = new_via_attrs["attrs_norm"].map(basin_pge_locs["latitude"])
+    new_via_attrs["basin_lon"] = new_via_attrs["attrs_norm"].map(basin_pge_locs["longitude"])
+    new_via_attrs["dist_to_basin_km"] = haversine_km(
+        new_via_attrs["attrs_lat"].astype(float),
+        new_via_attrs["attrs_lon"].astype(float),
+        new_via_attrs["basin_lat"].astype(float),
+        new_via_attrs["basin_lon"].astype(float),
+    )
+
+    # Remainder: loads not matched by name OR by ID disambiguation
+    loads_in_basin_name  = set(id_pairs[id_pairs["loads_in_basin"]]["loads_norm"])
+    loads_in_basin_id    = set(new_via_attrs["loads_norm"])
+    all_loads_norms      = set(id_pairs["loads_norm"])
+    remainder_norms_pge  = all_loads_norms - loads_in_basin_name - loads_in_basin_id
+
+    # Step 3: dictionary augmentation for PGE
+    dict_pge = dict_all.get("pge", {})
+    loads_in_basin_dict_pge = {
+        n for n in remainder_norms_pge
+        if any(bn in basin_norms for bn in dict_pge.get(n, []))
+    }
+    remainder_norms = remainder_norms_pge - loads_in_basin_dict_pge
+
+    remainder_df = (id_pairs[id_pairs["loads_norm"].isin(remainder_norms)]
+                    [["loads_name", "loads_norm", "attrs_name", "attrs_norm",
+                      "sub_id", "loads_lat", "loads_lon", "attrs_lat", "attrs_lon",
+                      "loads_attrs_dist_km"]]
+                    .sort_values("loads_name"))
+
+    print(f"    All ID pairs (loads <-> attrs): {len(id_pairs)}")
+    print(f"    Same norm name (ID + name agree): {id_pairs['names_agree'].sum()}")
+    print(f"    Name mismatches (same ID, different norm name): {len(mismatches)}")
+    print(f"      Loads matched basin by name:  {id_pairs['loads_in_basin'].sum()}")
+    print(f"      Attrs matched basin by name:  {id_pairs['attrs_in_basin'].sum()}")
+    print(f"      New via attrs name (loads miss, attrs hit):  {len(new_via_attrs)}")
+    print(f"      Conflicts (both match basin, different names): {len(conflicts)}")
+    if len(new_via_attrs) > 0:
+        d = new_via_attrs["dist_to_basin_km"].dropna()
+        print(f"      New-via-ID dist to basin: median={d.median():.1f} km  "
+              f"p90={d.quantile(0.9):.1f} km  max={d.max():.1f} km")
+    print(f"    Additionally matched via dictionary: {len(loads_in_basin_dict_pge)}")
+    print(f"    Remainder (unmatched after name + ID + dict): {len(remainder_df)}")
+    d2 = id_pairs["loads_attrs_dist_km"].dropna()
+    print(f"    Loads<->attrs coord distance: median={d2.median():.2f} km  "
+          f"p90={d2.quantile(0.9):.1f} km  max={d2.max():.1f} km")
+
+    if not conflicts.empty:
+        print("\n    CONFLICTS (same ID, both names match basin but to different records):")
+        for _, row in conflicts.iterrows():
+            print(f"      subid={row['sub_id']}  loads='{row['loads_name']}' "
+                  f"-> basin '{row['loads_norm']}'  |  "
+                  f"attrs='{row['attrs_name']}' -> basin '{row['attrs_norm']}'")
+
+    _save(id_pairs,     "cmp_D_pge_id_name_pairs.csv")
+    _save(new_via_attrs, "cmp_D_pge_new_via_id.csv")
+    _save(remainder_df,  "cmp_D_pge_loads_remainder.csv")
+
+    # ── SCE ──────────────────────────────────────────────────────────────────
+    _subhdr("SCE: T3.subst_id <-> alt.SUBST_ID")
+    print("  (SCE loads uses OBJECTID, not subst_id; loads<->attrs ID join not possible)")
+
+    sce_t3  = dfs["sce_attrs"].copy()
+    sce_alt = dfs["sce_attrs_alt"].copy()
+    basin_sce   = basin[basin["owner_std"] == "sce"]
+    basin_norms_sce = set(norm(basin_sce["name"].dropna()))
+
+    t3_subs = (sce_t3[["substation_name", "subst_id"]]
+               .drop_duplicates("subst_id").copy())
+    t3_subs["t3_norm"] = norm(t3_subs["substation_name"])
+
+    alt_subs = (sce_alt[["SUB_NAME", "SUBST_ID", "latitude", "longitude"]]
+                .drop_duplicates("SUBST_ID").copy())
+    alt_subs["alt_norm"] = norm(alt_subs["SUB_NAME"])
+
+    id_pairs_sce = pd.merge(
+        t3_subs.rename(columns={"subst_id": "sub_id", "substation_name": "t3_name"}),
+        alt_subs.rename(columns={"SUBST_ID": "sub_id", "SUB_NAME": "alt_name",
+                                  "latitude": "alt_lat", "longitude": "alt_lon"}),
+        on="sub_id",
+    )
+    id_pairs_sce["t3_in_basin"]  = id_pairs_sce["t3_norm"].isin(basin_norms_sce)
+    id_pairs_sce["alt_in_basin"] = id_pairs_sce["alt_norm"].isin(basin_norms_sce)
+    id_pairs_sce["names_agree"]  = id_pairs_sce["t3_norm"] == id_pairs_sce["alt_norm"]
+
+    mismatches_sce   = id_pairs_sce[~id_pairs_sce["names_agree"]]
+    # New connections: alt not in basin by name, but T3 name (same ID) is
+    new_via_t3 = id_pairs_sce[~id_pairs_sce["alt_in_basin"] & id_pairs_sce["t3_in_basin"]].copy()
+    # Compute distance alt->basin using T3 name for the lookup
+    basin_sce_locs = (basin_sce[["name", "latitude", "longitude"]].copy()
+                      .assign(name_norm=lambda d: norm(d["name"]))
+                      .drop_duplicates("name_norm")
+                      .set_index("name_norm"))
+    new_via_t3["basin_lat"] = new_via_t3["t3_norm"].map(basin_sce_locs["latitude"])
+    new_via_t3["basin_lon"] = new_via_t3["t3_norm"].map(basin_sce_locs["longitude"])
+    new_via_t3["dist_to_basin_km"] = haversine_km(
+        new_via_t3["alt_lat"].astype(float),
+        new_via_t3["alt_lon"].astype(float),
+        new_via_t3["basin_lat"].astype(float),
+        new_via_t3["basin_lon"].astype(float),
+    )
+
+    conflicts_sce = mismatches_sce[
+        mismatches_sce["t3_in_basin"] & mismatches_sce["alt_in_basin"]
+    ]
+
+    # Remainder for alt: not matched by name, not helped by T3 ID.
+    # Use the complete alt set to determine basin membership — id_pairs_sce only
+    # covers 675 of 734 alt subs (the 59 without a T3 ID still match basin directly).
+    all_alt_norms       = set(norm(dfs["sce_attrs_alt"]["SUB_NAME"].dropna()))
+    alt_in_basin_name   = all_alt_norms & basin_norms_sce
+    alt_in_basin_id     = set(new_via_t3["alt_norm"])
+    alt_remainder_norms = all_alt_norms - alt_in_basin_name - alt_in_basin_id
+
+    # Step 3: dictionary augmentation for SCE
+    dict_sce = dict_all.get("sce", {})
+    alt_in_basin_dict_sce = {
+        n for n in alt_remainder_norms
+        if any(bn in basin_norms_sce for bn in dict_sce.get(n, []))
+    }
+    alt_remainder_norms = alt_remainder_norms - alt_in_basin_dict_sce
+
+    alt_remainder_df = (sce_alt.assign(_norm=norm(sce_alt["SUB_NAME"]))
+                        [lambda d: d["_norm"].isin(alt_remainder_norms)]
+                        .drop_duplicates("SUBST_ID")
+                        [["SUB_NAME", "SUBST_ID", "SYS_NAME", "latitude", "longitude"]]
+                        .sort_values("SUB_NAME"))
+
+    print(f"    All ID pairs (T3 <-> alt): {len(id_pairs_sce)}")
+    print(f"    Same norm name (ID + name agree): {id_pairs_sce['names_agree'].sum()}")
+    print(f"    Name mismatches (same ID, different norm name): {len(mismatches_sce)}")
+    print(f"      T3  matched basin by name:  {id_pairs_sce['t3_in_basin'].sum()}")
+    print(f"      Alt matched basin by name:  {id_pairs_sce['alt_in_basin'].sum()}")
+    print(f"      New via T3 name (alt miss, T3 hit): {len(new_via_t3)}")
+    print(f"      Conflicts (both match basin, different names): {len(conflicts_sce)}")
+    if len(new_via_t3) > 0:
+        d = new_via_t3["dist_to_basin_km"].dropna()
+        print(f"      New-via-ID dist to basin: median={d.median():.1f} km  "
+              f"p90={d.quantile(0.9):.1f} km  max={d.max():.1f} km")
+    print(f"    Additionally matched via dictionary: {len(alt_in_basin_dict_sce)}")
+    print(f"    Alt remainder (unmatched after name + ID + dict): {len(alt_remainder_df)}")
+
+    if not conflicts_sce.empty:
+        print("\n    CONFLICTS:")
+        for _, row in conflicts_sce.iterrows():
+            print(f"      sub_id={row['sub_id']}  T3='{row['t3_name']}' "
+                  f"-> basin '{row['t3_norm']}'  |  "
+                  f"alt='{row['alt_name']}' -> basin '{row['alt_norm']}'")
+
+    _save(id_pairs_sce,   "cmp_D_sce_t3_alt_id_pairs.csv")
+    _save(new_via_t3,     "cmp_D_sce_new_via_t3.csv")
+    _save(alt_remainder_df, "cmp_D_sce_alt_remainder.csv")
+
+    # ── SDGE ─────────────────────────────────────────────────────────────────
+    _subhdr("SDGE: no ID columns available — remainder from name join + dict")
+
+    basin_sdge       = basin[basin["owner_std"] == "sdge"]
+    basin_norms_sdge = set(norm(basin_sdge["name"].dropna()))
+    dict_sdge        = dict_all.get("sdge", {})
+    failures_sdge = set(
+        pd.read_csv(FILE["sdge_fail"])["substation_name"].str.upper().str.strip()
+    )
+
+    sdge_a = dfs["sdge_attrs"].copy()
+    sdge_a = sdge_a[~sdge_a["substation_name"].str.upper().str.strip().isin(failures_sdge)]
+    sdge_a["_norm"] = norm(sdge_a["substation_name"])
+    sdge_a_unmatched_name = ~sdge_a["_norm"].isin(basin_norms_sdge)
+    sdge_a_dict_matched = sdge_a["_norm"].apply(
+        lambda n: any(bn in basin_norms_sdge for bn in dict_sdge.get(n, []))
+    )
+    sdge_a_rem = (sdge_a[sdge_a_unmatched_name & ~sdge_a_dict_matched]
+                  .drop_duplicates("substation_name")
+                  [["substation_name", "latitude", "longitude"]]
+                  .sort_values("substation_name"))
+
+    sdge_l = dfs["sdge_loads"].copy()
+    sdge_l = sdge_l[~sdge_l["AssetName"].str.upper().str.strip().isin(failures_sdge)]
+    sdge_l["_norm"] = norm(sdge_l["AssetName"])
+    sdge_l_unmatched_name = ~sdge_l["_norm"].isin(basin_norms_sdge)
+    sdge_l_dict_matched = sdge_l["_norm"].apply(
+        lambda n: any(bn in basin_norms_sdge for bn in dict_sdge.get(n, []))
+    )
+    sdge_l_rem = (sdge_l[sdge_l_unmatched_name & ~sdge_l_dict_matched]
+                  .drop_duplicates("AssetName")
+                  [["AssetName", "latitude", "longitude"]]
+                  .sort_values("AssetName"))
+
+    n_sdge_a_dict = int(sdge_a[sdge_a_unmatched_name & sdge_a_dict_matched]["substation_name"].nunique())
+    n_sdge_l_dict = int(sdge_l[sdge_l_unmatched_name & sdge_l_dict_matched]["AssetName"].nunique())
+    print(f"    SDGE attrs remainder: {len(sdge_a_rem)} "
+          f"(+{n_sdge_a_dict} matched via dict)")
+    print(f"    SDGE loads remainder: {len(sdge_l_rem)} "
+          f"(+{n_sdge_l_dict} matched via dict)")
+    for _, r in sdge_a_rem.iterrows():
+        print(f"      attrs: {r['substation_name']}")
+    for _, r in sdge_l_rem.iterrows():
+        print(f"      loads: {r['AssetName']}")
+
+    _save(sdge_a_rem, "cmp_D_sdge_attrs_remainder.csv")
+    _save(sdge_l_rem, "cmp_D_sdge_loads_remainder.csv")
+
+    # ── Basin remainders ──────────────────────────────────────────────────────
+    _subhdr("Basin remainders — basin substations not matched by any utility source or dict")
+
+    # Union of all normalised names from every source for each utility.
+    # SCE sce_loads contains both scrape and bulk rows.
+    util_source_norms = {
+        "pge": (
+            set(norm(dfs["pge_loads"]["subname"].dropna())) |
+            set(norm(dfs["pge_attrs"]["substation_name"].dropna()))
+        ),
+        "sce": (
+            set(norm(dfs["sce_loads"]["SUBSTATION"].dropna())) |
+            set(norm(dfs["sce_attrs"]["substation_name"].dropna())) |
+            set(norm(dfs["sce_attrs_alt"]["SUB_NAME"].dropna()))
+        ),
+        "sdge": (
+            set(norm(dfs["sdge_loads"]["AssetName"].dropna())) |
+            set(norm(dfs["sdge_attrs"]["substation_name"].dropna()))
+        ),
+    }
+
+    for owner_std, util_norms in util_source_norms.items():
+        # Dictionary augmentation: basin entries targeted by dict mappings from
+        # in-data source names are considered "matched" and excluded from remainder.
+        dict_util = dict_all.get(owner_std, {})
+        dict_claimed_basin_norms: set[str] = set()
+        for src_n, bas_norms in dict_util.items():
+            if src_n in util_norms:
+                dict_claimed_basin_norms.update(bas_norms)
+
+        covered = util_norms | dict_claimed_basin_norms
+
+        basin_sub = basin[basin["owner_std"] == owner_std].copy()
+        basin_sub["_norm"] = norm(basin_sub["name"])
+        remainder = (basin_sub[~basin_sub["_norm"].isin(covered)]
+                     .drop(columns=["_norm"])
+                     .sort_values("name")
+                     .reset_index(drop=True))
+        n_by_name = int(basin_sub["_norm"].isin(util_norms).sum())
+        n_by_dict = int(basin_sub["_norm"].isin(dict_claimed_basin_norms - util_norms).sum())
+        matched   = n_by_name + n_by_dict
+        print(f"  {owner_std.upper()}: {len(basin_sub)} basin total  |  "
+              f"{matched} matched (name: {n_by_name}, dict: {n_by_dict})  |  "
+              f"{len(remainder)} unmatched")
+        _save(remainder, f"cmp_D_basin_{owner_std}_remainder.csv")
+
+
 # ── Data loading ──────────────────────────────────────────────────────────────
 
 def load_all() -> dict[str, pd.DataFrame]:
@@ -577,6 +992,16 @@ def load_all() -> dict[str, pd.DataFrame]:
         else:
             dfs[key] = pd.DataFrame()
             print(f"  {key:<20}   [FILE NOT FOUND: {path.relative_to(ROOT)}]")
+
+    # Drop basin entries named 'Unknown' — they have no useful identity and
+    # clutter spatial joins and remainder outputs.
+    if not dfs["basin"].empty:
+        mask_unk = dfs["basin"]["name"].str.strip().str.lower() == "unknown"
+        n_unk = mask_unk.sum()
+        if n_unk:
+            dfs["basin"] = dfs["basin"][~mask_unk].reset_index(drop=True)
+            print(f"  Dropped {n_unk} 'Unknown' entries from basin dataset.")
+
     return dfs
 
 
@@ -589,21 +1014,34 @@ def main() -> None:
     )
     parser.add_argument(
         "-s", "--section",
-        default="A,B,C",
+        default="A,B,C,D",
         metavar="SECTIONS",
-        help="Comma-separated sections to run: A, B, C (default: A,B,C)",
+        help="Comma-separated sections to run: A, B, C, D (default: A,B,C,D)",
     )
     args = parser.parse_args()
     sections = {s.strip().upper() for s in args.section.split(",")}
 
     dfs = load_all()
 
+    # Load basin-source name dictionary for augmenting name joins in B and D.
+    dict_all = _load_dict_all()
+    if dict_all:
+        total_entries = sum(len(v) for util in dict_all.values() for v in util.values())
+        print(f"\nDictionary loaded: {DICT_PATH.relative_to(ROOT)} "
+              f"({total_entries} source->basin pairs across "
+              f"{', '.join(f'{k.upper()}:{len(v)}' for k, v in dict_all.items())})")
+    else:
+        print(f"\nWARNING: {DICT_PATH.relative_to(ROOT)} not found; "
+              "skipping dictionary augmentation in sections B and D.")
+
     if "A" in sections:
         section_a(dfs)
     if "B" in sections:
-        section_b(dfs)
+        section_b(dfs, dict_all)
     if "C" in sections:
         section_c(dfs)
+    if "D" in sections:
+        section_d(dfs, dict_all)
 
     print(f"\n{'=' * 72}")
     print(f"  Done. Exported CSVs -> {CHECKS.relative_to(ROOT)}/")

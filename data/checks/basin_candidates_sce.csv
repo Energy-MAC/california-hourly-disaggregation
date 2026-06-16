@@ -1,0 +1,11 @@
+SourceName,BasinName,match_rule,source_lat,source_lon,basin_lat,basin_lon,dist_km
+Armijo P.T.,Wilde,spatial,34.784334,-117.249018,34.785935,-117.247981,0.202
+Bixby,Thums A,spatial,33.772545,-118.170702,33.759322,-118.181553,1.78
+Coso,Coso Little Lake,spatial,36.082698,-117.950879,36.093442,-117.957614,1.339
+Daeley P.T.,Downey Med,spatial,33.928328,-118.141822,33.920796,-118.127433,1.57
+Daisy,Larder,spatial,33.788573,-118.200094,33.796294,-118.21576,1.683
+Mt. Givens P.T.,Portal,spatial,37.257695,-119.157106,37.256991,-119.159118,0.194
+Queen Mary U.G.S.,Thums A,spatial,33.750115,-118.191346,33.759322,-118.181553,1.367
+Ronnie P.T.,Webco,spatial,33.893703,-118.159106,33.883622,-118.165026,1.247
+Sunlight P.T.,Webco,spatial,33.879734,-118.176893,33.883622,-118.165026,1.178
+Timberwine,Eastwood,spatial,37.136039,-119.261064,37.148,-119.256617,1.387
