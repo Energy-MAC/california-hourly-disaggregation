@@ -112,6 +112,31 @@ public ArcGIS FeatureServer:
 | SDG&E | ICA_MAP_PROD_Substations_VW (layer 0) | substation type, voltage, existing/queued/total gen, projected load, DER penetration |
 | PacifiCorp | DG Readiness with Net Minimum (layer 0) | existing DER (MW), net minimum daytime load (MW) — aggregated from circuit level |
 
+### Substation Coverage Summary
+
+After cleaning (removing pass-through switching nodes and failed scrapes) and joining
+to the DataBasin CA Substations 2022 reference for geographic coordinates:
+
+|                                      | PG&E    | SCE     | SDG&E  | Total     |
+|--------------------------------------|---------|---------|--------|-----------|
+| Raw substations scraped              | 664     | 748     | 107¹   | 1,519     |
+| Removed (P.T. nodes / failed scrapes)| —       | 170     | 8      | 178       |
+| **Cleaned (in processed output)**    | **664** | **578** | **99** | **1,341** |
+| Matched to basin by name             | 550     | 518     | 87     | 1,155     |
+| Added via name dictionary            | 50      | 9       | 9      | 68        |
+| **Basin-matched total**              | **600** | **527** | **96** | **1,223** |
+| Not matched to basin                 | 64      | 51      | 3      | 118       |
+| Basin substations not in any source  | 346     | 160     | 42     | 548       |
+| Load profile rows                    | 191,184 | 313,608 | 28,512 | 533,304   |
+
+¹ SDG&E: 99 substations with data + 8 failed scrapes = 107 attempted.
+
+The **name dictionary** (`data/basinSourceDictionary.csv`, 79 entries) maps utility
+source names that differ from the DataBasin reference (e.g. "CRESTA PH" → "Cresta",
+"DRUM" → "Drum 1 / Drum 2") to recover additional geolocation matches beyond the
+normalised-name join.  SCE carries year-stamped profiles (2021–2026); PG&E and SDG&E
+publish monthly aggregates without a year column.
+
 ### CEC IEPR Forecasts
 
 The California Energy Commission publishes two Excel workbooks as part of the
@@ -378,10 +403,12 @@ subtracts it will always read lower than one that does not.
 | Source | BTM Solar Treatment | Load Metric | Raw vs Derived | ~2024 CA Annual |
 |--------|---------------------|-------------|----------------|-----------------|
 | **EIA-930 (CISO)** | **Net-of-BTM** — rooftop generation reduces the metered demand the grid sees | Net demand at CAISO system boundary | Raw (hourly self-reports from BA) | ~223 TWh |
-| **EIA-930 (CA8 group)** | Net-of-BTM | Sum of 8 BAs: CISO + BANC + IID + LDWP + TIDC + WALC + **NEVP + PACW** | Raw, but includes ~55–60 TWh of out-of-state load from NEVP and PACW | ~285 TWh (overestimates CA) |
+| **EIA-930 (CA8 group)** | Net-of-BTM | Sum of 8 BAs: CISO + BANC + IID + LDWP + TIDC + WALC + **NEVP + PACW** | Raw, but inflated by ~55–60 TWh of non-CA load (only ~1 TWh of NEVP+PACW is actually in CA) | ~285 TWh (overestimates CA) |
 | **EIA CAL region** | Net-of-BTM | Geographic California boundary; NEVP/PACW excluded | Raw | ~270–273 TWh |
-| **IEPR Total CAISO Load** | **Net-of-BTM** — BTM PV reduces the customer demand in the CEC model | Net system load including T&D losses, at the transmission boundary | Raw from CEC workbooks | ~217–220 TWh |
-| **RESOLVE Baseline Consumption** | **Gross (BTM PV removed from demand side, modeled as supply)** | Gross demand before BTM PV subtraction; includes T&D losses | **Derived** from IEPR — see formula below | ~241 TWh (PGE+SCE+SDGE only) |
+| **IEPR `BASELINE_CONSUMPTION`** | **Gross (BTM PV not yet subtracted)** — includes EV charging, data centers, climate already embedded | Gross load at grid busbar; comparable to RESOLVE Baseline | Raw from CEC hourly workbooks (`iepr_hourly_forecast.csv`) | ~247–250 TWh |
+| **IEPR `BASELINE_NET_LOAD`** | **Net-of-BTM** — `BASELINE_CONSUMPTION` − BTM\_PV − BTM\_STORAGE | Net system load, same concept as EIA-930 | Raw from CEC hourly workbooks | ~217–220 TWh |
+| **IEPR `MANAGED_NET_LOAD`** | **Net-of-BTM + all scenario overlays applied** — AAEE, AAFS, AATE adjustments | Final scenario net load ("IEPR Total CAISO Load" in RESOLVE I&A) | Raw from CEC hourly workbooks | ~217–220 TWh |
+| **RESOLVE Baseline Consumption** | **Gross (BTM PV removed from demand side, modeled as supply)** | Gross demand before BTM PV subtraction; includes T&D losses | **Derived** from IEPR MANAGED_NET_LOAD — see formula below | ~241 TWh (PGE+SCE+SDGE only) |
 
 **Key implication for comparisons:** A direct TWh comparison between RESOLVE Baseline
 and EIA-930 CISO will show an apparent ~17–20 TWh gap in 2024.  The true sources of
@@ -517,30 +544,31 @@ reporting, inherited from WECC planning conventions.  Two of these BAs — NEVP 
 and PACW (PacifiCorp West) — serve predominantly out-of-state territory and inflate the
 CA8 total relative to actual California demand.
 
-| BA | Primary service territory | CA fraction | Notes |
-|----|--------------------------|-------------|-------|
-| NEVP | Clark County (Las Vegas) and northern Nevada | Negligible | NV Energy's service territory does not extend into California; they are in RESOLVE's SW zone |
-| PACW | Oregon, Washington, Idaho, Wyoming, Utah; small slice of far-northern CA | ~2–4% | PacifiCorp West serves Del Norte, Siskiyou, and Modoc counties in CA, but this is a minor portion of their total load |
+| BA | Primary service territory | CA fraction | 2024 CA load | Notes |
+|----|--------------------------|-------------|--------------|-------|
+| NEVP | Clark County (Las Vegas) and northern Nevada | **0.4%** | **~0.18 TWh** | NV Energy serves Nevada; in RESOLVE's SW zone |
+| PACW | Oregon, Washington, Idaho, Wyoming, Utah; far-northern CA (Del Norte, Siskiyou, Modoc) | **4%** | **~0.85 TWh** | Small CA territory; in RESOLVE's NW zone |
 
 The ~55–60 TWh attributed to NEVP + PACW in EIA-930 (2024) is almost entirely out-of-state.
-The actual California load from these two BAs is estimated at **~2–4 TWh combined** —
-primarily the small PacifiCorp West territories in far-northern California.
+The verified California load from these two BAs is **~1.03 TWh combined** (0.18 + 0.85 TWh),
+verified against EIA Form 861 state-level retail sales data.  EIA CA8 therefore overstates
+California demand by approximately **54–59 TWh** relative to actual in-California load.
 
-**Sources and basis for these estimates:**
+**Sources:**
 
 - CPUC 2024-2026 IRP Inputs & Assumptions (February 2026), Table 99: confirms NEVP is in
   RESOLVE's SW zone and PACW is in the NW zone — neither is classified as California.
 - EIA Form EIA-861 (Annual Electric Power Industry Report): utility-level retail sales by
-  state, which can be used to isolate CA retail sales for NV Energy and PacifiCorp West.
-  NV Energy reports effectively zero CA retail sales. PacifiCorp West reports minimal CA
-  sales (northern CA service area).
+  state, isolating CA retail sales for NV Energy (0.4%) and PacifiCorp West (4%).
+  Yields 2024 CA loads of ~0.18 TWh (NEVP) and ~0.85 TWh (PACW).
 - EIA-930 BA-level demand data: NEVP total 2024 load ≈ 30–35 TWh (all Nevada);
   PACW total 2024 load ≈ 40–45 TWh (mostly OR/WA).
 - WECC Transmission Expansion Planning BA maps confirm NEVP = Nevada, PACW = Pacific
   Northwest.
 
 **Practical implication:** When comparing annual totals across sources, use EIA CISO
-(~223 TWh for 2024) or EIA CAL (~270–273 TWh) rather than EIA CA8 (~285 TWh), as EIA CA8
-overstates California demand by including NEVP's full Nevada load and PACW's Pacific
-Northwest load.  RESOLVE's PGE+SCE+SDGE total (~241 TWh gross, ~211 TWh net of BTM PV)
+(~223 TWh for 2024) or EIA CAL (~270–273 TWh) rather than EIA CA8 (~285 TWh).  EIA CA8
+overstates California demand by ~54–59 TWh because NEVP's full Nevada load and PACW's
+Pacific Northwest load are counted, while only ~1 TWh of their combined total is actually
+in California.  RESOLVE's PGE+SCE+SDGE total (~241 TWh gross, ~211 TWh net of BTM PV)
 is the most directly comparable forecast for the CAISO footprint.
