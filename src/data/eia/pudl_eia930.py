@@ -5,7 +5,7 @@ Source: Public PUDL nightly build on AWS S3 (no API key required)
   s3://pudl.catalyst.coop/nightly/
 
 Tables downloaded and filtered to CA-relevant BAs:
-  core_eia930__hourly_operations.parquet  — per-BA demand/gen/interchange
+  out_eia930__hourly_operations.parquet  — per-BA demand/gen/interchange
   core_eia930__hourly_interchange.parquet — BA-pair interchange flows
 
 Output directory: data/raw/eia/pudl/
@@ -24,7 +24,7 @@ RAW_DIR = ROOT / "data" / "raw" / "eia" / "pudl"
 CA8 = ["BANC", "CISO", "IID", "LDWP", "PACW", "NEVP", "TIDC", "WALC"]
 
 _BASE = "s3://pudl.catalyst.coop/nightly"
-_OPS_URL = f"{_BASE}/core_eia930__hourly_operations.parquet"
+_OPS_URL = f"{_BASE}/out_eia930__hourly_operations.parquet"
 _IXC_URL = f"{_BASE}/core_eia930__hourly_interchange.parquet"
 
 # Public PUDL bucket — anonymous S3 access
@@ -76,7 +76,7 @@ def ingest_operations(
     for ba, n in df[_BA_COL].value_counts().sort_index().items():
         print(f"  {ba:6s}  {n:,}")
 
-    out_path = output_dir / "core_eia930__hourly_operations_CA8.parquet"
+    out_path = output_dir / "out_eia930__hourly_operations_CA8.parquet"
     df.to_parquet(out_path, index=False)
     mb = out_path.stat().st_size / 1024 / 1024
     print(f"\nWrote -> {out_path}  ({mb:.1f} MB)")

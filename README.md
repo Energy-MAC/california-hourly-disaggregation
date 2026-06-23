@@ -31,7 +31,23 @@ california-hourly-disaggregation/
 ├── notebooks/
 │   ├── 01_eia_from_to_consistency.ipynb      # FROM vs TO cross-file consistency
 │   └── 02_eia_region_vs_interchange.ipynb    # Region TI vs sum-of-BA interchange
-├── scripts/                   # Runnable pipeline commands (see below)
+├── scripts/
+│   ├── data/                  # Scraping and processing — organised by source
+│   │   ├── eia/               # EIA-930 scrape, PUDL ingest, and processing
+│   │   ├── iepr/              # CEC IEPR forecast processing
+│   │   ├── resolve/           # RESOLVE load-input processing
+│   │   ├── pge/               # PG&E scraper
+│   │   ├── sce/               # SCE scraper, ingest, and validation
+│   │   ├── sdge/              # SDG&E scraper
+│   │   ├── bves/              # BVES scraper (placeholder)
+│   │   ├── calpeco/           # CalPeco scraper (placeholder)
+│   │   ├── pacificorp/        # PacifiCorp scraper
+│   │   └── substations/       # Substation processing, audit, and comparison
+│   ├── compare_cal_region_sources.py   # EIA API CAL vs PUDL CA5 sum
+│   ├── compare_eia_sources.py          # EIA API scrape vs PUDL nightly
+│   ├── compare_iepr_eia.py             # IEPR projections vs EIA realized demand
+│   ├── compare_resolve_iepr_eia.py     # RESOLVE vs IEPR vs EIA
+│   └── compare_substation_eia_iepr.py  # Substation profiles vs EIA and IEPR
 ├── src/data/                  # Scraper and processing library modules
 ├── requirements.txt
 └── README.md
@@ -51,7 +67,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**EIA API key** — required only for `scripts/scrape_eia.py`.
+**EIA API key** — required only for `scripts/data/eia/scrape_eia.py`.
 Get a free key at <https://www.eia.gov/opendata/> and add it to a `.env` file at the
 repo root:
 
@@ -159,7 +175,7 @@ all years.
 
 ### Step 1 — Scrape raw data
 
-Each `scripts/scrape_*.py` command writes chunked CSVs to the corresponding
+Each `scripts/data/<source>/scrape_*.py` command writes chunked CSVs to the corresponding
 `data/raw/<utility>/` folder.  All scrapers support **safe stop/resume**: press
 `Ctrl+C` at any time; re-run the same command to continue from where it left off.
 
@@ -167,15 +183,15 @@ Each `scripts/scrape_*.py` command writes chunked CSVs to the corresponding
 
 ```bash
 # Interchange: flows FROM each of the 8 BAs (all counterparts)
-python scripts/scrape_eia.py rto-interchange \
+python scripts/data/eia/scrape_eia.py rto-interchange \
     --from-bas BANC CISO IID LDWP PACW NEVP TIDC WALC
 
 # Interchange: flows TO each of the 8 BAs (all counterparts)
-python scripts/scrape_eia.py rto-interchange \
+python scripts/data/eia/scrape_eia.py rto-interchange \
     --to-bas BANC CISO IID LDWP PACW NEVP TIDC WALC
 
 # CAL region aggregate (demand, net gen, TI, day-ahead forecast)
-python scripts/scrape_eia.py rto-region
+python scripts/data/eia/scrape_eia.py rto-region
 ```
 
 Output: `data/raw/eia/eia_rto-interchange-data_from-*.csv` (×4 chunks),
@@ -185,10 +201,10 @@ Output: `data/raw/eia/eia_rto-interchange-data_from-*.csv` (×4 chunks),
 
 ```bash
 # Feeder load profiles (layer 25) — primary load source
-python scripts/scrape_pge.py layer --layer-id 25
+python scripts/data/pge/scrape_pge.py layer --layer-id 25
 
 # Substation physical attributes (layer 0)
-python scripts/scrape_pge.py attributes
+python scripts/data/pge/scrape_pge.py attributes
 ```
 
 Output: `data/raw/pge/pge_layer25_*.csv`, `pge_substation_attributes.csv`
@@ -202,17 +218,17 @@ SCE load profiles are obtained via the DRPEP bulk download (not scraped automati
 3. Save the ZIP file, then run:
 
 ```bash
-python scripts/ingest_sce_bulk_download.py path/to/SUBSTATION.zip
+python scripts/data/sce/ingest_sce_bulk_download.py path/to/SUBSTATION.zip
 ```
 
 ArcGIS data (coordinates + substation attributes) is scraped programmatically:
 
 ```bash
 # Substation load profile layer (layer 2) — coordinates only, values are in Amps
-python scripts/scrape_sce.py layer --layer-id 2
+python scripts/data/sce/scrape_sce.py layer --layer-id 2
 
 # Substation physical attributes (ICA Table 3)
-python scripts/scrape_sce.py attributes
+python scripts/data/sce/scrape_sce.py attributes
 ```
 
 Output: `data/raw/sce/sce_bulk_download_all.csv`, `sce_layer2_*.csv`,
@@ -226,10 +242,10 @@ Output: `data/raw/sce/sce_bulk_download_all.csv`, `sce_layer2_*.csv`,
 
 ```bash
 # Hourly load profiles (ZIP download per substation)
-python scripts/scrape_sdge.py substation-profiles
+python scripts/data/sdge/scrape_sdge.py substation-profiles
 
 # Substation physical attributes
-python scripts/scrape_sdge.py attributes
+python scripts/data/sdge/scrape_sdge.py attributes
 ```
 
 Output: `data/raw/sdge/sdge_substation_profiles_part*.csv`,
@@ -240,14 +256,32 @@ Output: `data/raw/sdge/sdge_substation_profiles_part*.csv`,
 
 ```bash
 # Substation names and coordinates (layer 1)
-python scripts/scrape_pacificorp.py layer --layer-id 1
+python scripts/data/pacificorp/scrape_pacificorp.py layer --layer-id 1
 
 # DER attributes from DG Readiness service (circuit-level, aggregated to substation)
-python scripts/scrape_pacificorp.py attributes
+python scripts/data/pacificorp/scrape_pacificorp.py attributes
 ```
 
 Output: `data/raw/pacificorp/pacificorp_layer1_*.csv`,
 `pacificorp_substation_attributes.csv`
+
+#### EIA Form 861 (Annual Retail Sales)
+
+Two options for downloading EIA Form 861 data (choose one):
+
+**Option A — PUDL (recommended):** Downloads only the sales table for the CA8 BAs as
+a compact parquet file.  No large ZIP files; fastest way to get the data.
+
+```bash
+python scripts/data/eia/ingest_eia861_pudl.py          # → data/raw/eia/pudl/core_eia861__yearly_sales_CA8.parquet
+```
+
+**Option B — Direct from EIA:** Downloads the full Form 861 ZIP and extracts only
+`Sales_Ult_Cust_{year}.xlsx` (all other worksheets discarded).
+
+```bash
+python scripts/data/eia/scrape_eia_form861.py --years 2022 2023 2024   # → data/raw/eia/form861/{year}/
+```
 
 #### CalPeco / BVES
 
@@ -262,7 +296,7 @@ for future work.
 #### Substation tables
 
 ```bash
-python scripts/process_substations.py
+python scripts/data/substations/process_substations.py
 ```
 
 Reads all raw utility files and writes two CSVs to `data/processed/substations/`:
@@ -308,7 +342,7 @@ Reads all raw utility files and writes two CSVs to `data/processed/substations/`
 #### EIA interchange
 
 ```bash
-python scripts/process_eia_interchange.py
+python scripts/data/eia/process_eia_interchange.py
 ```
 
 Standardizes all FROM and TO interchange files into a single canonical table
@@ -332,16 +366,62 @@ Standardizes all FROM and TO interchange files into a single canonical table
 - Both files are trimmed to the earlier endpoint before processing to avoid
   asymmetric coverage
 
+#### RESOLVE load inputs
+
+```bash
+python scripts/data/resolve/process_resolve.py
+```
+
+Reads RESOLVE's hourly load shape profiles and annual energy forecasts from
+`data/raw/RESOLVE Code Base and Inputs/` and writes two CSVs to `data/processed/resolve/`:
+
+**`resolve_hourly_profiles.csv`** — hourly load shapes for six California BA zones (PGE, SCE, SDGE, IID, LDWP, NCNC), covering 23 historical weather years (2000–2022) at 8,760 h/year (no Feb 29)
+
+| Column | Description |
+|--------|-------------|
+| datetime_pst | Hourly timestamp (fixed PST, UTC−8, no DST) |
+| utility | BA zone label: PGE, SCE, SDGE, IID, LDWP, or NCNC |
+| demand_mw_raw | Raw shape profile value (MW) from `profiles/loads/2024/{UTIL}_Baseline.csv` |
+| demand_mw_2024scaled | `demand_mw_raw` scaled so each weather year integrates to the 2024 IEPR annual energy forecast target (MWh) for that utility |
+
+> **Important:** `demand_mw_2024scaled` is **gross demand** — BTM solar has been moved to
+> the supply side in RESOLVE's model (see "RESOLVE Net Load" section below).  Use
+> `demand_mw_raw` / `demand_mw_2024scaled` only for gross-load comparisons.  For
+> net-load comparisons, `compare_substation_eia_iepr.py` applies the native
+> Customer_PV correction automatically.
+
+**`resolve_annual_forecast.csv`** — annual energy forecast targets (MWh and TWh) by utility and year (2024–2045), from IEPR interim load files used as RESOLVE scaling targets.
+
+#### EIA Form 861 — CA fractions by BA
+
+```bash
+python scripts/data/eia/process_eia861.py          # auto-detects PUDL parquet or EIA Excel
+python scripts/data/eia/process_eia861.py --source pudl
+python scripts/data/eia/process_eia861.py --source eia --years 2022 2023 2024
+```
+
+Reads from either the PUDL parquet (`data/raw/eia/pudl/core_eia861__yearly_sales_CA8.parquet`)
+or the direct EIA Excel files (`data/raw/eia/form861/{year}/Sales_Ult_Cust_{year}.xlsx`),
+then writes `data/processed/eia/eia861_ca_fractions.csv`:
+
+| Column | Description |
+|--------|-------------|
+| year | Report year |
+| ba_code | Balancing authority code (e.g. `NEVP`, `WALC`) |
+| total_mwh | Total retail sales across all states served by this BA |
+| ca_mwh | Retail sales to California customers only |
+| ca_fraction | `ca_mwh / total_mwh` — fraction of this BA's load in CA |
+
 ---
 
 ### Step 3 — Validate and audit
 
 ```bash
 # Check SCE data for schema consistency, row-count completeness, and duplicate hours
-python scripts/validate_sce.py
+python scripts/data/sce/validate_sce.py
 
 # Report which raw columns are unused in the processed output
-python scripts/audit_unused_columns.py
+python scripts/data/substations/audit_unused_columns.py
 ```
 
 ---
@@ -392,6 +472,33 @@ model used by CPUC for the 2024-2026 IRP.  Its raw load inputs sit in
 RESOLVE covers six California BA zones: **PGE**, **SCE**, **SDGE**, **IID**, **LDWP**,
 **NCNC**.  It does *not* model NEVP or PACW as California zones (see EIA CA8 note below).
 
+#### RESOLVE Net Load: gross → net derivation
+
+`resolve_hourly_profiles.csv` stores **gross demand** (`demand_mw_2024scaled`) — the
+demand side from which BTM solar has been removed because RESOLVE models rooftop PV as
+a supply-side resource named `Customer_PV`.  To compare RESOLVE against EIA-930 or IEPR
+(both of which measure or forecast **net-of-BTM** load), the Customer_PV output must be
+subtracted:
+
+```
+resolve_net_mw = demand_mw_2024scaled − (weather_factor × planned_capacity_2024)
+```
+
+`compare_substation_eia_iepr.py` applies this correction automatically via the
+`_load_resolve_customer_pv_native()` helper, which loads:
+
+| File | Contents |
+|------|----------|
+| `RESOLVE_RAW/data/profiles/pmax/2025/{UTIL}_Customer_PV.csv` | Hourly solar capacity factor (`Weather Factor`, 0–1) for each BA zone across 23 actual weather years (2000–2022). These are real SAM simulation outputs; the profile varies day to day with cloud cover and irradiance. 201,480 rows per utility (23 × 8,760 h, no Feb 29). |
+| `RESOLVE_RAW/data/interim/resources/{UTIL}_Customer_PV.csv` | Planned BTM PV installed capacity (MW) by year and scenario. For the 2024 comparison, `2024_IEPR_Local_Reliability` values are used: PGE 9,669 MW · SCE 6,553 MW · SDGE 2,463 MW. |
+
+The two approaches (native RESOLVE vs IEPR fixed template) produce nearly the same
+**mean** correction (~13 GW at July noon for PGE+SCE+SDGE), but the native RESOLVE
+profiles add realistic day-to-day solar variability — cloud-cover days reduce BTM output
+below the monthly average, rainy winter days near zero — that the IEPR fixed monthly
+template cannot capture.  This widens the inter-annual p10–p90 band in the monthly
+profile figures compared to using the IEPR template.
+
 ---
 
 ### BTM Solar Treatment by Source
@@ -402,13 +509,14 @@ subtracts it will always read lower than one that does not.
 
 | Source | BTM Solar Treatment | Load Metric | Raw vs Derived | ~2024 CA Annual |
 |--------|---------------------|-------------|----------------|-----------------|
-| **EIA-930 (CISO)** | **Net-of-BTM** — rooftop generation reduces the metered demand the grid sees | Net demand at CAISO system boundary | Raw (hourly self-reports from BA) | ~223 TWh |
+| **EIA-930 (CISO)** | **Net-of-BTM** — rooftop generation reduces the metered demand the grid sees | Net demand at CAISO system boundary | Raw (hourly self-reports from BA) | ~224 TWh |
 | **EIA-930 (CA8 group)** | Net-of-BTM | Sum of 8 BAs: CISO + BANC + IID + LDWP + TIDC + WALC + **NEVP + PACW** | Raw, but inflated by ~55–60 TWh of non-CA load (only ~1 TWh of NEVP+PACW is actually in CA) | ~285 TWh (overestimates CA) |
 | **EIA CAL region** | Net-of-BTM | Geographic California boundary; NEVP/PACW excluded | Raw | ~270–273 TWh |
 | **IEPR `BASELINE_CONSUMPTION`** | **Gross (BTM PV not yet subtracted)** — includes EV charging, data centers, climate already embedded | Gross load at grid busbar; comparable to RESOLVE Baseline | Raw from CEC hourly workbooks (`iepr_hourly_forecast.csv`) | ~247–250 TWh |
 | **IEPR `BASELINE_NET_LOAD`** | **Net-of-BTM** — `BASELINE_CONSUMPTION` − BTM\_PV − BTM\_STORAGE | Net system load, same concept as EIA-930 | Raw from CEC hourly workbooks | ~217–220 TWh |
 | **IEPR `MANAGED_NET_LOAD`** | **Net-of-BTM + all scenario overlays applied** — AAEE, AAFS, AATE adjustments | Final scenario net load ("IEPR Total CAISO Load" in RESOLVE I&A) | Raw from CEC hourly workbooks | ~217–220 TWh |
-| **RESOLVE Baseline Consumption** | **Gross (BTM PV removed from demand side, modeled as supply)** | Gross demand before BTM PV subtraction; includes T&D losses | **Derived** from IEPR MANAGED_NET_LOAD — see formula below | ~241 TWh (PGE+SCE+SDGE only) |
+| **RESOLVE Baseline Consumption** (`demand_mw_2024scaled` in `resolve_hourly_profiles.csv`) | **Gross (BTM PV removed from demand side, modeled as supply)** | Gross demand before BTM PV subtraction; includes T&D losses | **Derived** from IEPR MANAGED_NET_LOAD — see formula below | ~241 TWh (PGE+SCE+SDGE only) |
+| **RESOLVE Net Load** (derived in `compare_substation_eia_iepr.py`) | **Net-of-BTM** — RESOLVE's own weather-year `Customer_PV` profiles subtracted from Baseline; see "RESOLVE Net Load" section above | Net system load for peak-hour comparisons against EIA/IEPR; 23-year ensemble captures real day-to-day solar variability | `demand_mw_2024scaled − weather_factor × planned_capacity_2024` using native RESOLVE pmax profiles | ~221 TWh mean across 23 weather years (PGE+SCE+SDGE) |
 
 **Key implication for comparisons:** A direct TWh comparison between RESOLVE Baseline
 and EIA-930 CISO will show an apparent ~17–20 TWh gap in 2024.  The true sources of
@@ -537,38 +645,101 @@ capacity credit via ELCC.
 
 ---
 
-### EIA CA8 Group: NEVP and PACW Out-of-State Load
+### EIA CA8 Group: California Fractions by Balancing Authority
 
 EIA-930 defines a "California" (CA8) group of 8 balancing authorities for regional
-reporting, inherited from WECC planning conventions.  Two of these BAs — NEVP (NV Energy)
-and PACW (PacifiCorp West) — serve predominantly out-of-state territory and inflate the
-CA8 total relative to actual California demand.
+reporting, inherited from WECC planning conventions.  Three of these BAs serve
+significant out-of-state territory, inflating the CA8 total relative to actual
+California demand.  The table below shows retail sales fractions from EIA Form 861
+(Annual Electric Power Industry Report), which provides state-level sales by BA.
 
-| BA | Primary service territory | CA fraction | 2024 CA load | Notes |
-|----|--------------------------|-------------|--------------|-------|
-| NEVP | Clark County (Las Vegas) and northern Nevada | **0.4%** | **~0.18 TWh** | NV Energy serves Nevada; in RESOLVE's SW zone |
-| PACW | Oregon, Washington, Idaho, Wyoming, Utah; far-northern CA (Del Norte, Siskiyou, Modoc) | **4%** | **~0.85 TWh** | Small CA territory; in RESOLVE's NW zone |
+| BA | Primary service territory | 2024 CA % | 2024 CA load | 2024 total load |
+|----|--------------------------|-----------|--------------|-----------------|
+| BANC | Northern California co-ops and munis | **100%** | 15.8 TWh | 15.8 TWh |
+| CISO | PG&E + SCE + SDG&E footprint | **~100%** | 285.3 TWh | 285.3 TWh |
+| IID | Imperial Irrigation District (SE California) | **100%** | 3.7 TWh | 3.7 TWh |
+| LDWP | Los Angeles Dept. of Water and Power | **100%** | 23.4 TWh | 23.4 TWh |
+| TIDC | Turlock Irrigation District (San Joaquin Valley) | **100%** | 2.3 TWh | 2.3 TWh |
+| WALC | Western Area Lower Colorado (AZ/NV + southern CA) | **31%** | 3.8 TWh | 12.2 TWh |
+| PACW | PacifiCorp West (OR/WA/ID/UT + far-northern CA) | **4%** | 0.85 TWh | 21.2 TWh |
+| NEVP | NV Energy (primarily Nevada / Las Vegas) | **0.4%** | 0.18 TWh | 47.2 TWh |
 
-The ~55–60 TWh attributed to NEVP + PACW in EIA-930 (2024) is almost entirely out-of-state.
-The verified California load from these two BAs is **~1.03 TWh combined** (0.18 + 0.85 TWh),
-verified against EIA Form 861 state-level retail sales data.  EIA CA8 therefore overstates
-California demand by approximately **54–59 TWh** relative to actual in-California load.
+Note: Form 861 measures retail sales (MWh billed to customers), not EIA-930 system
+demand.  The fractions are used to partition EIA-930 hourly BA demand into in-CA vs
+out-of-CA portions; the total CA8 retail-sales overstatement (~76 TWh in 2024) will
+differ slightly from the EIA-930 demand overstatement.
 
-**Sources:**
+**CA8 vs actual California (2024 retail sales):**
+- CA8 group total: **411 TWh** across all 8 BAs
+- Actually in California: **335 TWh**
+- Out-of-CA inflation: **~76 TWh** — driven by NEVP (47 TWh), PACW (20 TWh), WALC (8 TWh)
 
-- CPUC 2024-2026 IRP Inputs & Assumptions (February 2026), Table 99: confirms NEVP is in
-  RESOLVE's SW zone and PACW is in the NW zone — neither is classified as California.
-- EIA Form EIA-861 (Annual Electric Power Industry Report): utility-level retail sales by
-  state, isolating CA retail sales for NV Energy (0.4%) and PacifiCorp West (4%).
-  Yields 2024 CA loads of ~0.18 TWh (NEVP) and ~0.85 TWh (PACW).
-- EIA-930 BA-level demand data: NEVP total 2024 load ≈ 30–35 TWh (all Nevada);
-  PACW total 2024 load ≈ 40–45 TWh (mostly OR/WA).
-- WECC Transmission Expansion Planning BA maps confirm NEVP = Nevada, PACW = Pacific
-  Northwest.
+**Source:** EIA Form 861 state-level retail sales, processed with
+`scripts/data/eia/process_eia861.py` (PUDL or direct EIA source; see pipeline below).
+
+**NEVP and PACW in RESOLVE:** CPUC 2024-2026 IRP Inputs & Assumptions (February 2026),
+Table 99 confirms NEVP is in RESOLVE's SW zone and PACW is in RESOLVE's NW zone —
+neither is classified as California.  Only ~1.03 TWh combined of their total retail
+sales (~68 TWh) is actually in California.
 
 **Practical implication:** When comparing annual totals across sources, use EIA CISO
-(~223 TWh for 2024) or EIA CAL (~270–273 TWh) rather than EIA CA8 (~285 TWh).  EIA CA8
-overstates California demand by ~54–59 TWh because NEVP's full Nevada load and PACW's
-Pacific Northwest load are counted, while only ~1 TWh of their combined total is actually
-in California.  RESOLVE's PGE+SCE+SDGE total (~241 TWh gross, ~211 TWh net of BTM PV)
-is the most directly comparable forecast for the CAISO footprint.
+(~224 TWh for 2024–2025) or EIA CAL (~270–273 TWh) rather than EIA CA8 (~285 TWh demand /
+~411 TWh retail sales).  RESOLVE's PGE+SCE+SDGE total (~241 TWh gross, ~211 TWh net
+of BTM PV) is the most directly comparable forecast for the CAISO footprint.
+
+---
+
+## Peak Hour Alignment: Reconciling Three Measures of IEPR vs EIA
+
+Three different analyses in this repository measure the alignment between IEPR
+projected peak hours and EIA-930 realized peak hours.  They report different
+numbers because they measure fundamentally different things.
+
+| Measure | Script | IEPR data used | EIA data used | Result | What this means |
+|---------|--------|----------------|---------------|--------|-----------------|
+| **fig4 daily offset** | `compare_iepr_eia.py` | Projected years 2024–2025 only, inner-joined to the **same realized calendar date** | Realized 2024–2025, matched by date | ~0h overall | Near-term IEPR projections agree with realized EIA day-by-day. Both datasets reflect the current (2024–2025) electricity system and peak in the same evening hours. |
+| **Mean-profile argmax** | `compare_substation_eia_iepr.py` | Representative year per vintage (2024 or 2025); **argmax of mean monthly profile** | Realized 2016–2025; argmax of mean profile | −1.91h overall | Comparing the peak of the average load shape, not individual days. EIA's mean profile peaks slightly later due to the growing BTM solar duck curve shifting the evening ramp. |
+| **Daily argmax distributions** | `compare_substation_eia_iepr.py` | **All** projected years 2024–2050 pooled; argmax per individual day | Realized 2016–2025; argmax per individual day | −2.16h overall; **−5 to −6h in winter** | Reveals that the aggregate shift masks a stark seasonal pattern: IEPR's long-range scenarios (2026–2050) project winter daily peaks clustering around noon, while EIA's realized winter peaks are at 6–7 PM. RESOLVE (23 weather years) is a much closer match to EIA in winter. |
+
+### Why fig4 and the daily distributions appear to contradict each other
+
+They do not contradict each other — they compare different populations:
+
+- **fig4** restricts to *projected years where EIA realized data exists* (2024 and 2025).
+  For those near-term years, IEPR's calibrated load shapes still closely match the current
+  system.  Both IEPR and EIA peak in the evening, so the offset is near zero.
+
+- **Daily distributions (left panel of `daily_peak_shift_significance_table.png`)** pool
+  *all* projected years 2024–2050.  The majority of IEPR data is from 2026–2050 long-range
+  scenarios where IEPR projects a fundamentally different winter daily load shape: as BTM
+  solar grows and electrification increases, morning peaks (before solar generation) compete
+  with evening peaks, and a growing fraction of IEPR winter days have their daily maximum
+  in the late morning rather than the evening.  The mean of a bimodal morning/evening
+  distribution lands near noon, pulling the monthly average far from EIA's consistently
+  evening-peaked realized data.
+
+- **Verification (center panel of `daily_peak_shift_significance_table.png`)** replicates
+  the year range from fig4 as a distributional comparison (no date-matching).  If
+  near-zero shifts appear here, it confirms that fig4 and the daily-distributions analysis
+  are consistent, and that the large shifts in the left panel are specifically driven by
+  2026–2050 long-range projections rather than a data problem.
+
+### RESOLVE as a reference
+
+RESOLVE's 23 historical weather years (2000–2022) produce winter daily peaks at
+~17–18h, within ~1h of EIA's ~18–19h — a much closer match than IEPR's long-range
+projections.  Because RESOLVE is built from actual historical California load shapes,
+it correctly captures the evening-dominant winter demand pattern.  For the summer
+duck-curve months, RESOLVE runs 1–2h earlier than EIA, likely because the 2000–2022
+historical load shapes carry an earlier evening ramp than the current (2024–2025) grid
+— the duck curve has deepened over time as BTM solar installed capacity has grown well
+beyond the 2024 levels used to scale the profiles.
+
+**Key outputs** (in `data/figures/` and `data/tables/`):
+
+| File | Description |
+|------|-------------|
+| `daily_peak_shift_significance_table.png` | Three-panel table: IEPR all years \| IEPR near-term verification \| RESOLVE |
+| `daily_peak_distributions_iepr_resolve_eia.png` | Violin plots of daily peak-hour distributions per month |
+| `iepr_peak_hour_evolution.png` | How IEPR's predicted daily peak hour changes across the 2024–2050 forecast horizon |
+| `data/tables/daily_peak_shift_significance.csv` | Full statistical results (t-test + Mann-Whitney U) |

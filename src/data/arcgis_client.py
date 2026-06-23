@@ -171,7 +171,7 @@ class ArcGISClient:
         order_by : str
             Field used for deterministic pagination across pages.
         page_size : int
-            Features per request. Many servers cap at 1000–2000.
+            Features per request. Many servers cap at 1000-2000.
         start_offset : int
             Record offset to begin from (non-zero when resuming).
         include_geometry : bool

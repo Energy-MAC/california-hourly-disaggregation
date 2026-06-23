@@ -68,13 +68,15 @@ FIGS.mkdir(parents=True, exist_ok=True)
 
 CA8 = ["BANC", "CISO", "IID", "LDWP", "PACW", "NEVP", "TIDC", "WALC"]
 
-EIA_FILE  = PROC / "eia_region.csv"
-PUDL_FILE = PROC / "eia930_operations.csv"
-CAL_FILE  = PROC / "eia930_cal_region.csv"
-IEPR_FILE = IEPR_PROC / "iepr_baseline_annual.csv"
+EIA_FILE      = PROC / "eia_region.csv"
+PUDL_FILE     = PROC / "eia930_operations.csv"
+CAL_FILE      = PROC / "eia930_cal_region_EIA.csv"
+PUDL_CAL_FILE = PROC / "eia930_cal_region_PUDL.csv"
+IEPR_FILE     = IEPR_PROC / "iepr_baseline_annual.csv"
 
-CAL_COLOR  = "#9467bd"   # purple — distinct from CA8 (dark) and CISO (blue)
-CA8_COLOR  = "#222222"
+CAL_COLOR      = "#9467bd"   # purple — PUDL CA5 sum (preferred)
+CAL_EIA_COLOR  = "#d62728"   # red — EIA API CAL (for annual plot comparison)
+CA8_COLOR      = "#222222"
 IEPR_COLORS = {2023: "#1f77b4", 2024: "#ff7f0e", 2025: "#2ca02c"}
 
 # Metrics to compare: canonical key -> (EIA col, PUDL col, display label)
@@ -473,13 +475,14 @@ def _load_ca8_annual(pudl: pd.DataFrame) -> pd.DataFrame:
     return annual[["year", "twh"]].rename(columns={"twh": "ca8_twh"})
 
 
-def _load_cal_annual() -> pd.DataFrame:
-    """Load CAL region demand by year; keep only complete years."""
-    if not CAL_FILE.exists():
-        return pd.DataFrame(columns=["year", "cal_twh"])
-    df = pd.read_csv(CAL_FILE, parse_dates=["datetime_utc"])
-    df["ts"]   = _localize_utc(df["datetime_utc"])
-    df["year"] = df["ts"].dt.year
+def _cal_annual_from(path: Path, col_name: str = "cal_twh") -> pd.DataFrame:
+    """Load CAL demand by year from any cal_region CSV; keep only complete years."""
+    if not path.exists():
+        return pd.DataFrame(columns=["year", col_name])
+    df = pd.read_csv(path, parse_dates=["datetime_utc"])
+    if df["datetime_utc"].dt.tz is not None:
+        df["datetime_utc"] = df["datetime_utc"].dt.tz_localize(None)
+    df["year"] = df["datetime_utc"].dt.year
     counts     = df.groupby("year")["demand_mwh"].count()
     full_years = counts[counts >= int(8760 * 0.95)].index
     annual = (
@@ -488,8 +491,18 @@ def _load_cal_annual() -> pd.DataFrame:
         .sum()
         .reset_index()
     )
-    annual["cal_twh"] = annual["demand_mwh"] / 1_000_000
-    return annual[["year", "cal_twh"]]
+    annual[col_name] = annual["demand_mwh"] / 1_000_000
+    return annual[["year", col_name]]
+
+
+def _load_cal_annual() -> pd.DataFrame:
+    """EIA API CAL region demand by year (for annual plot alongside PUDL CA5 sum)."""
+    return _cal_annual_from(CAL_FILE, col_name="cal_twh")
+
+
+def _load_pudl_cal_annual() -> pd.DataFrame:
+    """PUDL CA5 sum demand by year (preferred for analysis; cleaner data quality)."""
+    return _cal_annual_from(PUDL_CAL_FILE, col_name="pudl_cal_twh")
 
 
 def _load_iepr_annual() -> pd.DataFrame:
@@ -538,9 +551,9 @@ def _load_iepr_annual() -> pd.DataFrame:
 
 def _load_cal_monthly() -> pd.DataFrame:
     """CAL region monthly mean hourly demand in GW; drops incomplete months."""
-    if not CAL_FILE.exists():
+    if not PUDL_CAL_FILE.exists():
         return pd.DataFrame(columns=["period_ts", "cal_gw"])
-    df = pd.read_csv(CAL_FILE, parse_dates=["datetime_utc"])
+    df = pd.read_csv(PUDL_CAL_FILE, parse_dates=["datetime_utc"])
     df["ts"]     = _localize_utc(df["datetime_utc"])
     df["period"] = df["ts"].dt.to_period("M")
     monthly = (
@@ -548,8 +561,8 @@ def _load_cal_monthly() -> pd.DataFrame:
         .agg(mean="mean", count="count")
         .reset_index()
     )
-    expected = monthly["period"].dt.days_in_month * 24
-    monthly  = monthly[monthly["count"] >= expected * 0.95].copy()
+    days_per_month = monthly["period"].dt.days_in_month
+    monthly  = monthly[monthly["count"] >= days_per_month * 24 * 0.95].copy()
     monthly["period_ts"] = monthly["period"].dt.to_timestamp()
     monthly["cal_gw"]    = monthly["mean"] / 1_000
     return monthly[["period_ts", "cal_gw"]]
@@ -567,9 +580,10 @@ def section_e(pudl: pd.DataFrame) -> None:
     """
     _hdr("SECTION E -- CAL region vs CA8 BA sum vs IEPR statewide")
 
-    ca8_ann  = _load_ca8_annual(pudl)
-    cal_ann  = _load_cal_annual()
-    iepr_ann = _load_iepr_annual()
+    ca8_ann      = _load_ca8_annual(pudl)
+    cal_ann      = _load_cal_annual()        # EIA API (for annual plot)
+    pudl_cal_ann = _load_pudl_cal_annual()   # PUDL CA5 sum (preferred)
+    iepr_ann     = _load_iepr_annual()
 
     # ── Annual summary ────────────────────────────────────────────────────────
     if not cal_ann.empty:
@@ -615,16 +629,17 @@ def section_e(pudl: pd.DataFrame) -> None:
                       f"{d:>+10,.1f}  {pct:>+8.1f}%")
 
     # ── Figure ────────────────────────────────────────────────────────────────
-    _section_e_figure(ca8_ann, cal_ann, iepr_ann)
+    _section_e_figure(ca8_ann, cal_ann, iepr_ann, pudl_cal_ann=pudl_cal_ann)
 
 
 def _section_e_figure(
     ca8_ann:  pd.DataFrame,
     cal_ann:  pd.DataFrame,
     iepr_ann: pd.DataFrame,
+    pudl_cal_ann: pd.DataFrame | None = None,
 ) -> None:
     """Two-panel figure: annual totals + monthly mean demand."""
-    cal_monthly = _load_cal_monthly()
+    cal_monthly = _load_cal_monthly()  # PUDL CA5 sum monthly
 
     # Monthly CA8 sum from PUDL
     pudl_df = pd.read_csv(PUDL_FILE, usecols=["datetime_utc", "demand_mwh"],
@@ -632,8 +647,8 @@ def _section_e_figure(
     pudl_df["ts"]     = _localize_utc(pudl_df["datetime_utc"])
     pudl_df["period"] = pudl_df["ts"].dt.to_period("M")
     ca8_monthly_raw = pudl_df.groupby("period")["demand_mwh"].agg(mean="mean", count="count").reset_index()
-    expected_h = ca8_monthly_raw["period"].dt.days_in_month * 24 * 8  # 8 BAs
-    ca8_monthly = ca8_monthly_raw[ca8_monthly_raw["count"] >= expected_h * 0.90].copy()
+    days_per_month = ca8_monthly_raw["period"].dt.days_in_month
+    ca8_monthly = ca8_monthly_raw[ca8_monthly_raw["count"] >= days_per_month * 24 * 8 * 0.90].copy()
     ca8_monthly["period_ts"] = ca8_monthly["period"].dt.to_timestamp()
     ca8_monthly["ca8_gw"]    = ca8_monthly["mean"] / 1_000
 
@@ -643,9 +658,15 @@ def _section_e_figure(
     if not ca8_ann.empty:
         ax1.plot(ca8_ann["year"], ca8_ann["ca8_twh"], color=CA8_COLOR,
                  lw=2.5, marker="o", ms=5, label="EIA CA8 sum (PUDL, 8 BAs)")
+    # PUDL CA5 sum (solid) — preferred
+    if pudl_cal_ann is not None and not pudl_cal_ann.empty:
+        ax1.plot(pudl_cal_ann["year"], pudl_cal_ann["pudl_cal_twh"], color=CAL_COLOR,
+                 lw=2.5, marker="s", ms=5, label="PUDL CA5 sum (BANC+CISO+IID+LDWP+TIDC)")
+    # EIA API CAL (dashed) — shown alongside PUDL for comparison
     if not cal_ann.empty:
-        ax1.plot(cal_ann["year"], cal_ann["cal_twh"], color=CAL_COLOR,
-                 lw=2.5, marker="s", ms=5, label="EIA CAL region")
+        ax1.plot(cal_ann["year"], cal_ann["cal_twh"], color=CAL_EIA_COLOR,
+                 lw=1.5, marker="v", ms=4, ls="--", alpha=0.7,
+                 label="EIA API CAL region (data quality issues in some years)")
 
     # Projected BASELINE_NET_LOAD net load (from hourly file — projected years only)
     if not iepr_ann.empty:
@@ -685,16 +706,17 @@ def _section_e_figure(
                          lw=1.8, ls="--", alpha=0.75,
                          label=f"IEPR v{vintage} historical (gross, all utilities)")
 
-    if not ca8_ann.empty and not cal_ann.empty:
-        m = ca8_ann.merge(cal_ann, on="year")
+    ref_cal = pudl_cal_ann if (pudl_cal_ann is not None and not pudl_cal_ann.empty) else None
+    if not ca8_ann.empty and ref_cal is not None:
+        m = ca8_ann.merge(ref_cal.rename(columns={"pudl_cal_twh": "cal_twh"}), on="year")
         ax1.fill_between(m["year"], m["cal_twh"], m["ca8_twh"],
                          alpha=0.12, color=CA8_COLOR,
-                         label="CA8 excess (NEVP + PACW territory)")
+                         label="CA8 excess over CA5 (NEVP + PACW territory)")
 
     ax1.set_xlabel("Year")
     ax1.set_ylabel("Annual demand (TWh)")
     ax1.set_title(
-        "Annual demand: EIA CA8 sum vs EIA CAL region vs IEPR by vintage\n"
+        "Annual demand: EIA CA8 sum vs PUDL CA5 sum vs EIA API CAL region vs IEPR by vintage\n"
         "Solid IEPR = projected net load (PGE+SCE+SDGE, BASELINE_NET_LOAD);  "
         "dashed IEPR = historical Total_Consumption (gross, all utilities)\n"
         "CA8 excess over CAL = NEVP+PACW;  IEPR net below CAL = non-CAISO utilities (LDWP, BANC, etc.)",
@@ -711,7 +733,7 @@ def _section_e_figure(
                  color=CA8_COLOR, lw=1.5, alpha=0.85, label="EIA CA8 sum (PUDL)")
     if not cal_monthly.empty:
         ax2.plot(cal_monthly["period_ts"], cal_monthly["cal_gw"],
-                 color=CAL_COLOR, lw=1.5, alpha=0.85, label="EIA CAL region")
+                 color=CAL_COLOR, lw=1.5, alpha=0.85, label="PUDL CA5 sum (BANC+CISO+IID+LDWP+TIDC)")
 
     if not ca8_monthly.empty and not cal_monthly.empty:
         merged_m = ca8_monthly[["period_ts", "ca8_gw"]].merge(
@@ -721,12 +743,12 @@ def _section_e_figure(
         ax2.fill_between(
             merged_m["period_ts"], merged_m["cal_gw"], merged_m["ca8_gw"],
             alpha=0.12, color=CA8_COLOR,
-            label=f"CA8 excess (mean {delta_mean:+.1f} GW)",
+            label=f"CA8 excess over CA5 (mean {delta_mean:+.1f} GW)",
         )
 
     ax2.set_xlabel("Month")
     ax2.set_ylabel("Mean hourly demand (GW)")
-    ax2.set_title("Monthly mean demand: EIA CA8 sum vs EIA CAL region")
+    ax2.set_title("Monthly mean demand: EIA CA8 sum vs PUDL CA5 sum")
     ax2.legend(fontsize=9)
     ax2.grid(True, alpha=0.3)
 

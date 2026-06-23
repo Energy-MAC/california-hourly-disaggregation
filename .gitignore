@@ -1,3 +1,6 @@
+# Claude Code
+.claude/
+
 # Data files
 data/raw/*
 data/processed/*

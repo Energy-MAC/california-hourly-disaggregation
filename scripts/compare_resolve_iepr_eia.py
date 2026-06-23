@@ -45,7 +45,8 @@ Geographic scope differences (CA8 vs CAISO vs RESOLVE)
   EIA LDWP:    Los Angeles Dept. of Water & Power (in RESOLVE as "LDWP")
   EIA BANC:    Balancing Authority of Northern California (NOT in RESOLVE)
   EIA TIDC:    Turlock Irrigation District (not in RESOLVE; ~1 TWh/yr)
-  EIA WALC:    Western Area Lower Colorado (not in RESOLVE; mostly out of CA)
+
+  EIA WALC:    Western Area Lower Colorado (not in RESOLVE; mostly out of CA); Not included in CAL region
 
   EIA NEVP:    NV Energy (Nevada Power + Sierra Pacific Power).  Serves
                Nevada entirely; ~0.4% of NEVP load is in California
@@ -95,7 +96,8 @@ FIGS.mkdir(parents=True, exist_ok=True)
 RESOLVE_ANN  = PROC / "resolve"  / "resolve_annual_forecast.csv"
 RESOLVE_HRLY = PROC / "resolve"  / "resolve_hourly_profiles.csv"
 EIA_OPS      = PROC / "eia"      / "eia930_operations.csv"
-EIA_CAL      = PROC / "eia"      / "eia930_cal_region.csv"
+EIA_CAL      = PROC / "eia"      / "eia930_cal_region_EIA.csv"
+PUDL_CAL     = PROC / "eia"      / "eia930_cal_region_PUDL.csv"
 IEPR_ANN     = PROC / "iepr"     / "iepr_baseline_annual.csv"
 IEPR_HRLY    = PROC / "iepr"     / "iepr_hourly_forecast.csv"
 
@@ -116,7 +118,7 @@ RESOLVE_UTILS = ["PGE", "SCE", "SDGE", "IID", "LDWP", "NCNC"]
 # EIA BAs present in California (inside CA or overlapping)
 # NEVP and PACW are listed but extend substantially outside CA
 EIA_CA8_BAS  = ["CISO", "IID", "LDWP", "BANC", "TIDC", "WALC", "NEVP", "PACW"]
-EIA_INCA_BAS = ["CISO", "IID", "LDWP", "BANC", "TIDC", "WALC"]  # excludes NEVP, PACW
+EIA_INCA_BAS = ["CISO", "IID", "LDWP", "BANC", "TIDC"]  # excludes NEVP, PACW, "WALC"
 NEVP_PACW    = ["NEVP", "PACW"]
 
 
@@ -135,18 +137,30 @@ def _eia_annual_by_ba() -> pd.DataFrame:
     return ann
 
 
-def _eia_cal_annual() -> pd.DataFrame:
-    """EIA CAL region annual TWh (geographic CA boundary, available 2019+)."""
-    if not EIA_CAL.exists():
+def _cal_annual_from(path: Path) -> pd.DataFrame:
+    """Annual CAL demand TWh from any cal_region CSV; drops years < 95% complete."""
+    if not path.exists():
         return pd.DataFrame(columns=["year", "twh"])
-    df = pd.read_csv(EIA_CAL, usecols=["datetime_utc", "demand_mwh"],
+    df = pd.read_csv(path, usecols=["datetime_utc", "demand_mwh"],
                      parse_dates=["datetime_utc"])
+    if df["datetime_utc"].dt.tz is not None:
+        df["datetime_utc"] = df["datetime_utc"].dt.tz_localize(None)
     df["year"] = df["datetime_utc"].dt.year
     counts = df.groupby("year")["demand_mwh"].count()
     full   = counts[counts >= int(8760 * 0.95)].index
     ann    = (df[df["year"].isin(full)].groupby("year")["demand_mwh"].sum() / 1e6
               ).reset_index(name="twh")
     return ann
+
+
+def _eia_cal_annual() -> pd.DataFrame:
+    """EIA API CAL region annual TWh (geographic CA boundary, available 2019+)."""
+    return _cal_annual_from(EIA_CAL)
+
+
+def _pudl_cal_annual() -> pd.DataFrame:
+    """PUDL CA5 sum annual TWh (BANC+CISO+IID+LDWP+TIDC; preferred for analysis)."""
+    return _cal_annual_from(PUDL_CAL)
 
 
 def _iepr_net_annual() -> pd.DataFrame:
@@ -194,7 +208,7 @@ def _resolve_annual() -> pd.DataFrame:
 
 def _resolve_hourly() -> pd.DataFrame:
     """RESOLVE hourly profiles, raw (MW)."""
-    return pd.read_csv(RESOLVE_HRLY, parse_dates=["datetime"])
+    return pd.read_csv(RESOLVE_HRLY, parse_dates=["datetime_pst"])
 
 
 def _iepr_baseline_consumption_annual() -> pd.DataFrame:
@@ -359,6 +373,7 @@ def fig1_annual_comparison(
     cal_ann: pd.DataFrame,
     iepr_cons: pd.DataFrame | None = None,
     iepr_mgd: pd.DataFrame | None = None,
+    cal_ann_eia: pd.DataFrame | None = None,
 ) -> None:
     fig, ax = plt.subplots(figsize=(13, 7))
 
@@ -414,11 +429,15 @@ def fig1_annual_comparison(
             color=COLORS["eia_ciso"], lw=2.5, marker="o", ms=5, zorder=5,
             label="EIA-930 CISO BA (measured, net of BTM solar)")
 
-    # EIA CAL region
+    # CAL region: PUDL CA5 sum (solid) and EIA API (dashed, for comparison)
     if not cal_ann.empty:
         ax.plot(cal_ann["year"], cal_ann["twh"],
-                color=COLORS["eia_cal"], lw=1.8, marker="^", ms=4, ls="--",
-                label="EIA CAL region (geographic CA boundary, 2019+, net of BTM solar)")
+                color=COLORS["eia_cal"], lw=1.8, marker="^", ms=4,
+                label="PUDL CA5 sum (BANC+CISO+IID+LDWP+TIDC, net of BTM solar)")
+    if cal_ann_eia is not None and not cal_ann_eia.empty:
+        ax.plot(cal_ann_eia["year"], cal_ann_eia["twh"],
+                color="#d62728", lw=1.2, marker="v", ms=3, ls="--", alpha=0.7,
+                label="EIA API CAL region (data quality issues in some years)")
 
     # EIA CA8 total (all 8 BAs incl. NEVP/PACW)
     ca8 = eia_piv[eia_piv["CA8"].notna()][["year", "CA8"]]
@@ -445,7 +464,8 @@ def fig1_annual_comparison(
 
 
 def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
-                              cal_ann: pd.DataFrame) -> None:
+                              cal_ann: pd.DataFrame,
+                              cal_ann_eia: pd.DataFrame | None = None) -> None:
     """
     Paired bar chart: for each geographic scope, EIA (left) and RESOLVE (right) side-by-side.
     RESOLVE CAISO bars are stacked by utility (PGE / SCE / SDGE).
@@ -481,6 +501,12 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
         c = cal_ann[cal_ann["year"] == yr_eia]
         if not c.empty:
             cal_v = float(c["twh"].iloc[0])
+
+    cal_v_eia: float | None = None
+    if cal_ann_eia is not None and not cal_ann_eia.empty:
+        c = cal_ann_eia[cal_ann_eia["year"] == yr_eia]
+        if not c.empty:
+            cal_v_eia = float(c["twh"].iloc[0])
 
     # ── Colors ────────────────────────────────────────────────────────────────
     C_EIA_IN  = "#1f77b4"   # EIA in-CA / mostly-CA BAs
@@ -570,7 +596,7 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
     ]
 
     # Group A: EIA in-CA sum (excl. NEVP/PACW) vs RESOLVE All CA
-    inca_v = ev("INCA")    # CISO + IID + LDWP + BANC + TIDC + WALC (full WALC)
+    inca_v = ev("INCA")    # CISO + IID + LDWP + BANC + TIDC
     eia_x  = x - PAIR_D / 2
     res_x  = x + PAIR_D / 2
     ax.bar(eia_x, inca_v, BAR_W, color=C_EIA_IN, alpha=0.85, edgecolor="white", lw=0.5)
@@ -580,16 +606,34 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
     tick_labels.append("In-CA BAs\n(excl. NEVP/PACW)")
     x += SUM_D
 
-    # Group B: EIA CAL region (state boundary) vs RESOLVE All CA
+    # Group B: CAL region — PUDL CA5 sum and (optionally) EIA API vs RESOLVE All CA
     if cal_v is not None:
-        eia_x = x - PAIR_D / 2
-        res_x = x + PAIR_D / 2
-        ax.bar(eia_x, cal_v, BAR_W, color=C_EIA_CAL, alpha=0.85,
-               edgecolor="white", lw=0.5)
-        ax.text(eia_x, cal_v + 0.8, f"{cal_v:.0f}", ha="center", va="bottom", fontsize=6.5)
-        _stacked_bar(res_x, res_all_comps, label_min_twh=12.0)
-        tick_positions.append(x)
-        tick_labels.append("EIA CAL region\n(geographic CA)")
+        if cal_v_eia is not None:
+            # Three-bar group: PUDL (left), EIA API (center-left), RESOLVE (right)
+            pudl_x = x - PAIR_D * 0.7
+            eia_x  = x
+            res_x  = x + PAIR_D * 0.7
+            ax.bar(pudl_x, cal_v, BAR_W, color=C_EIA_CAL, alpha=0.85,
+                   edgecolor="white", lw=0.5)
+            ax.text(pudl_x, cal_v + 0.8, f"{cal_v:.0f}",
+                    ha="center", va="bottom", fontsize=6.5)
+            ax.bar(eia_x, cal_v_eia, BAR_W, color="#d62728", alpha=0.7,
+                   edgecolor="white", lw=0.5)
+            ax.text(eia_x, cal_v_eia + 0.8, f"{cal_v_eia:.0f}",
+                    ha="center", va="bottom", fontsize=6.5)
+            _stacked_bar(res_x, res_all_comps, label_min_twh=12.0)
+            tick_positions.append(x)
+            tick_labels.append("CAL region\n(PUDL / EIA / RESOLVE)")
+        else:
+            eia_x = x - PAIR_D / 2
+            res_x = x + PAIR_D / 2
+            ax.bar(eia_x, cal_v, BAR_W, color=C_EIA_CAL, alpha=0.85,
+                   edgecolor="white", lw=0.5)
+            ax.text(eia_x, cal_v + 0.8, f"{cal_v:.0f}",
+                    ha="center", va="bottom", fontsize=6.5)
+            _stacked_bar(res_x, res_all_comps, label_min_twh=12.0)
+            tick_positions.append(x)
+            tick_labels.append("PUDL CA5 sum\n(geographic CA)")
         x += SUM_D
 
     # ── Axes formatting ───────────────────────────────────────────────────────
@@ -600,18 +644,19 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:,.0f}"))
     ax.set_title(
         f"Demand scope: EIA-930 ({yr_eia}) vs RESOLVE Baseline (~{yr_res_lbl} forecast targets)\n"
-        "Left bar in each group = EIA; right bar = RESOLVE (stacked by utility).  "
-        "Right of dashed line: CA aggregates — EIA CAL region ≈ in-CA BAs ≈ RESOLVE CA total."
+        "Right of dashed line: CA aggregates — PUDL CA5 sum ≈ EIA API CAL ≈ in-CA BAs ≈ RESOLVE CA total."
     )
 
     # ── Legend ────────────────────────────────────────────────────────────────
     patches = [
         mpatches.Patch(color=C_EIA_IN,  alpha=0.85,
-                       label=f"EIA {yr_eia}: in-CA BAs (CISO, IID, LDWP, BANC, TIDC, WALC)"),
+                       label=f"EIA {yr_eia}: in-CA BAs (CISO, IID, LDWP, BANC, TIDC)"),
         mpatches.Patch(color=C_EIA_OUT, alpha=0.85,
                        label=f"EIA {yr_eia}: mostly out-of-state (NEVP≈Nevada, PACW≈OR/WA)"),
         mpatches.Patch(color=C_EIA_CAL, alpha=0.85,
-                       label=f"EIA {yr_eia}: CAL geographic region (state boundary)"),
+                       label=f"PUDL {yr_eia}: CA5 sum (BANC+CISO+IID+LDWP+TIDC)"),
+        mpatches.Patch(color="#d62728", alpha=0.7,
+                       label=f"EIA API {yr_eia}: CAL geographic region"),
         mpatches.Patch(color=C_PGE,  alpha=0.9, label=f"RESOLVE PGE  (~{yr_res_lbl})"),
         mpatches.Patch(color=C_SCE,  alpha=0.9, label=f"RESOLVE SCE  (~{yr_res_lbl})"),
         mpatches.Patch(color=C_SDGE, alpha=0.9, label=f"RESOLVE SDGE (~{yr_res_lbl})"),
@@ -619,7 +664,7 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
         mpatches.Patch(color=C_LDWP, alpha=0.9, label=f"RESOLVE LDWP (~{yr_res_lbl})"),
         mpatches.Patch(color=C_NCNC, alpha=0.9, label=f"RESOLVE NCNC (~{yr_res_lbl})"),
     ]
-    ax.legend(handles=patches, fontsize=7, ncol=3, loc="upper right")
+    ax.legend(handles=patches, fontsize=7, ncol=3, loc="upper center")
 
     fig.tight_layout()
     out = FIGS / "fig_resolve_scope_decomposition.png"
@@ -631,27 +676,34 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
 def fig3_hourly_shape(resolve_hrly: pd.DataFrame, eia_ann_by_ba: pd.DataFrame) -> None:
     """
     Compare RESOLVE 2022 hourly shape vs EIA CISO 2022 hourly.
-    Uses the RESOLVE demand_mw_2024scaled column so both are in comparable MW units.
+
+    Uses demand_mw_2024scaled (GROSS demand, before BTM solar subtraction) directly —
+    no Customer_PV correction is applied here.  This is intentional: the level gap
+    between RESOLVE (gross) and EIA-930 (net-of-BTM) illustrates the ~20-25 TWh BTM
+    solar offset.  For net-load comparisons, see compare_substation_eia_iepr.py which
+    subtracts RESOLVE's native Customer_PV profiles from demand_mw_2024scaled.
     """
     yr = 2022
 
     # RESOLVE 2022 CAISO sum (scaled to 2024 targets for absolute comparison)
     res = resolve_hrly[resolve_hrly["utility"].isin(CAISO_UTILS)].copy()
-    res = res[res["datetime"].dt.year == yr]
+    res = res[res["datetime_pst"].dt.year == yr]
     if res.empty:
         print("  WARNING: No RESOLVE 2022 data found, skipping hourly shape figure.")
         return
-    res_sum = res.groupby("datetime")["demand_mw_2024scaled"].sum().reset_index()
-    res_sum.columns = ["datetime", "demand_mw"]
+    res_sum = res.groupby("datetime_pst")["demand_mw_2024scaled"].sum().reset_index()
+    res_sum.columns = ["datetime_pst", "demand_mw"]
 
-    # EIA CISO 2022 hourly
+    # EIA CISO 2022 hourly — convert UTC to fixed PST (UTC-8) to match RESOLVE timezone
     eia = pd.read_csv(EIA_OPS, usecols=["datetime_utc", "ba_code", "demand_mwh"],
                       parse_dates=["datetime_utc"])
     ciso22 = eia[(eia["ba_code"] == "CISO") & (eia["datetime_utc"].dt.year == yr)].copy()
-    ciso22 = ciso22.rename(columns={"datetime_utc": "datetime", "demand_mwh": "demand_mw"})
+    dt_pst = ciso22["datetime_utc"]
+    if dt_pst.dt.tz is not None:
+        dt_pst = dt_pst.dt.tz_localize(None)
+    ciso22["datetime_pst"] = dt_pst - pd.Timedelta(hours=8)
+    ciso22 = ciso22.rename(columns={"demand_mwh": "demand_mw"})
 
-    # Align to common datetime (RESOLVE is naive, EIA is UTC — both hourly; we compare
-    # by rank/distribution since timezone alignment is approximate)
     res_vals  = res_sum["demand_mw"].dropna().sort_values().values
     ciso_vals = ciso22["demand_mw"].dropna().sort_values().values
     min_len   = min(len(res_vals), len(ciso_vals))
@@ -685,10 +737,10 @@ def fig3_hourly_shape(resolve_hrly: pd.DataFrame, eia_ann_by_ba: pd.DataFrame) -
     # Monthly average
     ax = axes[1]
     res_mon  = res_sum.copy()
-    res_mon["month"] = res_mon["datetime"].dt.month
+    res_mon["month"] = res_mon["datetime_pst"].dt.month
     res_mon  = res_mon.groupby("month")["demand_mw"].mean() / 1000
 
-    ciso22["month"] = ciso22["datetime"].dt.month
+    ciso22["month"] = ciso22["datetime_pst"].dt.month
     ciso_mon = ciso22.groupby("month")["demand_mw"].mean() / 1000
 
     mon_labels = ["Jan","Feb","Mar","Apr","May","Jun",
@@ -731,7 +783,8 @@ def main() -> None:
     iepr_btmpv   = _iepr_btm_pv_annual()
     eia_ba       = _eia_annual_by_ba()
     eia_piv      = _eia_pivot(eia_ba)
-    cal_ann      = _eia_cal_annual()
+    cal_ann      = _pudl_cal_annual()
+    cal_ann_eia  = _eia_cal_annual()
     resolve_hrly = _resolve_hourly()
     overlays     = _resolve_outputs_overlays()
     last_hist    = _iepr_last_hist()
@@ -774,7 +827,7 @@ def main() -> None:
 
     if not cal_ann.empty:
         print()
-        print("  EIA CAL region (geographic CA boundary):")
+        print("  PUDL CA5 sum (BANC+CISO+IID+LDWP+TIDC, geographic CA boundary):")
         for _, r in cal_ann.iterrows():
             print(f"    {int(r['year'])}: {r['twh']:.1f} TWh")
 
@@ -808,7 +861,7 @@ def main() -> None:
     print("  EIA CA8 inflation from NEVP and PACW (mostly outside CA, 2024):")
     print(f"    NEVP + PACW total:   {nevp_pacw_2024:.1f} TWh (almost all is NOT California load)")
     print(f"    EIA CA8 total:       {eia_ca8_2024:.1f} TWh")
-    print(f"    EIA in-CA BAs only:  {eia_inCA_2024:.1f} TWh  (CISO+IID+LDWP+BANC+TIDC+WALC)")
+    print(f"    EIA in-CA BAs only:  {eia_inCA_2024:.1f} TWh  (CISO+IID+LDWP+BANC+TIDC)")
     if not np.isnan(eia_ca8_2024) and not np.isnan(eia_inCA_2024):
         inflation = eia_ca8_2024 - eia_inCA_2024
         print(f"    NEVP+PACW inflation: {inflation:.1f} TWh ({inflation/eia_inCA_2024*100:.1f}% of in-CA total)")
@@ -833,7 +886,7 @@ def main() -> None:
         print(f"  EIA CAL region ({int(cal_latest['year'].iloc[0])}, geographic CA boundary):")
         print(f"    CAL total: {float(cal_latest['twh'].iloc[0]):.1f} TWh")
         print(f"    CAL vs RESOLVE CAISO gross: difference reflects BTM solar + "
-              f"IID/LDWP/BANC/TIDC/WALC scope")
+              f"IID/LDWP/BANC/TIDC scope")
 
     # ── Section 3: IEPR vs RESOLVE forecast comparison ────────────────────────
     print()
@@ -874,10 +927,10 @@ def main() -> None:
     yr = 2022
     res_yr = resolve_hrly[
         (resolve_hrly["utility"].isin(CAISO_UTILS)) &
-        (resolve_hrly["datetime"].dt.year == yr)
+        (resolve_hrly["datetime_pst"].dt.year == yr)
     ]
     if not res_yr.empty:
-        res_sum = res_yr.groupby("datetime")["demand_mw_2024scaled"].sum()
+        res_sum = res_yr.groupby("datetime_pst")["demand_mw_2024scaled"].sum()
         print(f"  RESOLVE {yr} (scaled to 2024 targets): "
               f"mean={res_sum.mean()/1000:.1f} GW  "
               f"peak={res_sum.max()/1000:.1f} GW  "
@@ -982,8 +1035,8 @@ def main() -> None:
     print()
     print("Generating figures ...")
     fig1_annual_comparison(resolve, iepr_net, iepr_gross, eia_piv, cal_ann,
-                           iepr_cons, iepr_mgd)
-    fig2_scope_decomposition(eia_piv, resolve, cal_ann)
+                           iepr_cons, iepr_mgd, cal_ann_eia=cal_ann_eia)
+    fig2_scope_decomposition(eia_piv, resolve, cal_ann, cal_ann_eia=cal_ann_eia)
     fig3_hourly_shape(resolve_hrly, eia_ba)
     print(f"\nDone. Figures saved to {FIGS.relative_to(ROOT)}/")
 
