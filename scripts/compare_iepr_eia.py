@@ -34,32 +34,39 @@ PROC = ROOT / "data" / "processed"
 FIGS = ROOT / "data" / "figures"
 FIGS.mkdir(parents=True, exist_ok=True)
 
-EIA_OPS   = PROC / "eia" / "eia930_operations.csv"
-CAL_FILE  = PROC / "eia" / "eia930_cal_region.csv"
-IEPR_ANN  = PROC / "iepr" / "iepr_baseline_annual.csv"
-IEPR_HRLY = PROC / "iepr" / "iepr_hourly_forecast.csv"
+EIA_OPS       = PROC / "eia" / "eia930_operations.csv"
+CAL_FILE_EIA  = PROC / "eia" / "eia930_cal_region_EIA.csv"
+CAL_FILE_PUDL = PROC / "eia" / "eia930_cal_region_PUDL.csv"
+IEPR_ANN      = PROC / "iepr" / "iepr_baseline_annual.csv"
+IEPR_HRLY     = PROC / "iepr" / "iepr_hourly_forecast.csv"
 
 VINTAGE_COLORS = {2023: "#1f77b4", 2024: "#ff7f0e", 2025: "#2ca02c"}
 EIA_COLOR      = "#222222"
-CAL_COLOR      = "#9467bd"   # purple — distinct from CA8 and CISO
+CAL_COLOR      = "#9467bd"   # purple — PUDL CA5 sum (preferred for analysis)
+CAL_EIA_COLOR  = "#d62728"   # red — EIA API CAL (shown in annual plots alongside PUDL)
 
 # IEPR utilities that map to CAISO (CISO) territory
 CAISO_UTILS = ["PGE", "SCE", "SDGE"]
 
 
+def _utc_to_pst(ts: pd.Series) -> pd.Series:
+    """Convert a UTC datetime series (tz-aware or tz-naive) to fixed PST (UTC-8, no DST)."""
+    if ts.dt.tz is not None:
+        ts = ts.dt.tz_localize(None)
+    return ts - pd.Timedelta(hours=8)
+
+
 # ── Loaders ───────────────────────────────────────────────────────────────────
 
-def load_cal_annual() -> pd.DataFrame:
-    """
-    Annual EIA CAL region demand in TWh.  Drops years with < 95 % of expected hours.
-    CAL is the EIA region boundary for California, available from 2019 onward.
-    Unlike CA8, it excludes NEVP and PACW load outside California.
-    """
-    if not CAL_FILE.exists():
-        print(f"  WARNING: {CAL_FILE.name} not found -- skipping CAL region.")
+def _cal_annual_from(path: Path) -> pd.DataFrame:
+    """Annual CAL demand TWh from any cal_region CSV; drops years < 95% complete."""
+    if not path.exists():
+        print(f"  WARNING: {path.name} not found -- skipping.")
         return pd.DataFrame(columns=["year", "twh"])
-    df = pd.read_csv(CAL_FILE, usecols=["datetime_utc", "demand_mwh"],
+    df = pd.read_csv(path, usecols=["datetime_utc", "demand_mwh"],
                      parse_dates=["datetime_utc"])
+    if df["datetime_utc"].dt.tz is not None:
+        df["datetime_utc"] = df["datetime_utc"].dt.tz_localize(None)
     df["year"] = df["datetime_utc"].dt.year
     counts     = df.groupby("year")["demand_mwh"].count()
     full_years = counts[counts >= int(8760 * 0.95)].index
@@ -73,15 +80,30 @@ def load_cal_annual() -> pd.DataFrame:
     return annual[["year", "twh"]]
 
 
+def load_cal_annual() -> pd.DataFrame:
+    """
+    Annual PUDL CA5 sum demand in TWh.  Drops years with < 95% of expected hours.
+    CAL = BANC+CISO+IID+LDWP+TIDC from PUDL (preferred for analysis; EIA API CAL
+    has data-quality issues in ~3.9% of hours).
+    """
+    return _cal_annual_from(CAL_FILE_PUDL)
+
+
+def load_cal_annual_eia() -> pd.DataFrame:
+    """Annual EIA API CAL region demand in TWh (for display alongside PUDL in annual plots)."""
+    return _cal_annual_from(CAL_FILE_EIA)
+
+
 def load_cal_monthly() -> pd.DataFrame:
     """
     CAL region monthly mean hourly demand in GW.  Drops partial months.
     Also returns day-ahead forecast when available.
+    Uses PUDL CA5 sum (preferred over EIA API for data quality).
     """
-    if not CAL_FILE.exists():
+    if not CAL_FILE_PUDL.exists():
         return pd.DataFrame(columns=["period_ts", "actual_gw", "forecast_gw"])
     df = pd.read_csv(
-        CAL_FILE,
+        CAL_FILE_PUDL,
         usecols=["datetime_utc", "demand_mwh", "demand_forecast_mwh"],
         parse_dates=["datetime_utc"],
     )
@@ -102,18 +124,15 @@ def load_cal_monthly() -> pd.DataFrame:
 
 
 def load_cal_daily_peaks() -> pd.DataFrame:
-    """Daily peak hour (Pacific time, 0-23) and peak MW from the EIA CAL region."""
-    if not CAL_FILE.exists():
+    """Daily peak hour (fixed PST, 0-23) and peak MW from the PUDL CA5 sum."""
+    if not CAL_FILE_PUDL.exists():
         return pd.DataFrame(columns=["date", "peak_hour_cal", "peak_mw_cal"])
-    df = pd.read_csv(CAL_FILE, usecols=["datetime_utc", "demand_mwh"],
+    df = pd.read_csv(CAL_FILE_PUDL, usecols=["datetime_utc", "demand_mwh"],
                      parse_dates=["datetime_utc"])
     df = df.dropna(subset=["demand_mwh"])
-    ts = df["datetime_utc"]
-    if ts.dt.tz is None:
-        ts = ts.dt.tz_localize("UTC")
-    df["dt_pac"] = ts.dt.tz_convert("US/Pacific")
-    df["date"]   = df["dt_pac"].dt.normalize().dt.tz_localize(None)
-    df["hour"]   = df["dt_pac"].dt.hour
+    df["dt_pst"] = _utc_to_pst(df["datetime_utc"])
+    df["date"]   = df["dt_pst"].dt.normalize()
+    df["hour"]   = df["dt_pst"].dt.hour
     idx      = df.groupby("date")["demand_mwh"].idxmax()
     peak_hrs = df.loc[idx, ["date", "hour", "demand_mwh"]]
     return peak_hrs.rename(columns={"hour": "peak_hour_cal",
@@ -349,13 +368,9 @@ def load_eia_daily_peaks_ciso() -> pd.DataFrame:
         parse_dates=["datetime_utc"],
     )
     ciso = df[df["ba_code"] == "CISO"].copy()
-    ciso["dt_pac"] = (
-        ciso["datetime_utc"]
-        .dt.tz_localize("UTC")
-        .dt.tz_convert("US/Pacific")
-    )
-    ciso["date"] = ciso["dt_pac"].dt.normalize().dt.tz_localize(None)
-    ciso["hour"] = ciso["dt_pac"].dt.hour
+    ciso["dt_pst"] = _utc_to_pst(ciso["datetime_utc"])
+    ciso["date"]   = ciso["dt_pst"].dt.normalize()
+    ciso["hour"]   = ciso["dt_pst"].dt.hour
     ciso = ciso.dropna(subset=["demand_mwh"])
 
     idx      = ciso.groupby("date")["demand_mwh"].idxmax()
@@ -450,9 +465,10 @@ def _plot_iepr_vintage(ax, grp: pd.DataFrame, vintage: int, color: str,
 def fig1_iepr_vs_eia(
     iepr: pd.DataFrame,
     eia_ca8: pd.DataFrame,
-    cal: pd.DataFrame,
+    cal_pudl: pd.DataFrame,
     eia_ciso: pd.DataFrame,
     ann_stats: dict,
+    cal_eia: pd.DataFrame | None = None,
 ) -> None:
     fig, ax = plt.subplots(figsize=(11, 5))
 
@@ -468,11 +484,16 @@ def fig1_iepr_vs_eia(
     ax.plot(eia_ciso["year"], eia_ciso["twh"], color=EIA_COLOR, lw=2.5,
             marker="o", ms=5, label="EIA CISO (CAISO BA — same scope as IEPR)")
 
-    # EIA CAL region and CA8 as broader reference lines
-    if not cal.empty:
-        ax.plot(cal["year"], cal["twh"], color=CAL_COLOR, lw=1.8,
-                marker="^", ms=4, linestyle="--",
-                label="EIA CAL region (CA boundary, from 2019)")
+    # CAL region: PUDL CA5 sum (solid) and EIA API (dashed, for comparison)
+    if not cal_pudl.empty:
+        ax.plot(cal_pudl["year"], cal_pudl["twh"], color=CAL_COLOR, lw=1.8,
+                marker="^", ms=4,
+                label="PUDL CA5 sum (BANC+CISO+IID+LDWP+TIDC)")
+    if cal_eia is not None and not cal_eia.empty:
+        ax.plot(cal_eia["year"], cal_eia["twh"], color=CAL_EIA_COLOR, lw=1.2,
+                marker="v", ms=3, linestyle="--", alpha=0.7,
+                label="EIA API CAL region (data quality issues in some years)")
+
     ax.plot(eia_ca8["year"], eia_ca8["twh"], color=EIA_COLOR, lw=1.2,
             marker="s", ms=3, linestyle=":", alpha=0.6,
             label="EIA CA8 sum (8 BAs incl. NEVP/PACW)")
@@ -482,7 +503,7 @@ def fig1_iepr_vs_eia(
     ax.set_title(
         "California load: IEPR BASELINE_NET_LOAD vs. EIA-930 realized demand\n"
         "IEPR (PGE+SCE+SDGE net) vs CISO = apples-to-apples; "
-        "CAL and CA8 shown as broader state/regional references"
+        "CAL (PUDL and EIA API) and CA8 shown as broader state/regional references"
     )
     ax.set_xlim(2015, 2035)
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{x:,.0f}"))
@@ -674,10 +695,15 @@ def main() -> None:
     eia_ciso_ann = load_eia_ciso_annual()
     print(f"  full years: {sorted(eia_ciso_ann['year'].tolist())}")
 
-    print("Loading EIA CAL region annual ...")
+    print("Loading CAL region annual (PUDL CA5 sum) ...")
     cal_ann = load_cal_annual()
     if not cal_ann.empty:
         print(f"  full years: {sorted(cal_ann['year'].tolist())}")
+
+    print("Loading CAL region annual (EIA API — for annual plot comparison) ...")
+    cal_ann_eia = load_cal_annual_eia()
+    if not cal_ann_eia.empty:
+        print(f"  full years: {sorted(cal_ann_eia['year'].tolist())}")
 
     print("Loading EIA monthly ...")
     monthly = load_eia_monthly()
@@ -823,7 +849,7 @@ def main() -> None:
     # ── Figures ───────────────────────────────────────────────────────────────
     print()
     print("Generating figures ...")
-    fig1_iepr_vs_eia(iepr, eia_ann, cal_ann, eia_ciso_ann, ann_stats)
+    fig1_iepr_vs_eia(iepr, eia_ann, cal_ann, eia_ciso_ann, ann_stats, cal_eia=cal_ann_eia)
     fig2_eia_fcst_vs_actual(monthly, cal_monthly, fcast_stats)
     fig3_iepr_vintages(iepr, iepr_gross)
     fig4_peak_alignment(peaks, pk_stats, cal_peaks)

@@ -14,7 +14,7 @@ Output file naming convention
 
 Examples:
     eia_rto-region-data_CAL_earliest_latest_part001.csv
-    eia_rto-interchange-data_from-CALI_20200101_20241231_part001.csv
+    eia_rto-interchange-data_from-CISO_20200101_20241231_part001.csv
     eia_rto-interchange-data_ALL_earliest_latest_part001.csv
 """
 from __future__ import annotations
