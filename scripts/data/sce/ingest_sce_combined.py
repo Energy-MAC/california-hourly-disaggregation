@@ -19,6 +19,9 @@ bulk
     Produced by: python scripts/ingest_sce_bulk_download.py <path/to/download.zip>
     Columns: YEAR, MONTH, HOUR, SUBSTATION, MIN_LOAD, MAX_LOAD, MONTHLABEL
     MIN_LOAD and MAX_LOAD are in MW (as published by DRPEP).
+    VERIFIED: sanity check — bulk values are consistent in magnitude with EIA-930
+    CISO demand for SCE territory (~16-17 GW peak); no separate unit documentation
+    is published by SCE for the DRPEP bulk download format.
 
 Both sources use MW for MIN_LOAD / MAX_LOAD after the convert-to-mw step.
 Scrape rows additionally carry MIN_LOAD_A / MAX_LOAD_A (Amps); bulk rows

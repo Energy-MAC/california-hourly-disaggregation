@@ -13,9 +13,11 @@ Filtering logic (per utility)
 
   PGE
     - "Redacted" flag in pge_substation_attributes.csv means PGE redacts DG
-      capacity numbers, but load profiles ARE still published for those sites.
-      All 664 metered substations are retained; 48 that are redacted will have
-      NaN for capacity columns but valid load profiles.
+      capacity numbers for certain substations, but load profiles ARE still
+      published for those sites.  Confirmed by structural observation: the 48
+      redacted substations (note_sub="Yes") have NaN in capacity columns but
+      non-NaN values in the layer 25 load profile data.
+      All 664 metered substations are retained.
     - Duplicate attr entries for the same substation collapsed by canonical
       name (e.g. "POTTER VALLEY PH" / "POTTER VALLEY P H" -> one row).
 
@@ -156,7 +158,7 @@ def _build_dict_map(utility_upper: str) -> dict[str, list[str]]:
 # ── Geometry ──────────────────────────────────────────────────────────────────
 
 def haversine_km(lat1, lon1, lat2, lon2) -> np.ndarray:
-    R = 6371.0
+    R = 6371.0  # mean Earth radius (km); IAU/GRS80 value, see https://en.wikipedia.org/wiki/Earth_radius
     lat1, lon1, lat2, lon2 = (np.radians(np.asarray(x, float))
                                for x in [lat1, lon1, lat2, lon2])
     a = np.sin((lat2 - lat1) / 2) ** 2 + np.cos(lat1) * np.cos(lat2) * np.sin((lon2 - lon1) / 2) ** 2
@@ -271,6 +273,9 @@ def process_pge() -> tuple[pd.DataFrame, pd.DataFrame]:
         "year":            pd.NA,
         "month":           split[0].astype(int).values,
         "hour":            split[1].astype(int).values,
+        # VERIFIED: sanity check — raw values are ~1000x larger than expected MW range for
+        # PGE (system peak ~28 GW); division by 1000 yields plausible MW magnitudes.
+        # No PGE documentation explicitly states kW units.
         "min_load":        pd.to_numeric(loads_raw["low"],  errors="coerce").values / 1000,
         "max_load":        pd.to_numeric(loads_raw["high"], errors="coerce").values / 1000,
     })
@@ -426,6 +431,23 @@ def process_sce() -> tuple[pd.DataFrame, pd.DataFrame]:
         "note_sub":           _t3("note_sub").values,
     })
 
+    # Deduplicate SCE to most-recent vintage per (substation, month, hour).
+    # Each year-stamp is an independent p10/p90 snapshot from SCE's non-public
+    # lookback window; including older rows for the same (sub, month, hour)
+    # would double-count that cell's envelope.
+    # We keep per-cell rather than a single global year because 2026 only covers
+    # Jan-Apr — substations in 2026 fall back to 2025 for months May-Dec.
+    n_before = len(loads_out)
+    idx_keep = (loads_out
+                .groupby(["substation_name", "month", "hour"])["year"]
+                .idxmax())
+    loads_out = loads_out.loc[idx_keep].copy()
+    n_years_used = loads_out["year"].nunique()
+    yrs_used = sorted(loads_out["year"].unique())
+    print(f"  SCE: kept most-recent vintage per (substation, month, hour): "
+          f"{len(loads_out):,} of {n_before:,} rows; "
+          f"vintages used: {yrs_used}")
+
     return attrs_out, loads_out[LOAD_COLS]
 
 
@@ -466,6 +488,9 @@ def process_sdge() -> tuple[pd.DataFrame, pd.DataFrame]:
     for col in ("min_load", "max_load"):
         if col not in pivoted.columns:
             pivoted[col] = np.nan
+    # VERIFIED: sanity check — raw SDGE values are ~1000x larger than expected MW range
+    # given SDGE system size (~5 GW peak); division by 1000 brings values in line with
+    # EIA-930 CISO SDGE-territory demand.  No public SDGE documentation states kW units.
     pivoted["min_load"] = pd.to_numeric(pivoted["min_load"], errors="coerce") / 1000
     pivoted["max_load"] = pd.to_numeric(pivoted["max_load"], errors="coerce") / 1000
 
@@ -566,7 +591,12 @@ def main() -> None:
     loads_all = pd.concat([pge_loads, sce_loads, sdge_loads], ignore_index=True)
 
     # Convert wall-clock Pacific hours to fixed PST (UTC-8, no DST) using majority-month rule.
-    # PDT months (Mar-Oct, months 3-10): wall-clock PDT is 1 hour ahead of PST, so subtract 1.
+    # METHODOLOGICAL ASSUMPTION: min/max load profiles represent percentile envelopes over a
+    # non-public lookback window and do not correspond to any single observed day, so we cannot
+    # look up the DST status of individual timestamps.  Instead we assign PDT to all hours in
+    # months where the majority of days fall in PDT (Mar-Oct = months 3-10 in California, per
+    # US federal DST rules, 15 USC 260a: "second Sunday in March" to "first Sunday in November").
+    # This introduces at most a 1-hour systematic error in the two transition months (Mar, Nov).
     # PST months (Jan, Feb, Nov, Dec): already PST.
     pdt_mask = loads_all["month"].isin(range(3, 11))
     loads_all["hour_pst"] = loads_all["hour"].where(~pdt_mask, (loads_all["hour"] - 1) % 24)

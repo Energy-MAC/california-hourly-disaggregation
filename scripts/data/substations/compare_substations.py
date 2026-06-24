@@ -85,6 +85,8 @@ import re
 import sys
 from pathlib import Path
 
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 import numpy as np
 import pandas as pd
 from scipy.spatial import KDTree
@@ -93,8 +95,10 @@ ROOT      = Path(__file__).resolve().parents[3]
 RAW       = ROOT / "data" / "raw"
 PROC      = ROOT / "data" / "processed"
 CHECKS    = ROOT / "data" / "checks"
+FIGS_SCE  = ROOT / "data" / "figures" / "sce_vintage_analysis"
 DICT_PATH = ROOT / "data" / "basinSourceDictionary.csv"
 CHECKS.mkdir(parents=True, exist_ok=True)
+FIGS_SCE.mkdir(parents=True, exist_ok=True)
 
 # ── File registry ─────────────────────────────────────────────────────────────
 
@@ -1071,6 +1075,282 @@ def section_e(dfs: dict) -> None:
     print(f"  cmp_E_sce_bulk_vs_scrape_by_sub.csv  ({len(grp):,} substations)")
 
 
+# ── Section F ─────────────────────────────────────────────────────────────────
+
+def section_f(dfs: dict) -> None:
+    """
+    SCE load profile evolution across data vintages (years).
+
+    Each year in the SCE bulk download is a distinct snapshot of the utility's
+    internally-computed 10th/90th percentile profiles from a non-public lookback
+    window.  This section shows how those snapshots have changed from 2017–2026.
+
+    Analysis uses bulk-source rows only (preferred over scrape; see CLAUDE.md).
+
+    Coverage varies by year (21 substations in 2017, 602 in 2025, 520 in 2026).
+    652 of 709 unique substations appear in 2+ years with overlapping coverage.
+    2026 only covers Jan-Apr; May-Dec fall back to 2025 in the processed output.
+    Cross-year comparison uses mean load per substation (normalised) for F1/F3;
+    F4 uses only substations present in both adjacent years for apples-to-apples.
+
+    Figures saved to data/figures/sce_vintage_analysis/:
+      F1  Per-substation mean MAX profile (normalised) — 12 monthly panels
+      F2  Raw coincident total + substation count on twin axes — coverage growth
+      F3  Peak hour shift — argmax of normalised hourly profile per (month, year)
+      F4  Change heatmap — common substations across best adjacent-year pair
+    """
+    _hdr("SECTION F - SCE load profile evolution across data vintages")
+
+    sce = dfs["sce_loads"]
+    if sce.empty:
+        print("  SCE loads not found — skipping section F.")
+        return
+
+    bulk = sce[sce["source"] == "bulk"].copy()
+    if bulk.empty:
+        print("  No bulk rows in SCE combined — skipping section F.")
+        return
+
+    # Numeric conversions; MONTH in raw CSV is 0-indexed, convert to 1-indexed
+    bulk["YEAR"]     = pd.to_numeric(bulk["YEAR"],     errors="coerce")
+    bulk["MONTH"]    = pd.to_numeric(bulk["MONTH"],    errors="coerce").add(1).astype("Int64")
+    bulk["HOUR"]     = pd.to_numeric(bulk["HOUR"],     errors="coerce")
+    bulk["MAX_LOAD"] = pd.to_numeric(bulk["MAX_LOAD"], errors="coerce")
+    bulk["MIN_LOAD"] = pd.to_numeric(bulk["MIN_LOAD"], errors="coerce")
+    bulk = bulk.dropna(subset=["YEAR", "MONTH", "HOUR", "MAX_LOAD"]).copy()
+    bulk["YEAR"] = bulk["YEAR"].astype(int)
+
+    years = sorted(bulk["YEAR"].unique())
+    n_subs_by_year = {y: bulk[bulk["YEAR"] == y]["SUBSTATION"].nunique() for y in years}
+    print(f"  Available years: {years}")
+    for y in years:
+        print(f"    {y}: {n_subs_by_year[y]:,} substations")
+
+    # ── How many substations appear in each pair of adjacent years? ───────────
+    sub_by_year = {y: set(bulk[bulk["YEAR"] == y]["SUBSTATION"].unique()) for y in years}
+    print()
+    for i in range(len(years) - 1):
+        ya, yb = years[i], years[i + 1]
+        overlap = len(sub_by_year[ya] & sub_by_year[yb])
+        print(f"    {ya}<->{yb} common substations: {overlap}")
+
+    # ── Substations present in 2+ years for vintage-delta analysis ────────────
+    sub_year_sets = bulk.groupby("SUBSTATION")["YEAR"].apply(set)
+    multi_year_subs = set(sub_year_sets[sub_year_sets.apply(len) > 1].index)
+    print(f"\n  Substations appearing in 2+ years: {len(multi_year_subs)} "
+          f"(used for per-substation vintage delta in F4)")
+
+    # ── Raw coincident totals (sum across all substations in each year) ───────
+    coin_raw = (bulk
+                .groupby(["YEAR", "MONTH", "HOUR"])[["MAX_LOAD", "MIN_LOAD"]]
+                .sum()
+                .reset_index())
+
+    # ── Normalised: mean load per substation per (year, month, hour) ─────────
+    coin_norm = coin_raw.copy()
+    for y in years:
+        mask = coin_norm["YEAR"] == y
+        coin_norm.loc[mask, "MAX_LOAD"] = (coin_norm.loc[mask, "MAX_LOAD"]
+                                           / n_subs_by_year[y])
+        coin_norm.loc[mask, "MIN_LOAD"] = (coin_norm.loc[mask, "MIN_LOAD"]
+                                           / n_subs_by_year[y])
+
+    # ── Figure color map: one color per year ─────────────────────────────────
+    cmap   = plt.cm.plasma
+    norm_c = mcolors.Normalize(vmin=min(years), vmax=max(years))
+    def yr_color(y): return cmap(norm_c(y))
+
+    MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun",
+                   "Jul","Aug","Sep","Oct","Nov","Dec"]
+
+    # ── Fig F1: Normalised per-substation MAX profile — 12 monthly panels ────
+    fig, axes = plt.subplots(3, 4, figsize=(22, 13), sharey=False)
+    axes_flat = axes.flatten()
+    for m_idx, m in enumerate(range(1, 13)):
+        ax = axes_flat[m_idx]
+        for yr in years:
+            sub_max = (coin_norm[(coin_norm["YEAR"] == yr) & (coin_norm["MONTH"] == m)]
+                       .sort_values("HOUR"))
+            sub_min = (coin_norm[(coin_norm["YEAR"] == yr) & (coin_norm["MONTH"] == m)]
+                       .sort_values("HOUR"))
+            if sub_max.empty:
+                continue
+            ax.plot(sub_max["HOUR"], sub_max["MAX_LOAD"],
+                    color=yr_color(yr), lw=1.8, label=str(yr))
+            ax.fill_between(sub_max["HOUR"], sub_min["MIN_LOAD"], sub_max["MAX_LOAD"],
+                            color=yr_color(yr), alpha=0.08)
+        ax.set_title(MONTH_NAMES[m - 1], fontsize=11, fontweight="bold")
+        ax.set_xlabel("Hour (PST)", fontsize=8)
+        ax.set_ylabel("Mean load per substation (MW)", fontsize=8)
+        ax.set_xlim(-0.5, 23.5)
+        ax.set_xticks([0, 6, 12, 18, 23])
+        ax.grid(alpha=0.25)
+
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm_c)
+    sm.set_array([])
+    cbar = fig.colorbar(sm, ax=axes_flat, orientation="vertical", fraction=0.015, pad=0.01)
+    cbar.set_label("Year", fontsize=10)
+    cbar.set_ticks(years)
+    cbar.set_ticklabels([str(y) for y in years])
+
+    fig.suptitle(
+        "SCE load profile shape evolution across bulk-download vintages "
+        "(normalised: mean MW per substation)\n"
+        "Shading = p10–p90 band per year.  "
+        "Substation coverage varies by year — see F2 for counts.  "
+        "Bulk source only (preferred; see CLAUDE.md).",
+        fontsize=10,
+    )
+    fig.tight_layout()
+    out = FIGS_SCE / "sce_vintage_F1_normalised_profiles.png"
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+    print(f"  Saved: {out.relative_to(ROOT)}")
+    plt.close(fig)
+
+    # ── Fig F2: Raw total coincident + substation count on twin axes ──────────
+    # One panel per month (small multiples), showing how total load and coverage grew
+    fig, axes = plt.subplots(3, 4, figsize=(22, 13), sharey=False)
+    axes_flat = axes.flatten()
+    for m_idx, m in enumerate(range(1, 13)):
+        ax = axes_flat[m_idx]
+        ax2 = ax.twinx()
+        peak_raw  = [coin_raw[(coin_raw["YEAR"] == yr) &
+                              (coin_raw["MONTH"] == m)]["MAX_LOAD"].max()
+                     for yr in years]
+        sub_cnts  = [n_subs_by_year[yr] for yr in years]
+        ax.bar(years, [v / 1000 if pd.notna(v) else 0 for v in peak_raw],
+               width=0.6, color="steelblue", alpha=0.7, label="Peak raw (GW)")
+        ax2.plot(years, sub_cnts, "o--", color="firebrick", lw=1.5,
+                 ms=5, label="Substations")
+        ax.set_title(MONTH_NAMES[m - 1], fontsize=11, fontweight="bold")
+        ax.set_xlabel("Year", fontsize=7)
+        ax.set_ylabel("Peak coincident MAX (GW)", fontsize=7, color="steelblue")
+        ax2.set_ylabel("# substations", fontsize=7, color="firebrick")
+        ax.tick_params(axis="x", labelrotation=45, labelsize=7)
+        ax.tick_params(axis="y", labelcolor="steelblue", labelsize=7)
+        ax2.tick_params(axis="y", labelcolor="firebrick", labelsize=7)
+        ax.grid(alpha=0.2)
+    fig.suptitle(
+        "SCE bulk download coverage expansion (raw coincident total vs. substation count)\n"
+        "Blue bars = sum of MAX_LOAD across ALL substations in each year's download.  "
+        "Red line = number of substations.  "
+        "Levels NOT comparable across years — coverage is non-overlapping.",
+        fontsize=9,
+    )
+    fig.tight_layout()
+    out = FIGS_SCE / "sce_vintage_F2_coverage_expansion.png"
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+    print(f"  Saved: {out.relative_to(ROOT)}")
+    plt.close(fig)
+
+    # ── Fig F3: Peak hour shift in normalised profile per (month, year) ───────
+    fig, ax = plt.subplots(figsize=(13, 6))
+    for m in range(1, 13):
+        peak_hrs = []
+        for yr in years:
+            sub = (coin_norm[(coin_norm["YEAR"] == yr) & (coin_norm["MONTH"] == m)]
+                   .sort_values("HOUR"))
+            if sub.empty or sub["MAX_LOAD"].isna().all():
+                peak_hrs.append(np.nan)
+            else:
+                peak_hrs.append(int(sub.loc[sub["MAX_LOAD"].idxmax(), "HOUR"]))
+        ax.plot(years, peak_hrs, marker="o", ms=5, lw=1.8, label=MONTH_NAMES[m - 1])
+
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Hour of peak mean MAX_LOAD (PST, 0–23)")
+    ax.set_title(
+        "SCE peak hour shift across vintages (normalised per-substation profile, bulk source)\n"
+        "Downward trend = solar duck-curve pushing peak later in the day",
+        fontsize=11,
+    )
+    ax.set_xticks(years)
+    ax.set_xticklabels([str(y) for y in years], rotation=45)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(
+        lambda h, _: f"{int(h):02d}:00" if 0 <= h <= 23 else ""
+    ))
+    ax.set_ylim(-0.5, 23.5)
+    ax.legend(fontsize=8, ncol=3, loc="upper right")
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    out = FIGS_SCE / "sce_vintage_F3_peak_hour_shift.png"
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+    print(f"  Saved: {out.relative_to(ROOT)}")
+    plt.close(fig)
+
+    # ── Fig F4: Change heatmap — common substations across adjacent year pairs ─
+    # Find the adjacent year pair with the most common substations for the most
+    # informative apples-to-apples comparison.
+    best_overlap, yr_a, yr_b = 0, years[-2], years[-1]
+    for i in range(len(years) - 1):
+        ya, yb = years[i], years[i + 1]
+        ov = len(sub_by_year[ya] & sub_by_year[yb])
+        if ov > best_overlap:
+            best_overlap, yr_a, yr_b = ov, ya, yb
+
+    common_ab = sub_by_year[yr_a] & sub_by_year[yr_b]
+    print(f"\n  F4 using {yr_a} vs {yr_b}: {len(common_ab)} common substations")
+
+    bulk_a = bulk[(bulk["YEAR"] == yr_a) & bulk["SUBSTATION"].isin(common_ab)]
+    bulk_b = bulk[(bulk["YEAR"] == yr_b) & bulk["SUBSTATION"].isin(common_ab)]
+    coin_a = bulk_a.groupby(["MONTH", "HOUR"])["MAX_LOAD"].mean().reset_index()
+    coin_b = bulk_b.groupby(["MONTH", "HOUR"])["MAX_LOAD"].mean().reset_index()
+    merged = coin_a.merge(coin_b, on=["MONTH", "HOUR"], suffixes=("_a", "_b"))
+    merged["delta_mw"]   = merged["MAX_LOAD_b"] - merged["MAX_LOAD_a"]
+    merged["pct_change"] = (merged["delta_mw"] / merged["MAX_LOAD_a"].replace(0, np.nan)) * 100
+
+    fig, axes = plt.subplots(1, 2, figsize=(18, 6))
+    for ax, col, label, cmap_name in [
+        (axes[0], "delta_mw",
+         f"Change in mean MAX per substation (MW)\n{yr_a} → {yr_b}", "RdBu_r"),
+        (axes[1], "pct_change",
+         f"% change in mean MAX per substation\n{yr_a} → {yr_b}", "RdBu_r"),
+    ]:
+        pivot = merged.pivot(index="MONTH", columns="HOUR", values=col)
+        vals  = pivot.values.astype(float)
+        finite = vals[np.isfinite(vals)]
+        if finite.size == 0:
+            ax.set_title(f"{label}\n(no data)")
+            continue
+        vmax = max(np.nanpercentile(np.abs(finite), 97), 1e-6)
+        im   = ax.imshow(vals, aspect="auto", cmap=cmap_name,
+                         vmin=-vmax, vmax=vmax, origin="upper")
+        ax.set_xticks(range(24))
+        ax.set_xticklabels([str(h) for h in range(24)], fontsize=7)
+        months_present = sorted(pivot.index)
+        ax.set_yticks(range(len(months_present)))
+        ax.set_yticklabels([MONTH_NAMES[m - 1] for m in months_present], fontsize=9)
+        ax.set_xlabel("Hour (PST)")
+        ax.set_title(label, fontsize=10)
+        fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
+
+    fig.suptitle(
+        f"SCE profile change {yr_a}→{yr_b}: {len(common_ab)} substations present in BOTH years "
+        f"(bulk source)\n"
+        "Red = load increased; Blue = load decreased.  "
+        "Mean MAX per common substation — apples-to-apples vintage comparison.",
+        fontsize=10,
+    )
+    fig.tight_layout()
+    out = FIGS_SCE / "sce_vintage_F4_change_heatmap.png"
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+    print(f"  Saved: {out.relative_to(ROOT)}")
+    plt.close(fig)
+
+    # ── Console summary ───────────────────────────────────────────────────────
+    print(f"\n  Summary (normalised, bulk, July peak hour — NaN if year lacks July data):")
+    for yr in years:
+        sub = (coin_norm[(coin_norm["YEAR"] == yr) & (coin_norm["MONTH"] == 7)]
+               .sort_values("HOUR"))
+        n = n_subs_by_year[yr]
+        if sub.empty:
+            print(f"    {yr}:  July data not available ({n} substations in this vintage)")
+            continue
+        peak_row = sub.loc[sub["MAX_LOAD"].idxmax()]
+        print(f"    {yr}:  July mean MAX = {peak_row['MAX_LOAD']:.1f} MW/sub  "
+              f"at hour {int(peak_row['HOUR']):02d}:00 PST  "
+              f"({n} substations)")
+
+
 # ── Data loading ──────────────────────────────────────────────────────────────
 
 def load_all() -> dict[str, pd.DataFrame]:
@@ -1107,9 +1387,9 @@ def main() -> None:
     )
     parser.add_argument(
         "-s", "--section",
-        default="A,B,C,D,E",
+        default="A,B,C,D,E,F",
         metavar="SECTIONS",
-        help="Comma-separated sections to run: A, B, C, D, E (default: A,B,C,D,E)",
+        help="Comma-separated sections to run: A, B, C, D, E, F (default: A,B,C,D,E,F)",
     )
     args = parser.parse_args()
     sections = {s.strip().upper() for s in args.section.split(",")}
@@ -1137,6 +1417,8 @@ def main() -> None:
         section_d(dfs, dict_all)
     if "E" in sections:
         section_e(dfs)
+    if "F" in sections:
+        section_f(dfs)
 
     print(f"\n{'=' * 72}")
     print(f"  Done. Exported CSVs -> {CHECKS.relative_to(ROOT)}/")
