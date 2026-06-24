@@ -55,7 +55,8 @@ ATTR_COLS = [
     "subst_id",         # SCE: subst_id; PGE: SubstationID
     # DER generation / load — all in MW in this file
     # (PGE raw is in kW; divided by 1000 during enrichment below)
-    "existing_gen",     # SCE, SDGE, PGE (MW)
+    # existing_gen: PGE/SCE/SDGE from ICA data; PacifiCorp from DG Readiness Existing_DER
+    "existing_gen",     # PGE, SCE, SDGE, PacifiCorp (MW)
     "queued_gen",       # SCE, SDGE, PGE (MW)
     "total_gen",        # SCE, SDGE, PGE (MW)
     "projected_load",   # SCE, SDGE (MW)
@@ -69,8 +70,7 @@ ATTR_COLS = [
     "res_total", "com_total", "agr_total", "ind_total", "other_total",
     # Notes / flags
     "note_sub",         # SCE: interconnection notes; PGE: REDACTED data flag
-    # PacifiCorp DG Readiness — distinct from existing_gen in other utilities
-    "existing_der",             # PacifiCorp: sum of Existing_DER across circuits (MW)
+    # PacifiCorp-only field
     "net_min_daytime_load_mw",  # PacifiCorp: sum of Net Minimum Daytime Load across circuits (MW)
 ]
 PROFILE_COLS = [
@@ -329,9 +329,14 @@ def _enrich_attributes(attributesFull: pd.DataFrame) -> pd.DataFrame:
         pac_attrs_idx = pac_attrs.set_index(pac_attrs["substation_name"].str.strip().str.upper())
         pac_mask = attributesFull["utility"] == "pacificorp"
         lookup_keys = attributesFull.loc[pac_mask, "substation_name"].str.strip().str.upper()
-        for col in ("existing_der", "net_min_daytime_load_mw", "circuit_count"):
-            if col in pac_attrs_idx.columns:
-                attributesFull.loc[pac_mask, col] = lookup_keys.map(pac_attrs_idx[col]).fillna("")
+        # existing_der → existing_gen so all utilities share one column
+        for src_col, dst_col in [
+            ("existing_der", "existing_gen"),
+            ("net_min_daytime_load_mw", "net_min_daytime_load_mw"),
+            ("circuit_count", "circuit_count"),
+        ]:
+            if src_col in pac_attrs_idx.columns:
+                attributesFull.loc[pac_mask, dst_col] = lookup_keys.map(pac_attrs_idx[src_col]).fillna("")
 
     # Normalise attr columns: numeric coercion from .loc assignment can turn
     # our initial "" sentinels into NaN — convert everything back to plain strings.

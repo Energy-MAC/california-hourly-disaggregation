@@ -2,7 +2,8 @@
 process_resolve.py
 
 Processes RESOLVE (E3 / CPUC IRP) load input data into clean files for
-comparison against IEPR and EIA-930.
+comparison against IEPR and EIA-930, and for use in the substation
+disaggregation prediction pipeline.
 
 RESOLVE is an energy system planning model used by CPUC for California Integrated Resource Planning.
 Its load inputs come in two layers:
@@ -23,6 +24,26 @@ Its load inputs come in two layers:
        RESOLVE scales each shape profile by (annual_target / shape_sum)
        before running the optimization (see new_modeling_toolkit/system/electric/
        load_component.py, scale_multiplier logic).
+
+BTM solar subtraction
+---------------------
+RESOLVE models rooftop PV (Customer_PV) as a supply-side resource, not a
+demand-side reduction.  demand_mw_2024scaled is therefore GROSS demand.  To
+produce net load for use in the prediction pipeline:
+
+    btm_pv_mw     = weather_factor × planned_capacity_2024
+    demand_mw_net = demand_mw_2024scaled − btm_pv_mw
+
+where:
+  weather_factor      from data/profiles/pmax/2025/{UTIL}_Customer_PV.csv
+                      column "Weather Factor" (0–1 solar capacity factor)
+  planned_capacity    from data/interim/resources/{UTIL}_Customer_PV.csv
+                      attribute=planned_capacity, scenario=2024_IEPR_Local_Reliability,
+                      year=2024 (PGE: 9,669 MW; SCE: 6,553 MW; SDGE: 2,463 MW;
+                                 IID: 185 MW; LDWP: 730 MW; NCNC: 754 MW)
+
+Both btm_pv_mw and demand_mw_net are written to resolve_hourly_profiles.csv
+so downstream scripts do not need to load the pmax/resource files themselves.
 
 Geographic scope of RESOLVE utilities modeled here:
   PGE    Pacific Gas & Electric (CAISO territory; PGE, SCE, SDGE map to CISO BA)
@@ -73,6 +94,11 @@ RESOLVE = (ROOT / "data" / "raw" /
 
 PROFILES_DIR = RESOLVE / "data" / "profiles" / "loads" / "2024"
 INTERIM_DIR  = RESOLVE / "data" / "interim"  / "loads"
+PMAX_DIR     = RESOLVE / "data" / "profiles" / "pmax"  / "2025"
+RSRC_DIR     = RESOLVE / "data" / "interim"  / "resources"
+
+BTM_SCENARIO = "2024_IEPR_Local_Reliability"
+BTM_YEAR     = 2024
 
 # Which profile files to load and their canonical utility label
 PROFILE_FILES = {
@@ -95,14 +121,49 @@ INTERIM_FILES = {
 }
 
 
+# ── BTM solar offset ─────────────────────────────────────────────────────────
+
+def _load_customer_pv_offset(util: str) -> pd.DataFrame | None:
+    """
+    Load RESOLVE's native Customer_PV BTM offset for one utility.
+
+    Returns DataFrame with columns: datetime_pst, btm_pv_mw
+    where btm_pv_mw = Weather_Factor × planned_capacity_2024 (MW, positive).
+    Returns None if either file is missing (btm_pv_mw will be set to 0).
+    """
+    pmax_path = PMAX_DIR / f"{util}_Customer_PV.csv"
+    rsrc_path = RSRC_DIR / f"{util}_Customer_PV.csv"
+    if not pmax_path.exists() or not rsrc_path.exists():
+        print(f"  {util}: no Customer_PV files found — btm_pv_mw = 0")
+        return None
+
+    rsrc = pd.read_csv(rsrc_path)
+    cap_rows = rsrc[
+        (rsrc["attribute"] == "planned_capacity") &
+        (rsrc["scenario"] == BTM_SCENARIO) &
+        (pd.to_datetime(rsrc["timestamp"]).dt.year == BTM_YEAR)
+    ]
+    if cap_rows.empty:
+        print(f"  {util}: planned_capacity row missing for {BTM_YEAR}/{BTM_SCENARIO} — btm_pv_mw = 0")
+        return None
+    capacity_mw = float(cap_rows["value"].iloc[0])
+
+    pmax = pd.read_csv(pmax_path, parse_dates=["datetime"])
+    pmax = pmax.rename(columns={"datetime": "datetime_pst", "Weather Factor": "weather_factor"})
+    pmax["btm_pv_mw"] = pmax["weather_factor"] * capacity_mw
+    print(f"  {util}: {capacity_mw:.0f} MW × CF (max {pmax['weather_factor'].max():.3f}) "
+          f"= peak BTM {pmax['btm_pv_mw'].max():.0f} MW")
+    return pmax[["datetime_pst", "btm_pv_mw"]]
+
+
 # ── Hourly profiles ───────────────────────────────────────────────────────────
 
 def _load_one_profile(util: str, path: Path) -> pd.DataFrame:
     df = pd.read_csv(path, parse_dates=["datetime"])
-    df = df.rename(columns={"profile_model_years": "demand_mw_raw"})
+    df = df.rename(columns={"datetime": "datetime_pst", "profile_model_years": "demand_mw_raw"})
     df["utility"] = util
-    df["year"]    = df["datetime"].dt.year
-    return df[["datetime", "year", "utility", "demand_mw_raw"]]
+    df["year"]    = df["datetime_pst"].dt.year
+    return df[["datetime_pst", "year", "utility", "demand_mw_raw"]]
 
 
 def _load_annual_target(path: Path) -> pd.Series:
@@ -131,20 +192,26 @@ def process_hourly_profiles() -> pd.DataFrame:
         if interim_path.exists():
             targets = _load_annual_target(interim_path)
             target_2024 = float(targets.get(2024, float("nan")))
-            # Annual raw sum for each year in the profile
             annual_raw = df.groupby("year")["demand_mw_raw"].sum()
-            # Scale each year so it integrates to the 2024 annual target
-            def _scale(row):
-                yr_sum = annual_raw.get(row["year"], float("nan"))
-                if not yr_sum or pd.isna(yr_sum) or pd.isna(target_2024):
-                    return float("nan")
-                return row["demand_mw_raw"] * (target_2024 / yr_sum)
-            df["demand_mw_2024scaled"] = df.apply(_scale, axis=1)
+            scale_map = {
+                yr: (target_2024 / s) if s and not pd.isna(s) and not pd.isna(target_2024) else float("nan")
+                for yr, s in annual_raw.items()
+            }
+            df["demand_mw_2024scaled"] = df["demand_mw_raw"] * df["year"].map(scale_map)
             print(f"    2024 target: {target_2024/1e6:.2f} TWh  "
                   f"  scaled mean: {df['demand_mw_2024scaled'].mean():.0f} MW")
         else:
             df["demand_mw_2024scaled"] = float("nan")
             print(f"    (no interim file — 2024scaled will be NaN)")
+
+        # BTM solar: weather_factor × planned_capacity_2024
+        cpv = _load_customer_pv_offset(util)
+        if cpv is not None:
+            df = df.merge(cpv, on="datetime_pst", how="left")
+            df["btm_pv_mw"] = df["btm_pv_mw"].fillna(0.0)
+        else:
+            df["btm_pv_mw"] = 0.0
+        df["demand_mw_net"] = df["demand_mw_2024scaled"] - df["btm_pv_mw"]
 
         pieces.append(df)
 
@@ -184,8 +251,8 @@ def main() -> None:
     print("Processing RESOLVE hourly shape profiles ...")
     profiles = process_hourly_profiles()
     out1 = PROC / "resolve_hourly_profiles.csv"
-    profiles.rename(columns={"datetime": "datetime_pst"}, inplace=True)
-    profiles[["datetime_pst", "utility", "demand_mw_raw", "demand_mw_2024scaled"]].to_csv(
+    profiles[["datetime_pst", "utility", "demand_mw_raw", "demand_mw_2024scaled",
+              "btm_pv_mw", "demand_mw_net"]].to_csv(
         out1, index=False
     )
     print(f"  -> {out1.relative_to(ROOT)}  ({len(profiles):,} rows)\n")
