@@ -321,78 +321,14 @@ def load_cal_region() -> pd.DataFrame:
     return mh_stats, yr_mh
 
 
-def _load_resolve_customer_pv_native() -> pd.DataFrame:
-    """
-    Load RESOLVE's native Customer_PV BTM offset for PGE, SCE, SDGE.
-
-    RESOLVE models BTM PV as a resource with weather-year capacity factor (CF) profiles
-    (actual SAM solar simulation, 2000-2022) multiplied by IEPR-sourced planned capacity:
-        btm_pv_mw = weather_factor × planned_capacity_2024
-
-    Returns DataFrame with columns: datetime_pst, utility, btm_pv_mw
-    where btm_pv_mw is POSITIVE MW that reduces grid demand (subtract from gross load).
-
-    Profile source:  RESOLVE_RAW/data/profiles/pmax/2025/{UTIL}_Customer_PV.csv
-    Capacity source: RESOLVE_RAW/data/interim/resources/{UTIL}_Customer_PV.csv
-                     (attribute=planned_capacity, year=2024, scenario=2024_IEPR_Local_Reliability)
-
-    Both the RESOLVE load profiles and these pmax CSVs use 8760 h/year (no Feb 29),
-    so datetime merges are clean with no missing rows.
-    """
-    pmax_dir = RESOLVE_RAW / "data" / "profiles" / "pmax" / "2025"
-    rsrc_dir = RESOLVE_RAW / "data" / "interim" / "resources"
-
-    frames = []
-    for util in RESOLVE_UTILS:
-        pmax_path = pmax_dir / f"{util}_Customer_PV.csv"
-        rsrc_path = rsrc_dir / f"{util}_Customer_PV.csv"
-        if not pmax_path.exists() or not rsrc_path.exists():
-            print(f"  WARNING: missing Customer_PV files for {util}, skipping")
-            continue
-
-        rsrc = pd.read_csv(rsrc_path)
-        cap_rows = rsrc[rsrc["attribute"] == "planned_capacity"].copy()
-        cap_rows["year"]  = pd.to_datetime(cap_rows["timestamp"]).dt.year
-        cap_rows["value"] = pd.to_numeric(cap_rows["value"], errors="coerce")
-        cap_2024 = cap_rows[cap_rows["year"] == 2024]
-
-        lr = cap_2024[cap_2024["scenario"] == "2024_IEPR_Local_Reliability"]
-        if len(lr) > 0:
-            capacity_mw = float(lr["value"].iloc[0])
-        else:
-            bl = cap_2024[cap_2024["scenario"] == "Baseline_Resources_Default"]
-            capacity_mw = float(bl["value"].iloc[0]) if len(bl) > 0 else float("nan")
-
-        pmax = pd.read_csv(pmax_path, parse_dates=["datetime"])
-        pmax = pmax.rename(columns={"datetime": "datetime_pst",
-                                    "Weather Factor": "weather_factor"})
-        pmax["utility"]    = util
-        pmax["btm_pv_mw"]  = pmax["weather_factor"] * capacity_mw
-        print(f"  {util}: {capacity_mw:.0f} MW capacity × CF "
-              f"(max {pmax['weather_factor'].max():.3f}) = peak {pmax['btm_pv_mw'].max():.0f} MW")
-        frames.append(pmax[["datetime_pst", "utility", "btm_pv_mw"]])
-
-    if not frames:
-        raise FileNotFoundError(
-            "No RESOLVE Customer_PV pmax profiles found. "
-            f"Expected under {pmax_dir}"
-        )
-    return pd.concat(frames, ignore_index=True)
-
 
 def load_resolve_hourly() -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Load RESOLVE hourly profiles and return inter-annual (month, hour) statistics.
 
-    RESOLVE demand_mw_2024scaled is gross consumption (BTM PV added back per CPUC
-    IRP Section 6.2.1).  To make RESOLVE comparable to IEPR BASELINE_NET_LOAD and
-    EIA-930 (both net of BTM solar), we subtract RESOLVE's native Customer_PV offset:
-        resolve_net_mw = demand_mw_2024scaled - btm_pv_mw
-
-    The native BTM_PV uses RESOLVE's own weather-year solar CF profiles × 2024 planned
-    capacity (Local_Reliability scenario) — actual weather-sensitive shapes rather than
-    IEPR's fixed monthly templates.  Both data sets use 8760 h/year (no Feb 29), so
-    datetime merges are clean.
+    Uses demand_mw_net from resolve_hourly_profiles.csv (pre-computed by
+    process_resolve.py as demand_mw_2024scaled − btm_pv_mw, where btm_pv_mw =
+    Customer_PV weather_factor × planned_capacity_2024_Local_Reliability).
 
     Returns:
         mh_stats  -- (month, hour) -> resolve_mean/p10/p90 across 23 weather years
@@ -405,30 +341,17 @@ def load_resolve_hourly() -> tuple[pd.DataFrame, pd.DataFrame]:
     df = pd.read_csv(RESOLVE_FILE, parse_dates=["datetime_pst"])
     df = df[df["utility"].isin(RESOLVE_UTILS)].copy()
 
-    # Sum across utilities for each timestamp
+    # Sum net demand across utilities for each timestamp
     hourly = (
-        df.groupby("datetime_pst")["demand_mw_2024scaled"]
+        df.groupby("datetime_pst")["demand_mw_net"]
         .sum()
         .reset_index()
+        .rename(columns={"demand_mw_net": "resolve_net_mw"})
     )
     hourly["year"]  = hourly["datetime_pst"].dt.year
     hourly["month"] = hourly["datetime_pst"].dt.month
     hourly["day"]   = hourly["datetime_pst"].dt.day
     hourly["hour"]  = hourly["datetime_pst"].dt.hour
-
-    # Native RESOLVE Customer_PV: weather_factor × planned_capacity_2024 summed across utils
-    print("  Loading RESOLVE native Customer_PV BTM profiles...")
-    cpv = _load_resolve_customer_pv_native()
-    cpv_total = cpv.groupby("datetime_pst")["btm_pv_mw"].sum().reset_index()
-
-    # Merge on datetime_pst (both skip Feb 29 — clean match)
-    hourly = hourly.merge(cpv_total, on="datetime_pst", how="left")
-    hourly["btm_pv_mw"] = hourly["btm_pv_mw"].fillna(0)
-    hourly["resolve_net_mw"] = hourly["demand_mw_2024scaled"] - hourly["btm_pv_mw"]
-    print(
-        f"  RESOLVE native BTM_PV: peak midday correction = "
-        f"{-hourly['btm_pv_mw'].max():,.0f} MW"
-    )
 
     # Per weather-year: mean across days at each (month, hour)
     yr_mh = (
@@ -449,8 +372,8 @@ def load_resolve_hourly() -> tuple[pd.DataFrame, pd.DataFrame]:
         .reset_index()
     )
     print(
-        f"  RESOLVE PGE+SCE+SDGE net: {yr_mh['year'].nunique()} weather years "
-        f"(2024 scale - native Customer_PV), peak mean = {mh_stats['resolve_mean'].max():,.0f} MW"
+        f"  RESOLVE PGE+SCE+SDGE net: {yr_mh['year'].nunique()} weather years, "
+        f"peak mean = {mh_stats['resolve_mean'].max():,.0f} MW"
     )
     return mh_stats, yr_mh
 
@@ -1520,12 +1443,7 @@ def fig_monthly_peak_distributions(
 
 def load_resolve_daily_peaks() -> pd.DataFrame:
     """
-    Daily peak hour from RESOLVE net load (demand_mw_2024scaled - native Customer_PV).
-
-    Uses RESOLVE's own weather-year solar CF profiles × 2024 planned capacity
-    (Local_Reliability) rather than IEPR's fixed monthly BTM_PV template.
-    Both data sets use 8760 h/year (no Feb 29), so datetime merges are clean.
-
+    Daily peak hour from RESOLVE net load (demand_mw_net from resolve_hourly_profiles.csv).
     Returns: year (weather year 2000-2022) | month | day | peak_hour | peak_mw
     """
     if not RESOLVE_FILE.exists():
@@ -1534,21 +1452,14 @@ def load_resolve_daily_peaks() -> pd.DataFrame:
     df = pd.read_csv(RESOLVE_FILE, parse_dates=["datetime_pst"])
     df = df[df["utility"].isin(RESOLVE_UTILS)].copy()
 
-    hourly = df.groupby("datetime_pst")["demand_mw_2024scaled"].sum().reset_index()
+    hourly = df.groupby("datetime_pst")["demand_mw_net"].sum().reset_index()
     hourly["year"]  = hourly["datetime_pst"].dt.year
     hourly["month"] = hourly["datetime_pst"].dt.month
     hourly["day"]   = hourly["datetime_pst"].dt.day
     hourly["hour"]  = hourly["datetime_pst"].dt.hour
 
-    # Native RESOLVE Customer_PV correction
-    cpv = _load_resolve_customer_pv_native()
-    cpv_total = cpv.groupby("datetime_pst")["btm_pv_mw"].sum().reset_index()
-    hourly = hourly.merge(cpv_total, on="datetime_pst", how="left")
-    hourly["btm_pv_mw"] = hourly["btm_pv_mw"].fillna(0)
-    hourly["net_mw"]     = hourly["demand_mw_2024scaled"] - hourly["btm_pv_mw"]
-
-    idx   = hourly.groupby(["year", "month", "day"])["net_mw"].idxmax()
-    peaks = hourly.loc[idx, ["year", "month", "day", "hour", "net_mw"]].copy()
+    idx   = hourly.groupby(["year", "month", "day"])["demand_mw_net"].idxmax()
+    peaks = hourly.loc[idx, ["year", "month", "day", "hour", "demand_mw_net"]].copy()
     peaks.columns = ["year", "month", "day", "peak_hour", "peak_mw"]
     print(f"  RESOLVE daily peaks (net): {len(peaks):,} days, "
           f"{peaks['year'].nunique()} weather years")
@@ -1562,7 +1473,7 @@ def load_resolve_daily_peaks() -> pd.DataFrame:
 def load_resolve_daily_peaks_by_utility() -> pd.DataFrame:
     """
     Daily peak hour from RESOLVE net load per utility (PGE, SCE, SDGE).
-    Uses RESOLVE's native Customer_PV (weather-year CF × 2024 planned capacity).
+    Uses demand_mw_net from resolve_hourly_profiles.csv.
     Returns: utility | year | month | day | peak_hour | peak_mw
     """
     if not RESOLVE_FILE.exists():
@@ -1575,13 +1486,8 @@ def load_resolve_daily_peaks_by_utility() -> pd.DataFrame:
     df["day"]   = df["datetime_pst"].dt.day
     df["hour"]  = df["datetime_pst"].dt.hour
 
-    cpv = _load_resolve_customer_pv_native()
-    df = df.merge(cpv, on=["datetime_pst", "utility"], how="left")
-    df["btm_pv_mw"] = df["btm_pv_mw"].fillna(0)
-    df["net_mw"]    = df["demand_mw_2024scaled"] - df["btm_pv_mw"]
-
-    idx   = df.groupby(["utility", "year", "month", "day"])["net_mw"].idxmax()
-    peaks = df.loc[idx, ["utility", "year", "month", "day", "hour", "net_mw"]].copy()
+    idx   = df.groupby(["utility", "year", "month", "day"])["demand_mw_net"].idxmax()
+    peaks = df.loc[idx, ["utility", "year", "month", "day", "hour", "demand_mw_net"]].copy()
     peaks.columns = ["utility", "year", "month", "day", "peak_hour", "peak_mw"]
     print(f"  RESOLVE per-utility daily peaks: {len(peaks):,} day-utility combos, "
           f"{peaks['year'].nunique()} weather years")

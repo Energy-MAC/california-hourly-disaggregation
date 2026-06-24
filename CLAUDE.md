@@ -165,10 +165,11 @@ Deduplication (in `process_substations_clean.py`) prefers bulk over scrape on ma
 
 | Assertion | Evidence |
 |-----------|----------|
-| `profile_model_years` column = gross MW, pre-BTM solar | Structural: source file `data/profiles/loads/2024/PGE_Baseline.csv` contains both `profile_model_years` (load) AND `Customer_PV` (BTM solar, negative values). If BTM solar were already subtracted from the load column, a separate BTM column would serve no purpose. The presence of both columns proves they are independent |
+| `profile_model_years` column = gross MW, pre-BTM solar | `PGE_Baseline.csv` has exactly two columns: `datetime` and `profile_model_years` — NO Customer_PV or BTM column. BTM solar lives in a completely separate file: `data/profiles/pmax/2025/PGE_Customer_PV.csv` (column `Weather Factor`, capacity factor 0–1). Physical separation proves they are independent. BTM solar is modeled as a supply-side resource in RESOLVE, not subtracted from baseline demand |
 | Fixed PST, hour-beginning, 8760 rows/year | Observed: each utility profile file has exactly 8760 rows per calendar year across all 23 years (2000–2022); no 8759/8761 anomalies; datetime column has no sub-hourly values |
-| Annual targets in `interim/loads/` are in MWh | Column attribute = `annual_energy_forecast`; order of magnitude (~240 TWh for PGE+SCE+SDGE combined) consistent with known California demand |
-| RESOLVE scales profiles to annual targets | RESOLVE source code and CPUC IRP documentation; identity: output_mw = profile_mw × (target_mwh / profile_annual_sum) |
+| Annual targets in `interim/loads/` are in MWh | Rows with `attribute = annual_energy_forecast` in `{UTIL}_Baseline_CHP_Not_Retire.csv`; magnitude ~240 TWh for PGE+SCE+SDGE combined at 2024, consistent with known California gross demand |
+| RESOLVE scales profiles to annual targets | `scale_by_energy = True` in interim file; formula: `scaled_mw = profile_mw × (target_mwh / sum_of_8760h_mwh)` per weather year. Verified by inspecting `new_modeling_toolkit/system/electric/load_component.py` scale_multiplier logic |
+| RESOLVE demand = sum of multiple load components | `data/interim/loads/` contains Baseline, AAEE (energy efficiency, negative), AAFS (electrification, positive), Storage_Losses (grid-scale battery round-trip losses, positive), LDVs, MHDVs, Climate_Impacts, Data_Centers. Each has its own profile + annual target. `process_resolve.py` reads Baseline only; AAEE/AAFS/etc. are not currently processed |
 | CA scope = PGE, SCE, SDGE, IID, LDWP, NCNC | Exactly these utility profile files exist under `data/profiles/loads/2024/`; no BANC, TIDC, NEVP, PACW, or WALC files exist |
 | NCNC = Northern California Non-CAISO (TIDC + BANC) | RESOLVE I&A documentation; NCNC profile covers the non-CAISO northern CA footprint |
 

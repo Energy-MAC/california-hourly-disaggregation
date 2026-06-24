@@ -8,6 +8,57 @@ from the California Energy Commission (CEC IEPR).
 
 ---
 
+## Table of Contents
+
+- [Repository Structure](#repository-structure)
+- [Setup](#setup)
+- [Data Sources](#data-sources)
+  - [EIA 930](#eia-930-hourly-balancing-authority-operations)
+  - [Utility IOUs — Load Profiles](#utility-ious--load-profiles)
+  - [Utility IOUs — Substation Attributes](#utility-ious--substation-attributes)
+  - [Substation Coverage Summary](#substation-coverage-summary)
+  - [ReEDS Projected Load](#reeds-projected-load-nrel)
+  - [ReEDS Historic Load](#reeds-historic-load-nrel-2016-2023)
+  - [CEC IEPR Forecasts](#cec-iepr-forecasts)
+- [Data Pipeline](#data-pipeline)
+  - [Step 1 — Scrape raw data](#step-1--scrape-raw-data)
+    - [EIA 930](#eia-930)
+    - [PG&E](#pge)
+    - [SCE](#sce)
+    - [SDG&E](#sdge)
+    - [PacifiCorp](#pacificorp)
+    - [EIA Form 861](#eia-form-861-annual-retail-sales)
+    - [CalPeco / BVES](#calpeco--bves)
+  - [Step 2 — Process into unified outputs](#step-2--process-into-unified-outputs)
+    - [Substation tables (raw)](#substation-tables-raw)
+    - [Substation tables (cleaned)](#substation-tables-cleaned)
+    - [Substation-to-county and ReEDS-region mapping](#substation-to-county-and-reeds-region-mapping)
+    - [EIA interchange](#eia-interchange)
+    - [RESOLVE load inputs](#resolve-load-inputs)
+    - [ReEDS California load](#reeds-california-load)
+    - [ReEDS historic California load](#reeds-historic-california-load)
+    - [ReEDS county disaggregation reference table](#reeds-county-disaggregation-reference-table)
+    - [Substation to county spatial join](#substation-to-county-spatial-join)
+    - [EIA Form 861 — CA fractions by BA](#eia-form-861--ca-fractions-by-ba)
+  - [Step 3 — Validate and audit](#step-3--validate-and-audit)
+- [Notebooks](#notebooks)
+- [Time Zone and DST Conventions](#time-zone-and-daylight-saving-time-conventions)
+  - [Substation DST treatment](#substation-dst-treatment-majority-month-rule)
+  - [Converting between conventions](#converting-between-conventions)
+- [Notes on Data Quality](#notes-on-data-quality)
+- [RESOLVE and Statewide Load Forecast Sources](#resolve-and-statewide-load-forecast-sources)
+  - [RESOLVE](#resolve)
+  - [ReEDS](#reeds-nrel--ira_low-scenario-and-historic-2016-2023)
+  - [BTM Solar Treatment by Source](#btm-solar-treatment-by-source)
+  - [RESOLVE vs IEPR: Modeling Framework Differences](#resolve-vs-iepr-modeling-framework-differences)
+  - [RESOLVE Baseline + Overlays = IEPR](#resolve-baseline--overlays--iepr-mathematical-verification)
+  - [EIA CA8 Group: CA Fractions by BA](#eia-ca8-group-california-fractions-by-balancing-authority)
+- [Peak Hour Alignment](#peak-hour-alignment-reconciling-three-measures-of-iepr-vs-eia)
+  - [Why fig4 and daily distributions appear to contradict](#why-fig4-and-the-daily-distributions-appear-to-contradict-each-other)
+  - [RESOLVE as a reference](#resolve-as-a-reference)
+
+---
+
 ## Repository Structure
 
 ```
@@ -474,18 +525,17 @@ Reads all raw utility files and writes two CSVs to `data/processed/substations/`
 | sys_name | SCE system/circuit area name |
 | division | PG&E service division (e.g. "Kern", "Bay") |
 | subst_id | Internal substation ID (PG&E, SCE) |
-| existing_gen | Existing DER/generation capacity (MW) |
-| queued_gen | Queued interconnection capacity (MW) |
-| total_gen | Existing + queued (MW) |
-| projected_load | Projected peak load (MW) |
-| der_penetration | DER as % of projected load |
-| max_remain_cap | Maximum remaining hosting capacity (MW) |
-| circuit_count | Number of distribution circuits (PG&E = transformer banks) |
-| res/com/agr/ind/other_pct | Customer-class share of circuits (SCE) |
-| res/com/agr/ind/other_total | Customer-class circuit count (SCE) |
-| note_sub | Data quality flag (PG&E `REDACTED` field) |
-| existing_der | PacifiCorp: existing DER across circuits (MW) |
-| net_min_daytime_load_mw | PacifiCorp: net minimum daytime load (MW) |
+| existing_gen | Existing DER/generation capacity (MW): PGE/SCE/SDGE from ICA data; PacifiCorp from DG Readiness `Existing_DER` field (same column, different source) |
+| queued_gen | Queued interconnection capacity (MW) — PGE, SCE, SDGE only |
+| total_gen | Existing + queued (MW) — PGE, SCE, SDGE only |
+| projected_load | Projected peak load (MW) — SCE, SDGE only |
+| der_penetration | DER as % of projected load — SCE, SDGE only |
+| max_remain_cap | Maximum remaining hosting capacity (MW) — SCE only |
+| circuit_count | Number of distribution circuits (PG&E = transformer banks; PacifiCorp from DG Readiness) |
+| res/com/agr/ind/other_pct | Customer-class share of circuits (%) — SCE only |
+| res/com/agr/ind/other_total | Customer-class circuit count — SCE only |
+| note_sub | Data quality flag (PG&E `REDACTED` field; SCE: interconnection notes) |
+| net_min_daytime_load_mw | PacifiCorp only: net minimum daytime load aggregated across circuits (MW) |
 
 **`substation_load_profiles.csv`** — hourly min/max load by substation (455,568 rows)
 
@@ -509,18 +559,87 @@ python scripts/data/substations/process_substations_clean.py
 Applies filtering, deduplication, coordinate enrichment, and DST correction to produce
 the analysis-ready versions used by all comparison scripts:
 
-**`substation_attributes_clean.csv`** — 1,341 substations (PGE 664 · SCE 578 · SDGE 99), with:
-- P.T. (pass-through switching) substations removed (170 SCE, 8 SDGE)
-- Basin coordinates (DataBasin CA Substations 2022) joined via name-match + dictionary
-- SCE deduplication: bulk download preferred over scraped data where both exist
-- PacifiCorp excluded (no metered load profiles)
+**`substation_attributes_clean.csv`** — 1,341 substations (PGE 664 · SCE 578 · SDGE 99)
 
-**`substation_load_profiles_clean.csv`** — 533,304 rows, with:
-- All P.T. substations removed
-- `hour_pst` column added: wall-clock Pacific hour converted to **fixed PST (UTC-8, no
-  DST)** using the majority-month rule (see DST section)
-- SCE loads deduplicated; SDGE kW→MW conversion applied
-- `year` is NaN for PGE and SDGE (monthly aggregates without year stamp)
+Filtering applied: P.T. (pass-through switching) substations removed (170 SCE, 8 SDGE); PacifiCorp excluded (no metered load profiles); SCE deduplication — bulk download preferred over scraped data on matching keys.
+
+| Column | Description |
+|--------|-------------|
+| utility | `pge`, `sce`, or `sdge` |
+| substation_name | Name as reported by the utility |
+| util_lat, util_lon | Coordinates from the utility data source (primary) |
+| basin_lat, basin_lon | Coordinates from DataBasin CA Substations 2022 (fallback) |
+| dist_to_basin_km | Haversine distance (km) between util and Basin coordinate matches |
+| sub_type | Substation type (e.g. "Distribution", "Transmission") |
+| substation_voltage, voltage_kv | Primary bus voltage label and numeric kV |
+| sys_name | SCE system/circuit area name |
+| division | PG&E service division (e.g. "Kern", "Bay") |
+| subst_id | Internal substation ID (PG&E, SCE) |
+| existing_gen | Existing DER/generation capacity (MW) |
+| queued_gen | Queued interconnection capacity (MW) |
+| total_gen | Existing + queued (MW) |
+| projected_load | Projected peak load (MW) |
+| der_penetration | DER as % of projected load |
+| max_remain_cap | Maximum remaining hosting capacity (MW) |
+| circuit_count | Number of distribution circuits (PG&E = transformer banks) |
+| res/com/agr/ind/other_pct | SCE: customer-class share of circuits (%) |
+| res/com/agr/ind/other_total | SCE: customer-class circuit count |
+| note_sub | Data quality flag (PG&E `REDACTED` field) |
+
+**`substation_load_profiles_clean.csv`** — 386,136 rows
+
+Filtering applied: P.T. substations removed; SCE loads deduplicated (most-recent year-vintage per `(substation, month, hour)` cell); SDGE kW→MW conversion applied; `hour_pst` column added.
+
+| Column | Description |
+|--------|-------------|
+| utility | `pge`, `sce`, or `sdge` |
+| substation_name | Matches `substation_attributes_clean.csv` |
+| year | SCE vintage year (2017–2026); NaN for PGE and SDGE (no year stamp published) |
+| month | 1–12 |
+| hour | 0–23, original wall-clock Pacific time (PDT in summer, PST in winter) |
+| hour_pst | 0–23, **fixed PST (UTC−8, no DST)** — use this column for all comparisons |
+| min_load | ~10th-percentile load for that (month, hour) cell (MW) |
+| max_load | ~90th-percentile load for that (month, hour) cell (MW) |
+
+#### Substation-to-county and ReEDS-region mapping
+
+```bash
+python scripts/data/reeds/process_county_disaggregation.py   # county reference table
+python scripts/data/substations/assign_substation_counties.py # spatial join
+```
+
+**`data/processed/reeds/county_ca_reference.csv`** — 58 rows, one per California county
+
+Built from `county2zone.csv` (county→p-region), `county_state_lpf.csv` (county load participation factors), and `distpvcap_stscen2023_mid_case.csv` (county BTM PV capacity by year) from `data/raw/reeds/ReEDS-2.0/inputs/`.
+
+| Column | Description |
+|--------|-------------|
+| fips_int | FIPS county code as integer (e.g. 6037 for Los Angeles) |
+| fips_key | FIPS in ReEDS p-format string (e.g. `p06037`) |
+| county_name | County name |
+| state | State abbreviation (CA for all rows) |
+| p_region | ReEDS planning region: p8, p9, p10, or p11 |
+| ca_load_fraction | County's fraction of California state load (sums to 1.0 across all 58 counties); source: `county_state_lpf.csv` |
+| btm_pv_{year}_mw | Distributed PV capacity (MW) for that county in the given year (2010–2050 in 2-year steps); source: `distpvcap_stscen2023_mid_case.csv` |
+
+Distribution across p-regions: p9 = 44 counties (37.4% of CA load), p10 = 10 counties (55.2%), p11 = 1 county (7.1%), p8 = 3 counties (0.3%; PacifiCorp CA slice — no PGE/SCE/SDGE substations fall here).
+
+**`data/processed/substations/substation_county_reeds_mapping.csv`** — 1,329 rows
+
+Spatial join of `substation_attributes_clean.csv` coordinates against the Census TIGER/Line 2022 county shapefile (`tl_2022_us_county.shp`), then joined to `county_ca_reference.csv`. 12 substations are excluded for missing coordinates (neither utility nor Basin source provides lat/lon). All 1,329 assigned substations fall in p9/p10/p11; none fall in p8 (PacifiCorp CA slice is geographically separate).
+
+| Column | Description |
+|--------|-------------|
+| utility | `pge`, `sce`, or `sdge` |
+| substation_name | Matches `substation_attributes_clean.csv` |
+| lat, lon | Best available coordinates (utility source preferred, Basin fallback) |
+| coord_source | `util` (1,320 substations) or `basin` (9 substations) |
+| fips_int | FIPS county code as integer |
+| fips_key | FIPS in ReEDS p-format string (e.g. `p06037`) |
+| county_name | County containing the substation |
+| p_region | ReEDS p-region for that county (p9, p10, or p11) |
+| ca_load_fraction | County's fraction of California state load |
+| btm_pv_{year}_mw | County distributed PV capacity (MW) for each 2-year step 2010–2050 |
 
 #### EIA interchange
 
@@ -556,18 +675,74 @@ python scripts/data/resolve/process_resolve.py
 ```
 
 Reads RESOLVE's hourly load shape profiles and annual energy forecasts from
-`data/raw/resolve/RESOLVE Code Base and Inputs/data/profiles/loads/2024/` (full 8,760-hour
-per-year profiles — no model run needed; see note below) and annual scaling targets from
-`data/interim/loads/`, then writes two CSVs to `data/processed/resolve/`:
+`data/raw/RESOLVE Code Base and Inputs/RESOLVE Code Base and Inputs/data/profiles/loads/2024/`
+(full 8,760-hour profiles — no model run needed) and annual scaling targets from
+`data/interim/loads/`, then writes two CSVs to `data/processed/resolve/`.
 
-> **Note on full 8,760-hour outputs:** The existing RESOLVE Outputs directory contains only
-> 36 representative dispatch windows.  The full 8,760-hour load profiles already exist as
-> inputs in `data/raw/resolve/RESOLVE Code Base and Inputs/data/profiles/loads/2024/`
-> (e.g., `PGE_Baseline.csv`, 23 weather years × 8,760 h = 201,480 rows).  These can be
-> read and scaled to any target year using the annual MWh targets in `data/interim/loads/`
-> without running the RESOLVE optimization.  The `process_resolve.py` script does exactly
-> this.  Running the full RESOLVE optimization requires the HiGHS or Gurobi solver plus a
+> **Why no model run is needed:** The RESOLVE Outputs directory contains only 36 representative
+> dispatch windows used by the optimizer internally.  The full 8,760-hour Baseline load profiles
+> already exist as inputs (`{UTIL}_Baseline.csv`, 23 weather years × 8,760 h = 201,480 rows
+> each).  `process_resolve.py` reads these directly and applies the annual scaling described
+> below.  Running the full RESOLVE optimization requires the HiGHS or Gurobi solver plus a
 > `dispatch_windows_map.csv` cluster file not included in the local copy.
+
+**How the annual scaling works:**
+
+Each `{UTIL}_Baseline_CHP_Not_Retire.csv` in `data/interim/loads/` is a long-format file with
+`attribute` / `timestamp` / `value` / `scenario` columns.  The relevant rows are:
+
+| attribute | what it means |
+|-----------|---------------|
+| `profile` | path to the shape file (e.g. `profiles/loads/2024/PGE_Baseline.csv`) |
+| `scale_by_energy` | `True` — instructs RESOLVE to scale by energy, not by peak capacity |
+| `annual_energy_forecast` | one row per model year (2024–2045), value in MWh |
+| `td_losses_adjustment` | transmission/distribution loss multiplier (1.0 in this dataset) |
+
+RESOLVE (and our script) applies this formula **per weather year**:
+
+```
+scale_factor = annual_energy_forecast_MWh[target_year] / sum(profile_MW × 1h) for all 8760h
+scaled_MW[hour] = profile_MW[hour] × scale_factor
+```
+
+Every hour in that weather year is multiplied by the same scalar.  The *shape* of demand comes
+from historical weather-year patterns; the *magnitude* is anchored to the IEPR-derived forecast.
+Our script fixes the target year at 2024 for all weather years to produce comparable absolute
+levels (`demand_mw_2024scaled`).
+
+**What "CHP Not Retire" means:** CHP = Combined Heat and Power (industrial/commercial cogeneration).
+"Not Retire" means these plants remain online and continue to self-supply their host facilities,
+keeping BA-meter demand lower.  The alternative scenario (`CHP_Retire.csv`) assumes these plants
+are decommissioned, shifting their load back onto the grid.  The two scenarios differ by a few
+percent at most.
+
+**How BTM solar and storage are handled:**
+
+RESOLVE models demand as a sum of multiple additive load components, each with its own profile
+and annual target.  We process only the Baseline component.  The full component list for PGE
+(same structure exists for SCE, SDGE, LDWP, NCNC) includes:
+
+| File | Sign | What it represents |
+|------|------|--------------------|
+| `PGE_Baseline_CHP_Not_Retire.csv` | + | Core grid load (all end uses) |
+| `PGE_AAEE.csv` | − | Advanced Action Energy Efficiency (demand reductions) |
+| `PGE_AAFS.csv` | + | Advanced Action Fuel Substitution (electrification: EVs, heat pumps) |
+| `PGE_Storage_Losses.csv` | + | Round-trip losses from grid-scale battery storage |
+| `PGE_Baseline_LDVs.csv` | + | Light-duty vehicle EV charging load |
+| `PGE_Baseline_MHDVs.csv` | + | Medium/heavy-duty vehicle EV charging load |
+| `PGE_Climate_Impacts.csv` | + | Additional cooling/heating demand from climate change |
+| `PGE_Data_Centers.csv` | + | Data center load growth |
+
+**BTM solar** (`Customer_PV`) is NOT a load component — it is modeled as a **supply-side resource**
+in `data/profiles/pmax/2025/{UTIL}_Customer_PV.csv` (column `Weather Factor`, hourly capacity
+factor 0–1) with installed capacity set in `data/interim/resources/{UTIL}_Customer_PV.csv`.
+RESOLVE dispatches this resource to offset grid demand during optimization:
+`net_load = Baseline_demand − Customer_PV_generation`.  The `demand_mw_2024scaled` column
+in our processed output is therefore **before** BTM solar subtraction.  `compare_substation_eia_iepr.py`
+subtracts the native Customer_PV offset to produce comparable net-load figures.
+
+**BTM storage** is handled analogously as a supply-side resource; round-trip losses of
+grid-scale (non-BTM) batteries appear in the `Storage_Losses` load component above.
 
 **`resolve_hourly_profiles.csv`** — hourly load shapes for six California BA zones (PGE, SCE, SDGE, IID, LDWP, NCNC — where NCNC = Northern California Non-CAISO, covering TIDC + BANC territory), covering 23 historical weather years (2000–2022) at 8,760 h/year (no Feb 29)
 
@@ -575,23 +750,10 @@ per-year profiles — no model run needed; see note below) and annual scaling ta
 |--------|-------------|
 | datetime_pst | Hourly timestamp (fixed PST, UTC−8, no DST) |
 | utility | BA zone label: PGE, SCE, SDGE, IID, LDWP, or NCNC |
-| demand_mw_raw | Raw shape profile value (MW) from `profiles/loads/2024/{UTIL}_Baseline.csv` |
-| demand_mw_2024scaled | `demand_mw_raw` scaled so each weather year integrates to the 2024 IEPR annual energy forecast target (MWh) for that utility |
+| demand_mw_raw | Raw shape value (MW) from `profiles/loads/2024/{UTIL}_Baseline.csv`; reflects historical weather-year load magnitudes |
+| demand_mw_2024scaled | `demand_mw_raw` scaled so each weather year integrates to the PGE/SCE/SDGE 2024 annual energy forecast (MWh); all 23 weather years brought to the same absolute level for direct comparison |
 
-> **Important:** `demand_mw_2024scaled` is **gross demand** — BTM solar has been moved to
-> the supply side in RESOLVE's model (see "RESOLVE Net Load" section below).  Use
-> `demand_mw_raw` / `demand_mw_2024scaled` only for gross-load comparisons.  For
-> net-load comparisons, `compare_substation_eia_iepr.py` applies the native
-> Customer_PV correction automatically.
->
-> **Evidence that `profile_model_years` is gross load:** Each `{UTIL}_Baseline.csv` file
-> in `data/profiles/loads/2024/` contains exactly two columns: `datetime` and
-> `profile_model_years`.  There is no BTM_PV or Customer_PV column in these files.
-> BTM solar is handled separately in `data/profiles/pmax/2025/{UTIL}_Customer_PV.csv`
-> (column: `Weather Factor`, values 0–1, one row per hour × weather year).  The physical
-> separation of the load and BTM generation files proves they are independent quantities.
-
-**`resolve_annual_forecast.csv`** — annual energy forecast targets (MWh and TWh) by utility and year (2024–2045), from IEPR interim load files used as RESOLVE scaling targets.
+**`resolve_annual_forecast.csv`** — annual energy forecast targets (MWh and TWh) by utility and year (2024–2045), extracted from the `annual_energy_forecast` rows of each `{UTIL}_Baseline_CHP_Not_Retire.csv`.
 
 #### ReEDS California load
 
