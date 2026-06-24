@@ -49,7 +49,11 @@ _CAL_FILE = RAW_DIR  / "eia_rto-region-data_CAL_earliest_latest_part001.csv"
 # PUDL column → canonical output column name.
 # Adjust if PUDL renames a column in a future nightly build.
 #
-# Datetime: PUDL uses 'datetime_utc' (UTC-stamped, hour-beginning).
+# Datetime: PUDL uses 'datetime_utc' (UTC-stamped, hour-ENDING per EIA filing convention).
+# EIA-930 docs: "hour ending 1:00 AM EST → 2017-03-01T06:00:00.000Z" (T06 = end of hour).
+# PUDL preserves this — confirmed by exact value match between PUDL and EIA API at
+# the same UTC timestamps (<0.001% difference). Do not treat these as hour-beginning.
+# To convert to fixed PST hour-beginning labels: subtract 9 hours (8h offset + 1h convention).
 _TS_COL = "datetime_utc"
 
 # BA identifier columns

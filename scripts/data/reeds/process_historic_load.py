@@ -7,8 +7,7 @@ and the ReEDS projected load.
 
 Source file
 -----------
-  data/raw/PotentialData/historic_post2015_load_hourly.h5/
-      historic_post2015_load_hourly.h5
+  data/raw/reeds/historic_post2015_load_hourly.h5
       HDF5-serialised pandas DataFrame with 134 p-regions (same as ReEDS
       projected data), 70080 rows = 8 years x 8760 h (leap days excluded),
       timestamps in CST (UTC-6, Etc/GMT+6), hour-beginning.
@@ -24,7 +23,7 @@ Load definition
 
 California regions (same citation as process_reeds.py)
 -------------------------------------------------------
-  Confirmed via data/raw/PotentialData/ReEDS-2.0/inputs/hierarchy.csv:
+  Confirmed via data/raw/reeds/ReEDS-2.0/inputs/hierarchy.csv:
   filtering st == "CA" returns exactly p8, p9, p10, p11.
     p8   PacifiCorp West California slice  (WECC_NW; ~100-160 MW, ~0.8 TWh/yr)
     p9   WECC_CA sub-region
@@ -80,9 +79,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[3]
-RAW  = (ROOT / "data" / "raw" / "PotentialData"
-        / "historic_post2015_load_hourly.h5"
-        / "historic_post2015_load_hourly.h5")
+RAW  = ROOT / "data" / "raw" / "reeds" / "historic_post2015_load_hourly.h5"
 OUT  = ROOT / "data" / "processed" / "reeds"
 
 CA_COLS    = ["p8", "p9", "p10", "p11"]

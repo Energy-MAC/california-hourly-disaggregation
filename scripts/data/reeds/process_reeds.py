@@ -34,7 +34,7 @@ California regions (from ReEDS inputs/hierarchy.csv)
 Time convention
 ---------------
   ReEDS output timezone is Etc/GMT+6 (CST, UTC-6, no DST), hour-beginning.
-  Confirmed in data/raw/PotentialData/ReEDS-2.0/hourlize/inputs/configs/config_base.json
+  Confirmed in data/raw/reeds/ReEDS-2.0/hourlize/inputs/configs/config_base.json
   ("output_timezone": "Etc/GMT+6") and hourlize/load.py (fixed-offset tz_localize,
   no DST transitions, first 8760 hours taken per weather year).
 
@@ -71,7 +71,7 @@ RAW  = ROOT / "data" / "raw"  / "reeds" / "reeds_load_transformed.parquet"
 OUT  = ROOT / "data" / "processed" / "reeds"
 
 # CA region confirmation source (filter st==CA returns exactly p8, p9, p10, p11)
-HIERARCHY_CSV = ROOT / "data" / "raw" / "PotentialData" / "ReEDS-2.0" / "inputs" / "hierarchy.csv"
+HIERARCHY_CSV = ROOT / "data" / "raw" / "reeds" / "ReEDS-2.0" / "inputs" / "hierarchy.csv"
 
 CA_REGIONS = ["p8", "p9", "p10", "p11"]
 
