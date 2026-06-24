@@ -82,7 +82,7 @@ EIA_API_KEY=your_key_here
 ### EIA 930 (Hourly Balancing Authority Operations)
 
 EIA collects hourly self-reports from every U.S. balancing authority via Form EIA-930.
-This project pulls two datasets for the eight California-adjacent BAs:
+This project covers eight California-adjacent BAs:
 
 | BA code | Full name |
 |---------|-----------|
@@ -90,19 +90,56 @@ This project pulls two datasets for the eight California-adjacent BAs:
 | CISO | California Independent System Operator |
 | IID  | Imperial Irrigation District |
 | LDWP | Los Angeles Dept. of Water and Power |
-| NEVP | NV Energy |
+| NEVP | NV Energy (Nevada) |
 | PACW | PacifiCorp West |
 | TIDC | Turlock Irrigation District |
 | WALC | Western Area Lower Colorado |
 
-**Interchange** (`rto-interchange`) — hourly MWh flows between every tracked BA pair.
-Scraped in two passes: flows *from* each of the eight BAs (all counterparts), and flows
-*to* each of the eight BAs (all counterparts).
+**Primary source: PUDL nightly parquet.**  [PUDL](https://catalyst.coop/pudl/) (Public
+Utility Data Liberation) mirrors EIA-930 daily with cleaned, imputed, and gap-filled
+values, with history from 2015 onward.  We download two filtered parquets restricted to
+the eight CA BAs via `scripts/data/eia/ingest_eia_pudl.py`, then process them into
+`data/processed/eia/eia930_operations.csv` and `eia930_interchange.csv`.  All timestamps
+are UTC (`datetime_utc`, hour-beginning).  PUDL's gap-filling methodology is documented at
+https://docs.catalyst.coop/pudl/en/latest/methodology/timeseries_imputation.html.
 
-**Region** (`rto-region`) — hourly demand, net generation, total interchange, and
-day-ahead forecast for the aggregate California (`CAL`) region.
+**EIA demand definition:** EIA defines demand as total metered net electricity generation
+within the BA minus total metered net electricity interchange with neighboring BAs
+([EIA Grid Monitor methodology](https://www.eia.gov/electricity/gridmonitor/about)).
+Because behind-the-meter (BTM) generation is not visible to BA-boundary meters, this is
+a **net-of-BTM** measure — rooftop solar that never crosses a BA meter reduces the
+apparent demand but is not explicitly subtracted.
 
-API endpoint: `https://api.eia.gov/v2/electricity/rto/`
+**Secondary source: EIA API direct scrape.**  `scripts/data/eia/scrape_eia.py` queries the
+EIA v2 API (`https://api.eia.gov/v2/electricity/rto/`) for two endpoints:
+- **`rto-interchange`** — hourly MWh flows between every tracked BA pair (scraped in two
+  passes: flows *from* each BA and flows *to* each BA)
+- **`rto-region`** — hourly demand, net generation, total interchange, and day-ahead
+  forecast for the aggregate California (`CAL`) region
+
+This scrape produces the `data/raw/eia/` CSV files used only to validate PUDL (see
+`scripts/compare_eia_sources.py`) and to provide the EIA API CAL region series alongside
+the PUDL-derived CA5 sum in `scripts/compare_cal_region_sources.py`.  For all analysis
+scripts, `eia930_operations.csv` (PUDL) is the authoritative operations source.
+
+**Source validation: `scripts/compare_eia_sources.py`** cross-checks PUDL against the
+EIA API scrape across four sections:
+
+| Section | What it checks |
+|---------|----------------|
+| **A** — Source summary | Row counts, BA coverage, and date ranges for both sources |
+| **B** — Hourly coverage | Per BA, within the overlap window: hours present in EIA but absent from PUDL (gaps are a concern); hours present in PUDL but absent from EIA (minor) |
+| **C** — Value agreement | For demand, demand forecast, net generation, and total interchange: Pearson correlation, MAE, and share of hours with \|diff\| > 50 MWh across all paired observations |
+| **D** — NaN audit | For each PUDL metric and BA, count of NaN values, when they occur (early record / recent / scattered), and maximum consecutive NaN run length |
+| **E** — Scope comparison | Annual TWh: EIA CA8 sum vs PUDL CA5 sum vs EIA API CAL region vs IEPR; quantifies the NEVP+PACW excess (~60 TWh) in the CA8 sum.  The "PUDL CA5 sum" is defined as BANC+CISO+IID+LDWP+TIDC — the five BAs that serve only California load.  EIA defines the CAL region as exactly this sum; verified in `scripts/compare_cal_region_sources.py` where the EIA API CAL series and the PUDL CA5 sum track each other within imputation differences. |
+
+Outputs are written to `data/checks/` (CSV files) and `data/figures/fig_e_cal_vs_ca8_vs_iepr.png`.
+Run with `-s D` to audit NaN values only (no EIA scrape file required).
+
+> **PUDL preferred over EIA scrape for analysis** because PUDL applies gap-filling and
+> imputation that the raw EIA API data does not, starts earlier (2015 vs ~2019 for the
+> API CAL region), and is updated nightly with corrections.  The EIA scrape is retained
+> for independent validation via `compare_eia_sources.py`.
 
 ### Utility IOUs — Load Profiles
 
@@ -143,15 +180,94 @@ to the DataBasin CA Substations 2022 reference for geographic coordinates:
 | **Basin-matched total**              | **600** | **527** | **96** | **1,223** |
 | Not matched to basin                 | 64      | 51      | 3      | 118       |
 | Basin substations not in any source  | 346     | 160     | 42     | 548       |
-| Load profile rows                    | 191,184 | 313,608 | 28,512 | 533,304   |
+| Load profile rows (processed)        | 191,184 | 166,440 | 28,512 | 386,136   |
 
 ¹ SDG&E: 99 substations with data + 8 failed scrapes = 107 attempted.
 
 The **name dictionary** (`data/basinSourceDictionary.csv`, 79 entries) maps utility
 source names that differ from the DataBasin reference (e.g. "CRESTA PH" → "Cresta",
 "DRUM" → "Drum 1 / Drum 2") to recover additional geolocation matches beyond the
-normalised-name join.  SCE carries year-stamped profiles (2021–2026); PG&E and SDG&E
-publish monthly aggregates without a year column.
+normalised-name join.  PG&E and SDG&E publish monthly aggregates without a year column.
+
+**SCE year-stamp deduplication:** SCE publishes year-stamped profiles (2017–2026), where
+each year is an independent 10th/90th percentile snapshot from a non-public utility
+lookback window.  652 of 709 unique SCE substations appear in multiple years with
+overlapping coverage.  The 2026 vintage only covers January–April.  The processed output
+applies per-cell deduplication: for each `(substation, month, hour)` the row with the
+highest year is retained, so May–December data for substations in the 2026 batch falls
+back to 2025 automatically.  This gives full 12-month coverage per substation using the
+most recent available percentile snapshot.  See `process_substations_clean.py`.
+
+### ReEDS Projected Load (NREL)
+
+The Regional Energy Deployment System (ReEDS) is NREL's long-term US capacity-planning
+model.  This project uses a pre-transformed parquet produced by a ReEDS run under the
+**IRA_low** (Inflation Reduction Act, low-demand growth) scenario.
+
+**File:** `data/raw/reeds/reeds_load_transformed.parquet`
+
+ReEDS divides California into four planning regions (`p`-regions) from
+`inputs/hierarchy.csv` in the ReEDS 2.0 repository:
+
+| Region | ReEDS NERC region | Description |
+|--------|-------------------|-------------|
+| p8  | WECC_NW | PacifiCorp West — California slice only (~0.8 TWh/yr) |
+| p9  | WECC_CA | California sub-region (see scope note below) |
+| p10 | WECC_CA | California sub-region (see scope note below) |
+| p11 | WECC_CA | California sub-region (see scope note below) |
+
+**Important scope note — WECC_CA ≠ EIA CISO BA:** The `hierarchy.csv` labels p9–p11
+as `WECC_CA`.  Empirically, the annual load of p9+p10+p11 (~252–268 TWh, 2016–2023
+actual) tracks the PUDL CA5 sum (BANC+CISO+IID+LDWP+TIDC), not EIA CISO alone
+(~218–224 TWh).  The ~40 TWh gap between p9–p11 and EIA CISO equals approximately
+IID + LDWP + BANC + TIDC combined.  This confirms that **WECC_CA in ReEDS = all
+California BAs except PacifiCorp West** — it is not limited to the CAISO BA boundary.
+Do not compare ReEDS p9–p11 directly to EIA CISO; compare to PUDL CA5 or EIA CAL.
+
+The raw parquet is long-format: one row per (`time_index`, `weather_year`, `region`,
+`year`).  `time_index` runs 1–8,760 (no Feb 29).  ReEDS uses CST (UTC−6, no DST)
+as its output timezone (`config_base.json` line 7: `"output_timezone": "Etc/GMT+6"`),
+so `time_index` 1 = Jan 1 00:00 CST = **Dec 31 22:00 PST**.  `process_reeds.py`
+converts to fixed PST before writing processed outputs.
+`weather_year` is one of 7 historical patterns (2007–2013) used to generate hourly
+shapes.  `year` is the planning target year (2020–2050).
+
+### ReEDS Historic Load (NREL, 2016–2023)
+
+**File:** `data/raw/PotentialData/historic_post2015_load_hourly.h5`
+(inside the `.h5` directory, the actual HDF5 file has the same name)
+
+The same 134-region structure as the ReEDS projected data, but covering **actual
+observed load** for 2016–2023 (8 years × 8,760 h = 70,080 rows; leap days excluded,
+consistent with ReEDS hourlize convention).  Timestamps are in CST (UTC−6), same
+timezone as the projected data.
+
+Load definition: sourced by the ReEDS hourlize tool from BA-level meter data
+(EIA-930 / FERC Form 714), which report demand **net of BTM generation** — same
+convention as EIA CISO.  CITATION NEEDED: specific hourlize input mapping not
+confirmed in publicly available files; validation against EIA sources is provided
+empirically in `compare_resolve_iepr_eia.py`.
+
+**Processed by:** `scripts/data/reeds/process_historic_load.py`
+**Outputs:**
+- `data/processed/reeds/historic_ca_load_annual.csv` — annual TWh by region
+- `data/processed/reeds/historic_ca_load_hourly.parquet` — hourly CA data
+
+Annual totals (WECC_CA = p9+p10+p11; CA total = p8+p9+p10+p11):
+
+| Year | WECC_CA p9-p11 (TWh) | CA total p8-p11 (TWh) |
+|------|---------------------|-----------------------|
+| 2016 | 268.3 | 269.1 |
+| 2017 | 269.2 | 270.1 |
+| 2018 | 267.3 | 268.1 |
+| 2019 | 262.5 | 263.3 |
+| 2020 | 261.9 | 262.7 |
+| 2021 | 259.5 | 260.3 |
+| 2022 | 264.1 | 264.9 |
+| 2023 | 251.8 | 252.5 |
+
+The ~0.8 TWh annual difference between WECC_CA and CA total is the PacifiCorp West
+California slice (p8), which is negligible at this scale.
 
 ### CEC IEPR Forecasts
 
@@ -181,6 +297,18 @@ Each `scripts/data/<source>/scrape_*.py` command writes chunked CSVs to the corr
 
 #### EIA 930
 
+**Primary (PUDL — recommended):**
+
+```bash
+python scripts/data/eia/ingest_eia_pudl.py   # downloads parquets → data/raw/eia/pudl/
+```
+
+Downloads two filtered PUDL parquets for the eight CA BAs:
+- `out_eia930__hourly_operations_CA8.parquet` — per-BA hourly demand, net gen, interchange
+- `core_eia930__hourly_interchange_CA8.parquet` — BA-pair interchange flows (optional)
+
+**Secondary (EIA API direct — for CAL region and validation only):**
+
 ```bash
 # Interchange: flows FROM each of the 8 BAs (all counterparts)
 python scripts/data/eia/scrape_eia.py rto-interchange \
@@ -190,12 +318,15 @@ python scripts/data/eia/scrape_eia.py rto-interchange \
 python scripts/data/eia/scrape_eia.py rto-interchange \
     --to-bas BANC CISO IID LDWP PACW NEVP TIDC WALC
 
-# CAL region aggregate (demand, net gen, TI, day-ahead forecast)
+# CAL region aggregate (demand, net gen, TI, day-ahead forecast) — 2019 to present
 python scripts/data/eia/scrape_eia.py rto-region
 ```
 
 Output: `data/raw/eia/eia_rto-interchange-data_from-*.csv` (×4 chunks),
 `eia_rto-interchange-data_to-*.csv` (×4 chunks), `eia_rto-region-data_CAL_*.csv`
+
+> An `EIA_API_KEY` environment variable is required for the EIA scraper.
+> The PUDL download does not need an API key.
 
 #### PG&E
 
@@ -293,7 +424,7 @@ for future work.
 
 ### Step 2 — Process into unified outputs
 
-#### Substation tables
+#### Substation tables (raw)
 
 ```bash
 python scripts/data/substations/process_substations.py
@@ -301,7 +432,7 @@ python scripts/data/substations/process_substations.py
 
 Reads all raw utility files and writes two CSVs to `data/processed/substations/`:
 
-**`substation_locations.csv`** — one row per substation (2,614 total across all utilities)
+**`substation_attributes.csv`** — one row per substation (2,614 total across all utilities)
 
 | Column | Description |
 |--------|-------------|
@@ -331,13 +462,35 @@ Reads all raw utility files and writes two CSVs to `data/processed/substations/`
 | Column | Description |
 |--------|-------------|
 | utility | Source utility |
-| substation_name | Matches `substation_locations.csv` |
+| substation_name | Matches `substation_attributes.csv` |
 | latitude, longitude | Coordinates |
 | year | Calendar year (NaN for PG&E, which publishes monthly aggregates without year) |
 | month | 1–12 |
-| hour | 0–23 |
+| hour | 0–23, **wall-clock Pacific time** (PDT in summer, PST in winter — see DST section) |
 | min_load | Minimum load observed in that month/hour slot (MW) |
 | max_load | Maximum load observed in that month/hour slot (MW) |
+
+#### Substation tables (cleaned)
+
+```bash
+python scripts/data/substations/process_substations_clean.py
+```
+
+Applies filtering, deduplication, coordinate enrichment, and DST correction to produce
+the analysis-ready versions used by all comparison scripts:
+
+**`substation_attributes_clean.csv`** — 1,341 substations (PGE 664 · SCE 578 · SDGE 99), with:
+- P.T. (pass-through switching) substations removed (170 SCE, 8 SDGE)
+- Basin coordinates (DataBasin CA Substations 2022) joined via name-match + dictionary
+- SCE deduplication: bulk download preferred over scraped data where both exist
+- PacifiCorp excluded (no metered load profiles)
+
+**`substation_load_profiles_clean.csv`** — 533,304 rows, with:
+- All P.T. substations removed
+- `hour_pst` column added: wall-clock Pacific hour converted to **fixed PST (UTC-8, no
+  DST)** using the majority-month rule (see DST section)
+- SCE loads deduplicated; SDGE kW→MW conversion applied
+- `year` is NaN for PGE and SDGE (monthly aggregates without year stamp)
 
 #### EIA interchange
 
@@ -375,7 +528,7 @@ python scripts/data/resolve/process_resolve.py
 Reads RESOLVE's hourly load shape profiles and annual energy forecasts from
 `data/raw/RESOLVE Code Base and Inputs/` and writes two CSVs to `data/processed/resolve/`:
 
-**`resolve_hourly_profiles.csv`** — hourly load shapes for six California BA zones (PGE, SCE, SDGE, IID, LDWP, NCNC), covering 23 historical weather years (2000–2022) at 8,760 h/year (no Feb 29)
+**`resolve_hourly_profiles.csv`** — hourly load shapes for six California BA zones (PGE, SCE, SDGE, IID, LDWP, NCNC — where NCNC = Northern California Non-CAISO, covering TIDC + BANC territory), covering 23 historical weather years (2000–2022) at 8,760 h/year (no Feb 29)
 
 | Column | Description |
 |--------|-------------|
@@ -389,8 +542,39 @@ Reads RESOLVE's hourly load shape profiles and annual energy forecasts from
 > `demand_mw_raw` / `demand_mw_2024scaled` only for gross-load comparisons.  For
 > net-load comparisons, `compare_substation_eia_iepr.py` applies the native
 > Customer_PV correction automatically.
+>
+> **Evidence that `profile_model_years` is gross load:** Each `{UTIL}_Baseline.csv` file
+> in `data/profiles/loads/2024/` contains exactly two columns: `datetime` and
+> `profile_model_years`.  There is no BTM_PV or Customer_PV column in these files.
+> BTM solar is handled separately in `data/profiles/pmax/2025/{UTIL}_Customer_PV.csv`
+> (column: `Weather Factor`, values 0–1, one row per hour × weather year).  The physical
+> separation of the load and BTM generation files proves they are independent quantities.
 
 **`resolve_annual_forecast.csv`** — annual energy forecast targets (MWh and TWh) by utility and year (2024–2045), from IEPR interim load files used as RESOLVE scaling targets.
+
+#### ReEDS California load
+
+```bash
+python scripts/data/reeds/process_reeds.py
+```
+
+Filters the raw ReEDS parquet to the four California p-regions, adds `month`/`day`/`hour`
+columns from the `time_index`, and writes two outputs to `data/processed/reeds/`:
+
+**`reeds_ca_load_hourly.parquet`** — CA-filtered hourly rows (7.6 M rows):
+
+| Column | Description |
+|--------|-------------|
+| time_index | 1–8,760 (Jan 1 h0 → Dec 31 h23, no Feb 29) |
+| weather_year | 2007–2013 — which historical weather pattern drives the shape |
+| region | p8, p9, p10, p11 |
+| region_label | PacifiCorp_West_CA, CAISO_North, CAISO_Central, CAISO_South |
+| load_mw | Projected hourly load (MW) |
+| year | Planning target year (2020–2050) |
+| scenario | IRA_low |
+| month, day, hour | Derived from time_index; hour 0–23 fixed PST (no DST) |
+
+**`reeds_ca_load_annual.csv`** — annual energy totals by (year, weather_year, region) plus a `CA_total` row summing all four regions.  IRA_low CA total grows from ~291 TWh (2020) to ~525 TWh (2050) — higher than other California sources because ReEDS covers all of California (CAISO + PacifiCorp West CA slice), models electrification growth explicitly, and reports gross load.
 
 #### EIA Form 861 — CA fractions by BA
 
@@ -417,6 +601,12 @@ then writes `data/processed/eia/eia861_ca_fractions.csv`:
 ### Step 3 — Validate and audit
 
 ```bash
+# Cross-validate PUDL EIA-930 against the EIA API scrape (all sections)
+python scripts/compare_eia_sources.py
+
+# NaN audit only — does not require the EIA scrape file
+python scripts/compare_eia_sources.py -s D
+
 # Check SCE data for schema consistency, row-count completeness, and duplicate hours
 python scripts/data/sce/validate_sce.py
 
@@ -432,6 +622,52 @@ python scripts/data/substations/audit_unused_columns.py
 |----------|---------|
 | `01_eia_from_to_consistency.ipynb` | Cross-file misreporting check: for each flow `A→B` in FROM, does the paired `B→A` in TO agree? Identifies BA pairs and time periods with the largest discrepancies. |
 | `02_eia_region_vs_interchange.ipynb` | Compares the EIA CAL region total interchange (type=TI) against the sum computed from individual BA interchange flows.  Quantifies the systematic gap and identifies its largest contributors. |
+
+---
+
+## Time Zone and Daylight Saving Time Conventions
+
+Every processed file in this project uses a specific time zone and hour-labeling convention.
+The table below documents them so comparisons across files are unambiguous.
+
+| File | Time zone | Hour convention | DST? |
+|------|-----------|-----------------|------|
+| `eia930_operations.csv` (PUDL) | UTC | `datetime_utc`, hour-beginning | n/a |
+| `eia_region.csv` (EIA API scrape) | UTC | `period` format `YYYY-MM-DDTHH`, hour-beginning | n/a |
+| `iepr_hourly_forecast.csv` | Fixed PST (UTC−8) | `HOUR` 1–24, hour-ending; `hour` = HOUR−1 (0–23) | No |
+| `resolve_hourly_profiles.csv` | Fixed PST (UTC−8) | `datetime_pst`, hour-beginning (0–23); 8,760 h/year | No |
+| `substation_load_profiles.csv` (raw) | Wall-clock Pacific | `hour` 0–23 (PDT in summer, PST in winter) | Yes |
+| `substation_load_profiles_clean.csv` | Fixed PST (UTC−8) | `hour_pst` 0–23, majority-month rule applied | No |
+
+### Substation DST treatment (majority-month rule)
+
+The raw utility substation scrapes report hours in local Pacific wall-clock time — PDT
+(UTC−7) from March through October and PST (UTC−8) the rest of the year.  To align with
+the IEPR and RESOLVE files (which both use fixed PST), the clean file converts using a
+**majority-month rule**: if more than half the days in a calendar month fall in a PDT
+period (months 3–10), all hours in that month are shifted back 1 hour; months 1, 2, 11,
+and 12 are left unchanged.
+
+```python
+# From scripts/data/substations/process_substations_clean.py
+pdt_mask = loads_all["month"].isin(range(3, 11))   # months 3–10 are majority-PDT
+loads_all["hour_pst"] = loads_all["hour"].where(~pdt_mask, (loads_all["hour"] - 1) % 24)
+```
+
+**Methodological note:** This is a deliberate approximation, not a data-verifiable fact.
+The min/max load profiles are 10th/90th percentile envelopes computed over a non-public
+lookback window — they do not correspond to any specific observed day, so it is impossible
+to look up the DST status of individual timestamps.  The majority-month assignment
+(per US federal DST rules, 15 USC 260a: second Sunday in March to first Sunday in
+November) introduces at most a 1-hour systematic error in the two transition months
+(March and November), but avoids the need for exact DST changeover dates.
+
+### Fixed PST vs UTC
+
+IEPR and RESOLVE use fixed PST (UTC−8, no clock changes) year-round.  To convert these
+to UTC: add 8 hours.  To compare against EIA-930 UTC data, apply the same +8h offset
+before merging.  The `compare_substation_eia_iepr.py` and related scripts handle this
+conversion internally.
 
 ---
 
@@ -458,9 +694,18 @@ python scripts/data/substations/audit_unused_columns.py
 
 ## RESOLVE and Statewide Load Forecast Sources
 
-This project compares substation-level profiles against four statewide demand sources.
+This project compares substation-level profiles against five statewide demand sources.
 The sections below document how each source handles behind-the-meter (BTM) solar,
 why RESOLVE and IEPR differ numerically, and which values are raw vs derived.
+
+| Source | Scope | Load definition | Horizon | Used for |
+|--------|-------|-----------------|---------|----------|
+| EIA-930 | CISO BA (CAISO territory) | Net of BTM solar (measured) | Historical (2015–) | Ground truth |
+| IEPR | PGE+SCE+SDGE utilities | BASELINE_NET_LOAD (net) or BASELINE_CONSUMPTION (gross) | 2024–2050 | Policy forecast |
+| RESOLVE | PGE+SCE+SDGE+IID+LDWP+NCNC | Gross (BTM solar on supply side) | 2024–2045 | IRP optimization target |
+| ReEDS projected | p8–p11 (CA total); p9–p11 = WECC_CA ≈ all CA except PACW | Net load projected under IRA_low scenario | 2020–2050 | Long-run US capacity planning |
+| ReEDS historic | p9–p11 (WECC_CA ≈ BANC+CISO+IID+LDWP+TIDC) | Net load actual observed | 2016–2023 | Ground truth at WECC_CA scale |
+| Substations | PGE+SCE+SDGE distribution | Gross (metered substation peak) | Historical monthly | Sub-BA spatial resolution |
 
 ### RESOLVE
 
@@ -471,6 +716,9 @@ model used by CPUC for the 2024-2026 IRP.  Its raw load inputs sit in
 
 RESOLVE covers six California BA zones: **PGE**, **SCE**, **SDGE**, **IID**, **LDWP**,
 **NCNC**.  It does *not* model NEVP or PACW as California zones (see EIA CA8 note below).
+NCNC (Northern California Non-CAISO) covers BANC, TIDC, SMUD, and other small municipal
+utilities in northern California outside the CAISO footprint.  See CEC Demand Modelling
+Form 1.1c at https://www.energy.ca.gov/data-reports/california-energy-planning-library/forecasts-and-system-planning/demand-side-3
 
 #### RESOLVE Net Load: gross → net derivation
 
@@ -499,6 +747,50 @@ below the monthly average, rainy winter days near zero — that the IEPR fixed m
 template cannot capture.  This widens the inter-annual p10–p90 band in the monthly
 profile figures compared to using the IEPR template.
 
+### ReEDS (NREL — IRA_low scenario and Historic 2016–2023)
+
+ReEDS (Regional Energy Deployment System) is NREL's flagship US capacity-planning model.
+Unlike RESOLVE (which is a California-specific IRP tool) and IEPR (which are CEC policy
+forecasts), ReEDS produces long-run US-wide projections through 2050, modelling technology
+costs, renewable build-out, and load growth from electrification under specific policy
+scenarios.
+
+This project uses two ReEDS datasets:
+- **IRA_low projected** (2020–2050): `reeds_load_transformed.parquet`
+- **Historic actual** (2016–2023): `historic_post2015_load_hourly.h5`
+
+Both use the same four California p-regions:
+
+- **p8** — PacifiCorp West California slice (WECC_NW; ~0.8 TWh/yr)
+- **p9, p10, p11** — WECC_CA sub-regions (all CA BAs except PacifiCorp West)
+
+**WECC_CA scope:** Despite being labeled as "CAISO sub-regions" in some ReEDS
+documentation, p9–p11 empirically correspond to all California BAs except PacifiCorp
+West (PACW) — approximately BANC+CISO+IID+LDWP+TIDC.  This was confirmed by comparing
+historic p9–p11 annual load (~252–268 TWh) to EIA sources: it tracks the PUDL CA5 sum,
+not EIA CISO alone (~218–224 TWh).  Because ReEDS aggregates California into these four
+p-regions, IID and LDWP are folded into the WECC_CA regions rather than appearing
+separately (as they do in RESOLVE and EIA).
+
+**Projected CA total (IRA_low, all 4 p-regions):**
+
+| Year | Mean TWh (across 7 weather years) |
+|------|----------------------------------|
+| 2020 | 291 |
+| 2025 | 288 |
+| 2030 | 336 |
+| 2035 | 394 |
+| 2040 | 449 |
+| 2050 | 525 |
+
+The near-zero standard deviation across weather years (~0–0.6 TWh) confirms that weather
+only affects the hourly *shape*, not the annual total — the annual energy level is fixed
+by the demand model for each target year.
+
+ReEDS values are higher than RESOLVE/IEPR because ReEDS:
+(a) covers all of California (CAISO + PacifiCorp CA), not just CAISO utilities, and
+(b) projects strong load growth from EVs and building electrification through 2050.
+
 ---
 
 ### BTM Solar Treatment by Source
@@ -517,6 +809,8 @@ subtracts it will always read lower than one that does not.
 | **IEPR `MANAGED_NET_LOAD`** | **Net-of-BTM + all scenario overlays applied** — AAEE, AAFS, AATE adjustments | Final scenario net load ("IEPR Total CAISO Load" in RESOLVE I&A) | Raw from CEC hourly workbooks | ~217–220 TWh |
 | **RESOLVE Baseline Consumption** (`demand_mw_2024scaled` in `resolve_hourly_profiles.csv`) | **Gross (BTM PV removed from demand side, modeled as supply)** | Gross demand before BTM PV subtraction; includes T&D losses | **Derived** from IEPR MANAGED_NET_LOAD — see formula below | ~241 TWh (PGE+SCE+SDGE only) |
 | **RESOLVE Net Load** (derived in `compare_substation_eia_iepr.py`) | **Net-of-BTM** — RESOLVE's own weather-year `Customer_PV` profiles subtracted from Baseline; see "RESOLVE Net Load" section above | Net system load for peak-hour comparisons against EIA/IEPR; 23-year ensemble captures real day-to-day solar variability | `demand_mw_2024scaled − weather_factor × planned_capacity_2024` using native RESOLVE pmax profiles | ~221 TWh mean across 23 weather years (PGE+SCE+SDGE) |
+| **ReEDS IRA_low projected** (`reeds_ca_load_annual.csv`) | **Projected net load** — ReEDS models BTM solar as a generation resource that reduces system demand in the optimization | Long-run projected system load (net of BTM solar); WECC_CA (p9–p11) ≈ all CA except PACW; CA total (p8–p11) adds ~0.8 TWh/yr | Raw from ReEDS run; CA filtered in `process_reeds.py` | ~288 TWh (2025, CA total p8–p11) growing to ~525 TWh (2050) |
+| **ReEDS historic actual** (`historic_ca_load_annual.csv`) | **Net load** — sourced from BA-level meter data (EIA-930 / FERC Form 714) by the ReEDS hourlize tool | Observed 2016–2023 load; WECC_CA (p9–p11) tracks PUDL CA5 sum, not EIA CISO alone | HDF5 processed by `process_historic_load.py` | ~252–268 TWh (WECC_CA p9–p11, 2016–2023) |
 
 **Key implication for comparisons:** A direct TWh comparison between RESOLVE Baseline
 and EIA-930 CISO will show an apparent ~17–20 TWh gap in 2024.  The true sources of
@@ -526,8 +820,12 @@ that gap are:
    PGE+SCE+SDGE share of statewide BTM PV is roughly ~17–18 TWh, explaining most of the gap.
 2. **Geographic scope** — RESOLVE covers PGE+SCE+SDGE+IID+LDWP+NCNC; EIA CISO covers
    only the CAISO footprint (PGE+SCE+SDGE, plus some BANC/TIDC slivers).
-3. **T&D losses** — RESOLVE and IEPR express demand at the generator busbar using a 7.97%
-   gross-up; EIA-930 measures at the BA boundary.
+3. **T&D losses** — RESOLVE loads include distribution losses (demand at the generator
+   busbar rather than the customer meter); EIA-930 measures at the BA boundary.  The
+   T&D loss adjustment factor is stored per-utility in RESOLVE's interim loads files
+   (`data/interim/loads/{UTIL}_*.csv`, attribute `td_losses_adjustment`); CAISO
+   utilities (PGE, SCE, SDGE) use a value of 1.0 in the 2024-2026 IRP inputs,
+   meaning no explicit loss grossup is applied in the RESOLVE load files for this cycle.
 
 ---
 
@@ -576,7 +874,7 @@ out-of-state, offshore).
 | Zone | RESOLVE label | IOU/BA covered |
 |------|--------------|----------------|
 | California CAISO | PGE, SCE, SDGE | PG&E, SCE, SDG&E |
-| Non-CAISO California | IID, LDWP, NCNC | Imperial ID, LADWP, northern co-ops |
+| Non-CAISO California | IID, LDWP, NCNC | Imperial ID, LADWP, TIDC + BANC territory (NCNC = Northern California Non-CAISO) |
 | Pacific Northwest (out-of-state) | NW | BPAT, PACW, PortlandGE |
 | Desert Southwest (out-of-state) | SW | AZPS, NEVP, SRP, WALC |
 

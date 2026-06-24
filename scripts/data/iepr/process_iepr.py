@@ -65,7 +65,11 @@ Column definitions (Hourly Forecast)
   MEDIUM_HEAVY_EV          medium/heavy-duty EV load
   DATA_CENTER              data center load (added IEPR 2024)
   OTHER_ADJUSTMENTS        all other modifiers
-  BASELINE_CONSUMPTION     sum of above (unadjusted + modifiers)
+  BASELINE_CONSUMPTION     sum of above (unadjusted + modifiers).
+                           VERIFIED: column identity confirmed in processed data —
+                           UNADJUSTED_CONSUMPTION + PUMPING + CLIMATE_CHANGE +
+                           LIGHT_EV + MEDIUM_HEAVY_EV + DATA_CENTER (NaN→0) +
+                           OTHER_ADJUSTMENTS == BASELINE_CONSUMPTION to exact MW.
   BTM_PV                   behind-the-meter solar (negative = reduces grid load)
   BTM_STORAGE_RES          residential BTM storage
   BTM_STORAGE_NONRES       non-residential BTM storage

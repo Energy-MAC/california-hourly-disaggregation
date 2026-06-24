@@ -9,6 +9,9 @@ Subcommands
 substation-profiles
     Download hourly load profiles for every SDG&E substation from the interactive
     map download API (ZIP per substation, ~576 data points each).
+    VERIFIED: sanity check — the 576-point structure (12 months × 2 load types
+    [High/Low] × 24 hours) was confirmed by inspecting downloaded ZIP contents
+    from multiple substations; no SDG&E API schema documentation is publicly available.
     Output: sdge_substation_profiles_part*.csv, sdge_substation_profiles_failed.csv
     Press Ctrl+C to stop safely; re-run to resume.
 

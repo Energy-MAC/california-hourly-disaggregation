@@ -35,8 +35,8 @@ Reconstruction identity (from RESOLVE I&A Table 2)
     + Climate_Impacts + Storage_Losses - AAEE - BTM_PV
     ≈ IEPR MANAGED_NET_LOAD
 
-Geographic scope differences (CA8 vs CAISO vs RESOLVE)
--------------------------------------------------------
+Geographic scope differences (CA8 vs CAISO vs RESOLVE vs ReEDS)
+-----------------------------------------------------------------
   RESOLVE CAISO zone: PGE + SCE + SDGE
   RESOLVE CA total:   PGE + SCE + SDGE + IID + LDWP + NCNC
 
@@ -59,6 +59,16 @@ Geographic scope differences (CA8 vs CAISO vs RESOLVE)
   EIA CAL:     EIA's geographic "CAL" region (available 2019+).  Excludes
                out-of-state NEVP/PACW load.  Best apples-to-apples
                comparison for total California electricity demand.
+
+  ReEDS p9-p11 (WECC_CA): Empirically found to track PUDL CA5 sum
+               (~BANC+CISO+IID+LDWP+TIDC, ~265-274 TWh/yr), NOT EIA CISO
+               alone (~224 TWh/yr).  The ~40 TWh gap between p9-p11 and CISO
+               is approximately equal to IID+LDWP+BANC+TIDC combined, confirming
+               that WECC_CA in ReEDS = all California BAs except PacifiCorp West.
+               Do NOT compare ReEDS p9-p11 directly to EIA CISO; compare to
+               PUDL CA5 or EIA CAL instead.
+  ReEDS p8 (WECC_NW CA slice): PacifiCorp West California territory only,
+               ~0.8 TWh/yr.  So CA total (p8+p9+p10+p11) ≈ WECC_CA + ~0.8 TWh.
 
 Outputs
 -------
@@ -100,6 +110,9 @@ EIA_CAL      = PROC / "eia"      / "eia930_cal_region_EIA.csv"
 PUDL_CAL     = PROC / "eia"      / "eia930_cal_region_PUDL.csv"
 IEPR_ANN     = PROC / "iepr"     / "iepr_baseline_annual.csv"
 IEPR_HRLY    = PROC / "iepr"     / "iepr_hourly_forecast.csv"
+REEDS_ANN    = PROC / "reeds"    / "reeds_ca_load_annual.csv"
+REEDS_HRLY   = PROC / "reeds"    / "reeds_ca_load_hourly.parquet"
+HIST_LOAD_ANN  = PROC / "reeds"  / "historic_ca_load_annual.csv"
 
 # RESOLVE optimization outputs (auto-detect latest timestamped run folder)
 def _find_resolve_outputs() -> Path | None:
@@ -123,6 +136,83 @@ NEVP_PACW    = ["NEVP", "PACW"]
 
 
 # ── Loaders ───────────────────────────────────────────────────────────────────
+
+def _reeds_hourly_ca(target_year: int = 2022) -> pd.DataFrame:
+    """
+    ReEDS CA total (p8-p11) mean hourly load across 7 weather years for a target year.
+
+    Uses nearest available target year if the exact year is not in the data.
+    Returns DataFrame with columns: time_index, month, hour, load_mw_mean.
+    """
+    if not REEDS_HRLY.exists():
+        return pd.DataFrame(columns=["time_index", "month", "hour", "load_mw_mean"])
+    df = pd.read_parquet(REEDS_HRLY, filters=[("year", "=", target_year)])
+    if df.empty:
+        all_df = pd.read_parquet(REEDS_HRLY, columns=["year"]).drop_duplicates()
+        available = sorted(all_df["year"].unique())
+        nearest = min(available, key=lambda y: abs(y - target_year))
+        df = pd.read_parquet(REEDS_HRLY, filters=[("year", "=", nearest)])
+    # Step 1: sum 4 CA regions per (weather_year, time_index)
+    ca = (df.groupby(["weather_year", "time_index", "month", "hour"])["load_mw"]
+            .sum().reset_index())
+    # Step 2: mean across 7 weather years per time_index
+    mean_h = (ca.groupby(["time_index", "month", "hour"])["load_mw"]
+                .mean().reset_index()
+                .rename(columns={"load_mw": "load_mw_mean"}))
+    return mean_h
+
+
+def _reeds_annual() -> pd.DataFrame:
+    """
+    ReEDS IRA_low CA total annual energy (TWh) by (year, weather_year).
+
+    Returns CA_total rows (p8+p9+p10+p11 summed).
+    Use for comparisons against PUDL CA5 sum or EIA CAL geographic region.
+    Columns: year, weather_year, annual_twh.
+    """
+    if not REEDS_ANN.exists():
+        return pd.DataFrame(columns=["year", "weather_year", "annual_twh"])
+    df = pd.read_csv(REEDS_ANN)
+    return df[df["region"] == "CA_total"][["year", "weather_year", "annual_twh"]].copy()
+
+
+def _reeds_annual_caiso() -> pd.DataFrame:
+    """
+    ReEDS IRA_low CAISO annual energy (TWh) by (year, weather_year).
+
+    Returns CAISO_total rows (p9+p10+p11 only; excludes p8 PacifiCorp CA slice).
+    Use for comparisons against EIA CISO or other CAISO-territory sources.
+    Columns: year, weather_year, annual_twh.
+    """
+    if not REEDS_ANN.exists():
+        return pd.DataFrame(columns=["year", "weather_year", "annual_twh"])
+    df = pd.read_csv(REEDS_ANN)
+    if "CAISO_total" not in df["region"].values:
+        # Fallback: compute on the fly from individual regions (pre-CAISO_total output)
+        caiso = (df[df["region"].isin(["p9", "p10", "p11"])]
+                 .groupby(["year", "scenario", "weather_year"])["annual_twh"]
+                 .sum().reset_index())
+        return caiso[["year", "weather_year", "annual_twh"]].copy()
+    return df[df["region"] == "CAISO_total"][["year", "weather_year", "annual_twh"]].copy()
+
+
+def _historic_annual() -> pd.DataFrame:
+    """
+    Historic CA load annual energy (TWh) by year and region.
+
+    Source: process_historic_load.py from
+    data/raw/PotentialData/historic_post2015_load_hourly.h5
+    Covers 2016-2023.  Timestamps in CST (UTC-6); annual totals use CST
+    calendar year grouping (~0.02% annual shift vs PST year — negligible).
+
+    Returns tidy DataFrame:
+      Columns: year | region | annual_twh
+      Region values: p8, p9, p10, p11, CAISO_total, CA_total
+    """
+    if not HIST_LOAD_ANN.exists():
+        return pd.DataFrame(columns=["year", "region", "annual_twh"])
+    return pd.read_csv(HIST_LOAD_ANN)[["year", "region", "annual_twh"]].copy()
+
 
 def _eia_annual_by_ba() -> pd.DataFrame:
     """Annual TWh per BA, filtered to full years (>= 95% of expected hours)."""
@@ -362,6 +452,10 @@ COLORS = {
     "eia_ca8":        "#bcbd22",
     "eia_inca":       "#8c564b",
     "nevp_pacw":      "#e74c3c",
+    "reeds":          "#7f7f7f",     # projected CA total (p8-p11)
+    "reeds_caiso":    "#b5b5b5",     # projected CAISO (p9-p11)
+    "hist_caiso":     "#d62728",     # historic CAISO actual (p9-p11)
+    "hist_ca":        "#ff7f0e",     # historic CA total actual (p8-p11)
 }
 
 
@@ -374,6 +468,9 @@ def fig1_annual_comparison(
     iepr_cons: pd.DataFrame | None = None,
     iepr_mgd: pd.DataFrame | None = None,
     cal_ann_eia: pd.DataFrame | None = None,
+    reeds: pd.DataFrame | None = None,
+    reeds_caiso: pd.DataFrame | None = None,
+    hist: pd.DataFrame | None = None,
 ) -> None:
     fig, ax = plt.subplots(figsize=(13, 7))
 
@@ -404,11 +501,11 @@ def fig1_annual_comparison(
     vintage_colors = {2023: "#1f77b4", 2024: "#ff7f0e", 2025: "#2ca02c"}
     last_hist = _iepr_last_hist()
     for vintage, grp in iepr_net.groupby("vintage"):
-        last_h = last_hist.get(vintage, 9999)
-        col    = vintage_colors.get(vintage, "gray")
-        proj   = grp[grp["year"] > last_h]
-        hist   = grp[grp["year"] <= last_h]
-        ax.plot(hist["year"], hist["twh"], color=col, lw=1.2, ls="--", alpha=0.4)
+        last_h   = last_hist.get(vintage, 9999)
+        col      = vintage_colors.get(vintage, "gray")
+        proj     = grp[grp["year"] > last_h]
+        iepr_his = grp[grp["year"] <= last_h]
+        ax.plot(iepr_his["year"], iepr_his["twh"], color=col, lw=1.2, ls="--", alpha=0.4)
         ax.plot(proj["year"], proj["twh"], color=col, lw=2,
                 label=f"IEPR v{vintage} BASELINE_NET_LOAD PGE+SCE+SDGE (net of BTM solar)")
         bnd = grp[grp["year"] == last_h]
@@ -445,6 +542,37 @@ def fig1_annual_comparison(
             color=COLORS["eia_ca8"], lw=1.2, marker="s", ms=3, ls=":",
             label="EIA CA8 sum (8 BAs incl. NEVP+PACW — ~1 TWh actual CA, rest out-of-state)")
 
+    # ReEDS IRA_low CA total (p8+p9+p10+p11): mean across 7 weather years, no band
+    # WECC_CA (p9-p11) + WECC_NW CA slice (p8, ~0.8 TWh/yr).
+    # Use for comparison against PUDL CA5 sum / EIA CAL geographic CA boundary.
+    if reeds is not None and not reeds.empty:
+        rd_mean = reeds.groupby("year")["annual_twh"].mean()
+        ax.plot(rd_mean.index, rd_mean.values,
+                color=COLORS["reeds"], lw=1.8, ls="--",
+                marker="x", ms=4, zorder=3,
+                label="ReEDS IRA_low CA total p8-p11 (WECC_CA + PACW CA slice, net projected)")
+
+    # ReEDS IRA_low WECC_CA (p9+p10+p11): mean across 7 weather years, no band
+    # Empirically tracks PUDL CA5 sum, not EIA CISO — see scope note in docstring.
+    # p8 (PacifiCorp CA slice) adds only ~0.8 TWh/yr; difference vs CA total is invisible at this scale.
+    if reeds_caiso is not None and not reeds_caiso.empty:
+        rc_mean = reeds_caiso.groupby("year")["annual_twh"].mean()
+        ax.plot(rc_mean.index, rc_mean.values,
+                color=COLORS["reeds_caiso"], lw=1.5, ls=":",
+                marker="+", ms=4, zorder=3,
+                label="ReEDS IRA_low WECC_CA p9-p11 (all CA excl. PACW, net projected)")
+
+    # ReEDS historic WECC_CA (p9+p10+p11), 2016-2023 actual observed load
+    # Source: historic_post2015_load_hourly.h5 via process_historic_load.py
+    # NOTE: p9-p11 tracks PUDL CA5 (~BANC+CISO+IID+LDWP+TIDC), not EIA CISO alone.
+    #   EIA CISO gap is ~40 TWh/yr; CA total (p8-p11) differs from p9-p11 by only ~0.8 TWh.
+    if hist is not None and not hist.empty:
+        h_wca = hist[hist["region"] == "CAISO_total"]   # column named CAISO_total = p9+p10+p11
+        if not h_wca.empty:
+            ax.plot(h_wca["year"], h_wca["annual_twh"],
+                    color=COLORS["hist_caiso"], lw=2, marker="o", ms=5, zorder=6,
+                    label="ReEDS historic WECC_CA p9-p11 (2016-2023 actual, all CA excl. PACW)")
+
     ax.set_xlabel("Year")
     ax.set_ylabel("Annual demand (TWh)")
     ax.set_xlim(2015, 2045)
@@ -465,7 +593,8 @@ def fig1_annual_comparison(
 
 def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
                               cal_ann: pd.DataFrame,
-                              cal_ann_eia: pd.DataFrame | None = None) -> None:
+                              cal_ann_eia: pd.DataFrame | None = None,
+                              reeds: pd.DataFrame | None = None) -> None:
     """
     Paired bar chart: for each geographic scope, EIA (left) and RESOLVE (right) side-by-side.
     RESOLVE CAISO bars are stacked by utility (PGE / SCE / SDGE).
@@ -508,10 +637,25 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
         if not c.empty:
             cal_v_eia = float(c["twh"].iloc[0])
 
+    # Nearest ReEDS target year to yr_eia for comparison
+    reeds_mean_twh: float | None = None
+    reeds_min_twh:  float | None = None
+    reeds_max_twh:  float | None = None
+    reeds_yr_lbl:   int          = yr_eia
+    if reeds is not None and not reeds.empty:
+        available_yrs = sorted(reeds["year"].unique())
+        nearest_yr = min(available_yrs, key=lambda y: abs(y - yr_eia))
+        r = reeds[reeds["year"] == nearest_yr]["annual_twh"]
+        reeds_mean_twh = float(r.mean())
+        reeds_min_twh  = float(r.min())
+        reeds_max_twh  = float(r.max())
+        reeds_yr_lbl   = nearest_yr
+
     # ── Colors ────────────────────────────────────────────────────────────────
     C_EIA_IN  = "#1f77b4"   # EIA in-CA / mostly-CA BAs
     C_EIA_OUT = "#e74c3c"   # EIA mostly-out-of-state BAs (NEVP, PACW)
     C_EIA_CAL = "#9467bd"   # EIA geographic CA region
+    C_REEDS   = COLORS["reeds"]
     # RESOLVE utility colors — green ramp for CAISO, purple ramp for non-CAISO
     C_PGE  = "#1a7a2e"
     C_SCE  = "#2ca02c"
@@ -636,6 +780,20 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
             tick_labels.append("PUDL CA5 sum\n(geographic CA)")
         x += SUM_D
 
+    # Group C: ReEDS IRA_low CA total (nearest target year to yr_eia)
+    if reeds_mean_twh is not None:
+        ax.bar(x, reeds_mean_twh, BAR_W, color=C_REEDS, alpha=0.85,
+               edgecolor="white", lw=0.5)
+        ax.errorbar(x, reeds_mean_twh,
+                    yerr=[[reeds_mean_twh - reeds_min_twh],
+                          [reeds_max_twh  - reeds_mean_twh]],
+                    color=C_REEDS, capsize=4, lw=1.5, zorder=5)
+        ax.text(x, reeds_max_twh + 1.0, f"{reeds_mean_twh:.0f}",
+                ha="center", va="bottom", fontsize=6.5)
+        tick_positions.append(x)
+        tick_labels.append(f"ReEDS IRA_low\nCA total (~{reeds_yr_lbl})")
+        x += SUM_D
+
     # ── Axes formatting ───────────────────────────────────────────────────────
     ax.set_xticks(tick_positions)
     ax.set_xticklabels(tick_labels, rotation=20, ha="right", fontsize=7.5)
@@ -664,6 +822,10 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
         mpatches.Patch(color=C_LDWP, alpha=0.9, label=f"RESOLVE LDWP (~{yr_res_lbl})"),
         mpatches.Patch(color=C_NCNC, alpha=0.9, label=f"RESOLVE NCNC (~{yr_res_lbl})"),
     ]
+    if reeds_mean_twh is not None:
+        patches.append(mpatches.Patch(color=C_REEDS, alpha=0.85,
+                                      label=f"ReEDS IRA_low p8+p9+p10+p11 (~{reeds_yr_lbl})"
+                                            " — error bars = weather-year range"))
     ax.legend(handles=patches, fontsize=7, ncol=3, loc="upper center")
 
     fig.tight_layout()
@@ -673,15 +835,19 @@ def fig2_scope_decomposition(eia_piv: pd.DataFrame, resolve: pd.DataFrame,
     plt.close(fig)
 
 
-def fig3_hourly_shape(resolve_hrly: pd.DataFrame, eia_ann_by_ba: pd.DataFrame) -> None:
+def fig3_hourly_shape(resolve_hrly: pd.DataFrame, eia_ann_by_ba: pd.DataFrame,
+                      reeds_hourly: pd.DataFrame | None = None) -> None:
     """
-    Compare RESOLVE 2022 hourly shape vs EIA CISO 2022 hourly.
+    Compare RESOLVE 2022 hourly shape vs EIA CISO 2022 hourly, with ReEDS overlay.
 
     Uses demand_mw_2024scaled (GROSS demand, before BTM solar subtraction) directly —
     no Customer_PV correction is applied here.  This is intentional: the level gap
     between RESOLVE (gross) and EIA-930 (net-of-BTM) illustrates the ~20-25 TWh BTM
     solar offset.  For net-load comparisons, see compare_substation_eia_iepr.py which
     subtracts RESOLVE's native Customer_PV profiles from demand_mw_2024scaled.
+
+    reeds_hourly: output of _reeds_hourly_ca(), columns (time_index, month, hour,
+    load_mw_mean).  Nearest available target year is used (see _reeds_hourly_ca).
     """
     yr = 2022
 
@@ -713,7 +879,19 @@ def fig3_hourly_shape(resolve_hrly: pd.DataFrame, eia_ann_by_ba: pd.DataFrame) -
     r_corr, _ = stats.pearsonr(res_vals, ciso_vals)
     diff_pct  = (res_vals.mean() - ciso_vals.mean()) / ciso_vals.mean() * 100
 
-    fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+    # ReEDS sorted hourly values and monthly means (if available)
+    reeds_ldc:  np.ndarray | None = None
+    reeds_mon:  pd.Series | None  = None
+    reeds_lbl   = ""
+    if reeds_hourly is not None and not reeds_hourly.empty:
+        rv = reeds_hourly["load_mw_mean"].dropna().sort_values().values
+        reeds_ldc = rv
+        rm = (reeds_hourly.groupby("month")["load_mw_mean"].mean() / 1000)
+        reeds_mon = rm
+        # Identify the target year from the data (stored via filter in _reeds_hourly_ca)
+        reeds_lbl = "ReEDS IRA_low CA total (p8-p11, mean across 7 wx-yrs)"
+
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
     # Load duration curves
     ax = axes[0]
@@ -721,16 +899,22 @@ def fig3_hourly_shape(resolve_hrly: pd.DataFrame, eia_ann_by_ba: pd.DataFrame) -
             color=COLORS["resolve"], lw=2, label=f"RESOLVE {yr} PGE+SCE+SDGE (scaled to 2024 target)")
     ax.plot(np.arange(min_len) / min_len * 100, ciso_vals[::-1] / 1000,
             color=COLORS["eia_ciso"], lw=2, label=f"EIA CISO {yr} (measured)")
+    if reeds_ldc is not None:
+        n_r = len(reeds_ldc)
+        ax.plot(np.arange(n_r) / n_r * 100, reeds_ldc[::-1] / 1000,
+                color=COLORS["reeds"], lw=1.8, ls="--", label=reeds_lbl)
     ax.set_xlabel("% of hours (load duration curve)")
     ax.set_ylabel("Demand (GW)")
     ax.set_title(f"Load duration curves: RESOLVE vs EIA CISO ({yr})")
-    ax.legend(fontsize=9)
+    ax.legend(fontsize=8.5)
     ax.grid(alpha=0.3)
-    ax.text(0.98, 0.02,
-            f"RESOLVE mean: {res_vals.mean()/1000:.1f} GW\n"
-            f"EIA CISO mean: {ciso_vals.mean()/1000:.1f} GW\n"
-            f"Level difference: {diff_pct:+.1f}%\n"
-            f"Shape correlation (sorted ranks): r={r_corr:.4f}",
+    stats_txt = (f"RESOLVE mean: {res_vals.mean()/1000:.1f} GW\n"
+                 f"EIA CISO mean: {ciso_vals.mean()/1000:.1f} GW\n"
+                 f"Level difference: {diff_pct:+.1f}%\n"
+                 f"Shape correlation (sorted ranks): r={r_corr:.4f}")
+    if reeds_ldc is not None:
+        stats_txt += f"\nReEDS mean: {reeds_ldc.mean()/1000:.1f} GW"
+    ax.text(0.98, 0.02, stats_txt,
             transform=ax.transAxes, fontsize=8, ha="right", va="bottom",
             bbox=dict(boxstyle="round", fc="white", alpha=0.8))
 
@@ -746,22 +930,32 @@ def fig3_hourly_shape(resolve_hrly: pd.DataFrame, eia_ann_by_ba: pd.DataFrame) -
     mon_labels = ["Jan","Feb","Mar","Apr","May","Jun",
                   "Jul","Aug","Sep","Oct","Nov","Dec"]
     x = np.arange(1, 13)
-    w = 0.38
-    ax.bar(x - w/2, res_mon.reindex(x).values,  width=w, label="RESOLVE (scaled to 2024)",
-           color=COLORS["resolve"], alpha=0.8)
-    ax.bar(x + w/2, ciso_mon.reindex(x).values, width=w, label="EIA CISO",
-           color=COLORS["eia_ciso"], alpha=0.8)
+    if reeds_mon is not None:
+        w = 0.26
+        ax.bar(x - w, res_mon.reindex(x).values,  width=w, label="RESOLVE (scaled to 2024)",
+               color=COLORS["resolve"], alpha=0.8)
+        ax.bar(x,     ciso_mon.reindex(x).values, width=w, label="EIA CISO",
+               color=COLORS["eia_ciso"], alpha=0.8)
+        ax.bar(x + w, reeds_mon.reindex(x).values, width=w, label=reeds_lbl,
+               color=COLORS["reeds"], alpha=0.75)
+    else:
+        w = 0.38
+        ax.bar(x - w/2, res_mon.reindex(x).values,  width=w, label="RESOLVE (scaled to 2024)",
+               color=COLORS["resolve"], alpha=0.8)
+        ax.bar(x + w/2, ciso_mon.reindex(x).values, width=w, label="EIA CISO",
+               color=COLORS["eia_ciso"], alpha=0.8)
     ax.set_xticks(x)
     ax.set_xticklabels(mon_labels)
     ax.set_ylabel("Mean hourly demand (GW)")
     ax.set_title(f"Monthly mean demand: RESOLVE vs EIA CISO ({yr})")
-    ax.legend(fontsize=9)
+    ax.legend(fontsize=8.5)
     ax.grid(alpha=0.3, axis="y")
 
     fig.suptitle(
-        "RESOLVE hourly shape comparison vs EIA-930 CISO\n"
+        "RESOLVE hourly shape comparison vs EIA-930 CISO (+ ReEDS IRA_low CA total)\n"
         "RESOLVE 2024scaled = raw shape × (2024 annual target / shape-year annual sum)\n"
-        "Level gap reflects gross load (RESOLVE) vs net-of-BTM-solar (EIA)",
+        "Level gap reflects gross load (RESOLVE) vs net-of-BTM-solar (EIA); "
+        "ReEDS is projected total consumption",
         fontsize=9
     )
     fig.tight_layout()
@@ -788,6 +982,9 @@ def main() -> None:
     resolve_hrly = _resolve_hourly()
     overlays     = _resolve_outputs_overlays()
     last_hist    = _iepr_last_hist()
+    reeds_ann    = _reeds_annual()          # CA total (p8+p9+p10+p11)
+    reeds_caiso  = _reeds_annual_caiso()    # CAISO only (p9+p10+p11)
+    hist_ann     = _historic_annual()       # historic 2016-2023 actual (all regions)
 
     # ── Section 1: Annual level comparison ───────────────────────────────────
     print()
@@ -1035,9 +1232,13 @@ def main() -> None:
     print()
     print("Generating figures ...")
     fig1_annual_comparison(resolve, iepr_net, iepr_gross, eia_piv, cal_ann,
-                           iepr_cons, iepr_mgd, cal_ann_eia=cal_ann_eia)
-    fig2_scope_decomposition(eia_piv, resolve, cal_ann, cal_ann_eia=cal_ann_eia)
-    fig3_hourly_shape(resolve_hrly, eia_ba)
+                           iepr_cons, iepr_mgd, cal_ann_eia=cal_ann_eia,
+                           reeds=reeds_ann, reeds_caiso=reeds_caiso,
+                           hist=hist_ann)
+    reeds_hourly = _reeds_hourly_ca(target_year=2022)
+    fig2_scope_decomposition(eia_piv, resolve, cal_ann, cal_ann_eia=cal_ann_eia,
+                             reeds=reeds_ann)
+    fig3_hourly_shape(resolve_hrly, eia_ba, reeds_hourly=reeds_hourly)
     print(f"\nDone. Figures saved to {FIGS.relative_to(ROOT)}/")
 
 

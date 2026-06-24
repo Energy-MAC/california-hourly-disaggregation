@@ -39,11 +39,13 @@ CAL_FILE_EIA  = PROC / "eia" / "eia930_cal_region_EIA.csv"
 CAL_FILE_PUDL = PROC / "eia" / "eia930_cal_region_PUDL.csv"
 IEPR_ANN      = PROC / "iepr" / "iepr_baseline_annual.csv"
 IEPR_HRLY     = PROC / "iepr" / "iepr_hourly_forecast.csv"
+REEDS_ANN     = PROC / "reeds" / "reeds_ca_load_annual.csv"
 
 VINTAGE_COLORS = {2023: "#1f77b4", 2024: "#ff7f0e", 2025: "#2ca02c"}
 EIA_COLOR      = "#222222"
 CAL_COLOR      = "#9467bd"   # purple — PUDL CA5 sum (preferred for analysis)
 CAL_EIA_COLOR  = "#d62728"   # red — EIA API CAL (shown in annual plots alongside PUDL)
+REEDS_COLOR    = "#7f7f7f"   # gray — ReEDS IRA_low scenario
 
 # IEPR utilities that map to CAISO (CISO) territory
 CAISO_UTILS = ["PGE", "SCE", "SDGE"]
@@ -137,6 +139,20 @@ def load_cal_daily_peaks() -> pd.DataFrame:
     peak_hrs = df.loc[idx, ["date", "hour", "demand_mwh"]]
     return peak_hrs.rename(columns={"hour": "peak_hour_cal",
                                     "demand_mwh": "peak_mw_cal"}).reset_index(drop=True)
+
+
+def load_reeds_ca_annual() -> pd.DataFrame:
+    """
+    ReEDS IRA_low CA total annual energy (TWh) by (year, weather_year).
+
+    Returns a DataFrame with columns: year, weather_year, annual_twh.
+    Only the CA_total aggregate row is returned (p8+p9+p10+p11 summed).
+    Source: data/processed/reeds/reeds_ca_load_annual.csv
+    """
+    if not REEDS_ANN.exists():
+        return pd.DataFrame(columns=["year", "weather_year", "annual_twh"])
+    df = pd.read_csv(REEDS_ANN)
+    return df[df["region"] == "CA_total"][["year", "weather_year", "annual_twh"]].copy()
 
 
 def load_iepr_statewide() -> pd.DataFrame:
@@ -469,6 +485,7 @@ def fig1_iepr_vs_eia(
     eia_ciso: pd.DataFrame,
     ann_stats: dict,
     cal_eia: pd.DataFrame | None = None,
+    reeds: pd.DataFrame | None = None,
 ) -> None:
     fig, ax = plt.subplots(figsize=(11, 5))
 
@@ -497,6 +514,17 @@ def fig1_iepr_vs_eia(
     ax.plot(eia_ca8["year"], eia_ca8["twh"], color=EIA_COLOR, lw=1.2,
             marker="s", ms=3, linestyle=":", alpha=0.6,
             label="EIA CA8 sum (8 BAs incl. NEVP/PACW)")
+
+    # ReEDS IRA_low CA total (p8+p9+p10+p11): mean + min/max across weather years
+    if reeds is not None and not reeds.empty:
+        rd_mean = reeds.groupby("year")["annual_twh"].mean()
+        rd_min  = reeds.groupby("year")["annual_twh"].min()
+        rd_max  = reeds.groupby("year")["annual_twh"].max()
+        ax.plot(rd_mean.index, rd_mean.values, color=REEDS_COLOR, lw=1.8,
+                ls="--", marker="x", ms=4,
+                label="ReEDS IRA_low CA total (p8+p9+p10+p11, all CA — mean across 7 weather years)")
+        ax.fill_between(rd_mean.index, rd_min.values, rd_max.values,
+                        color=REEDS_COLOR, alpha=0.12, label="_nolegend_")
 
     ax.set_xlabel("Year")
     ax.set_ylabel("Annual demand (TWh)")
@@ -846,10 +874,16 @@ def main() -> None:
         for ln in lines:
             print(f"     {ln}")
 
+    print("Loading ReEDS IRA_low CA annual projections ...")
+    reeds_ann = load_reeds_ca_annual()
+    if not reeds_ann.empty:
+        print(f"  years: {sorted(reeds_ann['year'].unique().tolist())}")
+
     # ── Figures ───────────────────────────────────────────────────────────────
     print()
     print("Generating figures ...")
-    fig1_iepr_vs_eia(iepr, eia_ann, cal_ann, eia_ciso_ann, ann_stats, cal_eia=cal_ann_eia)
+    fig1_iepr_vs_eia(iepr, eia_ann, cal_ann, eia_ciso_ann, ann_stats,
+                     cal_eia=cal_ann_eia, reeds=reeds_ann)
     fig2_eia_fcst_vs_actual(monthly, cal_monthly, fcast_stats)
     fig3_iepr_vintages(iepr, iepr_gross)
     fig4_peak_alignment(peaks, pk_stats, cal_peaks)

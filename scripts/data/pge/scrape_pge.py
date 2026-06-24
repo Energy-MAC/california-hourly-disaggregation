@@ -9,6 +9,11 @@ Key layers
   0   EDSubstations     Physical attributes: voltage, banks, DG capacity, division
   25  Feeder load       Hourly min/max load profiles by feeder (primary load source)
 
+Layer IDs were identified by manual inspection of the PG&E ArcGIS FeatureServer
+layer listing (subcommand: python scrape_pge.py discover).  Layer 0 and layer 25
+were selected as the attribute and load sources respectively based on their field
+names and data content, confirmed by reviewing sample records from each layer.
+
 Subcommands
 -----------
 attributes

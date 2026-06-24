@@ -4,31 +4,39 @@ process_resolve.py
 Processes RESOLVE (E3 / CPUC IRP) load input data into clean files for
 comparison against IEPR and EIA-930.
 
-RESOLVE is an energy system planning model used by CPUC for California IRP.
+RESOLVE is an energy system planning model used by CPUC for California Integrated Resource Planning.
 Its load inputs come in two layers:
 
   1. profiles/loads/2024/{utility}_Baseline.csv
        Hourly (8760-row) shape profiles for each utility covering calendar
-       years 2000-2022.  Column "profile_model_years" is in MW (gross load
-       including T&D losses, before BTM solar subtraction).  These represent
-       RESOLVE's calibrated historical load shapes used as temporal templates.
+       years 2000-2022.  Column "profile_model_years" is in MW (gross load,
+       before BTM solar subtraction).
+       STRUCTURAL PROOF that this is gross load: the file contains ONLY two
+       columns ("datetime", "profile_model_years") — there is no BTM_PV or
+       Customer_PV column in this file.  BTM solar is in a completely separate
+       directory (data/profiles/pmax/2025/{UTIL}_Customer_PV.csv) with its own
+       "Weather Factor" column (hourly solar capacity factor, 0-1).  The physical
+       separation of load and BTM profiles proves they are independent quantities.
 
   2. data/interim/loads/{utility}_Baseline_CHP_Not_Retire.csv
        Annual energy forecast targets (MWh) for model years 2024-2045.
        RESOLVE scales each shape profile by (annual_target / shape_sum)
-       before running the optimization, so the profile magnitudes are only
-       meaningful as ratios, not absolute values.
+       before running the optimization (see new_modeling_toolkit/system/electric/
+       load_component.py, scale_multiplier logic).
 
 Geographic scope of RESOLVE utilities modeled here:
-  PGE    Pacific Gas & Electric (CAISO territory)
+  PGE    Pacific Gas & Electric (CAISO territory; PGE, SCE, SDGE map to CISO BA)
   SCE    Southern California Edison (CAISO territory)
   SDGE   San Diego Gas & Electric (CAISO territory)
   IID    Imperial Irrigation District
   LDWP   Los Angeles Department of Water & Power
-  NCNC   Northern CA / NV Connection (smaller co-ops north of PGE)
+  NCNC   Northern California Non-CAISO — includes BANC, TIDC, SMUD, and other small
+         municipal utilities in northern CA.  See CEC Demand Modelling Form 1.1c at
+         https://www.energy.ca.gov/data-reports/california-energy-planning-library/
+         forecasts-and-system-planning/demand-side-3
 
-RESOLVE does NOT include NEVP, PACW, BANC, TIDC, WALC — these appear in
-EIA-930 CA8 but not in RESOLVE's California scope.
+RESOLVE does NOT include NEVP, PACW, WALC — these appear in
+EIA-930 CA8 but not in RESOLVE's California scope.  BANC and TIDC are included in NCNC.
 
 Outputs
 -------

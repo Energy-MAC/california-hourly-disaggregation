@@ -58,8 +58,10 @@ _BA_NAME = "balancing_authority_name_eia"    # e.g. "California ISO"
 
 # Operations: map PUDL column → output column name.
 # PUDL may provide both "reported" and "imputed" variants; we prefer imputed
-# where available (PUDL has filled gaps), falling back to reported.
-# The first one is the one that is used by the processing script
+# where available (PUDL has filled gaps via its timeseries imputation pipeline),
+# falling back to reported.  PUDL imputation methodology:
+# https://docs.catalyst.coop/pudl/en/latest/methodology/timeseries_imputation.html
+# The first candidate present in the parquet is the one used.
 _OPS_COL_CANDIDATES: dict[str, list[str]] = {
     "demand_mwh":            ["demand_imputed_pudl_mwh","demand_imputed_eia_mwh","demand_adjusted_mwh", "demand_reported_mwh"],
     "demand_forecast_mwh":   ["demand_forecast_mwh"],
@@ -193,6 +195,11 @@ def process_interchange(out_dir: Path = OUT_DIR) -> Path | None:
     return out_path
 
 
+# CA5 = the five BAs that serve only California load.  EIA defines the CAL region
+# as exactly this sum; verified empirically in compare_cal_region_sources.py where
+# the EIA API CAL series and the PUDL CA5 sum track each other (within PUDL imputation
+# differences).  WALC, NEVP, PACW are excluded because they serve significant
+# out-of-state load (confirmed via EIA Form 861 retail sales by state).
 CA5 = ["BANC", "CISO", "IID", "LDWP", "TIDC"]
 
 
@@ -204,9 +211,15 @@ def process_cal_region_eia(out_dir: Path = OUT_DIR) -> Path:
     CAL is EIA's California region aggregate — it aligns with state boundaries
     rather than BA boundaries, so it excludes the Nevada (NEVP) and Pacific
     Northwest (PACW) portions of the CA8 BA set while including any California
-    load outside those eight BAs.
+    load outside those eight BAs.  It also excludes WALC.
 
-    It also excludes WALC.
+    EIA defines "demand" as: total metered net generation within the BA minus
+    total metered net interchange with neighboring BAs.  This is a net-of-BTM
+    measure because behind-the-meter generation is not visible to BA-boundary
+    meters.  Source: EIA Grid Monitor methodology page,
+    https://www.eia.gov/electricity/gridmonitor/about (paragraph: "Demand is a
+    calculated value representing the amount of electricity load within a BA's
+    electric system.").
 
     Output: data/processed/eia/eia930_cal_region_EIA.csv
     """

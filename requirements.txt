@@ -9,3 +9,4 @@ python-dotenv
 pyarrow
 fsspec
 s3fs
+h5py

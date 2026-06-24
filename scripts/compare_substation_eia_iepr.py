@@ -11,7 +11,10 @@ Substation profiles represent the high-load-day (max_load) and low-load-day
 substations gives the COINCIDENT load bounds as measured at distribution level.
 
 PGE and SDGE have no year stamp -- their profiles are fixed month-hour overlays.
-SCE has years 2017-2026 and is included in the aggregate.
+SCE has years 2017-2026 with overlapping substation coverage across years.  For
+each (substation, month, hour) cell the most recent vintage is used; 2026 only
+covers Jan-Apr so May-Dec fall back to 2025 for those substations.  The processed
+CSV already encodes this deduplication; the loader applies it defensively as well.
 
 RESOLVE: gross → net load derivation
 --------------------------------------
@@ -25,12 +28,19 @@ subtracts RESOLVE's own native Customer_PV profiles:
     resolve_net_mw = demand_mw_2024scaled − weather_factor × planned_capacity_2024
 
 where:
-  weather_factor   -- hourly solar capacity factor from
-                      RESOLVE_RAW/data/profiles/pmax/2025/{UTIL}_Customer_PV.csv
-                      (23 actual weather years 2000-2022, real SAM simulation outputs;
+  weather_factor   -- hourly solar capacity factor ("Weather Factor" column, values 0-1)
+                      from RESOLVE_RAW/data/profiles/pmax/2025/{UTIL}_Customer_PV.csv
+                      (23 weather years 2000-2022; these are RESOLVE's native BTM PV
+                      generation profiles — their provenance within RESOLVE's modelling
+                      workflow is not independently documented in publicly available files,
+                      but the column name and 0-1 range are consistent with a capacity
+                      factor profile).
                       varies day to day based on cloud cover / irradiance)
-  planned_capacity -- 2024 IEPR Local_Reliability installed BTM PV capacity (MW) from
+  planned_capacity -- installed BTM PV capacity (MW) from
                       RESOLVE_RAW/data/interim/resources/{UTIL}_Customer_PV.csv
+                      attribute=planned_capacity, year=2024, scenario=2024_IEPR_Local_Reliability.
+                      This scenario is the CPUC 2024-2026 IRP local reliability planning case.
+                      Values (2024): PGE=9,669 MW, SCE=6,553 MW, SDGE=2,463 MW (from file rows).
                       (PGE: 9,669 MW; SCE: 6,553 MW; SDGE: 2,463 MW)
 
 This uses RESOLVE's own internal BTM model, NOT the IEPR BTM_PV fixed monthly
@@ -71,10 +81,11 @@ PROC = ROOT / "data" / "processed"
 FIGS = ROOT / "data" / "figures"
 FIGS.mkdir(parents=True, exist_ok=True)
 
-SUBS_FILE = PROC / "substations" / "substation_load_profiles_clean.csv"
-EIA_FILE  = PROC / "eia" / "eia930_operations.csv"
-CAL_FILE  = PROC / "eia" / "eia930_cal_region_PUDL.csv"
-IEPR_FILE = PROC / "iepr" / "iepr_hourly_forecast.csv"
+SUBS_FILE  = PROC / "substations" / "substation_load_profiles_clean.csv"
+EIA_FILE   = PROC / "eia" / "eia930_operations.csv"
+CAL_FILE   = PROC / "eia" / "eia930_cal_region_PUDL.csv"
+IEPR_FILE  = PROC / "iepr" / "iepr_hourly_forecast.csv"
+REEDS_FILE = PROC / "reeds" / "reeds_ca_load_hourly.parquet"
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -88,6 +99,7 @@ VINTAGE_COLORS = {2023: "#1f77b4", 2024: "#ff7f0e", 2025: "#2ca02c"}
 UTIL_COLORS    = {"pge": "#e41a1c", "sce": "#377eb8", "sdge": "#4daf4a"}
 CAL_COLOR      = "#9467bd"   # purple — EIA CAL region
 RESOLVE_COLOR  = "#8c564b"   # brown  — RESOLVE weather-year ensemble
+REEDS_COLOR    = "#7f7f7f"   # gray   — ReEDS IRA_low
 RESOLVE_FILE   = PROC / "resolve" / "resolve_hourly_profiles.csv"
 RESOLVE_UTILS  = ["PGE", "SCE", "SDGE"]   # match IEPR scope
 RESOLVE_RAW    = (ROOT / "data" / "raw" /
@@ -113,14 +125,93 @@ IEPR_REPR_YEAR = {2023: 2024, 2024: 2024, 2025: 2025}
 # Data loaders
 # ---------------------------------------------------------------------------
 
+def load_reeds_month_hour(target_year: int = 2025) -> pd.DataFrame:
+    """
+    Load ReEDS CA total (p8+p9+p10+p11) mean hourly load by (month, hour),
+    averaged across all 7 weather years for the given target_year.
+
+    Returns DataFrame with columns: month, hour, mean_mw, min_mw, max_mw.
+    Time convention: hour 0-23, fixed PST (same as RESOLVE/IEPR).
+    """
+    if not REEDS_FILE.exists():
+        return pd.DataFrame(columns=["month", "hour", "mean_mw", "min_mw", "max_mw"])
+    df = pd.read_parquet(REEDS_FILE,
+                         filters=[("year", "=", target_year)],
+                         columns=["time_index", "weather_year", "region",
+                                  "load_mw", "month", "day", "hour"])
+    # Step 1: sum across 4 CA regions for each (weather_year, time_index)
+    hourly_ca = (df.groupby(["weather_year", "time_index", "month", "day", "hour"])
+                   ["load_mw"].sum().reset_index())
+    # Step 2: average across days within each (weather_year, month, hour)
+    mh_by_wy = (hourly_ca.groupby(["weather_year", "month", "hour"])["load_mw"]
+                          .mean().reset_index())
+    # Step 3: aggregate across weather years
+    agg = (mh_by_wy.groupby(["month", "hour"])["load_mw"]
+                   .agg(mean_mw="mean", min_mw="min", max_mw="max")
+                   .reset_index())
+    return agg
+
+
+def load_reeds_daily_peak_hour(target_year: int = 2025) -> pd.DataFrame:
+    """
+    Extract daily peak hour (argmax of CA total load) per (weather_year, month, day)
+    from the ReEDS CA hourly parquet for the given target year.
+
+    Returns DataFrame with columns: weather_year, month, day, peak_hour.
+    Falls back to nearest available target year if exact year is missing.
+    """
+    if not REEDS_FILE.exists():
+        return pd.DataFrame(columns=["weather_year", "month", "day", "peak_hour"])
+    df = pd.read_parquet(REEDS_FILE, filters=[("year", "=", target_year)],
+                         columns=["weather_year", "region", "load_mw",
+                                  "month", "day", "hour"])
+    if df.empty:
+        all_df = pd.read_parquet(REEDS_FILE, columns=["year"]).drop_duplicates()
+        available = sorted(all_df["year"].unique())
+        nearest = min(available, key=lambda y: abs(y - target_year))
+        df = pd.read_parquet(REEDS_FILE, filters=[("year", "=", nearest)],
+                             columns=["weather_year", "region", "load_mw",
+                                      "month", "day", "hour"])
+    # Sum across 4 CA regions per (weather_year, month, day, hour)
+    ca = (df.groupby(["weather_year", "month", "day", "hour"])["load_mw"]
+            .sum().reset_index())
+    # Peak hour = argmax per (weather_year, month, day)
+    idx = ca.groupby(["weather_year", "month", "day"])["load_mw"].idxmax()
+    peak = (ca.loc[idx, ["weather_year", "month", "day", "hour"]]
+              .rename(columns={"hour": "peak_hour"})
+              .reset_index(drop=True))
+    return peak
+
+
 def load_substation_coincident() -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Returns:
         total_coin  -- coincident sum across all utilities by (month, hour)
         util_coin   -- coincident sum by (utility, month, hour)
     hour column is fixed PST (UTC-8, no DST) from hour_pst in the processed CSV.
+
+    SCE profiles are year-stamped (2017–2026). Each year is a distinct 10th/90th
+    percentile snapshot from a non-public utility lookback window. Per-cell
+    deduplication keeps the most recent vintage for each (substation, month, hour)
+    — 2026 only covers Jan-Apr so May-Dec fall back to 2025 for those substations.
+    PGE and SDGE have no year stamp (year=NaN) and are used as-is.
+    See CLAUDE.md: "Utility Substation Profiles — SCE: use only the most recent year."
     """
     df = pd.read_csv(SUBS_FILE)
+
+    # Defensive dedup: processed CSV should already be deduplicated per
+    # (substation, month, hour) keeping max year, but guard against stale files.
+    sce_mask = df["utility"] == "sce"
+    if sce_mask.any() and df.loc[sce_mask, "year"].nunique() > 1:
+        sce_df = df[sce_mask].copy()
+        idx_keep = (sce_df
+                    .groupby(["substation_name", "month", "hour_pst"])["year"]
+                    .idxmax())
+        df = pd.concat([df[~sce_mask], sce_df.loc[idx_keep]], ignore_index=True)
+        yrs = sorted(df.loc[df["utility"] == "sce", "year"].unique())
+        print(f"  Substation SCE: deduped to most-recent vintage per (sub,month,hour); "
+              f"vintages present: {[int(y) for y in yrs]}")
+
     total_coin = (
         df.groupby(["month", "hour_pst"])[["max_load", "min_load"]]
         .sum()
@@ -412,6 +503,7 @@ def fig_monthly_profiles(
     iepr_total:    pd.DataFrame,
     cal_stats:     pd.DataFrame,
     resolve_stats: pd.DataFrame | None = None,
+    reeds_mh:      pd.DataFrame | None = None,
     sharey:        bool = False,
     out_suffix:    str = "",
 ) -> None:
@@ -483,6 +575,20 @@ def fig_monthly_profiles(
                 label="RESOLVE net (mean, BTM_PV subtracted)" if m == 1 else "_",
             )
 
+        # ReEDS IRA_low: mean + min/max band across 7 weather years
+        if reeds_mh is not None and not reeds_mh.empty:
+            rd = reeds_mh[reeds_mh["month"] == m].sort_values("hour")
+            ax.fill_between(
+                rd["hour"], rd["min_mw"], rd["max_mw"],
+                alpha=0.15, color=REEDS_COLOR,
+                label="ReEDS IRA_low CA total (min-max, 7 wx yrs)" if m == 1 else "_",
+            )
+            ax.plot(
+                rd["hour"], rd["mean_mw"],
+                color=REEDS_COLOR, lw=1.8, ls="--",
+                label="ReEDS IRA_low CA total (mean, p8+p9+p10+p11)" if m == 1 else "_",
+            )
+
         ax.set_title(MONTH_NAMES[m - 1], fontsize=11)
         ax.set_xlim(0, 23)
         ax.set_xlabel("Hour (Pacific)" if m >= 9 else "")
@@ -499,10 +605,11 @@ def fig_monthly_profiles(
     )
     shared_note = "  [shared y-axis]" if sharey else ""
     fig.suptitle(
-        f"Monthly 24-Hour Load Profiles: Substation vs EIA CISO vs IEPR vs RESOLVE{shared_note}\n"
+        f"Monthly 24-Hour Load Profiles: Substation vs EIA CISO vs IEPR vs RESOLVE vs ReEDS{shared_note}\n"
         "Substation = PGE+SCE+SDGE distribution substations; "
         "EIA = CISO BA realized demand; IEPR = BASELINE_NET_LOAD (Local_Reliability); "
-        "RESOLVE = PGE+SCE+SDGE weather-year ensemble (2024 scale)",
+        "RESOLVE = PGE+SCE+SDGE weather-year ensemble (2024 scale); "
+        "ReEDS = IRA_low CA total (p8+p9+p10+p11, 2025 target year, 7 weather years)",
         fontsize=10, y=1.01,
     )
     plt.tight_layout()
@@ -725,11 +832,13 @@ def fig_monthly_profiles_shared_y(
     iepr_total:    pd.DataFrame,
     cal_stats:     pd.DataFrame,
     resolve_stats: pd.DataFrame | None = None,
+    reeds_mh:      pd.DataFrame | None = None,
 ) -> None:
     """Same as fig_monthly_profiles but all panels share the same y-axis scale."""
     fig_monthly_profiles(
         total_coin, mh_stats, iepr_total, cal_stats,
-        resolve_stats=resolve_stats, sharey=True, out_suffix="_shared_y",
+        resolve_stats=resolve_stats, reeds_mh=reeds_mh,
+        sharey=True, out_suffix="_shared_y",
     )
 
 
@@ -743,6 +852,7 @@ def fig_annual_profile(
     iepr_total:    pd.DataFrame,
     cal_stats:     pd.DataFrame,
     resolve_stats: pd.DataFrame | None = None,
+    reeds_mh:      pd.DataFrame | None = None,
 ) -> None:
     """Single figure: all 12 months concatenated on one x-axis, shared y-scale."""
     fig, ax = plt.subplots(figsize=(28, 6))
@@ -809,6 +919,16 @@ def fig_annual_profile(
             ax.plot(xh, rv["resolve_mean"], color=RESOLVE_COLOR, lw=1.8,
                     label=_lab("res_mean", "RESOLVE net (mean)"))
 
+        # ReEDS IRA_low CA total: mean line + weather-year min/max band
+        if reeds_mh is not None and not reeds_mh.empty:
+            rd = reeds_mh[reeds_mh["month"] == m].sort_values("hour")
+            xh = rd["hour"].values + offset
+            ax.fill_between(xh, rd["min_mw"], rd["max_mw"],
+                            alpha=0.12, color=REEDS_COLOR,
+                            label=_lab("reeds_band", "ReEDS IRA_low CA (wx-yr range)"))
+            ax.plot(xh, rd["mean_mw"], color=REEDS_COLOR, lw=1.8, ls="--",
+                    label=_lab("reeds_mean", "ReEDS IRA_low CA (mean)"))
+
         # Vertical separator between months
         if m < 12:
             ax.axvline(offset + 23.5, color="k", lw=0.8, linestyle="--", alpha=0.4)
@@ -837,7 +957,7 @@ def fig_annual_profile(
     ax.set_ylabel("MW")
     ax.set_title(
         "Annual 24-Hour Load Profile: Jan–Dec on One Axis (shared y-scale)\n"
-        "Substation coincident sum | EIA CISO | EIA CAL | IEPR | RESOLVE (PGE+SCE+SDGE)",
+        "Substation coincident sum | EIA CISO | EIA CAL | IEPR | RESOLVE (PGE+SCE+SDGE) | ReEDS IRA_low CA",
         fontsize=11,
     )
     ax.grid(True, alpha=0.2, axis="y")
@@ -1774,10 +1894,12 @@ def fig_iepr_resolve_substation_shift(
     total_coin:          pd.DataFrame,
     iepr_caiso_daily:    pd.DataFrame,
     resolve_caiso_daily: pd.DataFrame,
+    reeds_daily:         pd.DataFrame | None = None,
 ) -> None:
     """
     12-panel violin (3×4): IEPR projected vs RESOLVE weather-year daily peak-hour
-    distributions at CAISO level, per month.
+    distributions at CAISO level, per month.  ReEDS IRA_low CA daily peaks added
+    as a third violin when reeds_daily is provided.
 
     Grey dashed horizontal line = argmax of the substation coincident max-load-day
     profile, giving the historical reference point for each month.
@@ -1786,6 +1908,7 @@ def fig_iepr_resolve_substation_shift(
     """
     IEPR_C    = "#1f77b4"
     RESOLVE_C = "#8c564b"
+    REEDS_C   = REEDS_COLOR
     rng = np.random.default_rng(42)
 
     fig, axes = plt.subplots(3, 4, figsize=(18, 12), sharey=True)
@@ -1804,8 +1927,12 @@ def fig_iepr_resolve_substation_shift(
         sub_peak_h = (int(sub_m.loc[sub_m["coin_max_mw"].idxmax(), "hour"])
                       if not sub_m.empty else None)
 
+        reeds_m = (reeds_daily[reeds_daily["month"] == m]["peak_hour"].dropna()
+                   if reeds_daily is not None and not reeds_daily.empty
+                   else pd.Series(dtype=float))
         groups    = [("IEPR\nprojected", iepr_m, IEPR_C),
-                     ("RESOLVE\nnet",    res_m,  RESOLVE_C)]
+                     ("RESOLVE\nnet",    res_m,  RESOLVE_C),
+                     ("ReEDS\nIRA_low",  reeds_m, REEDS_C)]
         positions = np.arange(len(groups))
         for pos, (lbl, data, color) in zip(positions, groups):
             if len(data) < 2:
@@ -1852,9 +1979,10 @@ def fig_iepr_resolve_substation_shift(
 
     axes[0].legend(fontsize=8, loc="upper left")
     fig.suptitle(
-        "CAISO daily peak-hour distributions: IEPR projected vs RESOLVE weather-year net load\n"
+        "CAISO daily peak-hour distributions: IEPR projected vs RESOLVE weather-year net load vs ReEDS IRA_low\n"
         "IEPR: all projected years 2024–2050 pooled  |  "
-        "RESOLVE: 23 weather years (2000–2022, net of BTM_PV, 2024 scale)\n"
+        "RESOLVE: 23 weather years (2000–2022, net of BTM_PV, 2024 scale)  |  "
+        "ReEDS: 7 weather years (2007–2013) × 365 days\n"
         "Grey dashed line = substation coincident max-load-day profile argmax.  "
         "Title: mean diff (IEPR − RESOLVE) + Mann-Whitney U significance.",
         fontsize=10,
@@ -2522,13 +2650,22 @@ def main() -> None:
     print("\nLoading RESOLVE hourly (PGE+SCE+SDGE, 2000-2022, 2024 scale)...")
     resolve_stats, resolve_yr_mh = load_resolve_hourly()
 
+    print("\nLoading ReEDS IRA_low CA hourly (p8+p9+p10+p11, 2025 target year)...")
+    reeds_mh = load_reeds_month_hour(target_year=2025)
+    if not reeds_mh.empty:
+        print(f"  ReEDS CA mean load: {reeds_mh['mean_mw'].mean():,.0f} MW  "
+              f"peak: {reeds_mh['mean_mw'].max():,.0f} MW")
+
     print("\nGenerating figures...")
     # Fig 1: monthly profiles (per-panel y-axes)
-    fig_monthly_profiles(total_coin, mh_stats, iepr_total, cal_stats, resolve_stats)
+    fig_monthly_profiles(total_coin, mh_stats, iepr_total, cal_stats,
+                         resolve_stats, reeds_mh=reeds_mh)
     # Fig 5: same with shared y-axis across all panels
-    fig_monthly_profiles_shared_y(total_coin, mh_stats, iepr_total, cal_stats, resolve_stats)
+    fig_monthly_profiles_shared_y(total_coin, mh_stats, iepr_total, cal_stats,
+                                  resolve_stats, reeds_mh=reeds_mh)
     # Fig 6: all months on a single x-axis
-    fig_annual_profile(total_coin, mh_stats, iepr_total, cal_stats, resolve_stats)
+    fig_annual_profile(total_coin, mh_stats, iepr_total, cal_stats, resolve_stats,
+                       reeds_mh=reeds_mh)
     # Original supporting figures
     fig_coverage_heatmap(total_coin, mh_stats, cal_stats)
     for _month in range(1, 13):
@@ -2578,7 +2715,13 @@ def main() -> None:
 
     # IEPR vs RESOLVE vs substation shift figures
     print("\nGenerating IEPR vs RESOLVE vs substation shift figures...")
-    fig_iepr_resolve_substation_shift(total_coin, iepr_daily, resolve_daily)
+    print("\nLoading ReEDS daily peaks (IRA_low, 2025 target year)...")
+    reeds_daily = load_reeds_daily_peak_hour(target_year=2025)
+    if not reeds_daily.empty:
+        print(f"  ReEDS daily peaks: {len(reeds_daily):,} days across "
+              f"{reeds_daily['weather_year'].nunique()} weather years")
+    fig_iepr_resolve_substation_shift(total_coin, iepr_daily, resolve_daily,
+                                      reeds_daily=reeds_daily)
     fig_peak_hour_monthly_by_utility(
         util_coin, total_coin,
         iepr_util_daily, iepr_daily,
