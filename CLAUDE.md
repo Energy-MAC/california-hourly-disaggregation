@@ -130,7 +130,7 @@ Deduplication (in `process_substations_clean.py`) prefers bulk over scrape on ma
 
 | Assertion | Evidence |
 |-----------|----------|
-| Timestamp = UTC, hour-beginning | PUDL column named `datetime_utc`; EIA-930 API documentation states UTC hour-beginning convention |
+| Timestamp = UTC, **hour-ENDING** | EIA-930 filing instructions: "hour ending 1:00 AM EST → 2017-03-01T06:00:00.000Z" (timestamp marks end of integration period); confirmed empirically — PUDL and EIA API CAL region demand agree to <0.001% at identical UTC timestamps, proving PUDL does NOT shift by 1 hour. `_utc_to_pst()` in `compare_substation_eia_iepr.py` subtracts **9 hours** (8h UTC-to-PST + 1h hour-ending-to-beginning) to align with IEPR and substation hour labels |
 | `demand_mwh` = net of BTM solar | EIA-930 Form instructions: "demand" = load measured at balancing authority boundary meter; BTM generation is not visible to grid meters and is not subtracted by the utility before reporting |
 | NEVP ≈ 0.4% California load | EIA Form 861 (2024 actuals), `scripts/data/eia/process_eia861.py` |
 | PACW ≈ 4% California load | EIA Form 861 (2024 actuals), same source |
@@ -184,20 +184,25 @@ resolve_net_mw = demand_mw_2024scaled − weather_factor × planned_capacity_202
 ### ReEDS (NREL — IRA_low scenario + Historic 2016–2023)
 
 **Projected:** `data/raw/reeds/reeds_load_transformed.parquet` — `scripts/data/reeds/process_reeds.py`
-**Historic:** `data/raw/PotentialData/historic_post2015_load_hourly.h5/historic_post2015_load_hourly.h5` — `scripts/data/reeds/process_historic_load.py`
+**Historic:** `data/raw/reeds/historic_post2015_load_hourly.h5` — `scripts/data/reeds/process_historic_load.py`
+**Model inputs:** `data/raw/reeds/ReEDS-2.0/` — county maps, shapefiles, BTM PV, disaggregation inputs
 
 | Assertion | Evidence |
 |-----------|----------|
-| California = p8 + p9 + p10 + p11 | `data/raw/PotentialData/ReEDS-2.0/inputs/hierarchy.csv` filtered on `st == "CA"` returns exactly {p8, p9, p10, p11} |
+| California = p8 + p9 + p10 + p11 | `data/raw/reeds/ReEDS-2.0/inputs/hierarchy.csv` filtered on `st == "CA"` returns exactly {p8, p9, p10, p11} |
 | p8 = WECC_NW (PacifiCorp West CA slice, ~0.8 TWh/yr) | hierarchy.csv `wecc_reg` column |
 | p9/p10/p11 = WECC_CA (all CA except PACW) | hierarchy.csv `wecc_reg == WECC_CA`; empirically confirmed — annual load of p9-p11 tracks PUDL CA5 sum (~BANC+CISO+IID+LDWP+TIDC), not EIA CISO alone. Gap vs CISO ~40 TWh ≈ IID+LDWP+BANC+TIDC combined |
-| Timezone = Etc/GMT+6 (CST, UTC-6), no DST | `config_base.json` line 7: `"output_timezone": "Etc/GMT+6"` (both projected and historic files use same timezone) |
-| Hour-beginning convention | `hourlize/load.py` lines 312–324: fixed-offset tz_localize, no DST |
+| Timezone = Etc/GMT+6 (CST, UTC-6), no DST | `data/raw/reeds/ReEDS-2.0/hourlize/inputs/configs/config_base.json` line 7: `"output_timezone": "Etc/GMT+6"` (both projected and historic files use same timezone) |
+| Hour-beginning convention | `data/raw/reeds/ReEDS-2.0/hourlize/load.py` lines 312–324: fixed-offset tz_localize, no DST |
 | No leap day (8760 h/year) | `hourlize/load.py` lines 334–341: first 8760 hours per weather year; confirmed for historic: 70080 rows / 8 years = 8760 exactly |
 | time_index 1 = Dec 31 22:00 PST | CST (UTC-6) is 2h ahead of PST; `_REF_DATES` starts at `"2000-12-31 22:00"` |
 | Scenario = IRA_low only | Parquet metadata scan (`scripts/explore_potential_data.py`) |
 | Weather years = 2007–2013 | Parquet metadata |
 | Historic date range = 2016–2023 | HDF5 index_0 first/last values: 2016-01-01T00:00-06:00 to 2023-12-31T23:00-06:00 |
+| County → p-region mapping | `data/raw/reeds/ReEDS-2.0/inputs/county2zone.csv`; all 58 CA counties map to p8, p9, p10, or p11 (no PGE/SCE/SDGE substations in p8) |
+| County load participation factors | `data/raw/reeds/ReEDS-2.0/inputs/disaggregation/county_state_lpf.csv`; 58 CA county rows sum to 1.0 |
+| County BTM PV capacity | `data/raw/reeds/ReEDS-2.0/inputs/dgen_model_inputs/stscen2023_mid_case/distpvcap_stscen2023_mid_case.csv`; MW by county per 2-year step 2010–2050 |
+| Substation → county spatial join | Census TIGER/Line 2022 county shapefile at `data/raw/reeds/ReEDS-2.0/inputs/shapefiles/cache/tl_2022_us_county/tl_2022_us_county.shp`; 1329/1341 substations assigned (12 excluded for missing coordinates) |
 
 ---
 
@@ -210,7 +215,7 @@ resolve_net_mw = demand_mw_2024scaled − weather_factor × planned_capacity_202
 | RESOLVE | Fixed PST (UTC-8) | None | Hour-beginning | 8760 rows/yr; no repeated timestamps observed |
 | Substation raw | Wall-clock Pacific | Yes | Hour-beginning | Repeated Nov 2:00 AM; missing Mar 2:00 AM observed in SCE raw |
 | Substation clean | Fixed PST (UTC-8) | None | Hour-beginning | Majority-month rule in `process_substations_clean.py` line ~572 |
-| ReEDS | CST (UTC-6, Etc/GMT+6) | None | Hour-beginning | `config_base.json` line 7; `hourlize/load.py` lines 312–324 |
+| ReEDS | CST (UTC-6, Etc/GMT+6) | None | Hour-beginning | `data/raw/reeds/ReEDS-2.0/hourlize/inputs/configs/config_base.json` line 7; `hourlize/load.py` lines 312–324 |
 
 All processed outputs used in comparison (IEPR, RESOLVE, substation clean, ReEDS after conversion) use **Fixed PST, hour-beginning, hours 0–23** as the canonical time representation.
 

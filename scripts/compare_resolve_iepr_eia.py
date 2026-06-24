@@ -201,7 +201,7 @@ def _historic_annual() -> pd.DataFrame:
     Historic CA load annual energy (TWh) by year and region.
 
     Source: process_historic_load.py from
-    data/raw/PotentialData/historic_post2015_load_hourly.h5
+    data/raw/reeds/historic_post2015_load_hourly.h5
     Covers 2016-2023.  Timestamps in CST (UTC-6); annual totals use CST
     calendar year grouping (~0.02% annual shift vs PST year — negligible).
 

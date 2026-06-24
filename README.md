@@ -13,42 +13,63 @@ from the California Energy Commission (CEC IEPR).
 ```
 california-hourly-disaggregation/
 ├── data/
-│   ├── raw/                   # Downloaded source data (gitignored)
-│   │   ├── eia/               # EIA 930 interchange and region files
-│   │   ├── iepr/              # CEC IEPR forecast workbooks (manual download)
-│   │   ├── pge/               # PG&E ArcGIS feeder and substation files
-│   │   ├── sce/               # SCE DRPEP bulk download and ArcGIS files
-│   │   ├── sdge/              # SDG&E load profiles and substation attributes
-│   │   ├── pacificorp/        # PacifiCorp substation and DER readiness files
-│   │   ├── calpeco/           # CalPeco (Liberty Utilities) — no data yet
-│   │   └── bves/              # BVES — no data yet
+│   ├── raw/                        # Downloaded source data (gitignored)
+│   │   ├── eia/                    # EIA 930 interchange and region files
+│   │   ├── iepr/                   # CEC IEPR forecast workbooks (manual download)
+│   │   ├── reeds/                  # NREL ReEDS datasets
+│   │   │   ├── reeds_load_transformed.parquet       # ReEDS IRA_low projected load (2020–2050)
+│   │   │   ├── historic_post2015_load_hourly.h5     # ReEDS historic actual load (2016–2023)
+│   │   │   └── ReEDS-2.0/          # Full ReEDS model inputs (inputs/, hourlize/, shapefiles/)
+│   │   ├── resolve/                # RESOLVE Code Base and Inputs (E3/CPUC IRP)
+│   │   │   └── RESOLVE Code Base and Inputs/
+│   │   │       ├── data/profiles/loads/2024/        # Full 8760h load profiles (PGE, SCE, SDGE, …)
+│   │   │       └── data/interim/loads/              # Annual energy targets for profile scaling
+│   │   ├── pge/                    # PG&E ArcGIS feeder and substation files
+│   │   ├── sce/                    # SCE DRPEP bulk download and ArcGIS files
+│   │   ├── sdge/                   # SDG&E load profiles and substation attributes
+│   │   ├── pacificorp/             # PacifiCorp substation and DER readiness files
+│   │   ├── calpeco/                # CalPeco (Liberty Utilities) — no data yet
+│   │   └── bves/                   # BVES — no data yet
 │   └── processed/
 │       ├── substations/
-│       │   ├── substation_locations.csv      # All utilities, one row per substation
-│       │   └── substation_load_profiles.csv  # Hourly min/max load by substation
+│       │   ├── substation_attributes_clean.csv      # One row per substation with coords and attributes
+│       │   ├── substation_load_profiles_clean.csv   # Deduplicated hourly min/max load by substation
+│       │   └── substation_county_reeds_mapping.csv  # Substation → county → ReEDS p-region + LPF
+│       ├── reeds/
+│       │   ├── reeds_ca_load_hourly.parquet         # CA-filtered ReEDS projected hourly load
+│       │   ├── reeds_ca_load_annual.csv             # ReEDS projected annual totals by p-region
+│       │   ├── historic_ca_load_hourly.parquet      # CA-filtered ReEDS historic hourly load
+│       │   ├── historic_ca_load_annual.csv          # ReEDS historic annual totals by p-region
+│       │   └── county_ca_reference.csv              # CA county → p-region + LPF + BTM PV (2010–2050)
 │       └── eia/
-│           └── eia_interchange.csv           # Standardized BA interchange
+│           └── eia_interchange.csv                  # Standardized BA interchange
 ├── notebooks/
 │   ├── 01_eia_from_to_consistency.ipynb      # FROM vs TO cross-file consistency
 │   └── 02_eia_region_vs_interchange.ipynb    # Region TI vs sum-of-BA interchange
 ├── scripts/
-│   ├── data/                  # Scraping and processing — organised by source
-│   │   ├── eia/               # EIA-930 scrape, PUDL ingest, and processing
-│   │   ├── iepr/              # CEC IEPR forecast processing
-│   │   ├── resolve/           # RESOLVE load-input processing
-│   │   ├── pge/               # PG&E scraper
-│   │   ├── sce/               # SCE scraper, ingest, and validation
-│   │   ├── sdge/              # SDG&E scraper
-│   │   ├── bves/              # BVES scraper (placeholder)
-│   │   ├── calpeco/           # CalPeco scraper (placeholder)
-│   │   ├── pacificorp/        # PacifiCorp scraper
-│   │   └── substations/       # Substation processing, audit, and comparison
-│   ├── compare_cal_region_sources.py   # EIA API CAL vs PUDL CA5 sum
-│   ├── compare_eia_sources.py          # EIA API scrape vs PUDL nightly
-│   ├── compare_iepr_eia.py             # IEPR projections vs EIA realized demand
-│   ├── compare_resolve_iepr_eia.py     # RESOLVE vs IEPR vs EIA
-│   └── compare_substation_eia_iepr.py  # Substation profiles vs EIA and IEPR
-├── src/data/                  # Scraper and processing library modules
+│   ├── data/                       # Scraping and processing — organised by source
+│   │   ├── eia/                    # EIA-930 scrape, PUDL ingest, and processing
+│   │   ├── iepr/                   # CEC IEPR forecast processing
+│   │   ├── resolve/                # RESOLVE load-input processing
+│   │   ├── reeds/                  # ReEDS processing pipeline
+│   │   │   ├── process_reeds.py               # Projected load → reeds_ca_load_*.{parquet,csv}
+│   │   │   ├── process_historic_load.py       # Historic HDF5 → historic_ca_load_*.{parquet,csv}
+│   │   │   └── process_county_disaggregation.py  # County → p-region + LPF + BTM PV reference table
+│   │   ├── pge/                    # PG&E scraper
+│   │   ├── sce/                    # SCE scraper, ingest, and validation
+│   │   ├── sdge/                   # SDG&E scraper
+│   │   ├── bves/                   # BVES scraper (placeholder)
+│   │   ├── calpeco/                # CalPeco scraper (placeholder)
+│   │   ├── pacificorp/             # PacifiCorp scraper
+│   │   └── substations/            # Substation processing, audit, and spatial join
+│   │       ├── process_substations_clean.py   # Clean and deduplicate substation profiles
+│   │       └── assign_substation_counties.py  # Spatial join: substations → county → p-region
+│   ├── compare_cal_region_sources.py    # EIA API CAL vs PUDL CA5 sum
+│   ├── compare_eia_sources.py           # EIA API scrape vs PUDL nightly
+│   ├── compare_iepr_eia.py              # IEPR projections vs EIA realized demand
+│   ├── compare_resolve_iepr_eia.py      # RESOLVE vs IEPR vs EIA (with ReEDS overlay)
+│   └── compare_substation_eia_iepr.py   # Substation profiles vs EIA and IEPR
+├── src/data/                       # Scraper and processing library modules
 ├── requirements.txt
 └── README.md
 ```
@@ -100,8 +121,18 @@ Utility Data Liberation) mirrors EIA-930 daily with cleaned, imputed, and gap-fi
 values, with history from 2015 onward.  We download two filtered parquets restricted to
 the eight CA BAs via `scripts/data/eia/ingest_eia_pudl.py`, then process them into
 `data/processed/eia/eia930_operations.csv` and `eia930_interchange.csv`.  All timestamps
-are UTC (`datetime_utc`, hour-beginning).  PUDL's gap-filling methodology is documented at
+are UTC (`datetime_utc`, **hour-ending**).  PUDL's gap-filling methodology is documented at
 https://docs.catalyst.coop/pudl/en/latest/methodology/timeseries_imputation.html.
+
+> **EIA-930 hour convention:** EIA instructs balancing authorities to report in
+> **hour-ending UTC** — a timestamp of `T06:00:00Z` represents the period ending at
+> 06:00 UTC, i.e., the integrated MWh for 05:00–06:00 UTC.  Example from EIA instructions:
+> "hour ending 1:00 AM EST → 2017-03-01T06:00:00.000Z."  PUDL preserves this convention
+> unchanged — EIA API and PUDL values agree to < 0.001% at identical UTC timestamps.
+> To convert to fixed PST hour-beginning labels (as used by IEPR, RESOLVE, and substations):
+> subtract **9 hours** = 8h UTC-to-PST offset + 1h hour-ending-to-beginning.  This is
+> applied in `_utc_to_pst()` in `compare_substation_eia_iepr.py`.  For annual and monthly
+> totals the distinction is negligible (< 0.01% of annual load).
 
 **EIA demand definition:** EIA defines demand as total metered net electricity generation
 within the BA minus total metered net electricity interchange with neighboring BAs
@@ -234,8 +265,7 @@ shapes.  `year` is the planning target year (2020–2050).
 
 ### ReEDS Historic Load (NREL, 2016–2023)
 
-**File:** `data/raw/PotentialData/historic_post2015_load_hourly.h5`
-(inside the `.h5` directory, the actual HDF5 file has the same name)
+**File:** `data/raw/reeds/historic_post2015_load_hourly.h5`
 
 The same 134-region structure as the ReEDS projected data, but covering **actual
 observed load** for 2016–2023 (8 years × 8,760 h = 70,080 rows; leap days excluded,
@@ -526,7 +556,18 @@ python scripts/data/resolve/process_resolve.py
 ```
 
 Reads RESOLVE's hourly load shape profiles and annual energy forecasts from
-`data/raw/RESOLVE Code Base and Inputs/` and writes two CSVs to `data/processed/resolve/`:
+`data/raw/resolve/RESOLVE Code Base and Inputs/data/profiles/loads/2024/` (full 8,760-hour
+per-year profiles — no model run needed; see note below) and annual scaling targets from
+`data/interim/loads/`, then writes two CSVs to `data/processed/resolve/`:
+
+> **Note on full 8,760-hour outputs:** The existing RESOLVE Outputs directory contains only
+> 36 representative dispatch windows.  The full 8,760-hour load profiles already exist as
+> inputs in `data/raw/resolve/RESOLVE Code Base and Inputs/data/profiles/loads/2024/`
+> (e.g., `PGE_Baseline.csv`, 23 weather years × 8,760 h = 201,480 rows).  These can be
+> read and scaled to any target year using the annual MWh targets in `data/interim/loads/`
+> without running the RESOLVE optimization.  The `process_resolve.py` script does exactly
+> this.  Running the full RESOLVE optimization requires the HiGHS or Gurobi solver plus a
+> `dispatch_windows_map.csv` cluster file not included in the local copy.
 
 **`resolve_hourly_profiles.csv`** — hourly load shapes for six California BA zones (PGE, SCE, SDGE, IID, LDWP, NCNC — where NCNC = Northern California Non-CAISO, covering TIDC + BANC territory), covering 23 historical weather years (2000–2022) at 8,760 h/year (no Feb 29)
 
@@ -575,6 +616,60 @@ columns from the `time_index`, and writes two outputs to `data/processed/reeds/`
 | month, day, hour | Derived from time_index; hour 0–23 fixed PST (no DST) |
 
 **`reeds_ca_load_annual.csv`** — annual energy totals by (year, weather_year, region) plus a `CA_total` row summing all four regions.  IRA_low CA total grows from ~291 TWh (2020) to ~525 TWh (2050) — higher than other California sources because ReEDS covers all of California (CAISO + PacifiCorp West CA slice), models electrification growth explicitly, and reports gross load.
+
+#### ReEDS historic California load
+
+```bash
+python scripts/data/reeds/process_historic_load.py
+```
+
+Reads `data/raw/reeds/historic_post2015_load_hourly.h5` and writes two outputs to `data/processed/reeds/`:
+
+- **`historic_ca_load_hourly.parquet`** — 70,080 rows (8 years × 8,760 h) for p8–p11 plus derived WECC_CA and CA total columns.
+- **`historic_ca_load_annual.csv`** — annual TWh by region (p8, p9, p10, p11, CAISO_total, CA_total).
+
+#### ReEDS county disaggregation reference table
+
+```bash
+python scripts/data/reeds/process_county_disaggregation.py
+```
+
+Joins three ReEDS input files (all from `data/raw/reeds/ReEDS-2.0/inputs/`) to produce a California county reference table:
+
+- **`county_ca_reference.csv`** — 58 rows (one per California county).
+
+| Column | Description |
+|--------|-------------|
+| fips_int | Integer county FIPS (e.g., 6037) |
+| fips_key | p-format FIPS (e.g., `p06037`) — matches ReEDS disaggregation files |
+| county_name | County name |
+| p_region | ReEDS p-region (`p8`, `p9`, `p10`, or `p11`) |
+| ca_load_fraction | County share of California state load (sums to 1.0 across 58 counties) |
+| btm_pv_{year}_mw | County distributed PV capacity (MW) for 2010–2050 in 2-year steps |
+
+Source files: `county2zone.csv` (FIPS → p-region), `disaggregation/county_state_lpf.csv` (load participation factors), `dgen_model_inputs/stscen2023_mid_case/distpvcap_stscen2023_mid_case.csv` (BTM PV by year).
+
+#### Substation to county spatial join
+
+```bash
+python scripts/data/substations/assign_substation_counties.py
+```
+
+Spatially joins each substation (from `substation_attributes_clean.csv`) to a California county polygon using the Census TIGER/Line 2022 county shapefile (`data/raw/reeds/ReEDS-2.0/inputs/shapefiles/cache/tl_2022_us_county/`), then merges the county reference table to assign a ReEDS p-region, load fraction, and BTM PV capacity to every substation.
+
+- **`substation_county_reeds_mapping.csv`** — 1,329 substations with valid coordinates (12 excluded for missing lat/lon).
+
+| Column | Description |
+|--------|-------------|
+| utility | PGE, SCE, or SDGE |
+| substation_name | Utility substation name |
+| lat, lon | Coordinates used (util or basin fallback) |
+| coord_source | `util` (primary utility) or `basin` (DataBasin fallback) |
+| fips_int, fips_key | County FIPS in integer and p-format |
+| county_name | County name |
+| p_region | ReEDS p-region (p9, p10, or p11 — no PGE/SCE/SDGE substations fall in p8) |
+| ca_load_fraction | County share of statewide CA load |
+| btm_pv_{year}_mw | County-level distributed PV capacity (MW) for 2010–2050 |
 
 #### EIA Form 861 — CA fractions by BA
 
@@ -630,14 +725,25 @@ python scripts/data/substations/audit_unused_columns.py
 Every processed file in this project uses a specific time zone and hour-labeling convention.
 The table below documents them so comparisons across files are unambiguous.
 
-| File | Time zone | Hour convention | DST? |
-|------|-----------|-----------------|------|
-| `eia930_operations.csv` (PUDL) | UTC | `datetime_utc`, hour-beginning | n/a |
-| `eia_region.csv` (EIA API scrape) | UTC | `period` format `YYYY-MM-DDTHH`, hour-beginning | n/a |
-| `iepr_hourly_forecast.csv` | Fixed PST (UTC−8) | `HOUR` 1–24, hour-ending; `hour` = HOUR−1 (0–23) | No |
-| `resolve_hourly_profiles.csv` | Fixed PST (UTC−8) | `datetime_pst`, hour-beginning (0–23); 8,760 h/year | No |
-| `substation_load_profiles.csv` (raw) | Wall-clock Pacific | `hour` 0–23 (PDT in summer, PST in winter) | Yes |
-| `substation_load_profiles_clean.csv` | Fixed PST (UTC−8) | `hour_pst` 0–23, majority-month rule applied | No |
+**Canonical comparison format** (used by all compare scripts): **fixed PST (UTC−8), hour-beginning, hours 0–23**.
+
+| File | Time zone | Raw hour label | Column name | Conversion to canonical PST hour-beg 0–23 | DST? |
+|------|-----------|---------------|-------------|-------------------------------------------|------|
+| `eia930_operations.csv` (PUDL) | UTC | **hour-ending** (`datetime_utc`) | `datetime_utc` | Subtract **9h** (8h offset + 1h ending→beginning) via `_utc_to_pst()` | n/a |
+| `eia930_cal_region_PUDL.csv` | UTC | **hour-ending** (same PUDL source) | `datetime_utc` | Same `_utc_to_pst()` (−9h) | n/a |
+| `eia_region.csv` (EIA API scrape) | UTC | **hour-ending**, `YYYY-MM-DDTHH` | `period` | Subtract **9h** | n/a |
+| `iepr_hourly_forecast.csv` | Fixed PST (UTC−8) | **hour-ending**, 1–24 | `HOUR` | `hour0 = HOUR − 1` (→ 0–23) | No |
+| `resolve_hourly_profiles.csv` | Fixed PST (UTC−8) | **hour-beginning**, 0–23 | `datetime_pst` | None | No |
+| `substation_load_profiles_clean.csv` | Fixed PST (UTC−8) | **hour-beginning**, 0–23 | `hour_pst` | None | No |
+| `reeds_ca_load_hourly.parquet` (projected) | Fixed PST (UTC−8) | **hour-beginning**, 0–23 | `hour` (int8) | None (cast int8→int64 before arithmetic) | No |
+| `historic_ca_load_hourly.parquet` (ReEDS) | Fixed PST (UTC−8) | **hour-beginning**, 0–23 | `hour` (int8) | None (cast int8→int64 before arithmetic) | No |
+| `substation_load_profiles.csv` (raw) | Wall-clock Pacific | **hour-beginning**, 0–23 | `hour` | Majority-month rule → `hour_pst` (see below) | Yes |
+
+**Why EIA needs −9h, not −8h:**  EIA-930 filing instructions say "report by hour ending time" — the UTC timestamp marks the *end* of the integration period, not the beginning.  Example: `T06:00:00Z` = period 05:00–06:00 UTC = hour ending 1:00 AM EST.  Subtracting only 8h gives 22:00 PST of the *previous* calendar day — one hour too late.  Subtracting 9h gives 21:00 PST, which is the correct **start** label for the 21:00–22:00 PST period.  Annual and monthly totals are unaffected; only hourly peak analysis is sensitive to this.  Evidence: EIA API and PUDL demand values agree to < 0.001% at identical UTC timestamps, confirming PUDL preserves the EIA convention unchanged.
+
+**IEPR column naming:** The processed IEPR file uses the column name `hour0` (= HOUR − 1) while all other sources use `hour`.  Scripts that join IEPR against another source must use `left_on=["month","hour0"], right_on=["month","hour"]` — see `compare_substation_eia_iepr.py` `print_summary()` as the reference pattern.
+
+**ReEDS int8 columns:** The `month`, `day`, and `hour` columns in the ReEDS parquet files are stored as int8 for space efficiency.  Adding a month offset (e.g., `hour + 144` for the annual-profile plot) would overflow int8 (max 127).  The compare script casts these to int64 immediately after reading: `agg["hour"] = agg["hour"].astype("int64")`.
 
 ### Substation DST treatment (majority-month rule)
 
@@ -662,12 +768,14 @@ to look up the DST status of individual timestamps.  The majority-month assignme
 November) introduces at most a 1-hour systematic error in the two transition months
 (March and November), but avoids the need for exact DST changeover dates.
 
-### Fixed PST vs UTC
+### Converting between conventions
 
-IEPR and RESOLVE use fixed PST (UTC−8, no clock changes) year-round.  To convert these
-to UTC: add 8 hours.  To compare against EIA-930 UTC data, apply the same +8h offset
-before merging.  The `compare_substation_eia_iepr.py` and related scripts handle this
-conversion internally.
+| From → To | Operation |
+|-----------|-----------|
+| EIA UTC hour-ending → PST hour-beginning | `ts − 9h` (8h offset + 1h ending→beginning) |
+| IEPR hour-ending PST (HOUR 1–24) → hour-beginning PST (0–23) | `hour0 = HOUR − 1` |
+| ReEDS CST (UTC−6) → PST (UTC−8) | `ts − 2h` (done in `process_reeds.py` before writing processed outputs) |
+| PST hour-beginning → UTC | `ts + 8h` (then treat result as hour-beginning UTC, not hour-ending) |
 
 ---
 
@@ -756,8 +864,9 @@ costs, renewable build-out, and load growth from electrification under specific 
 scenarios.
 
 This project uses two ReEDS datasets:
-- **IRA_low projected** (2020–2050): `reeds_load_transformed.parquet`
-- **Historic actual** (2016–2023): `historic_post2015_load_hourly.h5`
+- **IRA_low projected** (2020–2050): `data/raw/reeds/reeds_load_transformed.parquet`
+- **Historic actual** (2016–2023): `data/raw/reeds/historic_post2015_load_hourly.h5`
+- **ReEDS-2.0 model inputs**: `data/raw/reeds/ReEDS-2.0/`
 
 Both use the same four California p-regions:
 

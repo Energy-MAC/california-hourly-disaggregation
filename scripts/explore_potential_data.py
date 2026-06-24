@@ -1,5 +1,5 @@
 """
-Exploratory script for the two ReEDS/historic load files in data/raw/PotentialData/.
+Exploratory script for the two ReEDS/historic load files in data/raw/reeds/.
 
 Files examined:
   - historic_post2015_load_hourly.h5   (HDF5, ~69 MB)
@@ -22,9 +22,8 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data" / "raw" / "PotentialData"
 
-H5_PATH      = DATA / "historic_post2015_load_hourly.h5" / "historic_post2015_load_hourly.h5"
+H5_PATH      = ROOT / "data" / "raw" / "reeds" / "historic_post2015_load_hourly.h5"
 PARQUET_PATH = ROOT / "data" / "raw" / "reeds" / "reeds_load_transformed.parquet"
 
 SEP = "=" * 72

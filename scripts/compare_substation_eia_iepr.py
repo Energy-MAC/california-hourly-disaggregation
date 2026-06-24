@@ -68,10 +68,23 @@ from scipy import stats as _stats
 # ---------------------------------------------------------------------------
 
 def _utc_to_pst(ts: pd.Series) -> pd.Series:
-    """Convert a UTC datetime series (tz-aware or tz-naive) to fixed PST (UTC-8, no DST)."""
+    """Convert EIA-930 UTC hour-ending timestamps to fixed PST (UTC-8) hour-beginning labels.
+
+    EIA-930 uses hour-ENDING UTC convention per filing instructions (confirmed empirically:
+    EIA API period T06:00Z maps to "hour ending 1:00 AM EST" in EIA documentation; PUDL
+    preserves the same timestamps — they agree to <0.001% at identical UTC timestamps).
+
+    Subtracting 9 hours = 8h UTC-to-PST offset + 1h hour-ending-to-beginning conversion.
+    This aligns EIA hours with IEPR (HOUR−1, hour-beginning 0–23) and substation
+    hour_pst (fixed PST, hour-beginning) for correct shape and peak-hour comparison.
+
+    Without this correction the hourly peak analysis would show a systematic 1-hour bias
+    (EIA peaks appearing 1 hour later than the equivalent IEPR/substation hour label).
+    Annual and monthly totals are unaffected by this convention.
+    """
     if ts.dt.tz is not None:
         ts = ts.dt.tz_localize(None)
-    return ts - pd.Timedelta(hours=8)
+    return ts - pd.Timedelta(hours=9)
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -149,6 +162,10 @@ def load_reeds_month_hour(target_year: int = 2025) -> pd.DataFrame:
     agg = (mh_by_wy.groupby(["month", "hour"])["load_mw"]
                    .agg(mean_mw="mean", min_mw="min", max_mw="max")
                    .reset_index())
+    # Cast int8 columns (written as int8 in parquet for storage efficiency) to int64
+    # so that arithmetic like `hour + offset` doesn't overflow when offset > 127.
+    agg["month"] = agg["month"].astype("int64")
+    agg["hour"]  = agg["hour"].astype("int64")
     return agg
 
 
@@ -180,6 +197,9 @@ def load_reeds_daily_peak_hour(target_year: int = 2025) -> pd.DataFrame:
     peak = (ca.loc[idx, ["weather_year", "month", "day", "hour"]]
               .rename(columns={"hour": "peak_hour"})
               .reset_index(drop=True))
+    # Cast int8 columns from parquet to int64 to prevent overflow in downstream arithmetic.
+    for col in ["month", "day", "peak_hour"]:
+        peak[col] = peak[col].astype("int64")
     return peak
 
 
