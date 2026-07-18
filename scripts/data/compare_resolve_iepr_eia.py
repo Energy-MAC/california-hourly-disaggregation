@@ -1,4 +1,4 @@
-"""
+﻿"""
 compare_resolve_iepr_eia.py
 
 Compares RESOLVE Baseline load projections against IEPR and EIA-930 demand.
@@ -79,7 +79,7 @@ Outputs
 
 Usage
 -----
-  python scripts/compare_resolve_iepr_eia.py
+  python scripts/data/compare_resolve_iepr_eia.py
 """
 from __future__ import annotations
 
@@ -98,7 +98,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-ROOT  = Path(__file__).resolve().parents[1]
+ROOT  = Path(__file__).resolve().parents[2]
 PROC  = ROOT / "data" / "processed"
 FIGS  = ROOT / "data" / "figures"
 FIGS.mkdir(parents=True, exist_ok=True)

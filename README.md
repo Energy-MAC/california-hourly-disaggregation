@@ -10,6 +10,7 @@ from the California Energy Commission (CEC IEPR).
 
 ## Table of Contents
 
+- [Load Projection Methodology](#load-projection-methodology)
 - [Repository Structure](#repository-structure)
 - [Setup](#setup)
 - [Data Sources](#data-sources)
@@ -59,6 +60,305 @@ from the California Energy Commission (CEC IEPR).
 
 ---
 
+## Load Projection Methodology
+
+This project disaggregates projected California statewide load into substation-level
+hourly forecasts.  Multiple approaches are implemented, each in its own named subsection
+below.  Outputs from different approaches live in separate subfolders so they never
+overwrite each other.
+
+---
+
+### Shared prerequisite — Substation rankings
+
+`scripts/load_projection/rank_substations.py` ranks all substations at four temporal
+aggregation levels.  Run this once (or whenever the substation profiles are updated)
+before running any disaggregation script.
+
+| Level | What it computes |
+|-------|-----------------|
+| Annual | Single mean load rank per substation |
+| Monthly | 12 rankings — mean across 24 hours per month |
+| Hourly | 24 rankings — mean across 12 months per hour |
+| Month-hour | 288 rankings — raw value at each (month, hour) cell |
+
+Three percentiles are ranked: `min_load` (~10th pct), `max_load` (~90th pct),
+`avg_load` (mean of the two).  Rankings are descending (rank 1 = highest load).
+
+**Rank stability** (Spearman r vs annual `max_load` ranking, 1,341 substation names):
+
+| Level | max_load | min_load |
+|-------|----------|----------|
+| Monthly | r = 0.987–0.994 | r = 0.971–0.991 |
+| Hourly | r = 0.991–0.997 | r = 0.832–0.993 |
+| Month-hour | r = 0.934–0.985 | r = 0.651–0.981 |
+
+Max-load orderings are very stable; min-load varies more at off-peak month-hours.
+
+```
+Outputs: data/processed/load_projection/rankings/
+  substation_annual_ranks.csv       # annual mean load + rank per substation
+  substation_monthly_ranks.csv      # long format: (substation, month)
+  substation_hourly_ranks.csv       # long format: (substation, hour_pst)
+  substation_monthhour_ranks.csv    # long format: (substation, month, hour_pst)
+  rank_correlations.csv             # Spearman r vs annual for all rankings
+
+data/figures/load_projection/
+  rank_correlation_heatmap.png      # monthly / hourly / 12×24 heatmap panels
+```
+
+```bash
+python scripts/load_projection/rank_substations.py
+```
+
+---
+
+### Approach 1 — Proportional participation weights
+
+Each substation is assigned a **participation weight** equal to its share of its
+regional total load at a chosen percentile and temporal resolution.  Projected regional
+load is then multiplied by that weight to produce a substation-level hourly forecast.
+This is a proportional scaling approach: it preserves the regional total at every hour.
+It does not account for substation-specific growth trajectories or changing load shapes.
+
+#### Method
+
+For each (month, hour) cell:
+
+```
+weight[s, m, h] = max(load_col[s, m, h], 0)  /  Σ same for all j in same region
+```
+
+Negative or missing values are clipped to zero; equal fallback weights used when all
+substations in a region are zero at a cell.  Applied vectorized:
+
+```
+substation_load[s, t] = regional_load[region(s), t] × weight[s, month(t), hour(t)]
+```
+
+Two disaggregation chains depending on forecast source:
+
+**ReEDS chain (p-region → county → substation)** — `disaggregate_reeds.py`
+
+Stage 1 uses county-level load participation fractions from ReEDS (geographic,
+constant across all hours).  Stage 2 distributes county load to substations using
+the substation profiles at the chosen temporal resolution.
+
+```
+county_pgroup_fraction[c] = ca_load_fraction[c] / Σ same for counties in p-region
+sub_county_weight[s, m, h] = max(weight_col[s,m,h], 0) / Σ same for s in county(s)
+chain_weight[s, m, h]      = county_pgroup_fraction[county(s)] × sub_county_weight[s, m, h]
+substation_load[s, t]      = p_region_load[p_region(s), t] × chain_weight[s, month(t), hour(t)]
+```
+
+Chain weights sum to 1.0 per p-region at every cell (max deviation ≤ 2×10⁻¹⁵).
+1,333 substations total: 1,329 real + 4 synthetic for counties with no utility data
+(`SYNTHETIC_DEL_NORTE` in p9; `SYNTHETIC_LASSEN`, `_MODOC`, `_SISKIYOU` in p8).
+p8 is entirely PacifiCorp territory — no PGE/SCE/SDGE substations fall there.
+
+**IOU chain (IOU → substation)** — `disaggregate_iou.py` (for IEPR and RESOLVE)
+
+Single-stage: distributes each IOU's hourly load among its substations.
+
+```
+sub_iou_weight[s, m, h] = max(weight_col[s,m,h], 0) / Σ same for s in IOU(s)
+substation_load[s, t]   = IOU_load[IOU(s), t] × sub_iou_weight[s, month(t), hour(t)]
+```
+
+PGE (664 subs), SCE (578 subs), SDGE (99 subs) only.  IEPR VEA load and RESOLVE
+IID/LDWP/NCNC load are excluded (no substation data for those utilities).
+
+#### Gross vs net load consistency
+
+Substation profiles are **net-of-BTM load at the substation meter** (revised
+2026-07-16; previously documented as gross). Evidence from
+`scripts/load_projection/stochastic_diagnostics.py` (`# VERIFIED: sanity check`):
+13,318 cells across 368 substations have negative `min_load` (reverse flow — only
+possible when BTM export exceeds local load), and the implied scaling factor
+`Σμ_s / CAISO_cell_mean` dips midday (0.66 at h10–11 vs 0.72–0.74 overnight) —
+the signature of the same BTM offset being netted from both sides, whereas gross
+substation data against net CAISO would make the ratio peak midday.
+
+| Pair net substation weights WITH | Gross alternatives (used in pre-revision Approach 1 runs) |
+|----------------------------------|----------------------------------------------------------|
+| EIA-930 demand (net-to-net) | — |
+| IEPR `BASELINE_NET_LOAD` | IEPR `BASELINE_CONSUMPTION` |
+| RESOLVE derived net load | RESOLVE `demand_mw_2024scaled` |
+
+#### Parameters
+
+| Flag | Options | Default |
+|------|---------|---------|
+| `--weight-col` | `min_load`, `max_load`, `avg_load` | `max_load` |
+| `--weight-level` | `annual`, `monthly`, `hourly`, `monthhour` | `monthhour` |
+| `--save-output` | flag | off — weight tables and annual CSVs always written |
+
+`disaggregate_reeds.py` also takes `--mode {historic,projected,both}`.
+`disaggregate_iou.py` also takes `--source {iepr,resolve}`, `--vintage {2023,2024,2025}`,
+`--scenario`, and `--load-col` (see script header for full details and defaults).
+
+#### Output files
+
+All outputs: `data/processed/load_projection/projections/<run_tag>/`
+Large parquets only written with `--save-output`; CSV files always written.
+
+```
+projections/reeds_historic__max_load__monthhour/
+  county_pgroup_weights.csv                  # 58-row county → p-region fractions
+  substation_chain_weights.csv               # 1,333 subs × 288 (month, hour) cells
+  substation_annual_load_by_year.csv         # annual MWh 2016–2023
+  [substation_disaggregated_load.parquet]    # ~93M rows / ~750 MB  (--save-output)
+
+projections/reeds_projected__max_load__monthhour/
+  county_pgroup_weights.csv
+  substation_chain_weights.csv               # apply to any projected p-region series
+  substation_annual_load.csv                 # annual MWh by (weather_year, year, substation)
+  [substation_monthly_load.parquet]          # ~3.4M rows / ~33 MB  (--save-output)
+
+projections/iepr__v2025__planningscenario__baselineconsumption__max_load__monthhour/
+  substation_iou_weights.csv                 # 1,341 subs × 288 cells
+  substation_annual_load.csv                 # annual MWh 2025–2050
+  [substation_disaggregated_load.parquet]    # ~2.4 GB  (--save-output)
+
+projections/resolve__demandmw2024scaled__max_load__monthhour/
+  substation_iou_weights.csv
+  substation_annual_load.csv                 # annual MWh by weather year (2000–2022)
+  [substation_disaggregated_load.parquet]    # ~2.2 GB  (--save-output)
+```
+
+**Validation:** ReEDS historic CA totals 252–270 TWh/yr (2016–2023); IEPR 2025
+PGE+SCE+SDGE 242–384 TWh (2025–2050); RESOLVE PGE+SCE+SDGE 241 TWh (2024-scaled).
+
+#### Run commands
+
+```bash
+# ReEDS — both historic and projected, default params (max_load, monthhour)
+python scripts/load_projection/disaggregate_reeds.py
+
+# ReEDS — historic only; also write full hourly parquet
+python scripts/load_projection/disaggregate_reeds.py --mode historic --save-output
+
+# ReEDS — projected, alternate weight column
+python scripts/load_projection/disaggregate_reeds.py --mode projected --weight-col min_load
+
+# IEPR — defaults: 2025 vintage, Planning_Scenario, BASELINE_CONSUMPTION
+python scripts/load_projection/disaggregate_iou.py --source iepr
+
+# IEPR — different vintage or scenario
+python scripts/load_projection/disaggregate_iou.py --source iepr --vintage 2024
+python scripts/load_projection/disaggregate_iou.py --source iepr --scenario Local_Reliability
+
+# RESOLVE — all 23 weather years, defaults
+python scripts/load_projection/disaggregate_iou.py --source resolve
+
+# Either source — also write the full hourly parquet
+python scripts/load_projection/disaggregate_iou.py --source iepr --save-output
+python scripts/load_projection/disaggregate_iou.py --source resolve --save-output
+```
+
+---
+
+### Approach 2 — Stochastic conditional disaggregation
+
+Disaggregates a CAISO-total hourly series into per-substation **Monte Carlo
+draws** rather than deterministic weights.  Each substation's load within a
+(month, hour_pst) cell is a random variable whose distribution (normal or
+uniform) is exactly identified by the utility 10th/90th-percentile envelopes;
+a per-cell common factor tied to CAISO's standardized within-cell deviation
+`z(t)` makes substations move together, so the simulated total tracks
+`F · s(c) · y(t)` while every substation retains its full envelope
+variability.  It does NOT model substation-specific factor loadings (uniform
+correlation within a cell — substation time series are confidential and
+unavailable) and does NOT truncate negative loads (real BTM reverse flows).
+Full derivations: `docs/stochastic_model_spec.md`.
+
+#### Model
+
+```
+z(t)    = (y(t) − ȳ_c) / sd_c                    # CAISO standardized within its cell
+m_s(t)  = μ_s + σ_s · √ρ(c) · z(t)               # conditional mean
+L_s(t)  = (F/F*) · [ m_s(t) + σ_s · √(1−ρ(c)) · ε_s ]   # normal-family draw
+uniform family: same W = √ρ·z + √(1−ρ)·ε through a Gaussian copula,
+L_s = (F/F*) · [ a_s + (b_s − a_s) · Φ(W) ]
+
+s(c)  = implied_f(c) / F*        empirical 288-value IOU-share shape (mean 1,
+                                 energy-weighted); duck-curve-like by hour
+ρ(c)  = min(1, (implied_f(c)·sd_c / Σσ_s)²)      F-invariant common-factor share
+ε_s   one draw per substation-day (persistent within day)
+```
+
+Estimated from EIA-930 CISO 2015–2025: **F\* = 0.7361** (annual IOU energy
+share of CAISO), s(c) ∈ [0.78, 1.20], ρ(c) median 0.231, range 0.10–0.48,
+no capped cells.  Sweeping `--F` rescales output levels by `F/F*`; ρ and the
+correlation structure are unchanged (see spec).
+
+#### Scripts and parameters
+
+`scripts/load_projection/estimate_stochastic.py` — no arguments; writes the
+three parameter tables below.
+
+`scripts/load_projection/generate_stochastic.py`:
+
+| Flag | Options | Default |
+|------|---------|---------|
+| `--target` | `eia930` or path to CSV (`dt_pst_hb`, `demand_mw`; CAISO-total series) | `eia930` |
+| `--family` | `normal`, `uniform`, `both` | `both` |
+| `--F` | `cal` (= F\*) or float, e.g. `0.80` | `cal` |
+| `--z-mode` | `native` (standardize target in its own cells), `bootstrap` (month-matched blocks of historical z) | `native` |
+| `--block-days` | int | `7` |
+| `--n-draws` | int | `5` |
+| `--year-start` / `--year-end` | subset target years | all |
+| `--seed` | int | `0` |
+| `--validate` | flag — run the three spec checks | off |
+| `--save-output` | flag — hourly wide parquet per draw (~47 MB/draw-year) | off |
+
+#### Output files
+
+Parameter tables (`data/processed/load_projection/stochastic/`, always):
+
+```
+substation_cell_params.csv   387,864 rows: q10/q90, μ/σ, unif a/b,
+                             zero_width / inverted / missing flags
+system_cell_params.csv       288 rows: Σμ, Σσ, ȳ, sd, implied_f, shape_s, ρ, F*
+caiso_z_history.csv          92,089 rows: dt_pst_hb, demand_mw, z (2015–2025)
+diagnostic_cells.csv         per-cell diagnostics (stochastic_diagnostics.py)
+diagnostic_hygiene.csv       inverted-cell list
+hygiene_report.md            anatomy of inverted / zero-width / missing / negative cells
+```
+
+Generation runs (`data/processed/load_projection/projections/<run_tag>/` where
+`run_tag = stochastic__{target}__{family}__F{level}__{zmode}`):
+
+```
+substation_annual_mwh.csv      always: (substation, year, draw) annual energy
+validation_totals_cells.csv    --validate: per-cell total q10/q90 vs target
+validation_marginals_subs.csv  --validate: per-substation envelope recovery
+draws/draw{k}.parquet          --save-output: hourly wide matrix per draw
+```
+
+#### Validation (eia930 2015–2025, native z, F = cal, 5 draws)
+
+| Check | normal | uniform |
+|-------|--------|---------|
+| (i) per-cell total q10/q90 error | median 0.16% / max 0.75% | median 0.22% / max 1.26% |
+| (ii) envelope recovery (width-normalized, 375,906 sub-cells) | median 1.1%, p95 3.3% | median 2.4%, p95 4.0% |
+| (iii) hourly tracking relRMSE (copula/MC error) | 0.40%, bias +0.002% | 0.78%, bias +0.013% |
+
+Mean simulated total: 157.5 TWh/yr = F\* × CAISO mean (~214 TWh/yr) ✓.
+Residual marginal-recovery error comes from the empirical z(t) not being
+exactly standard normal (skewed weather distribution), not from the sampler.
+
+#### Run commands
+
+```bash
+python scripts/load_projection/estimate_stochastic.py
+python scripts/load_projection/generate_stochastic.py --validate
+python scripts/load_projection/generate_stochastic.py --family normal --F 0.80 --n-draws 20
+python scripts/load_projection/generate_stochastic.py --target forecast.csv --z-mode bootstrap --save-output
+```
+
+---
+
 ## Repository Structure
 
 ```
@@ -98,7 +398,7 @@ california-hourly-disaggregation/
 │   ├── 01_eia_from_to_consistency.ipynb      # FROM vs TO cross-file consistency
 │   └── 02_eia_region_vs_interchange.ipynb    # Region TI vs sum-of-BA interchange
 ├── scripts/
-│   ├── data/                       # Scraping and processing — organised by source
+│   ├── data/                       # Data ingestion, processing, and validation — organised by source
 │   │   ├── eia/                    # EIA-930 scrape, PUDL ingest, and processing
 │   │   ├── iepr/                   # CEC IEPR forecast processing
 │   │   ├── resolve/                # RESOLVE load-input processing
@@ -106,21 +406,29 @@ california-hourly-disaggregation/
 │   │   │   ├── process_reeds.py               # Projected load → reeds_ca_load_*.{parquet,csv}
 │   │   │   ├── process_historic_load.py       # Historic HDF5 → historic_ca_load_*.{parquet,csv}
 │   │   │   └── process_county_disaggregation.py  # County → p-region + LPF + BTM PV reference table
-│   │   ├── pge/                    # PG&E scraper
+│   │   ├── pge/                    # PG&E scraper and feeder download
 │   │   ├── sce/                    # SCE scraper, ingest, and validation
 │   │   ├── sdge/                   # SDG&E scraper
 │   │   ├── bves/                   # BVES scraper (placeholder)
 │   │   ├── calpeco/                # CalPeco scraper (placeholder)
 │   │   ├── pacificorp/             # PacifiCorp scraper
-│   │   └── substations/            # Substation processing, audit, and spatial join
-│   │       ├── process_substations_clean.py   # Clean and deduplicate substation profiles
-│   │       └── assign_substation_counties.py  # Spatial join: substations → county → p-region
-│   ├── compare_cal_region_sources.py    # EIA API CAL vs PUDL CA5 sum
-│   ├── compare_eia_sources.py           # EIA API scrape vs PUDL nightly
-│   ├── compare_iepr_eia.py              # IEPR projections vs EIA realized demand
-│   ├── compare_resolve_iepr_eia.py      # RESOLVE vs IEPR vs EIA (with ReEDS overlay)
-│   └── compare_substation_eia_iepr.py   # Substation profiles vs EIA and IEPR
-├── src/data/                       # Scraper and processing library modules
+│   │   ├── substations/            # Substation processing, audit, and spatial join
+│   │   │   ├── process_substations_clean.py   # Clean and deduplicate substation profiles
+│   │   │   └── assign_substation_counties.py  # Spatial join: substations → county → p-region
+│   │   ├── compare_cal_region_sources.py    # EIA API CAL vs PUDL CA5 sum
+│   │   ├── compare_eia_sources.py           # EIA API scrape vs PUDL nightly
+│   │   ├── compare_iepr_eia.py              # IEPR projections vs EIA realized demand
+│   │   ├── compare_resolve_iepr_eia.py      # RESOLVE vs IEPR vs EIA (with ReEDS overlay)
+│   │   ├── compare_substation_eia_iepr.py   # Substation profiles vs EIA and IEPR
+│   │   ├── compare_cats_basin.py            # CATS vs DataBasin substation coverage
+│   │   ├── compare_cats_substations.py      # CATS vs cleaned utility substations
+│   │   ├── compare_cats_unfiltered.py       # CATS vs unfiltered utility substations
+│   │   ├── compare_lcr_pge.py               # PG&E LCR PDF substation list vs Basin and our data
+│   │   └── compare_feeder_substations.py    # PG&E feeder-derived substations vs Basin and CATS
+│   └── load_projection/            # Load projection scripts (in development)
+├── src/
+│   ├── data/                       # Scraper and processing library modules
+│   └── load_projection/            # Load projection library modules (in development)
 ├── requirements.txt
 └── README.md
 ```
@@ -200,11 +508,11 @@ EIA v2 API (`https://api.eia.gov/v2/electricity/rto/`) for two endpoints:
   forecast for the aggregate California (`CAL`) region
 
 This scrape produces the `data/raw/eia/` CSV files used only to validate PUDL (see
-`scripts/compare_eia_sources.py`) and to provide the EIA API CAL region series alongside
-the PUDL-derived CA5 sum in `scripts/compare_cal_region_sources.py`.  For all analysis
+`scripts/data/compare_eia_sources.py`) and to provide the EIA API CAL region series alongside
+the PUDL-derived CA5 sum in `scripts/data/compare_cal_region_sources.py`.  For all analysis
 scripts, `eia930_operations.csv` (PUDL) is the authoritative operations source.
 
-**Source validation: `scripts/compare_eia_sources.py`** cross-checks PUDL against the
+**Source validation: `scripts/data/compare_eia_sources.py`** cross-checks PUDL against the
 EIA API scrape across four sections:
 
 | Section | What it checks |
@@ -859,10 +1167,10 @@ then writes `data/processed/eia/eia861_ca_fractions.csv`:
 
 ```bash
 # Cross-validate PUDL EIA-930 against the EIA API scrape (all sections)
-python scripts/compare_eia_sources.py
+python scripts/data/compare_eia_sources.py
 
 # NaN audit only — does not require the EIA scrape file
-python scripts/compare_eia_sources.py -s D
+python scripts/data/compare_eia_sources.py -s D
 
 # Check SCE data for schema consistency, row-count completeness, and duplicate hours
 python scripts/data/sce/validate_sce.py
@@ -975,7 +1283,7 @@ why RESOLVE and IEPR differ numerically, and which values are raw vs derived.
 | RESOLVE | PGE+SCE+SDGE+IID+LDWP+NCNC | Gross (BTM solar on supply side) | 2024–2045 | IRP optimization target |
 | ReEDS projected | p8–p11 (CA total); p9–p11 = WECC_CA ≈ all CA except PACW | Net load projected under IRA_low scenario | 2020–2050 | Long-run US capacity planning |
 | ReEDS historic | p9–p11 (WECC_CA ≈ BANC+CISO+IID+LDWP+TIDC) | Net load actual observed | 2016–2023 | Ground truth at WECC_CA scale |
-| Substations | PGE+SCE+SDGE distribution | Gross (metered substation peak) | Historical monthly | Sub-BA spatial resolution |
+| Substations | PGE+SCE+SDGE distribution | Net-of-BTM at substation meter (revised 2026-07-16; see "Gross vs net load consistency") | Historical monthly | Sub-BA spatial resolution |
 
 ### RESOLVE
 
@@ -1211,6 +1519,14 @@ generate their own electricity, reducing grid demand).  RESOLVE adds it back to 
 because it models rooftop solar as a supply-side resource — the demand side "sees" gross
 consumption, and BTM PV generation is subtracted on the supply side by assigning it a
 capacity credit via ELCC.
+
+**Note on `demand_mw_net` in `resolve_hourly_profiles.csv`:** The processed output
+subtracts only the BTM PV overlay (`demand_mw_net = demand_mw_2024scaled − btm_pv_mw`).
+The remaining overlays — EV charging, building electrification (AAFS), energy efficiency
+(AAEE), data centers, and climate impacts — are still embedded in the signal.
+`demand_mw_net` is therefore closer to IEPR Total CAISO Load than `demand_mw_2024scaled`,
+but is not equal to it.  The gap is roughly the sum of the non-BTM overlays shown in the
+table above (~26 TWh/yr for CAISO in 2025).
 
 ---
 

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Exploratory script for the two ReEDS/historic load files in data/raw/reeds/.
 
 Files examined:
@@ -6,7 +6,7 @@ Files examined:
   - reeds_load_transformed.parquet     (Parquet, ~814 MB)
 
 Run:
-    python scripts/explore_potential_data.py
+    python scripts/data/explore_potential_data.py
 
 Optional flags:
     --h5-only       skip the parquet (it's large; reading takes a moment)
@@ -21,7 +21,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 H5_PATH      = ROOT / "data" / "raw" / "reeds" / "historic_post2015_load_hourly.h5"
 PARQUET_PATH = ROOT / "data" / "raw" / "reeds" / "reeds_load_transformed.parquet"

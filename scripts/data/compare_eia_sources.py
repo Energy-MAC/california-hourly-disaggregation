@@ -1,4 +1,4 @@
-"""
+﻿"""
 Compare EIA-930 data sources: direct EIA API scrape vs PUDL nightly.
 
 For each of the 8 California BAs, verifies that PUDL does not omit any
@@ -42,10 +42,10 @@ Outputs
 
 Usage
 -----
-  python scripts/compare_eia_sources.py            # all sections
-  python scripts/compare_eia_sources.py -s D       # NaN audit only (no EIA file needed)
-  python scripts/compare_eia_sources.py -s A       # summary only
-  python scripts/compare_eia_sources.py -s B,C     # coverage + values
+  python scripts/data/compare_eia_sources.py            # all sections
+  python scripts/data/compare_eia_sources.py -s D       # NaN audit only (no EIA file needed)
+  python scripts/data/compare_eia_sources.py -s A       # summary only
+  python scripts/data/compare_eia_sources.py -s B,C     # coverage + values
 """
 from __future__ import annotations
 
@@ -58,11 +58,11 @@ import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
 
-ROOT      = Path(__file__).resolve().parents[1]
+ROOT      = Path(__file__).resolve().parents[2]
 PROC      = ROOT / "data" / "processed" / "eia"
 IEPR_PROC = ROOT / "data" / "processed" / "iepr"
 FIGS      = ROOT / "data" / "figures"
-CHECKS    = ROOT / "data" / "checks"
+CHECKS    = ROOT / "data" / "checks" / "compare_eia_sources"
 CHECKS.mkdir(parents=True, exist_ok=True)
 FIGS.mkdir(parents=True, exist_ok=True)
 
@@ -849,7 +849,7 @@ def main() -> None:
 
     print("Loading PUDL operations ...")
     if not PUDL_FILE.exists():
-        sys.exit(f"  File not found: {PUDL_FILE}\n  Run scripts/process_eia_pudl.py first.")
+        sys.exit(f"  File not found: {PUDL_FILE}\n  Run scripts/data/eia/process_eia_pudl.py first.")
     pudl = _load_pudl()
     print(f"  {len(pudl):,} rows  [{pudl['ts'].min()} -> {pudl['ts'].max()}]")
 

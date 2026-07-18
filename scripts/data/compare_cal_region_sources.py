@@ -1,4 +1,4 @@
-"""
+﻿"""
 Compare the two EIA CAL region demand series:
 
   EIA API  : eia930_cal_region_EIA.csv  — direct scrape from EIA open-data API
@@ -28,7 +28,7 @@ Figures saved to data/figures/
 
 Usage
 -----
-  python scripts/compare_cal_region_sources.py
+  python scripts/data/compare_cal_region_sources.py
 """
 from __future__ import annotations
 
@@ -40,7 +40,7 @@ import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 PROC = ROOT / "data" / "processed" / "eia"
 FIGS = ROOT / "data" / "figures"
 FIGS.mkdir(parents=True, exist_ok=True)

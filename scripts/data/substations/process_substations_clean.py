@@ -91,6 +91,12 @@ PROC     = ROOT / "data" / "processed"
 OUT_DIR  = PROC / "substations"
 DICT_PATH = ROOT / "data" / "basinSourceDictionary.csv"
 
+# PGE removed some substations from their published ArcGIS layer between scrapes.
+# The older non-clean processed file is the only remaining source for those profiles.
+# Load values there are already in MW (converted during earlier processing run).
+LEGACY_PGE_LOADS = OUT_DIR / "substation_load_profiles.csv"
+LEGACY_PGE_ATTRS = OUT_DIR / "substation_attributes.csv"
+
 ATTR_COLS = [
     "utility", "substation_name",
     "util_lat", "util_lon",
@@ -307,6 +313,58 @@ def process_pge() -> tuple[pd.DataFrame, pd.DataFrame]:
         # note_sub carries "Yes" for redacted substations (capacity attrs are NaN there)
         "note_sub":        _map("redacted").values,
     })
+
+    # ── Legacy recovery: substations removed from PGE's published ArcGIS layer ─
+    # PGE periodically removes substations from pge_layer25_earliest_latest_part001.csv.
+    # The older non-clean processed file (LEGACY_PGE_LOADS / LEGACY_PGE_ATTRS) preserves
+    # their load profiles (already in MW) and attributes.  We union them back in here so
+    # the clean output does not silently lose historic coverage.
+    if LEGACY_PGE_LOADS.exists() and LEGACY_PGE_ATTRS.exists():
+        leg_loads = pd.read_csv(LEGACY_PGE_LOADS)
+        leg_loads = leg_loads[leg_loads["utility"] == "pge"].copy()
+        leg_loads["substation_name"] = leg_loads["substation_name"].str.upper().str.strip()
+
+        current_names = set(loads_out["substation_name"])
+        leg_loads = leg_loads[~leg_loads["substation_name"].isin(current_names)]
+
+        if not leg_loads.empty:
+            n_leg = leg_loads["substation_name"].nunique()
+            print(f"  PGE legacy recovery: adding {n_leg} substations "
+                  f"no longer in raw ArcGIS data ({leg_loads['substation_name'].nunique()} subs, "
+                  f"{len(leg_loads):,} rows)")
+            leg_loads_out = pd.DataFrame({
+                "utility":         "pge",
+                "substation_name": leg_loads["substation_name"].values,
+                "year":            pd.NA,
+                "month":           leg_loads["month"].astype(int).values,
+                "hour":            leg_loads["hour"].astype(int).values,
+                "min_load":        pd.to_numeric(leg_loads["min_load"], errors="coerce").values,
+                "max_load":        pd.to_numeric(leg_loads["max_load"], errors="coerce").values,
+            })
+            loads_out = pd.concat([loads_out, leg_loads_out], ignore_index=True)
+
+            # Attributes for recovered substations
+            leg_attrs = pd.read_csv(LEGACY_PGE_ATTRS)
+            leg_attrs = leg_attrs[leg_attrs["utility"] == "pge"].copy()
+            leg_attrs["substation_name"] = leg_attrs["substation_name"].str.upper().str.strip()
+            leg_attrs = leg_attrs[leg_attrs["substation_name"].isin(set(leg_loads_out["substation_name"]))]
+            leg_attrs = leg_attrs.drop_duplicates("substation_name")
+
+            leg_attrs_out = pd.DataFrame({
+                "utility":         "pge",
+                "substation_name": leg_attrs["substation_name"].values,
+                "util_lat":        pd.to_numeric(leg_attrs.get("latitude"),  errors="coerce").values,
+                "util_lon":        pd.to_numeric(leg_attrs.get("longitude"), errors="coerce").values,
+                "voltage_kv":      pd.to_numeric(leg_attrs.get("voltage_kv"), errors="coerce").values,
+                "division":        leg_attrs.get("division", pd.Series(dtype=str)).values,
+                "subst_id":        leg_attrs.get("subst_id", pd.Series(dtype=str)).values,
+                "circuit_count":   pd.to_numeric(leg_attrs.get("circuit_count"), errors="coerce").values,
+                "existing_gen":    pd.to_numeric(leg_attrs.get("existing_gen"), errors="coerce").values,
+                "queued_gen":      pd.to_numeric(leg_attrs.get("queued_gen"),   errors="coerce").values,
+                "total_gen":       pd.to_numeric(leg_attrs.get("total_gen"),    errors="coerce").values,
+                "note_sub":        leg_attrs.get("note_sub", pd.Series(dtype=str)).values,
+            })
+            attrs_out = pd.concat([attrs_out, leg_attrs_out], ignore_index=True)
 
     return attrs_out, loads_out[LOAD_COLS]
 

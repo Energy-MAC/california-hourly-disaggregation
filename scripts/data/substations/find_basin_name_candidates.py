@@ -48,8 +48,9 @@ from pathlib import Path
 import pandas as pd
 
 ROOT   = Path(__file__).resolve().parents[3]
-CHECKS = ROOT / "data" / "checks"
-
+CHECKS_compare_substations = ROOT / "data" / "checks" / "compare_substations"
+CHECKS = ROOT / "data" / "checks" / "find_basin_name_candidates"
+CHECKS.mkdir(parents=True, exist_ok=True)
 SPATIAL_THRESHOLD_KM = 2.0
 
 # ── Normalisation (mirrors process_substations_clean.py) ─────────────────────
@@ -281,8 +282,8 @@ def _filter_basin(basin, label):
 
 def run_pge(existing_pairs, claimed_basin_norms):
     print("-- PGE -----------------------------------------------------------------")
-    src   = pd.read_csv(CHECKS / "cmp_D_pge_loads_remainder.csv")
-    basin = pd.read_csv(CHECKS / "cmp_D_basin_pge_remainder.csv")
+    src   = pd.read_csv(CHECKS_compare_substations / "cmp_D_pge_loads_remainder.csv")
+    basin = pd.read_csv(CHECKS_compare_substations/ "cmp_D_basin_pge_remainder.csv")
     print(f"  Source remainder : {len(src):>4} substations")
     print(f"  Basin  remainder : {len(basin):>4} substations (before RISER/TAP filter)")
     basin = _filter_basin(basin, "PGE")
@@ -310,8 +311,8 @@ def run_pge(existing_pairs, claimed_basin_norms):
 
 def run_sce(existing_pairs, claimed_basin_norms):
     print("-- SCE -----------------------------------------------------------------")
-    src   = pd.read_csv(CHECKS / "cmp_D_sce_alt_remainder.csv")
-    basin = pd.read_csv(CHECKS / "cmp_D_basin_sce_remainder.csv")
+    src   = pd.read_csv(CHECKS_compare_substations / "cmp_D_sce_alt_remainder.csv")
+    basin = pd.read_csv(CHECKS_compare_substations/ "cmp_D_basin_sce_remainder.csv")
     print(f"  Source remainder : {len(src):>4} substations")
     print(f"    of which P.T.  : {src['SUB_NAME'].str.contains('P\\.T\\.', na=False).sum():>4}")
     print(f"  Basin  remainder : {len(basin):>4} substations (before RISER/TAP filter)")
