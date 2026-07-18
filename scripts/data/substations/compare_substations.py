@@ -94,7 +94,7 @@ from scipy.spatial import KDTree
 ROOT      = Path(__file__).resolve().parents[3]
 RAW       = ROOT / "data" / "raw"
 PROC      = ROOT / "data" / "processed"
-CHECKS    = ROOT / "data" / "checks"
+CHECKS    = ROOT / "data" / "checks" / "compare_substations"
 FIGS_SCE  = ROOT / "data" / "figures" / "sce_vintage_analysis"
 DICT_PATH = ROOT / "data" / "basinSourceDictionary.csv"
 CHECKS.mkdir(parents=True, exist_ok=True)

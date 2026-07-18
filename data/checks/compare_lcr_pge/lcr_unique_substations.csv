@@ -1,0 +1,823 @@
+sap_substation_name,lcr_area,city_served,division,owner,n_city_rows
+7TH STANDARD SUB,Kern,Bakersfield,KERN,PGE,1
+ACTON SUB,Greater Bay Area,Daly City; San Francisco,SAN FRANCISCO,PGE,2
+ADAMS EAST SOLAR SUB,Greater Fresno,San Joaquin County,YOSEMITE,nonPGE,1
+ADVANCED MICRO DEVICES SUB,Greater Bay Area,Sunnyvale,DE ANZA,nonPGE,1
+AEC SITE 300 SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+AG WISHON PH SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+AIR PRODUCTS SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+AIRWAYS SUB,Greater Fresno,Clovis; Fresno,FRESNO,PGE,2
+ALHAMBRA SUB,Greater Bay Area,Martinez; Pleasant Hill,DIABLO,PGE,2
+ALLEGHANY SUB,Sierra,Alleghany,SIERRA,PGE,1
+ALMADEN SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+ALTO SUB,North Coast/North Bay,Belvedere; Corte Madera; Kentfield; Larkspur; Mill Valley; Muir Beach; Strawberry; Tamalpais-Homestead Valley; Tiburon,NORTH BAY,PGE,9
+AMES DIST SUB,Greater Bay Area,Mountain View,DE ANZA,PGE,1
+AMES TRANS SUB,Greater Bay Area,Mt. View,DE ANZA,PGE,1
+ANGIOLA SUB,Greater Fresno,Alpaugh; Corcoran,FRESNO,PGE,2
+ANNAPOLIS SUB,North Coast/North Bay,Annapolis,NORTH COAST,PGE,1
+ANTIOCH SUB,Greater Bay Area,Antioch,DIABLO,PGE,1
+APPLE HILL SUB,Sierra,Placerville; Pollock Pines,SIERRA,PGE,2
+APPLIED MATERIALS SW STA SUB,Greater Bay Area,Sunnyvale,DE ANZA,PGE,1
+ARBURUA (TEXACO T & T INC.) SUB,Greater Fresno,Merced County,FRESNO,nonPGE,1
+ARCATA SUB,Humboldt,Arcata; Eureka; McKinleyville,HUMBOLDT,PGE,3
+ARCH ROCK SUB,Greater Fresno,Mariposa County,FRESNO,nonPGE,1
+ARLINGTON SUB,Greater Bay Area,Berkeley,EAST BAY,PGE,1
+ARMSTRONG SUB,Greater Fresno,Hanford,FRESNO,nonPGE,1
+ASHLAN AVE SUB,Greater Fresno,Fresno,FRESNO,PGE,1
+ASHLAN AVENUE SUB,Greater Fresno,Fresno,FRESNO,PGE,1
+ATLANTIC SUB,Sierra,Roseville,SIERRA,PGE,1
+ATWATER SUB,Greater Fresno,Atwater; Winton,YOSEMITE,PGE,2
+AUBERRY SUB,Greater Fresno,Auberry; Shaver Lake,FRESNO,PGE,2
+AUBURN SUB,Sierra,Auburn; North Auburn,SIERRA,PGE,2
+AVENA SUB,Stockton,Farmington; Manteca,STOCKTON,PGE,2
+AVENAL PRISON SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+AVENAL SUB,Greater Fresno,Avenal,FRESNO,nonPGE,1
+BABEL SUB,Greater Bay Area,Concord,DIABLO,PGE,1
+BADGER CREEK SUB,Kern,Kern County,KERN,nonPGE,1
+BAHIA SUB,North Coast/North Bay,Benicia,NORTH BAY,PGE,1
+BAIR SUB,Greater Bay Area,Redwood City,PENINSULA,PGE,1
+BAKER CREEK,Humboldt,Humboldt County,HUMBOLDT,nonPGE,1
+BAKERSFIELD JUNCTION SUB,Kern,Kern County,KERN,PGE,1
+BAKERSFIELD SUB,Kern,Bakersfield,KERN,PGE,1
+BALCH PH #1 SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+BALCH PH #2 SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+BALFOUR SUB,Greater Bay Area,Brentwood; Discovery Bay; Knightsen,DIABLO,PGE,3
+BANCROFT SUB,Greater Bay Area,Oakland; San Leandro,EAST BAY,PGE,2
+BANGOR SUB,Sierra,Bangor; Challenge-Brownsville; Loma Rica; Palermo,SIERRA,PGE,4
+BANK OF AMERICA SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,nonPGE,1
+BANTA CARBONA SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+BANTA SUB,Stockton,Lathrop; Tracy,STOCKTON,PGE,2
+BARKER SLOUGH SUB,Sierra,Solano County,SACRAMENTO,nonPGE,1
+BARRETT SUB,Greater Bay Area,Richmond,EAST BAY,PGE,1
+BARRY SUB,Sierra,Barry,SIERRA,PGE,1
+BARTON SUB,Greater Fresno,Clovis; Fresno,FRESNO,PGE,2
+BASALT SUB,North Coast/North Bay,Napa,NORTH BAY,PGE,1
+BASCOM SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+BAY MEADOWS SUB,Greater Bay Area,Burlingame; Foster City; Highlands-Baywood Park; Hillsborough; San Mateo,PENINSULA,PGE,5
+BEACH STREET SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+BEALE AIR FORCE BASE,Sierra,Marysville,SIERRA,nonPGE,1
+BEAR MOUNTAIN CO-GEN (DESTEC) SUB,Kern,Kern County,KERN,nonPGE,1
+BEAR VALLEY SUB,Greater Fresno,Bear Valley,YOSEMITE,PGE,1
+BEARDSLEY JCT SUB,Stockton,Strawberry,STOCKTON,PGE,1
+BECK STREET SUB,Greater Bay Area,Oakland,EAST BAY,PGE,1
+BELDEN PH,Sierra,Belden,NORTH VALLEY,PGE,1
+BELL SUB,Sierra,Auburn; North Auburn,SIERRA,PGE,2
+BELLE HAVEN SUB,Greater Bay Area,Atherton; East Palo Alto; Menlo Park; North Fair Oaks; Palo Alto; Redwood City,PENINSULA,PGE,6
+BELLEVUE SUB,North Coast/North Bay,Cotati; Rohnert Park; Santa Rosa,NORTH COAST,PGE,3
+BELLOTA SUB,Stockton,Bellota,STOCKTON,PGE,1
+BELMONT SUB,Greater Bay Area,Belmont; Foster City; Redwood City; San Carlos; San Mateo,PENINSULA,PGE,5
+BERESFORD SUB,Greater Bay Area,Hillsborough; San Mateo,PENINSULA,PGE,2
+BERKELEY F SUB,Greater Bay Area,Albany; Berkeley; Oakland,EAST BAY,PGE,4
+BERKELEY T SUB,Greater Bay Area,Berkeley; Oakland,EAST BAY,nonPGE,3
+BETHEL BANK SUB,Greater Bay Area,Bethel Island,DIABLO,nonPGE,1
+BIG BASIN SUB,Greater Bay Area,Boulder Creek,CENTRAL COAST,PGE,1
+BIG LAGOON SUB,Humboldt,Big Lagoon Park,HUMBOLDT,PGE,1
+BIG RIVER SUB,North Coast/North Bay,Mendocino,HUMBOLDT,PGE,1
+BIOLA SUB,Greater Fresno,Biola; Fresno,FRESNO,PGE,2
+BIRDS EYE FOODS SUB (AGRILINK FOODS),Greater Bay Area,,CENTRAL COAST,nonPGE,1
+BLUE CHIP MILLING,Humboldt,Humboldt County,HUMBOLDT,nonPGE,1
+BLUE LAKE SUB,Humboldt,Blue Lake; McKinleyville,HUMBOLDT,PGE,2
+BLUFORD CREEK HYDRO,Humboldt,Humboldt County,HUMBOLDT,nonPGE,1
+BOGUE SUB,Sierra,South Yuba City; Yuba City,SIERRA,PGE,2
+BOLINAS SUB,North Coast/North Bay,Bolinas; Stinson Beach,NORTH BAY,PGE,2
+BOLTHOUSE FARMS SUB,Kern,Kern County,KERN,nonPGE,1
+BONITA SUB,Greater Fresno,Madera,YOSEMITE,PGE,1
+BONNIE NOOK SUB,Sierra,Dutch Flat,SIERRA,PGE,1
+BORDEN SUB,Greater Fresno,Bonadelle Ranchos-Madera Ranchos; Fresno; Madera; Parksdale; Parkwood,YOSEMITE,PGE,5
+BORONDA SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+BOSTON SUB,Greater Bay Area,Oakland,EAST BAY,PGE,1
+BOSWELL SUB,Greater Fresno,Corcoran,FRESNO,PGE,1
+BOSWELL TOMATO PLANT SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+BOWLES SUB,Greater Fresno,Bowles; Easton,FRESNO,PGE,2
+BRENTWOOD SUB,Greater Bay Area,Bethel Island; Brentwood; Byron; Discovery Bay; Knightsen; Oakley,DIABLO,PGE,6
+BRIDGEVILLE SUB,Humboldt,Bridgeville,HUMBOLDT,PGE,1
+BRIGATANO SUB,Greater Bay Area,,CENTRAL COAST,nonPGE,1
+BRIGHTON SUB,Sierra,Sacramento,SACRAMENTO,PGE,1
+BRITTON SUB,Greater Bay Area,Santa Clara; Sunnyvale,DE ANZA,PGE,2
+BROOKSIDE SUB,Greater Bay Area,Richmond; San Pablo,EAST BAY,PGE,2
+BROWNS VALLEY SUB,Sierra,Loma Rica,SIERRA,PGE,1
+BRUNSWICK SUB,Sierra,Alta Sierra; Grass Valley; Nevada City,SIERRA,PGE,3
+BRYANT SUB,Greater Bay Area,Orinda,DIABLO,PGE,1
+BUCKS CREEK SUB,Sierra,Belden; Bucks Lake; Caribou; Storrie; Tobin,NORTH VALLEY,PGE,5
+BUENA VISTA SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+BULLARD SUB,Greater Fresno,Clovis; Fresno,FRESNO,PGE,2
+BURLINGAME SUB,Greater Bay Area,Burlingame; Hillsborough,PENINSULA,PGE,2
+BURNS SUB,Greater Bay Area,Santa Cruz,CENTRAL COAST,PGE,1
+CAL WATER SUB,Kern,Bakersfield,KERN,nonPGE,1
+CALERO SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+CALFLAX SUB,Greater Fresno,Huron,FRESNO,nonPGE,1
+CALIFORNIA AVE SUB,Greater Fresno,Fresno,FRESNO,PGE,1
+CALIFORNIA DAIRIES (DANISH CREAMERY) SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+CALISTOGA SUB,North Coast/North Bay,Calistoga,NORTH BAY,PGE,1
+CALPEAK PANOCHE IPP SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+CALPELLA SUB,North Coast/North Bay,Calpella,NORTH COAST,PGE,1
+CALVO SUB,Stockton,Tracy,STOCKTON,PGE,1
+CAMANCHE PP SUB,Stockton,Lockeford,STOCKTON,nonPGE,1
+CAMDEN SUB,Greater Fresno,Lanare; Laton; Riverdale,FRESNO,PGE,3
+CAMP EVERS SUB,Greater Bay Area,Santa Cruz,CENTRAL COAST,PGE,1
+CAMP FAR WEST,Sierra,Lincoln,SIERRA,nonPGE,1
+CAMPHORA JCT,Greater Bay Area,,CENTRAL COAST,PGE,1
+CAMPHORA SUB,Greater Bay Area,Soledad,CENTRAL COAST,PGE,1
+CANAL SUB,Greater Fresno,Los Banos,YOSEMITE,PGE,1
+CANANDAIGUA WINERY SUB,Greater Fresno,Madera County,FRESNO,nonPGE,1
+CANDLEWICK DIXIE YARN SUB,Greater Fresno,Lemoore,FRESNO,nonPGE,1
+CANTUA SUB,Greater Fresno,Cantua Creek,FRESNO,PGE,1
+CAPE HORN SUB,Sierra,Colfax,SIERRA,nonPGE,1
+CARBONA SUB,Stockton,Tracy,STOCKTON,PGE,1
+CARLOTTA SUB,Humboldt,Fortuna; Hydesville,HUMBOLDT,PGE,2
+CARNATION DAIRY SUB,Kern,Bakersfield,KERN,PGE,1
+CAROLANDS SUB,Greater Bay Area,Burlingame; Hillsborough; San Mateo,PENINSULA,PGE,3
+CARQUINEZ SUB,North Coast/North Bay,Vallejo,NORTH BAY,PGE,1
+CARUTHERS SUB,Greater Fresno,Caruthers,FRESNO,PGE,1
+CASSIDY SUB,Greater Fresno,Bonadelle Ranchos-Madera Ranchos; Fresno,YOSEMITE,PGE,2
+CASTLE SUB,Greater Fresno,Merced,FRESNO,nonPGE,1
+CASTRO SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+CASTRO VALLEY SUB,Greater Bay Area,Ashland; Castro Valley; Cherryland; Fairview; Hayward; Union City,MISSION,PGE,6
+CASTROVILLE SUB,Greater Bay Area,Castroville,CENTRAL COAST,PGE,1
+CATLETT SUB,Sierra,Pleasant Grove,SIERRA,PGE,1
+CAWELO B SUB,Kern,Famosa,KERN,PGE,1
+CAWELO C SUB,Kern,Famosa,KERN,PGE,1
+CAYETANO SUB,Greater Bay Area,Livermore,MISSION,PGE,1
+CERTAINTEED SUB,Greater Fresno,Madera County,FRESNO,nonPGE,1
+CHALLENGE SUB,Sierra,Brownsville; Challenge; La Porte; Little Grass Valley,NORTH VALLEY,PGE,4
+CHENEY SUB,Greater Fresno,Mendota,YOSEMITE,PGE,1
+CHERRY SUB,Greater Bay Area,San Leandro,MISSION,PGE,1
+CHEVRON PIPELINE KETTLEMAN SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+CHEVRON PIPELINE LOS BANOS SUB,Greater Fresno,Merced County,FRESNO,nonPGE,1
+CHILI BAR PH,Sierra,El Dorafo County,SIERRA,PGE,1
+CHOWCHILLA #2 NEO SUB,Greater Fresno,Madera County,FRESNO,PGE,1
+CHOWCHILLA #3 CO-GEN SJVE SUB,Greater Fresno,Madera County,FRESNO,PGE,1
+CHOWCHILLA SUB,Greater Fresno,Chowchilla,YOSEMITE,PGE,1
+CHRISTIE SUB,Greater Bay Area,Hercules,DIABLO,PGE,1
+CLARKSVILLE SUB,Sierra,Cameron Park; El Dorado Hills; Folsom,SIERRA,PGE,3
+CLAYTON SUB,Greater Bay Area,Alamo; Clayton; Concord; Walnut Creek,DIABLO,PGE,4
+CLEAR LAKE SUB,North Coast/North Bay,Kelseyville; Lakeport,NORTH COAST,PGE,2
+CLOVERDALE SUB,North Coast/North Bay,Cloverdale,NORTH COAST,PGE,1
+CLOVIS SUB,Greater Fresno,Clovis; Fresno,FRESNO,PGE,2
+COALINGA NO.1 SUB,Greater Fresno,Coalinga,FRESNO,PGE,1
+COALINGA NO.2 SUB,Greater Fresno,Coalinga,FRESNO,PGE,1
+COARSEGOLD SUB,Greater Fresno,Oakhurst; Yosemite Lakes,YOSEMITE,PGE,2
+COLGATE SUB,Sierra,Dobbins,SIERRA,PGE,1
+COLONY SUB,Stockton,Lockeford,STOCKTON,PGE,1
+COLUMBIA HILL SUB,Sierra,Sweetland,SIERRA,PGE,1
+COLUMBUS SUB,Kern,Bakersfield,KERN,PGE,1
+CONCORD SUB,Greater Bay Area,Concord,DIABLO,PGE,1
+CONTADINA SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+CONTRA COSTA PP SUB,Greater Bay Area,Antioch,DIABLO,nonPGE,1
+CONTRA COSTA SUB,Greater Bay Area,Antioch; Brentwood; Oakley,DIABLO,PGE,3
+COOLEY LANDING SUB,Greater Bay Area,Palo Alto,PENINSULA,PGE,1
+COPPERMINE SUB,Greater Fresno,Clovis,FRESNO,PGE,1
+CORCORAN SUB,Greater Fresno,Corcoran,FRESNO,PGE,1
+CORONA SUB,North Coast/North Bay,Petaluma,NORTH COAST,PGE,1
+COTATI SUB,North Coast/North Bay,Bodega Bay; Cotati; Dillon Beach; Rohnert Park; Tomales,NORTH COAST,PGE,5
+COVELO SUB,North Coast/North Bay,Covelo,NORTH COAST,PGE,1
+CPM SUB,Sierra,Clarksville,SIERRA,nonPGE,1
+CRAZY HORSE CANYON SW STA SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+CRESSEY SUB,Greater Fresno,Livingston; Winton,YOSEMITE,PGE,2
+CRESTA PH SUB,Sierra,Concow,NORTH VALLEY,PGE,1
+CROCKETT SUB,Greater Bay Area,Crockett,EAST BAY,PGE,1
+CROW CREEK SW STA,Stockton,Stomar,STOCKTON,PGE,1
+CROWS LANDING SUB,Stockton,Crows Landing,YOSEMITE,PGE,1
+CRUSHER SUB,Greater Bay Area,Bonny Doon,CENTRAL COAST,PGE,1
+CRYSTAL SPRINGS SUB,Greater Bay Area,San Mateo,PENINSULA,PGE,1
+CURTIS SUB,Stockton,Columbia; East Sonora; Groveland-Big Oak Flat; Jamestown; Mono Vista; Phoenix Lake-Cedar Ridge; Sonora; Soulsbyville; Tuolumne City,YOSEMITE,PGE,9
+City of HEALDSBURG SUB,North Coast/North Bay,Healdsburg,NORTH COAST,PGE,1
+DAIRYLAND SUB,Greater Fresno,Chowchilla,YOSEMITE,PGE,1
+DALY CITY SUB,Greater Bay Area,Broadmoor; Colma; Daly City; Pacifica; San Francisco; South San Francisco,PENINSULA,PGE,6
+DAVIS SUB,Sierra,Davis,SACRAMENTO,nonPGE,1
+DE FRANCESCO SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+DEADWOOD CREEK,Sierra,Concow,NORTH VALLEY,nonPGE,1
+DEEPWATER SUB,Sierra,West Sacramento,SACRAMENTO,PGE,1
+DEER CREEK PH,Sierra,Nevada County,SIERRA,PGE,1
+DEL MAR SUB,Sierra,Granite Bay; Lincoln; Loomis; Rocklin,SIERRA,PGE,4
+DEL MONTE SUB,Greater Bay Area,Monterey,CENTRAL COAST,PGE,1
+DELTA SWITCHING YARD,Greater Bay Area,,,,1
+DERRICK SUB,Greater Fresno,Kettleman,KERN,nonPGE,1
+DEXZEL SUB,Kern,Kern County,KERN,nonPGE,1
+DIAMOND SPRINGS SUB,Sierra,Diamond Springs; Placerville,SIERRA,PGE,2
+DINOSAUR POINT SUB,Greater Fresno,Merced County,FRESNO,PGE,1
+DINUBA ENERGY SUB,Greater Fresno,Dinuba; London; Reedley,FRESNO,nonPGE,3
+DISCOVERY CHEVRON SUB,Kern,Kern County,KERN,nonPGE,1
+DIXON LANDING SUB,Greater Bay Area,Fremont; Milpitas; San Jose,MISSION,PGE,4
+DOBBINS SUB,Sierra,Dobbins,SIERRA,PGE,1
+DOLAN ROAD SUB,Greater Bay Area,Moss Landing,CENTRAL COAST,PGE,1
+DOLE PACKAGED FROZEN FOODS INC SUB,Greater Fresno,Merced County,FRESNO,nonPGE,1
+DOS PALOS SUB,Greater Fresno,Dos Palos; South Dos Palos,YOSEMITE,PGE,2
+DOUBLE C SUB,Kern,Kern County,KERN,nonPGE,1
+DOW CHEMICAL METERING SUB,Greater Bay Area,Pittsburg,DIABLO,nonPGE,1
+DOWNIEVILLE DIESEL SUB,Sierra,Loyalton,SIERRA,PGE,1
+DRUM PH #1 SUB,Sierra,Colfax,SIERRA,PGE,1
+DUMBARTON SUB,Greater Bay Area,Fremont; Hayward; Newark; Union City,MISSION,PGE,4
+DUNBAR SUB,North Coast/North Bay,Boyes Hot Springs; Eldridge; Fetters Hot Springs-Agua Caliente; Glen Ellen; Santa Rosa,NORTH COAST,PGE,5
+DUNLAP SUB,Greater Fresno,Squaw Valley,FRESNO,PGE,1
+DUTCH FLAT #1 PH,Sierra,Colfax,SIERRA,PGE,1
+EAGLE ROCK SUB,North Coast/North Bay,Geysers,NORTH COAST,PGE,1
+EAST BANK SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+EAST GRAND SUB,Greater Bay Area,Brisbane; Colma; San Bruno; South San Francisco,PENINSULA,PGE,4
+EAST MARYSVILLE SUB,Sierra,Marysville; Yuba City,SIERRA,PGE,2
+EAST NICOLAUS SUB,Sierra,E. Nicolaus,SIERRA,PGE,1
+EAST PORTAL SUB,Greater Bay Area,Orinda,DIABLO,PGE,1
+EASTSHORE SUB,Greater Bay Area,Hayward,MISSION,PGE,1
+EDENVALE SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+EDES SUB,Greater Bay Area,Oakland; San Leandro,EAST BAY,PGE,2
+EEL RIVER SUB,Humboldt,Ferndale; Humboldt Hill,HUMBOLDT,PGE,2
+EIGHTEENTH STREET SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+EIGHTH AVE SUB,Greater Bay Area,Oakland,EAST BAY,PGE,1
+EL CAPITAN SUB,Greater Fresno,Merced,YOSEMITE,PGE,1
+EL CERRITO G SUB,Greater Bay Area,Albany; Berkeley; East Richmond Heights; El Cerrito; Kensington; Richmond; Rollingwood; San Pablo,EAST BAY,PGE,9
+EL DORADO PH,Sierra,Pollock Pines,SIERRA,nonPGE,1
+EL NIDO SUB,Greater Fresno,Merced,YOSEMITE,PGE,1
+EL PATIO SUB,Greater Bay Area,Burbank; Campbell; Fruitdale; San Jose; Santa Clara,DE ANZA,PGE,5
+EL PECO SUB,Greater Fresno,Madera,YOSEMITE,PGE,1
+ELK SUB,North Coast/North Bay,Elk,NORTH COAST,PGE,1
+ELLIS SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+EMERALD LAKE SUB,Greater Bay Area,Emerald Lake Hills; Redwood City; Woodside,PENINSULA,PGE,3
+ENCINAL SUB,Sierra,Live Oak,SIERRA,PGE,1
+ERTA SUB,Greater Bay Area,Watsonville,CENTRAL COAST,PGE,1
+ESSEX JUNCT SUB,Humboldt,Blue Lake,HUMBOLDT,PGE,1
+ESTUDILLO SUB,Greater Bay Area,Oakland; San Leandro,MISSION,PGE,2
+EUREKA A SUB,Humboldt,Eureka,HUMBOLDT,PGE,1
+EUREKA E SUB,Humboldt,Bayview; Cutten; Eureka; Pine Hills,HUMBOLDT,PGE,4
+EVERGREEN SUB,Greater Bay Area,San Jose; Seven Trees,SAN JOSE,PGE,2
+EXCELSIOR SW STA,Greater Fresno,Mendota,YOSEMITE,PGE,1
+EXCHEQUER PH SUB,Greater Fresno,Snelling,FRESNO,nonPGE,1
+FAIRHAVEN SUB,Humboldt,Fairhaven,HUMBOLDT,PGE,1
+FAIRMONT SUB,Greater Bay Area,Albany; El Cerrito; Richmond,EAST BAY,PGE,3
+FAIRVIEW SUB,Greater Bay Area,Crockett; Martinez; Port Costa; Rodeo; Vine Hill,DIABLO,PGE,5
+FIGARDEN SUB,Greater Fresno,Fresno,FRESNO,PGE,1
+FIGAS CONSTRUCTION (HUMBOLDT FLAKEBOARD),Humboldt,Humboldt County,HUMBOLDT,nonPGE,1
+FIREBAUGH SUB,Greater Fresno,Firebaugh; Mendota,YOSEMITE,PGE,2
+FIRESTONE SUB,Greater Bay Area,,,nonPGE,1
+FIRESTONE SW STA,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+FITCH MOUNTAIN SUB,North Coast/North Bay,Healdsburg; Windsor,NORTH COAST,PGE,2
+FIVE POINTS SW STA,Greater Fresno,Five Points,FRESNO,PGE,1
+FLINT SUB,Sierra,Auburn,SIERRA,PGE,1
+FLORENCE SUB,Greater Bay Area,Oakland; Piedmont,EAST BAY,PGE,2
+FMC SUB,Greater Bay Area,San Jose; Santa Clara,SAN JOSE,PGE,2
+FORBESTOWN PH,Sierra,Forbestown,NORTH VALLEY,nonPGE,1
+FORESTHILL SUB,Sierra,Foresthill,SIERRA,PGE,1
+FORMICA,Sierra,Lincoln,SIERRA,nonPGE,1
+FORT BRAGG A SUB,North Coast/North Bay,Fort Bragg,NORTH COAST,PGE,1
+FORT ORD SUB,Greater Bay Area,Fort Ord,CENTRAL COAST,PGE,1
+FORT ROSS SUB,North Coast/North Bay,Fort Ross,NORTH COAST,PGE,1
+FORT SEWARD SUB,Humboldt,Fort Seward,HUMBOLDT,PGE,1
+FRANKLIN SUB,Greater Bay Area,Crockett; Hercules; Pinole; Rodeo,EAST BAY,PGE,4
+FREMONT SUB,Greater Bay Area,Fremont; Sunol,MISSION,PGE,2
+FRESH EXPRESS SUB,Greater Bay Area,,CENTRAL COAST,nonPGE,1
+FRESNO WASTE WATER SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+FROGTOWN SUB,Stockton,Angels City; Copperopolis; Mountain Ranch; Murphys; Vallecito,STOCKTON,PGE,5
+FRUITLAND SUB,Humboldt,Myers Flat,HUMBOLDT,PGE,1
+FRUITVALE SUB,Kern,Bakersfield; Rosedale,KERN,PGE,2
+FULTON SUB,North Coast/North Bay,Larkfield-Wikiup; Santa Rosa; Windsor,NORTH COAST,PGE,3
+GABILAN SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+GALLO SUB,Greater Fresno,Livingston,YOSEMITE,PGE,1
+GARBERVILLE SUB,Humboldt,Redway,HUMBOLDT,PGE,1
+GARCIA SUB,North Coast/North Bay,Point Arena,NORTH COAST,PGE,1
+GATES SUB,Greater Fresno,Avenal; Coalinga; Huron,FRESNO,PGE,3
+GATES WELLHEAD SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+GEARY SUB,Greater Bay Area,Pleasant Hill; Walnut Creek,DIABLO,PGE,2
+GEYSERVILLE SUB,North Coast/North Bay,Geyserville,NORTH COAST,PGE,1
+GIFFEN SUB,Greater Fresno,Cantua Creek,FRESNO,PGE,1
+GILL RANCH SUB,Greater Fresno,Madera County,FRESNO,nonPGE,1
+GILL SUB,Greater Bay Area,Concord,DIABLO,PGE,1
+GLASS SUB,Greater Fresno,Madera,YOSEMITE,nonPGE,1
+GLENWOOD SUB,Greater Bay Area,Atherton; Menlo Park; North Fair Oaks,PENINSULA,PGE,3
+GOLD HILL SUB,Sierra,Folsom,SIERRA,PGE,1
+GOLDEN STATE METALS (EISEN) SUB,Kern,Kern County,KERN,nonPGE,1
+GONZALES,Greater Bay Area,Gonzales,CENTRAL COAST,PGE,1
+GRAND ISLAND SUB,Sierra,Isleton; Rio Vista,SACRAMENTO,PGE,2
+GRANITE CONSTRUCTION SUB,North Coast/North Bay,Lake County,NORTH COAST,nonPGE,1
+GRANITE ROCK SUB,Greater Bay Area,Oromas,CENTRAL COAST,nonPGE,1
+GRANT SUB,Greater Bay Area,Ashland; Cherryland; Hayward; San Leandro,MISSION,PGE,4
+GRASS VALLEY SUB,Sierra,Grass Valley,SIERRA,PGE,1
+GREEN VALLEY SUB,Greater Bay Area,Watsonville,CENTRAL COAST,PGE,1
+GREENBRAE SUB,North Coast/North Bay,Corte Madera; Kentfield; Larkspur; Tiburon,NORTH BAY,PGE,4
+GREGG SUB,Greater Fresno,Madera,YOSEMITE,PGE,1
+GRIMMWAY-MALAGA SUB,Kern,Kern County,KERN,nonPGE,1
+GRIZZLY SUB,Greater Bay Area,Berkeley,EAST BAY,nonPGE,1
+GRONEMEYER SUB,Stockton,Lathrop,STOCKTON,nonPGE,1
+GUALALA SUB,North Coast/North Bay,Gualala,NORTH COAST,PGE,1
+GUARDIAN SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+GUERNSEY SUB,Greater Fresno,Hanford,FRESNO,PGE,1
+GUSTINE SUB,Stockton,Gustine,YOSEMITE,PGE,1
+GWF HANFORD SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+GWF HANFORD SW STA SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+HAAS PH SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+HALF MOON BAY SUB,Greater Bay Area,El Granada; Half Moon Bay; Montara; Moss Beach,PENINSULA,PGE,4
+HALSEY PH SUB,Sierra,Auburn; Meadow Vista; North Auburn,SIERRA,PGE,3
+HAMILTON FIELD SUB,North Coast/North Bay,Novato,NORTH BAY,PGE,1
+HAMMONDS SUB,Greater Fresno,Fresno,YOSEMITE,PGE,1
+HANFORD SWITCHING STATION SUB,Greater Fresno,Kings County,FRESNO,PGE,1
+HARDWICK SUB,Greater Fresno,Hanford; Laton,FRESNO,PGE,2
+HARKINS,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+HARRIS SUB,Humboldt,Cutten; Eureka; Myrtletown; Pine Hills,HUMBOLDT,PGE,4
+HARTER SUB,Sierra,South Yuba City; Sutter; Tierra Buena; Yuba City,SIERRA,PGE,4
+HARTLEY SUB,North Coast/North Bay,Lakeport; North Lakeport,NORTH COAST,PGE,2
+HATTON SUB,Greater Bay Area,Carmel Valley,CENTRAL COAST,PGE,1
+HAYWARD O SUB,Greater Bay Area,Ashland; Cherryland; Hayward,MISSION,PGE,3
+HEINZ SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+HELM SUB,Greater Fresno,San Joaquin,FRESNO,PGE,1
+HELMS PGP SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+HENRIETTA SUB,Greater Fresno,Lemoore Station,FRESNO,PGE,1
+HERNDON SUB,Greater Fresno,Herndon,FRESNO,PGE,1
+HICKS SUB,Greater Bay Area,Cambrian Park; Los Gatos; San Jose,SAN JOSE,PGE,3
+HIGGINS SUB,Sierra,Alta Sierra; Lake of the Pines,SIERRA,PGE,2
+HIGH ST SUB,Greater Bay Area,Oakland,EAST BAY,PGE,1
+HIGHLANDS SUB,North Coast/North Bay,Clearlake; Hidden Valley Lake; Lower Lake,NORTH COAST,PGE,3
+HIGHWAY 70 INDUSTRIAL PARK (LOUISIANA PACIFIC),Sierra,Oroville,NORTH VALLEY,nonPGE,1
+HIGHWAY SUB,North Coast/North Bay,American Canyon; Vallejo,NORTH BAY,PGE,2
+HILLSDALE SUB,Greater Bay Area,Belmont; Hillsborough; San Mateo,PENINSULA,PGE,3
+HJ HEINZ,Stockton,Tracy,STOCKTON,nonPGE,1
+HOLLISTER SUB,Greater Bay Area,Hollister,CENTRAL COAST,PGE,1
+HOLLYWOOD SUB,Greater Bay Area,Oakland; Piedmont,EAST BAY,PGE,2
+HOMESTAKE SUB,North Coast/North Bay,,NORTH COAST,PGE,1
+HONCUT SUB,Sierra,Gridley; Loma Rica,NORTH VALLEY,PGE,2
+HOOPA SUB,Humboldt,Hoopa,HUMBOLDT,PGE,1
+HOPLAND SUB,North Coast/North Bay,Hopland,NORTH BAY,PGE,1
+HORSESHOE SUB,Sierra,Folsom; Granite Bay; Loomis; Roseville,SIERRA,PGE,4
+HOWLAND ROAD SUB,Stockton,Manteca,STOCKTON,PGE,1
+HUMBOLDT BAY GEN STA SUB,Humboldt,Bayview; Eureka; Humboldt Hill; Pine Hills,HUMBOLDT,PGE,5
+HUMBOLDT SUB,Humboldt,Eureka,HUMBOLDT,PGE,1
+HURON SUB,Greater Fresno,Huron,FRESNO,PGE,1
+IGNACIO SUB,North Coast/North Bay,Black Point-Green Point; Lucas Valley-Marinwood; Novato,NORTH BAY,PGE,3
+IMHOFF SUB,Greater Bay Area,Martinez,DIABLO,PGE,1
+INDIAN FLAT SUB,Greater Fresno,Incline,YOSEMITE,PGE,1
+INDIAN VALLEY SUB,North Coast/North Bay,,NORTH COAST,PGE,1
+INDUSTRIAL ACRES SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+INDUSTRIAL SUB,Stockton,Lodi,STOCKTON,PGE,1
+INGRAM CREEK SUB,Stockton,Stanislaus County,YOSEMITE,nonPGE,1
+IUKA SUB,Greater Bay Area,Pleasanton,MISSION,PGE,1
+J.R. WOOD SUB,Greater Fresno,Merced County,FRESNO,nonPGE,1
+JACALITO SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+JACOBS CORNER SUB,Greater Fresno,Lemoore; Lemoore Station; Stratford,FRESNO,PGE,3
+JANES CREEK SUB,Humboldt,Arcata; McKinleyville,HUMBOLDT,PGE,2
+JARVIS SUB,Greater Bay Area,Fremont; Hayward; Union City,MISSION,PGE,3
+JEFFERSON SUB,Greater Bay Area,Redwood City,PENINSULA,PGE,1
+JR WOOD SUB,Greater Fresno,Atwater,YOSEMITE,nonPGE,1
+JUDAH SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+KAMM (TEXACO) SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+KANAKA SUB,Sierra,Feather Falls,NORTH VALLEY,nonPGE,1
+KANSAS SOLAR SUB,Greater Fresno,Lemoore,FRESNO,nonPGE,1
+KANSAS SOUTH SUB,Greater Fresno,Lemoore,FRESNO,nonPGE,1
+KASSON SUB,Stockton,Tracy,STOCKTON,PGE,1
+KEARNEY (NEW) SUB,Greater Fresno,Easton; Fresno; Fresno County,FRESNO,PGE,3
+KEARNY (OLD) SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+KEKAWAKA,Humboldt,,HUMBOLDT,nonPGE,1
+KELSO SUB,Greater Bay Area,Tracy,STOCKTON,PGE,1
+KERCKHOFF #1 PH SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+KERCKHOFF #2 PH SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+KERMAN SUB,Greater Fresno,Kerman,FRESNO,PGE,1
+KERN FRONT SUB,Kern,Kern County,KERN,nonPGE,1
+KERN OIL SUB,Kern,Bakersfield; Oildale,KERN,PGE,2
+KERN PP SUB,Kern,Bakersfield,KERN,PGE,1
+KERNWATER SUB,Kern,Kern County,KERN,PGE,1
+KETTLEMAN HILLS SUB,Greater Fresno,Avenal,FRESNO,PGE,1
+KINGS RIVER PH SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+KINGSBURG SUB,Greater Fresno,Kingsburg; London; Selma; Traver,FRESNO,PGE,4
+KIRKER SUB,Greater Bay Area,Antioch; Bay Point; Pittsburg,DIABLO,PGE,3
+KNIGHTS LANDING SUB,Sierra,Knights Landing,SACRAMENTO,PGE,1
+KONOCTI SUB,North Coast/North Bay,Cobb; Kelseyville; Lower Lake,HUMBOLDT,PGE,3
+LAGUNA SECA SUB,North Coast/North Bay,Salinas,NORTH COAST,PGE,1
+LAGUNITAS SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+LAKEVILLE SUB,North Coast/North Bay,Petaluma,NORTH COAST,PGE,1
+LAKEWOOD SUB,Greater Bay Area,Alamo; Lafayette; Pleasant Hill; Waldon; Walnut Creek,DIABLO,PGE,5
+LAMBIE SW STA SUB,Greater Bay Area,Rio Vista,SACRAMENTO,PGE,1
+LAMMERS SUB,Stockton,Tracy,STOCKTON,PGE,1
+LAMONT SUB,Kern,Bakersfield; Lamont; Weedpatch,KERN,PGE,3
+LAS AROMAS SUB,Greater Bay Area,Orinda,DIABLO,PGE,1
+LAS GALLINAS A SUB,North Coast/North Bay,Lucas Valley-Marinwood; San Rafael; Santa Venetia,NORTH BAY,PGE,3
+LAS PALMAS SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+LAS POSITAS SUB,Greater Bay Area,Livermore; Pleasanton,MISSION,PGE,2
+LAS PULGAS SUB,Greater Bay Area,Atherton; Redwood City,PENINSULA,PGE,2
+LAURELES JCT,Greater Bay Area,,CENTRAL COAST,PGE,1
+LAURELES SUB,Greater Bay Area,Carmel,CENTRAL COAST,PGE,1
+LAWNDALE SUB,Greater Bay Area,South San Francisco,PENINSULA,PGE,1
+LAWRENCE SUB,Greater Bay Area,San Jose; Santa Clara; Sunnyvale,DE ANZA,PGE,3
+LAYTONVILLE SUB,North Coast/North Bay,Laytonville,NORTH COAST,PGE,1
+LE GRAND SUB,Greater Fresno,Le Grand,YOSEMITE,PGE,1
+LEARNER SUB,Stockton,Stockton,STOCKTON,,1
+LEMOORE NAS SUB,Greater Fresno,Kings County,FRESNO,PGE,1
+LEMOORE SUB,Greater Fresno,Lemoore,FRESNO,PGE,1
+LEPRINO FOODS LEEMORE SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+LEPRINO FOODS TRACY SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+LEPRINO SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+LERDO SUB,Kern,Shafter,KERN,PGE,1
+LIMESTONE SUB,Sierra,Shingle Springs,SIERRA,PGE,1
+LINCOLN SUB,Sierra,Lincoln,SIERRA,PGE,1
+LIVE OAK SUB,Sierra,Live Oak,SIERRA,PGE,1
+LIVERMORE SUB,Greater Bay Area,Livermore,MISSION,PGE,1
+LIVINGSTON SUB,Greater Fresno,Livingston; Winton,YOSEMITE,PGE,2
+LLAGAS SUB,Greater Bay Area,Gilroy; San Martin,SAN JOSE,PGE,2
+LOCKHEED #2 SUB,Greater Bay Area,San Jose; Sunnyvale,DE ANZA,PGE,2
+LODI STIG,Sierra,Lodi,STOCKTON,nonPGE,1
+LODI SUB,Stockton,Lodi; North Woodbridge; South Woodbridge,STOCKTON,PGE,3
+LONE STAR SUB,Greater Bay Area,Santa Cruz County,CENTRAL COAST,nonPGE,1
+LONETREE SUB,Greater Bay Area,Antioch; Brentwood; Oakley,DIABLO,PGE,3
+LOS ALTOS SUB,Greater Bay Area,Los Altos; Los Altos Hills; Mountain View; Palo Alto,DE ANZA,PGE,4
+LOS BANOS SUB,Greater Fresno,Los Banos,YOSEMITE,PGE,1
+LOS ESTEROS SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+LOS GATOS SUB,Greater Bay Area,Lexington Hills; Los Gatos; Monte Sereno,DE ANZA,PGE,3
+LOUISE SUB,Stockton,Manteca,STOCKTON,nonPGE,1
+LOUISIANA PACIFIC ARCATA,Humboldt,Arcata,HUMBOLDT,nonPGE,1
+LOWER LAKE SUB,North Coast/North Bay,Lower Lake,NORTH COAST,PGE,1
+LOYOLA SUB,Greater Bay Area,Los Altos; Los Altos Hills; Loyola; Mountain View; Palo Alto,DE ANZA,PGE,5
+LUCERNE SUB,North Coast/North Bay,Lucerne; Nice; North Lakeport; Upper Lake,NORTH COAST,PGE,4
+MABURY SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+MADERA JCT SUB,Greater Fresno,Madera,FRESNO,nonPGE,1
+MADERA POWER SUB,Greater Fresno,Madera,FRESNO,nonPGE,1
+MADERA SUB,Greater Fresno,Madera; Parkwood,YOSEMITE,nonPGE,2
+MALAGA POWER LLC (KRCD PEAKER),Greater Fresno,Fresno County,FRESNO,nonPGE,1
+MALAGA SUB,Greater Fresno,Calwa; Easton; Fowler; Fresno,FRESNO,PGE,4
+MANCHESTER SUB,Greater Fresno,Fresno,FRESNO,PGE,1
+MANTECA SUB,Stockton,Manteca,STOCKTON,PGE,1
+MAPLE CREEK SUB,Humboldt,Blue Lake,HUMBOLDT,PGE,1
+MAPLE SUB,Greater Bay Area,Oakland,EAST BAY,PGE,1
+MARIPOSA SUB,Greater Fresno,Bootjack; Mariposa,YOSEMITE,PGE,2
+MARKHAM SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+MARSH SUB,Greater Bay Area,Brentwood,DIABLO,PGE,1
+MARTINEZ PP SUB,Greater Bay Area,Martinez,DIABLO,PGE,1
+MARYSVILLE SUB,Sierra,Linda; Marysville; Yuba City,SIERRA,PGE,3
+MC FARLAND SUB,Kern,McFarland,KERN,PGE,1
+MC MULLIN SUB,Greater Fresno,Easton; Raisin City,FRESNO,PGE,2
+MCAVOY TAP SUB,Greater Bay Area,Bay Point,DIABLO,nonPGE,1
+MCCALL SUB,Greater Fresno,Del Rey; Fowler; Parlier; Selma,FRESNO,PGE,4
+MCKEE SUB,Greater Bay Area,Alum Rock; East Foothills; San Jose,SAN JOSE,PGE,3
+MCMULLIN SUB,Greater Fresno,Fresno,FRESNO,PGE,1
+MEADOW LANE SUB,Greater Bay Area,Concord; Martinez; Pleasant Hill; Waldon; Walnut Creek,DIABLO,PGE,5
+MELONES SUB,Stockton,Sonora,STOCKTON,PGE,1
+MENDOCINO SUB,North Coast/North Bay,Redwood Valley,NORTH COAST,PGE,1
+MENDOTA BIOMASS SUB,Greater Fresno,Mendota,FRESNO,nonPGE,1
+MENDOTA SUB,Greater Fresno,Mendota,YOSEMITE,PGE,1
+MENLO SUB,Greater Bay Area,Atherton; Los Altos Hills; Menlo Park; Palo Alto; Portola Valley; Redwood City; Stanford; West Menlo Park,PENINSULA,PGE,8
+MERCED FALLS PH SUB,Greater Fresno,Snelling,YOSEMITE,PGE,1
+MERCED SUB,Greater Fresno,Merced,YOSEMITE,PGE,1
+MERCY SPRINGS (SLWD) SUB,Greater Fresno,Merced County,FRESNO,PGE,1
+METCALF SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+METTLER SUB,Stockton,Lodi; Morada; Stockton,STOCKTON,PGE,3
+MI-WUK SUB,Stockton,Mi-Wuk Village; Mono Vista; Phoenix Lake-Cedar Ridge; Soulsbyville; Twain Harte,YOSEMITE,PGE,5
+MIDDLETOWN SUB,North Coast/North Bay,Cobb; Hidden Valley Lake; Middletown,NORTH COAST,PGE,3
+MILLBRAE SUB,Greater Bay Area,Burlingame; Millbrae; San Bruno,PENINSULA,PGE,3
+MILLER SUB,Stockton,Stanislaus County,YOSEMITE,nonPGE,1
+MILPITAS SUB,Greater Bay Area,Milpitas; San Jose,SAN JOSE,PGE,2
+MIRA VISTA SUB,Greater Bay Area,East Richmond Heights; El Cerrito; Richmond,EAST BAY,PGE,3
+MIRABEL SUB,North Coast/North Bay,Forestville; Graton; Guerneville,NORTH COAST,PGE,3
+MODESTO ENERGY SUB,Stockton,Modesto,STOCKTON,nonPGE,1
+MOLINO SUB,North Coast/North Bay,Graton; Occidental; Santa Rosa; Sebastopol,NORTH COAST,PGE,4
+MONROE SUB,North Coast/North Bay,Larkfield-Wikiup; Santa Rosa,NORTH COAST,PGE,2
+MONTA VISTA SUB,Greater Bay Area,Cupertino,DE ANZA,PGE,1
+MONTAGUE SUB,Greater Bay Area,Milpitas; San Jose,SAN JOSE,PGE,2
+MONTE RIO SUB,North Coast/North Bay,Guerneville; Monte Rio; Occidental,NORTH COAST,PGE,3
+MONTEREY NAVY LAB SUB,Greater Bay Area,Monterey,CENTRAL COAST,PGE,1
+MONTEREY SUB,Greater Bay Area,Monterey,CENTRAL COAST,PGE,1
+MONTICELLO SUB,North Coast/North Bay,Winters,NORTH BAY,PGE,1
+MORAGA SUB,Greater Bay Area,Lafayette; Moraga; Orinda,DIABLO,PGE,3
+MORGAN HILL SUB,Greater Bay Area,Morgan Hill; San Jose; San Martin,SAN JOSE,PGE,3
+MOSCONE SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,nonPGE,1
+MOSS LANDING SUB,Greater Bay Area,Moss Landing,CENTRAL COAST,PGE,1
+MOUNTAIN VIEW SUB,Greater Bay Area,Los Altos; Mountain View; Palo Alto; Sunnyvale,DE ANZA,PGE,4
+MT EDEN SUB,Greater Bay Area,Hayward; Union City,MISSION,PGE,2
+MT. QUARRIES SUB,Sierra,Georgetown,SIERRA,PGE,1
+MUSTANG SUB,Greater Fresno,,FRESNO,PGE,1
+NAPA SUB,North Coast/North Bay,Green Valley; Napa,NORTH BAY,PGE,2
+NARROWS,Sierra,Mooney Flat,SIERRA,PGE,1
+NARROWS #1 PH,Sierra,Mooney Flat,SIERRA,PGE,1
+NATIVIDAD SW SUB,Greater Bay Area,,CENTRAL COAST,PGE,1
+NAVY SCHOOL SUB,Greater Bay Area,Monterey,CENTRAL COAST,PGE,1
+NESTLE JCT,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+NEWARK DIST SUB,Greater Bay Area,Fremont,MISSION,PGE,1
+NEWARK SUB,Greater Bay Area,Fremont; Newark,MISSION,PGE,2
+NEWBURG SUB,Humboldt,Fortuna; Hydesville,HUMBOLDT,PGE,2
+NEWCASTLE PH,Sierra,Auburn,SIERRA,PGE,1
+NEWHALL SUB,Greater Fresno,Firebaugh,YOSEMITE,PGE,1
+NEWMAN SUB,Stockton,Newman,YOSEMITE,PGE,1
+NINTH ST JCT,Greater Bay Area,,CENTRAL COAST,PGE,1
+NORIEGA SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+NORTECH SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+NORTH DUBLIN SUB,Greater Bay Area,Dublin; Pleasanton,MISSION,nonPGE,2
+NORTH MERCED,Greater Fresno,,YOSEMITE,PGE,1
+NORTH TOWER SUB,North Coast/North Bay,Benicia; Crockett; Rodeo; Vallejo,NORTH BAY,PGE,4
+NOVATO SUB,North Coast/North Bay,Black Point-Green Point; Novato,NORTH BAY,PGE,2
+O'NEIL PGP (WPRS) SUB,Greater Fresno,Merced County,FRESNO,nonPGE,1
+OAK SUB,Greater Bay Area,Berkeley; El Cerrito; Kensington,EAST BAY,PGE,3
+OAKHURST SUB,Greater Fresno,Oakhurst,YOSEMITE,PGE,1
+OAKLAND C PP SUB,Greater Bay Area,Oakland,EAST BAY,nonPGE,1
+OAKLAND D SUB,Greater Bay Area,Berkeley; Emeryville; Oakland,EAST BAY,PGE,3
+OAKLAND I SUB,Greater Bay Area,Oakland,EAST BAY,PGE,2
+OAKLAND J SUB,Greater Bay Area,Oakland,EAST BAY,PGE,2
+OAKLAND K (CLAREMONT) SUB,Greater Bay Area,Berkeley; Oakland,EAST BAY,PGE,3
+OAKLAND L SUB,Greater Bay Area,Emeryville; Oakland,EAST BAY,PGE,3
+OAKLAND P SUB,Greater Bay Area,Oakland,EAST BAY,PGE,1
+OAKLAND X SUB,Greater Bay Area,Oakland; Piedmont,EAST BAY,PGE,2
+OAKMONT NORTH SUB,North Coast/North Bay,Santa Rosa,NORTH COAST,PGE,1
+OAKMONT SOUTH SUB,North Coast/North Bay,Santa Rosa,NORTH COAST,PGE,1
+OCEAN AVE SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+OIL CITY (SHELL OIL CO) SUB,Greater Fresno,Kings County,FRESNO,nonPGE,1
+OLD RIVER SUB,Kern,Knob Hill,KERN,PGE,1
+OLEMA SUB,North Coast/North Bay,Inverness; Point Reyes Station,NORTH BAY,PGE,2
+OLEUM PP SUB,Greater Bay Area,Rodeo,DIABLO,PGE,1
+OLIVEHURST SUB,Sierra,Linda; Olivehurst,SIERRA,PGE,2
+ORICK SUB,Humboldt,Orick,HUMBOLDT,PGE,1
+ORINDA SUB,Greater Bay Area,Orinda,DIABLO,PGE,1
+ORIOLE SUB,Greater Bay Area,Ashland; San Leandro,MISSION,PGE,2
+ORO LOMA SUB,Greater Fresno,South Dos Palos,YOSEMITE,PGE,1
+OROSI SUB,Greater Fresno,Cutler; East Orosi; Orosi,FRESNO,PGE,3
+OROVILLE SUB,Sierra,Oroville; Oroville East; South Oroville; Thermalito,NORTH VALLEY,PGE,4
+ORTIGA SUB,Greater Fresno,Los Banos,YOSEMITE,PGE,1
+OTTER SUB,Greater Bay Area,Carmel,CENTRAL COAST,PGE,1
+OWENS ILLINOIS SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+OXFORD SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+P.P.G. SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+PACHECO PUMPING PLANT SUB,Greater Fresno,Merced County,FRESNO,nonPGE,1
+PACHECO WIND POWER,Greater Fresno,Los Banos,YOSEMITE,nonPGE,1
+PACIFIC LUMBER (CARLOTTA),Humboldt,Humboldt County,HUMBOLDT,nonPGE,1
+PACIFIC LUMBER (SCOTIA),Humboldt,Humboldt County,HUMBOLDT,nonPGE,1
+PACIFIC OROVILLE POWER,Sierra,Oroville,NORTH VALLEY,nonPGE,1
+PACIFICA SUB,Greater Bay Area,Montara; Pacifica,PENINSULA,PGE,2
+PALERMO SUB,Sierra,Palermo,NORTH VALLEY,PGE,1
+PALO SECO SUB,Greater Bay Area,Oakland; Piedmont,EAST BAY,PGE,2
+PANAMA SUB,Kern,Bakersfield,KERN,PGE,1
+PANOCHE SUB,Greater Fresno,Mendota,YOSEMITE,PGE,1
+PARKWAY SUB,North Coast/North Bay,Vallejo,NORTH BAY,PGE,1
+PARLIER SUB,Greater Fresno,Parlier; Selma,FRESNO,PGE,2
+PARSONS SUB,Greater Bay Area,Castro Valley,MISSION,PGE,1
+PATTERSON PASS SUB,Greater Bay Area,Livermore,STOCKTON,nonPGE,1
+PAUL SWEET SUB,Greater Bay Area,Santa Cruz,CENTRAL COAST,PGE,1
+PEASE SUB,Sierra,Sutter; Tierra Buena; Yuba City,SIERRA,PGE,3
+PENN ZIER SUB,Greater Fresno,Coalinga,FRESNO,nonPGE,1
+PENNGROVE SUB,North Coast/North Bay,Rohnert Park,NORTH COAST,PGE,1
+PENRYN SUB,Sierra,Granite Bay; Loomis; Rocklin,SIERRA,PGE,3
+PEORIA SUB,Stockton,Chinese Camp; Copperopolis; Groveland-Big Oak Flat; Jamestown; Sonora,YOSEMITE,PGE,6
+PETALUMA A SUB,North Coast/North Bay,Petaluma,NORTH COAST,PGE,1
+PETALUMA C SUB,North Coast/North Bay,Petaluma,NORTH COAST,PGE,1
+PETROL SUB,Kern,Bakersfield,KERN,PGE,1
+PHILO SUB,North Coast/North Bay,Philo,NORTH COAST,PGE,1
+PIERCY SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+PIKE CITY SUB,Sierra,Camptonville,SIERRA,PGE,1
+PINEDALE SUB,Greater Fresno,Clovis; Fresno,FRESNO,PGE,2
+PIPER BANK SUB,Greater Bay Area,Bethel Island,DIABLO,nonPGE,1
+PITTSBURG PP SUB,Greater Bay Area,Pittsburg,DIABLO,nonPGE,1
+PITTSBURG SUB,Greater Bay Area,Pittsburg,DIABLO,PGE,1
+PLACER COUNTY SUB,Sierra,Forest Hill,SIERRA,nonPGE,1
+PLACER SUB,Sierra,Auburn; North Auburn,SIERRA,PGE,2
+PLACERVILLE SUB,Sierra,Diamond Springs; Georgetown; Placerville,SIERRA,PGE,3
+PLEASANT GROVE SUB,Sierra,Lincoln; Rocklin; Roseville,SIERRA,PGE,3
+PLEASANT HILL SUB,Greater Bay Area,Pleasant Hill,DIABLO,PGE,1
+PLUMAS SUB,Sierra,Olivehurst,SIERRA,PGE,1
+PLYMOUTH SUB,Greater Bay Area,Daly City; San Francisco,SAN FRANCISCO,PGE,2
+POE PH,Sierra,Concow,NORTH VALLEY,PGE,1
+POINT ARENA SUB,North Coast/North Bay,Point Arena,HUMBOLDT,PGE,1
+POINT MORETTI SUB,Greater Bay Area,Davenport,CENTRAL COAST,PGE,1
+POINT PINOLE SUB,Greater Bay Area,Bayview-Montalvin; Pinole; Richmond; San Pablo; Tara Hills,EAST BAY,PGE,5
+PORT COSTA BRICK SUB,Greater Bay Area,Port Costa,DIABLO,nonPGE,1
+PORTOLA SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+POSCO SUB,Greater Bay Area,Pittsburg,DIABLO,nonPGE,1
+POSO MOUNTAIN SUB,Kern,Kern,KERN,PGE,1
+POTTER VALLEY PH SUB,North Coast/North Bay,Potter Valley,NORTH COAST,PGE,1
+PRAXAIR SUB,Greater Bay Area,Pittsburg,DIABLO,nonPGE,1
+PRUNEDALE SUB,Greater Bay Area,Prunedale,CENTRAL COAST,PGE,1
+PUEBLO SUB,North Coast/North Bay,Napa; Yountville,NORTH BAY,PGE,2
+RACETRACK SUB,Stockton,Columbia; Sonora,YOSEMITE,PGE,2
+RADUM SUB,Greater Bay Area,Pleasanton; Sunol,MISSION,PGE,2
+RAINBOW SUB,Greater Fresno,Sanger,FRESNO,PGE,1
+RALSTON SUB,Greater Bay Area,Belmont; Highlands-Baywood Park; San Carlos; San Mateo,PENINSULA,PGE,4
+RANCHERS COTTON SUB,Greater Fresno,Fresno,FRESNO,nonPGE,1
+RANDOLPH SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+RAVENSWOOD SUB,Greater Bay Area,Menlo Park,PENINSULA,PGE,1
+RECLAMATION DIST 1500 (CARNACK) SUB,Sierra,Woodland,SACRAMENTO,PGE,1
+REDBUD SUB,North Coast/North Bay,Clearlake; Clearlake Oaks,NORTH COAST,PGE,2
+REDWOOD CITY SUB,Greater Bay Area,Atherton; North Fair Oaks; Redwood City,PENINSULA,PGE,3
+REEDLEY SUB,Greater Fresno,Dinuba; Orange Cove; Reedley; Squaw Valley,FRESNO,PGE,4
+RESEARCH SUB,Greater Bay Area,Danville; San Ramon,DIABLO,PGE,2
+RESERVATION ROAD SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+RESERVE OIL SUB,Greater Fresno,Hanford,FRESNO,PGE,1
+RICHMOND Q SUB,Greater Bay Area,Richmond,EAST BAY,PGE,2
+RICHMOND R SUB,Greater Bay Area,El Cerrito; Richmond; Rollingwood; San Pablo,EAST BAY,PGE,5
+RIDGE SUB,Greater Bay Area,Berkeley,EAST BAY,PGE,1
+RINCON SUB,North Coast/North Bay,Santa Rosa,NORTH COAST,PGE,1
+RIO BRAVO (FRESNO) SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+RIO BRAVO (ROCKLIN),Sierra,Lincoln,SIERRA,nonPGE,1
+RIO DELL SUB,Humboldt,Rio Dell,HUMBOLDT,PGE,1
+RIO OSO SUB,Sierra,Rio Oso,SIERRA,PGE,1
+RIPON SUB,Stockton,Manteca; Ripon,STOCKTON,PGE,2
+RIVER BANK JCT SW STATION,Stockton,Stanislaus County,YOSEMITE,PGE,1
+RIVER OAKS SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+RIVER ROCK SUB,Greater Fresno,Fresno,FRESNO,PGE,1
+RIVERBANK SUB,Stockton,East Oakdale; Escalon; Farmington; Oakdale; Riverbank,YOSEMITE,PGE,5
+ROB ROY SUB,Greater Bay Area,Watsonville,CENTRAL COAST,PGE,1
+ROBLES SUB,Greater Bay Area,Alamo,DIABLO,PGE,1
+ROCK CREEK PH,Sierra,Belden,NORTH VALLEY,PGE,1
+ROCKLIN SUB,Sierra,Loomis; Rocklin; Roseville,SIERRA,PGE,3
+ROSEDALE SUB,Kern,Bakersfield; Oildale,KERN,PGE,2
+ROSSMOOR SUB,Greater Bay Area,Alamo; Lafayette; Moraga; Walnut Creek,DIABLO,PGE,4
+RUCKER SUB,Greater Bay Area,Gilroy,SAN JOSE,PGE,1
+RUSS RANCH SUB,Humboldt,Blue Lake,HUMBOLDT,PGE,1
+RUSSELL SUB,Greater Bay Area,Berkeley; Oakland,EAST BAY,nonPGE,2
+SAFEWAY SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+SALADO SUB,Stockton,Patterson,YOSEMITE,PGE,1
+SALINAS SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+SALMON CREEK SUB,North Coast/North Bay,Bodega Bay,NORTH COAST,PGE,1
+SAN ANDREAS SUB,Greater Bay Area,Millbrae,PENINSULA,PGE,1
+SAN ANSELMO SUB,North Coast/North Bay,San Anselmo,NORTH BAY,PGE,1
+SAN BENITO SUB,Greater Bay Area,Moss Landing,CENTRAL COAST,PGE,1
+SAN BRUNO SUB,Greater Bay Area,San Bruno,PENINSULA,PGE,1
+SAN CARLOS SUB,Greater Bay Area,Emerald Lake Hills; Redwood City; San Carlos,PENINSULA,PGE,3
+SAN EMIDIO JUNCTION SUB,Kern,Kern County,KERN,PGE,1
+SAN FRAN A (POTRERO PP) SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,2
+SAN FRAN AIRPORT SUB,Greater Bay Area,San Bruno,PENINSULA,PGE,1
+SAN FRAN E SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN F (MARINA) SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN G SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN H (MARTIN) SUB,Greater Bay Area,Brisbane; Daly City; San Francisco,PENINSULA,PGE,3
+SAN FRAN I SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN J SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN K SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN L SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN M SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN N SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN P(HUNTERS POINT) SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN W (BAYSHORE) SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN X (MISSION) SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN Y (LARKIN) SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN FRAN Z (EMBARCADERO) SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SAN JOAQUIN JCT SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+SAN JOAQUIN SUB,Greater Fresno,San Joaquin; Tranquillity,FRESNO,PGE,2
+SAN JOSE A SUB,Greater Bay Area,Buena Vista; Burbank; San Jose; Sunol-Midtown,SAN JOSE,PGE,4
+SAN JOSE B SUB,Greater Bay Area,Buena Vista; Burbank; San Jose,SAN JOSE,PGE,3
+SAN LEANDRO U SUB,Greater Bay Area,Ashland; Castro Valley; Cherryland; Oakland; San Leandro; San Lorenzo,MISSION,PGE,6
+SAN LORENZO SUB,Greater Bay Area,San Lorenzo,MISSION,PGE,1
+SAN LUIS #3 SUB,Greater Fresno,Los Banos,YOSEMITE,PGE,1
+SAN LUIS #5 SUB,Greater Fresno,Los Banos,YOSEMITE,PGE,1
+SAN MARTIN SUB,Greater Bay Area,San Martin,SAN JOSE,PGE,1
+SAN MATEO SUB,Greater Bay Area,Burlingame; Foster City; Hillsborough; San Mateo,PENINSULA,PGE,4
+SAN PABLO SUB,Greater Bay Area,El Sobrante; Pinole; Richmond; Rollingwood; San Pablo,EAST BAY,PGE,5
+SAN RAFAEL SUB,North Coast/North Bay,Fairfax; Kentfield; Larkspur; Ross; San Anselmo; San Rafael; Santa Venetia,NORTH BAY,PGE,7
+SAN RAMON SUB,Greater Bay Area,Alamo; Castro Valley; Danville; Dublin; Pleasanton; San Ramon,MISSION,PGE,6
+SANBORN JCT,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+SAND CREEK SUB,Greater Fresno,Squaw Valley,FRESNO,PGE,1
+SAND DRAG PV SOLAR SUB,Greater Fresno,Avenal,FRESNO,nonPGE,1
+SANGER SUB,Greater Fresno,Del Rey; Fresno; Kingsburg; Sanger,FRESNO,PGE,4
+SANTA FE-KERN RIVER SUB,Kern,Kern County,KERN,nonPGE,1
+SANTA NELLA SUB,Greater Fresno,Santa Nella,YOSEMITE,PGE,1
+SANTA RITA SUB,Greater Fresno,Dos Palos,YOSEMITE,PGE,1
+SANTA ROSA A SUB,North Coast/North Bay,Roseland; Santa Rosa,NORTH COAST,PGE,2
+SANTA ROSA B SUB,North Coast/North Bay,Santa Rosa,NORTH COAST,PGE,1
+SANTA TERESA SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+SARANAP SUB,Greater Bay Area,Walnut Creek,DIABLO,PGE,1
+SARATOGA SUB,Greater Bay Area,Campbell; Cupertino; Los Gatos; Monte Sereno; San Jose; Saratoga,DE ANZA,PGE,6
+SAUSALITO SUB,North Coast/North Bay,Sausalito; Tamalpais-Homestead Valley,NORTH BAY,PGE,2
+SAXON CREEK SUB,Greater Fresno,Madera County,FRESNO,nonPGE,1
+SC JOHNSON WAX SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+SCHINDLER SUB,Greater Fresno,Five Points,FRESNO,PGE,1
+SCHULTE SWITCHING STATION,Stockton,N/A,STOCKTON,PGE,1
+SEMINARY SUB,Greater Bay Area,Oakland,EAST BAY,PGE,1
+SENTER SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+SERRAMONTE SUB,Greater Bay Area,Daly City; Pacifica; San Bruno; South San Francisco,PENINSULA,PGE,4
+SHADY GLEN SUB,Sierra,Colfax,SIERRA,PGE,1
+SHARON PRISON SUB,Greater Fresno,Madera County,FRESNO,PGE,1
+SHEPHERD SUB,Greater Fresno,Clovis,FRESNO,PGE,1
+SHINGLE SPRINGS SUB,Sierra,Cameron Park; Shingle Springs,SIERRA,PGE,2
+SHORE ACRES BANK SUB,Greater Bay Area,Bay Point,DIABLO,nonPGE,1
+SHREDDER SUB,Greater Bay Area,Redwood City,PENINSULA,PGE,1
+SIERRA PACIFIC (LINCOLN),Sierra,Lincoln,SIERRA,nonPGE,1
+SIERRA PACIFIC INDUSTRIES CHINESE STATION SUB,Stockton,Stanislaus County,YOSEMITE,nonPGE,1
+SIERRA PACIFIC LUMBER,Humboldt,Humboldt County,HUMBOLDT,nonPGE,1
+SIERRA PINE SUB,Sierra,Loomis,SIERRA,nonPGE,1
+SIERRA ULTRA CHINESE STATION SUB,Stockton,Stanislaus County,YOSEMITE,nonPGE,1
+SILVER (AVENUE) SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SILVERADO SUB,North Coast/North Bay,Angwin; Deer Park; St. Helena,NORTH BAY,PGE,3
+SIMPSON HUMBOLDT,Humboldt,Fairhaven,HUMBOLDT,nonPGE,1
+SIMPSON-KORBEL (BLUE LAKE),Humboldt,Humboldt County,HUMBOLDT,nonPGE,1
+SINCLAIR SUB,Greater Bay Area,Concord,DIABLO,PGE,1
+SIXTH AVE SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+SJ NO.1A PH SUB,Greater Fresno,Madera County,FRESNO,PGE,1
+SJ NO.2 PH SUB,Greater Fresno,Madera County,FRESNO,PGE,1
+SJ NO.3 PH SUB,Greater Fresno,Madera County,FRESNO,PGE,1
+SJVE EL NIDO SUB,Greater Fresno,Merced County,FRESNO,nonPGE,1
+SKAGGS ISLAND SUB,North Coast/North Bay,Skaggs Island,NORTH BAY,PGE,1
+SMARTVILLE SUB,Sierra,Smartville,SIERRA,PGE,1
+SNEATH LANE SUB,Greater Bay Area,Daly City; Pacifica; San Bruno; South San Francisco,PENINSULA,PGE,4
+SOBRANTE SUB,Greater Bay Area,Lafayette; Orinda,DIABLO,PGE,2
+SOLANO SUB,Greater Bay Area,Albany; Berkeley,EAST BAY,PGE,2
+SOLEDAD JCT,Greater Bay Area,,CENTRAL COAST,PGE,1
+SOLEDAD SUB,Greater Bay Area,Soledad,CENTRAL COAST,PGE,1
+SONOMA A SUB,North Coast/North Bay,Boyes Hot Springs; El Verano; Fetters Hot Springs-Agua Caliente; Sonoma; Temelec,NORTH COAST,PGE,5
+SOTO SUB,Greater Bay Area,Cherryland; Hayward,MISSION,PGE,2
+SOUTH KERN SOLAR SUB,Kern,Maricopa,KERN,nonPGE,1
+SPAULDING PH #1 SUB,Sierra,Truckee,SIERRA,PGE,1
+SPENCE SUB,Greater Bay Area,Salinas,CENTRAL COAST,PGE,1
+SPRING GAP PH SUB,Stockton,Tuolumne County,YOSEMITE,PGE,1
+SPRUCE SUB,Greater Bay Area,Berkeley; Kensington,EAST BAY,PGE,2
+SRI SUB,Greater Bay Area,Menlo Park,PENINSULA,PGE,1
+STAFFORD SUB,North Coast/North Bay,Novato,NORTH BAY,PGE,1
+STAGG SUB,Stockton,Country Club; Lincoln Village; Stockton,STOCKTON,PGE,3
+STANISLAUS CO. RESOURCE RECOVERY,Stockton,Stanislaus County,YOSEMITE,nonPGE,1
+STANISLAUS PH SUB,Stockton,Arnold; Avery; Forest Meadows; Murphys,STOCKTON,PGE,5
+STARWOOD POWER MIDWAY LLC SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+STATION MA SUB,Greater Bay Area,Millbrae,PENINSULA,nonPGE,1
+STAUFFER SUB,Greater Bay Area,Martinez,DIABLO,PGE,1
+STELLING SUB,Greater Bay Area,Cupertino; Los Altos; Loyola; Mountain View; San Jose; Sunnyvale,DE ANZA,PGE,6
+STOCKDALE SUB,Kern,Bakersfield,KERN,PGE,1
+STONE CORRAL SUB,Greater Fresno,Squaw Valley,FRESNO,PGE,1
+STONE SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+STONY POINT SUB,North Coast/North Bay,Roseland,NORTH COAST,nonPGE,1
+STOREY SUB,Greater Fresno,Bonadelle Ranchos-Madera Ranchos; Madera; Madera Acres; Parksdale,YOSEMITE,PGE,4
+STROUD SUB,Greater Fresno,Helm,FRESNO,PGE,1
+STUART SUB,Greater Bay Area,Berkeley; Oakland,EAST BAY,PGE,2
+SULLIVAN SUB,Greater Bay Area,Broadmoor; Daly City,PENINSULA,PGE,2
+SUMMIT SUB (PG&E),Sierra,Placer County,SIERRA,PGE,1
+SUN CITY PV SOLAR SUB,Greater Fresno,Avenal,FRESNO,nonPGE,1
+SUN MAID SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+SUNOL SUB,Greater Bay Area,Fremont; Pleasanton; Sunol,MISSION,PGE,3
+SWIFT SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+TAMARAK SUB,Sierra,Placer County,SIERRA,PGE,1
+TAR FLAT SUB,Stockton,Sonora,YOSEMITE,PGE,1
+TARAVAL SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+TASSAJARA SUB,Greater Bay Area,Alamo; Blackhawk-Camino Tassajara; Danville; Diablo; San Ramon; Walnut Creek,DIABLO,PGE,6
+TAYLOR RD STATION,Sierra,Rocklin,SIERRA,nonPGE,1
+TEICHERT SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+TEVIS SUB,Kern,Bakersfield; Rosedale,KERN,PGE,2
+THERMAL SUB,Greater Bay Area,Oakland,EAST BAY,PGE,1
+TIDEWATER SUB,Greater Bay Area,Bay Point; Clayton; Clyde; Concord; Martinez; Pacheco; Pleasant Hill; Vine Hill,DIABLO,PGE,8
+TIVY VALLEY SUB,Greater Fresno,Squaw Valley,FRESNO,PGE,1
+TOCALOMA SUB,North Coast/North Bay,Tocaloma,NORTH BAY,PGE,1
+TOMA-TEK SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+TORNADO (TEXACO TRADING AND TRANSPORTATION C,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+TRACY DEFENSE DEPOT SUB,Stockton,Tracy,STOCKTON,nonPGE,1
+TRACY SUB,Stockton,Lathrop; Tracy,STOCKTON,PGE,2
+TRANQUILITY #1,Greater Fresno,,YOSEMITE,PGE,1
+TRANQUILITY #2,Greater Fresno,,YOSEMITE,PGE,1
+TRIGO JCT SUB,Greater Fresno,Madera County,FRESNO,PGE,1
+TRIMBLE SUB,Greater Bay Area,San Jose,SAN JOSE,PGE,1
+TRINIDAD SUB,Humboldt,McKinleyville; Trinidad; Westhaven-Moonstone,HUMBOLDT,PGE,3
+TUDOR SUB,Sierra,Tudor,SIERRA,PGE,1
+TULARE LAKE SUB,Greater Fresno,Kettleman City,FRESNO,PGE,1
+TULUCAY SUB,North Coast/North Bay,American Canyon; Napa,NORTH BAY,PGE,2
+TWENTY-FIRST AVENUE SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+UC DAVIS,Sierra,Davis,SACRAMENTO,nonPGE,1
+UKIAH SUB,North Coast/North Bay,Talmage; Ukiah,NORTH COAST,PGE,2
+ULTRA POWER (BLUE LAKE),Humboldt,Blue Lake,HUMBOLDT,nonPGE,1
+ULTRA POWER (OGLE) SUB,Kern,Kern County,KERN,nonPGE,1
+UPPER LAKE SUB,North Coast/North Bay,Upper Lake,HUMBOLDT,PGE,1
+URICH SUB,Greater Bay Area,Martinez,DIABLO,PGE,1
+US POST OFFICE SUB,Sierra,West Sacramento,SACRAMENTO,nonPGE,1
+VALLECITOS SUB,Greater Bay Area,Sunol,MISSION,PGE,1
+VALLEJO B SUB,North Coast/North Bay,Vallejo,NORTH BAY,PGE,1
+VALLEJO C SUB,North Coast/North Bay,Vallejo,NORTH BAY,PGE,1
+VALLEY CHILDREN'S HOSPITAL SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+VALLEY HOME SUB,Stockton,Valley Home,YOSEMITE,PGE,1
+VALLEY VIEW SUB,Greater Bay Area,El Sobrante; Pinole; Richmond; San Pablo,EAST BAY,PGE,4
+VASCO SUB,Greater Bay Area,Livermore,MISSION,PGE,1
+VASONA SUB,Greater Bay Area,Cambrian Park; Campbell; Los Gatos; Monte Sereno; San Jose,DE ANZA,PGE,5
+VEDDER SUB,Kern,Kern County,KERN,nonPGE,1
+VICTOR SUB,Stockton,Lockeford,STOCKTON,PGE,1
+VIEJO SUB,Greater Bay Area,Monterey,CENTRAL COAST,PGE,1
+VIERRA SUB,Stockton,Lathrop; Manteca,STOCKTON,PGE,2
+VINEYARD SUB,Greater Bay Area,Dublin; Hayward; Livermore; Pleasanton; Sunol,MISSION,PGE,5
+VIRGINIA SUB,Greater Bay Area,Richmond,EAST BAY,PGE,1
+WAHTOKE SUB,Greater Fresno,Parlier; Reedley,FRESNO,PGE,2
+WALDO SUB,Greater Bay Area,El Cerrito; Kensington; Richmond,EAST BAY,PGE,3
+WALL SUB,Greater Bay Area,El Cerrito; Richmond,EAST BAY,PGE,2
+WALNUT CREEK SUB,Greater Bay Area,Walnut Creek,DIABLO,PGE,1
+WARD SUB,Greater Bay Area,San Leandro,MISSION,PGE,1
+WATERSHED SUB,Greater Bay Area,Redwood City,PENINSULA,PGE,1
+WATSONVILLE SUB,Greater Bay Area,Watsonville,CENTRAL COAST,PGE,1
+WAYNE SUB,Greater Bay Area,Alamo,DIABLO,PGE,1
+WEIMAR SUB,Sierra,Colfax; Meadow Vista,SIERRA,PGE,2
+WESIX (WAPA) SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+WEST FRESNO SUB,Greater Fresno,Easton; Fresno,FRESNO,PGE,2
+WEST SACRAMENTO SUB,Sierra,W. Sacramento; West Sacramento,SACRAMENTO,PGE,2
+WESTLAKE SUB,Greater Bay Area,Daly City; San Francisco,PENINSULA,PGE,2
+WESTLANDS #1 RA PP SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+WESTLANDS 16RA SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+WESTLANDS 18RA SUB,Greater Fresno,Fresno County,FRESNO,nonPGE,1
+WESTLANDS SUB,Greater Fresno,San Joaquin,YOSEMITE,PGE,1
+WESTLEY SUB,Stockton,Grayson; Westley,YOSEMITE,PGE,2
+WESTPARK SUB,Kern,Bakersfield; Oildale,KERN,PGE,2
+WHEATLAND SUB,Sierra,Beale AFB; Wheatland,SIERRA,PGE,2
+WHEELER RIDGE JUNCTION SUB,Kern,Kern County,KERN,PGE,1
+WHISMAN SUB,Greater Bay Area,Mountain View; Palo Alto; Sunnyvale,DE ANZA,PGE,3
+WHITNEY SUB,Greater Bay Area,Pittsburg,DIABLO,PGE,1
+WILLITS A SUB,North Coast/North Bay,Willits,NORTH COAST,PGE,1
+WILLOW CREEK SUB,Humboldt,Willow Creek,HUMBOLDT,PGE,1
+WILLOW PASS SUB,Greater Bay Area,Bay Point; Concord; Pittsburg,DIABLO,PGE,3
+WILSON SUB,Greater Fresno,Merced; Planada,YOSEMITE,PGE,2
+WISE PH SUB,Sierra,Auburn,SIERRA,PGE,1
+WISHON SUB,Greater Fresno,Auberry,YOSEMITE,PGE,1
+WITCO (OILDALE CO-GEN) SUB,Kern,Kern County,KERN,nonPGE,1
+WITCO REFINERY SUB,Kern,Kern County,KERN,nonPGE,1
+WOHLER SUB,North Coast/North Bay,Healdsburg,NORTH COAST,PGE,1
+WOLFE SUB,Greater Bay Area,Cupertino; San Jose; Santa Clara; Sunnyvale,DE ANZA,PGE,4
+WOOD SUB,Greater Bay Area,Oakland; Piedmont,EAST BAY,PGE,2
+WOODACRE SUB,North Coast/North Bay,Fairfax; Lagunitas-Forest Knolls; San Geronimo; Woodacre,NORTH BAY,PGE,4
+WOODBRIDGE WINERY SUB,Stockton,Lodi,STOCKTON,nonPGE,1
+WOODCHUCK SUB,Greater Fresno,Wilson Village,FRESNO,PGE,1
+WOODLAND BIOMASS,Sierra,Woodland,SACRAMENTO,PGE,1
+WOODLAND SUB,Sierra,Woodland,SACRAMENTO,PGE,2
+WOODSIDE SUB,Greater Bay Area,Atherton; Emerald Lake Hills; Menlo Park; Portola Valley; Redwood City; Woodside,PENINSULA,PGE,6
+WOODWARD SUB,Greater Fresno,Clovis; Fresno; Fresno County; Friant,FRESNO,PGE,4
+WRIGHT SUB,Greater Fresno,Los Banos,YOSEMITE,PGE,1
+WYANDOTTE SUB,Sierra,Concow; Oroville; Oroville East; Palermo; South Oroville,NORTH VALLEY,PGE,5
+YANCY SUB,Greater Fresno,Fresno County,FRESNO,PGE,1
+YOSEMITE SUB,Greater Bay Area,San Francisco,SAN FRANCISCO,PGE,1
+YUBA GOLDFIELDS,Sierra,Marysville,SIERRA,PGE,1
+ZAMORA SUB,Sierra,Zamora,SACRAMENTO,PGE,1

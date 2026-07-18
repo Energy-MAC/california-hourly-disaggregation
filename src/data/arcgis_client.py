@@ -17,6 +17,7 @@ from urllib3.util.retry import Retry
 
 _REQUEST_DELAY = 0.3
 _DEFAULT_PAGE_SIZE = 1000
+_GET_MAX_RETRIES = 5
 
 
 def _flatten_feature(feature: dict) -> dict:
@@ -74,15 +75,28 @@ class ArcGISClient:
 
     def _get(self, path: str, params: dict) -> dict:
         url = f"{self.base_url}{path}"
-        r = self.session.get(url, params={"f": "json", **params}, timeout=60)
-        r.raise_for_status()
-        data = r.json()
-        if "error" in data:
-            raise RuntimeError(
-                f"ArcGIS error {data['error'].get('code', '?')}: "
-                f"{data['error'].get('message', data['error'])}"
-            )
-        return data
+        _retryable = (
+            requests.exceptions.ConnectionError,
+            requests.exceptions.ChunkedEncodingError,
+            requests.exceptions.Timeout,
+        )
+        for attempt in range(_GET_MAX_RETRIES):
+            try:
+                r = self.session.get(url, params={"f": "json", **params}, timeout=90)
+                r.raise_for_status()
+                data = r.json()
+                if "error" in data:
+                    raise RuntimeError(
+                        f"ArcGIS error {data['error'].get('code', '?')}: "
+                        f"{data['error'].get('message', data['error'])}"
+                    )
+                return data
+            except _retryable as exc:
+                if attempt >= _GET_MAX_RETRIES - 1:
+                    raise
+                wait = 2 ** attempt * 2
+                print(f"\n  [retry {attempt + 1}/{_GET_MAX_RETRIES - 1}] {exc!r} — waiting {wait}s")
+                time.sleep(wait)
 
     def get_service_info(self) -> dict:
         """Return FeatureServer metadata, including the full layers list."""

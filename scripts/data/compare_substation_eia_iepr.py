@@ -1,4 +1,4 @@
-"""
+﻿"""
 compare_substation_eia_iepr.py
 
 Compares substation ICA load profiles (coincident sum) to:
@@ -89,7 +89,7 @@ def _utc_to_pst(ts: pd.Series) -> pd.Series:
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 PROC = ROOT / "data" / "processed"
 FIGS = ROOT / "data" / "figures"
 FIGS.mkdir(parents=True, exist_ok=True)
@@ -281,7 +281,21 @@ def load_eia_ciso() -> tuple[pd.DataFrame, pd.DataFrame]:
         )
         .reset_index()
     )
-    return mh_stats, yr_mh
+
+    # Day-level p10/p90: percentiles across all individual hourly observations
+    # (one per calendar day × year), not the annual means.  This captures full
+    # within-year weather variability and is directly comparable to the substation
+    # coin_min/coin_max band which also represents individual-day spread.
+    day_stats = (
+        df.groupby(["month", "hour"])["demand_mwh"]
+        .agg(
+            eia_day_p10=lambda x: x.quantile(0.10),
+            eia_day_p90=lambda x: x.quantile(0.90),
+            eia_day_max="max",
+        )
+        .reset_index()
+    )
+    return mh_stats, yr_mh, day_stats
 
 
 def load_cal_region() -> pd.DataFrame:
@@ -318,7 +332,17 @@ def load_cal_region() -> pd.DataFrame:
         )
         .reset_index()
     )
-    return mh_stats, yr_mh
+
+    day_stats = (
+        df.groupby(["month", "hour"])["demand_mwh"]
+        .agg(
+            cal_day_p10=lambda x: x.quantile(0.10),
+            cal_day_p90=lambda x: x.quantile(0.90),
+            cal_day_max="max",
+        )
+        .reset_index()
+    )
+    return mh_stats, yr_mh, day_stats
 
 
 
@@ -447,6 +471,8 @@ def fig_monthly_profiles(
     cal_stats:     pd.DataFrame,
     resolve_stats: pd.DataFrame | None = None,
     reeds_mh:      pd.DataFrame | None = None,
+    eia_day_stats: pd.DataFrame | None = None,
+    cal_day_stats: pd.DataFrame | None = None,
     sharey:        bool = False,
     out_suffix:    str = "",
 ) -> None:
@@ -467,11 +493,26 @@ def fig_monthly_profiles(
         ax.plot(s["hour"], s["coin_max_mw"], color="grey", lw=1.2)
         ax.plot(s["hour"], s["coin_min_mw"], color="grey", lw=1.2, linestyle="--")
 
-        # EIA CISO inter-annual band + mean
+        # EIA CISO day-level band (wide, transparent) — p10/p90 across all individual days
+        if eia_day_stats is not None and not eia_day_stats.empty:
+            ed = eia_day_stats[eia_day_stats["month"] == m].sort_values("hour")
+            ax.fill_between(
+                ed["hour"], ed["eia_day_p10"], ed["eia_day_p90"],
+                alpha=0.10, color="#1f77b4",
+                label="EIA CISO (individual-day p10–p90)" if m == 1 else "_",
+            )
+            ax.plot(
+                ed["hour"], ed["eia_day_max"],
+                color="#1f77b4", lw=1.0, linestyle="--", alpha=0.6,
+                label="EIA CISO (individual-day max)" if m == 1 else "_",
+            )
+
+        # EIA CISO inter-annual band + mean — p10/p90 of per-year monthly means
         e = mh_stats[mh_stats["month"] == m].sort_values("hour")
         ax.fill_between(
             e["hour"], e["eia_p10"], e["eia_p90"],
-            alpha=0.25, color="#1f77b4", label="EIA CISO (p10-p90)" if m == 1 else "_",
+            alpha=0.25, color="#1f77b4",
+            label="EIA CISO (annual-mean p10–p90)" if m == 1 else "_",
         )
         ax.plot(
             e["hour"], e["eia_mean"],
@@ -490,13 +531,27 @@ def fig_monthly_profiles(
                 label=f"IEPR v{vintage}" if m == 1 else "_",
             )
 
-        # EIA CAL region
+        # EIA CAL region day-level band (wide, transparent)
+        if cal_day_stats is not None and not cal_day_stats.empty:
+            cd = cal_day_stats[cal_day_stats["month"] == m].sort_values("hour")
+            ax.fill_between(
+                cd["hour"], cd["cal_day_p10"], cd["cal_day_p90"],
+                alpha=0.08, color=CAL_COLOR,
+                label="EIA CAL region (individual-day p10–p90)" if m == 1 else "_",
+            )
+            ax.plot(
+                cd["hour"], cd["cal_day_max"],
+                color=CAL_COLOR, lw=1.0, linestyle="--", alpha=0.6,
+                label="EIA CAL region (individual-day max)" if m == 1 else "_",
+            )
+
+        # EIA CAL region annual-mean band + mean
         if not cal_stats.empty:
             c = cal_stats[cal_stats["month"] == m].sort_values("hour")
             ax.fill_between(
                 c["hour"], c["cal_p10"], c["cal_p90"],
                 alpha=0.20, color=CAL_COLOR,
-                label="EIA CAL region (p10-p90)" if m == 1 else "_",
+                label="EIA CAL region (annual-mean p10–p90)" if m == 1 else "_",
             )
             ax.plot(
                 c["hour"], c["cal_mean"],
@@ -776,11 +831,14 @@ def fig_monthly_profiles_shared_y(
     cal_stats:     pd.DataFrame,
     resolve_stats: pd.DataFrame | None = None,
     reeds_mh:      pd.DataFrame | None = None,
+    eia_day_stats: pd.DataFrame | None = None,
+    cal_day_stats: pd.DataFrame | None = None,
 ) -> None:
     """Same as fig_monthly_profiles but all panels share the same y-axis scale."""
     fig_monthly_profiles(
         total_coin, mh_stats, iepr_total, cal_stats,
         resolve_stats=resolve_stats, reeds_mh=reeds_mh,
+        eia_day_stats=eia_day_stats, cal_day_stats=cal_day_stats,
         sharey=True, out_suffix="_shared_y",
     )
 
@@ -796,6 +854,8 @@ def fig_annual_profile(
     cal_stats:     pd.DataFrame,
     resolve_stats: pd.DataFrame | None = None,
     reeds_mh:      pd.DataFrame | None = None,
+    eia_day_stats: pd.DataFrame | None = None,
+    cal_day_stats: pd.DataFrame | None = None,
 ) -> None:
     """Single figure: all 12 months concatenated on one x-axis, shared y-scale."""
     fig, ax = plt.subplots(figsize=(28, 6))
@@ -821,12 +881,23 @@ def fig_annual_profile(
         ax.plot(xh, s["coin_max_mw"], color="grey", lw=1.0)
         ax.plot(xh, s["coin_min_mw"], color="grey", lw=1.0, linestyle="--")
 
+        # EIA CISO day-level band (wide, transparent)
+        if eia_day_stats is not None and not eia_day_stats.empty:
+            ed  = eia_day_stats[eia_day_stats["month"] == m].sort_values("hour")
+            xh = ed["hour"].values + offset
+            ax.fill_between(xh, ed["eia_day_p10"], ed["eia_day_p90"],
+                            alpha=0.08, color="#1f77b4",
+                            label=_lab("eia_day_band", "EIA CISO (individual-day p10–p90)"))
+            ax.plot(xh, ed["eia_day_max"],
+                    color="#1f77b4", lw=0.8, linestyle="--", alpha=0.6,
+                    label=_lab("eia_day_max", "EIA CISO (individual-day max)"))
+
         # EIA CISO inter-annual band + mean
         e  = mh_stats[mh_stats["month"] == m].sort_values("hour")
         xh = e["hour"].values + offset
         ax.fill_between(xh, e["eia_p10"], e["eia_p90"],
                         alpha=0.20, color="#1f77b4",
-                        label=_lab("eia_band", "EIA CISO (p10–p90)"))
+                        label=_lab("eia_band", "EIA CISO (annual-mean p10–p90)"))
         ax.plot(xh, e["eia_mean"], color="#1f77b4", lw=1.8,
                 label=_lab("eia_mean", "EIA CISO (mean)"))
 
@@ -842,13 +913,24 @@ def fig_annual_profile(
                     color=color, lw=1.6, linestyle=":",
                     label=_lab(f"iepr{vintage}", f"IEPR v{vintage}"))
 
-        # EIA CAL region
+        # EIA CAL region day-level band (wide, transparent)
+        if cal_day_stats is not None and not cal_day_stats.empty:
+            cd  = cal_day_stats[cal_day_stats["month"] == m].sort_values("hour")
+            xh = cd["hour"].values + offset
+            ax.fill_between(xh, cd["cal_day_p10"], cd["cal_day_p90"],
+                            alpha=0.06, color=CAL_COLOR,
+                            label=_lab("cal_day_band", "EIA CAL (individual-day p10–p90)"))
+            ax.plot(xh, cd["cal_day_max"],
+                    color=CAL_COLOR, lw=0.8, linestyle="--", alpha=0.6,
+                    label=_lab("cal_day_max", "EIA CAL (individual-day max)"))
+
+        # EIA CAL region annual-mean band + mean
         if not cal_stats.empty:
             c  = cal_stats[cal_stats["month"] == m].sort_values("hour")
             xh = c["hour"].values + offset
             ax.fill_between(xh, c["cal_p10"], c["cal_p90"],
                             alpha=0.15, color=CAL_COLOR,
-                            label=_lab("cal_band", "EIA CAL (p10–p90)"))
+                            label=_lab("cal_band", "EIA CAL (annual-mean p10–p90)"))
             ax.plot(xh, c["cal_mean"], color=CAL_COLOR, lw=1.8, linestyle="-.",
                     label=_lab("cal_mean", "EIA CAL (mean)"))
 
@@ -2560,12 +2642,14 @@ def main() -> None:
           f"peak min={total_coin['coin_min_mw'].max():,.0f} MW")
 
     print("\nLoading EIA CISO...")
-    mh_stats, yr_mh = load_eia_ciso()
+    mh_stats, yr_mh, eia_day_stats = load_eia_ciso()
     print(f"  EIA CISO mean demand range (month-hour range across all years): {mh_stats['eia_mean'].min():,.0f} - "
           f"{mh_stats['eia_mean'].max():,.0f} MW")
+    print(f"  EIA CISO day-level band: p10={eia_day_stats['eia_day_p10'].min():,.0f} - "
+          f"p90={eia_day_stats['eia_day_p90'].max():,.0f} MW")
 
     print("\nLoading EIA CAL region...")
-    cal_stats, cal_yr_mh = load_cal_region()
+    cal_stats, cal_yr_mh, cal_day_stats = load_cal_region()
     if not cal_stats.empty:
         print(f"  EIA CAL mean demand range: {cal_stats['cal_mean'].min():,.0f} - "
               f"{cal_stats['cal_mean'].max():,.0f} MW")
@@ -2585,13 +2669,16 @@ def main() -> None:
     print("\nGenerating figures...")
     # Fig 1: monthly profiles (per-panel y-axes)
     fig_monthly_profiles(total_coin, mh_stats, iepr_total, cal_stats,
-                         resolve_stats, reeds_mh=reeds_mh)
+                         resolve_stats, reeds_mh=reeds_mh,
+                         eia_day_stats=eia_day_stats, cal_day_stats=cal_day_stats)
     # Fig 5: same with shared y-axis across all panels
     fig_monthly_profiles_shared_y(total_coin, mh_stats, iepr_total, cal_stats,
-                                  resolve_stats, reeds_mh=reeds_mh)
+                                  resolve_stats, reeds_mh=reeds_mh,
+                                  eia_day_stats=eia_day_stats, cal_day_stats=cal_day_stats)
     # Fig 6: all months on a single x-axis
     fig_annual_profile(total_coin, mh_stats, iepr_total, cal_stats, resolve_stats,
-                       reeds_mh=reeds_mh)
+                       reeds_mh=reeds_mh,
+                       eia_day_stats=eia_day_stats, cal_day_stats=cal_day_stats)
     # Original supporting figures
     fig_coverage_heatmap(total_coin, mh_stats, cal_stats)
     for _month in range(1, 13):

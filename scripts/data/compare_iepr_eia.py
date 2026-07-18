@@ -1,4 +1,4 @@
-"""
+﻿"""
 Compare IEPR load projections against EIA-930 realized demand.
 
 Four figures saved to data/figures/:
@@ -15,7 +15,7 @@ beyond California, inflating the EIA CA8 total relative to IEPR statewide.
 
 Usage
 -----
-python scripts/compare_iepr_eia.py
+python scripts/data/compare_iepr_eia.py
 """
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 PROC = ROOT / "data" / "processed"
 FIGS = ROOT / "data" / "figures"
 FIGS.mkdir(parents=True, exist_ok=True)

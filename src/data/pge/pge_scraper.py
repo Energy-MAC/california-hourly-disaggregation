@@ -259,3 +259,182 @@ def scrape_substation_attributes(
 
     print(f"\n  {len(rows_out)} substations -> {out_path}")
     return out_path
+
+
+# ── Feeder detail (layer 2) ───────────────────────────────────────────────────
+
+_FEEDER_DETAIL_FIELDS = (
+    "FeederID,Feeder_Name,Substation,Nominal_Voltage,Division,"
+    "Load_Profile_Redaction,ResCust,ComCust,IndCust,AgrCust,OthCust,"
+    "Existing_DG,Queued_DG,Total_DG,Shape__Length"
+)
+
+_FEEDER_DETAIL_CSV_COLS = [
+    "feeder_id", "feeder_name", "substation", "nominal_voltage_kv", "division",
+    "load_profile_redaction",
+    "res_cust", "com_cust", "ind_cust", "agr_cust", "oth_cust",
+    "existing_dg_kw", "queued_dg_kw", "total_dg_kw",
+    "shape_length_m",
+    "lon_start", "lat_start",
+    "lon_end", "lat_end",
+]
+
+_FEEDERS_DIR = DATA_RAW_DIR / "feeders"
+
+
+def _polyline_endpoints(
+    geometry: dict,
+) -> tuple[float | None, float | None, float | None, float | None]:
+    """Return (lon_start, lat_start, lon_end, lat_end) from an ArcGIS polyline geometry dict."""
+    try:
+        paths = geometry.get("paths", [])
+        if not paths:
+            return None, None, None, None
+        first = paths[0][0]
+        last  = paths[-1][-1]
+        return float(first[0]), float(first[1]), float(last[0]), float(last[1])
+    except Exception:
+        return None, None, None, None
+
+
+def scrape_feeder_detail(output_dir: Path = _FEEDERS_DIR) -> Path:
+    """
+    Scrape feeder attributes and endpoint coordinates from FeederDetail (layer 2).
+
+    Layer 2 is a polyline feature layer (3,032 records as of 2025).  Each record
+    is one distribution feeder.  The start/end coordinates are extracted from the
+    polyline geometry: lon_start/lat_start = first vertex of first path;
+    lon_end/lat_end = last vertex of last path.
+
+    Raw field → output column mapping
+    ----------------------------------
+    FeederID                → feeder_id
+    Feeder_Name             → feeder_name
+    Substation              → substation        (name of parent substation)
+    Nominal_Voltage         → nominal_voltage_kv
+    Division                → division
+    Load_Profile_Redaction  → load_profile_redaction  ("Yes"/"No")
+    ResCust                 → res_cust
+    ComCust                 → com_cust
+    IndCust                 → ind_cust
+    AgrCust                 → agr_cust
+    OthCust                 → oth_cust
+    Existing_DG             → existing_dg_kw   (kW)
+    Queued_DG               → queued_dg_kw     (kW)
+    Total_DG                → total_dg_kw      (kW)
+    Shape__Length           → shape_length_m   (metres, projected CRS)
+    geometry (polyline)     → lon_start, lat_start, lon_end, lat_end (WGS-84)
+
+    Output: data/raw/pge/feeders/pge_feeder_detail.csv
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    client     = PGEClient()
+    total      = client.get_record_count(2)
+    print(f"Fetching PG&E FeederDetail (layer 2) — {total:,} records ...")
+    print("  (geometry omitted — polyline responses exceed server connection limits)")
+
+    rows_out: list[dict] = []
+    for rows, _ in client.paginate_layer(
+        2,
+        out_fields=_FEEDER_DETAIL_FIELDS,
+        include_geometry=False,
+        page_size=500,
+    ):
+        for row in rows:
+            rows_out.append({
+                "feeder_id":               row.get("FeederID", ""),
+                "feeder_name":             row.get("Feeder_Name", ""),
+                "substation":              row.get("Substation", ""),
+                "nominal_voltage_kv":      row.get("Nominal_Voltage", ""),
+                "division":                row.get("Division", ""),
+                "load_profile_redaction":  row.get("Load_Profile_Redaction", ""),
+                "res_cust":                row.get("ResCust", ""),
+                "com_cust":                row.get("ComCust", ""),
+                "ind_cust":                row.get("IndCust", ""),
+                "agr_cust":                row.get("AgrCust", ""),
+                "oth_cust":                row.get("OthCust", ""),
+                "existing_dg_kw":          row.get("Existing_DG", ""),
+                "queued_dg_kw":            row.get("Queued_DG", ""),
+                "total_dg_kw":             row.get("Total_DG", ""),
+                "shape_length_m":          row.get("Shape__Length", ""),
+                "lon_start": None,
+                "lat_start": None,
+                "lon_end":   None,
+                "lat_end":   None,
+            })
+        print(f"  {len(rows_out):,}/{total:,}", end="\r")
+
+    out_path = output_dir / "pge_feeder_detail.csv"
+    with open(out_path, "w", newline="", encoding="utf-8") as fh:
+        writer = _csv.DictWriter(fh, fieldnames=_FEEDER_DETAIL_CSV_COLS)
+        writer.writeheader()
+        writer.writerows(rows_out)
+
+    print(f"\n  {len(rows_out):,} feeders -> {out_path}")
+    return out_path
+
+
+# ── Feeder load profiles (layer 23) ──────────────────────────────────────────
+
+_FEEDER_PROFILE_FIELDS = "FeederID,division,MonthHour,Low,High,Publish"
+
+_FEEDER_PROFILE_CSV_COLS = [
+    "feeder_id", "division", "month_hour", "low_kw", "high_kw", "publish",
+]
+
+
+def scrape_feeder_load_profiles(output_dir: Path = _FEEDERS_DIR) -> Path:
+    """
+    Scrape feeder-level load profiles from FeederLoadProfile (layer 23).
+
+    Layer 23 is a non-spatial table (~637k rows, one per feeder × MonthHour cell).
+    MonthHour format: "MM_HH" (e.g., "01_00" = January, midnight).
+    Low/High are kW values (not MW) analogous to min_load/max_load in the
+    substation profiles.
+
+    Raw field → output column mapping
+    ----------------------------------
+    FeederID   → feeder_id
+    division   → division
+    MonthHour  → month_hour  ("MM_HH" string)
+    Low        → low_kw      (≈ 10th-percentile load, kW)
+    High       → high_kw     (≈ 90th-percentile load, kW)
+    Publish    → publish     (1 = public, 0 = redacted)
+
+    Output: data/raw/pge/feeders/pge_feeder_load_profiles.csv
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    client = PGEClient()
+    total  = client.get_record_count(23)
+    print(f"Fetching PG&E FeederLoadProfile (layer 23) — {total:,} records ...")
+
+    rows_out: list[dict] = []
+    for rows, _ in client.paginate_layer(
+        23,
+        out_fields=_FEEDER_PROFILE_FIELDS,
+        include_geometry=False,
+        page_size=2000,
+    ):
+        for row in rows:
+            rows_out.append({
+                "feeder_id":  row.get("FeederID", ""),
+                "division":   row.get("division", ""),
+                "month_hour": row.get("MonthHour", ""),
+                "low_kw":     row.get("Low", ""),
+                "high_kw":    row.get("High", ""),
+                "publish":    row.get("Publish", ""),
+            })
+        print(f"  {len(rows_out):,}/{total:,}", end="\r")
+
+    out_path = output_dir / "pge_feeder_load_profiles.csv"
+    with open(out_path, "w", newline="", encoding="utf-8") as fh:
+        writer = _csv.DictWriter(fh, fieldnames=_FEEDER_PROFILE_CSV_COLS)
+        writer.writeheader()
+        writer.writerows(rows_out)
+
+    print(f"\n  {len(rows_out):,} rows -> {out_path}")
+    return out_path

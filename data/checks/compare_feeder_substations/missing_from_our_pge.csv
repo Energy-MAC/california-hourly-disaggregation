@@ -1,0 +1,44 @@
+substation,n_feeders,division,voltages,total_res_cust,total_com_cust,redacted_any,lat,lon,our_pge_idx,our_pge_match,our_pge_name,our_pge_voltage_kv,basin_matched,basin_name,cats_dist_km,cats_matched,cats_kv
+,3,Sierra,12.0;21.0;4.16,4238,249,Yes,,,-1,unmatched,,,False,,,False,
+BAIR,4,Peninsula,12.0,479,192,Yes,37.49770280657784,-122.2140333653122,-1,unmatched,,,True,Bair,3.0837129989990844e-06,True,115.0
+BELLE HAVEN,16,Peninsula,12.0;4.16,19289,1184,Yes,37.47765834121956,-122.1685055498896,-1,unmatched,,,True,Belle Haven,4.42398393157938e-06,True,66.0
+BETHEL BANK,1,Diablo,4.16,8,5,Yes,,,-1,unmatched,,,False,,,False,
+CAMPHORA,1,Central coast,12.0,109,40,Yes,36.468219176509145,-121.39036110711068,-1,unmatched,,,True,Camphora,7.449658794914668e-07,True,66.0
+CASTROVILLE,2,Central coast,21.0,2376,454,Yes,36.76311989630461,-121.73473546336916,-1,unmatched,,,True,Castroville,0.0025237642202669544,True,66.0
+CORDELIA,3,North Bay,12.0,3311,440,Yes,38.2159399396576,-122.11240115884928,-1,unmatched,,,True,Cordelia,2.6422150802871043,False,115.0
+CORTINA,1,Sacramento,12.0,85,63,No,39.12054473540145,-122.22333491105772,-1,unmatched,,,True,Cortina,0.0026021440518842905,True,115.0
+EMBARCADERO (Z),27,San francisco,12.0;34.5,24897,2022,Yes,,,-1,unmatched,,,False,,,False,
+FLINT,1,Sierra,12.0,1872,145,No,38.88492040725154,-121.0671416240988,-1,unmatched,,,True,Flint,2.108141598283448e-06,True,115.0
+HARDWICK,2,Fresno,12.0,1003,173,Yes,36.4041265497173,-119.68584894432465,-1,unmatched,,,True,Hardwick,3.9669741355469e-06,True,66.0
+HUNTERS POINT (P),1,San francisco,12.0,4727,317,No,,,-1,unmatched,,,False,,,False,
+JERSEY ISLAND,1,Diablo,4.16,2,4,Yes,,,-1,unmatched,,,False,,,False,
+KESWICK,1,North Valley,12.0,452,72,Yes,40.62386039813804,-122.46199853399462,-1,unmatched,,,True,Keswick,2.876502741040561e-06,True,66.0
+LARKIN (Y),38,San francisco,12.0,57606,5246,Yes,,,-1,unmatched,,,False,,,False,
+MADISON,3,Sacramento,12.0;21.0,3264,443,Yes,38.670686014266025,-121.96934698137233,-1,unmatched,,,True,Madison,1.6853058205452028e-06,True,66.0
+MARINA (F),10,San francisco,12.0;4.16,13971,831,Yes,,,-1,unmatched,,,False,,,False,
+MERIDIAN,2,Sacramento,12.0,351,106,Yes,,,-1,unmatched,,,False,,,False,
+MISSION (X),20,San francisco,12.0,47153,3937,Yes,,,-1,unmatched,,,False,,,False,
+MONTEREY,1,Central coast,21.0,4239,487,No,36.59982742598498,-121.89048372337044,-1,unmatched,,,True,Monterey,2.133499842741391e-06,True,66.0
+NEWHALL,2,Yosemite,12.0,21,33,Yes,36.86696373850815,-120.3280422136908,-1,unmatched,,,True,Newhall,1.2291689811764728e-06,True,115.0
+OAKLAND K,4,East Bay,12.0,9677,497,Yes,,,-1,unmatched,,,False,,,False,
+PIPER BANK,1,Diablo,4.16,69,7,Yes,,,-1,unmatched,,,False,,,False,
+PORTOLA,2,San francisco,4.16,2227,39,Yes,,,-1,unmatched,,,False,,,False,
+POTRERO PP (A),15,San francisco,12.0,27321,2105,Yes,,,-1,unmatched,,,False,,,False,
+POTTER VALLEY PH,1,Humboldt,12.0,703,98,No,,,-1,unmatched,,,False,,,False,
+RAINBOW,3,Fresno,12.0,4385,479,Yes,36.71022222303943,-119.53811388808354,-1,unmatched,,,True,Rainbow,1.1147190560988024e-06,True,115.0
+SAN BERNARD,3,Kern,12.0,18,33,Yes,35.092397223656064,-118.8781167121445,-1,unmatched,,,True,San Bernard,1.1773527272175146e-06,True,66.0
+SF G,16,San francisco,12.0;4.16,16507,886,Yes,,,-1,unmatched,,,False,,,False,
+SF H,5,Peninsula,12.0;4.16,8522,560,Yes,,,-1,unmatched,,,False,,,False,
+SF J,13,San francisco,12.0;4.16,6913,720,Yes,,,-1,unmatched,,,False,,,False,
+SF K,12,San francisco,12.0;4.16,18847,928,Yes,,,-1,unmatched,,,False,,,False,
+SF L,12,San francisco,12.0;4.16,12270,718,Yes,,,-1,unmatched,,,False,,,False,
+TEMPORARY CARBONA,4,Stockton,12.0,6178,379,Yes,,,-1,unmatched,,,False,,,False,
+TEVIS,5,Kern,21.0,13938,518,Yes,35.319597002518464,-119.12895222184612,-1,unmatched,,,True,Tevis,7.172030037147636,False,66.0
+TOKAY,1,Stockton,12.0,4,1,Yes,,,-1,unmatched,,,False,,,False,
+TULARE LAKE,3,Fresno,12.0,405,95,Yes,36.003452769529034,-119.9494833416532,-1,unmatched,,,True,Tulare Lake,3.7472653517907284e-06,True,66.0
+TWISSELMAN,2,Kern,12.0;21.0,15,35,Yes,35.73065650722425,-119.8580980733426,-1,unmatched,,,True,Twisselman,2.4259404754257775e-06,True,66.0
+VALLEY SPRINGS,2,Stockton,12.0,1746,251,Yes,38.21658505767753,-120.76401047642304,-1,unmatched,,,True,Valley Springs,0.00312193261876699,True,230.0
+VINA,1,North Valley,12.0,355,69,No,39.9416370534073,-122.0417015018011,-1,unmatched,,,True,Vina,4.088068682968474e-07,True,66.0
+WILDWOOD,1,North Valley,12.0,105,29,Yes,40.38716974121961,-123.0441040072797,-1,unmatched,,,True,Wildwood,6.312953105863931e-07,True,115.0
+WISE,2,Sierra,12.0,2463,226,Yes,38.88992635835282,-121.09849583458151,-1,unmatched,,,True,Wise,2.9985950831129193e-06,True,115.0
+WISHON,1,Yosemite,12.0,11,2,Yes,,,-1,unmatched,,,False,,,False,
