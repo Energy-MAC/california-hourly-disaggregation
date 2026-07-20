@@ -24,8 +24,6 @@ Stochastic conditional disaggregation" for user-facing docs. Implementation:
 
 ## Model
 
-Two layers, per the agreed formulation:
-
 **Layer 1 — the given (unconditional) cell distribution.** Within its cell, each
 substation's load is distributed `L_s ~ Normal(μ_s, σ_s²)` (or the uniform
 variant). This is taken as given from the utility envelopes and never changes.
