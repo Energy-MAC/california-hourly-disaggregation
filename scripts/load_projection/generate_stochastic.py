@@ -10,8 +10,11 @@ CLI parameters:
                 columns dt_pst_hb, demand_mw holding a CAISO-total series
   --family      normal | uniform | both (default both)
   --F           level: "cal" (calibrated F*, default) or a float e.g. 0.80
-  --z-mode      native (standardize target within its own cells, default) |
-                bootstrap (month-matched 7-day blocks of historical z)
+  --z-mode      native (standardize target within its own cells; observed
+                trajectory shared by all draws, default) |
+                bootstrap (month-matched 7-day blocks of historical z,
+                redrawn independently per draw so weather varies across
+                the ensemble)
   --block-days  bootstrap block length in days (default 7)
   --n-draws     Monte Carlo draws (default 5)
   --year-start/--year-end   subset of target years (default all)
@@ -72,9 +75,14 @@ def load_target(args, caiso: pd.DataFrame) -> pd.DataFrame:
     return t.sort_values("dt_pst_hb").reset_index(drop=True)
 
 
-def trajectory_pass(mats, cells, target, z, family, scale, n_draws, seed,
+def trajectory_pass(mats, cells, target, z_draws, family, scale, n_draws, seed,
                     out_dir, save_output):
-    """Per-draw generation chunked by year. Returns (annual_df, totals [H, D])."""
+    """Per-draw generation chunked by year. Returns (annual_df, totals [H, D]).
+
+    z_draws is one z array per draw: identical in native mode (observed
+    trajectory shared, draws differ only in allocation), independently
+    bootstrapped per draw in bootstrap mode (weather varies across ensemble).
+    """
     years = target.dt_pst_hb.dt.year.values
     totals = np.empty((len(target), n_draws), dtype=np.float64)
     annual_rows = []
@@ -86,7 +94,7 @@ def trajectory_pass(mats, cells, target, z, family, scale, n_draws, seed,
         for yr in np.unique(years):
             mask = years == yr
             chunk = target[mask]
-            L = generate(mats, cells, chunk, z[mask], family, scale, rng)
+            L = generate(mats, cells, chunk, z_draws[d][mask], family, scale, rng)
             totals[mask, d] = np.nansum(L, axis=1)
             annual = pd.DataFrame({
                 "utility": mats.subs.utility, "substation_name": mats.subs.substation_name,
@@ -129,7 +137,7 @@ def validate_totals(cells, target, totals, family, F_level):
     return out.reset_index()
 
 
-def marginal_pass(mats, env, cells, target, z, family, scale, n_draws, seed):
+def marginal_pass(mats, env, cells, target, z_draws, family, scale, n_draws, seed):
     """Check (ii): per-cell envelope recovery. Generated cell-by-cell so exact
     empirical q10/q90 over (hours-in-cell x draws) samples fit in memory.
     Within one cell each sample is a distinct day, so daily idiosyncratic
@@ -139,11 +147,11 @@ def marginal_pass(mats, env, cells, target, z, family, scale, n_draws, seed):
     kvec = target.cell.values
     for c in range(288):
         rho_c = cells.rho.get(c, np.nan)
-        zc = z[kvec == c]
+        zc = np.concatenate([zd[kvec == c] for zd in z_draws])
         if len(zc) == 0 or np.isnan(rho_c):
             continue
-        w = (np.sqrt(rho_c) * np.tile(zc, n_draws)[:, None]
-             + np.sqrt(1 - rho_c) * rng.standard_normal((len(zc) * n_draws, len(mats.subs))))
+        w = (np.sqrt(rho_c) * zc[:, None]
+             + np.sqrt(1 - rho_c) * rng.standard_normal((len(zc), len(mats.subs))))
         if family == "normal":
             L = mats.mu[:, c] + mats.sigma[:, c] * w
         else:
@@ -199,11 +207,13 @@ def main() -> None:
     scale = F_level / f_star
     if args.z_mode == "native":
         target = standardize_z(target)
-        z = target.z.values
+        z_draws = [target.z.values] * args.n_draws  # shared observed trajectory
     else:
+        # independent weather trajectory per draw: the ensemble varies weather
         zhist = standardize_z(caiso)[["dt_pst_hb", "z"]]
-        rng = np.random.default_rng(args.seed + 555)
-        z = bootstrap_z(zhist, target, args.block_days, rng)
+        z_draws = [bootstrap_z(zhist, target, args.block_days,
+                               np.random.default_rng(args.seed + 555 + d))
+                   for d in range(args.n_draws)]
 
     tname = "eia930" if args.target == "eia930" else Path(args.target).stem
     f_tag = "cal" if args.F == "cal" else f"{F_level:.2f}"
@@ -218,8 +228,8 @@ def main() -> None:
         run_tag = f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}"
         out_dir = PROJ_DIR / run_tag
         out_dir.mkdir(parents=True, exist_ok=True)
-        annual, totals = trajectory_pass(mats, cells, target, z, family, scale,
-                                         args.n_draws, args.seed, out_dir,
+        annual, totals = trajectory_pass(mats, cells, target, z_draws, family,
+                                         scale, args.n_draws, args.seed, out_dir,
                                          args.save_output)
         annual.to_csv(out_dir / "substation_annual_mwh.csv", index=False)
         mean_twh = annual.groupby("draw").annual_mwh.sum().mean() / 1e6 \
@@ -228,7 +238,7 @@ def main() -> None:
         if args.validate:
             vt = validate_totals(cells, target, totals, family, F_level)
             vt.round(4).to_csv(out_dir / "validation_totals_cells.csv", index=False)
-            vm = marginal_pass(mats, env, cells, target, z, family, scale,
+            vm = marginal_pass(mats, env, cells, target, z_draws, family, scale,
                                args.n_draws, args.seed)
             vm.round(5).to_csv(out_dir / "validation_marginals_subs.csv", index=False)
 
