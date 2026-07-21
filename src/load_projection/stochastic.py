@@ -97,6 +97,8 @@ def build_system_cells(env: pd.DataFrame, caiso: pd.DataFrame) -> tuple[pd.DataF
     cells["implied_f"] = cells.sum_mu / cells.ybar
     f_star = (cells.sum_mu * cells.n_obs).sum() / (cells.ybar * cells.n_obs).sum()
     cells["shape_s"] = cells.implied_f / f_star
+    # min(1,.) projects the unbounded moment ratio onto rho's [0,1] parameter
+    # space; a binding cap would signal envelope/CAISO inconsistency (see spec)
     cells["rho"] = np.minimum(1.0, (cells.implied_f * cells.sd / cells.sum_sigma) ** 2)
     cells["month"] = cells.index // 24 + 1
     cells["hour_pst"] = cells.index % 24

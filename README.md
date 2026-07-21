@@ -304,7 +304,7 @@ three parameter tables below.
 | `--target` | `eia930` or path to CSV (`dt_pst_hb`, `demand_mw`; CAISO-total series) | `eia930` |
 | `--family` | `normal`, `uniform`, `both` | `both` |
 | `--F` | `cal` (= F\*) or float, e.g. `0.80` | `cal` |
-| `--z-mode` | `native` (standardize target in its own cells), `bootstrap` (month-matched blocks of historical z) | `native` |
+| `--z-mode` | `native` (standardize target in its own cells; observed trajectory shared by all draws — allocation-only uncertainty), `bootstrap` (month-matched blocks of historical z, **redrawn per draw** so weather years vary across the ensemble) | `native` |
 | `--block-days` | int | `7` |
 | `--n-draws` | int | `5` |
 | `--year-start` / `--year-end` | subset target years | all |
@@ -355,6 +355,97 @@ python scripts/load_projection/estimate_stochastic.py
 python scripts/load_projection/generate_stochastic.py --validate
 python scripts/load_projection/generate_stochastic.py --family normal --F 0.80 --n-draws 20
 python scripts/load_projection/generate_stochastic.py --target forecast.csv --z-mode bootstrap --save-output
+```
+
+#### Figures
+
+`scripts/load_projection/plot_stochastic.py` writes to
+`data/figures/load_projection/stochastic/`:
+
+- `rho_by_month_hour.png`, `shape_s_by_month_hour.png` — 12-subplot month
+  panels of ρ(c) and s(c) vs hour.
+- `clt_{eia930,resolve}_{day,month,year}/` — CLT convergence demos for one
+  representative high-load substation (default: smoothest of the top-20 by
+  mean load): Monte Carlo draws layered 1 → 50 until their mean converges to
+  the model conditional mean, against historical CAISO (2024) and a RESOLVE
+  weather-year (2012, PGE+SCE+SDGE net sum). Each subfolder holds the
+  per-frame PNGs plus the assembled GIF. Year views plot daily means for
+  legibility.
+- Args: `--which`, `--substation "utility:NAME"`, `--n-draws`, `--year`,
+  `--weather-year`, `--month`, `--day`, `--seed`.
+
+---
+
+### Nodal mapping — projecting substation loads onto an external test system
+
+`scripts/load_projection/map_loads_to_nodes.py` assigns each projected
+substation's load to the nearest node of an external system (CATS —
+`data/raw/CATS/CATS_buses.csv` — by default; any node CSV with id/lat/lon
+columns works via `--id-col/--lat-col/--lon-col`). Rules:
+
+- Each substation's load goes to its **closest candidate node**; nodes within
+  `--tie-tol-km` (0.25) of the minimum distance **share it equally**; a node
+  **accumulates** every substation assigned to it. Totals are conserved
+  exactly for all substations with coordinates.
+- Candidate nodes are filtered by default to real substations (CATS: `Type =
+  'Substation'`, non-`IMPORT` — excludes 5,699 line-routing AddedNodes). To
+  let AddedNodes receive load, pass `--no-default-filters` (optionally with
+  `--filter "col=value"` refinements on any node-file column).
+- **ReEDS synthetic substations** (Del Norte / Lassen / Modoc / Siskiyou —
+  counties with no utility substations) have no real location, so "closest"
+  does not apply to them. Instead each one's load is **split equally across
+  every candidate node located inside its county** (point-in-polygon, TIGER
+  2022 shapefile) — e.g. Siskiyou's 37 in-county buses each get 1/37 of
+  SYNTHETIC_SISKIYOU's load. Only matters for Approach 1 (Approach 2 covers
+  just the PGE/SCE/SDGE portion of CAISO and has no synthetic substations).
+  If a county has zero candidate nodes (Del Norte, on CATS: 0), that one
+  substation falls back to the nearest node to the county centroid — the only
+  case where a synthetic substation still uses distance.
+- Assignments farther than `--max-dist-km` (10) are flagged, not dropped.
+- `--unmapped {drop,renormalize}` — the 22 coordinate-less substations
+  (0.17% of fleet load):
+  - `drop` (default): that load is not assigned anywhere; the out/in
+    conservation ratio printed for each `--apply` reports the shortfall.
+  - `renormalize`: every mapped node's load is scaled up by a single global
+    factor so the applied total exactly equals the input total — this
+    redistributes the missing 0.17% uniformly across every node rather than
+    placing it near the substations it actually came from.
+- Works with **both approaches**: `--apply` accepts Approach 1 outputs
+  (`substation_annual_load.csv` for ReEDS/IEPR/RESOLVE runs,
+  `substation_monthly_load.parquet`) and Approach 2 outputs
+  (`substation_annual_mwh.csv`, hourly `draws/draw{k}.parquet`). Long tables
+  are matched on (utility, substation_name) case-insensitively; load columns
+  auto-detected by `*_mw`/`*_mwh` suffix (`--value-cols` to override); wide
+  draw parquets are matrix-multiplied through the share matrix.
+
+**TODO (planned improvements):**
+- Assignment currently ignores node voltage — a distribution substation
+  lands on a 230/500 kV bus if it is nearest. Planned refinement: prefer the
+  lowest-kV candidate within the tie tolerance.
+- **22 substations have no coordinates** (21 SCE, 1 PGE — Visalia, Safari,
+  Costa Mesa, Fair Oaks, etc. — real, presumably locatable sites; see
+  `unmapped_substations.csv`). Finding and adding their coordinates should
+  be straightforward and would eliminate the need for `--unmapped` entirely.
+
+CATS result: 1,325 real substations (nearest-node, 220 tie-shared across 2+
+buses) + 4 synthetic (county equal-split: Lassen 26 nodes, Modoc 14, Siskiyou
+37; Del Norte has 0 in-county CATS buses so falls back to its nearest node)
+→ 1,484 of 3,168 candidate buses. Real-substation distance: median **0.07 km**
+(p95 6.4 km); 33 land > 10 km away (0.47% of fleet load — mostly zero-load
+desert substations). Conservation out/in with `--unmapped drop`: stochastic
+0.99837, ReEDS 0.99904 (= 1 minus the 0.17% unmapped share); exactly 1.0 with
+`--unmapped renormalize` (used above).
+
+Outputs (`data/processed/load_projection/nodal/{system}/`):
+`substation_node_map.csv` (utility, substation, node, share, dist_km, n_tied,
+is_synthetic), `unmapped_substations.csv`, and per `--apply` input a
+`nodal__{run_tag}__{stem}.csv/.parquet`. Known limitations (future work): the
+stochastic approach only covers the PGE/SCE/SDGE fraction of CAISO, and
+non-IOU regions in the weights approach have no within-region variance.
+
+```bash
+python scripts/load_projection/map_loads_to_nodes.py --system CATS \
+    --apply data/processed/load_projection/projections/stochastic__eia930__normal__Fcal__native/substation_annual_mwh.csv
 ```
 
 ---

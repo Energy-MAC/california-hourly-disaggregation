@@ -24,8 +24,6 @@ Stochastic conditional disaggregation" for user-facing docs. Implementation:
 
 ## Model
 
-Two layers, per the agreed formulation:
-
 **Layer 1 — the given (unconditional) cell distribution.** Within its cell, each
 substation's load is distributed `L_s ~ Normal(μ_s, σ_s²)` (or the uniform
 variant). This is taken as given from the utility envelopes and never changes.
@@ -52,6 +50,41 @@ Properties (each verifiable in the diagnostics):
    between any two substations in cell `c`, and the R² of each substation's
    load on the system factor.
 
+## Optimization view
+
+The model is equivalently the closed-form solution of a constrained
+least-squares problem — the MSE objective originally posed for this work:
+
+```
+min_{b, v, f}   Σ_t [ f(c(t))·y(t) − Σ_s m_s(t) ]²
+
+s.t.  m_s(t) = μ_s + b_s(c)·z(t)              (linear conditional mean — all that
+                                               two quantiles per cell can identify)
+      L_s(t) = m_s(t) + v_s(c)·ε_s(t)
+      b_s(c)² + v_s(c)² = σ_s²                (marginal variance preserved)
+      E[m_s(t) | c] = μ_s                     (marginal mean preserved)
+      b_s(c) = σ_s·λ(c)                       (equal correlation within cell)
+      0 ≤ λ(c) ≤ 1                            (correlation parameter space)
+```
+
+First-order conditions solve analytically — no numerical optimizer runs
+(analogous to OLS solved via normal equations):
+
+- level term  → `f(c) = Σμ_s/ȳ_c` (the calibrated implied f; the level is then
+  deliberately frozen as `F·s(c)` so F remains a scenario parameter — s(c)
+  carries the optimal shape and F = F* recovers the exact optimum);
+- deviation term → zero MSE requires `Σ_s b_s = f(c)·sd_c`; the equal-correlation
+  constraint resolves the allocation: `λ(c) = √ρ(c) = f(c)·sd_c/Σσ_s`;
+- marginal variance → `v_s = σ_s·√(1−ρ)` with no remaining freedom.
+
+The achieved objective is exactly zero in expectation wherever the cap does
+not bind (it never binds on our data) — verified empirically as check (iii)'s
+≈0 bias. Estimation therefore = solving the minimization in closed form;
+Monte Carlo = sampling from the resulting joint distribution, not solving
+anything. A numerical optimizer would only be needed if the closed-form
+assumptions were relaxed (per-substation loadings β_s, richer copulas, or
+cross-cell smoothness penalties).
+
 ## Estimation
 
 Only two objects are estimated, both by moment matching per cell:
@@ -65,6 +98,19 @@ Feasibility requires `ρ(c) ≤ 1`, i.e. even perfectly synchronized substations
 can swing as much as `f·CAISO`. Verified on the 2015–2025 window: zero
 infeasible cells at any f ∈ [0.70, 0.85] (median ρ = 0.20 / 0.25 / 0.30 at
 f = 0.70 / 0.775 / 0.85; range 0.11–0.58 across cells).
+
+**Why the estimator carries a `min(1, ·)` cap:** ρ is a variance share (and a
+pairwise correlation), so its parameter space is [0, 1] by definition. The
+moment-ratio estimator `(f·sd_c/Σσ_s)²`, however, is just a ratio of two
+quantities measured from different datasets (CAISO history vs utility
+envelopes) and is not intrinsically bounded — nothing prevents noisy or
+inconsistent inputs from producing a value above 1. The cap is therefore part
+of the estimator's definition: it projects the moment estimate onto the
+feasible parameter space. A binding cap would mean the observed CAISO swings
+in that cell exceed what the envelopes can produce even under perfect
+synchronization — a data-inconsistency signal, which is why the estimator
+reports the number of capped cells (zero on our data; largest ρ̂ = 0.48, so
+the cap is currently dormant and no estimate is distorted by it).
 
 ## Decided
 
@@ -108,6 +154,12 @@ f = 0.70 / 0.775 / 0.85; range 0.11–0.58 across cells).
   blocks overlaid on forecast cell means for **IEPR**. Both used in
   validation. i.i.d. hourly `z` is rejected (destroys the temporal
   autocorrelation that peak/duration statistics depend on).
+- **Bootstrap z is redrawn independently for every Monte Carlo draw**
+  (decision 2026-07-20): a forecast ensemble should vary the weather year
+  across draws, so each draw carries its own bootstrapped trajectory plus its
+  own idiosyncratic noise ("100 plausible 2035s"). Native mode shares the one
+  observed trajectory across draws — there the uncertainty is allocation-only
+  ("how was the observed CAISO load split across substations").
 - **Idiosyncratic noise `ε_s`: one draw per substation-day** (decision
   2026-07-17), held constant across the 24 hours of each day. No substation
   time series exists to estimate hourly autocorrelation, so daily persistence
