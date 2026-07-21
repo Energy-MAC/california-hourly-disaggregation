@@ -448,6 +448,49 @@ python scripts/load_projection/map_loads_to_nodes.py --system CATS \
     --apply data/processed/load_projection/projections/stochastic__eia930__normal__Fcal__native/substation_annual_mwh.csv
 ```
 
+#### Figures
+
+Three figure scripts, all reusable across node systems and approaches:
+
+- **`plot_coverage_map.py`** — interactive Folium choropleth of CA counties
+  (TIGER 2022) colored by CATS-nodes-per-IOU-substation ratio, hover tooltip
+  with raw counts. Substation counts come from `substation_attributes_clean.csv`
+  and count ONLY real substations with a real coordinate — ReEDS synthetic
+  substations (placed at county centroids for the nodal mapping; not in that
+  file) are never counted as a substation here. The 4 synthetic counties
+  (Lassen, Modoc, Siskiyou, Del Norte) are marked with a **dashed red border**
+  and a "synthetic substation only" tooltip note so they can't be mistaken
+  for a real substation's county. `data/figures/load_projection/coverage/
+  coverage_map_{system}.html` + `coverage_by_county_{system}.csv`. CATS: 0
+  counties have substations but 0 nodes.
+- **`plot_nodal_diagnostics.py`** — needs `substation_node_map.csv` (run
+  `map_loads_to_nodes.py` first): `dist_hist.png` (assignment distance, log
+  y-axis, median 0.07 km), `tie_hist.png` (219 of 1,325 substations split
+  across 2+ nodes), `voronoi.png` (Voronoi cells of all 3,168 candidate
+  nodes clipped to CA, substations overlaid by utility — the geometric
+  partition nearest-node search implicitly performs; applies to any approach
+  since the node mapping is shared). Output:
+  `data/figures/load_projection/nodal/{system}/`.
+- **`plot_pipeline_explainers.py`** — worked examples with real numbers:
+  `reeds_chain_example.png` (two-stage p-region → county → substation chain
+  for Calaveras + Mariposa — both genuinely have only 3 real PGE substations
+  each — one cell), `iou_chain_example.png` (single-stage IOU → substation
+  chain for PGE: top-8 substations' weights multiplied by one concrete IEPR
+  hourly total, MW, so `sub_iou_weight` can be recovered from the figure
+  alone as `load_mw / total_mw`), `nodal_assignment_schematic.png`
+  (illustrative diagram of the four assignment rules — nearest, tie-share,
+  county equal-split, and centroid fallback: when a county has zero
+  candidate nodes, ALL of that synthetic substation's load goes to the
+  single node nearest the county centroid, even if that node sits outside
+  the county — the only case a synthetic substation's assignment depends on
+  distance). Output: `data/figures/load_projection/pipeline/`.
+
+```bash
+python scripts/load_projection/plot_coverage_map.py --system CATS
+python scripts/load_projection/plot_nodal_diagnostics.py --system CATS
+python scripts/load_projection/plot_pipeline_explainers.py
+```
+
 ---
 
 ## Repository Structure
