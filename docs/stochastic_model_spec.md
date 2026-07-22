@@ -18,9 +18,13 @@ Stochastic conditional disaggregation" for user-facing docs. Implementation:
 | `y(t)` | CAISO hourly net demand (EIA-930 CISO, PST hour-beginning). |
 | `ȳ_c, sd_c` | Mean and std of `y(t)` over all historical hours falling in cell `c` (2015–2025 window, ~319 obs per cell). |
 | `z(t)` | CAISO's standardized within-cell deviation: `z(t) = (y(t) − ȳ_c) / sd_c`. Mean 0, variance 1 within each cell by construction. |
-| `f` | IOU share of CAISO: either constant (sensitivity grid 0.70–0.85) or per-cell `f(c) = Σ_s μ_s / ȳ_c` (calibrated; range 0.58–0.88, hourly pattern reflects genuinely time-varying IOU share of CAISO). |
-| `ρ(c)` | Common-factor share for cell `c`: the fraction of each substation's cell variance that moves with the systemwide driver. `√ρ(c) = f · sd_c / Σ_s σ_s`, capped at 1. |
-| `ε_s(t)` | Idiosyncratic standard-normal draw, independent across substations and hours. This is the Monte Carlo randomness. |
+| `f(c)` | The **calibrated** per-cell IOU share of CAISO: `f(c) = Σ_s μ_s / ȳ_c`, computed directly from the envelopes and CAISO history — one number per cell, range 0.58–0.88. Not a free parameter; it is measured, not chosen. |
+| `F*` | The **calibrated level**: the single energy-weighted average of `f(c)` across all 288 cells (weighted by `ȳ_c` × hours-per-cell, so `F*` is exactly the IOU's share of *annual* CAISO energy). One number: `F* = 0.7361`. `F*` is what you get if you don't touch any dial — the model reproduces history exactly at `F = F*`. |
+| `s(c)` | The **calibrated shape**: `s(c) = f(c) / F*`, i.e. `f(c)` renormalized to have an energy-weighted mean of 1. Captures *when* (which hour/month) the IOUs take a bigger or smaller slice of CAISO, independent of the overall level. Duck-curve-like: <1 midday, >1 evening. Computed once from history, never re-fit. |
+| `F` | The **free scenario parameter** you actually choose per run: the sensitivity grid `{0.70, 0.75, 0.80, 0.85}` (or `--F cal` to use the calibrated `F*`). The model applies `f(c) = F · s(c)` — same hourly/monthly shape as history, but scaled to whatever overall IOU share you want to test. Every substation's output scales by the single factor `F/F*` (see "Optimization view" below for why `F` alone moves the level without touching `ρ`). |
+| `ρ(c)` | Common-factor share for cell `c`: the fraction of each substation's cell variance that moves with the systemwide driver. `√ρ(c) = f(c) · sd_c / Σ_s σ_s`, capped at 1 — computed from the *calibrated* `f(c)`, not from whichever `F` you're sweeping, which is why `ρ` is unaffected by the `--F` choice. |
+| `ε_s(t)` | Idiosyncratic standard-normal draw for substation `s`. **How it's drawn:** `numpy.random.default_rng(seed).standard_normal(...)`, one independent draw per (substation, calendar day) — held constant across all 24 hours of that day, then reused at every hour in the day (see "Decided" below: no data exists to estimate hourly autocorrelation, so daily persistence is the modeling choice). Independent across substations and across days. This is the only source of Monte Carlo randomness in native `z`-mode; bootstrap `z`-mode adds a second random ingredient (which historical weather block gets resampled). |
+| `L_s(t)` | **The model's output**: substation `s`'s disaggregated load at hour `t` — one Monte Carlo draw. This is literally what `generate_stochastic.py` writes out (per-substation columns, per-hour rows). Averaging `L_s(t)` over infinitely many draws recovers the conditional mean `m_s(t)`; histogramming it over all hours in one cell recovers exactly the given `Normal(μ_s, σ_s²)` (or uniform) envelope. |
 
 ## Model
 
@@ -29,19 +33,24 @@ substation's load is distributed `L_s ~ Normal(μ_s, σ_s²)` (or the uniform
 variant). This is taken as given from the utility envelopes and never changes.
 
 **Layer 2 — the conditional distribution at a specific hour `t`.** Knowing where
-CAISO sits at hour `t` shifts each substation's distribution:
+CAISO sits at hour `t` shifts each substation's distribution, and the chosen
+scenario level `F` rescales the whole thing:
 
 ```
-m_s(t)  =  μ_s + σ_s · √ρ(c) · z(t)          # time-varying conditional mean
-L_s(t)  =  m_s(t) + σ_s · √(1−ρ(c)) · ε_s(t) # Monte Carlo draw
+m_s(t)  =  μ_s + σ_s · √ρ(c) · z(t)                       # conditional mean, calibrated level
+L_s(t)  =  (F/F*) · [ m_s(t) + σ_s · √(1−ρ(c)) · ε_s(t) ]  # Monte Carlo draw = model OUTPUT
 ```
+
+`ρ(c)` is always computed from the calibrated `f(c)` (never from the swept
+`F`), which is why sweeping `--F` changes every substation's level uniformly
+without touching the correlation structure — see "Optimization view" for why.
 
 Properties (each verifiable in the diagnostics):
 
-1. **Zero MSE on deviations**: `Σ_s m_s(t) = Σ_s μ_s + f·(y(t) − ȳ_c)` — the
-   expected total tracks CAISO's within-cell swings exactly. With per-cell
-   `f(c)`, additionally `Σ_s μ_s = f(c)·ȳ_c`, so the expected total equals
-   `f(c)·y(t)` at every hour.
+1. **Zero MSE on deviations**: at the calibrated level (`F = F*`),
+   `Σ_s m_s(t) = Σ_s μ_s + f(c)·(y(t) − ȳ_c) = f(c)·y(t)` at every hour — the
+   expected total tracks CAISO exactly, both its level and its within-cell
+   swings. At any other `F`, the same holds with `f(c)` replaced by `F·s(c)`.
 2. **Marginal preservation**: `z(t)` has mean 0 / variance 1 within each cell,
    so mixing the conditional distributions over all hours of a cell reproduces
    the given `Normal(μ_s, σ_s²)` exactly (law of total variance:
@@ -53,7 +62,22 @@ Properties (each verifiable in the diagnostics):
 ## Optimization view
 
 The model is equivalently the closed-form solution of a constrained
-least-squares problem — the MSE objective originally posed for this work:
+least-squares problem — the MSE objective originally posed for this work.
+Before solving, these are treated as **unknowns to be found** — separate
+symbols from the model's `σ_s` and `ρ(c)` even though the solution ends up
+expressing them in terms of those (that's the point: solving *proves*
+`b_s = σ_s√ρ(c)`, it isn't assumed going in):
+
+- `b_s(c)` — substation `s`'s (unknown) loading on the common factor `z(t)`:
+  how many MW its conditional mean moves per unit of `z`. Turns out to equal
+  `σ_s(c)·λ(c)` (constraint below), and after solving, `σ_s(c)·√ρ(c)`.
+- `v_s(c)` — the (unknown) scale of substation `s`'s idiosyncratic noise in
+  cell `c`, in MW. After solving, equals `σ_s(c)·√(1−ρ(c))`.
+- `λ(c)` — the (unknown) common standardized loading shared by every
+  substation in cell `c` (the equal-correlation assumption forces `b_s/σ_s`
+  to be the same value `λ(c)` for all `s`). After solving, `λ(c) = √ρ(c)` —
+  i.e. `ρ(c)` is *defined* as `λ(c)²` once the optimization is solved, not
+  assumed beforehand.
 
 ```
 min_{b, v, f}   Σ_t [ f(c(t))·y(t) − Σ_s m_s(t) ]²
@@ -84,6 +108,80 @@ Monte Carlo = sampling from the resulting joint distribution, not solving
 anything. A numerical optimizer would only be needed if the closed-form
 assumptions were relaxed (per-substation loadings β_s, richer copulas, or
 cross-cell smoothness penalties).
+
+### Derivations
+
+Assumptions used throughout: within cell `c`, `z(t)` has mean 0 and variance 1
+(true by construction — `z(t) = (y(t) − ȳ_c)/sd_c`, and `ȳ_c, sd_c` are
+defined as the mean/std of `y(t)` over that cell's hours, so `Σ_t z(t) = 0`
+exactly). `ε_s(t) ~ N(0,1)`, independent of `z(t)`, independent across `s`.
+
+**1. Marginal mean preserved.** By linearity of expectation:
+```
+E[L_s(t)] = E[μ_s + b_s(c)·z(t) + v_s(c)·ε_s(t)]
+          = μ_s + b_s(c)·E[z(t)] + v_s(c)·E[ε_s(t)]
+          = μ_s + b_s(c)·0       + v_s(c)·0
+          = μ_s
+```
+Holds for any `b_s(c), v_s(c)` — both random pieces have mean zero.
+
+**2. Marginal variance preserved → `b_s(c)² + v_s(c)² = σ_s²`.** `L_s(t)` is
+the sum of `μ_s + b_s(c)·z(t)` (a deterministic function of `z(t)`) and
+`v_s(c)·ε_s(t)`; since `ε_s(t) ⊥ z(t)`, `Var(X+Y) = Var(X) + Var(Y)`:
+```
+Var(L_s(t)) = Var(μ_s + b_s(c)·z(t))  +  Var(v_s(c)·ε_s(t))
+            = b_s(c)²·Var(z(t))       +  v_s(c)²·Var(ε_s(t))
+            = b_s(c)²·1               +  v_s(c)²·1
+            = b_s(c)² + v_s(c)²
+```
+Requiring this to equal the envelope-given `σ_s²` gives the constraint. This
+is the law of total variance (`Var(L) = Var(E[L|z]) + E[Var(L|z)]`): the
+common-factor piece plus the idiosyncratic piece must sum to the total the
+envelope demands. It is also why `ε_s(t)` must be mean-0/variance-1
+*regardless of substation* — all substation-specific scale has to live in
+`v_s(c)`, or this bookkeeping breaks.
+
+**3. Equal correlation within cell → `b_s(c) = σ_s·λ(c)` implies
+`Corr(L_s, L_s') = λ(c)²` for every pair.** For two substations `s ≠ s'` in
+the same cell, using the same independence assumptions:
+```
+Cov(L_s(t), L_s'(t)) = Cov(b_s(c)·z(t), b_s'(c)·z(t))   (ε cross-terms vanish)
+                     = b_s(c)·b_s'(c)·Var(z(t)) = b_s(c)·b_s'(c)
+
+Corr(L_s, L_s') = Cov(L_s, L_s') / (σ_s·σ_s') = b_s(c)·b_s'(c) / (σ_s·σ_s')
+```
+Substituting `b_s(c) = σ_s·λ(c)` (and the same for `s'`), the `σ_s, σ_s'`
+cancel completely: `Corr(L_s, L_s') = λ(c)²` — the same value for *any* pair,
+which is why `ρ(c) := λ(c)²` is the pairwise correlation between any two
+substations in the cell, not just an average.
+
+**4. Solving for `b_s(c) = σ_s(c)·√ρ(c)`.** This one uses the objective
+itself, not just the model equations. Substitute `y(t) = ȳ_c + sd_c·z(t)` and
+`Σ_s m_s(t) = Σ_s μ_s + B(c)·z(t)` (writing `B(c) := Σ_s b_s(c)`) into the
+objective:
+```
+Σ_t [f(c)·y(t) − Σ_s m_s(t)]²
+  = Σ_t [ (f(c)·ȳ_c − Σμ_s) + (f(c)·sd_c − B(c))·z(t) ]²
+  = Σ_t [ C0 + C1·z(t) ]²                    where C0, C1 constants (not in t)
+  = n·C0² + 2·C0·C1·Σ_t z(t) + C1²·Σ_t z(t)²
+  = n·C0²  +  (const > 0)·C1²                since Σ_t z(t) = 0
+```
+The objective separates into an independent level term (`C0`) and deviation
+term (`C1`) — minimize each separately:
+- Level: `f(c) = Σμ_s/ȳ_c` makes `C0 = f(c)·ȳ_c − Σμ_s = 0` exactly.
+- Deviation: with `C0 = 0`, the objective is `(const)·C1²`, minimized only at
+  `C1 = 0`, i.e. `Σ_s b_s(c) = f(c)·sd_c`.
+
+This pins the *sum* `Σ_s b_s(c)`, not the individual `b_s` — one equation,
+~1,347 unknowns, so the objective is already at its zero minimum for any
+allocation that sums correctly. Substituting the equal-correlation ansatz
+`b_s(c) = σ_s·λ(c)` resolves the indeterminacy:
+```
+Σ_s b_s(c) = Σ_s [σ_s·λ(c)] = λ(c)·Σ_s σ_s = f(c)·sd_c
+          => λ(c) = f(c)·sd_c / Σ_s σ_s
+```
+and since `λ(c) = √ρ(c)` (definition 3 above), substituting back into
+`b_s(c) = σ_s·λ(c)` gives `b_s(c) = σ_s(c)·√ρ(c)`.
 
 ## Estimation
 

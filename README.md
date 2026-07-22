@@ -2,7 +2,7 @@
 
 Compile publicly available data to support substation-level hourly load disaggregation
 for California transmission studies.  The pipeline collects hourly load profiles and
-physical attributes for substations served by the four major California investor-owned
+physical attributes for substations served by the three major California investor-owned
 utilities (IOUs), inter-BA interchange data from EIA 930, and statewide demand forecasts
 from the California Energy Commission (CEC IEPR).
 
@@ -64,12 +64,11 @@ from the California Energy Commission (CEC IEPR).
 
 This project disaggregates projected California statewide load into substation-level
 hourly forecasts.  Multiple approaches are implemented, each in its own named subsection
-below.  Outputs from different approaches live in separate subfolders so they never
-overwrite each other.
+below.
 
 ---
 
-### Shared prerequisite — Substation rankings
+### Substation rankings
 
 `scripts/load_projection/rank_substations.py` ranks all substations at four temporal
 aggregation levels.  Run this once (or whenever the substation profiles are updated)
@@ -93,7 +92,7 @@ Three percentiles are ranked: `min_load` (~10th pct), `max_load` (~90th pct),
 | Hourly | r = 0.991–0.997 | r = 0.832–0.993 |
 | Month-hour | r = 0.934–0.985 | r = 0.651–0.981 |
 
-Max-load orderings are very stable; min-load varies more at off-peak month-hours.
+Max-load orderings are very stable; min-load varies more at off-peak month-hours. Average load outputs are able to be found from the function call below, but results are a balance between the min- and max-load rankings.
 
 ```
 Outputs: data/processed/load_projection/rankings/
@@ -126,17 +125,17 @@ It does not account for substation-specific growth trajectories or changing load
 For each (month, hour) cell:
 
 ```
-weight[s, m, h] = max(load_col[s, m, h], 0)  /  Σ same for all j in same region
+weight[s, m, h] = max(load_col[s, m, h], 0)  /  Σ_{j\in Region} max(load_col[j, m, h], 0) for all Regions
 ```
 
-Negative or missing values are clipped to zero; equal fallback weights used when all
+Negative or missing values are clipped to zero; equally proportioned weights are used as a fallback when all
 substations in a region are zero at a cell.  Applied vectorized:
 
 ```
 substation_load[s, t] = regional_load[region(s), t] × weight[s, month(t), hour(t)]
 ```
 
-Two disaggregation chains depending on forecast source:
+Two disaggregation chains apply this weighting process depending on forecast source:
 
 **ReEDS chain (p-region → county → substation)** — `disaggregate_reeds.py`
 
@@ -145,8 +144,8 @@ constant across all hours).  Stage 2 distributes county load to substations usin
 the substation profiles at the chosen temporal resolution.
 
 ```
-county_pgroup_fraction[c] = ca_load_fraction[c] / Σ same for counties in p-region
-sub_county_weight[s, m, h] = max(weight_col[s,m,h], 0) / Σ same for s in county(s)
+county_pgroup_fraction[c] = ca_load_fraction[c] / Σ ca_load_fraction[c] for counties in p-region
+sub_county_weight[s, m, h] = max(weight_col[s,m,h], 0) / Σ max(weight_col[s,m,h], 0) for s in county(s)
 chain_weight[s, m, h]      = county_pgroup_fraction[county(s)] × sub_county_weight[s, m, h]
 substation_load[s, t]      = p_region_load[p_region(s), t] × chain_weight[s, month(t), hour(t)]
 ```
@@ -161,29 +160,17 @@ p8 is entirely PacifiCorp territory — no PGE/SCE/SDGE substations fall there.
 Single-stage: distributes each IOU's hourly load among its substations.
 
 ```
-sub_iou_weight[s, m, h] = max(weight_col[s,m,h], 0) / Σ same for s in IOU(s)
+sub_iou_weight[s, m, h] = max(weight_col[s,m,h], 0) / Σ max(weight_col[s,m,h], 0) for s in IOU(s)
 substation_load[s, t]   = IOU_load[IOU(s), t] × sub_iou_weight[s, month(t), hour(t)]
 ```
 
 PGE (664 subs), SCE (578 subs), SDGE (99 subs) only.  IEPR VEA load and RESOLVE
 IID/LDWP/NCNC load are excluded (no substation data for those utilities).
 
-#### Gross vs net load consistency
-
-Substation profiles are **net-of-BTM load at the substation meter** (revised
-2026-07-16; previously documented as gross). Evidence from
-`scripts/load_projection/stochastic_diagnostics.py` (`# VERIFIED: sanity check`):
-13,318 cells across 368 substations have negative `min_load` (reverse flow — only
-possible when BTM export exceeds local load), and the implied scaling factor
-`Σμ_s / CAISO_cell_mean` dips midday (0.66 at h10–11 vs 0.72–0.74 overnight) —
-the signature of the same BTM offset being netted from both sides, whereas gross
-substation data against net CAISO would make the ratio peak midday.
-
-| Pair net substation weights WITH | Gross alternatives (used in pre-revision Approach 1 runs) |
-|----------------------------------|----------------------------------------------------------|
-| EIA-930 demand (net-to-net) | — |
-| IEPR `BASELINE_NET_LOAD` | IEPR `BASELINE_CONSUMPTION` |
-| RESOLVE derived net load | RESOLVE `demand_mw_2024scaled` |
+Substation profiles are **net-of-BTM load** — pair them with net statewide targets
+(EIA-930, IEPR `BASELINE_NET_LOAD`, RESOLVE derived net load), not gross ones. See
+[BTM Solar Treatment by Source](#btm-solar-treatment-by-source) for the evidence
+and the full source-by-source gross/net breakdown.
 
 #### Parameters
 
@@ -1417,7 +1404,7 @@ why RESOLVE and IEPR differ numerically, and which values are raw vs derived.
 | RESOLVE | PGE+SCE+SDGE+IID+LDWP+NCNC | Gross (BTM solar on supply side) | 2024–2045 | IRP optimization target |
 | ReEDS projected | p8–p11 (CA total); p9–p11 = WECC_CA ≈ all CA except PACW | Net load projected under IRA_low scenario | 2020–2050 | Long-run US capacity planning |
 | ReEDS historic | p9–p11 (WECC_CA ≈ BANC+CISO+IID+LDWP+TIDC) | Net load actual observed | 2016–2023 | Ground truth at WECC_CA scale |
-| Substations | PGE+SCE+SDGE distribution | Net-of-BTM at substation meter (revised 2026-07-16; see "Gross vs net load consistency") | Historical monthly | Sub-BA spatial resolution |
+| Substations | PGE+SCE+SDGE distribution | Net-of-BTM at substation meter (see [BTM Solar Treatment by Source](#btm-solar-treatment-by-source)) | Historical monthly | Sub-BA spatial resolution |
 
 ### RESOLVE
 
@@ -1524,6 +1511,19 @@ subtracts it will always read lower than one that does not.
 | **RESOLVE Net Load** (derived in `compare_substation_eia_iepr.py`) | **Net-of-BTM** — RESOLVE's own weather-year `Customer_PV` profiles subtracted from Baseline; see "RESOLVE Net Load" section above | Net system load for peak-hour comparisons against EIA/IEPR; 23-year ensemble captures real day-to-day solar variability | `demand_mw_2024scaled − weather_factor × planned_capacity_2024` using native RESOLVE pmax profiles | ~221 TWh mean across 23 weather years (PGE+SCE+SDGE) |
 | **ReEDS IRA_low projected** (`reeds_ca_load_annual.csv`) | **Projected net load** — ReEDS models BTM solar as a generation resource that reduces system demand in the optimization | Long-run projected system load (net of BTM solar); WECC_CA (p9–p11) ≈ all CA except PACW; CA total (p8–p11) adds ~0.8 TWh/yr | Raw from ReEDS run; CA filtered in `process_reeds.py` | ~288 TWh (2025, CA total p8–p11) growing to ~525 TWh (2050) |
 | **ReEDS historic actual** (`historic_ca_load_annual.csv`) | **Net load** — sourced from BA-level meter data (EIA-930 / FERC Form 714) by the ReEDS hourlize tool | Observed 2016–2023 load; WECC_CA (p9–p11) tracks PUDL CA5 sum, not EIA CISO alone | HDF5 processed by `process_historic_load.py` | ~252–268 TWh (WECC_CA p9–p11, 2016–2023) |
+| **Substations** (PGE/SCE/SDGE clean profiles) | **Net-of-BTM at the substation meter** (revised 2026-07-16; previously documented as gross) | Net demand at the distribution substation | Raw from utility scraped profiles (`substation_load_profiles_clean.csv`) | n/a (percentile envelope, not an annual total) |
+
+**Substation net-of-BTM evidence** (`# VERIFIED: sanity check`, from
+`scripts/load_projection/stochastic_diagnostics.py`): 13,318 cells across 368
+substations have negative `min_load` (reverse flow — only possible when BTM
+export exceeds local load), and the implied scaling factor
+`Σμ_s / CAISO_cell_mean` dips midday (0.66 at h10–11 vs 0.72–0.74 overnight) —
+the signature of the same BTM offset being netted from both sides, whereas
+gross substation data against net CAISO would make the ratio peak midday
+instead. Practical implication: pair substation weights with net targets —
+EIA-930 demand, IEPR `BASELINE_NET_LOAD`, RESOLVE derived net load — not the
+gross variants (`BASELINE_CONSUMPTION`, `demand_mw_2024scaled`); Approach 1
+runs using the gross variants predate this revision.
 
 **Key implication for comparisons:** A direct TWh comparison between RESOLVE Baseline
 and EIA-930 CISO will show an apparent ~17–20 TWh gap in 2024.  The true sources of
