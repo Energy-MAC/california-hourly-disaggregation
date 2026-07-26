@@ -1,0 +1,1032 @@
+name,owner_raw,type,status,latitude,longitude,county,city
+Captive,SCE,SUBSTATION,Operational,35.778748,-119.3050582,Kern County,Delano
+Protein,SCE,SUBSTATION,Operational,36.18543697,-119.33417252,Tulare County,Tulare
+Elcans,SCE,SUBSTATION,Operational,36.34271319,-119.39205915,Tulare County,Visalia
+Kawgen,SCE,SUBSTATION,Operational,36.41544946,-119.00770586,Tulare County,
+Lourich,SCE,SUBSTATION,Operational,36.13139821,-119.32920912,Tulare County,Tulare
+Mariposa - (SCE),SCE,SUBSTATION,Operational,35.80546568,-119.16063204,Tulare County,
+Wheatland - (SCE),SCE,SUBSTATION,Operational,35.91083111,-119.14444858,Tulare County,
+Burro Flats,SCE,SUBSTATION ASSUMED,Operational,34.22980865,-118.71001064,Ventura County,
+Camgen,SCE,SUBSTATION,Operational,34.1618952,-119.04760993,Ventura County,
+Charmin,SCE,SUBSTATION ASSUMED,Operational,34.21052851,-119.14012654,Ventura County,Oxnard
+Etec-Gen,SCE,SUBSTATION,Operational,34.23179239,-118.71034338,Ventura County,
+Getty,SCE,SUBSTATION,Operational,34.32054416,-119.26311664,Ventura County,
+Gonzales - (SCE),SCE,SUBSTATION,Operational,34.22618963,-119.17578487,Ventura County,Oxnard
+Oak Park - (SCE),SCE,SUBSTATION,Operational,34.18618069,-118.7846888,Ventura County,Oak Park
+Oxnard,SCE,SUBSTATION,Operational,34.19716185,-119.17429598,Ventura County,Oxnard
+Potrero - (SCE),SCE,SUBSTATION,Operational,34.16172116,-118.83477271,Ventura County,Thousand Oaks
+Procgen,SCE,SUBSTATION,Operational,34.21146741,-119.14000988,Ventura County,Oxnard
+Rocketdyne,SCE,SUBSTATION,Operational,34.22832553,-118.70441603,Ventura County,
+San Miguel - (SCE),SCE,SUBSTATION,Operational,34.25607296,-119.2418793,Ventura County,San Buenaventura (Ventura)
+Shore,SCE,SUBSTATION ASSUMED,Operational,34.23927125,-119.25887809,Ventura County,San Buenaventura (Ventura)
+Tayshell,SCE,SUBSTATION,Operational,34.31705727,-119.31045304,Ventura County,
+Thrust,SCE,SUBSTATION ASSUMED,Operational,34.22797294,-118.70593183,Ventura County,
+Torrey,SCE,SUBSTATION,Operational,34.38783326,-118.79633397,Ventura County,
+Unioil,SCE,NOT AVAILABLE,Operational,34.20776179,-119.24672643,Ventura County,Oxnard
+Claremont - (SCE),SCE,SUBSTATION,Operational,34.09929638,-117.70738745,Los Angeles County,Claremont
+Fremont - (SCE),SCE,SUBSTATION,Operational,33.89465325,-118.26449453,Los Angeles County,West Rancho Dominguez
+Portal,SCE,SUBSTATION,Operational,37.25698603,-119.15910502,Fresno County,
+Haiwee - SCE South,SCE,SUBSTATION,Operational,36.10988657,-117.95644323,Inyo County,
+Lone Pine,SCE,SUBSTATION,Operational,36.60070565,-118.07248848,Inyo County,Lone Pine
+Morgan,SCE,SUBSTATION,Operational,37.35975529,-118.70188193,Inyo County,
+Roberts,SCE,SUBSTATION,Operational,37.40069501,-118.35052392,Inyo County,
+Lebec - (SCE),SCE,SUBSTATION,Operational,34.95490926,-118.84423786,Kern County,
+Ammonia,SCE,SUBSTATION,Operational,33.922498,-117.84724778,Orange County,"Los Angeles--Long Beach--Anaheim, CA"
+Apollo,SCE,SUBSTATION,Operational,33.75251894,-118.03716036,Orange County,Huntington Beach
+Borrego - (SCE),SCE,SUBSTATION,Operational,33.59766017,-117.74899793,Orange County,Laguna Beach
+Burris Pit,SCE,SUBSTATION,Operational,33.81966995,-117.87141581,Orange County,Anaheim
+Cabrillo - (SCE),SCE,SUBSTATION,Operational,33.67186806,-117.84757924,Orange County,Irvine
+Camden - (SCE),SCE,SUBSTATION,Operational,33.71317892,-117.88360693,Orange County,Santa Ana
+Canyon - (SCE),SCE,SUBSTATION,Operational,33.8714507,-117.74696846,Orange County,Anaheim
+Chip,SCE,SUBSTATION,Operational,33.66059753,-117.86061766,Orange County,Newport Beach
+Coygen - SCE South,SCE,SUBSTATION,Operational,33.61303719,-117.8219149,Orange County,Newport Beach
+Estrella - (SCE),SCE,SUBSTATION,Operational,33.68750071,-117.82854349,Orange County,Irvine
+Fairview - (SCE),SCE,SUBSTATION,Operational,33.69356916,-117.86760489,Orange County,Santa Ana
+Johnair,SCE,SUBSTATION,Operational,33.67560634,-117.86376802,Orange County,"Los Angeles--Long Beach--Anaheim, CA"
+Lafayette - (SCE),SCE,SUBSTATION,Operational,33.63535716,-117.93563989,Orange County,Costa Mesa
+Lambert - (SCE),SCE,SUBSTATION,Operational,33.92281389,-117.84722428,Orange County,"Los Angeles--Long Beach--Anaheim, CA"
+Limestone - (SCE),SCE,SUBSTATION,Operational,33.65020636,-117.68855481,Orange County,Lake Forest
+Norseal,SCE,SUBSTATION,Operational,33.75710994,-118.0890668,Orange County,Seal Beach
+Norweld,SCE,SUBSTATION,Operational,33.92081251,-117.91983095,Orange County,Brea
+Kiwi,SCE,SUBSTATION,Operational,33.68962626,-117.94502342,Orange County,Fountain Valley
+Orcogen,SCE,SUBSTATION,Operational,33.6439924,-117.95554901,Orange County,Huntington Beach
+Paper,SCE,SUBSTATION,Operational,33.86093241,-117.89272401,Orange County,Fullerton
+Recovery ,SCE,SUBSTATION,Operational,33.67357758,-118.02122081,Orange County,Huntington Beach
+Smithtool,SCE,SUBSTATION,Operational,33.6878504,-117.84902712,Orange County,Irvine
+Soco,SCE,SUBSTATION ASSUMED,Operational,33.67374115,-118.02151156,Orange County,Huntington Beach
+Steelcase,SCE,SUBSTATION ASSUMED,Operational,33.71248628,-117.82877819,Orange County,Tustin
+Sullivan - SCE,SCE,SUBSTATION,Operational,33.74480019,-117.90191856,Orange County,Santa Ana
+Sunnyhills,SCE,SUBSTATION,Operational,33.88288955,-117.95736482,Orange County,Fullerton
+Yorba Linda - (SCE),SCE,SUBSTATION,Operational,33.88891615,-117.7881359,Orange County,Yorba Linda
+Corona - (SCE),SCE,SUBSTATION,Operational,33.88439535,-117.57187567,Riverside County,Corona
+Crestmore,SCE,SUBSTATION,Operational,34.02933197,-117.38771237,Riverside County,Jurupa Valley
+Databank,SCE,SUBSTATION,Operational,33.85543349,-117.53928344,Riverside County,Corona
+Delgen,SCE,SUBSTATION,Operational,33.89242466,-117.58010599,Riverside County,Corona
+Foil,SCE,SUBSTATION,Operational,33.92671807,-116.9287366,Riverside County,Banning
+Garnet - SCE,SCE,SUBSTATION,Operational,33.90147841,-116.54352145,Riverside County,Palm Springs
+Jefferson - (SCE),SCE,SUBSTATION,Operational,33.85774589,-117.58829217,Riverside County,Corona
+Maxwell - (SCE),SCE,SUBSTATION,Operational,33.94716117,-117.24330157,Riverside County,Moreno Valley
+Moraga - (SCE),SCE,SUBSTATION,Operational,33.50377015,-117.1404047,Riverside County,Temecula
+Santa Rosa - (SCE),SCE,SUBSTATION,Operational,33.74781175,-116.39207982,Riverside County,Rancho Mirage
+Tanker,SCE,SUBSTATION,Operational,33.90876736,-117.25976581,Riverside County,March ARB
+Blythe-Bucks,SCE,SUBSTATION,Operational,33.61612028,-114.68458233,Riverside County,Blythe
+Alamo,SCE,SUBSTATION,Operational,34.81550064,-118.68611545,Los Angeles County,
+Borel,SCE,SUBSTATION,Operational,35.58810333,-118.5247543,Kern County,
+Breeze,SCE,SUBSTATION,Operational,35.1238891,-118.37410903,Kern County,
+Cal Cement,SCE,SUBSTATION,Operational,35.03026073,-118.31080978,Kern County,
+Delano - (SCE),SCE,SUBSTATION,Operational,35.77550894,-119.24247363,Kern County,Delano
+Greenhorn - (SCE),SCE,SUBSTATION,Operational,35.7383667,-118.55638974,Kern County,Alta Sierra
+Lakegen,SCE,SUBSTATION,Operational,35.64439849,-118.48184223,Kern County,Lake Isabella
+Pandol,SCE,SUBSTATION,Operational,35.71894598,-119.23335764,Kern County,
+Rocket Test,SCE,SUBSTATION,Operational,34.93048895,-117.69806605,Kern County,
+Southbase,SCE,SUBSTATION,Operational,34.87995337,-117.89627113,Kern County,Edwards AFB
+Westpac,SCE,SUBSTATION,Operational,34.81940896,-118.75105433,Kern County,
+Aerojet,SCE,SUBSTATION,Operational,34.12514936,-117.92495434,Los Angeles County,Azusa
+Airchem,SCE,SUBSTATION,Operational,33.90160916,-118.39161633,Los Angeles County,Manhattan Beach
+Alhambra - (SCE),SCE,SUBSTATION,Operational,34.0912605,-118.14907918,Los Angeles County,Alhambra
+Amco,SCE,SUBSTATION,Operational,33.8614303,-118.32171564,Los Angeles County,Torrance
+Anita - (SCE),SCE,SUBSTATION,Operational,34.105624,-118.03844492,Los Angeles County,Arcadia
+Appgen,SCE,SUBSTATION,Operational,34.38185626,-118.50133056,Los Angeles County,Santa Clarita
+Astro,SCE,SUBSTATION,Operational,33.81919745,-118.16435193,Los Angeles County,Long Beach
+Belmont - (SCE),SCE,SUBSTATION,Operational,33.7813257,-118.1498075,Los Angeles County,Long Beach
+Azusa,SCE,SUBSTATION,Operational,34.13604098,-117.91093392,Los Angeles County,Azusa
+Beejay,SCE,SUBSTATION,Operational,34.00810089,-118.22751727,Los Angeles County,Vernon
+Boost,SCE,SUBSTATION,Operational,33.83038173,-118.14055591,Los Angeles County,Long Beach
+Brew,SCE,SUBSTATION,Operational,34.12716721,-117.93987737,Los Angeles County,Irwindale
+Artesia,SCE,SUBSTATION,Operational,33.8600744,-118.08429643,Los Angeles County,Artesia
+Brighton - (SCE),SCE,SUBSTATION,Operational,33.90251896,-118.31185604,Los Angeles County,Gardena
+Broadway - SCE,SCE,SUBSTATION,Operational,33.76696923,-118.15203855,Los Angeles County,Long Beach
+Cameron - (SCE),SCE,SUBSTATION,Operational,33.81936262,-118.21697478,Los Angeles County,Long Beach
+Carbogen,SCE,SUBSTATION,Operational,33.77486437,-118.22976582,Los Angeles County,Long Beach
+Certified,SCE,SUBSTATION,Operational,33.81660339,-118.17166605,Los Angeles County,Long Beach
+Dock,SCE,SUBSTATION,Operational,33.7594092,-118.23785068,Los Angeles County,Long Beach
+Cherry - (SCE),SCE,SUBSTATION,Operational,33.77860964,-118.183281,Los Angeles County,Long Beach
+Chevgen,SCE,SUBSTATION,Operational,33.91259813,-118.41414312,Los Angeles County,El Segundo
+Clark - (SCE),SCE,SUBSTATION,Operational,33.79574394,-118.10713272,Los Angeles County,Long Beach
+College - (SCE),SCE,SUBSTATION,Operational,33.78409525,-118.10850813,Los Angeles County,Long Beach
+Commodore,SCE,SUBSTATION,Operational,33.75681507,-118.22032117,Los Angeles County,Long Beach
+Corners,SCE,SUBSTATION,Operational,33.86341378,-118.16532373,Los Angeles County,Long Beach
+Cortez - (SCE),SCE,SUBSTATION,Operational,34.09257531,-117.87957253,Los Angeles County,Covina
+Cosmic,SCE,SUBSTATION,Operational,33.92406351,-118.31874712,Los Angeles County,Hawthorne
+Cryco,SCE,SUBSTATION,Operational,34.05754855,-117.98916008,Los Angeles County,Industry
+Domhill,SCE,SUBSTATION,Operational,33.86247132,-118.22301915,Los Angeles County,"Los Angeles--Long Beach--Anaheim, CA"
+Douglas - (SCE),SCE,SUBSTATION,Operational,33.92227856,-118.3826595,Los Angeles County,El Segundo
+Dougoil,SCE,SUBSTATION,Operational,33.89897212,-118.14425619,Los Angeles County,Paramount
+Federalgen,SCE,SUBSTATION,Operational,33.98199903,-118.16743394,Los Angeles County,Commerce
+Felton - SCE,SCE,SUBSTATION,Operational,33.91579589,-118.36204648,Los Angeles County,Del Aire
+Polypro,SCE,SUBSTATION,Operational,33.82142772,-118.23328633,Los Angeles County,Carson
+MWD Foothill,SCE,SUBSTATION,Operational,34.514559,-118.60828494,Los Angeles County,
+Fruitland - (SCE),SCE,SUBSTATION,Operational,33.99599105,-118.22669179,Los Angeles County,Vernon
+Fuel,SCE,SUBSTATION,Operational,33.76457244,-118.22647038,Los Angeles County,Long Beach
+Galaxy,SCE,SUBSTATION,Operational,33.89928344,-118.38287213,Los Angeles County,Manhattan Beach
+Garfield - (SCE),SCE,SUBSTATION,Operational,34.12495896,-118.14984024,Los Angeles County,Pasadena
+Gatx,SCE,SUBSTATION,Operational,33.80737947,-118.23317722,Los Angeles County,Carson
+Ductile,SCE,SUBSTATION,Operational,34.08149732,-118.0418125,Los Angeles County,El Monte
+Helijet,SCE,SUBSTATION,Operational,34.61192389,-118.11385172,Los Angeles County,Palmdale
+Hillgen - SCE North,SCE,SUBSTATION ASSUMED,Operational,34.02427419,-118.02500963,Los Angeles County,
+Howard - (SCE),SCE,SUBSTATION,Operational,33.92261431,-118.30715705,Los Angeles County,West Athens
+Hughesair,SCE,SUBSTATION,Operational,33.9117138,-118.39178854,Los Angeles County,El Segundo
+Hughtron,SCE,SUBSTATION,Operational,33.81046493,-118.34047851,Los Angeles County,Torrance
+Unknown - 618,SCE,RISER,Operational,34.03341188,-117.96770139,Los Angeles County,Industry
+Injection,SCE,SUBSTATION,Operational,33.80133691,-118.1593915,Los Angeles County,Signal Hill
+Jet,SCE,SUBSTATION,Operational,34.21350458,-118.16795567,Los Angeles County,Pasadena
+Jose,SCE,SUBSTATION,Operational,34.03709845,-118.02553252,Los Angeles County,"Los Angeles--Long Beach--Anaheim, CA"
+Kinetic - (SCE),SCE,SUBSTATION ASSUMED,Operational,34.01496981,-118.20356575,Los Angeles County,Los Angeles
+Lakewood - (SCE),SCE,SUBSTATION,Operational,33.83023922,-118.12464081,Los Angeles County,Long Beach
+Liquid,SCE,SUBSTATION,Operational,34.11184981,-117.93184466,Los Angeles County,Irwindale
+Live Oak - (SCE),SCE,SUBSTATION,Operational,34.12116109,-117.73188289,Los Angeles County,Claremont
+Losulfur,SCE,SUBSTATION,Operational,33.93180036,-118.40448723,Los Angeles County,Los Angeles
+Macneil,SCE,SUBSTATION,Operational,34.17218819,-118.34715077,Los Angeles County,Burbank
+Main Oil,SCE,SUBSTATION ASSUMED,Operational,33.76399405,-118.22759189,Los Angeles County,Long Beach
+Merced - (SCE),SCE,SUBSTATION,Operational,34.04972041,-117.90719427,Los Angeles County,West Covina
+Mobgen,SCE,SUBSTATION ASSUMED,Operational,33.85347599,-118.3355945,Los Angeles County,Torrance
+Mobil Oil,SCE,SUBSTATION,Operational,33.85706902,-118.33294417,Los Angeles County,Torrance
+Murphy - (SCE),SCE,SUBSTATION,Operational,33.95442114,-118.04309384,Los Angeles County,South Whittier
+Narrows - (SCE),SCE,SUBSTATION,Operational,34.00500122,-118.06682336,Los Angeles County,Pico Rivera
+Navy-1,SCE,SUBSTATION,Operational,33.76394719,-118.2191798,Los Angeles County,Long Beach
+Newhall - (SCE),SCE,SUBSTATION,Operational,34.37920812,-118.55915775,Los Angeles County,Santa Clarita
+Oasis - (SCE),SCE,SUBSTATION,Operational,34.64670742,-118.09485176,Los Angeles County,Palmdale
+Oso,SCE,SUBSTATION,Operational,34.80843954,-118.71927933,Los Angeles County,
+Owill - (SCE),SCE,SUBSTATION ASSUMED,Operational,34.05001746,-118.23126281,Los Angeles County,Los Angeles
+Package,SCE,SUBSTATION,Operational,34.03454196,-117.97674566,Los Angeles County,Industry
+Pacline,SCE,SUBSTATION,Operational,33.84602377,-118.23386091,Los Angeles County,Carson
+Palogen,SCE,SUBSTATION,Operational,33.79328527,-118.34922086,Los Angeles County,Rolling Hills Estates
+Pearblossom,SCE,SUBSTATION,Operational,34.50906467,-117.91966996,Los Angeles County,
+Pico - (SCE),SCE,SUBSTATION,Operational,33.76508498,-118.20664459,Los Angeles County,Long Beach
+Pioneer - (SCE),SCE,SUBSTATION,Operational,33.91557093,-118.08113677,Los Angeles County,Norwalk
+Pitchgen,SCE,SUBSTATION,Operational,34.46358936,-118.59418136,Los Angeles County,"Santa Clarita, CA"
+Polaris,SCE,SUBSTATION,Operational,33.9286993,-118.38970688,Los Angeles County,El Segundo
+Tidelands,SCE,SUBSTATION,Operational,33.76482628,-118.20781555,Los Angeles County,Long Beach
+Powerine,SCE,SUBSTATION,Operational,33.93498621,-118.06773466,Los Angeles County,Santa Fe Springs
+Procal,SCE,SUBSTATION,Operational,33.95856022,-118.06559775,Los Angeles County,Santa Fe Springs
+Quartz Hill - (SCE),SCE,SUBSTATION,Operational,34.65953628,-118.22827808,Los Angeles County,Lancaster
+Ramona - SCE,SCE,SUBSTATION,Operational,34.06991432,-118.13001595,Los Angeles County,Alhambra
+Randolph - SCE,SCE,SUBSTATION,Operational,33.9827099,-118.20530381,Los Angeles County,Huntington Park
+Refinery,SCE,SUBSTATION,Operational,33.83959125,-118.244275,Los Angeles County,Carson
+Refuse,SCE,SUBSTATION,Operational,33.99456097,-118.15276725,Los Angeles County,Commerce
+Reno,SCE,SUBSTATION,Operational,34.03444261,-118.02417808,Los Angeles County,"Los Angeles--Long Beach--Anaheim, CA"
+Repro,SCE,SUBSTATION,Operational,33.90338106,-118.37944417,Los Angeles County,El Segundo
+Revital,SCE,SUBSTATION,Operational,33.86302998,-118.16191974,Los Angeles County,Long Beach
+Rockair,SCE,SUBSTATION,Operational,34.61032058,-118.07325666,Los Angeles County,Palmdale
+Rosecrans,SCE,SUBSTATION,Operational,33.90314921,-118.3978325,Los Angeles County,El Segundo
+Sanitreat,SCE,SUBSTATION,Operational,33.80703334,-118.29895985,Los Angeles County,Los Angeles
+Serfgen,SCE,SUBSTATION,Operational,33.75936212,-118.24114024,Los Angeles County,Long Beach
+Shellwatt,SCE,SUBSTATION,Operational,33.80757102,-118.24398655,Los Angeles County,Carson
+Simpson,SCE,SUBSTATION,Operational,34.0595047,-117.77385425,Los Angeles County,Pomona
+Sopipe,SCE,SUBSTATION,Operational,34.02223349,-117.83706322,Los Angeles County,Industry
+San Dimas Power,SCE,SUBSTATION,Operational,34.12748407,-117.79546015,Los Angeles County,San Dimas
+Space,SCE,SUBSTATION,Operational,33.8914045,-118.37499839,Los Angeles County,Redondo Beach
+Sponge,SCE,SUBSTATION,Operational,33.9808431,-118.11124284,Los Angeles County,Pico Rivera
+Universal Studios A,SCE,SUBSTATION,Operational,34.14299628,-118.35912282,Los Angeles County,"Los Angeles--Long Beach--Anaheim, CA"
+Sunnyside - (SCE),SCE,SUBSTATION,Operational,33.85317979,-118.16705517,Los Angeles County,Lakewood
+Rindge,SCE,SUBSTATION,Operational,34.03955517,-118.69793875,Los Angeles County,Malibu
+Tengen,SCE,SUBSTATION,Operational,34.38417094,-118.4955185,Los Angeles County,Santa Clarita
+Thermal - (SCE),SCE,SUBSTATION,Operational,33.91600542,-118.40958997,Los Angeles County,El Segundo
+Thums A,SCE,SUBSTATION ASSUMED,Operational,33.75931711,-118.18154068,Los Angeles County,Long Beach
+Thums B,SCE,SUBSTATION ASSUMED,Operational,33.75275487,-118.15950914,Los Angeles County,Long Beach
+Thums C,SCE,SUBSTATION ASSUMED,Operational,33.73976723,-118.1388798,Los Angeles County,Long Beach
+Thums D,SCE,SUBSTATION ASSUMED,Operational,33.74132204,-118.16257112,Los Angeles County,Long Beach
+Topaz - SCE,SCE,SUBSTATION,Operational,33.82780726,-118.37656545,Los Angeles County,Redondo Beach
+Tortoise,SCE,SUBSTATION,Operational,34.64068043,-118.06587488,Los Angeles County,Palmdale
+Toyota,SCE,SUBSTATION,Operational,33.87279977,-118.16032168,Los Angeles County,Long Beach
+Trisonic,SCE,SUBSTATION,Operational,33.92131052,-118.3855717,Los Angeles County,El Segundo
+Linden - (SCE),SCE,SUBSTATION,Operational,33.85914436,-118.18557682,Los Angeles County,Long Beach
+Universal Studios (Studio Master),SCE,SUBSTATION,Operational,34.14297399,-118.35738435,Los Angeles County,"Los Angeles--Long Beach--Anaheim, CA"
+Venice,SCE,SUBSTATION,Operational,33.99033398,-118.42093029,Los Angeles County,Los Angeles
+Air Products - (SCE),SCE,SUBSTATION,Operational,33.81250703,-118.23205217,Los Angeles County,Carson
+Wabash - (SCE),SCE,SUBSTATION,Operational,34.04512655,-118.18641176,Los Angeles County,East Los Angeles
+Webco,SCE,SUBSTATION ASSUMED,Operational,33.88361764,-118.16501429,Los Angeles County,Paramount
+Westex,SCE,SUBSTATION,Operational,33.81138214,-118.1759198,Los Angeles County,Signal Hill
+Westhill,SCE,SUBSTATION,Operational,33.90928932,-118.42034007,Los Angeles County,El Segundo
+Nietos,SCE,SUBSTATION,Operational,33.93890137,-118.06098896,Los Angeles County,Santa Fe Springs
+Unimed,SCE,SUBSTATION,Operational,34.05099661,-117.26265662,San Bernardino County,Loma Linda
+Ameron,SCE,SUBSTATION,Operational,34.09299189,-117.53334367,San Bernardino County,Rancho Cucamonga
+Arrowhead - (SCE),SCE,SUBSTATION,Operational,34.28345907,-117.21625397,San Bernardino County,Lake Arrowhead
+Brockway Glass,SCE,SUBSTATION ASSUMED,Operational,34.03557519,-117.73120788,Los Angeles County,Pomona
+Capsule,SCE,SUBSTATION,Operational,34.08958673,-117.26103443,San Bernardino County,San Bernardino
+Cimgen,SCE,SUBSTATION,Operational,33.98971477,-117.68861186,San Bernardino County,Chino
+Colton (Century),SCE,SUBSTATION,Operational,34.05897352,-117.31448112,San Bernardino County,Colton
+Colton Cement,SCE,SUBSTATION,Operational,34.05448045,-117.34126407,San Bernardino County,"Riverside--San Bernardino, CA"
+Cottonwood - (SCE),SCE,SUBSTATION,Operational,34.37254868,-116.8612522,San Bernardino County,
+Devil Canyon,SCE,SUBSTATION,Operational,34.20602292,-117.33510731,San Bernardino County,San Bernardino
+Furnace,SCE,SUBSTATION,Operational,34.08377644,-117.49259647,San Bernardino County,"Riverside--San Bernardino, CA"
+Galvanizing,SCE,SUBSTATION,Operational,34.0799501,-117.49343894,San Bernardino County,"Riverside--San Bernardino, CA"
+Hygen,SCE,SUBSTATION,Operational,34.0629703,-117.52903731,San Bernardino County,Ontario
+Inland,SCE,SUBSTATION,Operational,34.04389407,-117.54132722,San Bernardino County,Ontario
+Linde - (SCE),SCE,SUBSTATION,Operational,34.06666312,-117.52155373,San Bernardino County,Fontana
+Mcgen,SCE,SUBSTATION,Operational,35.7651795,-117.38640097,San Bernardino County,Searles Valley
+Orange Products,SCE,SUBSTATION,Operational,34.05625912,-117.64358462,San Bernardino County,Ontario
+Permanente - (SCE),SCE,SUBSTATION,Operational,34.35455407,-116.85428835,San Bernardino County,
+Pipe,SCE,SUBSTATION,Operational,34.09292823,-117.53131212,San Bernardino County,Rancho Cucamonga
+Reduction,SCE,SUBSTATION,Operational,34.10092279,-117.53050002,San Bernardino County,Rancho Cucamonga
+Rolling,SCE,SUBSTATION,Operational,34.0828951,-117.50604195,San Bernardino County,"Riverside--San Bernardino, CA"
+Soquel - (SCE),SCE,SUBSTATION,Operational,33.96402847,-117.69538516,San Bernardino County,Chino Hills
+Stoddard - (SCE),SCE,SUBSTATION,Operational,34.10042547,-117.29268935,San Bernardino County,San Bernardino
+Strip,SCE,SUBSTATION,Operational,34.07700279,-117.5007358,San Bernardino County,"Riverside--San Bernardino, CA"
+Tiefort,SCE,SUBSTATION,Operational,35.22290052,-116.73316571,San Bernardino County,
+Desal,SCE,SUBSTATION,Operational,34.41838779,-119.68578116,Santa Barbara County,Santa Barbara
+Ellwood,SCE,TAP,Operational,34.43113252,-119.90009043,Santa Barbara County,Goleta
+San Marcos - (SCE),SCE,SUBSTATION,Operational,34.45196304,-119.7613857,Santa Barbara County,Eastern Goleta Valley
+Aventura P.T.,SCE,SUBSTATION ASSUMED,Operational,33.93260018,-116.50433854,Riverside County,Desert Hot Springs
+Transwind,SCE,SUBSTATION,Operational,33.91373159,-116.7196122,Riverside County,
+Hugo,SCE,SUBSTATION,Operational,33.90195998,-116.55578418,Riverside County,Palm Springs
+Leatherneck,SCE,SUBSTATION,Operational,34.24483167,-116.0977269,San Bernardino County,Twentynine Palms
+Unknown - 3284,SCE Metro,RISER,Operational,33.88820214,-117.8316699,Orange County,Yorba Linda
+Unknown - 3285,SCE Metro,SUBSTATION,Operational,33.93751815,-118.16888684,Los Angeles County,South Gate
+Unknown - 3286,SCE Metro,NOT AVAILABLE,Operational,33.96644517,-118.19442231,Los Angeles County,Cudahy
+Unknown - 3287,SCE Metro,RISER,Operational,33.95474416,-118.41368079,Los Angeles County,Los Angeles
+Unknown - 3290,SCE Metro,RISER,Operational,34.18479413,-118.34388579,Los Angeles County,Burbank
+Unknown - 3293,SCE Northern,SUBSTATION,Operational,35.02294251,-118.2821811,Kern County,
+Unknown - 3298,SCE Metro,SUBSTATION,Operational,34.12103511,-117.79416622,Los Angeles County,San Dimas
+Unknown - 3299,SCE Metro,SUBSTATION,Operational,33.94152715,-118.13863962,Los Angeles County,Downey
+Unknown - 3301,SCE Metro,RISER,Operational,33.85919014,-117.7883899,Orange County,Anaheim
+Unknown - 3302,SCE Metro,RISER,Operational,33.76369115,-117.8560679,Orange County,Santa Ana
+Unknown - 3308,SCE Northern,SUBSTATION,Operational,35.04315041,-118.24919541,Kern County,
+Unknown - 3309,SCE Metro,SUBSTATION,Operational,33.98660054,-118.16208093,Los Angeles County,Commerce
+Deadend300291,SCE Metro,DEAD END,Operational,33.88771515,-118.03887686,Los Angeles County,Cerritos
+Unknown - 3314,SCE Northern,SUBSTATION,Operational,34.83787549,-118.47520109,Kern County,
+Unknown - 3316,SCE Metro,RISER,Operational,33.99644012,-117.69062191,San Bernardino County,Chino
+Unknown - 3318,SCE Metro,RISER,Operational,33.92567016,-118.20005683,Los Angeles County,Lynwood
+Unknown - 3323,SCE Northern,SUBSTATION,Operational,34.67429722,-118.43955256,Los Angeles County,Lake Hughes
+Unknown - 3325,SCE Metro,NOT AVAILABLE,Operational,33.97851415,-118.14880684,Los Angeles County,Commerce
+Unknown - 3326,SCE Eastern,NOT AVAILABLE,Operational,33.90277855,-116.55401261,Riverside County,Palm Springs
+Unknown - 3329,SCE Northern,SUBSTATION,Operational,34.27161097,-118.48519003,Los Angeles County,Los Angeles
+Unknown - 3331,SCE Metro,RISER,Operational,33.85117525,-117.88064085,Orange County,Anaheim
+Unknown - 3332,SCE Northern,SUBSTATION,Operational,35.06319969,-118.25071794,Kern County,Mojave
+Unknown - 3333,SCE Metro,SUBSTATION,Operational,34.25749142,-117.58104452,San Bernardino County,
+Unknown - 3334,SCE Eastern,RISER,Operational,33.77254611,-116.98065405,Riverside County,Hemet
+Unknown - 3338,SCE Metro,RISER,Operational,33.72997517,-118.00058088,Orange County,Huntington Beach
+Unknown - 3339,SCE Metro,RISER,Operational,33.82741272,-117.92874606,Orange County,Anaheim
+Unknown - 3340,SCE Metro,DEAD END,Operational,33.97689614,-118.10193184,Los Angeles County,Pico Rivera
+Unknown - 3341,SCE Metro,SUBSTATION,Operational,33.9322917,-117.84097545,Orange County,
+Unknown - 3343,SCE Metro,RISER,Operational,33.81780201,-117.94440069,Orange County,Anaheim
+Lakeview - (SCE Eastern),SCE Eastern,SUBSTATION,Operational,33.82573501,-117.13399148,Riverside County,Lakeview
+Arrowhead - (SCE Eastern),SCE Eastern,SUBSTATION,Operational,33.91206405,-116.75220158,Riverside County,
+Unknown - 3350,SCE Metro,SUBSTATION,Operational,33.68671417,-118.00663041,Orange County,Huntington Beach
+Unknown - 3351,SCE Metro,RISER,Operational,33.88046015,-118.04792086,Los Angeles County,Cerritos
+Unknown - 3352,SCE NOL,SUBSTATION,Operational,34.96142153,-117.8959021,Kern County,
+Unknown - 3353,SCE Metro,RISER,Operational,34.02619212,-117.7468819,Los Angeles County,Pomona
+Unknown - 3354,SCE Eastern,RISER,Operational,34.10097076,-117.27930479,San Bernardino County,San Bernardino
+Olive - (SCE Northern),SCE Northern,SUBSTATION,Operational,34.31271761,-118.47995366,Los Angeles County,Los Angeles
+Unknown - 3359,SCE Metro,RISER,Operational,33.94463497,-118.18849646,Los Angeles County,South Gate
+Unknown - 3360,SCE Eastern,SUBSTATION,Operational,33.93288656,-116.58093417,Riverside County,
+Unknown - 3364,SCE Northern,SUBSTATION,Operational,35.05370275,-118.27042052,Kern County,
+Unknown - 3366,SCE Eastern,SUBSTATION,Operational,33.69958559,-116.24288896,Riverside County,Indio
+Unknown - 3369,SCE Metro,SUBSTATION,Operational,34.08892411,-117.64978032,San Bernardino County,Upland
+Unknown - 3370,SCE Metro,SUBSTATION,Operational,33.60770957,-117.88483919,Orange County,Newport Beach
+Unknown - 3371,SCE Metro,RISER,Operational,34.01892067,-118.40726881,Los Angeles County,Los Angeles
+Unknown - 3374,SCE Northern,NOT AVAILABLE,Operational,34.20581151,-119.12437447,Ventura County,
+Unknown - 3375,SCE Metro,SUBSTATION,Operational,33.84708758,-118.30180709,Los Angeles County,Los Angeles
+Unknown - 3379,SCE Northern,SUBSTATION,Operational,34.94065168,-118.33936351,Kern County,
+Unknown - 3380,SCE Metro,RISER,Operational,34.06186411,-117.68950491,San Bernardino County,Montclair
+Unknown - 3381,SCE Northern,SUBSTATION,Operational,34.83762565,-118.47634323,Kern County,
+Unknown - 3382,SCE Metro,NOT AVAILABLE,Operational,33.8129336,-117.8739123,Orange County,Anaheim
+Unknown - 3388,SCE Metro,SUBSTATION,Operational,33.90359416,-118.15154701,Los Angeles County,Paramount
+Unknown - 3389,SCE Eastern,SUBSTATION,Operational,34.23614765,-117.5220467,San Bernardino County,Lytle Creek
+Unknown - 3390,SCE Metro,RISER,Operational,34.02990013,-117.91198887,Los Angeles County,West Covina
+Unknown - 3391,SCE Eastern,SUBSTATION,Operational,33.28706302,-116.34953819,San Diego County,
+Unknown - 3393,SCE NOL,SUBSTATION,Operational,34.86045355,-116.85492692,San Bernardino County,
+Unknown - 3394,SCE Eastern,NOT AVAILABLE,Operational,33.65677374,-116.14398307,Riverside County,Coachella
+Unknown - 3395,SCE Eastern,RISER,Operational,34.08453429,-117.32700061,San Bernardino County,Colton
+Towne,SCE Metro,SUBSTATION,Operational,34.17940847,-118.31086789,Los Angeles County,Burbank
+Unknown - 3402,SCE Metro,RISER,Operational,33.91322592,-117.82624286,Orange County,Yorba Linda
+Unknown - 3405,SCE Metro,SUBSTATION,Operational,34.25926839,-118.32129087,Los Angeles County,Los Angeles
+Unknown - 3406,SCE NOL,SUBSTATION,Operational,34.56623679,-117.31651617,San Bernardino County,Victorville
+Unknown - 3407,SCE Metro,RISER,Operational,33.65223117,-117.9359339,Orange County,Costa Mesa
+Unknown - 3408,SCE Metro,DEAD END,Operational,33.95914997,-118.22474742,Los Angeles County,South Gate
+Unknown - 3409,SCE Northern,SUBSTATION,Operational,35.01715716,-118.18482254,Kern County,Mojave
+Unknown - 3411,SCE Metro,RISER,Operational,34.10685512,-117.92915986,Los Angeles County,Irwindale
+Unknown - 3412,SCE Northern,SUBSTATION,Operational,34.82902106,-118.51141702,Kern County,
+Wilmington (Station C) Tap,SCE Metro,TAP,Operational,33.8471208,-118.28388588,Los Angeles County,Carson
+Tanker Tap,SCE Eastern,TAP,Operational,33.90632151,-117.24345339,Riverside County,Moreno Valley
+Unknown - 3422,SCE Metro,TAP,Operational,34.12234512,-117.97745685,Los Angeles County,Irwindale
+Unknown - 3424,SCE Eastern,TAP,Operational,34.05162709,-117.34057697,San Bernardino County,Colton
+Unknown - 3425,SCE Northern,TAP,Operational,34.80800829,-118.72182804,Los Angeles County,
+Unknown - 3426,SCE Northern,TAP,Operational,34.71891068,-118.17910595,Los Angeles County,Lancaster
+Unknown - 3430,SCE Eastern,TAP,Operational,34.08623709,-117.28187797,San Bernardino County,San Bernardino
+Unknown - 3431,SCE Northern,TAP,Operational,34.45929366,-119.88014637,Santa Barbara County,
+Unknown - 3432,SCE Metro,TAP,Operational,33.8642388,-118.22201777,Los Angeles County,"Los Angeles--Long Beach--Anaheim, CA"
+Unknown - 3436,SCE Northern,TAP,Operational,34.76501148,-118.7224481,Los Angeles County,
+Unknown - 3438,SCE Northern,TAP,Operational,35.83387121,-119.25011094,Tulare County,
+Unknown - 3444,SCE Northern,TAP,Operational,34.18220992,-119.11807638,Ventura County,
+Unknown - 3449,SCE Northern,TAP,Operational,36.12342626,-119.30402132,Tulare County,
+Unknown - 3453,SCE Metro,TAP,Operational,33.80428765,-118.15863698,Los Angeles County,Long Beach
+Unknown - 3455,SCE Northern,TAP,Operational,34.27909143,-118.72194469,Ventura County,Simi Valley
+Unknown - 3458,SCE Eastern,TAP,Operational,33.92942589,-116.68049354,Riverside County,Whitewater
+SS3145 Eagle Rock Tap 2,SCE Metro,TAP,Operational,34.10507968,-118.23794836,Los Angeles County,Los Angeles
+Unknown - 3464,SCE Metro,TAP,Operational,33.92525515,-118.02450293,Los Angeles County,South Whittier
+Unknown - 3465,SCE Eastern,TAP,Operational,34.05153842,-117.34042649,San Bernardino County,Colton
+Unknown - 3466,SCE Eastern,TAP,Operational,34.02655908,-117.10314612,San Bernardino County,Yucaipa
+Maxwell Tap,SCE Eastern,TAP,Operational,33.94677405,-117.26161104,Riverside County,Moreno Valley
+Unknown - 3472,SCE Eastern,TAP,Operational,33.52523801,-116.13893085,Riverside County,Oasis
+Unknown - 3476,SCE Metro,TAP,Operational,34.04247414,-118.18695262,Los Angeles County,East Los Angeles
+Mayberry Tap,SCE Eastern,TAP,Operational,33.7804284,-116.98903735,Riverside County,San Jacinto
+Glendale South Tap 1,SCE Metro,TAP,Operational,34.10464819,-118.23852928,Los Angeles County,Los Angeles
+Unknown - 3487,SCE Metro,TAP,Operational,33.7600042,-117.83391931,Orange County,Tustin
+Unknown - 3489,SCE Metro,TAP,Operational,33.70139717,-117.97804827,Orange County,Fountain Valley
+Unknown - 3495,SCE NOL,TAP,Operational,34.25778673,-116.86622263,San Bernardino County,Big Bear Lake
+Unknown - 3496,SCE Metro,TAP,Operational,34.09221079,-117.68643653,San Bernardino County,Montclair
+Unknown - 3497,SCE Northern,TAP,Operational,34.20172413,-119.14204385,Ventura County,Oxnard
+Unknown - 3498,SCE Metro,TAP,Operational,34.00255613,-117.88735335,Los Angeles County,Industry
+Unknown - 3507,SCE NOL,TAP,Operational,35.018033,-117.56601385,San Bernardino County,
+Unknown - 3516,SCE Metro,TAP,Operational,33.97250715,-118.12099284,Los Angeles County,Downey
+Unknown - 3521,SCE Metro,TAP,Operational,33.86171817,-118.28447782,Los Angeles County,Los Angeles
+Unknown - 3525,SCE Eastern,TAP,Operational,33.15471511,-115.64027633,Imperial County,
+Unknown - 3526,SCE Northern,TAP,Operational,36.21092232,-119.21533147,Tulare County,
+Unknown - 3527,SCE Metro,TAP,Operational,33.74876237,-117.92893905,Orange County,Santa Ana
+Unknown - 3528,SCE Northern,TAP,Operational,34.19844814,-118.38761079,Los Angeles County,Los Angeles
+Unknown - 3532,SCE Metro,TAP,Operational,34.02267514,-118.08789584,Los Angeles County,Montebello
+Unknown - 3533,SCE Metro,TAP,Operational,34.01872759,-117.55810755,Riverside County,Eastvale
+Stent Tap,SCE Eastern,TAP,Operational,33.51805969,-117.15918166,Riverside County,Temecula
+Unknown - 3539,SCE,TAP,Operational,33.64322817,-117.95645789,Orange County,Huntington Beach
+Unknown - 3548,SCE Northern,TAP,Operational,36.22541698,-119.23338045,Tulare County,
+Unknown - 3550,SCE NOL,TAP,Operational,34.6370089,-117.17166515,San Bernardino County,
+SS3145 Eagle Rock Tap 1,SCE Metro,TAP,Operational,34.11828517,-118.23204908,Los Angeles County,Los Angeles
+Unknown - 3553,SCE Metro,TAP,Operational,33.80814317,-118.17181784,Los Angeles County,Signal Hill
+Unknown - 3554,SCE NOL,TAP,Operational,34.73996899,-117.3215709,San Bernardino County,
+Unknown - 3556,SCE Metro,TAP,Operational,33.88022308,-118.33535501,Los Angeles County,Alondra Park
+Unknown - 3557,SCE Eastern,TAP,Operational,34.12120709,-117.45344494,San Bernardino County,Fontana
+Glendale South Tap 5,SCE Metro,TAP,Operational,34.11475449,-118.24585351,Los Angeles County,Los Angeles
+Unknown - 3560,SCE Eastern,TAP,Operational,33.1767231,-115.56700735,Imperial County,
+Unknown - 3587,SCE Metro,RISER,Operational,33.88047415,-118.04725686,Los Angeles County,Cerritos
+Unknown - 3588,SCE Metro,RISER,Operational,34.18450813,-118.32557179,Los Angeles County,Burbank
+Unknown - 3590,SCE Eastern,RISER,Operational,34.08453665,-117.32703426,San Bernardino County,Colton
+Unknown - 3593,SCE Northern,NOT AVAILABLE,Operational,34.33802231,-118.51180891,Los Angeles County,
+Unknown - 3594,SCE Metro,NOT AVAILABLE,Operational,34.09916017,-118.08192755,Los Angeles County,San Gabriel
+Unknown - 3595,SCE Metro,RISER,Operational,34.18479013,-118.34340778,Los Angeles County,Burbank
+Unknown - 3596,SCE Eastern,NOT AVAILABLE,Operational,33.92177007,-116.58035811,Riverside County,Palm Springs
+Unknown - 3597,SCE NOL,SUBSTATION,Operational,37.33663103,-118.48190017,Inyo County,
+Unknown - 3600,SCE Northern,RISER,Operational,34.2753218,-118.42370746,Los Angeles County,Los Angeles
+Unknown - 3601,SCE Northern,SUBSTATION,Operational,34.20667298,-118.36256758,Los Angeles County,Burbank
+Unknown - 3602,SCE Metro,RISER,Operational,33.83213216,-118.14321185,Los Angeles County,Long Beach
+Unknown - 3604,SCE Metro,RISER,Operational,33.95474816,-118.41359279,Los Angeles County,Los Angeles
+Unknown - 3605,SCE Northern,SUBSTATION,Operational,34.27129759,-118.55616195,Los Angeles County,Los Angeles
+Highgrove,SCE,SUBSTATION,Operational,34.02228677,-117.33278519,San Bernardino County,Grand Terrace
+Cal City,SCE,SUBSTATION,Operational,35.14257737,-117.96870088,Kern County,California City
+Poole Ph,SCE,SUBSTATION,Operational,37.94437568,-119.21600329,Mono County,
+Rush Creek,SCE,SUBSTATION,Operational,37.7665993,-119.12312103,Mono County,
+Mammoth Pacific Il,SCE,SUBSTATION,Operational,37.64645275,-118.9100321,Mono County,
+Mammoth Pacific I,SCE,SUBSTATION,Operational,37.64552423,-118.91463654,Mono County,
+Oxbow,SCE,SUBSTATION,Operational,37.33530963,-118.48195979,Inyo County,
+White Mt. Radio,SCE,SUBSTATION,Operational,37.41693293,-118.40284487,Inyo County,
+Bishop Creek 3,SCE,SUBSTATION,Operational,37.30224712,-118.5317442,Inyo County,
+Bishop Creek 4,SCE,SUBSTATION,Operational,37.32303193,-118.50175536,Inyo County,
+Dwp,SCE,SUBSTATION,Operational,37.3601865,-118.39851021,Inyo County,Bishop
+Bishop Creek 2,SCE,SUBSTATION,Operational,37.27386587,-118.57361798,Inyo County,
+Big Creek 2A,SCE,SUBSTATION,Operational,37.20010183,-119.30685572,Fresno County,
+Eastwood,SCE,SUBSTATION,Operational,37.14799489,-119.25660402,Fresno County,
+Big Creek 8,SCE,SUBSTATION,Operational,37.2097076,-119.32884034,Fresno County,
+Mammoth,SCE,SUBSTATION,Operational,37.22027822,-119.33800678,Madera County,
+Big Creek 4,SCE,SUBSTATION,Operational,37.13886157,-119.4887262,Madera County,
+Division Creek,SCE,SUBSTATION,Operational,36.94006531,-118.25693885,Inyo County,
+Big Pine,SCE,SUBSTATION,Operational,37.14206638,-118.32414812,Inyo County,
+Big Creek 3,SCE,SUBSTATION,Operational,37.14820605,-119.38852604,Fresno County,
+Coso 1-3,SCE,SUBSTATION,Operational,36.03672659,-117.79794942,Inyo County,
+Coso 8-9,SCE,SUBSTATION,Operational,36.00144491,-117.79017382,Inyo County,
+Coso 7,SCE,SUBSTATION,Operational,36.00617014,-117.81017308,Inyo County,
+Coso 4-6,SCE,SUBSTATION,Operational,36.01858404,-117.79152051,Inyo County,
+Kern River 1,SCE,SUBSTATION,Operational,35.46016298,-118.77959579,Kern County,
+Kern River 3,SCE,SUBSTATION,Operational,35.77619776,-118.43623443,Kern County,Kernville
+Omar,SCE,SUBSTATION,Operational,35.45137171,-118.98390974,Kern County,
+Morwind,SCE,SUBSTATION,Operational,35.0587408,-118.26990485,Kern County,
+Eastwind,SCE,SUBSTATION,Operational,35.04467093,-118.27629981,Kern County,
+Westwind - (SCE),SCE,SUBSTATION,Operational,35.04379469,-118.27637848,Kern County,
+Mojave 17,SCE,SUBSTATION,Operational,35.04603705,-118.28087109,Kern County,
+Winderness,SCE,SUBSTATION,Operational,35.03860146,-118.29288667,Kern County,
+Station 54 ,SCE,SUBSTATION,Operational,34.10139432,-118.28773333,Los Angeles County,Los Angeles
+Spadra,SCE,SUBSTATION,Operational,34.04077144,-117.82182364,Los Angeles County,Pomona
+Puente Hills,SCE,SUBSTATION ASSUMED,Operational,34.02406714,-118.02418501,Los Angeles County,
+Coidgen,SCE,SUBSTATION ASSUMED,Operational,34.01866929,-118.20245018,Los Angeles County,Los Angeles
+Icegen,SCE,SUBSTATION,Operational,33.87574721,-118.24909597,Los Angeles County,Carson
+Redondo 1,SCE,SUBSTATION,Operational,33.85263428,-118.39381072,Los Angeles County,Redondo Beach
+Outfall,SCE,SUBSTATION,Operational,33.80371549,-118.28213392,Los Angeles County,Carson
+Shell Los Angeles,SCE,SUBSTATION,Operational,33.79405466,-118.23533842,Los Angeles County,Los Angeles
+Hanjin,SCE,SUBSTATION,Operational,33.77513739,-118.22785693,Los Angeles County,Long Beach
+Unknown - 3609,SCE Northern,SUBSTATION,Operational,35.35859355,-118.92552417,Kern County,East Niles
+Unknown - 3610,SCE Metro,RISER,Operational,33.86966015,-117.96808987,Orange County,Fullerton
+Unknown - 3612,SCE Eastern,SUBSTATION,Operational,33.65925898,-114.98268414,Riverside County,
+Unknown - 3614,SCE Metro,RISER,Operational,34.05630438,-118.13404503,Los Angeles County,Monterey Park
+Unknown - 3615,SCE Eastern,NOT AVAILABLE,Operational,34.14593649,-116.17369205,San Bernardino County,Twentynine Palms
+Unknown - 3616,SCE Metro,DEAD END,Operational,34.07739333,-117.54274868,San Bernardino County,Rancho Cucamonga
+Unknown - 3617,SCE Northern,SUBSTATION,Operational,35.03007522,-118.2199471,Kern County,Mojave
+SEGS 6,SCE,SUBSTATION,Operational,35.02029175,-117.56623769,San Bernardino County,
+Unknown - 3619,SCE Eastern,SUBSTATION,Operational,34.0118681,-117.44080644,Riverside County,Jurupa Valley
+SEGS 7,SCE,SUBSTATION,Operational,35.01550578,-117.5657222,San Bernardino County,
+Unknown - 3620,SCE Northern,SUBSTATION,Operational,34.8473637,-118.43105692,Kern County,
+SEGS 5,SCE,SUBSTATION,Operational,35.01903865,-117.55549822,San Bernardino County,
+SEGS 4,SCE,SUBSTATION,Operational,35.01184781,-117.55565403,San Bernardino County,
+SEGS 3,SCE,SUBSTATION,Operational,35.00735218,-117.55572878,San Bernardino County,
+Unknown - 3623,SCE Metro,RISER,Operational,34.18451913,-118.32598979,Los Angeles County,Burbank
+Westend,SCE,SUBSTATION,Operational,35.70414674,-117.39334816,San Bernardino County,
+Unknown - 3624,SCE Northern,SUBSTATION,Operational,34.16542215,-118.5256027,Los Angeles County,Los Angeles
+Trona - South,SCE,SUBSTATION,Operational,35.76487556,-117.37543346,San Bernardino County,Searles Valley
+Unknown - 3626,SCE Metro,RISER,Operational,34.00572246,-117.83047146,Los Angeles County,Industry
+Unknown - 3627,SCE Northern,NOT AVAILABLE,Operational,34.32153116,-118.97763267,Ventura County,
+Unknown - 3628,SCE Northern,SUBSTATION,Operational,34.82337251,-118.43290425,Kern County,
+Iron Mt.,SCE,SUBSTATION,Operational,34.14883405,-115.12193589,San Bernardino County,
+Unknown - 3629,SCE Metro,RISER,Operational,33.8544638,-117.87493558,Orange County,Anaheim
+Unknown - 3630,SCE Metro,RISER,Operational,33.81781602,-117.93884096,Orange County,Anaheim
+Unknown - 3631,SCE Metro,RISER,Operational,33.97426416,-118.41367979,Los Angeles County,Los Angeles
+Unknown - 3632,SCE Northern,SUBSTATION,Operational,34.81985487,-118.40866621,Kern County,
+SEGS 2,SCE,SUBSTATION,Operational,34.86159299,-116.82803248,San Bernardino County,
+Unknown - 3634,SCE Metro,RISER,Operational,33.91103086,-117.82596228,Orange County,"Los Angeles--Long Beach--Anaheim, CA"
+Unknown - 3635,SCE Eastern,DEAD END,Operational,34.04309409,-117.24374098,San Bernardino County,Loma Linda
+Rivertex,SCE,SUBSTATION,Operational,34.60604522,-117.33507767,San Bernardino County,
+Unknown - 3637,SCE Eastern,NOT AVAILABLE,Operational,34.0907447,-116.42274507,San Bernardino County,Yucca Valley
+Black Mt.,SCE,SUBSTATION,Operational,34.62283668,-117.10162407,San Bernardino County,
+Southcap,SCE,SUBSTATION,Operational,34.62129501,-117.10216852,San Bernardino County,
+Southdown,SCE,SUBSTATION ASSUMED,Operational,34.62152279,-117.09982129,San Bernardino County,
+Pluess,SCE,SUBSTATION,Operational,34.38305043,-116.9411691,San Bernardino County,
+Unknown - 3639,SCE Eastern,SUBSTATION,Operational,33.17665388,-115.60574388,Imperial County,
+Soport,SCE,SUBSTATION,Operational,34.56599503,-117.31248237,San Bernardino County,Victorville
+Unknown - 3640,SCE Metro,SUBSTATION,Operational,33.85870147,-118.30940138,Los Angeles County,Torrance
+Unknown - 3641,SCE Eastern,NOT AVAILABLE,Operational,33.91792607,-116.73527608,Riverside County,
+Unknown - 3642,SCE Metro,RISER,Operational,33.81795315,-117.90597889,Orange County,Anaheim
+Unknown - 3645,SCE Metro,NOT AVAILABLE,Operational,33.61642117,-117.76224093,Orange County,
+Santa Ana 1,SCE,SUBSTATION,Operational,34.14563311,-117.05909351,San Bernardino County,
+Greenspot,SCE,SUBSTATION,Operational,34.09852504,-117.10573033,San Bernardino County,Highland
+Crafton Hills,SCE,SUBSTATION,Operational,34.07420067,-117.07747969,San Bernardino County,Mentone
+Santa Ana 3,SCE,SUBSTATION,Operational,34.10723319,-117.09908918,San Bernardino County,
+Purewater,SCE,SUBSTATION,Operational,34.07806433,-117.18887588,San Bernardino County,Redlands
+Unknown - 3650,SCE Metro,DEAD END,Operational,33.93905214,-117.91598088,Orange County,Brea
+Unknown - 3651,SCE NOL,SUBSTATION,Operational,34.98389964,-117.89114229,Kern County,
+Mountainview,SCE,SUBSTATION ASSUMED,Operational,34.07946794,-117.24037656,San Bernardino County,Redlands
+Unknown - 3652,SCE Northern,SUBSTATION,Operational,35.84791639,-119.07092038,Tulare County,
+Agua Mansa,SCE,SUBSTATION,Operational,34.0417927,-117.36084799,San Bernardino County,Colton
+Mill Creek 3,SCE,SUBSTATION,Operational,34.08802175,-117.03964984,San Bernardino County,
+OLS Energy Chino,SCE,SUBSTATION,Operational,33.98991744,-117.68063824,San Bernardino County,Chino
+Pan Aero,SCE,SUBSTATION,Operational,33.95138119,-116.66540755,Riverside County,Whitewater
+Seawind,SCE,SUBSTATION,Operational,33.94998674,-116.6668381,Riverside County,
+Unknown - 2470,SCE,SUBSTATION,Operational,33.91601484,-116.71834574,Riverside County,
+Renwind,SCE,SUBSTATION,Operational,33.91775341,-116.64279365,Riverside County,Palm Springs
+Venwind,SCE,SUBSTATION,Operational,33.93718743,-116.61571029,Riverside County,
+Unknown - 3656,SCE Eastern,SUBSTATION,Operational,33.19128688,-115.54501328,Imperial County,
+Sanwind,SCE,SUBSTATION ASSUMED,Operational,33.92624507,-116.61479366,Riverside County,
+Tiffanywind,SCE,SUBSTATION,Operational,33.92065555,-116.58114348,Riverside County,
+Buckwind,SCE,SUBSTATION,Operational,33.92175895,-116.5796992,Riverside County,Palm Springs
+Unknown - 3658,SCE Northern,SUBSTATION,Operational,34.18855229,-119.22458702,Ventura County,Oxnard
+Terawind,SCE,SUBSTATION,Operational,33.93160895,-116.56896866,Riverside County,
+Altwind,SCE,SUBSTATION,Operational,33.90732564,-116.57982699,Riverside County,Palm Springs
+Mountwind,SCE,SUBSTATION,Operational,33.90720896,-116.57932145,Riverside County,Palm Springs
+Unknown - 3660,SCE Northern,SUBSTATION,Operational,34.19343501,-118.51897502,Los Angeles County,Los Angeles
+Indigo,SCE,SUBSTATION,Operational,33.91062757,-116.5528796,Riverside County,Palm Springs
+Unknown - 3661,SCE Northern,SUBSTATION,Operational,34.84898356,-118.36968579,Kern County,
+Unknown - 3662,SCE Metro,DEAD END,Operational,33.71526316,-117.84462791,Orange County,Santa Ana
+Capwind,SCE,SUBSTATION,Operational,33.87760066,-116.46435198,Riverside County,Cathedral City
+Capacitor,SCE,SUBSTATION,Operational,33.6712108,-115.55897075,Riverside County,
+Unknown - 3665,SCE Metro,SUBSTATION,Operational,33.90006411,-118.15152167,Los Angeles County,Paramount
+MWD Lake Mathews,SCE,SUBSTATION,Operational,33.85479125,-117.45388571,Riverside County,
+Banwind,SCE,SUBSTATION,Operational,33.91713009,-116.7345964,Riverside County,
+Unknown - 3667,SCE Eastern,SUBSTATION,Operational,33.11917847,-116.01046921,Imperial County,
+Perris,SCE,SUBSTATION,Operational,33.83564639,-117.18306163,Riverside County,
+Unknown - 3668,SCE Metro,RISER,Operational,33.85388259,-117.87652866,Orange County,Anaheim
+Unknown - 3670,SCE Metro,SUBSTATION,Operational,34.26413011,-117.60970603,San Bernardino County,
+Unknown - 3671,SCE Metro,SUBSTATION,Operational,33.91723014,-117.98541065,Los Angeles County,La Mirada
+Ivyglen Meter,SCE,SUBSTATION,Operational,33.76021364,-117.48136235,Riverside County,Temescal Valley
+Unknown - 3672,SCE Metro,RISER,Operational,34.03452602,-118.07606866,Los Angeles County,"Los Angeles--Long Beach--Anaheim, CA"
+Inland Empire,SCE,SUBSTATION,Operational,33.7385035,-117.16990194,Riverside County,Menifee
+Unknown - 3675,SCE Metro,SUBSTATION,Operational,33.85943015,-117.9115189,Orange County,Anaheim
+Unknown - 3676,SCE Metro,RISER,Operational,33.88901914,-117.88989289,Orange County,Fullerton
+Unknown - 3677,SCE Metro,RISER,Operational,33.80883815,-117.8442739,Orange County,Orange
+Unknown - 3678,SCE Metro,SUBSTATION,Operational,33.81389615,-117.8222719,Orange County,Villa Park
+Unknown - 3681,SCE Eastern,NOT AVAILABLE,Operational,34.05585716,-117.31927364,San Bernardino County,Colton
+Unknown - 3682,SCE Metro,SUBSTATION,Operational,33.85947115,-117.90693889,Orange County,Anaheim
+Unknown - 3688,SCE Metro,SUBSTATION,Operational,34.07182482,-118.4673247,Los Angeles County,Los Angeles
+Unknown - 3690,SCE Metro,RISER,Operational,33.65241617,-117.9442669,Orange County,Costa Mesa
+Unknown - 3692,SCE Metro,RISER,Operational,34.03589508,-117.76303795,Los Angeles County,Pomona
+Unknown - 3693,SCE Northern,TAP,Operational,35.05293811,-118.31034858,Kern County,
+Unknown - 3695,SCE Northern,TAP,Operational,34.43025427,-119.87187666,Santa Barbara County,Goleta
+Unknown - 3696,SCE Metro,TAP,Operational,33.92690027,-118.01207342,Los Angeles County,South Whittier
+Tule,SCE,SUBSTATION,Operational,36.13581841,-118.78901891,Tulare County,
+Oxgen,SCE,SUBSTATION,Operational,34.19592534,-119.16687774,Ventura County,Oxnard
+Willamette,SCE,SUBSTATION ASSUMED,Operational,34.14296564,-119.1827927,Ventura County,Oxnard
+Oxnard Wastewater ,SCE,SUBSTATION,Operational,34.1411322,-119.18448155,Ventura County,Oxnard
+SS3144 Tap,SCE Metro,TAP,Operational,34.12100843,-118.22641132,Los Angeles County,Los Angeles
+Lehman,SCE,SUBSTATION,Operational,34.15666741,-119.20919042,Ventura County,Port Hueneme
+Unknown - 3705,SCE Metro,TAP,Operational,33.94866983,-118.22500531,Los Angeles County,South Gate
+Unknown - 3712,SCE Northern,TAP,Operational,36.29821639,-119.3672235,Tulare County,
+Unknown - 3714,SCE Metro,TAP,Operational,33.9547171,-118.06753172,Los Angeles County,Santa Fe Springs
+Unknown - 3718,SCE Metro,TAP,Operational,33.86432314,-117.77544691,Orange County,Anaheim
+Unknown - 2559,SCE,SUBSTATION,Operational,36.80545371,-118.18682134,Inyo County,
+Unknown - 3736,SCE Northern,TAP,Operational,34.15448917,-119.11817865,Ventura County,
+Unknown - 3741,SCE Metro,TAP,Operational,33.79804934,-118.28313142,Los Angeles County,Carson
+Unknown - 3743,SCE NOL,TAP,Operational,34.26509519,-116.81491396,San Bernardino County,Big Bear City
+Arbwind,SCE,SUBSTATION,Operational,35.10812378,-118.31383786,Kern County,
+Unknown - 3745,SCE Northern,TAP,Operational,34.31717376,-119.13867037,Ventura County,
+Unknown - 2573,SCE,SUBSTATION,Operational,35.08816448,-118.36700425,Kern County,
+Unknown - 3747,SCE Metro,TAP,Operational,33.99385587,-118.15320114,Los Angeles County,Commerce
+Unknown - 2575,SCE,SUBSTATION,Operational,35.0990815,-118.33453463,Kern County,
+Unknown - 2576,SCE,SUBSTATION,Operational,35.09825699,-118.33783958,Kern County,
+Midwind,SCE,SUBSTATION,Operational,35.0538982,-118.34665771,Kern County,
+Flowind,SCE,SUBSTATION,Operational,35.07305185,-118.32037107,Kern County,
+Varwind,SCE,SUBSTATION,Operational,35.07808357,-118.31108778,Kern County,
+Enwind,SCE,SUBSTATION,Operational,35.07879631,-118.30935043,Kern County,
+Canwind,SCE,SUBSTATION,Operational,35.07922466,-118.30489219,Kern County,
+Unknown - 3755,SCE Metro,TAP,Operational,33.73257908,-117.82747859,Orange County,Tustin
+Unknown - 3759,SCE NOL,TAP,Operational,35.009473,-117.55552485,San Bernardino County,
+Unknown - 2585,SCE,SUBSTATION,Operational,34.19192143,-118.32317673,Los Angeles County,Burbank
+Unknown - 3760,SCE Eastern,TAP,Operational,34.02979896,-117.11190802,San Bernardino County,Yucaipa
+Unknown - 3761,SCE Metro,TAP,Operational,33.9897627,-117.68887748,San Bernardino County,Chino
+Unknown - 2588,SCE,SUBSTATION,Operational,34.15402027,-118.33944751,Los Angeles County,Burbank
+Downey Med,SCE,SUBSTATION,Operational,33.92079089,-118.12742057,Los Angeles County,Downey
+Unknown - 2590,SCE,SUBSTATION,Operational,33.78783657,-118.30022733,Los Angeles County,Los Angeles
+Unknown - 3765,SCE Eastern,TAP,Operational,33.15682811,-115.64027833,Imperial County,
+Unknown - 3773,SCE Metro,TAP,Operational,34.01878079,-117.55807719,Riverside County,Eastvale
+George Air Force Base,SCE,SUBSTATION,Operational,34.58001592,-117.36936322,San Bernardino County,Victorville
+MWD Etiwanda,SCE,SUBSTATION,Operational,34.10369623,-117.52642464,San Bernardino County,Rancho Cucamonga
+Warne Tap,SCE Northern,TAP,Operational,34.70473066,-118.74113556,Los Angeles County,
+Unknown - 3780,SCE Eastern,TAP,Operational,34.04851009,-117.26130598,San Bernardino County,Loma Linda
+Unknown - 3781,SCE Eastern,TAP,Operational,33.75778167,-116.37383967,Riverside County,Palm Desert
+Unknown - 3791,SCE Eastern,TAP,Operational,34.14967118,-116.17145964,San Bernardino County,Twentynine Palms
+Unknown - 3792,SCE Metro,TAP,Operational,33.71604755,-117.88515977,Orange County,Santa Ana
+Unknown - 3798,SCE Northern,TAP,Operational,34.6458967,-118.14786514,Los Angeles County,Lancaster
+Hanford - (SCE),SCE,SUBSTATION,Operational,36.31290653,-119.65438444,Kings County,Hanford
+Unknown - 3801,SCE Northern,TAP,Operational,34.27279897,-118.93312889,Ventura County,
+Unknown - 3806,SCE Metro,TAP,Operational,33.85903442,-117.96789259,Orange County,Fullerton
+Mooney,SCE,SUBSTATION,Operational,36.31853001,-119.31171088,Tulare County,Visalia
+Unknown - 3814,SCE Metro,TAP,Operational,33.92339265,-117.86404799,Orange County,Brea
+Unknown - 3815,SCE Eastern,TAP,Operational,33.69993831,-116.23400064,Riverside County,Indio
+Unknown - 3816,SCE Metro,TAP,Operational,33.78853617,-118.10777686,Los Angeles County,Long Beach
+Ultragen,SCE,SUBSTATION,Operational,35.74209937,-119.05180651,Kern County,
+Unknown - 3821,SCE Metro,TAP,Operational,34.41280161,-117.29394642,San Bernardino County,Hesperia
+Dutchwind,SCE,SUBSTATION,Operational,35.06199818,-118.32057049,Kern County,
+Unknown - 3822,SCE Metro,TAP,Operational,34.00292436,-117.76906425,San Bernardino County,Chino Hills
+Mogen,SCE,SUBSTATION,Operational,35.03228376,-117.70157052,Kern County,
+Ventura,SCE,SUBSTATION,Operational,34.27975571,-119.3010261,Ventura County,San Buenaventura (Ventura)
+Unknown - 3824,SCE Metro,TAP,Operational,34.08214313,-118.04514292,Los Angeles County,El Monte
+Missile,SCE,SUBSTATION,Operational,34.12874421,-119.09567112,Ventura County,"Oxnard--San Buenaventura (Ventura), CA"
+Unknown - 3826,SCE Metro,TAP,Operational,33.85897914,-117.97641473,Orange County,Fullerton
+Victorville - (SCE),SCE,SUBSTATION,Operational,34.53534569,-117.29512531,San Bernardino County,Victorville
+Unknown - 3829,SCE Metro,TAP,Operational,34.09082113,-118.07501204,Los Angeles County,Rosemead
+Unknown - 2655,SCE,SUBSTATION,Operational,33.94777728,-116.92319113,Riverside County,Banning
+Unknown - 3830,SCE Metro,TAP,Operational,34.02657239,-117.6674574,San Bernardino County,Chino
+Unknown - 3831,SCE Northern,TAP,Operational,35.36186388,-118.87871417,Kern County,
+Grapeland,SCE,SUBSTATION,Operational,34.09049688,-117.53330395,San Bernardino County,Rancho Cucamonga
+Bunker Tap,SCE Eastern,TAP,Operational,33.83030644,-117.22146914,Riverside County,Perris
+Metalcan,SCE,SUBSTATION,Operational,34.03301352,-117.52143981,Riverside County,Jurupa Valley
+Unknown - 3834,SCE Northern,TAP,Operational,35.76174137,-119.0985276,Kern County,
+Plastic,SCE,SUBSTATION,Operational,33.99375776,-117.70867324,San Bernardino County,Chino
+Flanco,SCE,SUBSTATION,Operational,34.09563035,-117.44046198,San Bernardino County,Fontana
+Fibre,SCE,SUBSTATION,Operational,34.023045,-117.37662287,Riverside County,Jurupa Valley
+Unknown - 3837,SCE Northern,TAP,Operational,35.07153951,-118.31964221,Kern County,
+Euclid - (SCE),SCE,SUBSTATION,Operational,34.08192108,-117.63230733,San Bernardino County,Ontario
+Valencia,SCE,SUBSTATION,Operational,34.16459407,-117.28640087,San Bernardino County,San Bernardino
+MWD Eastside Res Tap,SCE Eastern,TAP,Operational,33.71414027,-117.0758759,Riverside County,Winchester
+SS3143 Tap,SCE Metro,TAP,Operational,34.11236311,-118.26763565,Los Angeles County,Los Angeles
+Lucerne - (SCE),SCE,SUBSTATION,Operational,34.44513983,-116.9466249,San Bernardino County,Lucerne Valley
+Unknown - 3849,SCE Metro,TAP,Operational,34.00585713,-117.82134898,Los Angeles County,Diamond Bar
+Unknown - 3853,SCE Northern,TAP,Operational,36.29282676,-119.25190098,Tulare County,
+Riteaid,SCE,SUBSTATION,Operational,34.72092867,-118.17881869,Los Angeles County,Lancaster
+Acton - SCE,SCE,SUBSTATION,Operational,34.51022357,-118.19933149,Los Angeles County,Acton
+Shelline,SCE,SUBSTATION,Operational,34.14938496,-118.66446453,Los Angeles County,Calabasas
+Perez - (SCE),SCE,SUBSTATION,Operational,33.88193216,-117.58843619,Riverside County,Corona
+Unknown - 3856,SCE Metro,DEAD END,Operational,33.98319828,-117.74100623,San Bernardino County,Chino Hills
+Mecca - (SCE Eastern),SCE Eastern,SUBSTATION,Operational,33.55579556,-116.06027624,Riverside County,Mecca
+Stent,SCE,SUBSTATION,Operational,33.51782501,-117.1590572,Riverside County,Temecula
+Unknown - 2686,SCE,SUBSTATION,Operational,33.92127636,-116.87599602,Riverside County,Banning
+Unknown - 3861,SCE Eastern,RISER,Operational,34.07019109,-117.20785783,San Bernardino County,Redlands
+Unknown - 3863,SCE Metro,NOT AVAILABLE,Operational,33.64327415,-117.95459277,Orange County,Costa Mesa
+Unknown - 3864,SCE Northern,SUBSTATION,Operational,34.82895549,-118.51025134,Kern County,
+Titans,SCE,SUBSTATION,Operational,33.87893667,-117.88735127,Orange County,Fullerton
+Unknown - 3868,SCE Northern,RISER,Operational,34.69719707,-118.14437278,Los Angeles County,Lancaster
+Kinder,SCE,SUBSTATION,Operational,33.81267063,-117.86967787,Orange County,Orange
+Unknown - 3872,SCE Metro,RISER,Operational,33.62988776,-117.73151087,Orange County,Irvine
+Unknown - 3874,SCE Metro,SUBSTATION,Operational,34.0850025,-117.61108993,San Bernardino County,Ontario
+Unknown - 3876,SCE Metro,RISER,Operational,33.99719612,-117.69124191,San Bernardino County,Chino
+Basilone,SCE Metro,SUBSTATION,Operational,33.38743818,-117.58247398,San Diego County,
+Unknown - 3880,SCE Metro,SUBSTATION,Operational,34.00447764,-118.40987768,Los Angeles County,Culver City
+Unknown - 3882,SCE Metro,RISER,Operational,33.87397414,-117.74816591,Orange County,Anaheim
+Finance,SCE,SUBSTATION,Operational,34.09948858,-117.9799334,Los Angeles County,Irwindale
+Westwind - (SCE Northern),SCE Northern,SUBSTATION,Operational,35.00122876,-118.2915805,Kern County,
+Badillo,SCE,SUBSTATION,Operational,34.08221703,-117.92609504,Los Angeles County,West Covina
+Unknown - 3886,SCE Eastern,NOT AVAILABLE,Operational,33.92103507,-116.58034911,Riverside County,Palm Springs
+Unknown - 3889,SCE Metro,RISER,Operational,33.81789315,-117.92914688,Orange County,Anaheim
+Sangar,SCE,SUBSTATION,Operational,34.11216277,-118.16542344,Los Angeles County,South Pasadena
+Unknown - 3891,SCE Eastern,NOT AVAILABLE,Operational,34.04434486,-117.35826261,San Bernardino County,Colton
+Bartolo,SCE,SUBSTATION,Operational,34.00189873,-118.07821312,Los Angeles County,Pico Rivera
+Unknown - 3892,SCE NOL,NOT AVAILABLE,Operational,34.26864023,-116.84967007,San Bernardino County,Big Bear City
+Harding - (SCE),SCE,SUBSTATION,Operational,34.020589,-118.10531135,Los Angeles County,Montebello
+Montebello,SCE,SUBSTATION,Operational,34.00608939,-118.12165213,Los Angeles County,Montebello
+Friendly Hills,SCE,SUBSTATION,Operational,33.94801432,-118.00666153,Los Angeles County,Whittier
+Unknown - 3895,SCE Northern,SUBSTATION,Operational,34.69791105,-118.30286689,Los Angeles County,Lancaster
+Unknown - 3896,SCE Eastern,SUBSTATION,Operational,33.94620294,-116.66323936,Riverside County,Whitewater
+Siggen,SCE,SUBSTATION,Operational,33.924514,-118.06768565,Los Angeles County,Norwalk
+Westgate,SCE,SUBSTATION,Operational,33.99004883,-118.06488429,Los Angeles County,West Whittier-Los Nietos
+Unknown - 3899,SCE Metro,NOT AVAILABLE,Operational,33.91631867,-118.31761,Los Angeles County,Gardena
+Ringmill - SCE Southeast,SCE,SUBSTATION,Operational,33.89320163,-118.1638508,Los Angeles County,Paramount
+Unknown - 3900,SCE Northern,SUBSTATION,Operational,34.19359634,-118.48415267,Los Angeles County,Los Angeles
+Unknown - 3901,SCE Metro,SUBSTATION,Operational,34.01894896,-117.58022491,San Bernardino County,Ontario
+Unknown - 3903,SCE Eastern,SUBSTATION,Operational,33.45385738,-117.10430637,Riverside County,"Temecula--Murrieta--Menifee, CA"
+Unknown - 3904,SCE NOL,SUBSTATION,Operational,34.9301081,-117.69773313,Kern County,
+Maywood,SCE,SUBSTATION ASSUMED,Operational,33.9810557,-118.18614681,Los Angeles County,Bell
+Plaster,SCE,SUBSTATION,Operational,33.95677118,-118.18996128,Los Angeles County,South Gate
+Schultz,SCE,SUBSTATION,Operational,33.95347277,-118.177433,Los Angeles County,South Gate
+Velasco,SCE,TAP,Operational,33.94640739,-118.16607146,Los Angeles County,South Gate
+Unknown - 3909,SCE Metro,NOT AVAILABLE,Operational,33.98283789,-117.69749249,San Bernardino County,Chino
+Shred,SCE,SUBSTATION,Operational,33.94533884,-118.17499104,Los Angeles County,South Gate
+Unknown - 3910,SCE Metro,SUBSTATION,Operational,33.90997915,-118.11090029,Los Angeles County,Downey
+Unknown - 3913,SCE Northern,SUBSTATION,Operational,34.17979751,-118.44541319,Los Angeles County,Los Angeles
+Unknown - 3914,SCE Metro,RISER,Operational,33.85281856,-117.8809068,Orange County,Anaheim
+Unknown - 3917,SCE Northern,SUBSTATION,Operational,35.0790163,-118.30501421,Kern County,
+Hopeful,SCE,SUBSTATION,Operational,34.12586572,-117.9730987,Los Angeles County,Irwindale
+Unknown - 3918,SCE Metro,SUBSTATION,Operational,34.12370125,-118.33704608,Los Angeles County,Los Angeles
+Unknown - 3919,SCE Metro,RISER,Operational,33.88871625,-117.83811713,Orange County,Placentia
+Unknown - 3920,SCE Northern,SUBSTATION,Operational,35.00849914,-118.24097141,Kern County,Mojave
+Unknown - 2752,SCE,SUBSTATION,Operational,34.18851068,-118.3348831,Los Angeles County,Burbank
+Unknown - 2756,SCE,SUBSTATION,Operational,34.11311763,-118.26772082,Los Angeles County,Los Angeles
+Unknown - 2757,SCE,SUBSTATION,Operational,34.12069532,-118.22622304,Los Angeles County,Los Angeles
+Unknown - 2758,SCE,SUBSTATION,Operational,34.08672781,-118.21440785,Los Angeles County,Los Angeles
+Unknown - 3927,SCE Metro,RISER,Operational,33.62939216,-117.72722593,Orange County,Irvine
+Unknown - 3928,SCE Metro,RISER,Operational,33.93726695,-118.21324879,Los Angeles County,Lynwood
+Unknown - 2759,SCE,SUBSTATION,Operational,34.11393419,-118.18937073,Los Angeles County,Los Angeles
+Unknown - 3930,SCE Northern,SUBSTATION,Operational,34.90128199,-118.25191682,Kern County,
+Carbonic,SCE,SUBSTATION,Operational,33.82400825,-118.23930554,Los Angeles County,Carson
+Unknown - 3931,SCE Metro,SUBSTATION,Operational,33.80775049,-118.2845983,Los Angeles County,Carson
+Davidson City,SCE,SUBSTATION,Operational,33.8315149,-118.21408315,Los Angeles County,Long Beach
+Unknown - 3932,SCE Metro,RISER,Operational,33.99741812,-117.68937091,San Bernardino County,Chino
+Unknown - 3933,SCE Metro,RISER,Operational,33.84715083,-117.88713706,Orange County,Anaheim
+Papermate,SCE,SUBSTATION,Operational,34.02976007,-118.46597223,Los Angeles County,Santa Monica
+Unknown - 3936,SCE Metro,DEAD END,Operational,33.80244697,-117.87529847,Orange County,Orange
+Sony,SCE,SUBSTATION,Operational,34.01504285,-118.40219117,Los Angeles County,Culver City
+MWD Venice,SCE,SUBSTATION,Operational,34.01143801,-118.41639949,Los Angeles County,Culver City
+Unknown - 3938,SCE Metro,RISER,Operational,33.89949714,-117.8274789,Orange County,Yorba Linda
+Northrop,SCE,SUBSTATION,Operational,33.9205576,-118.33550102,Los Angeles County,Hawthorne
+Lawndale - (SCE),SCE,SUBSTATION,Operational,33.89490375,-118.35785407,Los Angeles County,Lawndale
+Unknown - 3940,SCE Metro,SUBSTATION,Operational,33.69404916,-117.8543668,Orange County,Irvine
+Wesbasin,SCE,SUBSTATION,Operational,33.90951392,-118.39084938,Los Angeles County,El Segundo
+Unknown - 3942,SCE Eastern,SUBSTATION,Operational,34.14981881,-116.10706091,San Bernardino County,Twentynine Palms
+Chevcentral,SCE,SUBSTATION,Operational,33.90936853,-118.41150999,Los Angeles County,El Segundo
+Ritter Ranch - (SCE Northern),SCE Northern,SUBSTATION,Operational,34.57931271,-118.20304449,Los Angeles County,Palmdale
+El Porto,SCE,SUBSTATION,Operational,33.89529593,-118.40988196,Los Angeles County,Manhattan Beach
+Perry - (SCE),SCE,SUBSTATION,Operational,33.86598019,-118.34834324,Los Angeles County,Torrance
+Unknown - 3946,SCE Eastern,NOT AVAILABLE,Operational,33.90760912,-117.46889525,Riverside County,Riverside
+Vapor,SCE,SUBSTATION,Operational,33.84816172,-118.33004075,Los Angeles County,Torrance
+Unknown - 3947,SCE Metro,RISER,Operational,33.85072315,-117.92343888,Orange County,Anaheim
+Unknown - 3948,SCE Metro,RISER,Operational,34.05039237,-118.43198232,Los Angeles County,Los Angeles
+Unknown - 3949,SCE Metro,SUBSTATION,Operational,33.84184927,-118.23524689,Los Angeles County,Carson
+Unknown - 2778,SCE,SUBSTATION,Operational,33.89908891,-118.38462337,Los Angeles County,Manhattan Beach
+Big Oaks,SCE Eastern,SUBSTATION,Operational,34.03044738,-116.85716535,Riverside County,
+Unknown - 3951,SCE Northern,SUBSTATION,Operational,35.05529469,-118.32065691,Kern County,
+Unknown - 3953,SCE Metro,RISER,Operational,33.99699612,-117.71443891,San Bernardino County,Chino
+Unknown - 3956,SCE Metro,RISER,Operational,34.06731411,-117.68942891,San Bernardino County,Montclair
+Unknown - 3957,SCE NOL,NOT AVAILABLE,Operational,34.26532459,-116.86625216,San Bernardino County,Big Bear City
+Unknown - 3958,SCE Metro,RISER,Operational,34.00771561,-117.83815874,Los Angeles County,Industry
+Unknown - 3963,SCE Metro,RISER,Operational,33.85969614,-117.7930119,Orange County,Anaheim
+Unknown - 3965,SCE Metro,RISER,Operational,34.11532412,-117.93404186,Los Angeles County,Azusa
+Unknown - 3966,SCE EOP,SUBSTATION,Operational,35.57332963,-115.4360145,San Bernardino County,
+Unknown - 3967,SCE Eastern,NOT AVAILABLE,Operational,33.86109507,-116.45643313,Riverside County,Cathedral City
+Unknown - 3969,SCE Northern,NOT AVAILABLE,Operational,35.7329193,-119.09850172,Kern County,
+Unknown - 3973,SCE Metro,SUBSTATION,Operational,34.07723912,-117.81267114,Los Angeles County,San Dimas
+Unknown - 3974,SCE Metro,SUBSTATION,Operational,34.05037915,-118.43201078,Los Angeles County,Los Angeles
+Unknown - 3975,SCE Northern,SUBSTATION,Operational,35.03902428,-118.36217929,Kern County,
+Unknown - 3976,SCE Northern,TAP,Operational,34.18225266,-119.12158893,Ventura County,
+Unknown - 3979,SCE Northern,TAP,Operational,35.80493641,-119.25016763,Tulare County,
+Unknown - 3980,SCE Northern,TAP,Operational,34.56514082,-118.14018309,Los Angeles County,Palmdale
+Unknown - 3981,SCE NOL,TAP,Operational,34.26123431,-116.82633023,San Bernardino County,Big Bear City
+Unknown - 3985,SCE NOL,TAP,Operational,34.29415257,-116.82284164,San Bernardino County,
+Unknown - 3993,SCE Northern,TAP,Operational,34.26356834,-119.07660623,Ventura County,
+Unknown - 3994,SCE Metro,TAP,Operational,33.88212516,-118.09966924,Los Angeles County,Cerritos
+Unknown - 3995,SCE Metro,TAP,Operational,34.06793956,-117.972987,Los Angeles County,Baldwin Park
+Unknown - 3996,SCE Metro,TAP,Operational,34.04793511,-117.54204093,San Bernardino County,Ontario
+Glendale South Tap 2,SCE Metro,TAP,Operational,34.10444501,-118.25366328,Los Angeles County,Los Angeles
+Station L (Scattergood) Tap,SCE Metro,TAP,Operational,33.93010694,-118.42799014,Los Angeles County,El Segundo
+Unknown - 4002,SCE Metro,TAP,Operational,34.30834339,-117.32459709,San Bernardino County,
+Unknown - 4003,SCE Eastern,TAP,Operational,34.08613747,-117.28525191,San Bernardino County,San Bernardino
+Unknown - 4006,SCE Metro,TAP,Operational,34.113463,-117.93236875,Los Angeles County,Irwindale
+Grangeville,SCE,SUBSTATION ASSUMED,Operational,36.32060731,-119.69119994,Kings County,"Hanford, CA"
+Unknown - 2896,SCE,SUBSTATION ASSUMED,Operational,35.07545257,-118.37249036,Kern County,
+Oakwind,SCE,SUBSTATION,Operational,35.03524544,-118.35242064,Kern County,
+Onshore - (SCE),SCE,SUBSTATION,Operational,34.43158638,-119.91144335,Santa Barbara County,Goleta
+Shellsom,SCE,SUBSTATION,Operational,34.26342664,-119.01184393,Ventura County,Somis
+Colossus,SCE,SUBSTATION,Operational,34.43109083,-118.59877689,Los Angeles County,
+Pharmacy,SCE,SUBSTATION,Operational,34.19286106,-118.91943904,Ventura County,Thousand Oaks
+Moog,SCE,SUBSTATION,Operational,33.84750689,-118.31110938,Los Angeles County,Torrance
+Larder,SCE,SUBSTATION,Operational,33.79628934,-118.21574828,Los Angeles County,Long Beach
+Thumsgen,SCE,SUBSTATION,Operational,33.76771754,-118.21349376,Los Angeles County,Long Beach
+Santee - (SCE),SCE,SUBSTATION,Operational,33.99707349,-117.91428943,Los Angeles County,Industry
+Orcosan,SCE,SUBSTATION,Operational,33.6871982,-117.94258373,Orange County,Fountain Valley
+Oneill,SCE,SUBSTATION,Operational,33.64318529,-117.60557585,Orange County,Rancho Santa Margarita
+Edgemont - (SCE),SCE,SUBSTATION,Operational,33.9234565,-117.28468618,Riverside County,Moreno Valley
+Nuevo,SCE,TAP,Operational,33.83438375,-117.12281078,Riverside County,Lakeview
+San Jacinto,SCE,SUBSTATION,Operational,33.78334447,-116.95937124,Riverside County,San Jacinto
+Palm Springs,SCE,SUBSTATION,Operational,33.82513556,-116.54608192,Riverside County,Palm Springs
+Southpac,SCE,SUBSTATION,Operational,33.89149442,-118.0711499,Los Angeles County,Norwalk
+Bishop Creek 6,SCE,SUBSTATION,Operational,37.35009022,-118.46300935,Inyo County,
+Norco - (SCE),SCE,SUBSTATION,Operational,33.93264642,-117.55465597,Riverside County,Norco
+Military,SCE,SUBSTATION,Operational,35.26250204,-116.7022676,San Bernardino County,Fort Irwin
+Second Ave.,SCE,SUBSTATION,Operational,33.69094435,-114.57245608,Riverside County,
+Cathedral City,SCE,SUBSTATION,Operational,33.77836578,-116.46328664,Riverside County,Cathedral City
+Goldstone,SCE,SUBSTATION,Operational,35.27406103,-116.78082412,San Bernardino County,
+Wilde,SCE,SUBSTATION,Operational,34.78592991,-117.24796852,San Bernardino County,
+Idyllwild,SCE,SUBSTATION,Operational,33.74644064,-116.71546613,Riverside County,Idyllwild-Pine Cove
+Thunderbird,SCE,SUBSTATION,Operational,33.7502539,-116.42736325,Riverside County,Rancho Mirage
+Trona - North,SCE,SUBSTATION,Operational,35.77356013,-117.37037339,San Bernardino County,Searles Valley
+Arco - (SCE),SCE,SUBSTATION,Operational,33.777355,-118.21532786,Los Angeles County,Long Beach
+Exgen,SCE,SUBSTATION ASSUMED,Operational,34.47747351,-120.04188028,Santa Barbara County,
+Forge,SCE,SUBSTATION,Operational,34.09743021,-117.54609679,San Bernardino County,Rancho Cucamonga
+Reclaim - SCE,SCE,SUBSTATION,Operational,34.08268655,-118.70941885,Los Angeles County,
+University - (SCE),SCE,SUBSTATION,Operational,33.64036901,-117.84992229,Orange County,Irvine
+Dairymans,SCE,SUBSTATION,Operational,36.20499701,-119.34106896,Tulare County,Tulare
+Stanhill,SCE,SUBSTATION,Operational,34.00046478,-118.37369069,Los Angeles County,Ladera Heights
+Bishop Creek 5,SCE,SUBSTATION ASSUMED,Operational,37.33465563,-118.47956751,Inyo County,
+Pebbly Beach,SCE,SUBSTATION ASSUMED,Operational,33.33303264,-118.31013278,Los Angeles County,Avalon
+Kaweah 2,SCE,SUBSTATION,Operational,36.46164653,-118.87985995,Tulare County,Three Rivers
+Kaweah 1,SCE,SUBSTATION,Operational,36.4650904,-118.86196871,Tulare County,Three Rivers
+Kaweah 3,SCE,SUBSTATION,Operational,36.48606436,-118.83562861,Tulare County,
+Ritter Ranch - (SCE),SCE,TAP,Operational,34.55764046,-118.18023758,Los Angeles County,
+Sycamore Grimmway Farm,SCE,SUBSTATION,Operational,35.19486614,-118.81554129,Kern County,Arvin
+Mcgrath Beach,SCE,SUBSTATION,Operational,34.20430184,-119.25004945,Ventura County,Oxnard
+Coso Little Lake,SCE,SUBSTATION,Operational,36.09343721,-117.95760183,Inyo County,
+Dryden,SCE,SUBSTATION,Operational,33.70191147,-117.37521087,Riverside County,Lake Elsinore
+Thrive Fontana,SCE,SUBSTATION,Operational,34.07355133,-117.4292919,San Bernardino County,Fontana
+Sylmar East,SCE,SUBSTATION,Operational,34.31189,-118.48040208,Los Angeles County,Los Angeles
+Cain Ranch P.T.,SCE,SUBSTATION ASSUMED,Operational,37.95234514,-119.1170469,Mono County,Lee Vining
+Matherson Trigas,SCE,SUBSTATION,Operational,33.98931039,-118.1771372,Los Angeles County,Vernon
+Cement,SCE,SUBSTATION ASSUMED,Operational,34.59010213,-117.37120413,San Bernardino County,Victorville
+Unknown - 3193,SCE,SUBSTATION,Operational,35.20708605,-118.24788964,Kern County,
+Sky River North,SCE,SUBSTATION,Operational,35.34508469,-118.18588345,Kern County,
+AFG,SCE,SUBSTATION ASSUMED,Operational,34.47434574,-117.29398175,San Bernardino County,Victorville
+Allen,SCE,SUBSTATION ASSUMED,Operational,34.1714345,-118.11179604,Los Angeles County,Altadena
+Unknown - 4417,SCE NOL,TAP,Operational,34.38424659,-116.94015969,San Bernardino County,
+Unknown - 4418,SCE Northern,TAP,Operational,36.29279843,-119.24746082,Tulare County,
+Unknown - 4419,SCE NOL,TAP,Operational,35.009448,-117.55047085,San Bernardino County,
+Unknown - 4420,SCE NOL,TAP,Operational,35.016305,-117.55546785,San Bernardino County,
+Unknown - 4424,SCE NOL,TAP,Operational,34.44399203,-116.945806,San Bernardino County,Lucerne Valley
+Unknown - 4426,SCE EOP,SUBSTATION,Operational,36.45681307,-116.84520336,Inyo County,
+Unknown - 4427,SCE Northern,TAP,Operational,34.4301673,-119.50404076,Santa Barbara County,
+Unknown - 4433,SCE Metro,TAP,Operational,34.00436491,-117.56494633,San Bernardino County,Ontario
+Unknown - 4434,SCE Metro,TAP,Operational,33.95910249,-117.55811579,Riverside County,Eastvale
+Unknown - 4435,SCE Metro,TAP,Operational,34.00924388,-117.92534633,Los Angeles County,La Puente
+Unknown - 4436,SCE Metro,TAP,Operational,34.09597632,-117.92522336,Los Angeles County,Vincent
+Unknown - 4440,SCE Eastern,TAP,Operational,33.8443841,-117.01627404,Riverside County,
+Unknown - 4441,SCE Metro,SUBSTATION ASSUMED,Operational,34.03359612,-117.7287939,Los Angeles County,Pomona
+Unknown - 4011,SCE Northern,TAP,Operational,36.33841956,-119.25198208,Tulare County,Visalia
+Unknown - 4013,SCE Northern,TAP,Operational,34.60223651,-118.05841611,Los Angeles County,
+Unknown - 4015,SCE Eastern,TAP,Operational,34.0359845,-117.24366345,San Bernardino County,Loma Linda
+Unknown - 4018,SCE Metro,TAP,Operational,33.75916071,-118.02943818,Orange County,Westminster
+Unknown - 4020,SCE Metro,TAP,Operational,34.09971637,-117.69810562,San Bernardino County,Upland
+Unknown - 4022,SCE Metro,TAP,Operational,33.90195915,-118.10027737,Los Angeles County,Norwalk
+Unknown - 4023,SCE Eastern,TAP,Operational,33.74449837,-116.16371461,Riverside County,
+Cajalco Tap,SCE Eastern,TAP,Operational,33.83649303,-117.21718611,Riverside County,Perris
+Federalgen Tap,SCE Metro,TAP,Operational,33.98061565,-118.16701848,Los Angeles County,Commerce
+Unknown - 4032,SCE Eastern,TAP,Operational,33.9253772,-116.71965692,Riverside County,Whitewater
+Unknown - 4034,SCE Metro,TAP,Operational,33.94410415,-118.05221685,Los Angeles County,Santa Fe Springs
+Unknown - 4036,SCE Metro,TAP,Operational,33.96351915,-118.19488483,Los Angeles County,Huntington Park
+Glendale South Tap 3,SCE Metro,TAP,Operational,34.11293381,-118.24801024,Los Angeles County,Los Angeles
+Unknown - 4039,SCE Metro,TAP,Operational,33.89189377,-117.5689341,Riverside County,Corona
+Unknown - 4042,SCE Metro,TAP,Operational,33.74430976,-118.02857478,Orange County,Huntington Beach
+Unknown - 4047,SCE Northern,TAP,Operational,35.83412492,-119.0355855,Tulare County,
+Unknown - 4049,SCE Eastern,TAP,Operational,34.01460573,-117.42731662,Riverside County,Jurupa Valley
+Unknown - 4051,SCE Metro,TAP,Operational,33.81747416,-118.07192616,Los Angeles County,Long Beach
+Unknown - 4057,SCE Metro,TAP,Operational,33.70014216,-117.87683397,Orange County,Santa Ana
+Unknown - 4060,SCE Metro,TAP,Operational,33.87144815,-118.02855401,Orange County,Buena Park
+Unknown - 4061,SCE Eastern,TAP,Operational,34.02803808,-117.11875323,San Bernardino County,Yucaipa
+Unknown - 4065,SCE Eastern,TAP,Operational,33.15397811,-115.64020533,Imperial County,
+Bunker 2 Tap,SCE Eastern,TAP,Operational,33.83044425,-117.21087308,Riverside County,Perris
+Unknown - 4072,SCE Northern,TAP,Operational,34.68928645,-118.22848888,Los Angeles County,Lancaster
+Unknown - 4074,SCE Northern,TAP,Operational,34.57240225,-118.12922377,Los Angeles County,Palmdale
+Unknown - 4078,SCE Metro,TAP,Operational,33.95892815,-118.22243713,Los Angeles County,South Gate
+Unknown - 4080,SCE NOL,TAP,Operational,34.27264265,-116.84015069,San Bernardino County,Big Bear City
+Unknown - 4085,SCE Northern,TAP,Operational,34.14727846,-118.76725782,Los Angeles County,Agoura Hills
+Unknown - 4088,SCE Metro,TAP,Operational,34.12526512,-117.93391686,Los Angeles County,Irwindale
+Unknown - 4101,SCE Metro,TAP,Operational,33.93906014,-117.92424375,Orange County,La Habra
+Unknown - 4103,SCE Northern,TAP,Operational,36.21160915,-119.31326711,Tulare County,Tulare
+Unknown - 4105,SCE Metro,TAP,Operational,34.02398714,-118.03729185,Los Angeles County,Industry
+Halldale Tap,SCE Metro,TAP,Operational,33.84722617,-118.28398782,Los Angeles County,Carson
+Unknown - 4119,SCE Metro,RISER,Operational,33.91317629,-117.82634376,Orange County,Yorba Linda
+Unknown - 4121,SCE Metro,RISER,Operational,34.09281011,-117.76514789,Los Angeles County,La Verne
+Unknown - 4122,SCE Metro,RISER,Operational,33.72314167,-118.04167023,Orange County,Huntington Beach
+Unknown - 4124,SCE Metro,RISER,Operational,33.85077518,-117.92342593,Orange County,Anaheim
+Unknown - 4125,SCE Eastern,SUBSTATION,Operational,33.83691523,-117.37297159,Riverside County,
+Unknown - 4128,SCE Metro,RISER,Operational,33.65273517,-117.9438899,Orange County,Costa Mesa
+Unknown - 4130,SCE Northern,SUBSTATION,Operational,34.4644882,-120.04433348,Santa Barbara County,
+Unknown - 4132,SCE Eastern,SUBSTATION,Operational,33.66888969,-115.00822839,Riverside County,
+Unknown - 4134,SCE Metro,SUBSTATION,Operational,33.84748417,-118.30946082,Los Angeles County,Torrance
+Unknown - 4135,SCE Metro,RISER,Operational,33.99730512,-117.71480391,San Bernardino County,Chino
+Unknown - 4136,SCE Metro,SUBSTATION,Operational,33.90174711,-118.17323321,Los Angeles County,Paramount
+Unknown - 4137,SCE Metro,SUBSTATION,Operational,34.12975067,-118.47950668,Los Angeles County,Los Angeles
+Unknown - 4138,SCE Metro,SUBSTATION,Operational,34.01383116,-118.46481378,Los Angeles County,Santa Monica
+Unknown - 4139,SCE Metro,SUBSTATION,Operational,33.87674115,-117.95928545,Orange County,Fullerton
+Unknown - 4140,SCE Eastern,NOT AVAILABLE,Operational,33.62742908,-116.1814272,Riverside County,Vista Santa Rosa
+Unknown - 4141,SCE Metro,RISER,Operational,33.99730312,-117.71472291,San Bernardino County,Chino
+Unknown - 4142,SCE Northern,SUBSTATION,Operational,34.20150304,-118.59624726,Los Angeles County,Los Angeles
+Unknown - 4144,SCE Metro,RISER,Operational,33.84680515,-117.92359888,Orange County,Anaheim
+Unknown - 4145,SCE Eastern,RISER,Operational,34.10091482,-117.27931031,San Bernardino County,San Bernardino
+Unknown - 4147,SCE Northern,SUBSTATION,Operational,35.35885543,-118.9253426,Kern County,East Niles
+Unknown - 4150,SCE Metro,RISER,Operational,33.91321301,-117.82626243,Orange County,Yorba Linda
+Unknown - 4153,SCE Metro,RISER,Operational,33.9330143,-118.36987661,Los Angeles County,Lennox
+Unknown - 4154,SCE Metro,RISER,Operational,33.91101739,-117.82603924,Orange County,"Los Angeles--Long Beach--Anaheim, CA"
+Onshore - (SCE Northern),SCE Northern,SUBSTATION,Operational,34.43369233,-119.9121215,Santa Barbara County,
+Unknown - 4157,SCE NOL,SUBSTATION,Operational,34.90826629,-117.91808183,Kern County,Edwards AFB
+Unknown - 4158,SCE Metro,RISER,Operational,34.0674391,-118.21586758,Los Angeles County,Los Angeles
+Unknown - 4159,SCE NOL,SUBSTATION,Operational,34.26117825,-116.83124774,San Bernardino County,Big Bear City
+Bank C,SCE Northern,SUBSTATION,Operational,36.44337613,-118.04385343,Inyo County,
+Unknown - 4163,SCE Metro,NOT AVAILABLE,Operational,33.65456317,-117.86539299,Orange County,Newport Beach
+Unknown - 4164,SCE Metro,SUBSTATION,Operational,33.62947654,-117.72731584,Orange County,Irvine
+Unknown - 4165,SCE Metro,SUBSTATION,Operational,33.9025242,-118.04632103,Los Angeles County,Santa Fe Springs
+Unknown - 4168,SCE Northern,SUBSTATION,Operational,34.91974253,-118.44831651,Kern County,
+Unknown - 4169,SCE Eastern,DEAD END,Operational,34.0481971,-117.47987194,San Bernardino County,Fontana
+Unknown - 4171,SCE Northern,SUBSTATION,Operational,34.35453163,-119.42180383,Ventura County,
+Unknown - 4175,SCE EOP,SUBSTATION,Operational,35.03278886,-114.67743484,San Bernardino County,
+Unknown - 4178,SCE Northern,SUBSTATION,Operational,34.78724259,-118.43223736,Los Angeles County,
+Unknown - 4185,SCE Northern,SUBSTATION,Operational,35.02130584,-118.29735508,Kern County,
+Unknown - 4186,SCE Metro,SUBSTATION,Operational,33.84715983,-118.29160032,Los Angeles County,Los Angeles
+Unknown - 4188,SCE Northern,SUBSTATION,Operational,34.90113729,-118.23865508,Kern County,Rosamond
+Unknown - 4189,SCE Metro,RISER,Operational,33.62360946,-117.69701938,Orange County,Lake Forest
+Unknown - 4190,SCE Metro,SUBSTATION,Operational,33.93541615,-118.08159385,Los Angeles County,Santa Fe Springs
+Unknown - 4192,SCE Metro,SUBSTATION,Operational,34.02784813,-117.99343659,Los Angeles County,Industry
+Unknown - 4193,SCE Metro,SUBSTATION,Operational,33.96602994,-118.38503699,Los Angeles County,Los Angeles
+Unknown - 4194,SCE Northern,SUBSTATION,Operational,34.84707648,-118.3955582,Kern County,
+Unknown - 4195,SCE Metro,RISER,Operational,33.92957515,-118.06416385,Los Angeles County,Norwalk
+Unknown - 4196,SCE Metro,RISER,Operational,33.82940536,-117.91944799,Orange County,Anaheim
+Unknown - 4197,SCE Metro,SUBSTATION,Operational,33.81763481,-117.95872887,Orange County,Anaheim
+Unknown - 4199,SCE Metro,SUBSTATION,Operational,34.04117011,-117.64584049,San Bernardino County,Ontario
+Unknown - 4200,SCE Metro,SUBSTATION,Operational,33.81060606,-117.92372589,Orange County,Anaheim
+Unknown - 4201,SCE Eastern,SUBSTATION,Operational,33.51935563,-117.09497082,Riverside County,Temecula
+Unknown - 4203,SCE Metro,RISER,Operational,34.10343714,-117.9343016,Los Angeles County,Irwindale
+Unknown - 4205,SCE Metro,SUBSTATION,Operational,33.91456949,-117.82447156,Orange County,Yorba Linda
+Unknown - 4207,SCE Eastern,SUBSTATION,Operational,34.0398331,-117.40053796,San Bernardino County,Bloomington
+Unknown - 4209,SCE Metro,SUBSTATION,Operational,33.8497519,-117.84191221,Orange County,Anaheim
+Unknown - 4210,SCE Metro,RISER,Operational,33.85790654,-117.79127856,Orange County,Anaheim
+Unknown - 4213,SCE Metro,SUBSTATION,Operational,33.86893222,-118.37475055,Los Angeles County,Redondo Beach
+Unknown - 4218,SCE Eastern,SUBSTATION,Operational,33.56942922,-116.11258372,Riverside County,
+Unknown - 4219,SCE Northern,SUBSTATION,Operational,35.10731658,-118.38336582,Kern County,
+Unknown - 4223,SCE Metro,DEAD END,Operational,33.80229396,-117.8623845,Orange County,Orange
+Unknown - 4224,SCE Metro,RISER,Operational,33.89948971,-117.82900524,Orange County,Yorba Linda
+Unknown - 4225,SCE Metro,SUBSTATION,Operational,33.88873444,-117.83809138,Orange County,Placentia
+Unknown - 4227,SCE Metro,SUBSTATION,Operational,33.99762012,-117.71541791,San Bernardino County,Chino
+Unknown - 4228,SCE Metro,SUBSTATION,Operational,34.10736376,-117.96133927,Los Angeles County,Irwindale
+Unknown - 4235,SCE Northern,SUBSTATION,Operational,35.02318631,-118.29607443,Kern County,
+Unknown - 4236,SCE Northern,SUBSTATION,Operational,34.82837994,-118.51167201,Kern County,
+Unknown - 4237,SCE Metro,SUBSTATION,Operational,34.07945046,-117.98875139,Los Angeles County,Baldwin Park
+Unknown - 4238,SCE Eastern,SUBSTATION,Operational,34.13096426,-114.37234166,San Bernardino County,Big River
+Unknown - 4239,SCE Metro,DEAD END,Operational,33.87885941,-118.33941379,Los Angeles County,Alondra Park
+Unknown - 4242,SCE Northern,SUBSTATION,Operational,34.19122725,-118.37955131,Los Angeles County,Los Angeles
+Unknown - 4244,SCE Northern,SUBSTATION,Operational,34.24167713,-118.39031113,Los Angeles County,Los Angeles
+Unknown - 4245,SCE Metro,RISER,Operational,33.87594015,-117.96859787,Orange County,Fullerton
+Unknown - 4246,SCE Northern,SUBSTATION,Operational,34.25798019,-118.49315652,Los Angeles County,Los Angeles
+Unknown - 4251,SCE Metro,TAP,Operational,34.30708847,-117.3289459,San Bernardino County,
+Unknown - 4256,SCE Metro,TAP,Operational,33.99701412,-117.70908191,San Bernardino County,Chino
+Universal Studios Tap 2,SCE Metro,TAP,Operational,34.14308314,-118.35943579,Los Angeles County,Los Angeles
+Unknown - 4258,SCE Eastern,TAP,Operational,33.80184707,-116.40626615,Riverside County,"Indio--Palm Desert--Palm Springs, CA"
+Unknown - 4259,SCE Metro,TAP,Operational,33.98971312,-117.7324789,San Bernardino County,Chino Hills
+Unknown - 4263,SCE Eastern,TAP,Operational,33.91017819,-116.55992651,Riverside County,Palm Springs
+Underground Tap 1,SCE Metro,TAP,Operational,34.1175371,-118.23476182,Los Angeles County,Los Angeles
+Newcomb Tap,SCE Eastern,TAP,Operational,33.68450346,-117.15447331,Riverside County,Menifee
+Unknown - 4270,SCE Northern,TAP,Operational,36.4141469,-119.25124728,Tulare County,
+Unknown - 4282,SCE Metro,TAP,Operational,34.12825266,-117.93386923,Los Angeles County,Irwindale
+Unknown - 4286,SCE Northern,TAP,Operational,34.60225687,-118.0723533,Los Angeles County,
+Unknown - 4287,SCE Metro,TAP,Operational,33.94812365,-118.22841726,Los Angeles County,South Gate
+Unknown - 4289,SCE Metro,TAP,Operational,33.7161594,-117.93724895,Orange County,Fountain Valley
+Unknown - 4294,SCE Eastern,TAP,Operational,33.94640938,-117.17417945,Riverside County,Moreno Valley
+Unknown - 4295,SCE Metro,TAP,Operational,33.92374655,-118.38521752,Los Angeles County,El Segundo
+Unknown - 4301,SCE Metro,TAP,Operational,34.0335751,-117.52450294,San Bernardino County,Ontario
+Unknown - 4306,SCE Northern,TAP,Operational,34.19748054,-118.38763821,Los Angeles County,Los Angeles
+Banning Tap,SCE Eastern,TAP,Operational,33.91273568,-116.87231233,Riverside County,Banning
+Unknown - 4313,SCE Metro,TAP,Operational,34.09156328,-117.5755835,San Bernardino County,Rancho Cucamonga
+Unknown - 4319,SCE Eastern,TAP,Operational,34.0483547,-117.48875679,San Bernardino County,Fontana
+Unknown - 4320,SCE Eastern,TAP,Operational,34.10235047,-116.99588849,San Bernardino County,
+Unknown - 4321,SCE Eastern,TAP,Operational,34.05470918,-117.17491683,San Bernardino County,Redlands
+Unknown - 4325,SCE Metro,TAP,Operational,33.83184007,-118.24856946,Los Angeles County,Carson
+Unknown - 4327,SCE Northern,TAP,Operational,34.11324196,-118.75099288,Los Angeles County,
+Unknown - 4328,SCE Metro,TAP,Operational,34.0917179,-118.09967105,Los Angeles County,San Gabriel
+Unknown - 4334,SCE Northern,TAP,Operational,36.12489595,-118.81746303,Tulare County,
+Unknown - 4336,SCE Northern,TAP,Operational,34.67503367,-118.14799228,Los Angeles County,Lancaster
+Elsinore Tap,SCE Eastern,TAP,Operational,33.68399063,-117.33165868,Riverside County,Lake Elsinore
+Unknown - 4342,SCE Eastern,TAP,Operational,34.05209197,-117.27858635,San Bernardino County,San Bernardino
+Unknown - 4346,SCE Northern,TAP,Operational,36.31262234,-119.36743615,Tulare County,Visalia
+Universal Studios Tap,SCE Metro,TAP,Operational,34.14322061,-118.35922871,Los Angeles County,Los Angeles
+Unknown - 4351,SCE Northern,TAP,Operational,34.41337912,-118.45737975,Los Angeles County,Santa Clarita
+Glendale South Tap 6,SCE Metro,TAP,Operational,34.11337211,-118.24756481,Los Angeles County,Los Angeles
+Moreno Tap,SCE Eastern,TAP,Operational,33.94649932,-117.15650637,Riverside County,Moreno Valley
+Unknown - 4364,SCE Northern,TAP,Operational,35.99328408,-119.17887408,Tulare County,
+Unknown - 4367,SCE Metro,TAP,Operational,33.98993412,-117.69056091,San Bernardino County,Chino
+Unknown - 4369,SCE Metro,TAP,Operational,33.91723473,-117.96842672,Orange County,La Habra
+Unknown - 4371,SCE Metro,TAP,Operational,33.95703615,-118.18643083,Los Angeles County,Cudahy
+Unknown - 4377,SCE Metro,TAP,Operational,33.75947837,-117.8062782,Orange County,North Tustin
+Unknown - 4378,SCE Northern,TAP,Operational,34.34141717,-119.24153762,Ventura County,
+Eagle Rock Underground Tap 1,SCE Metro,TAP,Operational,34.12339375,-118.22248903,Los Angeles County,Los Angeles
+Unknown - 4388,SCE Eastern,TAP,Operational,34.07380229,-117.17360621,San Bernardino County,Redlands
+Unknown - 4391,SCE Metro,TAP,Operational,33.63692207,-117.86267643,Orange County,Newport Beach
+Unknown - 4395,SCE Eastern,TAP,Operational,34.0809885,-117.17358669,San Bernardino County,Redlands
+Unknown - 4397,SCE Northern,TAP,Operational,34.68928107,-118.17487477,Los Angeles County,Lancaster
+Unknown - 4399,SCE Metro,TAP,Operational,33.89651037,-117.58986597,Riverside County,Corona
+Springville,SCE,SUBSTATION,Operational,36.10795255,-118.93804584,Tulare County,
+Santa Clara,SCE,SUBSTATION,Operational,34.30226125,-119.18492599,Ventura County,
+Ormond Beach,SCE,SUBSTATION,Operational,34.1307962,-119.16706366,Ventura County,Oxnard
+El Segundo,SCE,SUBSTATION,Operational,33.90843881,-118.42306272,Los Angeles County,El Segundo
+Ellis - (SCE),SCE,SUBSTATION,Operational,33.68533416,-117.94308589,Orange County,Huntington Beach
+Lewis,SCE,SUBSTATION,Operational,33.80925851,-117.8990747,Orange County,Anaheim
+Serrano,SCE,SUBSTATION,Operational,33.82885994,-117.78968273,Orange County,Orange
+Julian Hinds,SCE,SUBSTATION,Operational,33.70470126,-115.62659273,Riverside County,
+Devers - SCE,SCE,SUBSTATION,Operational,33.93473565,-116.57788157,Riverside County,
+Kem,SCE,SUBSTATION,Operational,33.86115606,-115.48868536,Riverside County,
+Mirage,SCE,SUBSTATION,Operational,33.81849739,-116.37009851,Riverside County,Thousand Palms
+Valley - (SCE),SCE,SUBSTATION,Operational,33.73998954,-117.15610183,Riverside County,Menifee
+Pastoria,SCE,SUBSTATION,Operational,34.93527285,-118.84311541,,Arvin
+Sycamore,SCE,SUBSTATION,Operational,35.45226566,-118.99040293,Kern County,
+Antelope - (SCE),SCE,SUBSTATION,Operational,34.68750792,-118.30052909,Los Angeles County,Lancaster
+Arcogen,SCE,SUBSTATION,Operational,33.81748999,-118.24346507,Los Angeles County,Carson
+Bailey,SCE,SUBSTATION,Operational,34.77650703,-118.77470327,Los Angeles County,
+Eagle Rock - (SCE),SCE,SUBSTATION,Operational,34.15085125,-118.18430624,Los Angeles County,Glendale
+El Nido - (SCE),SCE,SUBSTATION,Operational,33.89565377,-118.37330991,Los Angeles County,Hawthorne
+Goodrich,SCE,SUBSTATION,Operational,34.15135145,-118.08790942,Los Angeles County,Pasadena
+Harborgen,SCE,SUBSTATION,Operational,33.7789243,-118.22730532,Los Angeles County,Los Angeles
+Hinson,SCE,SUBSTATION,Operational,33.81926415,-118.22252687,Los Angeles County,Long Beach
+La Cienega,SCE,SUBSTATION,Operational,34.00073315,-118.37831478,Los Angeles County,Ladera Heights
+Mesa - (SCE),SCE,SUBSTATION,Operational,34.03725796,-118.11045806,Los Angeles County,Monterey Park
+Olinda - (SCE),SCE,SUBSTATION,Operational,33.94626792,-117.92229797,Los Angeles County,Rowland Heights
+Pardee - (SCE),SCE,SUBSTATION,Operational,34.43926556,-118.58282378,Los Angeles County,Santa Clarita
+Vincent,SCE,SUBSTATION,Operational,34.48596106,-118.11846856,Los Angeles County,Acton
+Warne,SCE,SUBSTATION,Operational,34.6850699,-118.78854143,Los Angeles County,
+Kramer - SCE,SCE,SUBSTATION,Operational,34.98947498,-117.54238387,San Bernardino County,
+Lugo,SCE,SUBSTATION,Operational,34.36662345,-117.36861843,San Bernardino County,
+Mt. Pass,SCE,SUBSTATION,Operational,35.5015562,-115.55220113,San Bernardino County,
+Pisgah,SCE,SUBSTATION,Operational,34.78157654,-116.38472017,San Bernardino County,
+Victor - (SCE),SCE,SUBSTATION,Operational,34.50493544,-117.38837479,San Bernardino County,Victorville
+Vista - SCE,SCE,SUBSTATION,Operational,34.0413401,-117.31919396,San Bernardino County,Grand Terrace
+Huntington Beach,SCE,SUBSTATION,Operational,33.64596303,-117.97780972,Orange County,Huntington Beach
+Alberhill,SCE,SUBSTATION ASSUMED,Proposed,33.73452419,-117.41250985,,Karona
+Rancho Vista,SCE,SUBSTATION,Operational,34.08849549,-117.5345205,San Bernardino County,Rancho Cucamonga
+Inyo,SCE,SUBSTATION,Operational,37.34206766,-118.44091835,Inyo County,
+Control,SCE,SUBSTATION,Operational,37.33631483,-118.48087292,Inyo County,
+Big Creek 1,SCE,SUBSTATION,Operational,37.20395044,-119.24291235,Fresno County,Big Creek
+Walnut - (SCE),SCE,SUBSTATION,Operational,34.00826577,-117.94991566,Los Angeles County,Industry
+Chevmain,SCE,SUBSTATION,Operational,33.90248441,-118.40287465,Los Angeles County,El Segundo
+Long Beach,SCE,SUBSTATION,Operational,33.76563468,-118.22513856,Los Angeles County,Long Beach
+Cool Water,SCE,SUBSTATION,Operational,34.863107,-116.85419496,San Bernardino County,
+Rerc,SCE,SUBSTATION,Operational,33.96216493,-117.45288407,Riverside County,Riverside
+Eagle Mt.,SCE,SUBSTATION,Operational,33.81082577,-115.45364504,Riverside County,
+San Onofre,SCE,SUBSTATION,Operational,33.36968096,-117.55422612,San Diego County,
+Mandalay,SCE,SUBSTATION,Operational,34.20734748,-119.24911042,Ventura County,Oxnard
+Sandlot,SCE,SUBSTATION,Operational,34.99707498,-117.30298789,San Bernardino County,
+Highwind,SCE,SUBSTATION,Operational,35.09945022,-118.37811143,Kern County,
+Sylmar-Pac Intertie,SCE,SUBSTATION,Operational,34.30532013,-118.50046553,Los Angeles County,Los Angeles
+Viejo - (SCE),SCE,SUBSTATION,Operational,33.66700203,-117.642363,Orange County,Lake Forest
+Blythe,SCE,SUBSTATION,Operational,33.60620765,-114.59984385,Riverside County,Blythe
+Windhub,SCE,SUBSTATION,Operational,35.0348446,-118.28067751,Kern County,
+Whirlwind,SCE,SUBSTATION,Operational,34.85927301,-118.43520486,Kern County,
+Colorado River,SCE,SUBSTATION,Operational,33.57897512,-114.81591613,Riverside County,
+Red Bluff - (SCE),SCE,SUBSTATION,Operational,33.69808958,-115.31317485,Riverside County,
+Ivanpah,SCE,SUBSTATION,Operational,35.54440795,-115.46891493,San Bernardino County,
+Alamitos,SCE,SUBSTATION ASSUMED,Operational,33.76482934,-118.09887037,Los Angeles County,Long Beach
+Calcite,SCE,SUBSTATION ASSUMED,Operational,34.52098302,-116.917785,San Bernardino,Lucerne Valley
+Lee Lake (Proposed),SCE Eastern,SUBSTATION ASSUMED,Proposed,33.74982709,-117.44998927,Riverside County,Temescal Valley
+Lugo - Pisgah (Proposed),SCE,SUBSTATION,Proposed,34.39830927,-116.635902,San Bernardino,Lucerne Valley
+North of SONGS,SCE,SUBSTATION ASSUMED,,33.44924518,-117.57441797,SAN DIEGO,SAN CLEMENTE
+Cielo Azul,SCE,SUBSTATION ASSUMED,,33.64852482,-113.93914355,La Paz,Sunwest
+Delaney SCE 500kV,SCE,SUBSTATION ASSUMED,,33.48112493,-113.03398879,Maricopa County,TONOPAH
+Eldorado SCE 500kV,SCE,SUBSTATION ASSUMED,,35.79731475,-115.00898823,Clark County,BOULDER CITY
+Mohave SCE 500kV,SCE,SUBSTATION ASSUMED,,35.1474648,-114.59498836,Clark County,LAUGHLIN
+Palo Verde SCE 500kV,SCE,SUBSTATION ASSUMED,,33.38472001,-112.85904303,Maricopa County,TONOPAH
+Primm SEC 230kV,SCE,SUBSTATION ASSUMED,,35.64108479,-115.34898818,Clark County,JEAN
+New Sub - Kramer - Lugo (Proposed),SCE,SUBSTATION ASSUMED,,34.57652498,-117.41314167,SAN BERNARDINO,ADELANTO
+Kokanee,SCE,SUBSTATION,,37.22136239,-119.23416949,Fresno County,
+Fontana P.H.,SCE,SUBSTATION,,34.15559151,-117.39707961,San Bernardino County,
+Ontario Ph.2,SCE,SUBSTATION,,34.17328208,-117.67649664,Los Angeles County,
+Sharon - SCE,SCE,SUBSTATION,,34.22627362,-118.2427621,Los Angeles County,
+Stirrup,SCE,SUBSTATION,,33.75207201,-118.32986575,Los Angeles County,
+Modoc - SCE,SCE,SUBSTATION,,34.43022786,-119.71471933,Santa Barbara County,
+Ralphs,SCE,SUBSTATION,,33.87073417,-118.23625187,Los Angeles County,
+Exeter,SCE,SUBSTATION,,36.29882531,-119.14260287,Tulare County,
+Woodlake,SCE,SUBSTATION,,36.41546018,-119.09970145,Tulare County,
+San Gorgonio No.2,SCE,SUBSTATION,,34.01861494,-116.89488577,Riverside County,
+Diemer,SCE,SUBSTATION,,33.91423026,-117.82282688,Orange County,
+Stevedore,SCE,SUBSTATION,,33.74282167,-118.18939174,Los Angeles County,
+Pier,SCE,SUBSTATION,,33.7471323,-118.2041211,Los Angeles County,
+Arch Beach,SCE,SUBSTATION,,33.5280108,-117.76971535,Orange County,
+Skinwater,SCE,SUBSTATION,,33.5842843,-117.07833641,Riverside County,
+Hillgen - SCE South,SCE,SUBSTATION,,34.0226263,-118.02530098,Los Angeles County,
+Server,SCE,SUBSTATION,,33.92078485,-118.38495508,Los Angeles County,
+N.W.C.,SCE,SUBSTATION,,35.65097282,-117.66820663,Kern County,
+Kerrgen,SCE,SUBSTATION,,35.76333543,-117.37764399,San Bernardino County,
+Wellgen,SCE,SUBSTATION,,35.79061223,-119.29413365,Tulare County,
+Ringmill - SCE Northwest,SCE,SUBSTATION,,33.89617267,-118.16858423,Los Angeles County,
+Haagen,SCE,SUBSTATION,,36.18619778,-119.33322559,Tulare County,
+Fish Lake Valley,SCE,SUBSTATION,,37.48955457,-117.86719984,Mono County,
+Garden State,SCE,SUBSTATION,,34.06072693,-117.79023075,Los Angeles County,
+Mcgrath,SCE,SUBSTATION,,34.20516927,-119.24715899,Ventura County,
+Booth Road (Bia),SCE,SUBSTATION,,34.0856757,-114.42969363,La Paz County,
+Weymouth,SCE,SUBSTATION,,34.10874578,-117.77888908,Los Angeles County,
+Sparkle,SCE,SUBSTATION,,34.61629001,-117.94223685,Los Angeles County,
+Canadian,SCE,SUBSTATION,,34.2630035,-117.16184381,San Bernardino County,
+Bristol,SCE,SUBSTATION,,33.75628033,-117.88213667,Orange County,
+Porter,SCE,SUBSTATION,,34.28575009,-118.44614877,Los Angeles County,
+Griswold,SCE,SUBSTATION,,34.29367953,-118.43321927,Los Angeles County,
+Valley Elect. Assoc.,SCE,SUBSTATION,,36.4083667,-116.42166182,Nye County,
+Tejon (Pgae),SCE,SUBSTATION,,34.48654105,-118.51382849,Los Angeles County,
+Ship,SCE,SUBSTATION,,33.76820187,-118.21141255,Los Angeles County,
+East Transition Station,SCE,SUBSTATION,,33.98657322,-117.71425025,San Bernardino County,
+Covina,SCE,SUBSTATION,,34.09008156,-117.88753261,Los Angeles County,
+Divisadero,SCE,SUBSTATION,,36.33450362,-119.30953014,Tulare County,
+Haiwee - SCE North,SCE,SUBSTATION,,36.48893492,-117.87114315,Inyo County,
+Lytle Creek P.H.,SCE,SUBSTATION,,34.20389965,-117.44692367,San Bernardino County,
+Taft - SCE,SCE,SUBSTATION,,34.81953378,-119.46114251,Santa Barbara County,
+Ontario Ph.1,SCE,SUBSTATION,,34.17329963,-117.67649084,Los Angeles County,
+Process,SCE,SUBSTATION,,33.74500931,-118.1904815,Los Angeles County,
+Purify,SCE,SUBSTATION,,34.78131314,-118.16573143,Los Angeles County,
+Rcho Msn Viejo (Sdge),SCE,SUBSTATION,,33.53436364,-117.5493241,Orange County,
+Wharf,SCE,SUBSTATION,,33.74198892,-118.18976591,Los Angeles County,
+Cleargen,SCE,SUBSTATION,,33.89071651,-117.59009454,Riverside County,
+Fogarty - SCE,SCE,SUBSTATION,,33.7018464,-117.37397451,Riverside County,
+Coygen - SCE North,SCE,SUBSTATION,,33.62532326,-117.83229869,Orange County,

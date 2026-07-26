@@ -1,0 +1,4 @@
+model,l2_regularization,learning_rate,max_depth,max_leaf_nodes,min_samples_leaf
+cell_mean,,,,,
+linear,,,,,
+hist_gbm,0.030332002719541333,0.025421050711698624,9.0,34.0,115.0

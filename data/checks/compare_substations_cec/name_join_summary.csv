@@ -1,0 +1,4 @@
+utility,n_subs,basin_name_matched,cec_name_matched,cec_unmatched,median_dist_util_vs_cec_km,p95_dist_util_vs_cec_km,n_util_cec_over_1km
+PGE,670,605,501,169,0.034,0.109,3
+SCE,578,527,465,113,0.058,0.314,2
+SDGE,99,96,65,34,1.327,3.892,41

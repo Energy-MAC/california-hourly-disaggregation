@@ -1,0 +1,2 @@
+spearman_r,spearman_p,n_nodes,frac_substations_reassigned,frac_load_mass_reassigned,added_dist_km_median,added_dist_km_p95,fallback_frac_substations,fallback_frac_load_mass,voltage_match_rate_proximity,voltage_match_rate_restricted_nonfallback
+0.7402251186114316,2.4890684397404456e-186,1070,0.08006042296072508,0.10863252496200451,3.5264895000000003,7.738564961036,0.23867069486404835,0.14999064476568608,0.7746478873239436,1.0

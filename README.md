@@ -70,7 +70,7 @@ below.
 
 ### Substation rankings
 
-`scripts/load_projection/rank_substations.py` ranks all substations at four temporal
+`scripts/load_projection/shared/rank_substations.py` ranks all substations at four temporal
 aggregation levels.  Run this once (or whenever the substation profiles are updated)
 before running any disaggregation script.
 
@@ -107,7 +107,7 @@ data/figures/load_projection/
 ```
 
 ```bash
-python scripts/load_projection/rank_substations.py
+python scripts/load_projection/shared/rank_substations.py
 ```
 
 ---
@@ -220,27 +220,27 @@ PGE+SCE+SDGE 242–384 TWh (2025–2050); RESOLVE PGE+SCE+SDGE 241 TWh (2024-sca
 
 ```bash
 # ReEDS — both historic and projected, default params (max_load, monthhour)
-python scripts/load_projection/disaggregate_reeds.py
+python scripts/load_projection/approach1/disaggregate_reeds.py
 
 # ReEDS — historic only; also write full hourly parquet
-python scripts/load_projection/disaggregate_reeds.py --mode historic --save-output
+python scripts/load_projection/approach1/disaggregate_reeds.py --mode historic --save-output
 
 # ReEDS — projected, alternate weight column
-python scripts/load_projection/disaggregate_reeds.py --mode projected --weight-col min_load
+python scripts/load_projection/approach1/disaggregate_reeds.py --mode projected --weight-col min_load
 
 # IEPR — defaults: 2025 vintage, Planning_Scenario, BASELINE_CONSUMPTION
-python scripts/load_projection/disaggregate_iou.py --source iepr
+python scripts/load_projection/approach1/disaggregate_iou.py --source iepr
 
 # IEPR — different vintage or scenario
-python scripts/load_projection/disaggregate_iou.py --source iepr --vintage 2024
-python scripts/load_projection/disaggregate_iou.py --source iepr --scenario Local_Reliability
+python scripts/load_projection/approach1/disaggregate_iou.py --source iepr --vintage 2024
+python scripts/load_projection/approach1/disaggregate_iou.py --source iepr --scenario Local_Reliability
 
 # RESOLVE — all 23 weather years, defaults
-python scripts/load_projection/disaggregate_iou.py --source resolve
+python scripts/load_projection/approach1/disaggregate_iou.py --source resolve
 
 # Either source — also write the full hourly parquet
-python scripts/load_projection/disaggregate_iou.py --source iepr --save-output
-python scripts/load_projection/disaggregate_iou.py --source resolve --save-output
+python scripts/load_projection/approach1/disaggregate_iou.py --source iepr --save-output
+python scripts/load_projection/approach1/disaggregate_iou.py --source resolve --save-output
 ```
 
 ---
@@ -281,10 +281,10 @@ correlation structure are unchanged (see spec).
 
 #### Scripts and parameters
 
-`scripts/load_projection/estimate_stochastic.py` — no arguments; writes the
+`scripts/load_projection/approach2/estimate_stochastic.py` — no arguments; writes the
 three parameter tables below.
 
-`scripts/load_projection/generate_stochastic.py`:
+`scripts/load_projection/approach2/generate_stochastic.py`:
 
 | Flag | Options | Default |
 |------|---------|---------|
@@ -338,15 +338,15 @@ exactly standard normal (skewed weather distribution), not from the sampler.
 #### Run commands
 
 ```bash
-python scripts/load_projection/estimate_stochastic.py
-python scripts/load_projection/generate_stochastic.py --validate
-python scripts/load_projection/generate_stochastic.py --family normal --F 0.80 --n-draws 20
-python scripts/load_projection/generate_stochastic.py --target forecast.csv --z-mode bootstrap --save-output
+python scripts/load_projection/approach2/estimate_stochastic.py
+python scripts/load_projection/approach2/generate_stochastic.py --validate
+python scripts/load_projection/approach2/generate_stochastic.py --family normal --F 0.80 --n-draws 20
+python scripts/load_projection/approach2/generate_stochastic.py --target forecast.csv --z-mode bootstrap --save-output
 ```
 
 #### Figures
 
-`scripts/load_projection/plot_stochastic.py` writes to
+`scripts/load_projection/approach2/plot_stochastic.py` writes to
 `data/figures/load_projection/stochastic/`:
 
 - `rho_by_month_hour.png`, `shape_s_by_month_hour.png` — 12-subplot month
@@ -365,7 +365,7 @@ python scripts/load_projection/generate_stochastic.py --target forecast.csv --z-
 
 ### Nodal mapping — projecting substation loads onto an external test system
 
-`scripts/load_projection/map_loads_to_nodes.py` assigns each projected
+`scripts/load_projection/nodal/map_loads_to_nodes.py` assigns each projected
 substation's load to the nearest node of an external system (CATS —
 `data/raw/CATS/CATS_buses.csv` — by default; any node CSV with id/lat/lon
 columns works via `--id-col/--lat-col/--lon-col`). Rules:
@@ -378,6 +378,13 @@ columns works via `--id-col/--lat-col/--lon-col`). Rules:
   'Substation'`, non-`IMPORT` — excludes 5,699 line-routing AddedNodes). To
   let AddedNodes receive load, pass `--no-default-filters` (optionally with
   `--filter "col=value"` refinements on any node-file column).
+- Candidates are further restricted to nodes that **ever carry load in the
+  target system's own demand table** (CATS: `Demand_data.csv`, columns
+  `Demand_MW_z{bus_i}`) — a node the target model never treats as a demand
+  bus is not a meaningful place to route disaggregated load. For CATS this
+  drops 1,307 of 3,168 `Type='Substation'` buses, leaving **1,861** real
+  candidates. Disable with `--no-demand-filter`; override the file/column
+  prefix with `--demand-file`/`--demand-col-prefix` for other node systems.
 - **ReEDS synthetic substations** (Del Norte / Lassen / Modoc / Siskiyou —
   counties with no utility substations) have no real location, so "closest"
   does not apply to them. Instead each one's load is **split equally across
@@ -406,33 +413,99 @@ columns works via `--id-col/--lat-col/--lon-col`). Rules:
   draw parquets are matrix-multiplied through the share matrix.
 
 **TODO (planned improvements):**
-- Assignment currently ignores node voltage — a distribution substation
-  lands on a 230/500 kV bus if it is nearest. Planned refinement: prefer the
-  lowest-kV candidate within the tie tolerance.
 - **22 substations have no coordinates** (21 SCE, 1 PGE — Visalia, Safari,
   Costa Mesa, Fair Oaks, etc. — real, presumably locatable sites; see
   `unmapped_substations.csv`). Finding and adding their coordinates should
   be straightforward and would eliminate the need for `--unmapped` entirely.
 
-CATS result: 1,325 real substations (nearest-node, 220 tie-shared across 2+
-buses) + 4 synthetic (county equal-split: Lassen 26 nodes, Modoc 14, Siskiyou
-37; Del Norte has 0 in-county CATS buses so falls back to its nearest node)
-→ 1,484 of 3,168 candidate buses. Real-substation distance: median **0.07 km**
-(p95 6.4 km); 33 land > 10 km away (0.47% of fleet load — mostly zero-load
-desert substations). Conservation out/in with `--unmapped drop`: stochastic
-0.99837, ReEDS 0.99904 (= 1 minus the 0.17% unmapped share); exactly 1.0 with
-`--unmapped renormalize` (used above).
+CATS result (post zero-demand filter, 1,861 candidate buses): 1,325 real
+substations (nearest-node, 76 tie-shared across 2+ buses) + 4 synthetic
+(county equal-split: Lassen 9 nodes, Modoc 8, Siskiyou 12; Del Norte has 0
+in-county CATS buses with nonzero demand, so falls back to its nearest node,
+49.0 km) → **1,070** distinct buses receive load. Real-substation distance:
+median **0.13 km** (p95 19.8 km, max 105.7 km); 157 substations land > 10 km
+away — worse than the pre-filter tail (median unchanged, but the demand
+filter removes many nearby-but-load-free candidates, so some substations now
+reach farther for a bus the target model actually treats as a demand point).
+Conservation out/in with `--unmapped drop`: stochastic 0.99837, ReEDS 0.99904
+(= 1 minus the 0.17% unmapped share); exactly 1.0 with `--unmapped
+renormalize` (used above).
 
 Outputs (`data/processed/load_projection/nodal/{system}/`):
 `substation_node_map.csv` (utility, substation, node, share, dist_km, n_tied,
-is_synthetic), `unmapped_substations.csv`, and per `--apply` input a
-`nodal__{run_tag}__{stem}.csv/.parquet`. Known limitations (future work): the
+is_synthetic, assignment_method) for `--voltage-mode off`;
+`substation_node_map__voltrestrict.csv` (adds sub_kv_highside, sub_kv_class,
+node_kv, voltage_match) for `--voltage-mode restrict` — both coexist, `off`'s
+output is never overwritten by a `restrict` run. Also `unmapped_substations.csv`,
+and per `--apply` input a `nodal__{run_tag}__{stem}.csv/.parquet`. Known
+limitations (future work): the
 stochastic approach only covers the PGE/SCE/SDGE fraction of CAISO, and
 non-IOU regions in the weights approach have no within-region variance.
 
 ```bash
-python scripts/load_projection/map_loads_to_nodes.py --system CATS \
+python scripts/load_projection/nodal/map_loads_to_nodes.py --system CATS \
     --apply data/processed/load_projection/projections/stochastic__eia930__normal__Fcal__native/substation_annual_mwh.csv
+```
+
+#### Voltage-aware assignment (`--voltage-mode restrict`)
+
+By default (`--voltage-mode off`, unchanged from above) nearest-node
+assignment ignores voltage entirely — a distribution substation can land on a
+230/500 kV bus if it happens to be closest. `--voltage-mode restrict`
+instead requires the assigned node's CATS voltage class to match the
+substation's own high-side class before nearest-node applies, falling back to
+unrestricted nearest for substations with no known voltage or with no
+same-class node within `--voltage-max-dist-km` (default = `--max-dist-km`).
+
+**Substation high-side voltage** (`highside_kv` in
+`substation_attributes_clean.csv`, computed by `process_substations_clean.py`):
+SCE/SDGE publish a transformer-ratio string (`substation_voltage`, e.g.
+`"115/33 kV"`) whose first token is the high side — used directly, no join.
+PGE publishes no such field, so its `highside_kv` comes entirely from CEC's
+`max_voltage_kv`, attached by normalized-name `.map()` (never a row-dropping
+merge — see "CEC substation reference" below for why that matters for PGE).
+Both this and the CATS node's own `kV` column are snapped onto CATS's four
+bus classes {66, 115, 230, 500 kV} by `band_to_cats_class()` — boundaries at
+the geometric mean of adjacent levels (87.1, 162.6, 339.1 kV).
+
+**Validation before trusting this as a mapping input**
+(`checks/validate_voltage.py`, → `data/checks/voltage_validation/`):
+coverage is PGE 611/670 substations from CEC (59 none), SCE 557/578 from the
+utility + 5 CEC rescue (16 none), SDGE 99/99 from the utility. Utility-vs-CEC
+class agreement is only ~87% for SCE/SDGE, which looked like a data problem
+until cross-checked against a *third* SCE signal (`sys_name`, e.g. substation
+"Zanja" belongs to sys_name "El Casco 220/115 System" — this names the
+transmission *system/area* a substation is fed from, not its own voltage).
+The system name's **low** leg (115) agrees with the utility's own high-side
+rating 87.7% of the time, while its **high** leg (220) agrees with CEC's
+`max_voltage_kv` only 8% of the time — the opposite of what a data-entry
+error would produce. Read straightforwardly: **CEC's `max_voltage_kv` tends
+to record a site's broader transmission-area voltage, not the specific
+substation's own load-attachment voltage.** This doesn't affect SCE/SDGE
+(utility value used directly) but is a real caveat for **PGE, whose
+`highside_kv` is ~100% CEC-derived** — its voltage classes may skew toward
+the area's bulk voltage. Consequently, under proximity-only mapping the
+substation's class already matches its assigned node's class only 65.8% of
+the time for PGE, vs 90.5% (SCE) and 79.8% (SDGE) — the gap `--voltage-mode
+restrict` is designed to close.
+
+**Sensitivity vs proximity-only** (`checks/compare_voltage_mapping.py`, →
+`data/checks/voltage_mapping_comparison/`): per-node load Spearman **r =
+0.740** between the two mappings; **8.0%** of substations get a different
+node-set, moving **10.9%** of load mass (PGE ~19%, SDGE ~13%, SCE ~4% — tracks
+the coverage/caveat above). Reassigned substations travel a median **3.5 km**
+farther (p95 7.7 km) to reach a same-class node. **23.9%** of substations
+(15.0% of load mass) have no known voltage or no same-class node within
+range and fall back to unrestricted nearest. Voltage-match rate: proximity
+77.5% → voltage-restricted 100% among non-fallback rows. Net picture:
+proximity gets most assignments right, and voltage-restriction is a
+targeted, quantifiable correction to a specific minority, not a wholesale
+reshuffling — the intended, defensible result.
+
+```bash
+python scripts/load_projection/nodal/map_loads_to_nodes.py --system CATS --voltage-mode restrict
+python scripts/load_projection/checks/validate_voltage.py
+python scripts/load_projection/checks/compare_voltage_mapping.py
 ```
 
 #### Figures
@@ -473,9 +546,153 @@ Three figure scripts, all reusable across node systems and approaches:
   distance). Output: `data/figures/load_projection/pipeline/`.
 
 ```bash
-python scripts/load_projection/plot_coverage_map.py --system CATS
-python scripts/load_projection/plot_nodal_diagnostics.py --system CATS
-python scripts/load_projection/plot_pipeline_explainers.py
+python scripts/load_projection/nodal/plot_coverage_map.py --system CATS
+python scripts/load_projection/nodal/plot_nodal_diagnostics.py --system CATS
+python scripts/load_projection/shared/plot_pipeline_explainers.py
+```
+
+#### Validation against ReEDS
+
+Two independent checks against ReEDS, at county and balancing-area (p-region)
+resolution respectively.
+
+- **`validate_county_reeds.py`** — for every county with ≥1 real IOU
+  substation, compares the county's Approach 2 stochastic total (substations
+  in that county, mean over Monte Carlo draws, summed) against an
+  independent ReEDS-implied county load: `p_region annual load ×
+  county_pgroup_fraction` (the same purely-geographic Stage-1 weight
+  `disaggregate_reeds.py` uses — it has no dependence on substation load
+  shape, so it is a genuinely independent reference). Compared over the 8
+  years both sources cover historically (2016–2023). Pooled relative RMSE
+  **105%** of mean county-year load — but this single number is misleading:
+  error is almost entirely explained by non-IOU (municipal utility) coverage
+  gaps, not model error. Counties fully inside PGE/SCE/SDGE territory match
+  closely (Fresno 8.1%, Alameda 6.7%, Ventura 3.1%, Humboldt 1.2% relative
+  RMSE), while counties with large municipal-utility service areas — which
+  ReEDS' county load includes but our substation dataset structurally
+  cannot, since PacifiCorp/SMUD/IID/LADWP/MID are out of scope — show huge
+  negative bias: Sacramento (SMUD) −98.9%, Imperial (IID) −99.8%, Stanislaus
+  (MID + PGE mix) −90.0%, Los Angeles (LADWP + SCE mix) −51.9%. **Trinity
+  (−94.8%) is the one large-magnitude gap that is NOT a muni-coverage
+  artifact** — real PGE territory with only 1 scraped substation, i.e. a
+  genuine undersampling case (see "Nodal coverage gaps" below). One notable
+  outlier in the other direction: Mono county is stochastic **+301%** over
+  ReEDS — not a bug (its 9 real substations were spot-checked), just a small
+  low-population but high-tourism-load (Mammoth Lakes) county where ReEDS'
+  population/employment-based `ca_load_fraction` understates actual metered
+  demand. Output: `data/processed/load_projection/validation/
+  county_reeds_stochastic_annual_{long,summary}.csv`,
+  `data/figures/load_projection/validation/county_reeds_relrmse_bar.png`.
+- **`plot_ba_iou_comparison.py`** — coarser check: are ReEDS p-regions
+  utility-pure? No official IOU service-territory shapefile exists, so
+  utility footprint is approximated by the real substation point cloud.
+  Result: p9 = 96.8% PGE, p11 = 100% SDGE, p10 = 90.4% SCE with an 8.6% PGE
+  bleed-through (52 substations — eastern Sierra/high-desert counties like
+  Mono/Inyo where PGE and SCE territory interleave near the p9/p10
+  boundary). p8 has zero PGE/SCE/SDGE substations (confirmed
+  PacifiCorp-only). Output: `data/processed/load_projection/validation/
+  ba_iou_purity.csv`, `data/figures/load_projection/validation/ba_iou_map.png`.
+
+```bash
+python scripts/load_projection/checks/validate_county_reeds.py
+python scripts/load_projection/checks/plot_ba_iou_comparison.py
+```
+
+#### Nodal coverage gaps
+
+Filtering candidate nodes to only those the target system ever loads (above)
+surfaces a coverage problem distinct from mapping *accuracy*: several
+counties have real IOU substations but far more CATS demand buses than
+substations to route load to, so most of that county's buses end up with
+zero load even though the county clearly has real demand. Two flavors, only
+one of which the nodal mapping can fix on its own:
+
+- **Sparse-but-real coverage** (e.g. **Trinity**: 4 candidate buses, 1
+  substation, ratio 0.25) — genuinely undersampled utility territory; more
+  scraped substations would directly help.
+- **Municipal-utility gaps** (e.g. **Sacramento**/SMUD: 190 buses, 1
+  substation; **Imperial**/IID: 22 buses, 1 substation) — PGE/SCE/SDGE never
+  had substations there to scrape; the gap isn't sampling error, it's a
+  utility genuinely outside this project's data sources.
+
+`coverage_by_county_{system}.csv` (from `plot_coverage_map.py`) has the full
+per-county `n_substations`/`n_nodes` breakdown used to identify both cases.
+
+#### Hybrid county top-up (prototype)
+
+`scripts/load_projection/nodal/hybrid_county_topup.py` — **PROTOTYPE, not wired
+into `map_loads_to_nodes.py` or either approach's pipeline.** For every
+county whose (real substations / demand-filtered candidate nodes) ratio is
+below `--ratio-threshold` (default 0.5) AND whose ReEDS county reference
+exceeds its Approach 2 stochastic total, the shortfall is distributed across
+that county's *uncovered* CATS nodes (never its substations) — including
+municipal-utility-dominated counties, since the target is CATS nodes that
+already stand in for the county's actual MOU buses, not IOU substations.
+Two distribution methods, selected by `--method`:
+
+- `equal` (default) — every uncovered node gets an identical share
+  (shortfall / n_uncovered), same convention as ReEDS synthetic substations.
+- `proportional` — split in proportion to each uncovered node's own load in
+  CATS's `Demand_data.csv`, so nodes CATS already models as bigger demand
+  points receive a proportionally bigger share. Falls back to `equal` for a
+  county where every uncovered node happens to have zero CATS load (does not
+  occur for CATS in practice, since uncovered nodes are drawn from the same
+  nonzero-demand candidate pool as everywhere else in the pipeline).
+
+At the default threshold, **5 counties qualify**: Sacramento (+7.9 TWh/yr
+across 188 nodes), Stanislaus (+3.7 TWh/yr, 35 nodes), Imperial (+3.1 TWh/yr,
+22 nodes), Trinity (+77 GWh/yr, 3 nodes), Inyo (+25 GWh/yr, 5 nodes) — stable
+across all 8 overlap years, no zero-uncovered-node dead ends. Los Angeles
+does **not** qualify despite its real LADWP gap (LA has enough SCE
+substations that its ratio never drops below 0.5) — the ratio gate only
+catches "too few substations relative to nodes," not "utility present but
+muni-mixed"; a different trigger would be needed to also cover LA.
+
+Outputs: `data/processed/load_projection/validation/
+hybrid_topup_{counties,nodes}_{method}.csv`,
+`data/figures/load_projection/validation/hybrid_topup_map_{method}.png`.
+
+```bash
+python scripts/load_projection/nodal/hybrid_county_topup.py --method equal
+python scripts/load_projection/nodal/hybrid_county_topup.py --method proportional
+```
+
+#### Statewide total validation
+
+`scripts/load_projection/checks/validate_approach_totals.py` compares each
+approach's full statewide annual total against EIA-930 CAISO actual demand
+and ReEDS's own statewide `CA_total`, 2016–2023. Two of the four
+comparisons are informative; two are tautological by construction (see
+script docstring) — the honest reading is:
+
+- **Approach 2 (stochastic) vs EIA-930 CAISO**: mean **−26.4%**, stable
+  within a **0.3 percentage-point range** across all 8 years. This is NOT a
+  0% target — Approach 2 is calibrated to F\*=0.7361 of CAISO by design, not
+  100% of it — but the year-to-year *stability* of that ratio is a genuine
+  confirmatory result (IOU share of CAISO hasn't drifted 2016–2023).
+- **Approach 2 (stochastic) vs ReEDS CA\_total (statewide)**: mean **−37.9%**
+  — the municipal-utility + PacifiCorp share of the state, on top of the
+  F\*-driven gap above.
+- **Approach 1 (weights) vs EIA-930 CAISO**: mean **+18.6%** — NOT an
+  Approach-1 modeling error. Approach 1's chain weights conserve each ReEDS
+  p-region's total exactly by construction, so this number is really "does
+  ReEDS's own historic reconstruction agree with actual observed CAISO
+  demand" (+18.2% of that gap) plus the small PacifiCorp/p8 addition. ReEDS's
+  "CAISO_total" region (p9+p10+p11) is also geographically broader than the
+  EIA-930 CISO balancing authority — it includes BANC/IID/LDWP/TIDC
+  territory inside those same counties — so a persistent double-digit gap is
+  expected, matching the "this process should be less close to CAISO"
+  intuition.
+- **Approach 1 (weights) vs ReEDS CA\_total**: mean **≈0.0000%** — expected;
+  a conservation sanity check (Approach 1 reconstructs its own ReEDS input
+  exactly), not new information.
+
+Output: `data/processed/load_projection/validation/
+approach_totals_vs_reference.csv`,
+`data/figures/load_projection/validation/approach_totals_vs_reference.png`.
+
+```bash
+python scripts/load_projection/checks/validate_approach_totals.py
 ```
 
 ---
@@ -530,11 +747,18 @@ california-hourly-disaggregation/
 │   │   ├── pge/                    # PG&E scraper and feeder download
 │   │   ├── sce/                    # SCE scraper, ingest, and validation
 │   │   ├── sdge/                   # SDG&E scraper
+│   │   ├── smud/                   # SMUD POI capacity heatmap scraper
 │   │   ├── bves/                   # BVES scraper (placeholder)
 │   │   ├── calpeco/                # CalPeco scraper (placeholder)
 │   │   ├── pacificorp/             # PacifiCorp scraper
 │   │   ├── substations/            # Substation processing, audit, and spatial join
 │   │   │   ├── process_substations_clean.py   # Clean and deduplicate substation profiles
+│   │   │   ├── process_substations_misc.py    # DataBasin 2022 reference → ca_substations_2022.csv
+│   │   │   ├── process_substations_cec.py     # CEC 2026 DataPull → ca_substations_cec.csv
+│   │   │   ├── compare_substations_cec.py     # Cleaned utility subs vs CEC (name + coord accuracy)
+│   │   │   ├── build_cec_name_dictionary.py   # utility→CEC name dict (cecSourceDictionary.csv)
+│   │   │   ├── map_review_candidates.py       # interactive map for reviewing unresolved names
+│   │   │   ├── audit_substation_coverage.py   # coverage/coordinate/CEC-gap accounting (checks CSVs)
 │   │   │   └── assign_substation_counties.py  # Spatial join: substations → county → p-region
 │   │   ├── compare_cal_region_sources.py    # EIA API CAL vs PUDL CA5 sum
 │   │   ├── compare_eia_sources.py           # EIA API scrape vs PUDL nightly
@@ -542,6 +766,7 @@ california-hourly-disaggregation/
 │   │   ├── compare_resolve_iepr_eia.py      # RESOLVE vs IEPR vs EIA (with ReEDS overlay)
 │   │   ├── compare_substation_eia_iepr.py   # Substation profiles vs EIA and IEPR
 │   │   ├── compare_cats_basin.py            # CATS vs DataBasin substation coverage
+│   │   ├── compare_cats_cec.py              # CATS vs CEC 2026 DataPull (basin successor)
 │   │   ├── compare_cats_substations.py      # CATS vs cleaned utility substations
 │   │   ├── compare_cats_unfiltered.py       # CATS vs unfiltered utility substations
 │   │   ├── compare_lcr_pge.py               # PG&E LCR PDF substation list vs Basin and our data
@@ -708,6 +933,172 @@ applies per-cell deduplication: for each `(substation, month, hour)` the row wit
 highest year is retained, so May–December data for substations in the 2026 batch falls
 back to 2025 automatically.  This gives full 12-month coverage per substation using the
 most recent available percentile snapshot.  See `process_substations_clean.py`.
+
+### CEC Substation DataPull (2026) — updated basin successor
+
+The **CEC Substation DataPull (07/24/2026)** is a direct data request granted by the
+California Energy Commission — a newer, richer version of the same underlying dataset
+that DataBasin 2022 ("basin") was built from. It supersedes basin as the authoritative
+statewide substation reference, and because **CATS is itself derived from basin**, this
+new pull is the intended basis for eventually replacing CATS node coordinates.
+
+**Raw:** `data/raw/CEC_Substation_DataPull_07242026.gdb/` (Esri File Geodatabase, one
+point layer, 4,828 rows, native EPSG:3310; `Lat`/`Lon` attribute columns are WGS84).
+**Processed:** `data/processed/substation_misc/ca_substations_cec.csv`
+(`process_substations_cec.py`) — mirrors basin's `ca_substations_2022.csv` schema
+exactly (name, owner_std, type, hifld_id, max_voltage_kv, latitude, longitude, …) so
+the two references are drop-in comparable, plus CEC-only columns (status, CPUC
+cross-references, `cec_resolve_area`, urban/rural, imagery-verified flag).
+
+**Basin results are kept and reported separately** — nothing about the basin pipeline
+(`process_substations_misc.py`, `compare_cats_basin.py`, `substation_attributes_clean.csv`'s
+`basin_lat`/`basin_lon` fallback) is changed. The CEC work lives in parallel scripts and
+output folders:
+
+| Basin (2022) | CEC (2026) counterpart |
+|--------------|------------------------|
+| `ca_substations_2022.csv` (4,442 rows) | `ca_substations_cec.csv` (4,828 rows) |
+| `compare_cats_basin.py` → `data/checks/compare_cats_basin/` | `compare_cats_cec.py` → `data/checks/compare_cats_cec/` |
+| `compare_substations.py` §D basin-match counts | `compare_substations_cec.py` → `data/checks/compare_substations_cec/` |
+| figs `cats_basin_*.png` | figs `cats_cec_*.png` |
+
+**Key validation findings:**
+
+1. **CEC ≈ basin at the record level** (they share a common origin). Of 4,247
+   substations sharing a HIFLD ID between the two datasets, the median coordinate
+   shift is **1.3 m** and only 2 moved more than 1 km — CEC is an *extension* of basin
+   (386 more rows, richer attributes), not a wholesale re-survey.
+
+2. **CATS is fully contained in CEC.** All **3,171 of 3,171** CATS substation buses
+   match a CEC record within 2 km (median distance **≈0 m**, max 0.25 km) — vs the same
+   100% against basin. This confirms CATS was built from this data lineage and that
+   **CEC can replace basin as CATS's coordinate reference with zero loss of CATS
+   coverage**, while adding 915 CEC substations CATS does not model (mostly smaller
+   PGE/SCE/SDGE distribution substations plus muni/other-utility sites — see
+   `cec_cats_join.csv`, `cats_matched == False`).
+
+3. **CEC recovers 2 of the 12 previously un-locatable substations** (SCE Topanga and
+   Paularino, which had neither a utility nor a basin coordinate) via exact name match.
+
+4. **Utility-vs-CEC coordinate agreement** (substations where both our utility scrape
+   and CEC give a location — an accuracy cross-check basin never offered, since basin is
+   only used as a fallback when the utility coordinate is missing): PGE and SCE agree
+   almost perfectly (median **34 m** / **58 m**, only 3 / 2 substations disagreeing by
+   >1 km). **SDGE is the outlier** — median **1.33 km**, 41 of 65 name-matched pairs
+   disagreeing by >1 km, up to ~9.7 km (Santa Ysabel, Jamacha). This flags SDGE's own
+   published substation coordinates as the least reliable of the three IOUs and is worth
+   a closer look; the full list is in `name_join_matched_sdge.csv`.
+
+Exact normalized-name match rates (before the dictionary below): PGE 501/670, SCE
+465/578, SDGE 65/99.
+
+**CEC name dictionary** (`build_cec_name_dictionary.py` → `data/cecSourceDictionary.csv`,
+the CEC analogue of the hand-curated `data/basinSourceDictionary.csv`). Because CEC
+inherited basin's naming, the existing basin dictionary is **directly repurposable** —
+70 of its 79 `BasinName` targets exist verbatim as a CEC name. The builder combines three
+tiers: (1) *basin_reuse* — the transferable basin-dict entries; (2) *name_auto* — a
+utility name whose CEC counterpart matches once CEC's systematic " - (OWNER)" suffix is
+stripped (`norm_base()`); this is the reliable signal for SDGE, whose centroid
+coordinates (see below) are too offset for a spatial gate; (3) *spatial_auto* — nearest
+CEC record within 0.25 km. Remaining unmatched utility substations are written to
+`data/checks/find_cec_name_candidates/cec_candidates_{util}.csv` for manual review.
+
+A fourth tier (`name_auto_assumed`) rescues substations whose only CEC match has an
+unconfirmed owner tag (CEC records "Other (PGE - Assumed)" etc, filtered out of tiers
+1–3 to keep the confirmed-owner match honest) — auto-accepted only on an exact name
+match, never on spatial proximity alone. This tier exists because a handful of PGE
+substations (RUSSELL, LODI, LOCKHEED NO 1/2, BERKELEY T, and others) had obvious
+sub-100m CEC matches that were invisible to the confirmed-owner search entirely, not
+merely excluded from auto-accept.
+
+With the dictionary applied, the **CEC cross-reference rate** (scraped substations tied
+to a CEC record by direct name or dictionary) is **PGE 666/670, SCE 559/578, SDGE 90/99**
+— vs basin's post-dictionary 605 / 527 / 96. CEC+dict beats basin for PGE (+61) and SCE
+(+32); SDGE trails by 6 (genuinely different or missing names). Aggregate: **1,315
+cross-referenced vs basin's 1,228 (+87)**.
+
+**This is a cross-reference/enrichment rate, NOT a coordinate-availability rate — do not
+read "666/670" as "4 PGE substations lack a location."** Every scraped substation already
+carries the utility's own published coordinate (`util_lat/lon`); basin and CEC are only
+fallbacks and independent cross-checks. Of all 1,347 scraped substations, 1,335 have a
+coordinate from the utility or basin, and **only 12 (all SCE) lack any coordinate** — CEC
+recovers 2 of those 12 (Topanga, Paularino). The value of the CEC match is validating the
+utility coordinate (this is how the SDGE centroid offset below was found) and pulling CEC
+attributes, not supplying a missing location. The 9 unmatched SDGE substations, for
+instance, all still have their own utility coordinate. See
+`scripts/data/substations/audit_substation_coverage.py` for the full reproducible
+accounting.
+
+The remaining unresolved names (0 PGE, 5 SCE, 2 SDGE as of the last run) are written to
+`data/checks/find_cec_name_candidates/cec_candidates_{util}.csv` with an
+`already_in_dict` column so it's clear which rows are already resolved vs need a human.
+`scripts/data/substations/map_review_candidates.py` renders an interactive map (every
+CEC/basin record within 3 km of the utility coordinate, not just rule-matched
+candidates) for visually reviewing what's left.
+
+### CEC coverage audit — what we scraped vs what CEC lists
+
+`scripts/data/substations/audit_substation_coverage.py` produces the full reproducible
+accounting (→ `data/checks/substation_coverage_audit/`), separating three questions that
+are easy to conflate:
+
+1. **Coordinates** (`coverage_summary.csv`) — the table above: 1,335 / 1,347 scraped
+   substations have a coordinate; only 12 SCE lack one.
+2. **CEC cross-reference** — the 666 / 559 / 90 name-match counts.
+3. **Reverse gap** (`cec_unscraped_{util}.csv`) — CEC is a location inventory of *every*
+   substation, while our scrape is a load inventory of only the substations a utility
+   publishes profiles for, so CEC lists far more IOU substations than we have load data
+   for. Each unscraped CEC record is tagged by its CEC `type`:
+
+   | Utility | CEC records | load-eligible (`SUBSTATION`) | line structures (`TAP`/`RISER`/`DEAD END`) | unmatched to our scrape |
+   |---------|-------------|------------------------------|---------------------------------------------|--------------------------|
+   | PGE | 2,246 | 1,728 | 476 | 1,579 (1,061 substations · 476 structures) |
+   | SCE | 1,598 | 1,269 | 301 | 1,038 (709 substations · 301 structures) |
+   | SDGE | 366 | 337 | 25 | 276 (247 substations · 25 structures) |
+
+   The `type` field is the primary filter for "likely carries load": **`TAP`, `RISER`,
+   and `DEAD END` are line structures that carry no load** and must be excluded from any
+   projection-target set. Among the remaining `SUBSTATION`-type records, `max_voltage_kv`
+   is a secondary filter — the highest-voltage unmatched records (500 kV: Tesla, Round
+   Mtn, Table Mtn, …) are bulk transmission substations that also carry no *retail* load.
+   The `cec_unscraped_{util}.csv` files sort load-eligible unmatched records first so the
+   genuine expansion candidates are at the top.
+
+**Why SDGE coordinates disagree — polygon centroids.** `src/data/sdge/sdge_scraper.py`
+derives substation coordinates from **polygon centroids** (`use_centroid=True` in the
+load-profile scraper, `return_centroid=True` in the attribute scraper). SDGE publishes
+substations as area polygons, so the centroid sits away from the point CEC/HIFLD record —
+hence the 1.33 km median gap and cases like "Salt Creek"/"Santee" matching CEC by name
+but landing 0.58 km away. PGE and SCE publish point coordinates and agree with CEC to
+~30–58 m.
+
+```bash
+python scripts/data/substations/process_substations_cec.py   # build ca_substations_cec.csv
+python scripts/data/compare_cats_cec.py                       # CATS vs CEC coverage + figs
+python scripts/data/substations/compare_substations_cec.py    # utility vs CEC name/coord check
+python scripts/data/substations/build_cec_name_dictionary.py  # cecSourceDictionary.csv
+```
+
+### SMUD substations (POI capacity heatmap)
+
+SMUD is a municipal utility, not one of the scraped IOUs, so its substations are a known
+coverage gap — Sacramento County shows many CATS demand buses but no scraped substation.
+`scripts/data/smud/scrape_smud_heatmap.py` pulls the SMUD Points-of-Interconnection
+capacity heatmap (<https://www.smud.org/heatmap/index.html>, a PowerGEM React/Leaflet app
+backed by a static JSON) into `data/raw/smud/smud_heatmap_substations.csv`.
+
+This is a **transmission-level** POI map: **13** major SMUD substations (11 × 230 kV, 2 ×
+115 kV), not the full distribution network. Each carries per-scenario available
+interconnection capacity (MW) for four study cases (Heavy Summer, Light Spring, Partial
+Peak Discharging, Charging). The JSON `lat`/`lon` are PSS/E model coordinates, not WGS84;
+the scraper re-derives a 2-D affine transform to WGS84 at runtime from 8 unambiguous
+230 kV SMUD substations in the CEC reference (anchor residual median ~0.03 km, max
+~0.10 km) and applies it to all 13, so even substations without a clean CEC name (e.g.
+"STA. E") get an accurate coordinate.
+
+```bash
+python scripts/data/smud/scrape_smud_heatmap.py
+```
 
 ### ReEDS Projected Load (NREL)
 
@@ -988,7 +1379,7 @@ python scripts/data/substations/process_substations_clean.py
 Applies filtering, deduplication, coordinate enrichment, and DST correction to produce
 the analysis-ready versions used by all comparison scripts:
 
-**`substation_attributes_clean.csv`** — 1,341 substations (PGE 664 · SCE 578 · SDGE 99)
+**`substation_attributes_clean.csv`** — 1,347 substations (PGE 670 · SCE 578 · SDGE 99)
 
 Filtering applied: P.T. (pass-through switching) substations removed (170 SCE, 8 SDGE); PacifiCorp excluded (no metered load profiles); SCE deduplication — bulk download preferred over scraped data on matching keys.
 
@@ -1000,7 +1391,10 @@ Filtering applied: P.T. (pass-through switching) substations removed (170 SCE, 8
 | basin_lat, basin_lon | Coordinates from DataBasin CA Substations 2022 (fallback) |
 | dist_to_basin_km | Haversine distance (km) between util and Basin coordinate matches |
 | sub_type | Substation type (e.g. "Distribution", "Transmission") |
-| substation_voltage, voltage_kv | Primary bus voltage label and numeric kV |
+| substation_voltage, voltage_kv | Transformer-ratio string (SCE/SDGE) and numeric secondary/low-side kV — NOT a transmission rating, see `highside_kv` |
+| highside_kv | High-side (transmission) voltage: `substation_voltage`'s first token (SCE/SDGE) else CEC `max_voltage_kv` (all utilities, only source for PGE) — see "Nodal mapping > Voltage-aware assignment" |
+| highside_kv_source | `utility` \| `cec` \| `none` |
+| cec_max_voltage_kv | Raw CEC value backing `highside_kv` when sourced from CEC (`-99` sentinel / NaN dropped) |
 | sys_name | SCE system/circuit area name |
 | division | PG&E service division (e.g. "Kern", "Bay") |
 | subst_id | Internal substation ID (PG&E, SCE) |
@@ -1514,7 +1908,7 @@ subtracts it will always read lower than one that does not.
 | **Substations** (PGE/SCE/SDGE clean profiles) | **Net-of-BTM at the substation meter** (revised 2026-07-16; previously documented as gross) | Net demand at the distribution substation | Raw from utility scraped profiles (`substation_load_profiles_clean.csv`) | n/a (percentile envelope, not an annual total) |
 
 **Substation net-of-BTM evidence** (`# VERIFIED: sanity check`, from
-`scripts/load_projection/stochastic_diagnostics.py`): 13,318 cells across 368
+`scripts/load_projection/approach2/stochastic_diagnostics.py`): 13,318 cells across 368
 substations have negative `min_load` (reverse flow — only possible when BTM
 export exceeds local load), and the implied scaling factor
 `Σμ_s / CAISO_cell_mean` dips midday (0.66 at h10–11 vs 0.72–0.74 overnight) —

@@ -1,0 +1,3637 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_3cfbbe9856b0f358d62370231dfb399b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_3cfbbe9856b0f358d62370231dfb399b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_3cfbbe9856b0f358d62370231dfb399b = L.map(
+                "map_3cfbbe9856b0f358d62370231dfb399b",
+                {
+                    center: [37.5, -120.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_93badb7590898ad4528741e40e6c56a2 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_93badb7590898ad4528741e40e6c56a2.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_fb3ee4a9a1a3e6c0eedd1b47a0a42b78 = L.marker(
+                [37.86457393824122, -122.25905444052576],
+                {
+}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            var icon_ef1ad714f4ac254f41a704bf002845ed = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_fb3ee4a9a1a3e6c0eedd1b47a0a42b78.bindTooltip(
+                `<div>
+                     SOURCE: BERKELEY T (PGE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fb3ee4a9a1a3e6c0eedd1b47a0a42b78.setIcon(icon_ef1ad714f4ac254f41a704bf002845ed);
+            
+    
+            var circle_marker_45dcf6e92198164901793abecaee227f = L.circleMarker(
+                [37.86395375, -122.25894809],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+        var popup_0dfedc82d225d19f6ac939d8b0327bbb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_23bb8fd3cc5597293f927fb1d1dd4b5b = $(`<div id="html_23bb8fd3cc5597293f927fb1d1dd4b5b" style="width: 100.0%; height: 100.0%;"><b>Berkeley T</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 0.07 km</div>`)[0];
+                popup_0dfedc82d225d19f6ac939d8b0327bbb.setContent(html_23bb8fd3cc5597293f927fb1d1dd4b5b);
+            
+        
+
+        circle_marker_45dcf6e92198164901793abecaee227f.bindPopup(popup_0dfedc82d225d19f6ac939d8b0327bbb)
+        ;
+
+        
+    
+    
+            circle_marker_45dcf6e92198164901793abecaee227f.bindTooltip(
+                `<div>
+                     CEC: Berkeley T (pge_assumed, SUBSTATION) — 0.07 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c6eaf16390b62605bed323ca7a8e2c11 = L.circleMarker(
+                [37.85803969, -122.26867425],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+        var popup_08e0b54af64d6a185cdf4fc6bc1a094c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3b9b6115a6a91425f7fdf0a74d307fe9 = $(`<div id="html_3b9b6115a6a91425f7fdf0a74d307fe9" style="width: 100.0%; height: 100.0%;"><b>Stuart - (PG&E)</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 1.11 km</div>`)[0];
+                popup_08e0b54af64d6a185cdf4fc6bc1a094c.setContent(html_3b9b6115a6a91425f7fdf0a74d307fe9);
+            
+        
+
+        circle_marker_c6eaf16390b62605bed323ca7a8e2c11.bindPopup(popup_08e0b54af64d6a185cdf4fc6bc1a094c)
+        ;
+
+        
+    
+    
+            circle_marker_c6eaf16390b62605bed323ca7a8e2c11.bindTooltip(
+                `<div>
+                     CEC: Stuart - (PG&E) (pge, SUBSTATION) — 1.11 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_de3b402592d8e1f1e3d1559dca20c3f7 = L.circleMarker(
+                [37.87586687, -122.24537661],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+        var popup_c14ec0663dcda95376e180f43537dbc1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c8a221dea3235b5db7057e418d506b58 = $(`<div id="html_c8a221dea3235b5db7057e418d506b58" style="width: 100.0%; height: 100.0%;"><b>Hillside</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 1.74 km</div>`)[0];
+                popup_c14ec0663dcda95376e180f43537dbc1.setContent(html_c8a221dea3235b5db7057e418d506b58);
+            
+        
+
+        circle_marker_de3b402592d8e1f1e3d1559dca20c3f7.bindPopup(popup_c14ec0663dcda95376e180f43537dbc1)
+        ;
+
+        
+    
+    
+            circle_marker_de3b402592d8e1f1e3d1559dca20c3f7.bindTooltip(
+                `<div>
+                     CEC: Hillside (pge_assumed, SUBSTATION) — 1.74 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1a2d3a6048109f8edbf5b1e7dbf0694c = L.circleMarker(
+                [37.87616904, -122.24575082],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+        var popup_021fcc0750ecd08e9e749258949617d9 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ac0a4f06eb48ff7017c0189cbde8b1da = $(`<div id="html_ac0a4f06eb48ff7017c0189cbde8b1da" style="width: 100.0%; height: 100.0%;"><b>Grizzly - (Other)</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 1.74 km</div>`)[0];
+                popup_021fcc0750ecd08e9e749258949617d9.setContent(html_ac0a4f06eb48ff7017c0189cbde8b1da);
+            
+        
+
+        circle_marker_1a2d3a6048109f8edbf5b1e7dbf0694c.bindPopup(popup_021fcc0750ecd08e9e749258949617d9)
+        ;
+
+        
+    
+    
+            circle_marker_1a2d3a6048109f8edbf5b1e7dbf0694c.bindTooltip(
+                `<div>
+                     CEC: Grizzly - (Other) (pge_assumed, SUBSTATION) — 1.74 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2434b9671146b678c8004d564222c816 = L.circleMarker(
+                [37.8724246, -122.27815591],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+        var popup_ee5f0bc6c3ada022350f04da70533d14 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a5135da3947bf56e250f3f361a0163dc = $(`<div id="html_a5135da3947bf56e250f3f361a0163dc" style="width: 100.0%; height: 100.0%;"><b>Berkeley F</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 1.89 km</div>`)[0];
+                popup_ee5f0bc6c3ada022350f04da70533d14.setContent(html_a5135da3947bf56e250f3f361a0163dc);
+            
+        
+
+        circle_marker_2434b9671146b678c8004d564222c816.bindPopup(popup_ee5f0bc6c3ada022350f04da70533d14)
+        ;
+
+        
+    
+    
+            circle_marker_2434b9671146b678c8004d564222c816.bindTooltip(
+                `<div>
+                     CEC: Berkeley F (pge, SUBSTATION) — 1.89 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5598ce97cc4bfcbe973915589fc7fa8c = L.circleMarker(
+                [37.85448174, -122.27965371],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+        var popup_02bda29daa378fbdfbdf206950b80eaa = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e79e4f9a9f983e6402e4d51a2e644e60 = $(`<div id="html_e79e4f9a9f983e6402e4d51a2e644e60" style="width: 100.0%; height: 100.0%;"><b>Russell</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 2.13 km</div>`)[0];
+                popup_02bda29daa378fbdfbdf206950b80eaa.setContent(html_e79e4f9a9f983e6402e4d51a2e644e60);
+            
+        
+
+        circle_marker_5598ce97cc4bfcbe973915589fc7fa8c.bindPopup(popup_02bda29daa378fbdfbdf206950b80eaa)
+        ;
+
+        
+    
+    
+            circle_marker_5598ce97cc4bfcbe973915589fc7fa8c.bindTooltip(
+                `<div>
+                     CEC: Russell (pge_assumed, SUBSTATION) — 2.13 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_388cac94ab50327a38d5f2a194e478b7 = L.circleMarker(
+                [37.88497751, -122.25509253],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+        var popup_12d7ba2592ed94041d6ded0d11c0b19e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_30545520550a22a5428ffb7c63c13059 = $(`<div id="html_30545520550a22a5428ffb7c63c13059" style="width: 100.0%; height: 100.0%;"><b>Ridge</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.30 km</div>`)[0];
+                popup_12d7ba2592ed94041d6ded0d11c0b19e.setContent(html_30545520550a22a5428ffb7c63c13059);
+            
+        
+
+        circle_marker_388cac94ab50327a38d5f2a194e478b7.bindPopup(popup_12d7ba2592ed94041d6ded0d11c0b19e)
+        ;
+
+        
+    
+    
+            circle_marker_388cac94ab50327a38d5f2a194e478b7.bindTooltip(
+                `<div>
+                     CEC: Ridge (pge, SUBSTATION) — 2.30 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fb4947a395e7b055e6ed5c64f8899318 = L.circleMarker(
+                [37.88891931, -122.27292584],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+        var popup_ad6915d2181030a8c1ff1095b75612ac = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_941534fee09b4604f56a3037861686cb = $(`<div id="html_941534fee09b4604f56a3037861686cb" style="width: 100.0%; height: 100.0%;"><b>Arlington</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.97 km</div>`)[0];
+                popup_ad6915d2181030a8c1ff1095b75612ac.setContent(html_941534fee09b4604f56a3037861686cb);
+            
+        
+
+        circle_marker_fb4947a395e7b055e6ed5c64f8899318.bindPopup(popup_ad6915d2181030a8c1ff1095b75612ac)
+        ;
+
+        
+    
+    
+            circle_marker_fb4947a395e7b055e6ed5c64f8899318.bindTooltip(
+                `<div>
+                     CEC: Arlington (pge, SUBSTATION) — 2.97 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5d51e3fed503d6092e4decf4d7775d72 = L.circleMarker(
+                [37.86395871640366, -122.25896128682572],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            circle_marker_5d51e3fed503d6092e4decf4d7775d72.bindTooltip(
+                `<div>
+                     basin: Berkeley T (other, SUBSTATION) — 0.07 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9db253c46bd8546f61de270a0dca78a0 = L.circleMarker(
+                [37.85804465342326, -122.26868745271749],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            circle_marker_9db253c46bd8546f61de270a0dca78a0.bindTooltip(
+                `<div>
+                     basin: Stuart (pge, SUBSTATION) — 1.11 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c2c15fd3caa8a415268d83c657dc394 = L.circleMarker(
+                [37.875871837941325, -122.24538980699218],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            circle_marker_6c2c15fd3caa8a415268d83c657dc394.bindTooltip(
+                `<div>
+                     basin: Hillside (other, SUBSTATION) — 1.74 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4eab5109289e04cd8c8b72aa7749d4d5 = L.circleMarker(
+                [37.8761740015629, -122.24576402139796],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            circle_marker_4eab5109289e04cd8c8b72aa7749d4d5.bindTooltip(
+                `<div>
+                     basin: Grizzly (other, SUBSTATION) — 1.74 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ad925e919b737692d491d2c52ce1266f = L.circleMarker(
+                [37.87242956835905, -122.27816911147052],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            circle_marker_ad925e919b737692d491d2c52ce1266f.bindTooltip(
+                `<div>
+                     basin: Berkeley F (pge, SUBSTATION) — 1.89 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_415a2e9ed547bdf733013644de701ce1 = L.circleMarker(
+                [37.85448670185692, -122.27966691690987],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            circle_marker_415a2e9ed547bdf733013644de701ce1.bindTooltip(
+                `<div>
+                     basin: Russell (other, SUBSTATION) — 2.13 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1b52db0bc4721cfded36ee5eedccbc25 = L.circleMarker(
+                [37.88498247194448, -122.25510573016852],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            circle_marker_1b52db0bc4721cfded36ee5eedccbc25.bindTooltip(
+                `<div>
+                     basin: Ridge (pge, SUBSTATION) — 2.30 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7000ba93758e59910c3a361faab02a02 = L.circleMarker(
+                [37.88892427650707, -122.2729390429972],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf);
+        
+    
+            circle_marker_7000ba93758e59910c3a361faab02a02.bindTooltip(
+                `<div>
+                     basin: Arlington (pge, SUBSTATION) — 2.97 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_acb0056b6727b1de12cb20548737751b = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_846c08f41099a661aeb047ab731b00f2 = L.marker(
+                [37.4097706587578, -122.03110865958986],
+                {
+}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+            var icon_bc8d1f7c1682e75109ef2209535f94d2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_846c08f41099a661aeb047ab731b00f2.bindTooltip(
+                `<div>
+                     SOURCE: LOCKHEED NO 1 (PGE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_846c08f41099a661aeb047ab731b00f2.setIcon(icon_bc8d1f7c1682e75109ef2209535f94d2);
+            
+    
+            var circle_marker_98b49c67dfe3f1d3e89d1922eb6fc80d = L.circleMarker(
+                [37.40953644, -122.03176303],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+        var popup_4d5fce18bde0927a4515747c456c23c7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0ec87834331801a8d810cb9e96141b02 = $(`<div id="html_0ec87834331801a8d810cb9e96141b02" style="width: 100.0%; height: 100.0%;"><b>Lockheed 1</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 0.06 km</div>`)[0];
+                popup_4d5fce18bde0927a4515747c456c23c7.setContent(html_0ec87834331801a8d810cb9e96141b02);
+            
+        
+
+        circle_marker_98b49c67dfe3f1d3e89d1922eb6fc80d.bindPopup(popup_4d5fce18bde0927a4515747c456c23c7)
+        ;
+
+        
+    
+    
+            circle_marker_98b49c67dfe3f1d3e89d1922eb6fc80d.bindTooltip(
+                `<div>
+                     CEC: Lockheed 1 (pge_assumed, SUBSTATION) — 0.06 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a3ae8d820325efb0e7a21ea3f6110f48 = L.circleMarker(
+                [37.41612839, -122.03078966],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+        var popup_8d97a06e1cb303680129579027725311 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_288664b0b334e4c399615578d2af72a9 = $(`<div id="html_288664b0b334e4c399615578d2af72a9" style="width: 100.0%; height: 100.0%;"><b>Lockheed 2</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 0.71 km</div>`)[0];
+                popup_8d97a06e1cb303680129579027725311.setContent(html_288664b0b334e4c399615578d2af72a9);
+            
+        
+
+        circle_marker_a3ae8d820325efb0e7a21ea3f6110f48.bindPopup(popup_8d97a06e1cb303680129579027725311)
+        ;
+
+        
+    
+    
+            circle_marker_a3ae8d820325efb0e7a21ea3f6110f48.bindTooltip(
+                `<div>
+                     CEC: Lockheed 2 (pge_assumed, SUBSTATION) — 0.71 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f7df68a65d17d842ee0fc87c0d48cb3a = L.circleMarker(
+                [37.4195562, -122.03716404],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+        var popup_83944c1cb8a8111cf55a96bd2ffbbc70 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ecb8d8968e22e05fd2002817251babe8 = $(`<div id="html_ecb8d8968e22e05fd2002817251babe8" style="width: 100.0%; height: 100.0%;"><b>Moffet Field Tap</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 1.21 km</div>`)[0];
+                popup_83944c1cb8a8111cf55a96bd2ffbbc70.setContent(html_ecb8d8968e22e05fd2002817251babe8);
+            
+        
+
+        circle_marker_f7df68a65d17d842ee0fc87c0d48cb3a.bindPopup(popup_83944c1cb8a8111cf55a96bd2ffbbc70)
+        ;
+
+        
+    
+    
+            circle_marker_f7df68a65d17d842ee0fc87c0d48cb3a.bindTooltip(
+                `<div>
+                     CEC: Moffet Field Tap (pge, TAP) — 1.21 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_27af7981251468ced0fc7a742d66ca0f = L.circleMarker(
+                [37.4186756, -122.03931467],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+        var popup_834bba088fa0fea5d0e0bd469276ba25 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_12fc6e2ff4fd956469af2e438fe28973 = $(`<div id="html_12fc6e2ff4fd956469af2e438fe28973" style="width: 100.0%; height: 100.0%;"><b>Moffet Field</b><br>owner: WAPA<br>type: SUBSTATION<br>status: Operational<br>dist: 1.23 km</div>`)[0];
+                popup_834bba088fa0fea5d0e0bd469276ba25.setContent(html_12fc6e2ff4fd956469af2e438fe28973);
+            
+        
+
+        circle_marker_27af7981251468ced0fc7a742d66ca0f.bindPopup(popup_834bba088fa0fea5d0e0bd469276ba25)
+        ;
+
+        
+    
+    
+            circle_marker_27af7981251468ced0fc7a742d66ca0f.bindTooltip(
+                `<div>
+                     CEC: Moffet Field (wapa, SUBSTATION) — 1.23 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e482f0d7b1d7a162d2178872dc3e9516 = L.circleMarker(
+                [37.41482283, -122.00588186],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+        var popup_3713fc6717bdfd36d8d29f4ea9757088 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e1a61b93be11eba0590f40c0ad9683cc = $(`<div id="html_e1a61b93be11eba0590f40c0ad9683cc" style="width: 100.0%; height: 100.0%;"><b>Lockheed 2 Tap</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 2.30 km</div>`)[0];
+                popup_3713fc6717bdfd36d8d29f4ea9757088.setContent(html_e1a61b93be11eba0590f40c0ad9683cc);
+            
+        
+
+        circle_marker_e482f0d7b1d7a162d2178872dc3e9516.bindPopup(popup_3713fc6717bdfd36d8d29f4ea9757088)
+        ;
+
+        
+    
+    
+            circle_marker_e482f0d7b1d7a162d2178872dc3e9516.bindTooltip(
+                `<div>
+                     CEC: Lockheed 2 Tap (pge, TAP) — 2.30 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7a8dac36048348a2bb65213b172b475d = L.circleMarker(
+                [37.39720119, -122.01031639],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+        var popup_2fb36497693d4b6d49d39405065f746f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9995ce28a3bda6e4fc08b3c25926440d = $(`<div id="html_9995ce28a3bda6e4fc08b3c25926440d" style="width: 100.0%; height: 100.0%;"><b>Lawrence</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.31 km</div>`)[0];
+                popup_2fb36497693d4b6d49d39405065f746f.setContent(html_9995ce28a3bda6e4fc08b3c25926440d);
+            
+        
+
+        circle_marker_7a8dac36048348a2bb65213b172b475d.bindPopup(popup_2fb36497693d4b6d49d39405065f746f)
+        ;
+
+        
+    
+    
+            circle_marker_7a8dac36048348a2bb65213b172b475d.bindTooltip(
+                `<div>
+                     CEC: Lawrence (pge, SUBSTATION) — 2.31 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d62faac8e235218edca327d3eb8ee8fc = L.circleMarker(
+                [37.41725438, -122.00515997],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+        var popup_0806d99e826efe620c66fc004791a810 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5c74d1d604dc9445fcef0e794991e5de = $(`<div id="html_5c74d1d604dc9445fcef0e794991e5de" style="width: 100.0%; height: 100.0%;"><b>Lockheed 1 Tap</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 2.44 km</div>`)[0];
+                popup_0806d99e826efe620c66fc004791a810.setContent(html_5c74d1d604dc9445fcef0e794991e5de);
+            
+        
+
+        circle_marker_d62faac8e235218edca327d3eb8ee8fc.bindPopup(popup_0806d99e826efe620c66fc004791a810)
+        ;
+
+        
+    
+    
+            circle_marker_d62faac8e235218edca327d3eb8ee8fc.bindTooltip(
+                `<div>
+                     CEC: Lockheed 1 Tap (pge, TAP) — 2.44 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc204e3a45a7bfad241cae366ab5ab74 = L.circleMarker(
+                [37.40954138684667, -122.03177614066104],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+            circle_marker_bc204e3a45a7bfad241cae366ab5ab74.bindTooltip(
+                `<div>
+                     basin: Lockheed 1 (other, SUBSTATION) — 0.06 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_79c39f2d14d9f716251da2c955fc1a80 = L.circleMarker(
+                [37.41613333334354, -122.03080277718443],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+            circle_marker_79c39f2d14d9f716251da2c955fc1a80.bindTooltip(
+                `<div>
+                     basin: Lockheed 2 (other, SUBSTATION) — 0.71 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_efecd246caa2661c8e16b2c23fbc55da = L.circleMarker(
+                [37.419561145908816, -122.03717715281604],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+            circle_marker_efecd246caa2661c8e16b2c23fbc55da.bindTooltip(
+                `<div>
+                     basin: Moffet Field Tap (unknown, TAP) — 1.21 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a196bd28e61a3720faee77f4f7cf9ca6 = L.circleMarker(
+                [37.41868054219352, -122.03932778549915],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+            circle_marker_a196bd28e61a3720faee77f4f7cf9ca6.bindTooltip(
+                `<div>
+                     basin: Moffet Field (wapa, SUBSTATION) — 1.23 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ea5554591b733e53c845b1f9f3ad227e = L.circleMarker(
+                [37.41482777865061, -122.0058949759467],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+            circle_marker_ea5554591b733e53c845b1f9f3ad227e.bindTooltip(
+                `<div>
+                     basin: Lockheed 2 Tap (unknown, TAP) — 2.30 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a1f35c0915f695ffc9b5e6382fe0e53d = L.circleMarker(
+                [37.39720613760379, -122.01032950183628],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+            circle_marker_a1f35c0915f695ffc9b5e6382fe0e53d.bindTooltip(
+                `<div>
+                     basin: Lawrence (pge, SUBSTATION) — 2.31 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ad76289d1ccd3b2407ef8a1cbf8272b7 = L.circleMarker(
+                [37.41725932027248, -122.0051730808012],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_acb0056b6727b1de12cb20548737751b);
+        
+    
+            circle_marker_ad76289d1ccd3b2407ef8a1cbf8272b7.bindTooltip(
+                `<div>
+                     basin: Lockheed 1 Tap (unknown, TAP) — 2.44 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_acb0056b6727b1de12cb20548737751b.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_c3c4d7f36d6ef4793722247631f8a2d4 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_a072e8e1d8c93e6d515617fdaeb3ee5f = L.marker(
+                [37.41633412032817, -122.03185703639838],
+                {
+}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            var icon_f30674a2207c99219c7216dd96462571 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_a072e8e1d8c93e6d515617fdaeb3ee5f.bindTooltip(
+                `<div>
+                     SOURCE: LOCKHEED NO 2 (PGE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a072e8e1d8c93e6d515617fdaeb3ee5f.setIcon(icon_f30674a2207c99219c7216dd96462571);
+            
+    
+            var circle_marker_e6fe40af3c69b4cb59577705af3a5b8a = L.circleMarker(
+                [37.41612839, -122.03078966],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+        var popup_5c7d9116dc9e2fc031f41f3d8d12826b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a95adeeb946780916480bf7fe47165d5 = $(`<div id="html_a95adeeb946780916480bf7fe47165d5" style="width: 100.0%; height: 100.0%;"><b>Lockheed 2</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 0.10 km</div>`)[0];
+                popup_5c7d9116dc9e2fc031f41f3d8d12826b.setContent(html_a95adeeb946780916480bf7fe47165d5);
+            
+        
+
+        circle_marker_e6fe40af3c69b4cb59577705af3a5b8a.bindPopup(popup_5c7d9116dc9e2fc031f41f3d8d12826b)
+        ;
+
+        
+    
+    
+            circle_marker_e6fe40af3c69b4cb59577705af3a5b8a.bindTooltip(
+                `<div>
+                     CEC: Lockheed 2 (pge_assumed, SUBSTATION) — 0.10 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ba833e96789cecfc348349c941fb3c04 = L.circleMarker(
+                [37.4195562, -122.03716404],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+        var popup_86bc14768ebd3a9fa7f38c8fb34676b8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_99784df6e4ca43b620d68c06f9e915c5 = $(`<div id="html_99784df6e4ca43b620d68c06f9e915c5" style="width: 100.0%; height: 100.0%;"><b>Moffet Field Tap</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 0.59 km</div>`)[0];
+                popup_86bc14768ebd3a9fa7f38c8fb34676b8.setContent(html_99784df6e4ca43b620d68c06f9e915c5);
+            
+        
+
+        circle_marker_ba833e96789cecfc348349c941fb3c04.bindPopup(popup_86bc14768ebd3a9fa7f38c8fb34676b8)
+        ;
+
+        
+    
+    
+            circle_marker_ba833e96789cecfc348349c941fb3c04.bindTooltip(
+                `<div>
+                     CEC: Moffet Field Tap (pge, TAP) — 0.59 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e2adff9d9593ccf4b44ac31499012801 = L.circleMarker(
+                [37.4186756, -122.03931467],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+        var popup_aa54d8fffb0669eaa87a7c46cc9eda38 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_139c58305cb163f0bcdb56ab18b55188 = $(`<div id="html_139c58305cb163f0bcdb56ab18b55188" style="width: 100.0%; height: 100.0%;"><b>Moffet Field</b><br>owner: WAPA<br>type: SUBSTATION<br>status: Operational<br>dist: 0.71 km</div>`)[0];
+                popup_aa54d8fffb0669eaa87a7c46cc9eda38.setContent(html_139c58305cb163f0bcdb56ab18b55188);
+            
+        
+
+        circle_marker_e2adff9d9593ccf4b44ac31499012801.bindPopup(popup_aa54d8fffb0669eaa87a7c46cc9eda38)
+        ;
+
+        
+    
+    
+            circle_marker_e2adff9d9593ccf4b44ac31499012801.bindTooltip(
+                `<div>
+                     CEC: Moffet Field (wapa, SUBSTATION) — 0.71 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e56fda87725df9b4f1303887dd88c25 = L.circleMarker(
+                [37.40953644, -122.03176303],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+        var popup_ab46679ff040700f9f7f36162f22c127 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d49568e8eee6fec2dd4edef80590f1d9 = $(`<div id="html_d49568e8eee6fec2dd4edef80590f1d9" style="width: 100.0%; height: 100.0%;"><b>Lockheed 1</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 0.76 km</div>`)[0];
+                popup_ab46679ff040700f9f7f36162f22c127.setContent(html_d49568e8eee6fec2dd4edef80590f1d9);
+            
+        
+
+        circle_marker_7e56fda87725df9b4f1303887dd88c25.bindPopup(popup_ab46679ff040700f9f7f36162f22c127)
+        ;
+
+        
+    
+    
+            circle_marker_7e56fda87725df9b4f1303887dd88c25.bindTooltip(
+                `<div>
+                     CEC: Lockheed 1 (pge_assumed, SUBSTATION) — 0.76 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_821274538ce837e3b23c9ed8dd194ae2 = L.circleMarker(
+                [37.41482283, -122.00588186],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+        var popup_e0338987679f8d3f93d111afeacd01d7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bbc88c71ef0638ebbdba8ecffc9741a5 = $(`<div id="html_bbc88c71ef0638ebbdba8ecffc9741a5" style="width: 100.0%; height: 100.0%;"><b>Lockheed 2 Tap</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 2.30 km</div>`)[0];
+                popup_e0338987679f8d3f93d111afeacd01d7.setContent(html_bbc88c71ef0638ebbdba8ecffc9741a5);
+            
+        
+
+        circle_marker_821274538ce837e3b23c9ed8dd194ae2.bindPopup(popup_e0338987679f8d3f93d111afeacd01d7)
+        ;
+
+        
+    
+    
+            circle_marker_821274538ce837e3b23c9ed8dd194ae2.bindTooltip(
+                `<div>
+                     CEC: Lockheed 2 Tap (pge, TAP) — 2.30 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_90d49c9319a06bedf2529ba8b617feb2 = L.circleMarker(
+                [37.41725438, -122.00515997],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+        var popup_783c8bb3b80c5b8d92b355c166e2ed0c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7510cd18ba363a1090b9a27e237af4f0 = $(`<div id="html_7510cd18ba363a1090b9a27e237af4f0" style="width: 100.0%; height: 100.0%;"><b>Lockheed 1 Tap</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 2.36 km</div>`)[0];
+                popup_783c8bb3b80c5b8d92b355c166e2ed0c.setContent(html_7510cd18ba363a1090b9a27e237af4f0);
+            
+        
+
+        circle_marker_90d49c9319a06bedf2529ba8b617feb2.bindPopup(popup_783c8bb3b80c5b8d92b355c166e2ed0c)
+        ;
+
+        
+    
+    
+            circle_marker_90d49c9319a06bedf2529ba8b617feb2.bindTooltip(
+                `<div>
+                     CEC: Lockheed 1 Tap (pge, TAP) — 2.36 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f4df15c3dee62e4fe34976146ec7a77a = L.circleMarker(
+                [37.41810708, -122.06346786],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+        var popup_cc79d088f70b33d91fd979e27ec6135f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e0c671b841d6a99057a44d0a8b20255e = $(`<div id="html_e0c671b841d6a99057a44d0a8b20255e" style="width: 100.0%; height: 100.0%;"><b>Nasa</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 2.80 km</div>`)[0];
+                popup_cc79d088f70b33d91fd979e27ec6135f.setContent(html_e0c671b841d6a99057a44d0a8b20255e);
+            
+        
+
+        circle_marker_f4df15c3dee62e4fe34976146ec7a77a.bindPopup(popup_cc79d088f70b33d91fd979e27ec6135f)
+        ;
+
+        
+    
+    
+            circle_marker_f4df15c3dee62e4fe34976146ec7a77a.bindTooltip(
+                `<div>
+                     CEC: Nasa (pge_assumed, SUBSTATION) — 2.80 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0affa274b4a743befd405681abc73c16 = L.circleMarker(
+                [37.39720119, -122.01031639],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+        var popup_815e85a4f103ade5b8a51ae74dcc2859 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_97073de310bb17252a8d3ae7066c64cf = $(`<div id="html_97073de310bb17252a8d3ae7066c64cf" style="width: 100.0%; height: 100.0%;"><b>Lawrence</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.85 km</div>`)[0];
+                popup_815e85a4f103ade5b8a51ae74dcc2859.setContent(html_97073de310bb17252a8d3ae7066c64cf);
+            
+        
+
+        circle_marker_0affa274b4a743befd405681abc73c16.bindPopup(popup_815e85a4f103ade5b8a51ae74dcc2859)
+        ;
+
+        
+    
+    
+            circle_marker_0affa274b4a743befd405681abc73c16.bindTooltip(
+                `<div>
+                     CEC: Lawrence (pge, SUBSTATION) — 2.85 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c5f085886a822f86d7959bf1f8078001 = L.circleMarker(
+                [37.41613333334354, -122.03080277718443],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            circle_marker_c5f085886a822f86d7959bf1f8078001.bindTooltip(
+                `<div>
+                     basin: Lockheed 2 (other, SUBSTATION) — 0.10 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f391d0e288188803cbaf85ca2eb52d4d = L.circleMarker(
+                [37.419561145908816, -122.03717715281604],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            circle_marker_f391d0e288188803cbaf85ca2eb52d4d.bindTooltip(
+                `<div>
+                     basin: Moffet Field Tap (unknown, TAP) — 0.59 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_295d5a4fdcb0d09dffeec4b6ce474fa1 = L.circleMarker(
+                [37.41868054219352, -122.03932778549915],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            circle_marker_295d5a4fdcb0d09dffeec4b6ce474fa1.bindTooltip(
+                `<div>
+                     basin: Moffet Field (wapa, SUBSTATION) — 0.71 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4bb98db794416e553f9c57e900954c5d = L.circleMarker(
+                [37.40954138684667, -122.03177614066104],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            circle_marker_4bb98db794416e553f9c57e900954c5d.bindTooltip(
+                `<div>
+                     basin: Lockheed 1 (other, SUBSTATION) — 0.76 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5794541c36b00bf42203c6ac64b404c2 = L.circleMarker(
+                [37.41482777865061, -122.0058949759467],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            circle_marker_5794541c36b00bf42203c6ac64b404c2.bindTooltip(
+                `<div>
+                     basin: Lockheed 2 Tap (unknown, TAP) — 2.30 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ca21a7bc1e9785873a93119590b26b3a = L.circleMarker(
+                [37.41725932027248, -122.0051730808012],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            circle_marker_ca21a7bc1e9785873a93119590b26b3a.bindTooltip(
+                `<div>
+                     basin: Lockheed 1 Tap (unknown, TAP) — 2.36 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_308d99490772bb5a8a1a230fa84637fc = L.circleMarker(
+                [37.418112018487015, -122.06348097931397],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            circle_marker_308d99490772bb5a8a1a230fa84637fc.bindTooltip(
+                `<div>
+                     basin: Nasa (other, SUBSTATION) — 2.80 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e77ebb6439b039b6e81e0deb7efc748 = L.circleMarker(
+                [37.39720613760379, -122.01032950183628],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c3c4d7f36d6ef4793722247631f8a2d4);
+        
+    
+            circle_marker_7e77ebb6439b039b6e81e0deb7efc748.bindTooltip(
+                `<div>
+                     basin: Lawrence (pge, SUBSTATION) — 2.85 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_c3c4d7f36d6ef4793722247631f8a2d4.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_e72f27c3ba24583882e3f66923489d4e = L.marker(
+                [38.137240812553664, -121.26217434307496],
+                {
+}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+            var icon_bf7d2216fa0afa115ba847e58feb9fd6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_e72f27c3ba24583882e3f66923489d4e.bindTooltip(
+                `<div>
+                     SOURCE: LODI (PGE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e72f27c3ba24583882e3f66923489d4e.setIcon(icon_bf7d2216fa0afa115ba847e58feb9fd6);
+            
+    
+            var circle_marker_f5bcb575a42f284e51836e0f082a7dfe = L.circleMarker(
+                [38.13723522, -121.2613648],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+        var popup_a2d16f5f527e6663d9fced428df59194 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_48c5eac470150a6b5991a8db65c4a299 = $(`<div id="html_48c5eac470150a6b5991a8db65c4a299" style="width: 100.0%; height: 100.0%;"><b>Lodi</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 0.07 km</div>`)[0];
+                popup_a2d16f5f527e6663d9fced428df59194.setContent(html_48c5eac470150a6b5991a8db65c4a299);
+            
+        
+
+        circle_marker_f5bcb575a42f284e51836e0f082a7dfe.bindPopup(popup_a2d16f5f527e6663d9fced428df59194)
+        ;
+
+        
+    
+    
+            circle_marker_f5bcb575a42f284e51836e0f082a7dfe.bindTooltip(
+                `<div>
+                     CEC: Lodi (pge_assumed, SUBSTATION) — 0.07 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4d119737162194c434adf2e7601024dc = L.circleMarker(
+                [38.12872099, -121.25699067],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+        var popup_40deeeef2537eea1b5a08eedaeb613f7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_98a4ac98197c4d207da7b7209a3d9194 = $(`<div id="html_98a4ac98197c4d207da7b7209a3d9194" style="width: 100.0%; height: 100.0%;"><b>Unknown - 4308</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 1.05 km</div>`)[0];
+                popup_40deeeef2537eea1b5a08eedaeb613f7.setContent(html_98a4ac98197c4d207da7b7209a3d9194);
+            
+        
+
+        circle_marker_4d119737162194c434adf2e7601024dc.bindPopup(popup_40deeeef2537eea1b5a08eedaeb613f7)
+        ;
+
+        
+    
+    
+            circle_marker_4d119737162194c434adf2e7601024dc.bindTooltip(
+                `<div>
+                     CEC: Unknown - 4308 (pge, TAP) — 1.05 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7d431d51270bf0d7abd256b9cc56e703 = L.circleMarker(
+                [38.14825594, -121.26087892],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+        var popup_a66f3638796fb02585726ce270a448d8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_558316682a6019dc9dd5a9253205f2fd = $(`<div id="html_558316682a6019dc9dd5a9253205f2fd" style="width: 100.0%; height: 100.0%;"><b>Unknown - 3347</b><br>owner: PG&E GBA<br>type: SUBSTATION<br>status: Operational<br>dist: 1.23 km</div>`)[0];
+                popup_a66f3638796fb02585726ce270a448d8.setContent(html_558316682a6019dc9dd5a9253205f2fd);
+            
+        
+
+        circle_marker_7d431d51270bf0d7abd256b9cc56e703.bindPopup(popup_a66f3638796fb02585726ce270a448d8)
+        ;
+
+        
+    
+    
+            circle_marker_7d431d51270bf0d7abd256b9cc56e703.bindTooltip(
+                `<div>
+                     CEC: Unknown - 3347 (pge, SUBSTATION) — 1.23 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_42c4a4695e0ae039cc603f9503ec9f94 = L.circleMarker(
+                [38.12992266, -121.25154882],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+        var popup_3f4bd0115704144ca700e022c6faf8c3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a390690724aecddc000f931cb839636b = $(`<div id="html_a390690724aecddc000f931cb839636b" style="width: 100.0%; height: 100.0%;"><b>Industrial - (PG&E)</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 1.24 km</div>`)[0];
+                popup_3f4bd0115704144ca700e022c6faf8c3.setContent(html_a390690724aecddc000f931cb839636b);
+            
+        
+
+        circle_marker_42c4a4695e0ae039cc603f9503ec9f94.bindPopup(popup_3f4bd0115704144ca700e022c6faf8c3)
+        ;
+
+        
+    
+    
+            circle_marker_42c4a4695e0ae039cc603f9503ec9f94.bindTooltip(
+                `<div>
+                     CEC: Industrial - (PG&E) (pge, SUBSTATION) — 1.24 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5b87c270bea11cdc9cd604dbba0bb2b5 = L.circleMarker(
+                [38.14649665, -121.24348778],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+        var popup_6637bb049ebde9591e8432ac282dbd66 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_388bc174c0a9f5a424864df1dc0887f0 = $(`<div id="html_388bc174c0a9f5a424864df1dc0887f0" style="width: 100.0%; height: 100.0%;"><b>Unknown - 3562</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 1.93 km</div>`)[0];
+                popup_6637bb049ebde9591e8432ac282dbd66.setContent(html_388bc174c0a9f5a424864df1dc0887f0);
+            
+        
+
+        circle_marker_5b87c270bea11cdc9cd604dbba0bb2b5.bindPopup(popup_6637bb049ebde9591e8432ac282dbd66)
+        ;
+
+        
+    
+    
+            circle_marker_5b87c270bea11cdc9cd604dbba0bb2b5.bindTooltip(
+                `<div>
+                     CEC: Unknown - 3562 (pge, TAP) — 1.93 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_05c56b1a6c94b0e3156ac563aeddea50 = L.circleMarker(
+                [38.14641966, -121.24339255],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+        var popup_8793531a1b4e398216c7a24fc8cccbea = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0dee1985c1ce8fe284c1852ba32f7432 = $(`<div id="html_0dee1985c1ce8fe284c1852ba32f7432" style="width: 100.0%; height: 100.0%;"><b>Unknown - 4329</b><br>owner: PG&E GBA<br>type: TAP<br>status: Operational<br>dist: 1.93 km</div>`)[0];
+                popup_8793531a1b4e398216c7a24fc8cccbea.setContent(html_0dee1985c1ce8fe284c1852ba32f7432);
+            
+        
+
+        circle_marker_05c56b1a6c94b0e3156ac563aeddea50.bindPopup(popup_8793531a1b4e398216c7a24fc8cccbea)
+        ;
+
+        
+    
+    
+            circle_marker_05c56b1a6c94b0e3156ac563aeddea50.bindTooltip(
+                `<div>
+                     CEC: Unknown - 4329 (pge, TAP) — 1.93 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_546aa685835ab9e795d9393015c0fe62 = L.circleMarker(
+                [38.15262317, -121.24540792],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+        var popup_8199e98102b12713fdaea3e7f006e51e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_572d76f71bbc8b9067b73dd0de56eb98 = $(`<div id="html_572d76f71bbc8b9067b73dd0de56eb98" style="width: 100.0%; height: 100.0%;"><b>Woodbridge Winery</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 2.25 km</div>`)[0];
+                popup_8199e98102b12713fdaea3e7f006e51e.setContent(html_572d76f71bbc8b9067b73dd0de56eb98);
+            
+        
+
+        circle_marker_546aa685835ab9e795d9393015c0fe62.bindPopup(popup_8199e98102b12713fdaea3e7f006e51e)
+        ;
+
+        
+    
+    
+            circle_marker_546aa685835ab9e795d9393015c0fe62.bindTooltip(
+                `<div>
+                     CEC: Woodbridge Winery (pge_assumed, SUBSTATION) — 2.25 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d144af406b793b19da12622f0463b3f0 = L.circleMarker(
+                [38.137240278833545, -121.2613778814748],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+            circle_marker_d144af406b793b19da12622f0463b3f0.bindTooltip(
+                `<div>
+                     basin: Lodi (other, SUBSTATION) — 0.07 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5bbb5a4206ffb4389b02c5fba0f03519 = L.circleMarker(
+                [38.128726046795165, -121.2570037511852],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+            circle_marker_5bbb5a4206ffb4389b02c5fba0f03519.bindTooltip(
+                `<div>
+                     basin: Unknown (unknown, TAP) — 1.05 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cfe7de9a83c4b2d534f9147257dd1364 = L.circleMarker(
+                [38.14826100030182, -121.26089200019636],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+            circle_marker_cfe7de9a83c4b2d534f9147257dd1364.bindTooltip(
+                `<div>
+                     basin: Unknown (unknown, SUBSTATION) — 1.23 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eb0a562726d8df8aff161cd8bb581b49 = L.circleMarker(
+                [38.12992771852424, -121.25156189484872],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+            circle_marker_eb0a562726d8df8aff161cd8bb581b49.bindTooltip(
+                `<div>
+                     basin: Industrial (pge, SUBSTATION) — 1.23 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_47e963f3bbf0f59c6e659717a48d5b13 = L.circleMarker(
+                [38.14650171291744, -121.24350085794258],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+            circle_marker_47e963f3bbf0f59c6e659717a48d5b13.bindTooltip(
+                `<div>
+                     basin: Unknown (unknown, TAP) — 1.93 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_829f60b8d49219db349abb72edf434df = L.circleMarker(
+                [38.14642471871725, -121.2434056248444],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+            circle_marker_829f60b8d49219db349abb72edf434df.bindTooltip(
+                `<div>
+                     basin: Unknown (unknown, TAP) — 1.93 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_515ca7c7e3d61aef3ae7fba8bed7c48e = L.circleMarker(
+                [38.15262822804437, -121.24542099587912],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0);
+        
+    
+            circle_marker_515ca7c7e3d61aef3ae7fba8bed7c48e.bindTooltip(
+                `<div>
+                     basin: Woodbridge Winery (other, SUBSTATION) — 2.25 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_10bf6c914143b840026161e883c492b3 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_b0418a3682804e3bf8d8c4b43491bf06 = L.marker(
+                [37.85452448999599, -122.27989615948655],
+                {
+}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+            var icon_30343750d19ac64d53db9584ac48dede = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_b0418a3682804e3bf8d8c4b43491bf06.bindTooltip(
+                `<div>
+                     SOURCE: RUSSELL (PGE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b0418a3682804e3bf8d8c4b43491bf06.setIcon(icon_30343750d19ac64d53db9584ac48dede);
+            
+    
+            var circle_marker_7c2220be454b2732139baee8e578f98e = L.circleMarker(
+                [37.85448174, -122.27965371],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+        var popup_ea9003c7f9df3f060f8364a173204f55 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_358d47289fe3c2b2a1ee657543e1a109 = $(`<div id="html_358d47289fe3c2b2a1ee657543e1a109" style="width: 100.0%; height: 100.0%;"><b>Russell</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 0.02 km</div>`)[0];
+                popup_ea9003c7f9df3f060f8364a173204f55.setContent(html_358d47289fe3c2b2a1ee657543e1a109);
+            
+        
+
+        circle_marker_7c2220be454b2732139baee8e578f98e.bindPopup(popup_ea9003c7f9df3f060f8364a173204f55)
+        ;
+
+        
+    
+    
+            circle_marker_7c2220be454b2732139baee8e578f98e.bindTooltip(
+                `<div>
+                     CEC: Russell (pge_assumed, SUBSTATION) — 0.02 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5145c3b52c5b33e5515b37745a0e3e98 = L.circleMarker(
+                [37.85803969, -122.26867425],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+        var popup_827e34b1eb59f0aae456aa16f15b00d2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c750e954221446c501a720cb3bd1cf76 = $(`<div id="html_c750e954221446c501a720cb3bd1cf76" style="width: 100.0%; height: 100.0%;"><b>Stuart - (PG&E)</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 1.06 km</div>`)[0];
+                popup_827e34b1eb59f0aae456aa16f15b00d2.setContent(html_c750e954221446c501a720cb3bd1cf76);
+            
+        
+
+        circle_marker_5145c3b52c5b33e5515b37745a0e3e98.bindPopup(popup_827e34b1eb59f0aae456aa16f15b00d2)
+        ;
+
+        
+    
+    
+            circle_marker_5145c3b52c5b33e5515b37745a0e3e98.bindTooltip(
+                `<div>
+                     CEC: Stuart - (PG&E) (pge, SUBSTATION) — 1.06 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a5d627e95d2679dd9309e080da681f74 = L.circleMarker(
+                [37.8724246, -122.27815591],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+        var popup_04fce6621f96c688c1d6e5cc88b43003 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e8975087fb6b71e523d986955b628d83 = $(`<div id="html_e8975087fb6b71e523d986955b628d83" style="width: 100.0%; height: 100.0%;"><b>Berkeley F</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.00 km</div>`)[0];
+                popup_04fce6621f96c688c1d6e5cc88b43003.setContent(html_e8975087fb6b71e523d986955b628d83);
+            
+        
+
+        circle_marker_a5d627e95d2679dd9309e080da681f74.bindPopup(popup_04fce6621f96c688c1d6e5cc88b43003)
+        ;
+
+        
+    
+    
+            circle_marker_a5d627e95d2679dd9309e080da681f74.bindTooltip(
+                `<div>
+                     CEC: Berkeley F (pge, SUBSTATION) — 2.00 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2042a8af22ca90db3be43560e553d98b = L.circleMarker(
+                [37.86395375, -122.25894809],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+        var popup_c6ca7a3249ac92e26237ebfda36aff35 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d7afda14c2ef0c38478999cd6769ebd3 = $(`<div id="html_d7afda14c2ef0c38478999cd6769ebd3" style="width: 100.0%; height: 100.0%;"><b>Berkeley T</b><br>owner: Other (PGE - Assumed)<br>type: SUBSTATION<br>status: Operational<br>dist: 2.12 km</div>`)[0];
+                popup_c6ca7a3249ac92e26237ebfda36aff35.setContent(html_d7afda14c2ef0c38478999cd6769ebd3);
+            
+        
+
+        circle_marker_2042a8af22ca90db3be43560e553d98b.bindPopup(popup_c6ca7a3249ac92e26237ebfda36aff35)
+        ;
+
+        
+    
+    
+            circle_marker_2042a8af22ca90db3be43560e553d98b.bindTooltip(
+                `<div>
+                     CEC: Berkeley T (pge_assumed, SUBSTATION) — 2.12 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9d0aa9d6384d25581be0c3650af9ce65 = L.circleMarker(
+                [37.83756579, -122.26359866],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+        var popup_2d52103251cf3cc4a215ccf7c62a1fbb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d6e58b0fa9beacee93f1ca4cb184d041 = $(`<div id="html_d6e58b0fa9beacee93f1ca4cb184d041" style="width: 100.0%; height: 100.0%;"><b>Oakland D</b><br>owner: PG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.37 km</div>`)[0];
+                popup_2d52103251cf3cc4a215ccf7c62a1fbb.setContent(html_d6e58b0fa9beacee93f1ca4cb184d041);
+            
+        
+
+        circle_marker_9d0aa9d6384d25581be0c3650af9ce65.bindPopup(popup_2d52103251cf3cc4a215ccf7c62a1fbb)
+        ;
+
+        
+    
+    
+            circle_marker_9d0aa9d6384d25581be0c3650af9ce65.bindTooltip(
+                `<div>
+                     CEC: Oakland D (pge, SUBSTATION) — 2.37 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_82c1b88ab514c48e27619547815ef9bc = L.circleMarker(
+                [37.85448670185692, -122.27966691690987],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+            circle_marker_82c1b88ab514c48e27619547815ef9bc.bindTooltip(
+                `<div>
+                     basin: Russell (other, SUBSTATION) — 0.02 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97e4526ad2ac34c6593d35316141f09e = L.circleMarker(
+                [37.85804465342326, -122.26868745271749],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+            circle_marker_97e4526ad2ac34c6593d35316141f09e.bindTooltip(
+                `<div>
+                     basin: Stuart (pge, SUBSTATION) — 1.06 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_695b93da7ebbacc4ac0870cc1b3f0670 = L.circleMarker(
+                [37.87242956835905, -122.27816911147052],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+            circle_marker_695b93da7ebbacc4ac0870cc1b3f0670.bindTooltip(
+                `<div>
+                     basin: Berkeley F (pge, SUBSTATION) — 2.00 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_924d5fd2eabc42e62395fd886593dde0 = L.circleMarker(
+                [37.86395871640366, -122.25896128682572],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+            circle_marker_924d5fd2eabc42e62395fd886593dde0.bindTooltip(
+                `<div>
+                     basin: Berkeley T (other, SUBSTATION) — 2.12 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_48286087a16d2415e9878eb455ff8b2f = L.circleMarker(
+                [37.83757074843421, -122.26361185898772],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_10bf6c914143b840026161e883c492b3);
+        
+    
+            circle_marker_48286087a16d2415e9878eb455ff8b2f.bindTooltip(
+                `<div>
+                     basin: Oakland D (pge, SUBSTATION) — 2.37 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_10bf6c914143b840026161e883c492b3.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_5acb521854ddf51e0acc6b86d383e37d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_dad2926b63e97ffa16131c19a2629238 = L.marker(
+                [34.24375366141106, -117.19723414306642],
+                {
+}
+            ).addTo(feature_group_5acb521854ddf51e0acc6b86d383e37d);
+        
+    
+            var icon_b46108015e89da2d7999712df6f13db3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_dad2926b63e97ffa16131c19a2629238.bindTooltip(
+                `<div>
+                     SOURCE: Cottage Grove (SCE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dad2926b63e97ffa16131c19a2629238.setIcon(icon_b46108015e89da2d7999712df6f13db3);
+            
+    
+            var circle_marker_72ca09a80ada11a54a51412a433778f3 = L.circleMarker(
+                [34.23438247, -117.20141211],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_5acb521854ddf51e0acc6b86d383e37d);
+        
+    
+        var popup_68cb8bde4d75382d6e1655ce7cef1956 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_77e6ca2a9ef2a523646ddab112d3b961 = $(`<div id="html_77e6ca2a9ef2a523646ddab112d3b961" style="width: 100.0%; height: 100.0%;"><b>Burnt Mill</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 1.11 km</div>`)[0];
+                popup_68cb8bde4d75382d6e1655ce7cef1956.setContent(html_77e6ca2a9ef2a523646ddab112d3b961);
+            
+        
+
+        circle_marker_72ca09a80ada11a54a51412a433778f3.bindPopup(popup_68cb8bde4d75382d6e1655ce7cef1956)
+        ;
+
+        
+    
+    
+            circle_marker_72ca09a80ada11a54a51412a433778f3.bindTooltip(
+                `<div>
+                     CEC: Burnt Mill (sce, SUBSTATION) — 1.11 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5c09031ef1160bddbc642b61f9caed23 = L.circleMarker(
+                [34.23438741025922, -117.20142413397105],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_5acb521854ddf51e0acc6b86d383e37d);
+        
+    
+            circle_marker_5c09031ef1160bddbc642b61f9caed23.bindTooltip(
+                `<div>
+                     basin: Burnt Mill (sce, SUBSTATION) — 1.11 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_5acb521854ddf51e0acc6b86d383e37d.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_fd6197dc9f9f8e8dc9bb255e3de56844 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_d33f7f38da6769c5b8ed21f879f2f568 = L.marker(
+                [33.78253081686645, -118.4057875936086],
+                {
+}
+            ).addTo(feature_group_fd6197dc9f9f8e8dc9bb255e3de56844);
+        
+    
+            var icon_ae872f41285eff6f17f7fba38060044d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_d33f7f38da6769c5b8ed21f879f2f568.bindTooltip(
+                `<div>
+                     SOURCE: Peacock U.g.s. (SCE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d33f7f38da6769c5b8ed21f879f2f568.setIcon(icon_ae872f41285eff6f17f7fba38060044d);
+            
+    
+            var circle_marker_2d59dab9fb6f4823dbac2c9d942d7770 = L.circleMarker(
+                [33.77965734, -118.38732968],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_fd6197dc9f9f8e8dc9bb255e3de56844);
+        
+    
+        var popup_0f8f5cfa1c3579957004615e891b51df = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_babfd2b430dead6babaace98668eaaab = $(`<div id="html_babfd2b430dead6babaace98668eaaab" style="width: 100.0%; height: 100.0%;"><b>Bluff Cove</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 1.74 km</div>`)[0];
+                popup_0f8f5cfa1c3579957004615e891b51df.setContent(html_babfd2b430dead6babaace98668eaaab);
+            
+        
+
+        circle_marker_2d59dab9fb6f4823dbac2c9d942d7770.bindPopup(popup_0f8f5cfa1c3579957004615e891b51df)
+        ;
+
+        
+    
+    
+            circle_marker_2d59dab9fb6f4823dbac2c9d942d7770.bindTooltip(
+                `<div>
+                     CEC: Bluff Cove (sce, SUBSTATION) — 1.74 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_63fb7a6ff76be6a872e57affc9145baa = L.circleMarker(
+                [33.7796621537618, -118.38734186389172],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_fd6197dc9f9f8e8dc9bb255e3de56844);
+        
+    
+            circle_marker_63fb7a6ff76be6a872e57affc9145baa.bindTooltip(
+                `<div>
+                     basin: Bluff Cove (sce, SUBSTATION) — 1.73 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_fd6197dc9f9f8e8dc9bb255e3de56844.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_2bc526e744a3372ab0b59aa1406ef12b = L.marker(
+                [33.75011514963357, -118.19134574924804],
+                {
+}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            var icon_073d293896cb7fd91289cf447702cb9f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_2bc526e744a3372ab0b59aa1406ef12b.bindTooltip(
+                `<div>
+                     SOURCE: Queen Mary U.g.s. (SCE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2bc526e744a3372ab0b59aa1406ef12b.setIcon(icon_073d293896cb7fd91289cf447702cb9f);
+            
+    
+            var circle_marker_3f9156c391dbf5b0c410f824ae97be6a = L.circleMarker(
+                [33.74500931, -118.1904815],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_adba35beffb9f6e0b0ed84054b9ab5a0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c92cc548f011d801e2aa1fdc5c24cfce = $(`<div id="html_c92cc548f011d801e2aa1fdc5c24cfce" style="width: 100.0%; height: 100.0%;"><b>Process</b><br>owner: SCE<br>type: SUBSTATION<br>status: nan<br>dist: 0.57 km</div>`)[0];
+                popup_adba35beffb9f6e0b0ed84054b9ab5a0.setContent(html_c92cc548f011d801e2aa1fdc5c24cfce);
+            
+        
+
+        circle_marker_3f9156c391dbf5b0c410f824ae97be6a.bindPopup(popup_adba35beffb9f6e0b0ed84054b9ab5a0)
+        ;
+
+        
+    
+    
+            circle_marker_3f9156c391dbf5b0c410f824ae97be6a.bindTooltip(
+                `<div>
+                     CEC: Process (sce, SUBSTATION) — 0.57 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e49edabc5b1003664c63232acbae96ed = L.circleMarker(
+                [33.74282167, -118.18939174],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_7d2be66da21c185d87743d18c322c2c5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0bae4b1a8218fdf47543d43f159244ca = $(`<div id="html_0bae4b1a8218fdf47543d43f159244ca" style="width: 100.0%; height: 100.0%;"><b>Stevedore</b><br>owner: SCE<br>type: SUBSTATION<br>status: nan<br>dist: 0.83 km</div>`)[0];
+                popup_7d2be66da21c185d87743d18c322c2c5.setContent(html_0bae4b1a8218fdf47543d43f159244ca);
+            
+        
+
+        circle_marker_e49edabc5b1003664c63232acbae96ed.bindPopup(popup_7d2be66da21c185d87743d18c322c2c5)
+        ;
+
+        
+    
+    
+            circle_marker_e49edabc5b1003664c63232acbae96ed.bindTooltip(
+                `<div>
+                     CEC: Stevedore (sce, SUBSTATION) — 0.83 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e2e3e4cf62d8df639731bac924895791 = L.circleMarker(
+                [33.74198892, -118.18976591],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_8d18d4511745335fdb15642142af8a89 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_af514d166a12a7a1bc7c4ad71d9f303e = $(`<div id="html_af514d166a12a7a1bc7c4ad71d9f303e" style="width: 100.0%; height: 100.0%;"><b>Wharf</b><br>owner: SCE<br>type: SUBSTATION<br>status: nan<br>dist: 0.92 km</div>`)[0];
+                popup_8d18d4511745335fdb15642142af8a89.setContent(html_af514d166a12a7a1bc7c4ad71d9f303e);
+            
+        
+
+        circle_marker_e2e3e4cf62d8df639731bac924895791.bindPopup(popup_8d18d4511745335fdb15642142af8a89)
+        ;
+
+        
+    
+    
+            circle_marker_e2e3e4cf62d8df639731bac924895791.bindTooltip(
+                `<div>
+                     CEC: Wharf (sce, SUBSTATION) — 0.92 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1a051b7a94cb8d95be1ddabea5eda498 = L.circleMarker(
+                [33.7471323, -118.2041211],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_68c32461d26c53f6934058c6b7f0f6bc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5a6cd260565fe1201861af017f76cfc4 = $(`<div id="html_5a6cd260565fe1201861af017f76cfc4" style="width: 100.0%; height: 100.0%;"><b>Pier</b><br>owner: SCE<br>type: SUBSTATION<br>status: nan<br>dist: 1.23 km</div>`)[0];
+                popup_68c32461d26c53f6934058c6b7f0f6bc.setContent(html_5a6cd260565fe1201861af017f76cfc4);
+            
+        
+
+        circle_marker_1a051b7a94cb8d95be1ddabea5eda498.bindPopup(popup_68c32461d26c53f6934058c6b7f0f6bc)
+        ;
+
+        
+    
+    
+            circle_marker_1a051b7a94cb8d95be1ddabea5eda498.bindTooltip(
+                `<div>
+                     CEC: Pier (sce, SUBSTATION) — 1.23 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9feed1de971c1c766b32169076624005 = L.circleMarker(
+                [33.75931711, -118.18154068],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_1f5229c2cb87293b80e222d4b62737e1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1edcb25e0c322f5a73925dece6941276 = $(`<div id="html_1edcb25e0c322f5a73925dece6941276" style="width: 100.0%; height: 100.0%;"><b>Thums A</b><br>owner: SCE<br>type: SUBSTATION ASSUMED<br>status: Operational<br>dist: 1.37 km</div>`)[0];
+                popup_1f5229c2cb87293b80e222d4b62737e1.setContent(html_1edcb25e0c322f5a73925dece6941276);
+            
+        
+
+        circle_marker_9feed1de971c1c766b32169076624005.bindPopup(popup_1f5229c2cb87293b80e222d4b62737e1)
+        ;
+
+        
+    
+    
+            circle_marker_9feed1de971c1c766b32169076624005.bindTooltip(
+                `<div>
+                     CEC: Thums A (sce, SUBSTATION ASSUMED) — 1.37 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_71b1fc73f310a0efbf9bba9c50287b4c = L.circleMarker(
+                [33.76508498, -118.20664459],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_ea4de885a17898b60c67d2f8b4c82938 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_138b965d6aeab8ad49ebe74f701fe240 = $(`<div id="html_138b965d6aeab8ad49ebe74f701fe240" style="width: 100.0%; height: 100.0%;"><b>Pico - (SCE)</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 2.18 km</div>`)[0];
+                popup_ea4de885a17898b60c67d2f8b4c82938.setContent(html_138b965d6aeab8ad49ebe74f701fe240);
+            
+        
+
+        circle_marker_71b1fc73f310a0efbf9bba9c50287b4c.bindPopup(popup_ea4de885a17898b60c67d2f8b4c82938)
+        ;
+
+        
+    
+    
+            circle_marker_71b1fc73f310a0efbf9bba9c50287b4c.bindTooltip(
+                `<div>
+                     CEC: Pico - (SCE) (sce, SUBSTATION) — 2.18 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cd2071a441a0d5da3ac6a4de03d6e72c = L.circleMarker(
+                [33.76482628, -118.20781555],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_274230b604c73f92710881bbc815fba4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_56506414b7780f5a49933ccb844a203c = $(`<div id="html_56506414b7780f5a49933ccb844a203c" style="width: 100.0%; height: 100.0%;"><b>Tidelands</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 2.23 km</div>`)[0];
+                popup_274230b604c73f92710881bbc815fba4.setContent(html_56506414b7780f5a49933ccb844a203c);
+            
+        
+
+        circle_marker_cd2071a441a0d5da3ac6a4de03d6e72c.bindPopup(popup_274230b604c73f92710881bbc815fba4)
+        ;
+
+        
+    
+    
+            circle_marker_cd2071a441a0d5da3ac6a4de03d6e72c.bindTooltip(
+                `<div>
+                     CEC: Tidelands (sce, SUBSTATION) — 2.23 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_96ae3f3ce632f3a24c410ed1ffe0d268 = L.circleMarker(
+                [33.77252613, -118.20352287],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_b7aa31bc66bc1a75c0bbdbd73350926a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_44a77719f860568efbda49b917793263 = $(`<div id="html_44a77719f860568efbda49b917793263" style="width: 100.0%; height: 100.0%;"><b>Seabright</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 2.73 km</div>`)[0];
+                popup_b7aa31bc66bc1a75c0bbdbd73350926a.setContent(html_44a77719f860568efbda49b917793263);
+            
+        
+
+        circle_marker_96ae3f3ce632f3a24c410ed1ffe0d268.bindPopup(popup_b7aa31bc66bc1a75c0bbdbd73350926a)
+        ;
+
+        
+    
+    
+            circle_marker_96ae3f3ce632f3a24c410ed1ffe0d268.bindTooltip(
+                `<div>
+                     CEC: Seabright (sce, SUBSTATION) — 2.73 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a9af7780c9f2ecb558bb4f91e8c03fee = L.circleMarker(
+                [33.76820187, -118.21141255],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_91e95d7a988f59a37508b66107e18c4b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2b79cf5e12a74a83ad4a7b3e59c722bd = $(`<div id="html_2b79cf5e12a74a83ad4a7b3e59c722bd" style="width: 100.0%; height: 100.0%;"><b>Ship</b><br>owner: SCE<br>type: SUBSTATION<br>status: nan<br>dist: 2.74 km</div>`)[0];
+                popup_91e95d7a988f59a37508b66107e18c4b.setContent(html_2b79cf5e12a74a83ad4a7b3e59c722bd);
+            
+        
+
+        circle_marker_a9af7780c9f2ecb558bb4f91e8c03fee.bindPopup(popup_91e95d7a988f59a37508b66107e18c4b)
+        ;
+
+        
+    
+    
+            circle_marker_a9af7780c9f2ecb558bb4f91e8c03fee.bindTooltip(
+                `<div>
+                     CEC: Ship (sce, SUBSTATION) — 2.74 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0e292ad64df0feabdaeef73826bddd39 = L.circleMarker(
+                [33.75681507, -118.22032117],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_f9a14aaa18adeed8fdf8b7b049bed02b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_71a4191213b6fefe2fdbe3dd9f5458db = $(`<div id="html_71a4191213b6fefe2fdbe3dd9f5458db" style="width: 100.0%; height: 100.0%;"><b>Commodore</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 2.78 km</div>`)[0];
+                popup_f9a14aaa18adeed8fdf8b7b049bed02b.setContent(html_71a4191213b6fefe2fdbe3dd9f5458db);
+            
+        
+
+        circle_marker_0e292ad64df0feabdaeef73826bddd39.bindPopup(popup_f9a14aaa18adeed8fdf8b7b049bed02b)
+        ;
+
+        
+    
+    
+            circle_marker_0e292ad64df0feabdaeef73826bddd39.bindTooltip(
+                `<div>
+                     CEC: Commodore (sce, SUBSTATION) — 2.78 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_466282bff3d47c024724847b05dbc414 = L.circleMarker(
+                [33.76771754, -118.21349376],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_0785b203463a3a1edd6de0bfdb31a487 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_814a9a8d206a805d3315fccb51c3efa5 = $(`<div id="html_814a9a8d206a805d3315fccb51c3efa5" style="width: 100.0%; height: 100.0%;"><b>Thumsgen</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 2.83 km</div>`)[0];
+                popup_0785b203463a3a1edd6de0bfdb31a487.setContent(html_814a9a8d206a805d3315fccb51c3efa5);
+            
+        
+
+        circle_marker_466282bff3d47c024724847b05dbc414.bindPopup(popup_0785b203463a3a1edd6de0bfdb31a487)
+        ;
+
+        
+    
+    
+            circle_marker_466282bff3d47c024724847b05dbc414.bindTooltip(
+                `<div>
+                     CEC: Thumsgen (sce, SUBSTATION) — 2.83 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3c2e6bc97d34ba70eef23ca9b44e3b6d = L.circleMarker(
+                [33.74132204, -118.16257112],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_28199c105ece9e9fa1335e72af61feab = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_dd9a89d570c83a46ee86dfbd541e5374 = $(`<div id="html_dd9a89d570c83a46ee86dfbd541e5374" style="width: 100.0%; height: 100.0%;"><b>Thums D</b><br>owner: SCE<br>type: SUBSTATION ASSUMED<br>status: Operational<br>dist: 2.83 km</div>`)[0];
+                popup_28199c105ece9e9fa1335e72af61feab.setContent(html_dd9a89d570c83a46ee86dfbd541e5374);
+            
+        
+
+        circle_marker_3c2e6bc97d34ba70eef23ca9b44e3b6d.bindPopup(popup_28199c105ece9e9fa1335e72af61feab)
+        ;
+
+        
+    
+    
+            circle_marker_3c2e6bc97d34ba70eef23ca9b44e3b6d.bindTooltip(
+                `<div>
+                     CEC: Thums D (sce, SUBSTATION ASSUMED) — 2.83 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7a8ce8d1aeb5284bff8fade5bc92130e = L.circleMarker(
+                [33.75275487, -118.15950914],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_11c964f714337d9ca14c1241d14644ce = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_37e852b46434f6dfe0a84f3a0e97ec35 = $(`<div id="html_37e852b46434f6dfe0a84f3a0e97ec35" style="width: 100.0%; height: 100.0%;"><b>Thums B</b><br>owner: SCE<br>type: SUBSTATION ASSUMED<br>status: Operational<br>dist: 2.96 km</div>`)[0];
+                popup_11c964f714337d9ca14c1241d14644ce.setContent(html_37e852b46434f6dfe0a84f3a0e97ec35);
+            
+        
+
+        circle_marker_7a8ce8d1aeb5284bff8fade5bc92130e.bindPopup(popup_11c964f714337d9ca14c1241d14644ce)
+        ;
+
+        
+    
+    
+            circle_marker_7a8ce8d1aeb5284bff8fade5bc92130e.bindTooltip(
+                `<div>
+                     CEC: Thums B (sce, SUBSTATION ASSUMED) — 2.96 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6cc40deb9e3178eb5de525d82c9adf72 = L.circleMarker(
+                [33.76394719, -118.2191798],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+        var popup_7870093e7257d9fa90a641687413a8c2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f7f8d2f77e3c1bec35c6935895b1becc = $(`<div id="html_f7f8d2f77e3c1bec35c6935895b1becc" style="width: 100.0%; height: 100.0%;"><b>Navy-1</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 3.00 km</div>`)[0];
+                popup_7870093e7257d9fa90a641687413a8c2.setContent(html_f7f8d2f77e3c1bec35c6935895b1becc);
+            
+        
+
+        circle_marker_6cc40deb9e3178eb5de525d82c9adf72.bindPopup(popup_7870093e7257d9fa90a641687413a8c2)
+        ;
+
+        
+    
+    
+            circle_marker_6cc40deb9e3178eb5de525d82c9adf72.bindTooltip(
+                `<div>
+                     CEC: Navy-1 (sce, SUBSTATION) — 3.00 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2cbcc778a2104bd4e7122a4f8c148a8d = L.circleMarker(
+                [33.75932193433884, -118.18155283414627],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_2cbcc778a2104bd4e7122a4f8c148a8d.bindTooltip(
+                `<div>
+                     basin: Thums A (sce, nan) — 1.37 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c614aa9cdc1ba3d95b70da3a124f100e = L.circleMarker(
+                [33.76508980684087, -118.2066567454716],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_c614aa9cdc1ba3d95b70da3a124f100e.bindTooltip(
+                `<div>
+                     basin: Pico (sce, SUBSTATION) — 2.19 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_efedb40e9723a3cce7ae16e3b4101ca3 = L.circleMarker(
+                [33.76483110734601, -118.20782770747276],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_efedb40e9723a3cce7ae16e3b4101ca3.bindTooltip(
+                `<div>
+                     basin: Tidelands (sce, SUBSTATION) — 2.24 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1de65bf4e4a4cdfe241a17afb10b81a1 = L.circleMarker(
+                [33.77253096089302, -118.20353502669651],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_1de65bf4e4a4cdfe241a17afb10b81a1.bindTooltip(
+                `<div>
+                     basin: Seabright (sce, SUBSTATION) — 2.74 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6f5a19cdee8fe27ec6ef500278100059 = L.circleMarker(
+                [33.75681989873164, -118.22033332617822],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_6f5a19cdee8fe27ec6ef500278100059.bindTooltip(
+                `<div>
+                     basin: Commodore (sce, SUBSTATION) — 2.78 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0517b901dbcdaf52df422f4191e3c866 = L.circleMarker(
+                [33.741326860822674, -118.1625832702439],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_0517b901dbcdaf52df422f4191e3c866.bindTooltip(
+                `<div>
+                     basin: Thums D (sce, nan) — 2.83 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_87994b4fbdb34029d863b0000e2c6e9f = L.circleMarker(
+                [33.767722365020795, -118.21350592027214],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_87994b4fbdb34029d863b0000e2c6e9f.bindTooltip(
+                `<div>
+                     basin: Thumsgen (sce, SUBSTATION) — 2.83 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d447e03ac713105c592252f4269be6e4 = L.circleMarker(
+                [33.752759695883846, -118.15952128982984],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_d447e03ac713105c592252f4269be6e4.bindTooltip(
+                `<div>
+                     basin: Thums B (sce, nan) — 2.96 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_515a5e78bb10b4da7c49351c56663564 = L.circleMarker(
+                [33.76395201398806, -118.21919196259918],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7);
+        
+    
+            circle_marker_515a5e78bb10b4da7c49351c56663564.bindTooltip(
+                `<div>
+                     basin: Navy-1 (sce, SUBSTATION) — 3.00 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_edc1f92c3423f3d17b94800cb7ef9f0a = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_7a7fc252e9487d660f8e35d2dc6e1f3c = L.marker(
+                [33.75575006143004, -118.3499964209899],
+                {
+}
+            ).addTo(feature_group_edc1f92c3423f3d17b94800cb7ef9f0a);
+        
+    
+            var icon_aef002d4c80d033e85d90ddc418deae7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_7a7fc252e9487d660f8e35d2dc6e1f3c.bindTooltip(
+                `<div>
+                     SOURCE: Surrey U.g.s. (SCE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7a7fc252e9487d660f8e35d2dc6e1f3c.setIcon(icon_aef002d4c80d033e85d90ddc418deae7);
+            
+    
+            var circle_marker_4d5a3923f26166e706b7683752d0cacc = L.circleMarker(
+                [33.75207201, -118.32986575],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_edc1f92c3423f3d17b94800cb7ef9f0a);
+        
+    
+        var popup_35ed6a71dced35159fbb138b7c822137 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e36868ff8367505bec2ceba08c0526cd = $(`<div id="html_e36868ff8367505bec2ceba08c0526cd" style="width: 100.0%; height: 100.0%;"><b>Stirrup</b><br>owner: SCE<br>type: SUBSTATION<br>status: nan<br>dist: 1.91 km</div>`)[0];
+                popup_35ed6a71dced35159fbb138b7c822137.setContent(html_e36868ff8367505bec2ceba08c0526cd);
+            
+        
+
+        circle_marker_4d5a3923f26166e706b7683752d0cacc.bindPopup(popup_35ed6a71dced35159fbb138b7c822137)
+        ;
+
+        
+    
+    
+            circle_marker_4d5a3923f26166e706b7683752d0cacc.bindTooltip(
+                `<div>
+                     CEC: Stirrup (sce, SUBSTATION) — 1.91 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dbc61c222c6373ba6828ef1ea1c5393d = L.circleMarker(
+                [33.76693976, -118.37318172],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_edc1f92c3423f3d17b94800cb7ef9f0a);
+        
+    
+        var popup_31667864303c00338d1d169a5c01f967 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b5132a58b25f2b6250126cc9c7ad6929 = $(`<div id="html_b5132a58b25f2b6250126cc9c7ad6929" style="width: 100.0%; height: 100.0%;"><b>Crest</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 2.48 km</div>`)[0];
+                popup_31667864303c00338d1d169a5c01f967.setContent(html_b5132a58b25f2b6250126cc9c7ad6929);
+            
+        
+
+        circle_marker_dbc61c222c6373ba6828ef1ea1c5393d.bindPopup(popup_31667864303c00338d1d169a5c01f967)
+        ;
+
+        
+    
+    
+            circle_marker_dbc61c222c6373ba6828ef1ea1c5393d.bindTooltip(
+                `<div>
+                     CEC: Crest (sce, SUBSTATION) — 2.48 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_504eb11802a61f29469411424d120328 = L.circleMarker(
+                [33.76014319, -118.37856619],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_edc1f92c3423f3d17b94800cb7ef9f0a);
+        
+    
+        var popup_f5ddc0dc8e3577f286f318c55f491848 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1d01cbd282babc440a9fa73be64100bb = $(`<div id="html_1d01cbd282babc440a9fa73be64100bb" style="width: 100.0%; height: 100.0%;"><b>Lunada</b><br>owner: SCE<br>type: SUBSTATION<br>status: nan<br>dist: 2.69 km</div>`)[0];
+                popup_f5ddc0dc8e3577f286f318c55f491848.setContent(html_1d01cbd282babc440a9fa73be64100bb);
+            
+        
+
+        circle_marker_504eb11802a61f29469411424d120328.bindPopup(popup_f5ddc0dc8e3577f286f318c55f491848)
+        ;
+
+        
+    
+    
+            circle_marker_504eb11802a61f29469411424d120328.bindTooltip(
+                `<div>
+                     CEC: Lunada (sce, SUBSTATION) — 2.69 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_355be0ddb17d4b428d1c104f5881346c = L.circleMarker(
+                [33.76694457472049, -118.37319390757165],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_edc1f92c3423f3d17b94800cb7ef9f0a);
+        
+    
+            circle_marker_355be0ddb17d4b428d1c104f5881346c.bindTooltip(
+                `<div>
+                     basin: Crest (sce, SUBSTATION) — 2.48 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_edc1f92c3423f3d17b94800cb7ef9f0a.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_1875dc7e435618d869a8e4c69a3a7255 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_652c448940de1322ba45cba8ce4ebecf = L.marker(
+                [34.45401946062403, -119.74406674690124],
+                {
+}
+            ).addTo(feature_group_1875dc7e435618d869a8e4c69a3a7255);
+        
+    
+            var icon_c07858c754a789f9ae5a68505548e6f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_652c448940de1322ba45cba8ce4ebecf.bindTooltip(
+                `<div>
+                     SOURCE: Westfall P.m. (SCE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_652c448940de1322ba45cba8ce4ebecf.setIcon(icon_c07858c754a789f9ae5a68505548e6f0);
+            
+    
+            var circle_marker_fd202d7e507a10f3d154df1295fe0559 = L.circleMarker(
+                [34.45196304, -119.7613857],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_1875dc7e435618d869a8e4c69a3a7255);
+        
+    
+        var popup_bae82af700c639f68ca404c48a4f62f9 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_022101495b9f8eea5cfd25f0ceda4386 = $(`<div id="html_022101495b9f8eea5cfd25f0ceda4386" style="width: 100.0%; height: 100.0%;"><b>San Marcos - (SCE)</b><br>owner: SCE<br>type: SUBSTATION<br>status: Operational<br>dist: 1.60 km</div>`)[0];
+                popup_bae82af700c639f68ca404c48a4f62f9.setContent(html_022101495b9f8eea5cfd25f0ceda4386);
+            
+        
+
+        circle_marker_fd202d7e507a10f3d154df1295fe0559.bindPopup(popup_bae82af700c639f68ca404c48a4f62f9)
+        ;
+
+        
+    
+    
+            circle_marker_fd202d7e507a10f3d154df1295fe0559.bindTooltip(
+                `<div>
+                     CEC: San Marcos - (SCE) (sce, SUBSTATION) — 1.60 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c87b25caccd0c5f24108696ea9d2f4db = L.circleMarker(
+                [34.451967855248554, -119.761398169901],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_1875dc7e435618d869a8e4c69a3a7255);
+        
+    
+            circle_marker_c87b25caccd0c5f24108696ea9d2f4db.bindTooltip(
+                `<div>
+                     basin: San Marcos (sce, SUBSTATION) — 1.61 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_1875dc7e435618d869a8e4c69a3a7255.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_97880d33910395d95ca47f44b542d7c7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_5b1a660198f4cd49e89432e6e3a9d88b = L.marker(
+                [32.88079314728578, -117.19125554657676],
+                {
+}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+            var icon_94de51ed2b759b55fd8805c86f1b1614 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_5b1a660198f4cd49e89432e6e3a9d88b.bindTooltip(
+                `<div>
+                     SOURCE: EASTGATE (SDGE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5b1a660198f4cd49e89432e6e3a9d88b.setIcon(icon_94de51ed2b759b55fd8805c86f1b1614);
+            
+    
+            var circle_marker_e0026fa3c6336851f06acf0c765bc390 = L.circleMarker(
+                [32.88484676, -117.20082653],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+        var popup_0b85928fb9477687066ceebaead72093 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4e8b866bd98541b51cdfbd161cff7cda = $(`<div id="html_4e8b866bd98541b51cdfbd161cff7cda" style="width: 100.0%; height: 100.0%;"><b>Eastgate -  South</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 1.00 km</div>`)[0];
+                popup_0b85928fb9477687066ceebaead72093.setContent(html_4e8b866bd98541b51cdfbd161cff7cda);
+            
+        
+
+        circle_marker_e0026fa3c6336851f06acf0c765bc390.bindPopup(popup_0b85928fb9477687066ceebaead72093)
+        ;
+
+        
+    
+    
+            circle_marker_e0026fa3c6336851f06acf0c765bc390.bindTooltip(
+                `<div>
+                     CEC: Eastgate -  South (sdge, SUBSTATION) — 1.00 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_897154e66941949b7116c0043bec1c19 = L.circleMarker(
+                [32.89273637, -117.20589149],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+        var popup_83bbad3480f2c8eba5a7117e1de83892 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_015d16d3c648882504429f9651ad175d = $(`<div id="html_015d16d3c648882504429f9651ad175d" style="width: 100.0%; height: 100.0%;"><b>Mira Sorrento</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: nan<br>dist: 1.91 km</div>`)[0];
+                popup_83bbad3480f2c8eba5a7117e1de83892.setContent(html_015d16d3c648882504429f9651ad175d);
+            
+        
+
+        circle_marker_897154e66941949b7116c0043bec1c19.bindPopup(popup_83bbad3480f2c8eba5a7117e1de83892)
+        ;
+
+        
+    
+    
+            circle_marker_897154e66941949b7116c0043bec1c19.bindTooltip(
+                `<div>
+                     CEC: Mira Sorrento (sdge, SUBSTATION) — 1.91 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3ad46c33855e1e48951d860512959fd5 = L.circleMarker(
+                [32.87960521, -117.21360809],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+        var popup_1b64b07d087cb6d417c4051b95df7fa9 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a8cece1c681d6259e2bbe85bc137a725 = $(`<div id="html_a8cece1c681d6259e2bbe85bc137a725" style="width: 100.0%; height: 100.0%;"><b>Genesee</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.09 km</div>`)[0];
+                popup_1b64b07d087cb6d417c4051b95df7fa9.setContent(html_a8cece1c681d6259e2bbe85bc137a725);
+            
+        
+
+        circle_marker_3ad46c33855e1e48951d860512959fd5.bindPopup(popup_1b64b07d087cb6d417c4051b95df7fa9)
+        ;
+
+        
+    
+    
+            circle_marker_3ad46c33855e1e48951d860512959fd5.bindTooltip(
+                `<div>
+                     CEC: Genesee (sdge, SUBSTATION) — 2.09 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_95bfaed8c31cfdfc4045970a147a50e4 = L.circleMarker(
+                [32.8938167, -117.21133294],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+        var popup_ed7970881c423e72bbd687ed6631f48d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2891613c5c63130848c71910c75364ef = $(`<div id="html_2891613c5c63130848c71910c75364ef" style="width: 100.0%; height: 100.0%;"><b>Unknown - 4234</b><br>owner: SDGE Imperial<br>type: RISER<br>status: Operational<br>dist: 2.37 km</div>`)[0];
+                popup_ed7970881c423e72bbd687ed6631f48d.setContent(html_2891613c5c63130848c71910c75364ef);
+            
+        
+
+        circle_marker_95bfaed8c31cfdfc4045970a147a50e4.bindPopup(popup_ed7970881c423e72bbd687ed6631f48d)
+        ;
+
+        
+    
+    
+            circle_marker_95bfaed8c31cfdfc4045970a147a50e4.bindTooltip(
+                `<div>
+                     CEC: Unknown - 4234 (sdge, RISER) — 2.37 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_416de4dbbac6fd64983bc2b5008ab7d1 = L.circleMarker(
+                [32.87607501, -117.16588393],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+        var popup_ab943c2f9929389665cc1cfbb74e26ef = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3239ca66d9fec1cfb975f0f393dfaee2 = $(`<div id="html_3239ca66d9fec1cfb975f0f393dfaee2" style="width: 100.0%; height: 100.0%;"><b>Miramar Gt</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.43 km</div>`)[0];
+                popup_ab943c2f9929389665cc1cfbb74e26ef.setContent(html_3239ca66d9fec1cfb975f0f393dfaee2);
+            
+        
+
+        circle_marker_416de4dbbac6fd64983bc2b5008ab7d1.bindPopup(popup_ab943c2f9929389665cc1cfbb74e26ef)
+        ;
+
+        
+    
+    
+            circle_marker_416de4dbbac6fd64983bc2b5008ab7d1.bindTooltip(
+                `<div>
+                     CEC: Miramar Gt (sdge, SUBSTATION) — 2.43 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7275bc46f86387fdd2f9ef7e0a2e6076 = L.circleMarker(
+                [32.88360622, -117.22245408],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+        var popup_621c79c6cd999738deac7e8d1efa0bac = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_359d54d3777e722158c90625103f488f = $(`<div id="html_359d54d3777e722158c90625103f488f" style="width: 100.0%; height: 100.0%;"><b>UC San Diego</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.93 km</div>`)[0];
+                popup_621c79c6cd999738deac7e8d1efa0bac.setContent(html_359d54d3777e722158c90625103f488f);
+            
+        
+
+        circle_marker_7275bc46f86387fdd2f9ef7e0a2e6076.bindPopup(popup_621c79c6cd999738deac7e8d1efa0bac)
+        ;
+
+        
+    
+    
+            circle_marker_7275bc46f86387fdd2f9ef7e0a2e6076.bindTooltip(
+                `<div>
+                     CEC: UC San Diego (sdge, SUBSTATION) — 2.93 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d070d9b73e41bfbd24621aad53ae29a6 = L.circleMarker(
+                [32.88485153479576, -117.200838449833],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+            circle_marker_d070d9b73e41bfbd24621aad53ae29a6.bindTooltip(
+                `<div>
+                     basin: Eastgate (sdge, SUBSTATION) — 1.00 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_48fd3c4af160a3d458f05a51326b1a1a = L.circleMarker(
+                [32.87960998752614, -117.21362001492032],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+            circle_marker_48fd3c4af160a3d458f05a51326b1a1a.bindTooltip(
+                `<div>
+                     basin: Genesee (sdge, SUBSTATION) — 2.09 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c5a7f00a5f41296b5cac3db184b18c5c = L.circleMarker(
+                [32.893821479095, -117.21134486619856],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+            circle_marker_c5a7f00a5f41296b5cac3db184b18c5c.bindTooltip(
+                `<div>
+                     basin: Unknown (unknown, RISER) — 2.37 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c99e8347d2edbbfbcecacbf83e1ff99b = L.circleMarker(
+                [32.87607978917124, -117.16589583859414],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+            circle_marker_c99e8347d2edbbfbcecacbf83e1ff99b.bindTooltip(
+                `<div>
+                     basin: Miramar Gt (sdge, SUBSTATION) — 2.43 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b45f51b90963d68edb06ecb84b4c9308 = L.circleMarker(
+                [32.883610995853, -117.22246600135104],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_97880d33910395d95ca47f44b542d7c7);
+        
+    
+            circle_marker_b45f51b90963d68edb06ecb84b4c9308.bindTooltip(
+                `<div>
+                     basin: UC San Diego (sdge, SUBSTATION) — 2.93 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_97880d33910395d95ca47f44b542d7c7.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var feature_group_793e90f70bb582e3752f40b57bec2405 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_1c8eb673324c099da958a2189d644ac4 = L.marker(
+                [32.72991109316187, -117.09755129532914],
+                {
+}
+            ).addTo(feature_group_793e90f70bb582e3752f40b57bec2405);
+        
+    
+            var icon_8eb5d771a244b5993c105a7b34df4691 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_1c8eb673324c099da958a2189d644ac4.bindTooltip(
+                `<div>
+                     SOURCE: WABASH CANYON (SDGE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1c8eb673324c099da958a2189d644ac4.setIcon(icon_8eb5d771a244b5993c105a7b34df4691);
+            
+    
+            var circle_marker_6ee6cc6a37fe645d944cd83b8041fbc5 = L.circleMarker(
+                [32.73003924, -117.11095412],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_793e90f70bb582e3752f40b57bec2405);
+        
+    
+        var popup_3aba358e676f27d62a03e9833c6ecf16 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_91ebe2c0eb95199a45dcc7f88743a571 = $(`<div id="html_91ebe2c0eb95199a45dcc7f88743a571" style="width: 100.0%; height: 100.0%;"><b>Wabash - (SDG&E)</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 1.25 km</div>`)[0];
+                popup_3aba358e676f27d62a03e9833c6ecf16.setContent(html_91ebe2c0eb95199a45dcc7f88743a571);
+            
+        
+
+        circle_marker_6ee6cc6a37fe645d944cd83b8041fbc5.bindPopup(popup_3aba358e676f27d62a03e9833c6ecf16)
+        ;
+
+        
+    
+    
+            circle_marker_6ee6cc6a37fe645d944cd83b8041fbc5.bindTooltip(
+                `<div>
+                     CEC: Wabash - (SDG&E) (sdge, SUBSTATION) — 1.25 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f6b3d1ba6124f87b08d28c615db8f205 = L.circleMarker(
+                [32.71258644, -117.09384885],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_793e90f70bb582e3752f40b57bec2405);
+        
+    
+        var popup_58702c4f8133f19983388f348de66b9a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b122097ead5d3e0933baefd4885bd883 = $(`<div id="html_b122097ead5d3e0933baefd4885bd883" style="width: 100.0%; height: 100.0%;"><b>Market</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: nan<br>dist: 1.96 km</div>`)[0];
+                popup_58702c4f8133f19983388f348de66b9a.setContent(html_b122097ead5d3e0933baefd4885bd883);
+            
+        
+
+        circle_marker_f6b3d1ba6124f87b08d28c615db8f205.bindPopup(popup_58702c4f8133f19983388f348de66b9a)
+        ;
+
+        
+    
+    
+            circle_marker_f6b3d1ba6124f87b08d28c615db8f205.bindTooltip(
+                `<div>
+                     CEC: Market (sdge, SUBSTATION) — 1.96 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dfd7ff3d2cdfc3eb506cdbc2645e483f = L.circleMarker(
+                [32.74565323, -117.07858613],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_793e90f70bb582e3752f40b57bec2405);
+        
+    
+        var popup_682e2dcb97259f2fd4542d0891b158bb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_84b149f348a2d519312b876131cfd7a3 = $(`<div id="html_84b149f348a2d519312b876131cfd7a3" style="width: 100.0%; height: 100.0%;"><b>Streamview</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: Operational<br>dist: 2.49 km</div>`)[0];
+                popup_682e2dcb97259f2fd4542d0891b158bb.setContent(html_84b149f348a2d519312b876131cfd7a3);
+            
+        
+
+        circle_marker_dfd7ff3d2cdfc3eb506cdbc2645e483f.bindPopup(popup_682e2dcb97259f2fd4542d0891b158bb)
+        ;
+
+        
+    
+    
+            circle_marker_dfd7ff3d2cdfc3eb506cdbc2645e483f.bindTooltip(
+                `<div>
+                     CEC: Streamview (sdge, SUBSTATION) — 2.49 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f2631ab7a8a0e934e8eb78bcc30f61f0 = L.circleMarker(
+                [32.71026711, -117.08459435],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_793e90f70bb582e3752f40b57bec2405);
+        
+    
+        var popup_5a6a61ad68f3dbfddbb4a92457a6891c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_741c8fd9b530390dea3f08b5387c571e = $(`<div id="html_741c8fd9b530390dea3f08b5387c571e" style="width: 100.0%; height: 100.0%;"><b>Roswell</b><br>owner: SDG&E<br>type: SUBSTATION<br>status: nan<br>dist: 2.50 km</div>`)[0];
+                popup_5a6a61ad68f3dbfddbb4a92457a6891c.setContent(html_741c8fd9b530390dea3f08b5387c571e);
+            
+        
+
+        circle_marker_f2631ab7a8a0e934e8eb78bcc30f61f0.bindPopup(popup_5a6a61ad68f3dbfddbb4a92457a6891c)
+        ;
+
+        
+    
+    
+            circle_marker_f2631ab7a8a0e934e8eb78bcc30f61f0.bindTooltip(
+                `<div>
+                     CEC: Roswell (sdge, SUBSTATION) — 2.50 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cce919fcce2b9d903bdac6b8caf6e686 = L.circleMarker(
+                [32.730044002441986, -117.11096601432388],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_793e90f70bb582e3752f40b57bec2405);
+        
+    
+            circle_marker_cce919fcce2b9d903bdac6b8caf6e686.bindTooltip(
+                `<div>
+                     basin: Wabash (sdge, SUBSTATION) — 1.25 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cd54906455c4bfa52cc7dfbf27f3bf42 = L.circleMarker(
+                [32.74565799569511, -117.07859801908296],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_793e90f70bb582e3752f40b57bec2405);
+        
+    
+            circle_marker_cd54906455c4bfa52cc7dfbf27f3bf42.bindTooltip(
+                `<div>
+                     basin: Streamview (sdge, SUBSTATION) — 2.49 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_793e90f70bb582e3752f40b57bec2405.addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+        
+    
+            var layer_control_34239f4fab8af1cb9dd1c9f967969f82_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_93badb7590898ad4528741e40e6c56a2,
+                },
+                overlays :  {
+                    "PGE \u2014 BERKELEY T" : feature_group_cc8b6b4e3de03c0137b6d8d7073c40bf,
+                    "PGE \u2014 LOCKHEED NO 1" : feature_group_acb0056b6727b1de12cb20548737751b,
+                    "PGE \u2014 LOCKHEED NO 2" : feature_group_c3c4d7f36d6ef4793722247631f8a2d4,
+                    "PGE \u2014 LODI" : feature_group_ba7c8b3968bbc64a2e2df2b890b43bd0,
+                    "PGE \u2014 RUSSELL" : feature_group_10bf6c914143b840026161e883c492b3,
+                    "SCE \u2014 Cottage Grove" : feature_group_5acb521854ddf51e0acc6b86d383e37d,
+                    "SCE \u2014 Peacock U.g.s." : feature_group_fd6197dc9f9f8e8dc9bb255e3de56844,
+                    "SCE \u2014 Queen Mary U.g.s." : feature_group_d8ae33fd0f2e1cf0b62d8c4ccfa68ef7,
+                    "SCE \u2014 Surrey U.g.s." : feature_group_edc1f92c3423f3d17b94800cb7ef9f0a,
+                    "SCE \u2014 Westfall P.m." : feature_group_1875dc7e435618d869a8e4c69a3a7255,
+                    "SDGE \u2014 EASTGATE" : feature_group_97880d33910395d95ca47f44b542d7c7,
+                    "SDGE \u2014 WABASH CANYON" : feature_group_793e90f70bb582e3752f40b57bec2405,
+                },
+            };
+            let layer_control_34239f4fab8af1cb9dd1c9f967969f82 = L.control.layers(
+                layer_control_34239f4fab8af1cb9dd1c9f967969f82_layers.base_layers,
+                layer_control_34239f4fab8af1cb9dd1c9f967969f82_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_3cfbbe9856b0f358d62370231dfb399b);
+
+        
+</script>
+</html>

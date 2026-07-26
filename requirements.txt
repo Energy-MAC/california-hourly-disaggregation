@@ -3,6 +3,9 @@ numpy
 matplotlib
 seaborn
 scikit-learn
+xgboost
+lightgbm
+statsmodels
 jupyter
 requests
 python-dotenv

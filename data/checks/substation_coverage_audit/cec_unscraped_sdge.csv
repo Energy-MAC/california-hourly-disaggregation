@@ -1,0 +1,367 @@
+name,owner_raw,owner_std,type,category,matched_to_scrape,max_voltage_kv,latitude,longitude,county,city,status,cec_resolve_area,hifld_id
+Imperial Valley - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,500.0,32.71794293,-115.71564984,Imperial County,,Operational,SDGE Imperial,300666.0
+Miguel,SDG&E,sdge,SUBSTATION,substation,False,500.0,32.67942885,-116.98398078,San Diego County,,Operational,SDGE Imperial,305518.0
+ECO - East County,SDG&E,sdge,SUBSTATION,substation,False,500.0,32.6272652,-116.11798829,San Diego County,,Operational,SDGE Imperial,304506.0
+North Gila - IV (Proposed),SDG&E,sdge,SUBSTATION,substation,False,500.0,32.73610818,-115.21299074,Imperial,Bonds Corner,Operational,SDGE Imperial,308292.0
+North Gila,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,500.0,32.7464981,-114.4903456,Yuma County,,Operational,SDGE Arizona,
+Suncrest,SDG&E,sdge,SUBSTATION,substation,False,500.0,32.8090995,-116.68286701,San Diego County,,Operational,SDGE Imperial,307573.0
+Ocotillo Express,SDG&E,sdge,SUBSTATION,substation,False,500.0,32.74502518,-116.04198829,Imperial,Ocotillo,Operational,SDGE Imperial,301886.0
+SDGE Hassayampa 500kV,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,500.0,33.34584494,-112.85198884,Maricopa County,TONOPAH,,SDGE Arizona,
+Hoodoo Wash SDGE 500kV,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,500.0,32.95407502,-113.48898875,ROLL,,,SDGE Arizona,
+New Sub - Suncrest - Ocotillo (Proposed),SDG&E,sdge,SUBSTATION,substation,False,500.0,32.69898067,-116.35375379,San Diego County,,Operational,SDGE Imperial,310100.0
+Doublett,SDG&E,sdge,SUBSTATION,substation,False,230.0,32.91704485,-117.21907745,San Diego County,San Diego,Operational,SDGE Imperial,300151.0
+Fashion Valley,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,230.0,32.77170822,-117.16439407,San Diego County,San Diego,Operational,SDGE Imperial,
+Calpeak Power Enterprise 7,SDG&E,sdge,SUBSTATION,substation,False,230.0,33.12093686,-117.11725752,San Diego County,Escondido,Operational,SDGE Imperial,308981.0
+Main Street,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,230.0,32.69649223,-117.14346709,San Diego County,San Diego,Operational,SDGE Imperial,
+Unknown - 4149,SDGE Imperial,sdge,SUBSTATION,substation,False,230.0,32.73453586,-115.7173368,Imperial County,,Operational,SDGE Imperial,308676.0
+Encina,SDG&E,sdge,SUBSTATION,substation,False,230.0,33.1369612,-117.33550504,San Diego County,Carlsbad,Operational,SDGE Imperial,309677.0
+Penasquitos,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,230.0,32.91870708,-117.21912669,San Diego County,San Diego,Operational,SDGE Imperial,
+Sycamore Canyon,SDG&E,sdge,SUBSTATION,substation,False,230.0,32.91739381,-117.03111566,San Diego County,San Diego,Operational,SDGE Imperial,305902.0
+Talega,SDG&E,sdge,SUBSTATION,substation,False,230.0,33.4531076,-117.57144142,San Diego County,,Operational,SDGE Imperial,300131.0
+Silvergate,SDG&E,sdge,SUBSTATION,substation,False,230.0,32.69487768,-117.14325631,San Diego County,San Diego,Operational,SDGE Imperial,303846.0
+Otay Mesa - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,230.0,32.57412782,-116.91130947,San Diego County,,Operational,SDGE Imperial,300185.0
+Bay Boulevard,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,230.0,32.60847334,-117.09431198,San Diego County,Chula Vista,Operational,SDGE Imperial,
+Drew Switchyard,SDG&E,sdge,SUBSTATION,substation,False,230.0,32.67811141,-115.67159358,Imperial County,,,SDGE Imperial,
+Suncrest Svc,SDG&E,sdge,SUBSTATION,substation,False,230.0,32.81227731,-116.6664833,San Diego County,,,SDGE Imperial,
+Q1806,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,138.0,33.53285517,-117.67692795,ORANGE,San Juan Capistrano,,SDGE Imperial,
+Carrizo Gorge,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,138.0,32.72151519,-116.26196826,San Diego,Boulevard,,SDGE Imperial,
+North County Metering,SDG&E,sdge,SUBSTATION,substation,False,138.0,33.0895823,-117.20322604,San Diego County,,,SDGE Imperial,
+Larkspur Energy Facility,SDG&E,sdge,SUBSTATION,substation,False,93.0,32.56629037,-116.94431164,San Diego County,San Diego,Operational,SDGE Imperial,302409.0
+Narrows - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,92.0,33.13722813,-116.29446501,San Diego County,,Operational,SDGE Imperial,305768.0
+Heber - (SDGE Imperial),SDGE Imperial,sdge,SUBSTATION,substation,False,92.0,32.71340647,-115.53457212,Imperial County,,Operational,SDGE Imperial,301601.0
+Eastgate -  North,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.9019458,-117.22704421,San Diego County,San Diego,Operational,SDGE Imperial,300286.0
+Ntcq,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.74614278,-117.19251357,San Diego County,San Diego,Operational,SDGE Imperial,303742.0
+North Island QF,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.7023117,-117.18244343,San Diego County,Coronado,Operational,SDGE Imperial,306795.0
+Sithe,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.67954047,-117.24733939,San Diego County,San Diego,Operational,SDGE Imperial,306124.0
+Barrett Lake,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.65347523,-116.6798732,San Diego County,,Operational,SDGE Imperial,300685.0
+Borrego - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,33.27085624,-116.34820207,San Diego County,,Operational,SDGE Imperial,307763.0
+Boulder Creek - SDG&E West,SDG&E,sdge,SUBSTATION,substation,False,69.0,33.00598706,-116.58619859,San Diego County,,Operational,SDGE Imperial,308308.0
+Del Mar - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,32.98068966,-117.25536028,San Diego County,San Diego,Operational,SDGE Imperial,310137.0
+Division - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,32.68155824,-117.12009712,San Diego County,San Diego,Operational,SDGE Imperial,303096.0
+Dunhill,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.90154024,-117.22990808,San Diego County,San Diego,Operational,SDGE Imperial,304193.0
+Fenton,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.89496745,-117.1563103,San Diego County,San Diego,Operational,SDGE Imperial,304897.0
+Horno,SDG&E,sdge,SUBSTATION,substation,False,69.0,33.37824754,-117.45752698,San Diego County,,Operational,SCE Metro,308470.0
+Japanese Mesa,SDG&E,sdge,SUBSTATION,substation,False,69.0,33.37429907,-117.55477629,San Diego County,,Operational,SCE Metro,310478.0
+Las Pulgas - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,33.31284519,-117.46691023,San Diego County,,Operational,SCE Metro,302995.0
+Miramar,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.89419668,-117.13549364,San Diego County,San Diego,Operational,SDGE Imperial,303145.0
+National City,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.67308625,-117.10737312,San Diego County,National City,Operational,SDGE Imperial,302065.0
+Otay Lake,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.59709529,-116.92767981,San Diego County,,Operational,SDGE Imperial,305962.0
+Rincon - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,33.28584794,-116.95864087,San Diego County,,Operational,SDGE Imperial,302252.0
+Scrap Disposal Corp.,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,69.0,32.67036626,-117.11464209,San Diego County,National City,Operational,SDGE Imperial,
+Stuart - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,33.25671185,-117.41656302,San Diego County,Camp Pendleton South,Operational,SDGE Imperial,306532.0
+Warner - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,33.24728399,-116.67591866,San Diego County,,Operational,SDGE Imperial,306424.0
+Warren Canyon,SDG&E,sdge,SUBSTATION,substation,False,69.0,33.01540631,-117.00230755,San Diego County,Poway,Operational,SDGE Imperial,303929.0
+Unknown - 3385,SDGE Imperial,sdge,SUBSTATION,substation,False,69.0,33.13892895,-117.07259878,San Diego County,Escondido,Operational,SDGE Imperial,301797.0
+Lake Hodges,SDG&E,sdge,SUBSTATION,substation,False,69.0,33.05860383,-117.11927352,San Diego County,,Operational,SDGE Imperial,303592.0
+Unknown - 3622,SDGE Imperial,sdge,SUBSTATION,substation,False,69.0,32.74538024,-117.19255309,San Diego County,San Diego,Operational,SDGE Imperial,303526.0
+UC San Diego,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.88360622,-117.22245408,San Diego County,San Diego,Operational,SDGE Imperial,304980.0
+Naval Station,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.67076211,-117.11471374,San Diego County,National City,Operational,SDGE Imperial,306730.0
+MMC Chula,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.59169005,-117.05851077,San Diego County,Chula Vista,Operational,SDGE Imperial,303175.0
+Unknown - 3893,SDGE Imperial,sdge,SUBSTATION,substation,False,69.0,32.91035231,-117.11330139,San Diego County,San Diego,Operational,SDGE Imperial,306264.0
+Calpeak,SDGE Imperial,sdge,SUBSTATION,substation,False,69.0,32.56702649,-116.94427176,San Diego County,San Diego,Operational,SDGE Imperial,307262.0
+Unknown - 3960,SDGE Imperial,sdge,SUBSTATION,substation,False,69.0,32.79685931,-116.971782,San Diego County,El Cajon,Operational,SDGE Imperial,307550.0
+Unknown - 4117,SDGE Imperial,sdge,SUBSTATION,substation,False,69.0,32.70554297,-116.3421513,San Diego County,,Operational,SDGE Imperial,308179.0
+Unknown - 4174,SDGE Imperial,sdge,SUBSTATION,substation,False,69.0,32.73526558,-117.20792885,San Diego County,San Diego,Operational,SDGE Imperial,309067.0
+Alpine - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.82772785,-116.78988242,San Diego County,Alpine,Operational,SDGE Imperial,308247.0
+Pendleton,SDG&E,sdge,SUBSTATION,substation,False,69.0,33.30916463,-117.33502414,San Diego County,Camp Pendleton Mainside,Operational,SDGE Imperial,308957.0
+San Marcos - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,33.1287952,-117.19722139,San Diego County,San Marcos,Operational,SDGE Imperial,305995.0
+Loveland - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,69.0,32.79697576,-116.79218816,San Diego County,ALPINE,Operational,SDGE Imperial,306685.0
+Salt Creek - SDGE Imperial,SDG&E,sdge,SUBSTATION ASSUMED,substation,False,69.0,32.67824322,-116.98282028,San Diego,Bonita,,SDGE Imperial,
+Mira Sorrento,SDG&E,sdge,SUBSTATION,substation,False,69.0,32.89273637,-117.20589149,San Diego County,,,SDGE Imperial,
+Boulder Creek - SDG&E East,SDG&E,sdge,SUBSTATION,substation,False,69.0,33.01862145,-116.6651616,San Diego County,,,SDGE Imperial,
+Unknown - 4151,SDGE Imperial,sdge,SUBSTATION,substation,False,66.0,33.61924772,-117.70730863,Orange County,Lake Forest,Operational,SDGE Imperial,308699.0
+Sewage Pumping Station #1,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.68113688,-117.11831786,San Diego County,,,SDGE Imperial,
+Adams,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.76225701,-117.14344191,San Diego County,,,SDGE Imperial,
+Central,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.71426323,-117.15861324,San Diego County,,,SDGE Imperial,
+Lincoln Acres,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.67552602,-117.07666959,San Diego County,,,SDGE Imperial,
+Naval Training Center  Station C,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.73184642,-117.21658431,San Diego County,,,SDGE Imperial,
+North Vista,SDG&E,sdge,SUBSTATION,substation,False,12.0,33.22516344,-117.22821933,San Diego County,,,SDGE Imperial,
+Vista - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,12.0,33.20252251,-117.24427571,San Diego County,,,SDGE Imperial,
+Sewage Pumping Station #64,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.89879278,-117.22244391,San Diego County,,,SDGE Imperial,
+Shorecliffs,SDG&E,sdge,SUBSTATION,substation,False,12.0,33.44247266,-117.64169148,Orange County,,,SCE Metro,
+East Oceanside,SDG&E,sdge,SUBSTATION,substation,False,12.0,33.19754431,-117.35403255,San Diego County,,,SDGE Imperial,
+San Clemente,SDG&E,sdge,SUBSTATION,substation,False,12.0,33.4295653,-117.61636197,Orange County,,,SCE Metro,
+Bostonia,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.79994777,-116.93783343,San Diego County,,,SDGE Imperial,
+Calavo Gardens,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.76967366,-116.95829578,San Diego County,,,SDGE Imperial,
+Hilltop - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.63003725,-117.0635172,San Diego County,,,SDGE Imperial,
+Market,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.71258644,-117.09384885,San Diego County,,,SDGE Imperial,
+Rolando,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.76218911,-117.06410699,San Diego County,,,SDGE Imperial,
+Amherst,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.76773517,-117.04014257,San Diego County,,,SDGE Imperial,
+Sewage Pumping Station #2,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.72972015,-117.20813316,San Diego County,,,SDGE Imperial,
+South San Clemente,SDG&E,sdge,SUBSTATION,substation,False,12.0,33.41737171,-117.60307073,Orange County,,,SCE Metro,
+Ramona - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,12.0,33.04122018,-116.87062686,San Diego County,,,SDGE Imperial,
+Yerba Santa,SDG&E,sdge,SUBSTATION,substation,False,12.0,32.77393988,-117.09126664,San Diego County,,,SDGE Imperial,
+Temecula,SDG&E,sdge,SUBSTATION,substation,False,12.0,33.4305192,-117.08903653,Riverside County,,,SDGE Imperial,
+Birch,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.6861921,-117.10765832,San Diego County,,,SDGE Imperial,
+Highland 1,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.69364477,-117.10203042,San Diego County,,,SDGE Imperial,
+Las Palmas - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.66462784,-117.09251505,San Diego County,,,SDGE Imperial,
+Flower,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.64609144,-117.09076121,San Diego County,,,SDGE Imperial,
+North Otay 1,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.61686311,-117.07465052,San Diego County,,,SDGE Imperial,
+North Otay 2,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.61670721,-117.07458873,San Diego County,,,SDGE Imperial,
+North Otay 3,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.61660679,-117.07454928,San Diego County,,,SDGE Imperial,
+Flintridge,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.67867849,-117.0693864,San Diego County,,,SDGE Imperial,
+Reo,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.67937289,-117.06715662,San Diego County,,,SDGE Imperial,
+El Rancho Vista,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.63918556,-117.06491543,San Diego County,,,SDGE Imperial,
+Fairmount 2,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.7631008,-117.09670633,San Diego County,,,SDGE Imperial,
+Monroe 3,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.76297656,-117.10828765,San Diego County,,,SDGE Imperial,
+Linda Vista 2,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.79110706,-117.16387378,San Diego County,,,SDGE Imperial,
+Sampson 1,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.69625537,-117.14120028,San Diego County,,,SDGE Imperial,
+Sampson 2,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.69635004,-117.14111032,San Diego County,,,SDGE Imperial,
+Upas 2,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.74121931,-117.12949869,San Diego County,,,SDGE Imperial,
+Volta,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.77655218,-117.16504862,San Diego County,,,SDGE Imperial,
+Hillcrest 3,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.74677582,-117.16458695,San Diego County,,,SDGE Imperial,
+Hillcrest 4,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.74677795,-117.16448439,San Diego County,,,SDGE Imperial,
+Jennings,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.71876607,-117.23932609,San Diego County,,,SDGE Imperial,
+Lindbergh,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.7277105,-117.18076369,San Diego County,,,SDGE Imperial,
+Station C 14,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.71965347,-117.16165627,San Diego County,,,SDGE Imperial,
+Bramson,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.75433113,-117.12242381,San Diego County,,,SDGE Imperial,
+Del Rio,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.743987,-116.96832208,San Diego County,,,SDGE Imperial,
+Campo Road,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.75181916,-117.00121685,San Diego County,,,SDGE Imperial,
+Chollas 1,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.74413169,-117.04585748,San Diego County,,,SDGE Imperial,
+Chollas 2,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.7441317,-117.04570984,San Diego County,,,SDGE Imperial,
+Downtown,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.70834172,-117.1484079,San Diego County,,,SDGE Imperial,
+Wabash 2,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.72978821,-117.1299119,San Diego County,,,SDGE Imperial,
+Station C 17,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.71965235,-117.16152688,San Diego County,,,SDGE Imperial,
+Harbor 5,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.71510872,-117.16843731,San Diego County,,,SDGE Imperial,
+Kramer - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.77700849,-117.17037537,San Diego County,,,SDGE Imperial,
+Highland 3,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.69379943,-117.11220538,San Diego County,,,SDGE Imperial,
+Upas,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.74143502,-117.12950206,San Diego County,,,SDGE Imperial,
+Salt Works,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.60114775,-117.09256773,San Diego County,,,SDGE Imperial,
+Park,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.73114795,-117.14555774,San Diego County,,,SDGE Imperial,
+Fairmount 3,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.76319836,-117.09670496,San Diego County,,,SDGE Imperial,
+Fairmount 1,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.76300396,-117.0967076,San Diego County,,,SDGE Imperial,
+Whitney - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.63149031,-117.07357147,San Diego County,,,SDGE Imperial,
+Middletown 3,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.73147533,-117.16999358,San Diego County,,,SDGE Imperial,
+Middletown 1,SDG&E,sdge,SUBSTATION,substation,False,4.0,32.73145837,-117.17004819,San Diego County,,,SDGE Imperial,
+Quivira Basin,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.76234491,-117.23195928,San Diego County,,,SDGE Imperial,
+Old Town 2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.77296647,-117.20322443,San Diego County,,,SDGE Imperial,
+La Jolla 4,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.83922661,-117.27410654,San Diego County,,,SDGE Imperial,
+La Jolla 3,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.83948008,-117.27418856,San Diego County,,,SDGE Imperial,
+Bird Rock 4,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.81313915,-117.26864406,San Diego County,,,SDGE Imperial,
+Bird Rock 2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.81316606,-117.26852515,San Diego County,,,SDGE Imperial,
+Bird Rock 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.81319266,-117.2684073,San Diego County,,,SDGE Imperial,
+Cardiff 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.023799,-117.2803332,San Diego County,,,SDGE Imperial,
+Seaview,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.9614373,-117.26511417,San Diego County,,,SDGE Imperial,
+Monarch Bay,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.48574932,-117.72626828,Orange County,,,SDGE Imperial,
+Serra - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.46361865,-117.65647667,Orange County,,,SDGE Imperial,
+Mansfield,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.76290091,-117.11739558,San Diego County,,,SDGE Imperial,
+Tyrone,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.7978308,-116.98829452,San Diego County,,,SDGE Imperial,
+Challenge - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.75551853,-116.96455742,San Diego County,,,SDGE Imperial,
+Queen,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.76187994,-116.96236308,San Diego County,,,SDGE Imperial,
+Garfield 3,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.79510178,-116.98660665,San Diego County,,,SDGE Imperial,
+Bradley 3,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.81873199,-116.95835471,San Diego County,,,SDGE Imperial,
+Bradley 2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.81877383,-116.9583558,San Diego County,,,SDGE Imperial,
+Helix View,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.78164847,-116.98001636,San Diego County,,,SDGE Imperial,
+Montezuma,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.77086129,-117.06905033,San Diego County,,,SDGE Imperial,
+La Mesa,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.76721134,-117.02227129,San Diego County,,,SDGE Imperial,
+Via Del Norte,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.82347767,-117.27417385,San Diego County,,,SDGE Imperial,
+Electric Avenue,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.83031383,-117.27639833,San Diego County,,,SDGE Imperial,
+Soledad,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.84962573,-117.25978102,San Diego County,,,SDGE Imperial,
+Azure,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.84909757,-117.24857298,San Diego County,,,SDGE Imperial,
+Bahia Point,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.77067567,-117.24599527,San Diego County,,,SDGE Imperial,
+Ski Beach,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.76578774,-117.23350418,San Diego County,,,SDGE Imperial,
+Garnet - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.80412744,-117.22531712,San Diego County,,,SDGE Imperial,
+South Oceanside,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.17239424,-117.36042224,San Diego County,,,SDGE Imperial,
+Agua Lagoon,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.15667913,-117.34961276,San Diego County,,,SDGE Imperial,
+Carlsbad 4,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.16057376,-117.34379856,San Diego County,,,SDGE Imperial,
+Davis,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.16529818,-117.34364831,San Diego County,,,SDGE Imperial,
+Vista Way,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.18320442,-117.31826178,San Diego County,,,SDGE Imperial,
+Phillips,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.18832635,-117.22945233,San Diego County,,,SDGE Imperial,
+Alta Vista,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.19388314,-117.22397646,San Diego County,,,SDGE Imperial,
+Monte Vista,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.18857101,-117.22209074,San Diego County,,,SDGE Imperial,
+Vista Terrace,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.19435882,-117.22085852,San Diego County,,,SDGE Imperial,
+Buena 2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.17514962,-117.21236867,San Diego County,,,SDGE Imperial,
+Buena 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.17504066,-117.21240057,San Diego County,,,SDGE Imperial,
+El Camino Hills,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.19765399,-117.32163605,San Diego County,,,SDGE Imperial,
+Mimulus,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.03097633,-117.1920854,San Diego County,,,SDGE Imperial,
+Roseville 3,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.71980175,-117.22941088,San Diego County,,,SDGE Imperial,
+Roseville 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.71976785,-117.22949715,San Diego County,,,SDGE Imperial,
+Roseville 2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.7197848,-117.22945401,San Diego County,,,SDGE Imperial,
+La Jolla Farms,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.88642401,-117.24417059,San Diego County,,,SDGE Imperial,
+El Secreto,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.01748283,-117.21470124,San Diego County,,,SDGE Imperial,
+Ohio,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.12518837,-117.07030823,San Diego County,,,SDGE Imperial,
+Grossmont,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.77876626,-116.99400127,San Diego County,,,SDGE Imperial,
+Taylor - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.22913744,-117.22669125,San Diego County,,,SDGE Imperial,
+Hawley,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.2318073,-117.2289386,San Diego County,,,SDGE Imperial,
+De Anza,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.79684833,-117.21648741,San Diego County,,,SDGE Imperial,
+Gesner,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.79187802,-117.20551401,San Diego County,,,SDGE Imperial,
+Erlanger,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.85100847,-117.19484593,San Diego County,,,SDGE Imperial,
+Burton,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.78048882,-117.1720959,San Diego County,,,SDGE Imperial,
+Cass,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.79587507,-117.25152237,San Diego County,,,SDGE Imperial,
+Ocasa,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.85243357,-117.25469804,San Diego County,,,SDGE Imperial,
+Muirlands,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.82758145,-117.2568997,San Diego County,,,SDGE Imperial,
+Country Club - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.84226978,-117.26302395,San Diego County,,,SDGE Imperial,
+Morena 2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.78909247,-117.2053157,San Diego County,,,SDGE Imperial,
+Morena 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.78894197,-117.20534195,San Diego County,,,SDGE Imperial,
+La Jolla Shores 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.84540709,-117.24873629,San Diego County,,,SDGE Imperial,
+Al Bahr 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.84444628,-117.26600065,San Diego County,,,SDGE Imperial,
+Roswell,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.71026711,-117.08459435,San Diego County,,,SDGE Imperial,
+Balboa Stadium 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.71974958,-117.1513103,San Diego County,,,SDGE Imperial,
+Brown Field,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.56836668,-116.99295935,San Diego County,,,SDGE Imperial,
+Carlsbad 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.16200908,-117.35123659,San Diego County,,,SDGE Imperial,
+Carlsbad 3,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.16202837,-117.35120427,San Diego County,,,SDGE Imperial,
+Cardiff 2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.02247251,-117.27966915,San Diego County,,,SDGE Imperial,
+Plaza 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.67545776,-117.09745833,San Diego County,,,SDGE Imperial,
+Hickory 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.75607601,-117.18924122,San Diego County,,,SDGE Imperial,
+Broadway - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.14490044,-117.09041878,San Diego County,,,SDGE Imperial,
+Bancroft - SDG&E,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.77330625,-116.99959218,San Diego County,,,SDGE Imperial,
+Magnolia,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.83908869,-116.96787816,San Diego County,,,SDGE Imperial,
+Eo1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.70996347,-117.06105798,San Diego County,,,SDGE Imperial,
+Eo2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.70996349,-117.06101243,San Diego County,,,SDGE Imperial,
+Oceanside 4,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.20059815,-117.38283479,San Diego County,,,SDGE Imperial,
+Eo3,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.7099637,-117.06096602,San Diego County,,,SDGE Imperial,
+Oceanside 5,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.19493643,-117.38299748,San Diego County,,,SDGE Imperial,
+Moore,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.01202928,-116.927476,San Diego County,,,SDGE Imperial,
+Fallbrook 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.36948723,-117.25361288,San Diego County,,,SDGE Imperial,
+Fallbrook 2,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.36943877,-117.25361133,San Diego County,,,SDGE Imperial,
+Reidy Canyon,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.18239995,-117.09271029,San Diego County,,,SDGE Imperial,
+Julian,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.07881547,-116.60380959,San Diego County,,,SDGE Imperial,
+Dehesa Valley,SDG&E,sdge,SUBSTATION,substation,False,-99.0,32.79044903,-116.83651647,San Diego County,,,SDGE Imperial,
+Pauma Valley,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.30072253,-116.9848595,San Diego County,,,SDGE Imperial,
+Crestline,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.31210251,-116.85843581,San Diego County,,,SDGE Imperial,
+Oaks 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.07009194,-116.59114171,San Diego County,,,SDGE Imperial,
+Pine Hills,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.05602782,-116.62111881,San Diego County,,,SDGE Imperial,
+Rainbow 1,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.40857951,-117.14772148,San Diego County,,,SDGE Imperial,
+Salton,SDG&E,sdge,SUBSTATION,substation,False,-99.0,33.07421678,-116.58321933,San Diego County,,,SDGE Imperial,
+Goal Line,SDG&E,sdge,SUBSTATION,substation,False,,33.11840352,-117.09846308,San Diego County,Escondido,Operational,SDGE Imperial,304166.0
+Cristianitos,SDG&E,sdge,SUBSTATION,substation,False,,33.46333637,-117.57048747,Orange County,Rancho Mission Viejo,Operational,SDGE Imperial,306324.0
+San Mateo - (SDG&E),SDG&E,sdge,SUBSTATION,substation,False,,33.40945562,-117.59059984,Orange County,San Clemente,Operational,SCE Metro,306687.0
+Fuel Oil Terminal,SDG&E,sdge,SUBSTATION,substation,False,,32.65519664,-117.11534589,San Diego County,National City,Operational,SDGE Imperial,306080.0
+General Dynamics,SDG&E,sdge,SUBSTATION,substation,False,,32.82811428,-117.13611411,San Diego County,San Diego,Operational,SDGE Imperial,310020.0
+Kyocera,SDG&E,sdge,SUBSTATION,substation,False,,32.81978967,-117.14034087,San Diego County,San Diego,Operational,SDGE Imperial,304726.0
+Plaster City - (SDGE Imperial),SDGE Imperial,sdge,SUBSTATION,substation,False,,32.79049849,-115.85380788,Imperial County,,Operational,SDGE Imperial,300689.0
+Verde - (SDGE Imperial),SDGE Imperial,sdge,SUBSTATION,substation,False,,32.72293975,-115.337487,Imperial County,,Operational,SDGE Imperial,300922.0
+Barret - (SDGE Imperial),SDGE Imperial,sdge,SUBSTATION,substation,False,,32.86630465,-114.49012962,Imperial County,,Operational,SDGE Imperial,303020.0
+South Bay,SDG&E,sdge,SUBSTATION,substation,False,,32.61514376,-117.09491153,San Diego County,Chula Vista,Operational,SDGE Imperial,304955.0
+Unknown - 3636,SDGE Imperial,sdge,SUBSTATION,substation,False,,32.91226173,-115.56813913,Imperial County,,Operational,SDGE Imperial,303871.0
+Red Mt.,SDG&E,sdge,SUBSTATION,substation,False,,33.3946649,-117.18928126,San Diego County,"Fallbrook, CA",Operational,SDGE Imperial,304982.0
+Miramar Gt,SDG&E,sdge,SUBSTATION,substation,False,,32.87607501,-117.16588393,San Diego County,San Diego,Operational,SDGE Imperial,303864.0
+North Island,SDG&E,sdge,SUBSTATION,substation,False,,32.70509688,-117.18923968,San Diego County,Coronado,Operational,SDGE Imperial,303970.0
+Unknown - 3869,SDGE Imperial,sdge,SUBSTATION,substation,False,,32.72910273,-115.5242733,Imperial County,Heber,Operational,SDGE Imperial,305731.0
+Alamorio - (SDGE Imperial),SDGE Imperial,sdge,SUBSTATION,substation,False,,32.95317572,-115.42324696,Imperial County,,Operational,SDGE Imperial,306508.0
+Unknown - 3911,SDGE Imperial,sdge,SUBSTATION,substation,False,,32.73817503,-114.71416104,Imperial County,,Operational,SDGE Imperial,306588.0
+Clark Helicopter,SDG&E,sdge,SUBSTATION,substation,False,,32.82938592,-116.96637944,San Diego County,El Cajon,Operational,SDGE Imperial,309761.0
+Brawley,SDGE Imperial,sdge,SUBSTATION,substation,False,,32.90330169,-115.51284194,Imperial County,,Operational,SDGE Imperial,308432.0
+Mesquite - (SDGE Imperial),SDGE Imperial,sdge,SUBSTATION,substation,False,,32.84750846,-115.51019742,Imperial County,,Operational,SDGE Imperial,308467.0
+Unknown - 4206,SDGE Imperial,sdge,SUBSTATION,substation,False,,32.75250365,-115.57765305,Imperial County,,Operational,SDGE Imperial,309666.0
+Unknown - 4243,SDGE Imperial,sdge,SUBSTATION,substation,False,,32.7816771,-114.59043755,Imperial County,,Operational,SDGE Imperial,310453.0
+Drop 4,SDGE Imperial,sdge,SUBSTATION,substation,False,,32.70606959,-115.2178832,Imperial County,,Proposed,SDGE Imperial,
+Unknown - 3751,SDGE Imperial,sdge,TAP,line_structure,False,138.0,33.51412877,-117.66863562,Orange County,San Juan Capistrano,Operational,SDGE Imperial,305222.0
+Carlton Hills Tap,SDGE Imperial,sdge,TAP,line_structure,False,138.0,32.86045571,-117.03389834,San Diego County,San Diego,Operational,SDGE Imperial,310875.0
+Unknown - 3313,SDGE Imperial,sdge,NOT AVAILABLE,unknown,False,92.0,32.90546643,-115.51814682,Imperial County,,Operational,SDGE Imperial,300300.0
+Unknown - 3689,SDGE Imperial,sdge,NOT AVAILABLE,unknown,False,92.0,32.78142132,-115.50945782,Imperial County,"El Centro, CA",Operational,SDGE Imperial,305031.0
+Unknown - 4068,SDGE Imperial,sdge,TAP,line_structure,False,92.0,32.91295529,-115.53563603,Imperial County,,Operational,SDGE Imperial,308060.0
+Unknown - 3534,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.68495383,-117.10124991,San Diego County,National City,Operational,SDGE Imperial,302696.0
+Bernardo Tap,SDGE Imperial,sdge,TAP,line_structure,False,69.0,33.0407102,-117.15244608,San Diego County,,Operational,SDGE Imperial,302706.0
+Unknown - 3574,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.71413801,-116.47367419,San Diego County,,Operational,SDGE Imperial,302772.0
+Granite Hills Tap,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.79069022,-116.89316314,San Diego County,Granite Hills,Operational,SDGE Imperial,305207.0
+Unknown - 3804,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.76965361,-116.69734202,San Diego County,,Operational,SDGE Imperial,305372.0
+Unknown - 4429,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.74763801,-117.22922546,San Diego County,San Diego,Operational,SDGE Imperial,310966.0
+Unknown - 4430,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.80667684,-117.21491768,San Diego County,San Diego,Operational,SDGE Imperial,310967.0
+Unknown - 4437,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.69612868,-117.04968785,San Diego County,San Diego,Operational,SDGE Imperial,310978.0
+Otay Tap,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.58935225,-117.05813613,San Diego County,San Diego,Operational,SDGE Imperial,307962.0
+Unknown - 4030,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.66778752,-116.69872579,San Diego County,,Operational,SDGE Imperial,307975.0
+Unknown - 4056,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.79754291,-116.4987782,San Diego County,,Operational,SDGE Imperial,308035.0
+Warren Canyon Tap,SDGE Imperial,sdge,TAP,line_structure,False,69.0,33.0221422,-117.0324921,San Diego County,Poway,Operational,SDGE Imperial,308160.0
+Unknown - 4113,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.65372248,-116.67962853,San Diego County,,Operational,SDGE Imperial,308169.0
+Unknown - 4234,SDGE Imperial,sdge,RISER,line_structure,False,69.0,32.8938167,-117.21133294,San Diego County,San Diego,Operational,SDGE Imperial,310191.0
+Jamacha Tap,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.72778823,-116.92535714,San Diego County,Jamul,Operational,SDGE Imperial,310587.0
+Dunhill Tap,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.90066522,-117.23006307,San Diego County,San Diego,Operational,SDGE Imperial,310690.0
+Unknown - 4363,SDGE Imperial,sdge,TAP,line_structure,False,69.0,33.22798856,-117.01988714,San Diego County,Valley Center,Operational,SDGE Imperial,310795.0
+Border Tap,SDGE Imperial,sdge,TAP,line_structure,False,69.0,32.59832024,-116.93940015,San Diego County,Chula Vista,Operational,SDGE Imperial,310812.0
+Unknown - 3289,SDGE Imperial,sdge,RISER,line_structure,False,66.0,33.61412475,-117.70006624,Orange County,Lake Forest,Operational,SDGE Imperial,300066.0
+Unknown - 3621,SDGE Imperial,sdge,RISER,line_structure,False,66.0,33.57557571,-117.7406879,Orange County,Aliso Viejo,Operational,SDGE Imperial,303470.0
+Unknown - 3452,SDGE Imperial,sdge,TAP,line_structure,False,,33.17495879,-117.2795278,San Diego County,Carlsbad,Operational,SDGE Imperial,302513.0
+Unknown - 3647,SDGE Imperial,sdge,NOT AVAILABLE,unknown,False,,32.75288949,-114.59547569,Imperial County,,Operational,SDGE Imperial,304088.0
+Unknown - 3925,SDGE Imperial,sdge,NOT AVAILABLE,unknown,False,,32.75286168,-114.61596763,Imperial County,,Operational,SDGE Imperial,306875.0
+Unknown - 4428,SDGE Imperial,sdge,TAP,line_structure,False,,32.69397577,-115.33705768,Imperial County,,Operational,SDGE Imperial,310964.0
+Crestwood,SDG&E,sdge,SUBSTATION,substation,True,500.0,32.69904008,-116.35375109,San Diego County,,Operational,SDGE Imperial,310100.0
+Batiquitos,SDG&E,sdge,SUBSTATION,substation,True,230.0,33.10113686,-117.2504075,San Diego County,Carlsbad,Operational,SDGE Imperial,307345.0
+Sampson,SDG&E,sdge,SUBSTATION,substation,True,230.0,32.69438825,-117.14237712,San Diego County,San Diego,Operational,SDGE Imperial,304366.0
+Pico - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,230.0,33.45686953,-117.58923059,Orange County,San Clemente,Operational,SCE Metro,309122.0
+Palomar Airport,SDG&E,sdge,SUBSTATION,substation,True,230.0,33.12287576,-117.28787417,San Diego County,Carlsbad,Operational,SDGE Imperial,303820.0
+Capistrano,SDG&E,sdge,SUBSTATION,substation,True,230.0,33.51258418,-117.66552195,Orange County,San Juan Capistrano,Operational,SDGE Imperial,309660.0
+Escondido,SDG&E,sdge,SUBSTATION,substation,True,230.0,33.12588403,-117.11669124,San Diego County,Escondido,Operational,SDGE Imperial,305776.0
+Mission - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,230.0,32.7840155,-117.13743125,San Diego County,San Diego,Operational,SDGE Imperial,301309.0
+Old Town,SDG&E,sdge,SUBSTATION,substation,True,230.0,32.76607024,-117.19237208,San Diego County,San Diego,Operational,SDGE Imperial,303720.0
+San Luis Rey,SDG&E,sdge,SUBSTATION,substation,True,230.0,33.2114699,-117.33453713,San Diego County,Oceanside,Operational,SDGE Imperial,304572.0
+Artesian,SDG&E,sdge,SUBSTATION,substation,True,230.0,33.02116492,-117.13420586,San Diego County,San Diego,Operational,SDGE Imperial,306409.0
+Laguna Niguel,SDG&E,sdge,SUBSTATION,substation,True,138.0,33.49494019,-117.70296394,Orange County,Laguna Niguel,Operational,SDGE Imperial,309211.0
+Carlton Hills,SDG&E,sdge,SUBSTATION,substation,True,138.0,32.85492221,-117.0120135,San Diego County,San Diego,Operational,SDGE Imperial,300055.0
+Grant Hill,SDG&E,sdge,SUBSTATION,substation,True,138.0,32.71264343,-117.13080202,San Diego County,San Diego,Operational,SDGE Imperial,308950.0
+North City West,SDG&E,sdge,SUBSTATION,substation,True,138.0,32.95874613,-117.22065418,San Diego County,San Diego,Operational,SDGE Imperial,308497.0
+Margarita,SDG&E,sdge,SUBSTATION,substation,True,138.0,33.54997682,-117.62819848,Orange County,,Operational,SDGE Imperial,303293.0
+Telegraph Canyon,SDG&E,sdge,SUBSTATION,substation,True,138.0,32.63792324,-117.01608012,San Diego County,Chula Vista,Operational,SDGE Imperial,305639.0
+Shadowridge,SDG&E,sdge,SUBSTATION,substation,True,138.0,33.1414813,-117.2387575,San Diego County,Vista,Operational,SDGE Imperial,307342.0
+Trabuco,SDG&E,sdge,SUBSTATION,substation,True,138.0,33.562907,-117.67350781,Orange County,Laguna Niguel,Operational,SDGE Imperial,301858.0
+Boulevard,SDG&E,sdge,SUBSTATION,substation,True,138.0,32.6621752,-116.27218826,San Diego County,Boulevard,Operational,SDGE Imperial,301210.0
+Chicarita,SDG&E,sdge,SUBSTATION,substation,True,138.0,32.95835632,-117.10879642,San Diego County,San Diego,Operational,SDGE Imperial,301188.0
+Los Coches - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,138.0,32.85960893,-116.89919737,San Diego County,Lakeside,Operational,SDGE Imperial,301288.0
+Santee - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,138.0,32.85443322,-116.96835714,San Diego County,Santee,Operational,SDGE Imperial,310267.0
+Rancho Mission Viejo,SDG&E,sdge,SUBSTATION,substation,True,138.0,33.52621553,-117.59882313,Orange County,Rancho Mission Viejo,Operational,SDGE Imperial,306862.0
+Ash,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.1366813,-117.0703242,San Diego County,Escondido,Operational,SDGE Imperial,304153.0
+Bernardo,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.02151464,-117.0962881,San Diego County,San Diego,Operational,SDGE Imperial,307537.0
+Border - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.562598,-116.94315277,San Diego County,San Diego,Operational,SDGE Imperial,303807.0
+Cabrillo - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.70747823,-117.24504206,San Diego County,San Diego,Operational,SDGE Imperial,307355.0
+Chollas,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.74376472,-117.04677426,San Diego County,Lemon Grove,Operational,SDGE Imperial,303602.0
+Clairemont,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.82589652,-117.18398375,San Diego County,San Diego,Operational,SDGE Imperial,307132.0
+Coronado,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.69884325,-117.1733231,San Diego County,Coronado,Operational,SDGE Imperial,307501.0
+Descanso,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.86524656,-116.6337569,San Diego County,Descanso,Operational,SDGE Imperial,301129.0
+Encinitas,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.05066745,-117.2853075,San Diego County,Encinitas,Operational,SDGE Imperial,309050.0
+Esco,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.11580308,-117.08906328,San Diego County,Escondido,Operational,SDGE Imperial,300270.0
+Felicita,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.09324959,-117.07367335,San Diego County,Escondido,Operational,SDGE Imperial,309861.0
+Genesee,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.87960521,-117.21360809,San Diego County,San Diego,Operational,SDGE Imperial,301710.0
+Glencliff,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.79833409,-116.498316,San Diego County,,Operational,SDGE Imperial,308984.0
+Granite Hills,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.80440355,-116.92087424,San Diego,El Cajon,Operational,SDGE Imperial,301688.0
+Jamacha,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.74415638,-116.95729646,San Diego County,Spring Valley,Operational,SDGE Imperial,306500.0
+Kettner,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.73317625,-117.17375908,San Diego County,San Diego,Operational,SDGE Imperial,309602.0
+La Jolla,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.84010914,-117.27527697,San Diego County,San Diego,Operational,SDGE Imperial,305898.0
+Montgomery,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.63166193,-117.09966038,San Diego County,Chula Vista,Operational,SDGE Imperial,308575.0
+Morro Hill,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.25220907,-117.30028804,San Diego County,Oceanside,Operational,SDGE Imperial,304856.0
+Oceanside,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.19678481,-117.38181982,San Diego County,Oceanside,Operational,SDGE Imperial,308199.0
+Pacific Beach,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.79919723,-117.24018807,San Diego County,San Diego,Operational,SDGE Imperial,300507.0
+Paradise - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.70448422,-117.04998311,San Diego County,San Diego,Operational,SDGE Imperial,300636.0
+Poway,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.97874798,-117.03127144,San Diego County,Poway,Operational,SDGE Imperial,306075.0
+Rancho Carmel,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.9938202,-117.07789365,San Diego County,San Diego,Operational,SDGE Imperial,304359.0
+Rancho Santa Fe,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.01431743,-117.19855751,San Diego County,Rancho Santa Fe,Operational,SDGE Imperial,308652.0
+Rose Canyon,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.84454522,-117.23704087,San Diego County,San Diego,Operational,SDGE Imperial,308183.0
+Santa Ysabel,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.11050461,-116.67103403,San Diego County,,Operational,SDGE Imperial,306675.0
+Station B - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.71414636,-117.16948952,San Diego County,San Diego,Operational,SDGE Imperial,302259.0
+Station F,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.75495525,-117.12594809,San Diego County,San Diego,Operational,SDGE Imperial,301382.0
+Streamview,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.74565323,-117.07858613,San Diego County,San Diego,Operational,SDGE Imperial,308669.0
+Sunnyside - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.65801525,-117.03030214,San Diego County,Bonita,Operational,SDGE Imperial,306258.0
+Sweetwater,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.65832226,-117.09172313,San Diego County,National City,Operational,SDGE Imperial,307315.0
+Torrey Pines,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.89868623,-117.23999706,San Diego County,San Diego,Operational,SDGE Imperial,308692.0
+Urban,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.71324243,-117.15144643,San Diego County,San Diego,Operational,SDGE Imperial,308215.0
+Wabash - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.73003924,-117.11095412,San Diego County,San Diego,Operational,SDGE Imperial,304119.0
+Olivanhain,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.06849243,-117.14138251,San Diego County,,Operational,SDGE Imperial,302181.0
+Barrett - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.66719217,-116.70013085,San Diego County,,Operational,SDGE Imperial,309405.0
+Eastgate -  South,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.88484676,-117.20082653,San Diego County,San Diego,Operational,SDGE Imperial,300708.0
+Garfield - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.79524624,-116.99677512,San Diego County,El Cajon,Operational,SDGE Imperial,301451.0
+Pomerado,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.94141743,-117.03271866,San Diego County,Poway,Operational,SDGE Imperial,304841.0
+Avocado,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.38464795,-117.23687972,San Diego County,Fallbrook,Operational,SDGE Imperial,305771.0
+Cameron - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.65324709,-116.48814517,San Diego County,Campo,Operational,SDGE Imperial,310119.0
+Cannon,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.13738521,-117.33270105,San Diego County,Carlsbad,Operational,SDGE Imperial,304802.0
+Creelman,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.01814796,-116.8529298,San Diego County,Ramona,Operational,SDGE Imperial,308248.0
+El Cajon,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.7954507,-116.97227348,San Diego County,El Cajon,Operational,SDGE Imperial,303670.0
+Elliott,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.81592857,-117.08847978,San Diego County,San Diego,Operational,SDGE Imperial,302064.0
+Imperial Beach,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.58336189,-117.09722703,San Diego County,San Diego,Operational,SDGE Imperial,306916.0
+Kearny,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.83304308,-117.13399048,San Diego County,San Diego,Operational,SDGE Imperial,309291.0
+Lilac,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.25323962,-117.08584085,San Diego County,,Operational,SDGE Imperial,306693.0
+Melrose,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.20649519,-117.25289083,San Diego County,Vista,Operational,SDGE Imperial,304402.0
+Mesa Heights,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.82960913,-117.15724086,San Diego County,San Diego,Operational,SDGE Imperial,302006.0
+Monserate,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.32910905,-117.23524082,San Diego County,Fallbrook,Operational,SDGE Imperial,301345.0
+Murray,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.79085077,-117.02303812,San Diego County,La Mesa,Operational,SDGE Imperial,300154.0
+Otay,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.59534524,-117.05781612,San Diego County,Chula Vista,Operational,SDGE Imperial,306350.0
+Pala,SDG&E,sdge,SUBSTATION,substation,True,69.0,33.35571915,-117.1122265,San Diego County,,Operational,SDGE Imperial,308927.0
+Point Loma,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.74148412,-117.23338806,San Diego County,San Diego,Operational,SDGE Imperial,306335.0
+San Ysidro,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.56216525,-117.02674915,San Diego County,San Diego,Operational,SDGE Imperial,307222.0
+Scripps - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,32.91097579,-117.11258255,San Diego County,San Diego,Operational,SDGE Imperial,304405.0
+Spring Valley,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.73897422,-117.00272912,San Diego County,Spring Valley,Operational,SDGE Imperial,310301.0
+Valley Center - (SDG&E),SDG&E,sdge,SUBSTATION,substation,True,69.0,33.23069028,-117.01840743,San Diego County,Valley Center,Operational,SDGE Imperial,303972.0
+Ocean Ranch,SDG&E,sdge,SUBSTATION ASSUMED,substation,True,69.0,33.21083519,-117.29374804,San Diego County,Oceanside,,SDGE Imperial,
+SDGE Vine 69kV,SDG&E,sdge,SUBSTATION ASSUMED,substation,True,69.0,32.73875606,-117.17898593,San Diego County,SAN DIEGO,,SDGE Imperial,
+Salt Creek - SDG&E,SDG&E,sdge,SUBSTATION,substation,True,69.0,32.61940535,-116.94945122,San Diego County,,,SDGE Imperial,
+Mesa Rim,SDG&E,sdge,SUBSTATION,substation,True,,32.90491355,-117.17313784,San Diego County,San Diego,Operational,SDGE Imperial,301790.0
+Proctor Valley,SDG&E,sdge,SUBSTATION,substation,True,,32.66511026,-116.98667012,San Diego County,"San Diego, CA",Operational,SDGE Imperial,307111.0
+Friars,SDG&E,sdge,SUBSTATION,substation,True,,32.77902547,-117.1568366,San Diego County,San Diego,Operational,SDGE Imperial,309076.0
