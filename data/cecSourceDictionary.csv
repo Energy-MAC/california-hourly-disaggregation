@@ -1,0 +1,286 @@
+SourceName,CECName,Utility,source,Notes
+18TH STREET,Eighteenth St,PGE,spatial_auto,auto: spatial 0.032km
+21ST AVENUE,Twenty-First Ave,PGE,spatial_auto,auto: spatial 0.021km
+6TH AVENUE,Sixth Ave,PGE,spatial_auto,auto: spatial 0.012km
+8TH AVENUE,Eighth Ave,PGE,spatial_auto,auto: spatial 0.021km
+ACTON,Acton - PG&E,PGE,name_auto,"auto: name match, 0.108km"
+ALHAMBRA,Alhambra - (PG&E),PGE,name_auto,"auto: name match, 0.028km"
+ALPINE,Alpine - PG&E,PGE,name_auto,"auto: name match, 0.049km"
+ANTELOPE,Antelope - (PG&E),PGE,name_auto,"auto: name match, 0.035km"
+AVENAL,Avenal,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.021km"
+BALCH NO 1,Balch 1,PGE,basin_reuse,
+BANCROFT,Bancroft - PG&E,PGE,name_auto,"auto: name match, 0.068km"
+BARRETT,Barrett - (PG&E),PGE,name_auto,"auto: name match, 0.05km"
+BEACH (Q),Beach St,PGE,spatial_auto,auto: spatial 0.011km
+BECK STREET,Beck,PGE,spatial_auto,auto: spatial 0.024km
+BELMONT,Belmont - (PG&E),PGE,name_auto,"auto: name match, 0.06km"
+BERKELEY T,Berkeley T,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.070km"
+CABRILLO,Cabrillo - (PG&E),PGE,name_auto,"auto: name match, 0.009km"
+CALAVERAS CEMENT,Calaveras Cement,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.129km"
+CALFLAX,Calflax,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.014km"
+CAMDEN,Camden - (PG&E),PGE,name_auto,"auto: name match, 0.034km"
+CHALLENGE,Challenge - PG&E,PGE,name_auto,"auto: name match, 0.044km"
+CHOLAME,Cholame,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.028km"
+CHOWCHILLA,Chowchilla - (PG&E),PGE,name_auto,"auto: name match, 0.032km"
+CLEAR LAKE,Clear Lake - (PG&E),PGE,name_auto,"auto: name match, 0.046km"
+COALINGA NO 1,Coalinga 1,PGE,basin_reuse,
+COALINGA NO 2,Coalinga 2,PGE,basin_reuse,
+CONCORD NO 1,Concord,PGE,spatial_auto,auto: spatial 0.04km
+CONTRA COSTA,Contra Costa - (PG&E),PGE,name_auto,"auto: name match, 0.102km"
+CORONA,Corona - (PG&E),PGE,name_auto,"auto: name match, 0.022km"
+COTTONWOOD,Cottonwood - (PG&E),PGE,name_auto,"auto: name match, 0.267km"
+COUNTRY CLUB,Country Club - PG&E,PGE,name_auto,"auto: name match, 0.074km"
+CRESCENT MILLS,Unknown - 3320,PGE,spatial_auto,auto: spatial 0.046km
+CRESTA PH,Cresta,PGE,basin_reuse,
+CROWS LANDING,Crows Landing - (PG&E),PGE,name_auto,"auto: name match, 0.056km"
+DAVIS,UC Davis,PGE,basin_reuse,
+DEL MAR,Del Mar - (PG&E),PGE,name_auto,"auto: name match, 0.011km"
+DINUBA,Dinuba,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.037km"
+DIXON LANDING,Dixon Landing - (PG&E),PGE,name_auto,"auto: name match, 0.06km"
+DRUM,Drum 1,PGE,basin_reuse,
+DUMBARTON,Dumbarton - (PG&E),PGE,name_auto,"auto: name match, 0.04km"
+EDES,Edes - (PG&E),PGE,name_auto,"auto: name match, 0.039km"
+EL CERRITO G,El Cerrito Station G,PGE,basin_reuse,
+EL DORADO PH,El Dorado,PGE,basin_reuse,
+EL NIDO,El Nido - (PG&E),PGE,name_auto,"auto: name match, 0.035km"
+ELECTRA,Electra 1,PGE,basin_reuse,
+EUREKA A,Eureka Station A,PGE,basin_reuse,
+EUREKA E,Eureka Station E,PGE,basin_reuse,
+FAIRMOUNT,Fairmont - (PG&E),PGE,spatial_auto,auto: spatial 0.044km
+FAIRVIEW,Fairview - (PG&E),PGE,name_auto,"auto: name match, 0.019km"
+FAMOSO,Famoso - (PG&E),PGE,name_auto,"auto: name match, 0.064km"
+FIGARDEN,Fig Garden,PGE,basin_reuse,
+FIREBAUGH,Fireboard,PGE,spatial_auto,auto: spatial 0.052km
+FITCH MOUNTAIN,Fitch Mt.,PGE,basin_reuse,
+FOOTHILL,Foothill - (PG&E),PGE,name_auto,"auto: name match, 0.04km"
+FORT BRAGG A,Fort Bragg,PGE,basin_reuse,
+FRANKLIN,Franklin - (PG&E),PGE,name_auto,"auto: name match, 0.033km"
+FREMONT,Fremont - (PG&E),PGE,name_auto,"auto: name match, 0.051km"
+FRUITLAND,Fruitland - (PG&E),PGE,name_auto,"auto: name match, 0.093km"
+GANSO,Ganso - (PG&E),PGE,name_auto,"auto: name match, 0.029km"
+GONZALES,Gonzales - (PG&E),PGE,name_auto,"auto: name match, 0.055km"
+GOOSE LAKE,Goose Lake - (PG&E),PGE,name_auto,"auto: name match, 0.012km"
+GRAYS FLAT,Grays Flat - PG&E,PGE,name_auto,"auto: name match, 0.148km"
+GREEN VALLEY,Green Valley - (PG&E),PGE,name_auto,"auto: name match, 0.021km"
+GUERNSEY,Guernsey - (PG&E),PGE,name_auto,"auto: name match, 0.054km"
+HALF MOON BAY,Half Moon Bay & CM&O Yard ,PGE,basin_reuse,
+HALSEY,Halsey - (PG&E NGBA),PGE,name_auto,"auto: name match, 0.035km"
+HARDING,Harding - (PG&E),PGE,name_auto,"auto: name match, 0.028km"
+HUMBOLDT BAY PP,Humboldt Bay,PGE,basin_reuse,
+IONE,Ione Energy,PGE,basin_reuse,
+JARVIS,Air Liquide,PGE,basin_reuse,Distance
+KANAKA,Kanaka,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.019km"
+KEARNEY,Kearney (New),PGE,basin_reuse,
+KERCKHOFF,Kerchoff 2,PGE,basin_reuse,
+LAKEVIEW,Lakeview - (PG&E),PGE,name_auto,"auto: name match, 0.056km"
+LAKEWOOD,Lakewood - (PG&E),PGE,name_auto,"auto: name match, 0.048km"
+LAS GALLINAS A,Las Gallinas,PGE,basin_reuse,
+LAS PULGAS,Las Pulgas - (PG&E),PGE,name_auto,"auto: name match, 0.039km"
+LAWNDALE,Lawndale - (PG&E),PGE,name_auto,"auto: name match, 0.056km"
+LEMOORE,Lemoore - (PGE Fresno),PGE,name_auto,"auto: name match, 0.052km"
+LINCOLN,Lincoln - (PG&E),PGE,name_auto,"auto: name match, 0.015km"
+LINDEN,Linden - (PG&E),PGE,name_auto,"auto: name match, 0.033km"
+LIVE OAK,Live Oak - 95953,PGE,spatial_auto,auto: spatial 0.018km
+LOCKHEED NO 1,Lockheed 1,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.063km"
+LOCKHEED NO 2,Lockheed 2,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.097km"
+LODI,Lodi,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.071km"
+LOS COCHES,Los Coches - (PG&E),PGE,name_auto,"auto: name match, 0.038km"
+LUCERNE,Lucerne - (PG&E),PGE,name_auto,"auto: name match, 0.012km"
+MANTECA,Manteca - (PG&E),PGE,name_auto,"auto: name match, 0.053km"
+MAPLE,Maple - PG&E,PGE,name_auto,"auto: name match, 0.031km"
+MARIPOSA,Mariposa - (PG&E),PGE,name_auto,"auto: name match, 0.02km"
+MAXWELL,Maxwell - (PG&E),PGE,name_auto,"auto: name match, 0.035km"
+MC CALL,McCall,PGE,basin_reuse,
+MERCED,Merced - (PG&E),PGE,name_auto,"auto: name match, 0.025km"
+MESA,Mesa - (PG&E),PGE,name_auto,"auto: name match, 0.121km"
+MIDWAY,Midway - (PG&E),PGE,name_auto,"auto: name match, 0.455km"
+MILLBRAE,Millbrae - (PG&E),PGE,name_auto,"auto: name match, 0.058km"
+MIWUK,Mi-Wuk,PGE,basin_reuse,
+MONTAGUE,Montague - (PG&E),PGE,name_auto,"auto: name match, 0.042km"
+MORAGA,Moraga - (PG&E),PGE,name_auto,"auto: name match, 0.125km"
+MORRO BAY,Morro Bay (Proposed),PGE,spatial_auto,auto: spatial 0.032km
+MOUNTAIN QUARRIES,Mt. Quarries,PGE,basin_reuse,
+MOUNTAIN VIEW,Mt. View - (PG&E),PGE,spatial_auto,auto: spatial 0.008km
+NARROWS,Narrows - (PG&E),PGE,name_auto,"auto: name match, 0.046km"
+NEW HOPE,New Hope,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.094km"
+NEWARK 12KV,Newark,PGE,basin_reuse,
+NEWARK 21KV,Newark Distribution,PGE,basin_reuse,
+NORCO,Norco - (PG&E),PGE,name_auto,"auto: name match, 0.052km"
+OAK,Oak - PG&E South,PGE,name_auto,"auto: name match, 0.03km"
+OAKLAND I,Oakland I - PG&E Southeast,PGE,name_auto,"auto: name match, 0.017km"
+OCEAN,Ocean Ave,PGE,spatial_auto,auto: spatial 0.016km
+OILFIELDS,Oil Fields,PGE,basin_reuse,
+PANOCHE,Panoche - PG&E,PGE,name_auto,"auto: name match, 0.269km"
+PARADISE,Paradise - (PG&E),PGE,name_auto,"auto: name match, 0.043km"
+PARKWAY,Parkway - (PG&E),PGE,name_auto,"auto: name match, 0.033km"
+PERRY,Perry - (PG&E),PGE,name_auto,"auto: name match, 0.06km"
+PETALUMA A,Petaluma Station A,PGE,basin_reuse,
+PETALUMA C,Petaluma Station C,PGE,basin_reuse,
+PIT NO 1,Pit 1,PGE,basin_reuse,
+PIT NO 3,Pit 3,PGE,basin_reuse,
+PIT NO 5,Pit 5,PGE,basin_reuse,
+PLUMAS,Plumas - (PG&E),PGE,name_auto,"auto: name match, 0.037km"
+POSO MOUNTAIN,Poso Mt.,PGE,basin_reuse,
+RALSTON,Ralston - (PG&E),PGE,name_auto,"auto: name match, 0.031km"
+RANDOLPH,Randolph - PG&E,PGE,name_auto,"auto: name match, 0.027km"
+RAWSON,Rawson Packaging,PGE,basin_reuse,
+RED BLUFF,Red Bluff - (PG&E),PGE,name_auto,"auto: name match, 0.013km"
+RESEARCH,San Ramon Research Cntr.,PGE,basin_reuse,
+RINCON,Rincon - (PG&E),PGE,name_auto,"auto: name match, 0.014km"
+RIO BRAVO,Rio Bravo - (PG&E),PGE,name_auto,"auto: name match, 0.008km"
+ROUGH AND READY ISLA,Rough & Ready,PGE,basin_reuse,
+RUSSELL,Russell,PGE,name_auto_assumed,"auto: name match to CEC-unconfirmed owner (Other (PGE - Assumed)), 0.022km"
+SALINAS,Salinas - (PG&E),PGE,name_auto,"auto: name match, 0.068km"
+SAN JOSE A,San Jose Station A,PGE,basin_reuse,
+SAN JOSE B,San Jose Station B,PGE,basin_reuse,
+SAN MATEO,San Mateo - (PG&E),PGE,name_auto,"auto: name match, 0.19km"
+SAN MIGUEL,San Miguel - (PG&E),PGE,name_auto,"auto: name match, 0.017km"
+SF A (POTRERO),Trans Bay Cable Facility,PGE,spatial_auto,auto: spatial 0.13km
+SF E,San Fran E,PGE,spatial_auto,auto: spatial 0.001km
+SF H (MARTIN),Martin,PGE,basin_reuse,
+SF M,San Fran M,PGE,spatial_auto,auto: spatial 0.007km
+SF N,San Fran N,PGE,spatial_auto,auto: spatial 0.007km
+SF P (HUNTERS POINT),Hunters Point,PGE,basin_reuse,
+SF X (MISSION),Mission - (PG&E),PGE,spatial_auto,auto: spatial 0.052km
+SILVER,Silver Ave,PGE,spatial_auto,auto: spatial 0.014km
+SMARTVILLE,Smartsville,PGE,basin_reuse,
+SOLEDAD,Soledad - (PGE GBA),PGE,name_auto,"auto: name match, 0.017km"
+SPAULDING,Spaulding #2 Ph,PGE,spatial_auto,auto: spatial 0.182km
+STILLWATER,Stillwater - (PG&E),PGE,name_auto,"auto: name match, 0.018km"
+STOCKTON A,Stockton Station A,PGE,basin_reuse,
+STUART,Stuart - (PG&E),PGE,name_auto,"auto: name match, 0.021km"
+SULLIVAN,Sullivan - PG&E,PGE,name_auto,"auto: name match, 0.018km"
+SUMMIT,Summit - (PG&E),PGE,name_auto,"auto: name match, 0.036km"
+TAFT,Taft - Other,PGE,spatial_auto,auto: spatial 0.04km
+TRACY,Tracy - (PG&E),PGE,name_auto,"auto: name match, 0.079km"
+UKIAH,Ukiah - (PG&E),PGE,name_auto,"auto: name match, 0.02km"
+VACA DIXON,Vaca-Dixon & Gc Yard,PGE,basin_reuse,
+VICTOR,Victor - (PG&E),PGE,name_auto,"auto: name match, 0.053km"
+VIEJO,Viejo - (PG&E),PGE,name_auto,"auto: name match, 0.027km"
+VOLTA,Volta 1,PGE,basin_reuse,
+WESTLEY,Westley - (PG&E),PGE,name_auto,"auto: name match, 0.049km"
+WESTPARK,West Park,PGE,basin_reuse,
+WHEATLAND,Wheatland - (PG&E),PGE,name_auto,"auto: name match, 0.025km"
+WHITNEY,Whitney - PG&E,PGE,name_auto,"auto: name match, 0.027km"
+WILLITS,Willits Station A,PGE,basin_reuse,
+WRIGHT,Wright - (PG&E),PGE,name_auto,"auto: name match, 0.07km"
+Acton,Acton - SCE,SCE,name_auto,"auto: name match, 0.193km"
+Alhambra,Alhambra - (SCE),SCE,name_auto,"auto: name match, 0.056km"
+Anita,Anita - (SCE),SCE,name_auto,"auto: name match, 0.073km"
+Arrowhead,Arrowhead - (SCE),SCE,name_auto,"auto: name match, 0.135km"
+Belmont,Belmont - (SCE),SCE,name_auto,"auto: name match, 0.017km"
+Blythe (Walc),Blythe-Bucks,SCE,basin_reuse,Distance
+Blythe City,Blythe,SCE,spatial_auto,auto: spatial 0.051km
+Borrego,Borrego - (SCE),SCE,name_auto,"auto: name match, 0.022km"
+Brighton,Brighton - (SCE),SCE,name_auto,"auto: name match, 0.033km"
+Broadway,Broadway - SCE,SCE,name_auto,"auto: name match, 0.026km"
+Cabrillo,Cabrillo - (SCE),SCE,name_auto,"auto: name match, 0.02km"
+Cal City 'A',Cal City,SCE,basin_reuse,
+Cal City 'B',Cal City,SCE,basin_reuse,
+Camden,Camden - (SCE),SCE,name_auto,"auto: name match, 0.035km"
+Cameron,Cameron - (SCE),SCE,name_auto,"auto: name match, 0.019km"
+Canyon,Canyon - (SCE),SCE,name_auto,"auto: name match, 0.102km"
+Cherry,Cherry - (SCE),SCE,name_auto,"auto: name match, 0.035km"
+Clark,Clark - (SCE),SCE,name_auto,"auto: name match, 0.039km"
+Colton,Colton (Century),SCE,basin_reuse,
+Corona,Corona - (SCE),SCE,name_auto,"auto: name match, 0.054km"
+Cortez,Cortez - (SCE),SCE,name_auto,"auto: name match, 0.048km"
+Cottonwood,Cottonwood - (SCE),SCE,name_auto,"auto: name match, 0.108km"
+Delano,Delano - (SCE),SCE,name_auto,"auto: name match, 0.039km"
+Devers,Devers - SCE,SCE,name_auto,"auto: name match, 0.091km"
+Eagle Mountain,Eagle Mt.,SCE,basin_reuse,
+El Nido,El Nido - (SCE),SCE,name_auto,"auto: name match, 0.079km"
+Ellis,Ellis - (SCE),SCE,name_auto,"auto: name match, 0.034km"
+Estrella,Estrella - (SCE),SCE,name_auto,"auto: name match, 0.066km"
+Euclid,Euclid - (SCE),SCE,name_auto,"auto: name match, 0.058km"
+Fairview,Fairview - (SCE),SCE,name_auto,"auto: name match, 0.071km"
+Felton,Felton - SCE,SCE,name_auto,"auto: name match, 0.04km"
+Fogarty,Fogarty - SCE,SCE,name_auto,"auto: name match, 0.115km"
+Fremont,Fremont - (SCE),SCE,name_auto,"auto: name match, 0.019km"
+Fruitland,Fruitland - (SCE),SCE,name_auto,"auto: name match, 0.017km"
+Garfield,Garfield - (SCE),SCE,name_auto,"auto: name match, 0.141km"
+Garnet,Garnet - SCE,SCE,name_auto,"auto: name match, 0.043km"
+George A.f.b.,George Air Force Base,SCE,basin_reuse,
+Gonzales,Gonzales - (SCE),SCE,name_auto,"auto: name match, 0.006km"
+Greenhorn,Greenhorn - (SCE),SCE,name_auto,"auto: name match, 0.033km"
+Hanford,Hanford - (SCE),SCE,name_auto,"auto: name match, 1.279km"
+Howard,Howard - (SCE),SCE,name_auto,"auto: name match, 0.017km"
+Inyo Sce,Inyo,SCE,basin_reuse,
+Iron Mt. Sce,Iron Mt.,SCE,basin_reuse,
+Jefferson,Jefferson - (SCE),SCE,name_auto,"auto: name match, 0.07km"
+Kramer,Kramer - SCE,SCE,name_auto,"auto: name match, 0.244km"
+Lafayette,Lafayette - (SCE),SCE,name_auto,"auto: name match, 0.018km"
+Lakeview,Lakeview - (SCE Eastern),SCE,name_auto,"auto: name match, 0.02km"
+Lakewood,Lakewood - (SCE),SCE,name_auto,"auto: name match, 0.016km"
+Lawndale,Lawndale - (SCE),SCE,name_auto,"auto: name match, 0.031km"
+Limestone,Limestone - (SCE),SCE,name_auto,"auto: name match, 0.038km"
+Linden,Linden - (SCE),SCE,name_auto,"auto: name match, 0.004km"
+Live Oak,Live Oak - (SCE),SCE,name_auto,"auto: name match, 0.092km"
+Lucerne,Lucerne - (SCE),SCE,name_auto,"auto: name match, 0.091km"
+Mariposa,Mariposa - (SCE),SCE,name_auto,"auto: name match, 0.06km"
+Maxwell,Maxwell - (SCE),SCE,name_auto,"auto: name match, 0.075km"
+Merced,Merced - (SCE),SCE,name_auto,"auto: name match, 0.061km"
+Mesa,Mesa - (SCE),SCE,name_auto,"auto: name match, 0.535km"
+Modoc,Modoc - SCE,SCE,name_auto,"auto: name match, 0.059km"
+Moraga,Moraga - (SCE),SCE,name_auto,"auto: name match, 0.045km"
+Mountain Pass A,Mt. Pass,SCE,spatial_auto,auto: spatial 0.206km
+Murphy,Murphy - (SCE),SCE,name_auto,"auto: name match, 0.041km"
+Narrows,Narrows - (SCE),SCE,name_auto,"auto: name match, 0.125km"
+Newhall,Newhall - (SCE),SCE,name_auto,"auto: name match, 0.029km"
+O'neill,Oneill,SCE,spatial_auto,auto: spatial 0.055km
+Oak Park,Oak Park - (SCE),SCE,name_auto,"auto: name match, 0.091km"
+Oasis,Oasis - (SCE),SCE,name_auto,"auto: name match, 0.084km"
+Olinda,Olinda - (SCE),SCE,name_auto,"auto: name match, 0.26km"
+Perez,Perez - (SCE),SCE,name_auto,"auto: name match, 0.019km"
+Perry,Perry - (SCE),SCE,name_auto,"auto: name match, 0.016km"
+Pico,Pico - (SCE),SCE,name_auto,"auto: name match, 0.055km"
+Pioneer,Pioneer - (SCE),SCE,name_auto,"auto: name match, 0.008km"
+Potrero,Potrero - (SCE),SCE,name_auto,"auto: name match, 0.22km"
+Quartz Hill,Quartz Hill - (SCE),SCE,name_auto,"auto: name match, 0.023km"
+Ramona,Ramona - SCE,SCE,name_auto,"auto: name match, 0.06km"
+Randolph,Randolph - SCE,SCE,name_auto,"auto: name match, 0.04km"
+Ritter Ranch,Ritter Ranch - (SCE Northern),SCE,name_auto,"auto: name match, 0.057km"
+San Marcos,San Marcos - (SCE),SCE,name_auto,"auto: name match, 0.07km"
+San Miguel,San Miguel - (SCE),SCE,name_auto,"auto: name match, 0.018km"
+Santa Rosa,Santa Rosa - (SCE),SCE,name_auto,"auto: name match, 0.124km"
+Second Avenue,Second Ave.,SCE,basin_reuse,
+Soquel,Soquel - (SCE),SCE,name_auto,"auto: name match, 0.107km"
+Stoddard,Stoddard - (SCE),SCE,name_auto,"auto: name match, 0.082km"
+Sullivan,Sullivan - SCE,SCE,name_auto,"auto: name match, 0.005km"
+Sunnyside,Sunnyside - (SCE),SCE,name_auto,"auto: name match, 0.019km"
+Topaz,Topaz - SCE,SCE,name_auto,"auto: name match, 0.057km"
+Trona,Trona - North,SCE,spatial_auto,auto: spatial 0.077km
+Universal,Universal Studios (Studio Master),SCE,basin_reuse,
+Valley,Valley - (SCE),SCE,name_auto,"auto: name match, 0.013km"
+Victor,Victor - (SCE),SCE,name_auto,"auto: name match, 0.167km"
+Victorville,Victorville - (SCE),SCE,name_auto,"auto: name match, 0.042km"
+Viejo,Viejo - (SCE),SCE,name_auto,"auto: name match, 0.106km"
+Wabash,Wabash - (SCE),SCE,name_auto,"auto: name match, 0.032km"
+Walnut,Walnut - (SCE),SCE,name_auto,"auto: name match, 0.017km"
+Wheatland,Wheatland - (SCE),SCE,name_auto,"auto: name match, 0.214km"
+Yorba Linda,Yorba Linda - (SCE),SCE,name_auto,"auto: name match, 0.181km"
+Artesian Ranch,Artesian,SDGE,basin_reuse,
+BARRETT,Barrett - (SDG&E),SDGE,name_auto,"auto: name match, 0.843km"
+BORDER,Border - (SDG&E),SDGE,name_auto,"auto: name match, 0.705km"
+Boulevard East,Boulevard,SDGE,basin_reuse,
+CABRILLO,Cabrillo - (SDG&E),SDGE,name_auto,"auto: name match, 1.06km"
+CAMERON,Cameron - (SDG&E),SDGE,name_auto,"auto: name match, 1.843km"
+Chollas West,Chollas,SDGE,basin_reuse,
+EASTGATE,Eastgate -  South,SDGE,spatial,
+GARFIELD,Garfield - (SDG&E),SDGE,name_auto,"auto: name match, 0.716km"
+Granite,Granite Hills,SDGE,basin_reuse,
+Kearny West,Kearny,SDGE,basin_reuse,
+LOS COCHES,Los Coches - (SDG&E),SDGE,name_auto,"auto: name match, 1.754km"
+MISSION,Mission - (SDG&E),SDGE,name_auto,"auto: name match, 1.095km"
+Olivenhain,Olivanhain,SDGE,basin_reuse,
+PARADISE,Paradise - (SDG&E),SDGE,name_auto,"auto: name match, 0.909km"
+PICO,Pico - (SDG&E),SDGE,name_auto,"auto: name match, 1.952km"
+SALT CREEK,Salt Creek - SDG&E,SDGE,name_auto,"auto: name match, 0.579km"
+SANTEE,Santee - (SDG&E),SDGE,name_auto,"auto: name match, 0.591km"
+SCRIPPS,Scripps - (SDG&E),SDGE,name_auto,"auto: name match, 1.065km"
+STATION B,Station B - (SDG&E),SDGE,name_auto,"auto: name match, 0.365km"
+SUNNYSIDE,Sunnyside - (SDG&E),SDGE,name_auto,"auto: name match, 1.158km"
+San Juan Capistrano,Capistrano,SDGE,basin_reuse,
+VALLEY CENTER,Valley Center - (SDG&E),SDGE,name_auto,"auto: name match, 1.831km"
+VINE,SDGE Vine 69kV,SDGE,spatial_auto,auto: spatial 0.158km
+WABASH CANYON,Wabash - (SDG&E),SDGE,spatial,

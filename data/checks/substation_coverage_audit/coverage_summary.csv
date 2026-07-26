@@ -1,0 +1,5 @@
+utility,scraped,has_util_coord,has_basin_coord,has_any_coord,no_coord_at_all,cec_name_matched
+PGE,670.0,669.0,605.0,670.0,0.0,666.0
+SCE,578.0,557.0,527.0,566.0,12.0,559.0
+SDGE,99.0,99.0,96.0,99.0,0.0,90.0
+TOTAL,1347.0,1325.0,1228.0,1335.0,12.0,1315.0

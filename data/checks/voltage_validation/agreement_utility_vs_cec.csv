@@ -1,0 +1,521 @@
+utility,substation_name,kv_util,kv_cec,kv_sys_name_low_leg,class_util,class_cec,exact_match,class_match
+sce,Zanja,115.0,115.0,115.0,115,115,True,True
+sce,Zack,55.0,55.0,115.0,66,66,True,True
+sce,Yukon,66.0,66.0,66.0,66,66,True,True
+sce,Yucca,115.0,115.0,115.0,115,115,True,True
+sce,Yucaipa,66.0,66.0,66.0,66,66,True,True
+sce,Woodville,66.0,66.0,66.0,66,66,True,True
+sce,Woodruff,12.0,66.0,66.0,66,66,False,True
+sce,Windsor Hills,16.0,60.0,66.0,66,66,False,True
+sce,Wimbledon,66.0,66.0,66.0,66,66,True,True
+sce,Wilsona,66.0,66.0,66.0,66,66,True,True
+sce,Whitewater,33.0,115.0,115.0,66,115,False,False
+sce,Whipple,66.0,230.0,66.0,66,230,False,False
+sce,Wheatland,66.0,66.0,66.0,66,66,True,True
+sce,West Barstow,33.0,33.0,115.0,66,66,True,True
+sce,Weldon,66.0,66.0,66.0,66,66,True,True
+sce,Wave,66.0,66.0,66.0,66,66,True,True
+sce,Watson,66.0,66.0,66.0,66,66,True,True
+sce,Washington,66.0,66.0,66.0,66,66,True,True
+sce,Walnut,66.0,230.0,66.0,66,230,False,False
+sce,Walker Basin,66.0,66.0,66.0,66,66,True,True
+sce,Wakefield,66.0,66.0,66.0,66,66,True,True
+sce,Wabash,66.0,66.0,66.0,66,66,True,True
+sce,Villa Park,66.0,230.0,66.0,66,230,False,False
+sce,Viejo,66.0,230.0,66.0,66,230,False,False
+sce,Victorville,33.0,33.0,115.0,66,66,True,True
+sce,Victoria,66.0,66.0,66.0,66,66,True,True
+sce,Victor,115.0,230.0,115.0,115,230,False,False
+sce,Vestal,66.0,230.0,66.0,66,230,False,False
+sce,Vera,66.0,66.0,66.0,66,66,True,True
+sce,Venice Hill,66.0,66.0,66.0,66,66,True,True
+sce,Vegas,66.0,66.0,66.0,66,66,True,True
+sce,Valley,115.0,500.0,115.0,115,500,False,False
+sce,Valdez,66.0,66.0,66.0,66,66,True,True
+sce,Vail,66.0,66.0,66.0,66,66,True,True
+sce,Upland,66.0,66.0,66.0,66,66,True,True
+sce,Universal,66.0,66.0,66.0,66,66,True,True
+sce,Twentynine Palms,33.0,115.0,115.0,66,115,False,False
+sce,Tulare,66.0,66.0,66.0,66,66,True,True
+sce,Trophy,66.0,66.0,66.0,66,66,True,True
+sce,Trask,66.0,66.0,66.0,66,66,True,True
+sce,Tortilla,115.0,115.0,115.0,115,115,True,True
+sce,Torrance,66.0,66.0,66.0,66,66,True,True
+sce,Topaz,66.0,66.0,66.0,66,66,True,True
+sce,Tipton,66.0,66.0,66.0,66,66,True,True
+sce,Tippecanoe,12.0,66.0,66.0,66,66,False,True
+sce,Timoteo,66.0,115.0,66.0,66,115,False,False
+sce,Timberwine,33.0,33.0,220.0,66,66,True,True
+sce,Three Rivers,66.0,66.0,66.0,66,66,True,True
+sce,Thousand Oaks,66.0,66.0,66.0,66,66,True,True
+sce,Thornhill,115.0,115.0,115.0,115,115,True,True
+sce,Terrace,16.0,66.0,66.0,66,66,False,True
+sce,Terra Bella,66.0,66.0,66.0,66,66,True,True
+sce,Tennessee,66.0,115.0,66.0,66,115,False,False
+sce,Tenaja,115.0,115.0,115.0,115,115,True,True
+sce,Telegraph,66.0,66.0,66.0,66,66,True,True
+sce,Tamarisk,115.0,115.0,115.0,115,115,True,True
+sce,Talbert,66.0,66.0,66.0,66,66,True,True
+sce,Sunnyside,66.0,66.0,66.0,66,66,True,True
+sce,Sun City,115.0,115.0,115.0,115,115,True,True
+sce,Sullivan,66.0,66.0,66.0,66,66,True,True
+sce,Strathmore,66.0,66.0,66.0,66,66,True,True
+sce,Stewart,66.0,66.0,66.0,66,66,True,True
+sce,Stetson,115.0,115.0,115.0,115,115,True,True
+sce,State Street,66.0,66.0,66.0,66,66,True,True
+sce,Stadler,115.0,115.0,115.0,115,115,True,True
+sce,South Gate,16.0,66.0,66.0,66,66,False,True
+sce,Somis,66.0,66.0,66.0,66,66,True,True
+sce,Somerset,66.0,66.0,66.0,66,66,True,True
+sce,Solemint,66.0,66.0,66.0,66,66,True,True
+sce,Slater,66.0,66.0,66.0,66,66,True,True
+sce,Skylark,115.0,115.0,115.0,115,115,True,True
+sce,Silver Spur,33.0,33.0,115.0,66,66,True,True
+sce,Signal Hill,12.0,66.0,66.0,66,66,False,True
+sce,Sierra Madre,16.0,66.0,66.0,66,66,False,True
+sce,Shuttle,66.0,66.0,66.0,66,66,True,True
+sce,Sherwin,115.0,115.0,115.0,115,115,True,True
+sce,Shawnee,66.0,66.0,66.0,66,66,True,True
+sce,Shandin,115.0,115.0,115.0,115,115,True,True
+sce,Second Avenue,33.0,33.0,220.0,66,66,True,True
+sce,Searles,115.0,115.0,115.0,115,115,True,True
+sce,Seabright,66.0,66.0,66.0,66,66,True,True
+sce,Sawtelle,66.0,66.0,66.0,66,66,True,True
+sce,Savage,115.0,115.0,115.0,115,115,True,True
+sce,Saugus,66.0,230.0,66.0,66,230,False,False
+sce,Saticoy,66.0,66.0,66.0,66,66,True,True
+sce,Santiago,66.0,230.0,66.0,66,230,False,False
+sce,Santa Susana,66.0,66.0,66.0,66,66,True,True
+sce,Santa Rosa,115.0,115.0,115.0,115,115,True,True
+sce,Santa Fe Springs,66.0,66.0,66.0,66,66,True,True
+sce,Santa Barbara,66.0,66.0,66.0,66,66,True,True
+sce,San Miguel,66.0,66.0,66.0,66,66,True,True
+sce,San Gabriel,66.0,66.0,66.0,66,66,True,True
+sce,San Fernando,66.0,66.0,66.0,66,66,True,True
+sce,San Dimas,66.0,66.0,66.0,66,66,True,True
+sce,San Bernardino,66.0,230.0,66.0,66,230,False,False
+sce,San Antonio,66.0,66.0,66.0,66,66,True,True
+sce,Rush,66.0,66.0,66.0,66,66,True,True
+sce,Running Springs,33.0,33.0,115.0,66,66,True,True
+sce,Royal,66.0,66.0,66.0,66,66,True,True
+sce,Rosemead,66.0,66.0,66.0,66,66,True,True
+sce,Rosamond,66.0,66.0,66.0,66,66,True,True
+sce,Rolling Hills,66.0,66.0,66.0,66,66,True,True
+sce,Roadway,115.0,115.0,115.0,115,115,True,True
+sce,Riverway,66.0,66.0,66.0,66,66,True,True
+sce,Rivera,12.0,66.0,66.0,66,66,False,True
+sce,Rio Hondo,66.0,230.0,66.0,66,230,False,False
+sce,Rialto,33.0,66.0,115.0,66,66,False,True
+sce,Repetto,66.0,66.0,66.0,66,66,True,True
+sce,Redondo,16.0,230.0,66.0,66,230,False,False
+sce,Redman,66.0,66.0,66.0,66,66,True,True
+sce,Redlands,66.0,115.0,66.0,66,115,False,False
+sce,Rector,66.0,230.0,66.0,66,230,False,False
+sce,Ravendale,66.0,66.0,66.0,66,66,True,True
+sce,Randsburg,115.0,115.0,115.0,115,115,True,True
+sce,Randolph,66.0,66.0,66.0,66,66,True,True
+sce,Randall,66.0,66.0,66.0,66,66,True,True
+sce,Rancho,33.0,33.0,115.0,66,66,True,True
+sce,Ramona,66.0,66.0,66.0,66,66,True,True
+sce,Railroad,66.0,66.0,66.0,66,66,True,True
+sce,Quinn,66.0,66.0,66.0,66,66,True,True
+sce,Quartz Hill,66.0,66.0,66.0,66,66,True,True
+sce,Puente,66.0,66.0,66.0,66,66,True,True
+sce,Proctor,66.0,66.0,66.0,66,66,True,True
+sce,Potrero,66.0,66.0,66.0,66,66,True,True
+sce,Porterville,66.0,66.0,66.0,66,66,True,True
+sce,Poplar,66.0,66.0,66.0,66,66,True,True
+sce,Playa,16.0,66.0,66.0,66,66,False,True
+sce,Placentia,66.0,66.0,66.0,66,66,True,True
+sce,Pixley,66.0,66.0,66.0,66,66,True,True
+sce,Piute,66.0,66.0,66.0,66,66,True,True
+sce,Pitman,33.0,230.0,220.0,66,230,False,False
+sce,Pioneer,66.0,66.0,66.0,66,66,True,True
+sce,Pico,66.0,66.0,66.0,66,66,True,True
+sce,Phelan,115.0,115.0,115.0,115,115,True,True
+sce,Peyton,66.0,66.0,66.0,66,66,True,True
+sce,Perez,33.0,66.0,66.0,66,66,False,True
+sce,Pepper,115.0,115.0,115.0,115,115,True,True
+sce,Pedley,66.0,66.0,66.0,66,66,True,True
+sce,Pechanga,115.0,115.0,115.0,115,115,True,True
+sce,Pauba,115.0,115.0,115.0,115,115,True,True
+sce,Passons,66.0,66.0,66.0,66,66,True,True
+sce,Palmdale,66.0,66.0,66.0,66,66,True,True
+sce,Padua,66.0,230.0,66.0,66,230,False,False
+sce,Ortega,66.0,66.0,66.0,66,66,True,True
+sce,Oro Grande,33.0,33.0,115.0,66,66,True,True
+sce,Ordway,33.0,33.0,115.0,66,66,True,True
+sce,Orange,66.0,66.0,66.0,66,66,True,True
+sce,Ontario,12.0,66.0,66.0,66,66,False,True
+sce,Olive Lake,33.0,33.0,220.0,66,66,True,True
+sce,Olinda,66.0,230.0,66.0,66,230,False,False
+sce,Oldfield,12.0,66.0,66.0,66,66,False,True
+sce,Ojai,66.0,66.0,66.0,66,66,True,True
+sce,Octol,66.0,66.0,66.0,66,66,True,True
+sce,Oceanview,66.0,66.0,66.0,66,66,True,True
+sce,Oasis,66.0,66.0,66.0,66,66,True,True
+sce,Oak Park,66.0,66.0,66.0,66,66,True,True
+sce,Oak Grove,66.0,66.0,66.0,66,66,True,True
+sce,O'neill,66.0,66.0,66.0,66,66,True,True
+sce,North Oaks,66.0,66.0,66.0,66,66,True,True
+sce,North Muroc,33.0,33.0,115.0,66,66,True,True
+sce,Niguel,66.0,66.0,66.0,66,66,True,True
+sce,Newhall,66.0,66.0,66.0,66,66,True,True
+sce,Newcomb,115.0,115.0,115.0,115,115,True,True
+sce,Newbury,66.0,66.0,66.0,66,66,True,True
+sce,Neptune,66.0,66.0,66.0,66,66,True,True
+sce,Nelson,115.0,115.0,115.0,115,115,True,True
+sce,Neenach,66.0,66.0,66.0,66,66,True,True
+sce,Navy Mole,66.0,66.0,66.0,66,66,True,True
+sce,Narrows,66.0,66.0,66.0,66,66,True,True
+sce,Narod,66.0,66.0,66.0,66,66,True,True
+sce,Murphy,66.0,66.0,66.0,66,66,True,True
+sce,Mt. Vernon,33.0,66.0,115.0,66,66,False,True
+sce,Movie,66.0,66.0,66.0,66,66,True,True
+sce,Mountain Pass A,115.0,115.0,115.0,115,115,True,True
+sce,Moulton,66.0,66.0,66.0,66,66,True,True
+sce,Morro,66.0,66.0,66.0,66,66,True,True
+sce,Moreno,115.0,115.0,115.0,115,115,True,True
+sce,Moraga,115.0,115.0,115.0,115,115,True,True
+sce,Moorpark,66.0,230.0,66.0,66,230,False,False
+sce,Monrovia,16.0,66.0,66.0,66,66,False,True
+sce,Monolith,66.0,66.0,66.0,66,66,True,True
+sce,Modena,66.0,66.0,66.0,66,66,True,True
+sce,Mira Loma,66.0,500.0,66.0,66,500,False,False
+sce,Milliken,66.0,66.0,66.0,66,66,True,True
+sce,Michillinda,16.0,66.0,66.0,66,66,False,True
+sce,Mesa,66.0,500.0,66.0,66,500,False,False
+sce,Merced,66.0,66.0,66.0,66,66,True,True
+sce,Mentone,115.0,115.0,115.0,115,115,True,True
+sce,Mayflower,16.0,66.0,66.0,66,66,False,True
+sce,Mayberry,115.0,115.0,115.0,115,115,True,True
+sce,Maxwell,115.0,115.0,115.0,115,115,True,True
+sce,Mascot,66.0,66.0,66.0,66,66,True,True
+sce,Marymount,66.0,66.0,66.0,66,66,True,True
+sce,Mariposa,66.0,66.0,66.0,66,66,True,True
+sce,Marion,66.0,66.0,66.0,66,66,True,True
+sce,Maraschino,115.0,115.0,115.0,115,115,True,True
+sce,Malibu,66.0,66.0,66.0,66,66,True,True
+sce,Macarthur,66.0,66.0,66.0,66,66,True,True
+sce,Lynwood,16.0,66.0,66.0,66,66,False,True
+sce,Lundy,55.0,55.0,115.0,66,66,True,True
+sce,Lucerne,33.0,115.0,115.0,66,115,False,False
+sce,Los Cerritos,66.0,66.0,66.0,66,66,True,True
+sce,Loraine,66.0,66.0,66.0,66,66,True,True
+sce,Longdon,16.0,66.0,66.0,66,66,False,True
+sce,Locust,12.0,66.0,66.0,66,66,False,True
+sce,Live Oak,66.0,66.0,66.0,66,66,True,True
+sce,Little Rock,66.0,66.0,66.0,66,66,True,True
+sce,Lindsay,66.0,66.0,66.0,66,66,True,True
+sce,Limestone,66.0,66.0,66.0,66,66,True,True
+sce,Lighthipe,66.0,230.0,66.0,66,230,False,False
+sce,Liberty,66.0,66.0,66.0,66,66,True,True
+sce,Levy,66.0,66.0,66.0,66,66,True,True
+sce,Lennox,66.0,66.0,66.0,66,66,True,True
+sce,Lemon Cove,66.0,66.0,66.0,66,66,True,True
+sce,Layfair,66.0,66.0,66.0,66,66,True,True
+sce,Laurel,66.0,66.0,66.0,66,66,True,True
+sce,Latigo,66.0,66.0,66.0,66,66,True,True
+sce,Lark Ellen,66.0,66.0,66.0,66,66,True,True
+sce,Landing,66.0,66.0,66.0,66,66,True,True
+sce,Lancaster,66.0,66.0,66.0,66,66,True,True
+sce,Lampson,66.0,66.0,66.0,66,66,True,True
+sce,Lakewood,66.0,66.0,66.0,66,66,True,True
+sce,Laguna Bell,66.0,230.0,66.0,66,230,False,False
+sce,Lafayette,66.0,66.0,66.0,66,66,True,True
+sce,La Veta,66.0,66.0,66.0,66,66,True,True
+sce,La Palma,66.0,66.0,66.0,66,66,True,True
+sce,La Mirada,66.0,66.0,66.0,66,66,True,True
+sce,La Habra,66.0,66.0,66.0,66,66,True,True
+sce,La Fresa,66.0,230.0,66.0,66,230,False,False
+sce,La Canada,16.0,66.0,66.0,66,66,False,True
+sce,Kramer,33.0,230.0,115.0,66,230,False,False
+sce,Kimball,66.0,66.0,66.0,66,66,True,True
+sce,Kernville,66.0,66.0,66.0,66,66,True,True
+sce,June Lake,2.4,115.0,115.0,66,115,False,False
+sce,Joshua Tree,33.0,115.0,115.0,66,115,False,False
+sce,Johanna,66.0,230.0,66.0,66,230,False,False
+sce,Jersey,66.0,66.0,66.0,66,66,True,True
+sce,Jefferson,66.0,66.0,66.0,66,66,True,True
+sce,Ivyglen,115.0,115.0,115.0,115,115,True,True
+sce,Ivar,16.0,66.0,66.0,66,66,False,True
+sce,Isla Vista,66.0,66.0,66.0,66,66,True,True
+sce,Isabella,66.0,66.0,66.0,66,66,True,True
+sce,Iron Mt. (Sce),7.0,230.0,,66,230,False,False
+sce,Inyokern,115.0,115.0,115.0,115,115,True,True
+sce,Inglewood,66.0,66.0,66.0,66,66,True,True
+sce,Industry,66.0,66.0,66.0,66,66,True,True
+sce,Imperial,66.0,66.0,66.0,66,66,True,True
+sce,Huston,33.0,33.0,115.0,66,66,True,True
+sce,Hoyt,16.0,66.0,66.0,66,66,False,True
+sce,Howard,66.0,66.0,66.0,66,66,True,True
+sce,Homart,115.0,115.0,115.0,115,115,True,True
+sce,Holiday,33.0,33.0,115.0,66,66,True,True
+sce,Holgate,33.0,115.0,115.0,66,115,False,False
+sce,Hinkley,33.0,33.0,115.0,66,66,True,True
+sce,Highland,66.0,66.0,66.0,66,66,True,True
+sce,Hi Desert,115.0,115.0,115.0,115,115,True,True
+sce,Hesperia,115.0,115.0,115.0,115,115,True,True
+sce,Hemet,33.0,33.0,115.0,66,66,True,True
+sce,Helendale,33.0,33.0,115.0,66,66,True,True
+sce,Hedda,12.0,66.0,66.0,66,66,False,True
+sce,Havilah,66.0,66.0,66.0,66,66,True,True
+sce,Haveda,16.0,66.0,66.0,66,66,False,True
+sce,Havasu,66.0,66.0,66.0,66,66,True,True
+sce,Hathaway,66.0,66.0,66.0,66,66,True,True
+sce,Harvard,33.0,115.0,115.0,66,115,False,False
+sce,Harper Lake,33.0,220.0,115.0,66,230,False,False
+sce,Hamilton,66.0,66.0,66.0,66,66,True,True
+sce,Greening,66.0,66.0,66.0,66,66,True,True
+sce,Greenhorn,66.0,66.0,66.0,66,66,True,True
+sce,Gould,66.0,230.0,66.0,66,230,False,False
+sce,Goshen,66.0,66.0,66.0,66,66,True,True
+sce,Gorman,66.0,66.0,66.0,66,66,True,True
+sce,Gonzales,66.0,66.0,66.0,66,66,True,True
+sce,Goleta,66.0,230.0,66.0,66,230,False,False
+sce,Goldtown,66.0,66.0,66.0,66,66,True,True
+sce,Goldhill,33.0,33.0,115.0,66,66,True,True
+sce,Glennville,66.0,66.0,66.0,66,66,True,True
+sce,Glen Avon,66.0,66.0,115.0,66,66,True,True
+sce,Gisler,66.0,66.0,66.0,66,66,True,True
+sce,Gilbert,66.0,66.0,66.0,66,66,True,True
+sce,Genamic,66.0,66.0,66.0,66,66,True,True
+sce,Gaviota,66.0,66.0,66.0,66,66,True,True
+sce,Garnet,115.0,115.0,115.0,115,115,True,True
+sce,Garfield,66.0,66.0,66.0,66,66,True,True
+sce,Ganesha,66.0,66.0,66.0,66,66,True,True
+sce,Gale,115.0,115.0,115.0,115,115,True,True
+sce,Fullerton,66.0,66.0,66.0,66,66,True,True
+sce,Fruitland,66.0,66.0,66.0,66,66,True,True
+sce,Fremont,16.0,66.0,66.0,66,66,False,True
+sce,Frazier Park,66.0,66.0,66.0,66,66,True,True
+sce,Francis,66.0,66.0,66.0,66,66,True,True
+sce,Forest Home,33.0,33.0,115.0,66,66,True,True
+sce,Floraday,12.0,66.0,66.0,66,66,False,True
+sce,Firehouse,66.0,66.0,66.0,66,66,True,True
+sce,Fillmore,66.0,66.0,66.0,66,66,True,True
+sce,Fernwood,66.0,66.0,66.0,66,66,True,True
+sce,Felton,66.0,66.0,66.0,66,66,True,True
+sce,Farrell,115.0,115.0,115.0,115,115,True,True
+sce,Falcon Ridge,66.0,500.0,66.0,66,500,False,False
+sce,Fairview,66.0,66.0,66.0,66,66,True,True
+sce,Fairfax,66.0,66.0,66.0,66,66,True,True
+sce,Etiwanda,66.0,230.0,66.0,66,230,False,False
+sce,Estrella,66.0,66.0,66.0,66,66,True,True
+sce,Estero,66.0,66.0,66.0,66,66,True,True
+sce,Eric,66.0,66.0,66.0,66,66,True,True
+sce,Elsinore,115.0,115.0,115.0,115,115,True,True
+sce,Ellis,66.0,230.0,66.0,66,230,False,False
+sce,Elizabeth Lake,66.0,66.0,66.0,66,66,True,True
+sce,El Sobrante,33.0,115.0,66.0,66,115,False,False
+sce,El Nido,66.0,230.0,66.0,66,230,False,False
+sce,El Casco,115.0,230.0,115.0,115,230,False,False
+sce,Eisenhower,115.0,115.0,115.0,115,115,True,True
+sce,East Barstow,33.0,33.0,115.0,66,66,True,True
+sce,Earlimart,66.0,66.0,66.0,66,66,True,True
+sce,Eagle Mountain,66.0,230.0,220.0,66,230,False,False
+sce,Dunn Siding,115.0,115.0,115.0,115,115,True,True
+sce,Dunes,33.0,161.0,220.0,66,115,False,False
+sce,Duarte,16.0,66.0,66.0,66,66,False,True
+sce,Downey,12.0,66.0,66.0,66,66,False,True
+sce,Ditmar,16.0,66.0,66.0,66,66,False,True
+sce,Dike,66.0,66.0,66.0,66,66,True,True
+sce,Diamond Bar,66.0,66.0,66.0,66,66,True,True
+sce,Devers,115.0,500.0,115.0,115,500,False,False
+sce,Desert Outpost,33.0,115.0,115.0,66,115,False,False
+sce,Delano,66.0,66.0,66.0,66,66,True,True
+sce,Del Sur,66.0,66.0,66.0,66,66,True,True
+sce,Del Rosa,66.0,66.0,66.0,66,66,True,True
+sce,Del Amo,66.0,500.0,66.0,66,500,False,False
+sce,Declez,66.0,66.0,66.0,66,66,True,True
+sce,Dalton,66.0,66.0,66.0,66,66,True,True
+sce,Daggett,33.0,33.0,115.0,66,66,True,True
+sce,Cypress,66.0,66.0,66.0,66,66,True,True
+sce,Cummings,66.0,66.0,66.0,66,66,True,True
+sce,Cudahy,66.0,66.0,66.0,66,66,True,True
+sce,Cucamonga,66.0,66.0,66.0,66,66,True,True
+sce,Crown,66.0,66.0,66.0,66,66,True,True
+sce,Crest,66.0,66.0,66.0,66,66,True,True
+sce,Crater,66.0,66.0,66.0,66,66,True,True
+sce,Cottonwood,115.0,230.0,115.0,115,230,False,False
+sce,Corum,66.0,66.0,66.0,66,66,True,True
+sce,Cortez,66.0,66.0,66.0,66,66,True,True
+sce,Corona,66.0,66.0,66.0,66,66,True,True
+sce,Converse Flats,33.0,33.0,115.0,66,66,True,True
+sce,Concho,115.0,115.0,115.0,115,115,True,True
+sce,Columbine,66.0,66.0,66.0,66,66,True,True
+sce,Colorado,66.0,66.0,66.0,66,66,True,True
+sce,Colonia,66.0,66.0,66.0,66,66,True,True
+sce,Coffee,33.0,115.0,115.0,66,115,False,False
+sce,Clark,66.0,66.0,66.0,66,66,True,True
+sce,Citrus,66.0,66.0,66.0,66,66,True,True
+sce,Chiquita,66.0,66.0,66.0,66,66,True,True
+sce,Chino,66.0,230.0,66.0,66,230,False,False
+sce,Chestnut,66.0,66.0,66.0,66,66,True,True
+sce,Cherry,66.0,66.0,66.0,66,66,True,True
+sce,Chatsworth,66.0,66.0,66.0,66,66,True,True
+sce,Chatham,66.0,66.0,66.0,66,66,True,True
+sce,Chase,66.0,66.0,66.0,66,66,True,True
+sce,Channel Island,66.0,66.0,66.0,66,66,True,True
+sce,Center,66.0,230.0,66.0,66,230,False,False
+sce,Casitas,66.0,66.0,66.0,66,66,True,True
+sce,Casa Diablo,115.0,115.0,115.0,115,115,True,True
+sce,Carson,66.0,66.0,66.0,66,66,True,True
+sce,Carpinteria,66.0,66.0,66.0,66,66,True,True
+sce,Carolina,66.0,66.0,66.0,66,66,True,True
+sce,Carodean,115.0,115.0,115.0,115,115,True,True
+sce,Carmenita,66.0,66.0,66.0,66,66,True,True
+sce,Cardiff,66.0,66.0,66.0,66,66,True,True
+sce,Capitan,66.0,66.0,66.0,66,66,True,True
+sce,Cantil,33.0,33.0,115.0,66,66,True,True
+sce,Camp 10,33.0,230.0,220.0,66,230,False,False
+sce,Cameron,66.0,66.0,66.0,66,66,True,True
+sce,Acton,66.0,115.0,66.0,66,115,False,False
+sce,Alder,66.0,66.0,66.0,66,66,True,True
+sce,Alessandro,115.0,115.0,115.0,115,115,True,True
+sce,Alhambra,66.0,66.0,66.0,66,66,True,True
+sce,Alola,12.0,33.0,115.0,66,66,False,True
+sce,Alon,66.0,66.0,66.0,66,66,True,True
+sce,Amador,66.0,66.0,66.0,66,66,True,True
+sce,Amalia,16.0,66.0,66.0,66,66,False,True
+sce,Amargo,33.0,33.0,115.0,66,66,True,True
+sce,Anaverde,66.0,66.0,66.0,66,66,True,True
+sce,Anita,66.0,66.0,66.0,66,66,True,True
+sce,Apple Valley,115.0,115.0,115.0,115,115,True,True
+sce,Aqueduct,115.0,115.0,115.0,115,115,True,True
+sce,Arcadia,66.0,66.0,66.0,66,66,True,True
+sce,Archibald,66.0,66.0,66.0,66,66,True,True
+sce,Archline,66.0,66.0,66.0,66,66,True,True
+sce,Arro,33.0,66.0,66.0,66,66,False,True
+sce,Arrowhead,115.0,115.0,115.0,115,115,True,True
+sce,Arroyo,66.0,66.0,66.0,66,66,True,True
+sce,Auld,115.0,115.0,115.0,115,115,True,True
+sce,Bain,66.0,66.0,66.0,66,66,True,True
+sce,Bandini,66.0,66.0,66.0,66,66,True,True
+sce,Banning,115.0,115.0,115.0,115,115,True,True
+sce,Barre,66.0,230.0,66.0,66,230,False,False
+sce,Barstow,33.0,33.0,115.0,66,66,True,True
+sce,Bassett,66.0,66.0,66.0,66,66,True,True
+sce,Basta,12.0,66.0,66.0,66,66,False,True
+sce,Bayside,66.0,66.0,66.0,66,66,True,True
+sce,Belmont,12.0,66.0,66.0,66,66,False,True
+sce,Belvedere,16.0,66.0,66.0,66,66,False,True
+sce,Beverly,66.0,66.0,66.0,66,66,True,True
+sce,Bicknell,16.0,66.0,66.0,66,66,False,True
+sce,Bliss,66.0,66.0,66.0,66,66,True,True
+sce,Bloomington,66.0,66.0,115.0,66,66,True,True
+sce,Blythe (Walc),161.0,161.0,33.0,115,115,True,True
+sce,Blythe City,33.0,161.0,220.0,66,115,False,False
+sce,Bolsa,66.0,66.0,66.0,66,66,True,True
+sce,Borrego,66.0,66.0,66.0,66,66,True,True
+sce,Bovine,66.0,66.0,66.0,66,66,True,True
+sce,Bowl,66.0,66.0,66.0,66,66,True,True
+sce,Boxwood,66.0,66.0,66.0,66,66,True,True
+sce,Bradbury,66.0,66.0,66.0,66,66,True,True
+sce,Brea,66.0,66.0,66.0,66,66,True,True
+sce,Bridge,66.0,66.0,66.0,66,66,True,True
+sce,Bridgeport,16.0,55.0,115.0,66,66,False,True
+sce,Brighton,66.0,66.0,66.0,66,66,True,True
+sce,Broadway,66.0,66.0,66.0,66,66,True,True
+sce,Brookhurst,66.0,66.0,66.0,66,66,True,True
+sce,Browning,66.0,66.0,66.0,66,66,True,True
+sce,Bryan,66.0,66.0,66.0,66,66,True,True
+sce,Bryman,33.0,33.0,115.0,66,66,True,True
+sce,Bullis,66.0,66.0,66.0,66,66,True,True
+sce,Bunker,115.0,115.0,115.0,115,115,True,True
+sce,Burnt Mill,33.0,33.0,115.0,66,66,True,True
+sce,Cabrillo,66.0,66.0,66.0,66,66,True,True
+sce,Cajalco,115.0,115.0,115.0,115,115,True,True
+sce,Cal City 'A',33.0,33.0,115.0,66,66,True,True
+sce,Cal City 'B',33.0,33.0,115.0,66,66,True,True
+sce,Calden,66.0,66.0,66.0,66,66,True,True
+sce,Calectric,115.0,115.0,115.0,115,115,True,True
+sce,Camarillo,66.0,66.0,66.0,66,66,True,True
+sce,Camden,66.0,66.0,66.0,66,66,True,True
+sdge,ARTESIAN RANCH,230.0,230.0,,230,230,True,True
+sdge,ASH,69.0,69.0,,66,66,True,True
+sdge,AVOCADO,69.0,69.0,,66,66,True,True
+sdge,BARRETT,69.0,69.0,,66,66,True,True
+sdge,BATIQUITOS,138.0,230.0,,115,230,False,False
+sdge,BERNARDO,69.0,69.0,,66,66,True,True
+sdge,BORDER,69.0,69.0,,66,66,True,True
+sdge,BOULEVARD EAST,138.0,138.0,,115,115,True,True
+sdge,CABRILLO,69.0,69.0,,66,66,True,True
+sdge,CAMERON,69.0,69.0,,66,66,True,True
+sdge,CANNON,138.0,69.0,,115,66,False,False
+sdge,CARLTON HILLS,138.0,138.0,,115,115,True,True
+sdge,CHICARITA,138.0,138.0,,115,115,True,True
+sdge,CHOLLAS WEST,69.0,69.0,,66,66,True,True
+sdge,CLAIREMONT,69.0,69.0,,66,66,True,True
+sdge,CORONADO,69.0,69.0,,66,66,True,True
+sdge,CREELMAN,69.0,69.0,,66,66,True,True
+sdge,CRESTWOOD,69.0,500.0,,66,500,False,False
+sdge,DESCANSO,69.0,69.0,,66,66,True,True
+sdge,EASTGATE,69.0,69.0,,66,66,True,True
+sdge,EL CAJON,69.0,69.0,,66,66,True,True
+sdge,ELLIOTT,69.0,69.0,,66,66,True,True
+sdge,ENCINITAS,69.0,69.0,,66,66,True,True
+sdge,ESCO,69.0,69.0,,66,66,True,True
+sdge,ESCONDIDO,230.0,230.0,,230,230,True,True
+sdge,FELICITA,69.0,69.0,,66,66,True,True
+sdge,GARFIELD,69.0,69.0,,66,66,True,True
+sdge,GENESEE,69.0,69.0,,66,66,True,True
+sdge,GLENCLIFF,69.0,69.0,,66,66,True,True
+sdge,GRANITE,69.0,69.0,,66,66,True,True
+sdge,GRANT HILL,138.0,138.0,,115,115,True,True
+sdge,IMPERIAL BEACH,69.0,69.0,,66,66,True,True
+sdge,JAMACHA,69.0,69.0,,66,66,True,True
+sdge,KEARNY WEST,69.0,69.0,,66,66,True,True
+sdge,KETTNER,69.0,69.0,,66,66,True,True
+sdge,LA JOLLA,69.0,69.0,,66,66,True,True
+sdge,LAGUNA NIGUEL,138.0,138.0,,115,115,True,True
+sdge,LILAC,69.0,69.0,,66,66,True,True
+sdge,LOS COCHES,138.0,138.0,,115,115,True,True
+sdge,MARGARITA,138.0,138.0,,115,115,True,True
+sdge,MELROSE,69.0,69.0,,66,66,True,True
+sdge,MESA HEIGHTS,69.0,69.0,,66,66,True,True
+sdge,MISSION,230.0,230.0,,230,230,True,True
+sdge,MONSERATE,69.0,69.0,,66,66,True,True
+sdge,MONTGOMERY,69.0,69.0,,66,66,True,True
+sdge,MORRO HILL,69.0,69.0,,66,66,True,True
+sdge,MURRAY,69.0,69.0,,66,66,True,True
+sdge,NORTH CITY WEST,69.0,138.0,,66,115,False,False
+sdge,OCEAN RANCH,69.0,69.0,,66,66,True,True
+sdge,OCEANSIDE,69.0,69.0,,66,66,True,True
+sdge,OLD TOWN,230.0,230.0,,230,230,True,True
+sdge,OLIVENHAIN,69.0,69.0,,66,66,True,True
+sdge,OTAY,69.0,69.0,,66,66,True,True
+sdge,PACIFIC BEACH,69.0,69.0,,66,66,True,True
+sdge,PALA,69.0,69.0,,66,66,True,True
+sdge,PALOMAR AIRPORT,138.0,230.0,,115,230,False,False
+sdge,PARADISE,69.0,69.0,,66,66,True,True
+sdge,PICO,138.0,230.0,,115,230,False,False
+sdge,POINT LOMA,69.0,69.0,,66,66,True,True
+sdge,POMERADO,69.0,69.0,,66,66,True,True
+sdge,POWAY,69.0,69.0,,66,66,True,True
+sdge,RANCHO CARMEL,69.0,69.0,,66,66,True,True
+sdge,RANCHO MISSION VIEJO,138.0,138.0,,115,115,True,True
+sdge,RANCHO SANTA FE,69.0,69.0,,66,66,True,True
+sdge,ROSE CANYON,69.0,69.0,,66,66,True,True
+sdge,SALT CREEK,69.0,69.0,,66,66,True,True
+sdge,SAMPSON,69.0,230.0,,66,230,False,False
+sdge,SAN JUAN CAPISTRANO,230.0,230.0,,230,230,True,True
+sdge,SAN LUIS REY,230.0,230.0,,230,230,True,True
+sdge,SAN YSIDRO,69.0,69.0,,66,66,True,True
+sdge,SANTA YSABEL,69.0,69.0,,66,66,True,True
+sdge,SANTEE,138.0,138.0,,115,115,True,True
+sdge,SCRIPPS,69.0,69.0,,66,66,True,True
+sdge,SHADOWRIDGE,138.0,138.0,,115,115,True,True
+sdge,SPRING VALLEY,69.0,69.0,,66,66,True,True
+sdge,STATION B,69.0,69.0,,66,66,True,True
+sdge,STATION F,69.0,69.0,,66,66,True,True
+sdge,STREAMVIEW,69.0,69.0,,66,66,True,True
+sdge,SUNNYSIDE,69.0,69.0,,66,66,True,True
+sdge,SWEETWATER,69.0,69.0,,66,66,True,True
+sdge,TELEGRAPH CANYON,138.0,138.0,,115,115,True,True
+sdge,TORREY PINES,69.0,69.0,,66,66,True,True
+sdge,TRABUCO,138.0,138.0,,115,115,True,True
+sdge,URBAN,69.0,69.0,,66,66,True,True
+sdge,VALLEY CENTER,69.0,69.0,,66,66,True,True
+sdge,VINE,69.0,69.0,,66,66,True,True
+sdge,WABASH CANYON,69.0,69.0,,66,66,True,True

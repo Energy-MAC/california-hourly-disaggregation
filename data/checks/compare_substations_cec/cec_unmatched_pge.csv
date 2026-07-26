@@ -1,0 +1,1319 @@
+name,owner_raw,type,status,latitude,longitude,county,city
+Coyote Pumping,PG&E,SUBSTATION,Operational,37.15817063,-121.63747981,Santa Clara County,Morgan Hill
+Signetics,PG&E,SUBSTATION,Operational,37.38492928,-122.01296515,Santa Clara County,Sunnyvale
+Gish,PG&E,SUBSTATION,Operational,37.35410059,-121.91263016,Santa Clara County,San Jose
+Markham,PG&E,SUBSTATION ASSUMED,Operational,37.3362673,-121.87816304,Santa Clara County,San Jose
+Montague - (PG&E),PG&E,SUBSTATION,Operational,37.40332775,-121.90597735,Santa Clara County,San Jose
+Monta Vista (Upper),PG&E,SUBSTATION,Operational,37.32640273,-122.07541299,Santa Clara County,Cupertino
+Senter,PG&E,SUBSTATION ASSUMED,Operational,37.30049053,-121.8447369,Santa Clara County,San Jose
+Crusher,PG&E,SUBSTATION,Operational,37.02569254,-122.15478776,Santa Cruz County,
+Benton,PG&E,SUBSTATION,Operational,40.56241358,-122.39534077,Shasta County,Redding
+Cascade,PG&E,SUBSTATION,Operational,40.65219256,-122.33418755,Shasta County,
+Stillwater - (PG&E),PG&E,SUBSTATION,Operational,40.67775832,-122.3497616,Shasta County,Shasta Lake
+Amerigas,PG&E,SUBSTATION,Operational,38.40329431,-121.92262217,Solano County,
+Shell Chemical,PG&E,SUBSTATION,Operational,38.03082899,-121.94600882,Contra Costa County,Bay Point
+Stauffer - PG&E Southwest,PG&E,SUBSTATION ASSUMED,Operational,38.03228545,-122.11997929,Contra Costa County,Martinez
+Batavia,PG&E,SUBSTATION,Operational,38.38708136,-121.77584211,Solano County,
+Cache Slough,PG&E,SUBSTATION,Operational,38.29638768,-121.74814821,Solano County,
+Maine Prairie,PG&E,SUBSTATION,Operational,38.38475486,-121.75867761,Solano County,
+Petaluma Station C,PG&E,SUBSTATION,Operational,38.23908398,-122.63669905,Sonoma County,Petaluma
+Petaluma Station A,PG&E,SUBSTATION,Operational,38.23416504,-122.6362107,Sonoma County,Petaluma
+Skaggs Island,PG&E,SUBSTATION,Operational,38.16135612,-122.38100529,Sonoma County,
+Wohler,PG&E,SUBSTATION,Operational,38.51053433,-122.88106593,Sonoma County,
+Stony Point,PG&E,SUBSTATION,Operational,38.37001099,-122.7641023,,
+Mariposa - (PG&E),PG&E,SUBSTATION,Operational,37.50443953,-120.00777043,,
+Modesto Energy,PG&E,SUBSTATION,Operational,37.55398555,-121.30835733,Stanislaus County,
+Hershey,PG&E,SUBSTATION,Operational,37.75092921,-120.84528202,Stanislaus County,Oakdale
+Live Oak - 95953,PG&E,SUBSTATION,Operational,39.27638489,-121.66028657,Sutter County,Live Oak
+Rawson Packaging,PG&E,SUBSTATION,Operational,40.1499682,-122.21300961,Tehama County,
+Red Bank,PG&E,SUBSTATION,Operational,40.14573607,-122.19945344,Tehama County,
+Big Creek,PG&E,SUBSTATION,Operational,40.64682671,-123.49789625,Trinity County,Hyampom
+Trinity - (PG&E),PG&E,SUBSTATION,Operational,40.71802497,-122.9344172,Trinity County,Weaverville
+Wildwood,PG&E,SUBSTATION,Operational,40.38716464,-123.04409036,Trinity County,
+Fibreboard Standard Spi,PG&E,SUBSTATION,Operational,37.97434117,-120.31565559,Tuolumne County,East Sonora
+Challenge - PG&E,PG&E,SUBSTATION,Operational,39.48525408,-121.22030544,Yuba County,Challenge-Brownsville
+Encinal,PG&E,SUBSTATION,Operational,39.24756282,-121.63712248,Sutter County,
+Plumas - (PG&E),PG&E,SUBSTATION,Operational,39.02624095,-121.54303879,Yuba County,Plumas Lake
+Wheatland - (PG&E),PG&E,SUBSTATION,Operational,39.01314211,-121.41860311,Yuba County,Wheatland
+Yuba City Station A,PG&E,SUBSTATION,Operational,39.13912574,-121.63833506,Sutter County,Yuba City
+Yuba Gold Fields,PG&E,SUBSTATION,Operational,39.20322939,-121.41498898,Yuba County,
+Smartsville Ss,PG&E,SUBSTATION,Operational,39.20852874,-121.3026853,Yuba County,Smartsville
+French Meadows,PG&E,SUBSTATION,Operational,39.07794621,-120.40622253,Placer County,
+Potter Valley,PG&E,SUBSTATION,Operational,39.36196027,-123.12782723,Mendocino County,
+Santa Ynez Switch,PG&E,SUBSTATION,Operational,34.64795198,-120.1847947,Santa Barbara County,
+Sonora Mining,PG&E,SUBSTATION ASSUMED,Operational,37.96717536,-120.38639459,Tuolumne County,Sonora
+Wintun,PG&E,SUBSTATION,Operational,40.59277951,-122.3696425,Shasta County,Redding
+South Bay 1,PG&E,SUBSTATION,Operational,37.77847661,-121.62593825,Alameda County,
+Claremont - (PG&E),PG&E,SUBSTATION,Operational,37.84736849,-122.22857188,Alameda County,Oakland
+Kekawaka,PG&E,SUBSTATION,Operational,40.0940257,-123.50917312,Trinity County,
+Luka,PG&E,SUBSTATION,Operational,37.66794111,-121.8318637,Alameda County,"Livermore--Pleasanton--Dublin, CA"
+Air Liquide,PG&E,SUBSTATION ASSUMED,Operational,37.5953056,-122.01747832,Alameda County,Union City
+Parks,PG&E,SUBSTATION,Operational,37.71163865,-121.89383726,Alameda County,Dublin
+Ralph,PG&E,SUBSTATION,Operational,37.79905199,-121.6199307,CONTRA COSTA,
+Vallecitos,PG&E,SUBSTATION,Operational,37.60923901,-121.84265791,Alameda County,Sunol
+Amfor,PG&E,SUBSTATION,Operational,38.40876188,-120.82208495,Amador County,
+Ione Energy,PG&E,SUBSTATION,Operational,38.27716834,-120.9138865,Amador County,
+A.P.T. Oro,PG&E,SUBSTATION,Operational,39.48122118,-121.56547211,Butte County,Oroville
+Paradise - (PG&E),PG&E,SUBSTATION,Operational,39.76065779,-121.61871709,Butte County,Paradise
+Murphy - (PG&E),PG&E,SUBSTATION,Operational,38.14698195,-120.44640649,Calaveras County,
+North Branch,PG&E,SUBSTATION,Operational,38.19974189,-120.719335,Calaveras County,
+Drake,PG&E,SUBSTATION,Operational,38.9698177,-122.04331887,Colusa County,
+Harrington,PG&E,SUBSTATION,Operational,38.9692189,-122.07045507,Colusa County,
+Maxwell - (PG&E),PG&E,SUBSTATION,Operational,39.27695488,-122.15327551,Colusa County,
+Byron Bethany,PG&E,SUBSTATION,Operational,37.81698435,-121.5871326,Contra Costa County,
+GWF 4,PG&E,SUBSTATION,Operational,38.01049463,-121.75625648,Contra Costa County,Antioch
+Linde - (PG&E),PG&E,SUBSTATION ASSUMED,Operational,38.02639366,-121.84961477,Contra Costa County,Pittsburg
+Columbia Steel,PG&E,SUBSTATION,Operational,38.02597928,-121.86329806,,
+Antioch,PG&E,SUBSTATION,Operational,38.01351301,-121.81553884,Contra Costa County,Antioch
+East Portal,PG&E,SUBSTATION,Operational,37.87595023,-122.18703268,Contra Costa County,Orinda
+Fibreboard,PG&E,SUBSTATION,Operational,38.01599133,-121.77390547,Contra Costa County,Antioch
+Franklin - (PG&E),PG&E,SUBSTATION,Operational,38.01210203,-122.26431677,Contra Costa County,Hercules
+Imhoff,PG&E,SUBSTATION,Operational,38.00163158,-122.0672425,Contra Costa County,"Concord--Walnut Creek, CA"
+Marsh,PG&E,SUBSTATION,Operational,37.90286041,-121.72268263,Contra Costa County,Brentwood
+San Ramon Research Cntr.,PG&E,SUBSTATION ASSUMED,Operational,37.78241098,-121.96764928,Contra Costa County,Danville
+Narrows - (PG&E),PG&E,SUBSTATION,Operational,39.23512352,-121.26861825,Nevada County,
+Unocal,PG&E,SUBSTATION,Operational,38.05340283,-122.23451897,Contra Costa County,Crockett
+Urich - (PG&E),PG&E,SUBSTATION,Operational,38.02895002,-122.10308779,Contra Costa County,Martinez
+Flint,PG&E,SUBSTATION,Operational,38.88491527,-121.06712848,Placer County,Auburn
+Limestone - (PG&E),PG&E,SUBSTATION,Operational,38.63492778,-120.98016969,El Dorado County,Cameron Park
+Mt. Quarries,PG&E,SUBSTATION,Operational,38.91406082,-121.01896906,El Dorado County,
+Newcastle,PG&E,SUBSTATION,Operational,38.83485386,-121.09480786,Placer County,
+Camino - (PG&E),PG&E,SUBSTATION,Operational,38.79337246,-120.61929791,El Dorado County,
+Oxford,PG&E,SUBSTATION,Operational,36.71508838,-120.70181596,Fresno County,
+River Rock,PG&E,SUBSTATION,Operational,36.90285495,-119.77383028,Fresno County,
+Westlands,PG&E,SUBSTATION,Operational,36.63241255,-120.34229944,Fresno County,
+Camden - (PG&E),PG&E,SUBSTATION,Operational,36.44598108,-119.79895395,Fresno County,
+Capco Madera - (PG&E),PG&E,SUBSTATION,Operational,36.83608772,-120.44954396,Fresno County,Firebaugh
+Fireboard,PG&E,SUBSTATION,Operational,36.8505761,-120.46635952,Fresno County,
+Kearney (Old),PG&E,SUBSTATION,Operational,36.70678897,-119.8800103,Fresno County,
+Kings River,PG&E,SUBSTATION,Operational,36.88826305,-119.15946196,Fresno County,
+Rainbow,PG&E,SUBSTATION,Operational,36.71021717,-119.53810124,Fresno County,
+De Francesco,PG&E,SUBSTATION,Operational,36.83603893,-120.62029452,Fresno County,
+Gates Wellhead,PG&E,SUBSTATION,Operational,36.15251611,-120.14780665,Fresno County,
+Headgate,PG&E,SUBSTATION,Operational,39.78927403,-122.05129695,Glenn County,
+Provident,PG&E,SUBSTATION ASSUMED,Operational,39.55776343,-122.00469037,Glenn County,
+Stony Gorge,PG&E,SUBSTATION,Operational,39.58703795,-122.53314351,Glenn County,Elk Creek
+Ultra Power - (PG&E),PG&E,SUBSTATION,Operational,40.87792931,-123.9946194,Humboldt County,Blue Lake
+Fruitland - (PG&E),PG&E,SUBSTATION,Operational,40.28583672,-123.83729396,Humboldt County,
+Ridge Cabin,PG&E,SUBSTATION ASSUMED,Operational,40.72891419,-123.66976472,Humboldt County,
+Russ Ranch,PG&E,SUBSTATION,Operational,40.82049255,-123.82822372,Humboldt County,
+Berrenda A,PG&E,SUBSTATION,Operational,35.71159587,-120.01118299,Kern County,
+Berrenda C,PG&E,SUBSTATION,Operational,35.65849654,-120.04241711,Kern County,
+Cawelo B,PG&E,SUBSTATION,Operational,35.47076084,-119.11830642,Kern County,
+Cawelo C,PG&E,SUBSTATION,Operational,35.57075261,-119.11540761,Kern County,
+Kernwater,PG&E,SUBSTATION,Operational,35.40105248,-119.03538055,Kern County,Oildale
+Lost Hills,PG&E,SUBSTATION,Operational,35.78572695,-119.86627087,Kern County,
+Petrol,PG&E,SUBSTATION,Operational,35.4546256,-118.99217923,Kern County,
+Valpredo,PG&E,SUBSTATION,Operational,35.06400924,-119.06181438,Kern County,
+Antelope - (PG&E),PG&E,SUBSTATION,Operational,35.65789628,-119.99642185,Kern County,
+Arvin-Edison,PG&E,SUBSTATION,Operational,35.31697561,-118.93320148,Kern County,
+Cadet,PG&E,SUBSTATION,Operational,35.10677559,-119.40353284,Kern County,Taft
+Carnation Dairy,PG&E,SUBSTATION,Operational,35.31100114,-119.08579425,Kern County,Bakersfield
+Chalk,PG&E,SUBSTATION,Operational,35.09713662,-119.42940648,Kern County,
+Dexel,PG&E,SUBSTATION,Operational,35.45555332,-119.02114573,Kern County,Oildale
+Double C,PG&E,SUBSTATION,Operational,35.5010341,-119.04602741,Kern County,
+Eisen,PG&E,SUBSTATION,Operational,35.35577476,-118.97175878,Kern County,Potomac Park
+Frito Lay,PG&E,SUBSTATION,Operational,35.39404176,-119.32146941,Kern County,
+Kern Front,PG&E,SUBSTATION,Operational,35.5094399,-119.03049873,Kern County,
+Lost Hills (Texaco),PG&E,SUBSTATION,Operational,35.6658105,-119.76743863,,
+Sysquoc,PG&E,SUBSTATION,Operational,35.31982083,-119.66231226,Kern County,
+Ultra Power - 93308,PG&E,SUBSTATION,Operational,35.54775617,-119.07543271,Kern County,
+Rio Bravo - G,PG&E,SUBSTATION,Operational,35.4298185,-118.82261907,Kern County,Bakersfield
+San Bernard,PG&E,SUBSTATION,Operational,35.09239229,-118.87810433,Kern County,
+Santa Fe Energy,PG&E,SUBSTATION,Operational,35.1933423,-119.58233473,,
+Badger Creek,PG&E,SUBSTATION,Operational,35.4839117,-119.02971102,Kern County,
+Berry Petroleum,PG&E,SUBSTATION,Operational,35.0932242,-119.44381796,Kern County,
+Tecuya,PG&E,SUBSTATION,Operational,35.01964647,-118.97962599,Kern County,
+Fort Bragg,PG&E,SUBSTATION,Operational,39.43482433,-123.7993704,Mendocino County,Fort Bragg
+Garcia,PG&E,SUBSTATION,Operational,38.88918649,-123.55085759,Mendocino County,
+Gallo,PG&E,SUBSTATION,Operational,37.37940613,-120.80950654,Merced County,
+International Turbine Research,PG&E,SUBSTATION,Operational,37.04729449,-121.19501489,Merced County,
+Texaco,PG&E,SUBSTATION,Operational,35.95855623,-120.86356501,Monterey County,
+Camphora,PG&E,SUBSTATION,Operational,36.46821427,-121.39034819,Monterey County,
+Castroville,PG&E,SUBSTATION,Operational,36.76311499,-121.73472246,Monterey County,
+Chualar,PG&E,TAP,Operational,36.57244098,-121.52048864,Monterey County,
+Edward Pike,PG&E,SUBSTATION,Operational,36.6262318,-121.58762873,Monterey County,
+Gonzales - (PG&E),PG&E,SUBSTATION,Operational,36.50886016,-121.44687749,Monterey County,Gonzales
+Lagunitas,PG&E,SUBSTATION,Operational,36.74875631,-121.60597559,Monterey County,
+Los Coches - (PG&E),PG&E,SUBSTATION,Operational,36.36646086,-121.28006792,Monterey County,
+Manzanita,PG&E,SUBSTATION,Operational,36.6145428,-121.83353189,Monterey County,Seaside
+Monterey,PG&E,SUBSTATION,Operational,36.59982254,-121.89047072,Monterey County,Monterey
+Monterey Naval Lab,PG&E,SUBSTATION,Operational,36.58952818,-121.86381866,Monterey County,Monterey
+Navy School,PG&E,SUBSTATION,Operational,36.59959553,-121.8768712,Monterey County,Monterey
+Oil Fields,PG&E,SUBSTATION,Operational,35.95647007,-120.85113998,Monterey County,
+Viejo - (PG&E),PG&E,SUBSTATION,Operational,36.57836651,-121.90840485,Monterey County,Monterey
+Smartsville,PG&E,SUBSTATION,Operational,39.20900038,-121.30325586,Yuba County,Smartsville
+Cisco Grove,PG&E,SUBSTATION,Operational,39.30962266,-120.5483291,Placer County,
+Del Mar - (PG&E),PG&E,SUBSTATION,Operational,38.7988104,-121.22129945,Placer County,Rocklin
+Halsey - (PG&E),PG&E,SUBSTATION,Operational,38.95692333,-121.04221719,Placer County,
+Grays Flat - PG&E,PG&E,SUBSTATION,Operational,40.02241219,-121.06543225,Plumas County,Twain
+Greenville,PG&E,SUBSTATION ASSUMED,Operational,40.15068589,-121.0812311,Plumas County,
+Spanish Creek,PG&E,SUBSTATION,Operational,40.02696682,-120.96311015,Plumas County,
+Twisselman,PG&E,SUBSTATION,Operational,35.73065157,-119.85808547,Kern County,
+Rio Bravo Poso,PG&E,SUBSTATION,Operational,35.57652744,-119.00651476,Kern County,
+Vedder,PG&E,SUBSTATION,Operational,35.59265733,-118.9590362,Kern County,
+Witco,PG&E,SUBSTATION,Operational,35.42795198,-118.97749316,Kern County,
+Shiloh I,PG&E,SUBSTATION,Operational,38.12529705,-121.83225786,Solano County,
+Boswell,PG&E,SUBSTATION,Operational,36.08513945,-119.55359297,Kings County,
+Angiola,PG&E,SUBSTATION,Operational,35.99202836,-119.57169576,Kings County,
+Hardwick,PG&E,SUBSTATION,Operational,36.40412154,-119.6858363,Kings County,
+Clear Lake - (PG&E),PG&E,SUBSTATION,Operational,39.0077625,-122.89398734,Lake County,
+Lower Lake,PG&E,SUBSTATION,Operational,38.91063568,-122.61735406,Lake County,Lower Lake
+Lucerne - (PG&E),PG&E,SUBSTATION,Operational,39.11038184,-122.81282473,Lake County,
+Halls Flat,PG&E,SUBSTATION,Operational,40.74488695,-121.27798671,Lassen County,
+Bogard,PG&E,SUBSTATION,Operational,40.588066,-121.09157101,Lassen County,
+Live Oak - 93308,PG&E,SUBSTATION,Operational,35.49594755,-119.0094539,Kern County,
+Capco,PG&E,SUBSTATION,Operational,37.10858708,-120.24830631,Madera County,Chowchilla
+Certainteed,PG&E,SUBSTATION,Operational,37.09320414,-120.22861451,Madera County,Chowchilla
+Sharon - PG&E,PG&E,SUBSTATION,Operational,37.09782123,-120.15717109,Madera County,Chowchilla
+Hamilton Wetlands,PG&E,SUBSTATION,Operational,38.07813952,-122.5257967,Marin County,
+Las Gallinas,PG&E,SUBSTATION,Operational,38.02242837,-122.53792745,Marin County,San Rafael
+Tocaloma,PG&E,SUBSTATION,Operational,38.05485949,-122.7598498,Marin County,
+Embarcadero,PG&E,SUBSTATION,Operational,37.78752989,-122.39343391,San Francisco County,San Francisco
+Larkin,PG&E,SUBSTATION,Operational,37.78365462,-122.41699615,San Francisco County,San Francisco
+Mission - (PG&E),PG&E,SUBSTATION,Operational,37.77734803,-122.41380967,San Francisco County,San Francisco
+AEC 300,PG&E,SUBSTATION,Operational,37.65340049,-121.52678716,,
+Banta,PG&E,SUBSTATION,Operational,37.75291698,-121.35059094,San Joaquin County,
+Calvo,PG&E,SUBSTATION,Operational,37.74747841,-121.32672094,San Joaquin County,
+Carbona,PG&E,SUBSTATION,Operational,37.69223444,-121.41666836,San Joaquin County,
+Country Club - PG&E,PG&E,SUBSTATION,Operational,37.97920524,-121.31637896,San Joaquin County,Stockton
+Harding - (PG&E),PG&E,SUBSTATION,Operational,37.96372394,-121.29037593,San Joaquin County,Stockton
+Tracy - (PG&E),PG&E,SUBSTATION,Operational,37.74881349,-121.41600878,San Joaquin County,Tracy
+Learner,PG&E,SUBSTATION ASSUMED,Operational,37.93856696,-121.32908091,San Joaquin County,Stockton
+Linden - (PG&E),PG&E,SUBSTATION,Operational,38.01697994,-121.09584994,San Joaquin County,
+TRACY DEFENSE DEPOT,PG&E,SUBSTATION,Operational,37.72172299,-121.39193496,San Joaquin County,"Tracy--Mountain House, CA"
+Mc Donald,PG&E,SUBSTATION,Operational,37.9914434,-121.47886274,San Joaquin County,
+Oak Park - (PG&E),PG&E,SUBSTATION,Operational,37.98050597,-121.29853194,San Joaquin County,Stockton
+Owens Illinois,PG&E,SUBSTATION,Operational,37.71338919,-121.48784894,San Joaquin County,
+Lee,PG&E,SUBSTATION,Operational,37.7319045,-121.11623335,San Joaquin County,Ripon
+Robertson,PG&E,SUBSTATION,Operational,37.94338892,-121.32983436,San Joaquin County,Stockton
+Rough & Ready,PG&E,SUBSTATION ASSUMED,Operational,37.94966297,-121.34640991,San Joaquin County,Stockton
+S.J. Power,PG&E,SUBSTATION ASSUMED,Operational,37.80650196,-121.29088596,San Joaquin County,Lathrop
+Victor - (PG&E),PG&E,SUBSTATION,Operational,38.14550095,-121.17756791,San Joaquin County,Lockeford
+Cambria,PG&E,SUBSTATION,Operational,35.60042121,-121.11536643,San Luis Obispo County,
+Foothill - (PG&E),PG&E,SUBSTATION,Operational,35.28670169,-120.70590108,San Luis Obispo County,
+Perry - (PG&E),PG&E,SUBSTATION,Operational,35.57091333,-121.05535835,San Luis Obispo County,
+Industrial - (PG&E),PG&E,SUBSTATION,Operational,38.12992266,-121.25154882,San Joaquin County,Lodi
+San Francisco Airport,PG&E,SUBSTATION,Operational,37.62624037,-122.40351088,San Mateo County,"San Francisco--Oakland, CA"
+Bair,PG&E,SUBSTATION,Operational,37.49769787,-122.21402021,San Mateo County,Redwood City
+Belle Haven,PG&E,SUBSTATION,Operational,37.4776534,-122.16849241,San Mateo County,Menlo Park
+Belmont - (PG&E),PG&E,SUBSTATION,Operational,37.52346077,-122.26521895,San Mateo County,Belmont
+Crystal Springs,PG&E,SUBSTATION,Operational,37.52998374,-122.36171223,San Mateo County,"San Francisco--Oakland, CA"
+Half Moon Bay & CM&O Yard ,PG&E,SUBSTATION,Operational,37.4688423,-122.43010898,San Mateo County,Half Moon Bay
+Las Pulgas - (PG&E),PG&E,SUBSTATION,Operational,37.46283675,-122.22789241,San Mateo County,Redwood City
+Ralston - (PG&E),PG&E,SUBSTATION,Operational,37.51130896,-122.34011182,San Mateo County,Highlands
+San Mateo - (PG&E),PG&E,SUBSTATION,Operational,37.58306967,-122.31865074,San Mateo County,San Mateo
+Shredder,PG&E,SUBSTATION,Operational,37.51141277,-122.20756766,San Mateo County,Redwood City
+Surf,PG&E,SUBSTATION,Operational,34.68480399,-120.60385621,Santa Barbara County,
+Bayshore ,PG&E,SUBSTATION,Operational,37.74602487,-122.4033589,San Francisco County,San Francisco
+Shiloh II,PG&E,SUBSTATION,Operational,38.17131512,-121.84640783,Solano County,
+Adobe,PG&E,SUBSTATION,Operational,35.10728559,-118.95790426,Kern County,
+Kent,PG&E,SUBSTATION,Operational,36.22179519,-119.90597482,Kings County,"Lemoore Station, CA"
+Fall Creek Powerhouse,PG&E NGBA,SUBSTATION,Operational,41.98541373,-122.36028332,Siskiyou County,
+Unknown - 3258,PG&E NGBA,TAP,Operational,41.77287225,-124.20787842,Del Norte County,"Crescent City, CA"
+Unknown - 3259,PG&E NGBA,TAP,Operational,41.76618402,-124.198456,Del Norte County,Crescent City
+Unknown - 3260,PG&E NGBA,TAP,Operational,41.75809342,-124.16315137,Del Norte County,Bertsch-Oceanview
+Unknown - 3261,PG&E NGBA,TAP,Operational,41.84985548,-124.14032006,Del Norte County,
+Unknown - 3262,PG&E NGBA,TAP,Operational,41.86933824,-124.1425196,Del Norte County,Fort Dick
+Unknown - 3263,PG&E NGBA,TAP,Operational,41.85587193,-123.3915126,Siskiyou County,Happy Camp
+Unknown - 3264,PG&E NGBA,TAP,Operational,41.84038272,-123.19221331,Siskiyou County,
+Unknown - 3265,PG&E NGBA,TAP,Operational,41.78036124,-123.0711587,Siskiyou County,
+Unknown - 3266,PG&E NGBA,TAP,Operational,41.67783047,-122.8470736,Siskiyou County,
+Unknown - 3267,PG&E NGBA,TAP,Operational,41.60713873,-122.85127087,Siskiyou County,
+Unknown - 3268,PG&E NGBA,TAP,Operational,41.70606704,-122.5389113,Siskiyou County,
+Unknown - 3269,PG&E NGBA,TAP,Operational,41.86767442,-122.46418394,Siskiyou County,
+Unknown - 3270,PG&E NGBA,TAP,Operational,41.72672293,-122.53621838,Siskiyou County,Montague
+Unknown - 3271,PG&E NGBA,TAP,Operational,41.60366606,-122.52256229,Siskiyou County,
+Unknown - 3272,PG&E NGBA,TAP,Operational,41.54864172,-122.36508371,Siskiyou County,
+Unknown - 3273,PG&E NGBA,TAP,Operational,41.61958945,-122.36438239,Siskiyou County,
+Copco 2 B,PG&E NGBA,SUBSTATION,Operational,41.97492602,-122.35864962,Siskiyou County,
+Unknown - 3275,PG&E NGBA,TAP,Operational,41.95365199,-121.5662839,Siskiyou County,
+Unknown - 3276,PG&E NGBA,TAP,Operational,41.95082095,-121.40628069,Modoc County,
+Unknown - 3277,PG&E NGBA,TAP,Operational,41.73347229,-120.37503269,Modoc County,
+Unknown - 3278,PG&E NGBA,TAP,Operational,41.26265849,-122.27061363,Siskiyou County,Dunsmuir
+Unknown - 3279,PG&E NGBA,TAP,Operational,41.20191917,-122.28139466,Siskiyou County,
+Unknown - 3280,PG&E NGBA,TAP,Operational,41.29406588,-122.31261312,Siskiyou County,"Mount Shasta, CA"
+Unknown - 3281,PG&E NGBA,SUBSTATION,Operational,41.43252642,-122.38284519,Siskiyou County,
+Unknown - 3282,PG&E NGBA,TAP,Operational,41.4322623,-122.38363755,Siskiyou County,
+Unknown - 3283,PG&E NGBA,TAP,Operational,41.4317412,-122.38901275,Siskiyou County,Weed
+Unknown - 3288,PG&E FRESNO,RISER,Operational,36.30839782,-119.61887867,Kings County,
+Unknown - 3291,PG&E GBA,SUBSTATION,Operational,38.37375392,-120.95058427,Amador County,Ione
+Unknown - 3292,PG&E KERN,SUBSTATION,Operational,35.41285945,-119.64200065,Kern County,
+Unknown - 3294,PG&E FRESNO,SUBSTATION,Operational,36.37766668,-120.13847734,Fresno County,
+Highway Junction 2,PG&E NGBA,SUBSTATION,Operational,38.16685401,-122.25372576,Napa County,American Canyon
+Unknown - 3297,PG&E NGBA,SUBSTATION,Operational,38.29017793,-121.44086199,Sacramento County,
+Unknown - 3300,PG&E GBA,SUBSTATION,Operational,38.30246638,-121.29652826,Sacramento County,
+Unknown - 3303,PG&E NGBA,SUBSTATION,Operational,39.3155876,-120.65089473,Nevada County,
+Unknown - 3304,PG&E NGBA,SUBSTATION,Operational,38.72868752,-121.36448447,Placer County,"Sacramento, CA"
+Unknown - 3305,PG&E KERN,SUBSTATION,Operational,35.70880532,-120.010356,Kern County,
+Unknown - 3306,PG&E FRESNO,SUBSTATION,Operational,36.75757944,-120.36363862,Fresno County,Mendota
+Unknown - 3307,PG&E KERN,NOT AVAILABLE,Operational,35.63041622,-119.45539417,Kern County,
+Unknown - 3310,PG&E FRESNO,SUBSTATION,Operational,36.30825329,-120.25285482,Fresno County,
+Unknown - 3312,PG&E KERN,SUBSTATION,Operational,35.4199804,-119.63305477,Kern County,
+Unknown - 3315,PG&E FRESNO,SUBSTATION,Operational,36.39923182,-120.23293391,Fresno County,
+Unknown - 3317,PG&E NGBA,NOT AVAILABLE,Operational,38.67835289,-121.23023486,Sacramento County,Orangevale
+Travis AB,PG&E NGBA,SUBSTATION,Operational,38.27155246,-121.93341189,Solano County,Fairfield
+Unknown - 3320,PG&E NGBA,SUBSTATION,Operational,40.09380096,-120.911221,Plumas County,Crescent Mills
+Unknown - 3321,PG&E NGBA,SUBSTATION,Operational,38.43828004,-121.40381954,Sacramento County,Sacramento
+Unknown - 3322,PG&E GBA,SUBSTATION,Operational,36.59881345,-121.85381108,Monterey County,Monterey
+Unknown - 3324,PG&E KERN,NOT AVAILABLE,Operational,35.64118899,-118.48291963,Kern County,Lake Isabella
+Unknown - 3328,PG&E GBA,SUBSTATION,Operational,37.57469943,-121.86599144,Alameda County,Sunol
+Unknown - 3330,PG&E KERN,NOT AVAILABLE,Operational,35.6016607,-119.61468045,Kern County,
+Unknown - 3335,PG&E KERN,NOT AVAILABLE,Operational,35.30011269,-120.62092993,San Luis Obispo County,
+Unknown - 3337,PG&E KERN,SUBSTATION,Operational,35.46956089,-119.03706055,Kern County,
+Unknown - 3342,PG&E KERN,SUBSTATION,Operational,35.48660408,-119.74339252,Kern County,
+Unknown - 3344,PG&E KERN,SUBSTATION,Operational,35.22140554,-119.08766307,Kern County,
+Unknown - 3347,PG&E GBA,SUBSTATION,Operational,38.14825594,-121.26087892,San Joaquin County,Lodi
+Unknown - 3348,PG&E FRESNO,NOT AVAILABLE,Operational,37.31826096,-120.51581713,Merced County,"Merced, CA"
+Tocaloma Junction,PG&E NGBA,SUBSTATION,Operational,38.04832306,-122.7430927,Marin County,
+Unknown - 3357,PG&E FRESNO,RISER,Operational,36.42856587,-120.33950842,Fresno County,
+Skaggs Island Junction 1,PG&E NGBA,SUBSTATION,Operational,38.15261602,-122.38113575,Solano County,
+Unknown - 3361,PG&E KERN,DEAD END,Operational,35.44141305,-119.13407154,Kern County,Bakersfield
+Unknown - 3362,PG&E NGBA,SUBSTATION,Operational,38.8349996,-122.76890065,Lake County,
+Unknown - 3363,PG&E NGBA,NOT AVAILABLE,Operational,38.6492358,-121.32784497,Sacramento County,Carmichael
+Unknown - 3365,PG&E GBA,SUBSTATION,Operational,36.41704527,-121.31668246,Monterey County,Soledad
+Unknown - 3367,PG&E KERN,NOT AVAILABLE,Operational,35.54424012,-119.11485817,Kern County,
+Unknown - 3368,PG&E FRESNO,SUBSTATION,Operational,36.22572811,-119.8331808,Kings County,
+Unknown - 3372,PG&E KERN,SUBSTATION,Operational,35.11363547,-119.47036401,Kern County,
+Unknown - 3376,PG&E NGBA,RISER,Operational,38.53597399,-120.24143605,Amador County,
+Unknown - 3377,PG&E KERN,NOT AVAILABLE,Operational,35.55624343,-119.12337777,Kern County,
+Unknown - 3378,PG&E GBA,SUBSTATION,Operational,37.85654699,-120.91224077,Stanislaus County,
+Unknown - 3383,PG&E GBA,SUBSTATION,Operational,37.73154637,-121.11538741,San Joaquin County,Ripon
+Unknown - 3384,PG&E GBA,SUBSTATION,Operational,37.9176037,-121.62490034,Contra Costa County,
+Unknown - 3386,PG&E KERN,NOT AVAILABLE,Operational,35.48358001,-118.52583619,Kern County,
+California State Department Of Corrections,PG&E FRESNO,SUBSTATION,Operational,36.13694984,-120.25385818,Fresno County,Coalinga
+Unknown - 3392,PG&E FRESNO,RISER,Operational,36.42856275,-120.3394148,Fresno County,
+Unknown - 3397,PG&E NGBA,NOT AVAILABLE,Operational,39.32095686,-121.56756972,Butte County,
+Unknown - 3398,PG&E NGBA,SUBSTATION,Operational,38.66867614,-121.38305439,Sacramento County,North Highlands
+Unknown - 3399,PG&E GBA,NOT AVAILABLE,Operational,37.97458295,-120.31574751,Tuolumne County,East Sonora
+Unknown - 3400,PG&E KERN,SUBSTATION,Operational,35.37738395,-119.68618427,Kern County,
+Unknown - 3401,PG&E KERN,SUBSTATION,Operational,35.28419414,-119.47328388,Kern County,
+Unknown - 3403,PG&E GBA,SUBSTATION,Operational,36.79793123,-121.73413714,Monterey County,Elkhorn
+Unknown - 3404,PG&E NGBA,NOT AVAILABLE,Operational,38.65538289,-121.46624847,Sacramento County,Sacramento
+Plumas Sierra Rea,PG&E NGBA,SUBSTATION,Operational,39.93491052,-120.88439323,Plumas County,
+El Camino Tap,PG&E NGBA,TAP,Operational,38.61067291,-121.41054884,Sacramento County,Arden-Arcade
+Unknown - 3414,PG&E KERN,TAP,Operational,35.10820632,-119.40336523,Kern County,Taft
+Unknown - 3415,PG&E NGBA,TAP,Operational,38.27722762,-121.51543556,Sacramento County,
+Sunol Tap,PG&E GBA,TAP,Operational,37.58635757,-121.86998628,Alameda County,Sunol
+Unknown - 3417,PG&E NGBA,TAP,Operational,38.41320176,-121.32019898,Sacramento County,
+Lammers Tap,PG&E GBA,TAP,Operational,37.71237745,-121.47809148,San Joaquin County,
+Unknown - 3420,PG&E GBA,TAP,Operational,38.01267491,-121.85433936,Contra Costa County,Pittsburg
+Unknown - 3423,PG&E KERN,TAP,Operational,35.51732108,-119.75857843,Kern County,
+Unknown - 3427,PG&E NGBA,TAP,Operational,41.48841087,-120.58602528,Modoc County,
+Edenvale Tap,PG&E GBA,TAP,Operational,37.22118376,-121.79407548,Santa Clara County,
+Unknown - 3429,PG&E KERN,TAP,Operational,35.42655626,-119.0131121,Kern County,Oildale
+Unknown - 3433,PG&E NGBA,TAP,Operational,39.76194788,-122.19702357,Glenn County,
+Unknown - 3434,PG&E NGBA,TAP,Operational,39.21731287,-122.02596656,Colusa County,"Colusa, CA"
+Unknown - 3435,PG&E GBA,TAP,Operational,36.97380112,-121.9733103,Santa Cruz County,Live Oak
+Vacaville Tap,PG&E NGBA,TAP,Operational,38.40284494,-121.96063489,Solano County,Vacaville
+Edes Tap 2,PG&E GBA,TAP,Operational,37.73690263,-122.19870793,Alameda County,Oakland
+Unknown - 3441,PG&E GBA,TAP,Operational,37.63796322,-120.93006868,Stanislaus County,"Modesto, CA"
+Shredder Tap,PG&E GBA,TAP,Operational,37.51120499,-122.20691568,San Mateo County,Redwood City
+Unknown - 3443,PG&E GBA,TAP,Operational,37.64021696,-121.00341202,Stanislaus County,Modesto
+Unknown - 3445,PG&E GBA,TAP,Operational,37.67651787,-122.1350571,Alameda County,San Lorenzo
+Unknown - 3446,PG&E KERN,TAP,Operational,35.39729972,-119.00718888,Kern County,Bakersfield
+Auburn Watt Tap 1,PG&E NGBA,TAP,Operational,38.63418718,-121.38273572,Sacramento County,Arden-Arcade
+Unknown - 3450,PG&E GBA,TAP,Operational,37.95598323,-121.33313829,San Joaquin County,Stockton
+Unknown - 3451,PG&E NGBA,TAP,Operational,38.5847539,-121.26549486,Sacramento County,Rancho Cordova
+Unknown - 3454,PG&E KERN,TAP,Operational,35.29569698,-119.0027418,Kern County,Bakersfield
+Unknown - 3456,PG&E NGBA,TAP,Operational,38.65787522,-121.38379329,Sacramento County,North Highlands
+Unknown - 3457,PG&E KERN,TAP,Operational,34.70062328,-120.43643017,Santa Barbara County,
+Unknown - 3459,PG&E KERN,TAP,Operational,35.06680958,-120.48080509,San Luis Obispo County,
+Unknown - 3460,PG&E NGBA,TAP,Operational,39.11943075,-122.13287422,Colusa County,
+S.L.A.C. Tap,PG&E GBA,TAP,Operational,37.38792932,-122.28873276,San Mateo County,
+Unknown - 3463,PG&E KERN,TAP,Operational,35.42839103,-118.8188676,Kern County,Bakersfield
+Unknown - 3467,PG&E FRESNO,TAP,Operational,35.96336007,-119.45597822,Tulare County,
+Unknown - 3468,PG&E GBA,TAP,Operational,37.98253186,-122.35804388,Contra Costa County,Richmond
+Stony Point Tap,PG&E NGBA,TAP,Operational,38.40179441,-122.71330055,Sonoma County,"Santa Rosa, CA"
+Unknown - 3471,PG&E NGBA,TAP,Operational,38.47528148,-121.40861805,Sacramento County,Florin
+Mabury Tap,PG&E GBA,TAP,Operational,37.39276207,-121.87779524,Santa Clara County,San Jose
+Unknown - 3474,PG&E NGBA,TAP,Operational,38.5769711,-121.32719846,Sacramento County,Rancho Cordova
+Unknown - 3475,PG&E GBA,TAP,Operational,38.18938566,-121.26098073,San Joaquin County,"Lodi, CA"
+Unknown - 3477,PG&E NGBA,TAP,Operational,38.85671792,-121.78682975,Yolo County,
+Unknown - 3480,PG&E GBA,TAP,Operational,36.88025373,-121.60958927,San Benito County,
+Unknown - 3481,PG&E NGBA,TAP,Operational,38.86182836,-121.79358957,Yolo County,
+Unknown - 3482,PG&E GBA,TAP,Operational,37.80211399,-121.6049859,Alameda County,
+Unknown - 3483,PG&E NGBA,TAP,Operational,38.65839304,-121.38429588,Sacramento County,McClellan Park
+Rossmoor Tap 2,PG&E GBA,TAP,Operational,37.85587902,-122.07602902,Contra Costa County,Walnut Creek
+Unknown - 3485,PG&E GBA,TAP,Operational,37.98383756,-121.28354912,San Joaquin County,Stockton
+Unknown - 3486,PG&E KERN,TAP,Operational,35.65827406,-120.0102374,Kern County,
+Unknown - 3488,PG&E NGBA,TAP,Operational,38.66019072,-121.44781511,Sacramento County,Sacramento
+Unknown - 3490,PG&E NGBA,TAP,Operational,38.65832991,-121.38439584,Sacramento County,McClellan Park
+Unknown - 3491,PG&E NGBA,TAP,Operational,38.38715896,-121.75859881,Solano County,
+Unknown - 3492,PG&E NGBA,TAP,Operational,38.55481268,-121.34423464,Sacramento County,Rosemont
+Unknown - 3493,PG&E NGBA,TAP,Operational,40.62937986,-124.18767638,Humboldt County,
+Unknown - 3494,PG&E FRESNO,TAP,Operational,36.05099358,-119.49648872,Tulare County,
+Unknown - 3499,PG&E KERN,TAP,Operational,35.41285067,-119.64268298,Kern County,
+Pit 7 Tap,PG&E NGBA,TAP,Operational,40.82485709,-121.93346175,Shasta County,
+Unknown - 3501,PG&E KERN,TAP,Operational,35.22391445,-119.57181458,Kern County,
+East Dublin Tap,PG&E GBA,TAP,Operational,37.7039232,-121.90154096,Alameda County,Dublin
+Unknown - 3503,PG&E GBA,TAP,Operational,38.02114389,-121.29459383,San Joaquin County,Stockton
+Unknown - 3504,PG&E NGBA,TAP,Operational,39.25017521,-121.66018233,Sutter County,
+Unknown - 3505,PG&E NGBA,TAP,Operational,40.7719479,-124.17158678,Humboldt County,"Eureka, CA"
+Unknown - 3506,PG&E FRESNO,TAP,Operational,36.22616137,-119.83323121,Kings County,
+Unknown - 3508,PG&E NGBA,TAP,Operational,38.26060724,-122.6625143,Sonoma County,"Petaluma, CA"
+Unknown - 3509,PG&E GBA,TAP,Operational,38.3738679,-120.95082994,Amador County,Ione
+Unknown - 3510,PG&E FRESNO,TAP,Operational,36.52959821,-119.25085037,Tulare County,
+Unknown - 3511,PG&E GBA,TAP,Operational,38.39299187,-120.62912699,Amador County,Red Corral
+Unknown - 3512,PG&E FRESNO,TAP,Operational,36.29776098,-119.4742794,Tulare County,
+Unknown - 3513,PG&E NGBA,TAP,Operational,41.5343588,-120.9447377,Modoc County,
+Unknown - 3514,PG&E FRESNO,TAP,Operational,36.756554,-120.36409721,Fresno County,Mendota
+Unknown - 3515,PG&E FRESNO,TAP,Operational,37.52364893,-120.33047214,Merced County,
+North Tower Tap,PGE,TAP,Operational,38.02858073,-122.20271593,Contra Costa County,
+Unknown - 3518,PG&E NGBA,TAP,Operational,40.56372862,-122.23443097,Shasta County,Palo Cedro
+Sneath-Pacifica Tap,PG&E GBA,TAP,Operational,37.62189172,-122.44591373,San Mateo County,
+Unknown - 3520,PG&E NGBA,TAP,Operational,40.37590923,-120.53059983,Lassen County,
+Unknown - 3522,PG&E KERN,TAP,Operational,35.02674953,-118.95771722,Kern County,
+Unknown - 3523,PG&E NGBA,TAP,Operational,40.01462578,-121.22506868,Plumas County,
+Emerald Lake Tap,PG&E GBA,TAP,Operational,37.46170852,-122.27754707,San Mateo County,Redwood City
+Woodland Biomass Tap,PG&E NGBA,TAP,Operational,38.68088378,-121.73758662,Yolo County,Woodland
+Unknown - 3530,PG&E NGBA,TAP,Operational,38.65550728,-121.16877393,Sacramento County,Folsom
+Unknown - 3531,PG&E NGBA,TAP,Operational,39.14115971,-121.00676094,Nevada County,
+Unknown - 3535,PG&E GBA,TAP,Operational,38.03695575,-121.29481851,San Joaquin County,Stockton
+Unknown - 3536,PG&E NGBA,TAP,Operational,39.09772171,-121.33632227,Yuba County,Beale AFB
+Unknown - 3538,PG&E GBA,TAP,Operational,37.8995599,-120.47678707,Tuolumne County,
+Processing Site Tap,PG&E NGBA,TAP,Operational,38.91187119,-122.61885719,Lake County,Lower Lake
+Unknown - 3542,PG&E GBA,TAP,Operational,37.96089094,-121.33335031,San Joaquin County,Stockton
+Unknown - 3543,PG&E NGBA,TAP,Operational,38.51090306,-121.29764571,Sacramento County,
+Unknown - 3544,PG&E GBA,TAP,Operational,36.56939488,-121.75502218,Monterey County,
+Unknown - 3545,PG&E FRESNO,TAP,Operational,36.5314201,-120.10692521,Fresno County,
+Unknown - 3546,PG&E GBA,TAP,Operational,38.26186682,-121.31036891,Sacramento County,Galt
+Unknown - 3547,PG&E NGBA,TAP,Operational,41.44418772,-120.88105837,Modoc County,Canby
+Unknown - 3549,PG&E KERN,TAP,Operational,35.09500263,-119.05649465,Kern County,
+Unknown - 3552,PG&E GBA,TAP,Operational,37.97787679,-121.28106076,San Joaquin County,Stockton
+Unknown - 3555,PG&E NGBA,TAP,Operational,38.58917891,-121.41061884,Sacramento County,Arden-Arcade
+Westinghouse Tap,PG&E GBA,TAP,Operational,37.37828393,-122.0156316,Santa Clara County,Sunnyvale
+Unknown - 3561,PG&E NGBA,TAP,Operational,38.68754672,-121.15236936,Sacramento County,Folsom
+Unknown - 3562,PG&E GBA,TAP,Operational,38.14649665,-121.24348778,San Joaquin County,
+Unknown - 3563,PG&E GBA,TAP,Operational,37.96912572,-121.18631957,San Joaquin County,
+Unknown - 3564,PG&E NGBA,TAP,Operational,38.6878889,-121.30767784,Sacramento County,Citrus Heights
+Unknown - 3565,PG&E FRESNO,TAP,Operational,36.41784847,-120.3686995,Fresno County,
+Unknown - 3566,PG&E NGBA,TAP,Operational,40.57857583,-122.35290043,Shasta County,Redding
+Unknown - 3567,PG&E FRESNO,TAP,Operational,36.61785387,-120.38789347,Fresno County,
+Unknown - 3568,PG&E FRESNO,TAP,Operational,36.83627837,-120.44935348,Fresno County,Firebaugh
+Unknown - 3569,PG&E FRESNO,TAP,Operational,36.92383424,-120.11069641,Madera County,
+Unknown - 3570,PG&E GBA,TAP,Operational,36.5660825,-121.91302351,Monterey County,"Seaside--Monterey--Pacific Grove, CA"
+Unknown - 3571,PG&E NGBA,TAP,Operational,38.83123288,-121.30754383,Placer County,
+Unknown - 3572,PG&E NGBA,TAP,Operational,39.15103557,-121.9550246,Colusa County,
+Unknown - 3573,PG&E NGBA,TAP,Operational,41.12791366,-121.14341838,Lassen County,Bieber
+Unknown - 3575,PG&E NGBA,TAP,Operational,38.58326065,-121.45274807,Sacramento County,Sacramento
+Unknown - 3576,PG&E NGBA,TAP,Operational,38.65945792,-121.79359885,Yolo County,Woodland
+Unknown - 3577,PG&E NGBA,TAP,Operational,38.65657194,-121.16833461,Sacramento County,Folsom
+Unknown - 3578,PG&E GBA,TAP,Operational,38.01135903,-122.26554278,Contra Costa County,Hercules
+San Rafael Junction,PG&E GBA,SUBSTATION,Operational,37.95679761,-122.50516539,Marin County,San Rafael
+Unknown - 3582,PG&E FRESNO,NOT AVAILABLE,Operational,37.0755686,-121.19122649,Merced County,
+Olive - (PG&E FRESNO),PG&E,SUBSTATION,Operational,35.87704126,-119.45524776,Tulare,Apaugh
+Unknown - 3584,PG&E KERN,SUBSTATION,Operational,35.0602209,-119.06426009,Kern County,
+Unknown - 3585,PG&E NGBA,SUBSTATION,Operational,39.13938269,-121.58339507,Yuba County,Marysville
+Unknown - 3586,PG&E NGBA,SUBSTATION,Operational,40.84925896,-124.07845114,Humboldt County,Arcata
+Unknown - 3589,PG&E NGBA,RISER,Operational,38.5859989,-121.28190786,Sacramento County,Rancho Cordova
+Unknown - 3592,PG&E NGBA,NOT AVAILABLE,Operational,38.51063144,-121.37193493,Sacramento County,Sacramento
+Unknown - 3598,PG&E FRESNO,SUBSTATION,Operational,36.79288709,-120.25379904,Madera County,
+Unknown - 3599,PG&E GBA,SUBSTATION,Operational,37.77989398,-121.0011704,San Joaquin County,Escalon
+Unknown - 3603,PG&E FRESNO,SUBSTATION,Operational,36.24211362,-119.90477329,Kings County,
+Sri,PG&E,SUBSTATION,Operational,37.45537178,-122.17827359,San Mateo County,Menlo Park
+Newby Island I,PG&E,SUBSTATION,Operational,37.45475435,-121.93553795,Santa Clara County,San Jose
+Cal Mat,PG&E,SUBSTATION,Operational,37.67388855,-121.8356179,Alameda County,"Livermore--Pleasanton--Dublin, CA"
+Fayette,PG&E,SUBSTATION,Operational,37.72018832,-121.5952787,Alameda County,
+Eureka Station A,PG&E,SUBSTATION,Operational,40.79374785,-124.1832564,Humboldt County,Eureka
+Eureka Station E,PG&E,SUBSTATION,Operational,40.79342739,-124.1802996,Humboldt County,Eureka
+Centerville,PG&E,SUBSTATION,Operational,39.78844375,-121.65733329,Butte County,Butte Creek Canyon
+Lime Saddle - (PG&E),PG&E,SUBSTATION,Operational,39.69859532,-121.57139816,Butte County,
+High Line,PG&E,SUBSTATION,Operational,39.76192274,-122.19753293,Glenn County,
+Willits Station A,PG&E,SUBSTATION,Operational,39.40558466,-123.32706602,Mendocino County,
+Forbestown,PG&E,SUBSTATION,Operational,39.55099782,-121.27857331,Butte County,
+Sly Creek,PG&E,SUBSTATION,Operational,39.58039646,-121.11968313,Butte County,
+Edward C Hyatt,PG&E,SUBSTATION,Operational,39.53267075,-121.48621612,Butte County,Oroville East
+Lake Mendocino,PG&E,SUBSTATION ASSUMED,Operational,39.19732103,-123.18543,Mendocino County,
+Big Geysers,PG&E,SUBSTATION,Operational,38.77334042,-122.72899692,Lake County,
+Bear Canyon,PG&E,SUBSTATION,Operational,38.7626092,-122.69242334,Lake County,
+Quicksilver,PG&E,SUBSTATION,Operational,38.76615471,-122.70742854,Lake County,
+West Ford Flat,PG&E,SUBSTATION,Operational,38.78780694,-122.72239459,Lake County,
+Tiger Creek,PG&E,SUBSTATION,Operational,38.4491701,-120.49226391,Amador County,
+Electra 1,PG&E,SUBSTATION,Operational,38.33154007,-120.66978625,Amador County,
+Electra 2,PG&E,SUBSTATION,Operational,38.3313191,-120.673022,Amador County,
+New Hogan,PG&E,SUBSTATION,Operational,38.14959933,-120.81486385,Calaveras County,
+Angels,PG&E,SUBSTATION,Operational,38.07182769,-120.53934383,Calaveras County,Angels
+Loveridge Road,PG&E,SUBSTATION,Operational,38.03039528,-121.86940592,Contra Costa County,Pittsburg
+Oleum,PG&E,SUBSTATION,Operational,38.04448063,-122.25700265,Contra Costa County,Rodeo
+Fairview - (PG&E),PG&E,SUBSTATION,Operational,38.01608207,-122.11627408,Contra Costa County,"Concord--Walnut Creek, CA"
+Tulloch,PG&E,SUBSTATION,Operational,37.87666806,-120.6055792,Calaveras County,
+Delta Energy,PG&E,SUBSTATION,Operational,38.0174783,-121.84659631,Contra Costa County,Pittsburg
+Orinda,PG&E,SUBSTATION,Operational,37.88359921,-122.19345746,Contra Costa County,
+Wind Driven,PG&E,SUBSTATION,Operational,37.8212365,-121.6609238,Contra Costa County,
+US Wind Power,PG&E,SUBSTATION,Operational,37.79142132,-121.72776081,Contra Costa County,
+Oakland I - PG&E Northwest,PG&E,SUBSTATION,Operational,37.797434,-122.28072446,Alameda County,Oakland
+Mt. House,PG&E,SUBSTATION,Operational,37.79421234,-121.55955708,Alameda County,
+California Energy Tesla,PG&E,SUBSTATION,Operational,37.74908412,-121.6494805,Alameda County,
+Cartwright,PG&E,SUBSTATION,Operational,37.77931569,-122.29268289,Alameda County,Alameda
+Green Ridge Services,PG&E,SUBSTATION,Operational,37.76124499,-121.69073289,Alameda County,
+Frick Green Ridge Power,PG&E,SUBSTATION,Operational,37.72973671,-121.68774013,Alameda County,
+Zond Wind,PG&E,SUBSTATION,Operational,37.74309507,-121.65870683,Alameda County,
+Lawrence Livermore Laboratory,PG&E,SUBSTATION,Operational,37.68223396,-121.70527494,Alameda County,Livermore
+Patterson Pass,PG&E,SUBSTATION,Operational,37.69858112,-121.61066097,Alameda County,
+Reta,PG&E,SUBSTATION,Operational,37.45438743,-120.49004114,Merced County,
+Helm's Pumped Storage,PG&E,SUBSTATION,Operational,37.03911287,-118.96368239,Fresno County,
+San Joaquin 1A,PG&E,SUBSTATION,Operational,37.15880821,-119.49444814,Madera County,
+Wolfsen Bypass,PG&E,SUBSTATION ASSUMED,Operational,37.09829807,-121.04744262,Merced County,
+Wright - (PG&E),PG&E,SUBSTATION,Operational,37.01340613,-120.94522042,Merced County,
+San Luis,PG&E,SUBSTATION,Operational,37.06666171,-121.07543984,,Hamburg Farms
+Kerchoff 2,PG&E,SUBSTATION,Operational,37.07187243,-119.55802431,Fresno County,
+San Luis 3,PG&E,SUBSTATION,Operational,36.86206846,-120.7772737,Merced County,
+San Luis 5,PG&E,SUBSTATION,Operational,36.7800156,-120.72973117,Fresno County,
+Rio Bravo Fresno,PG&E,SUBSTATION,Operational,36.688855,-119.72370515,Fresno County,"Fresno, CA"
+Kings River Consrv.,PG&E,SUBSTATION,Operational,36.69044924,-119.74040539,Fresno County,"Fresno, CA"
+Coalinga 1,PG&E,SUBSTATION,Operational,36.13619835,-120.34421642,Fresno County,Coalinga
+Coalinga 2,PG&E,SUBSTATION,Operational,36.23719035,-120.31470351,Fresno County,
+Lost Hills (Chevron),PG&E,SUBSTATION,Operational,35.6055982,-119.70831928,,
+North Generator,PG&E,SUBSTATION,Operational,35.57819779,-119.54424744,Kern County,
+Sierra - (PG&E),PG&E,SUBSTATION,Operational,35.51575393,-119.04059051,Kern County,
+Dai/Oildale Cogen,PG&E,SUBSTATION,Operational,35.4404158,-119.01329371,Kern County,Oildale
+Elk Hills Cogen 1,PG&E,SUBSTATION,Operational,35.28133585,-119.46990876,Kern County,
+Elk Hills Cogen 2,PG&E,SUBSTATION,Operational,35.28117277,-119.47285795,Kern County,
+Elk Hills Cogen 3,PG&E,SUBSTATION,Operational,35.27863179,-119.46416773,Kern County,
+Welport,PG&E,SUBSTATION,Operational,35.36347689,-119.67548812,Kern County,
+Kern Canyon,PG&E,SUBSTATION,Operational,35.44055963,-118.7967405,Kern County,
+Wheeler,PG&E,SUBSTATION,Operational,35.02957415,-119.00446684,Kern County,
+Midway-Sunset Cogen 2,PG&E,SUBSTATION,Operational,35.22647847,-119.63084028,Kern County,
+Midway-Sunset Cogen 3,PG&E,SUBSTATION,Operational,35.22557567,-119.62975138,Kern County,
+North Midway,PG&E,SUBSTATION,Operational,35.27635323,-119.59887379,Kern County,
+Dome Project,PG&E,SUBSTATION,Operational,35.22527041,-119.55948494,Kern County,
+University - 93268,PG&E,SUBSTATION,Operational,35.1457118,-119.5027403,Kern County,
+Buena Vista Pumps,PG&E,SUBSTATION,Operational,35.15800295,-119.34888451,Kern County,
+Berry - (PG&E),PG&E,SUBSTATION,Operational,35.08979958,-119.44121457,Kern County,
+Hat Creek 2,PG&E,SUBSTATION,Operational,40.96097797,-121.54858504,Shasta County,
+Pit 1 A,PG&E,SUBSTATION,Operational,40.98974939,-121.49675975,Shasta County,
+Pit 6,PG&E,SUBSTATION,Operational,40.92226533,-121.99233182,Shasta County,
+Pit 7,PG&E,SUBSTATION,Operational,40.84661104,-121.99105888,Shasta County,
+Pit 5,PG&E,SUBSTATION,Operational,40.98672406,-121.97657134,Shasta County,
+Kilarc,PG&E,SUBSTATION,Operational,40.67817034,-121.87307895,Shasta County,
+Cow Creek,PG&E,SUBSTATION,Operational,40.57186127,-122.02036919,Shasta County,
+Mt. Gate,PG&E,SUBSTATION,Operational,40.73723424,-122.32248451,Shasta County,
+Mt. Gate Junction,PG&E,SUBSTATION,Operational,40.74434524,-122.3083027,Shasta County,
+Volta 1,PG&E,SUBSTATION,Operational,40.45954607,-121.86641934,Shasta County,
+Inskip,PG&E,SUBSTATION,Operational,40.40132439,-121.96509188,Tehama County,
+Butt Valley,PG&E,SUBSTATION,Operational,40.17581401,-121.19073301,Plumas County,
+Caribou 2,PG&E,SUBSTATION,Operational,40.08516597,-121.1475803,Plumas County,
+Unknown - 2321,PG&E,SUBSTATION ASSUMED,Operational,39.97493011,-120.94474708,Plumas County,
+Black Butte,PG&E,SUBSTATION,Operational,39.81514828,-122.3325038,Tehama County,
+Haypress Middle,PG&E,SUBSTATION,Operational,39.56554486,-120.58159773,Sierra County,
+Haypress Lower,PG&E,SUBSTATION ASSUMED,Operational,39.56571618,-120.59691425,Sierra County,
+Drum 2,PG&E,SUBSTATION ASSUMED,Operational,39.25741843,-120.76664193,Placer County,
+Middle Fork,PG&E,SUBSTATION,Operational,39.02424224,-120.59639709,Placer County,
+Yuba City Station B,PG&E,SUBSTATION,Operational,39.1384296,-121.63848849,Sutter County,Yuba City
+Rio Bravo Rocklin,PG&E,SUBSTATION,Operational,38.83186614,-121.31398954,Placer County,
+Camp Far West,PG&E,SUBSTATION,Operational,39.0488968,-121.31690688,Placer County,
+Wise,PG&E,SUBSTATION,Operational,38.88992122,-121.09848269,Placer County,
+NCPA 3&4,PG&E,SUBSTATION,Operational,38.74875808,-122.71156299,Sonoma County,
+Aidlin Geothermal,PG&E,SUBSTATION,Operational,38.83402828,-122.88122472,Sonoma County,
+Geysers Unit 3,PG&E,SUBSTATION,Operational,38.8056994,-122.81496583,Sonoma County,
+Ridge Line,PG&E,SUBSTATION,Operational,38.81470909,-122.80202578,Sonoma County,
+Cobb Creek,PG&E,SUBSTATION,Operational,38.80530511,-122.78384678,Sonoma County,
+Socrates 18,PG&E,SUBSTATION,Operational,38.76858589,-122.7482778,Sonoma County,
+Magnesium,PG&E,SUBSTATION ASSUMED,Operational,37.31772344,-122.08871373,Santa Clara County,
+Sulphur Springs,PG&E,SUBSTATION,Operational,38.7867067,-122.7820188,Sonoma County,
+Mccabe,PG&E,SUBSTATION,Operational,38.80561501,-122.80820873,Sonoma County,
+Fumarole,PG&E,SUBSTATION,Operational,38.795974,-122.76699329,Sonoma County,
+Park - (PG&E),PG&E,SUBSTATION,Operational,38.77949319,-121.28272819,Placer County,Roseville
+NCPA 1&2,PG&E,SUBSTATION,Operational,38.75227265,-122.71953592,Sonoma County,
+UC Davis,PG&E,SUBSTATION,Operational,38.52910509,-121.75138547,Yolo,
+Calpeak Power Vaca Dixon 1,PG&E,SUBSTATION,Operational,38.40518339,-121.91809816,Solano County,
+Creed Energy,PG&E,SUBSTATION,Operational,38.24121568,-121.85574075,Solano County,
+Goose Haven,PG&E,SUBSTATION,Operational,38.22658782,-121.84417042,Solano County,
+Henning,PG&E,SUBSTATION,Operational,38.11600455,-121.29042895,San Joaquin County,Lodi
+Stockton Cogen,PG&E,SUBSTATION,Operational,37.91255094,-121.26335854,San Joaquin County,Stockton
+Frankenheimer,PG&E,SUBSTATION,Operational,37.83027565,-120.80705589,Stanislaus County,
+Howland Road,PG&E,SUBSTATION,Operational,37.80878046,-121.27655824,San Joaquin County,Lathrop
+Thermal Energy,PG&E,SUBSTATION,Operational,37.72004765,-121.48841553,San Joaquin County,
+Hunters Point,PG&E,SUBSTATION,Operational,37.73691305,-122.37685316,San Francisco County,San Francisco
+Unknown - 3606,PG&E KERN,SUBSTATION,Operational,35.73003274,-119.89502775,Kern County,
+Unknown - 3607,PG&E NGBA,SUBSTATION,Operational,38.63768798,-121.22046119,Sacramento County,Fair Oaks
+Unknown - 3608,PG&E GBA,SUBSTATION,Operational,37.00004116,-121.53719011,Santa Clara County,Gilroy
+Guadalupe,PG&E,SUBSTATION,Operational,37.21421287,-121.89522254,Santa Clara County,San Jose
+Unknown - 3611,PG&E FRESNO,DEAD END,Operational,36.25463718,-119.58310677,Kings County,
+Metcalf 2,PG&E,SUBSTATION,Operational,37.22627761,-121.74626365,Santa Clara County,"San Jose, CA"
+Unknown - 3613,PG&E NGBA,SUBSTATION,Operational,38.26494227,-121.95406182,Solano County,Fairfield
+Unknown - 3618,PG&E GBA,SUBSTATION,Operational,37.91187869,-121.25645339,San Joaquin County,Stockton
+Unknown - 3625,PG&E NGBA,SUBSTATION,Operational,39.2982163,-120.84406996,Nevada County,
+Santa Maria Cogen,PG&E,SUBSTATION,Operational,34.94478501,-120.45776155,Santa Barbara County,Santa Maria
+Unknown - 3633,PG&E GBA,NOT AVAILABLE,Operational,37.69078808,-121.56297694,Alameda County,
+Unknown - 3638,PG&E KERN,SUBSTATION,Operational,35.02465335,-118.99504175,Kern County,
+Unknown - 3643,PG&E NGBA,SUBSTATION,Operational,38.67192753,-121.15028194,Sacramento County,Folsom
+Unknown - 3644,PG&E NGBA,NOT AVAILABLE,Operational,38.6795729,-121.33676084,Sacramento County,Foothill Farms
+Unknown - 3646,PG&E GBA,SUBSTATION,Operational,37.57432269,-120.98483522,Stanislaus County,Ceres
+Unknown - 3648,PG&E NGBA,RISER,Operational,38.5818699,-121.27520686,Sacramento County,Rancho Cordova
+Unknown - 3653,PG&E GBA,NOT AVAILABLE,Operational,38.15484885,-121.1784366,San Joaquin County,Lockeford
+Unknown - 3655,PG&E GBA,SUBSTATION,Operational,38.01661063,-121.86160142,Contra Costa County,Pittsburg
+Unknown - 3657,PG&E NGBA,SUBSTATION,Operational,38.63137778,-121.22225125,Sacramento County,Gold River
+Unknown - 3659,PG&E NGBA,NOT AVAILABLE,Operational,39.93402129,-120.90168893,Plumas County,East Quincy
+Unknown - 3663,PG&E GBA,NOT AVAILABLE,Operational,37.81624468,-121.58479018,Contra Costa County,
+Highway Junction 1,PG&E NGBA,SUBSTATION,Operational,38.16674301,-122.25363876,Napa County,American Canyon
+Unknown - 3666,PG&E FRESNO,SUBSTATION,Operational,36.13016054,-120.13809325,Fresno County,
+Unknown - 3669,PG&E GBA,RISER,Operational,37.67205441,-122.08814471,Alameda County,Hayward
+Potrero - (PG&E GBA),PG&E,SUBSTATION,Operational,37.75744844,-122.38650408,San Francisco County,San Francisco
+Sycamore Cogen,PG&E KERN,SUBSTATION,Operational,35.45406705,-119.00275481,Kern County,
+Stafford Junction,PG&E NGBA,SUBSTATION,Operational,38.12143704,-122.63003771,Marin County,
+Unknown - 3680,PG&E FRESNO,NOT AVAILABLE,Operational,36.92383817,-120.10697525,Madera County,
+Unknown - 3683,PG&E GBA,NOT AVAILABLE,Operational,36.59416802,-121.86667011,Monterey County,Monterey
+Unknown - 3684,PG&E FRESNO,SUBSTATION,Operational,36.72029982,-120.43010951,Fresno County,
+Unknown - 3685,PG&E KERN,SUBSTATION,Operational,35.1840361,-119.5713785,Kern County,
+Unknown - 3687,PG&E NGBA,SUBSTATION,Operational,40.06978986,-122.23339452,Tehama County,
+Geysers Tap 6,PG&E NGBA,TAP,Operational,38.77864867,-122.76564825,Sonoma County,
+Beardsley,PG&E,SUBSTATION,Operational,38.20286573,-120.07684717,Tuolumne County,
+Sand Bar,PG&E,SUBSTATION,Operational,38.18612041,-120.14998909,Tuolumne County,
+IBM Cottle Tap,PG&E GBA,TAP,Operational,37.24499604,-121.79641705,Santa Clara County,San Jose
+Unknown - 3698,PG&E FRESNO,TAP,Operational,36.74878731,-119.70033231,Fresno County,Fresno
+Unknown - 3699,PG&E KERN,TAP,Operational,35.72129125,-118.69540816,Kern County,
+Unknown - 3700,PG&E NGBA,TAP,Operational,40.49537098,-124.09894019,Humboldt County,Rio Dell
+Castro Valley Tap,PG&E GBA,TAP,Operational,37.69329674,-122.04273236,Alameda County,Castro Valley
+Atwater Tap,PG&E FRESNO,TAP,Operational,37.33122307,-120.63260747,Merced County,
+Unknown - 3704,PG&E NGBA,TAP,Operational,38.48135904,-122.85133981,Sonoma County,
+IBM Bailey Tap,PG&E GBA,TAP,Operational,37.21464102,-121.76328077,Santa Clara County,
+Unknown - 3707,PG&E GBA,TAP,Operational,38.33143688,-120.67376999,Amador County,
+Unknown - 3708,PG&E NGBA,TAP,Operational,38.60256252,-121.4332986,Sacramento County,Sacramento
+Unknown - 3709,PG&E NGBA,TAP,Operational,38.58871291,-121.40610584,Sacramento County,Arden-Arcade
+Geysers Tap  9,PG&E NGBA,TAP,Operational,38.7778353,-122.75239005,Sonoma County,
+Unknown - 3711,PG&E NGBA,TAP,Operational,38.5060641,-121.24225642,Sacramento County,Rancho Cordova
+Deepwater Tap - (PG&E NGBA),PG&E NGBA,TAP,Operational,38.58195266,-121.56483163,Yolo County,West Sacramento
+PG&E Pumping Station,PG&E,SUBSTATION,Operational,38.21807254,-122.15846584,Solano County,
+Unknown - 3715,PG&E KERN,TAP,Operational,35.4412191,-119.64276956,Kern County,
+Unknown - 3716,PG&E GBA,TAP,Operational,36.99858942,-121.53730785,Santa Clara County,Gilroy
+Unknown - 3717,PG&E KERN,TAP,Operational,35.05997853,-119.06474305,Kern County,
+Barker Slough Pumping Station,PG&E,SUBSTATION,Operational,38.27647079,-121.79677149,Solano County,
+Unknown - 3719,PG&E FRESNO,TAP,Operational,36.40484079,-119.63702804,Kings County,
+Hercules Ms,PG&E,SUBSTATION,Operational,38.01533936,-122.28721658,Contra Costa County,Hercules
+Imhoff Tap 2,PG&E GBA,TAP,Operational,38.01777447,-122.06728851,Contra Costa County,"Concord--Walnut Creek, CA"
+Vineyard Tap,PG&E GBA,TAP,Operational,37.66906985,-121.85409722,Alameda County,Pleasanton
+Unknown - 3722,PG&E NGBA,TAP,Operational,38.54737144,-121.39161714,Sacramento County,Sacramento
+Unknown - 3723,PG&E NGBA,TAP,Operational,38.68367688,-121.13915787,Sacramento County,Folsom
+Millbrae Tap,PG&E GBA,TAP,Operational,37.59271132,-122.41669331,San Mateo County,
+Unknown - 3725,PG&E GBA,TAP,Operational,36.4666561,-121.39163708,Monterey County,
+Unknown - 3726,PG&E GBA,TAP,Operational,36.63003936,-121.53987921,Monterey County,
+Unknown - 2553,PG&E,SUBSTATION ASSUMED,Operational,38.7658616,-122.71191424,Lake County,
+Unknown - 3727,PG&E NGBA,TAP,Operational,38.55871652,-121.32298111,Sacramento County,Mather
+Kasson Tap 1,PG&E GBA,TAP,Operational,37.75276531,-121.35163655,San Joaquin County,
+Unknown - 3729,PG&E NGBA,TAP,Operational,38.221803,-122.15722577,Solano County,Fairfield
+Unknown - 3730,PG&E NGBA,TAP,Operational,38.67916289,-121.26237685,Sacramento County,Citrus Heights
+Unknown - 3731,PG&E FRESNO,TAP,Operational,37.18554097,-120.43409516,Merced County,
+Flowind Corp,PG&E,SUBSTATION,Operational,37.76433184,-121.61443601,CONTRA COSTA,
+Unknown - 3732,PG&E GBA,TAP,Operational,37.43177368,-121.96289223,Santa Clara County,San Jose
+Unknown - 3733,PG&E NGBA,TAP,Operational,38.7089869,-121.30879984,Sacramento County,Citrus Heights
+Coalinga Cogen,PG&E,SUBSTATION,Operational,36.18093139,-120.38791696,Fresno County,
+Unknown - 3734,PG&E NGBA,TAP,Operational,39.65457562,-121.63597368,Butte County,Butte Valley
+Unknown - 3735,PG&E GBA,TAP,Operational,37.98962372,-121.28569526,San Joaquin County,Stockton
+Unknown - 2562,PG&E,SUBSTATION,Operational,35.51759508,-119.7613291,Kern County,
+Wasco Prison,PG&E,SUBSTATION,Operational,35.6009061,-119.40302049,Kern County,Wasco
+Geysers Tap 3,PG&E NGBA,TAP,Operational,38.75616262,-122.72430906,Sonoma County,
+Unknown - 2564,PG&E,SUBSTATION,Operational,35.44065089,-118.96052598,Kern County,
+Unknown - 3738,PG&E GBA,TAP,Operational,36.61295946,-121.56817568,Monterey County,
+United Cogen Tap,PG&E GBA,TAP,Operational,37.63829046,-122.40630484,San Mateo County,South San Francisco
+Walnut-Engle Tap,PG&E NGBA,TAP,Operational,38.63165172,-121.33683634,Sacramento County,Carmichael
+Unknown - 3744,PG&E GBA,TAP,Operational,37.43747708,-121.95495205,Santa Clara County,San Jose
+Kern Pp Dist.,PG&E,SUBSTATION ASSUMED,Operational,35.37804784,-119.095382,Kern County,Bakersfield
+San Andreas Tap,PG&E GBA,TAP,Operational,37.5990874,-122.42402373,San Mateo County,
+Unknown - 3748,PG&E NGBA,TAP,Operational,39.24336386,-120.0303366,Placer County,Kings Beach
+Unknown - 3749,PG&E NGBA,TAP,Operational,39.48671664,-121.68852759,Butte County,
+Albatross Tap,PG&E NGBA,TAP,Operational,38.61071991,-121.41507084,Sacramento County,Arden-Arcade
+Unknown - 3752,PG&E NGBA,TAP,Operational,38.46293692,-121.4464339,Sacramento County,Sacramento
+Unknown - 3753,PG&E KERN,TAP,Operational,35.78922793,-119.91534795,Kings County,
+Unknown - 3754,PG&E FRESNO,TAP,Operational,37.58546678,-120.00240867,Mariposa County,
+Unknown - 3756,PG&E NGBA,TAP,Operational,38.44361486,-121.45798381,Sacramento County,
+Unknown - 2583,PG&E,SUBSTATION,Operational,35.20995345,-119.58121248,Kern County,
+Lockheed 1 Tap,PG&E GBA,TAP,Operational,37.41725438,-122.00515997,Santa Clara County,Sunnyvale
+Unknown - 3758,PG&E NGBA,TAP,Operational,38.23184087,-121.864418,Solano County,
+Bollman Tap 2,PG&E GBA,TAP,Operational,38.03068851,-122.03374123,Contra Costa County,
+Unknown - 3764,PG&E FRESNO,TAP,Operational,37.06838313,-121.21564602,Santa Clara County,
+Unknown - 3766,PG&E NGBA,TAP,Operational,38.32376994,-121.44481387,Sacramento County,
+Unknown - 3767,PG&E FRESNO,TAP,Operational,36.7201849,-120.38733535,Fresno County,"Mendota, CA"
+Unknown - 3768,PG&E NGBA,TAP,Operational,38.51047671,-121.39086024,Sacramento County,Sacramento
+Unknown - 3769,PG&E GBA,TAP,Operational,38.11246876,-121.37069992,San Joaquin County,
+Unknown - 3770,PG&E GBA,TAP,Operational,37.68923696,-121.01274601,Stanislaus County,Modesto
+High Winds,PG&E,SUBSTATION,Operational,38.12739084,-121.83076389,Solano County,
+Unknown - 3771,PG&E NGBA,TAP,Operational,38.6479474,-121.33682202,Sacramento County,Carmichael
+Teichert,PG&E,SUBSTATION,Operational,37.61727661,-121.35630555,San Joaquin County,
+Port Costa Brick Tap,PG&E GBA,TAP,Operational,38.02144602,-122.16616079,Contra Costa County,
+Unknown - 3774,PG&E NGBA,TAP,Operational,38.50643171,-121.46468871,Sacramento County,Parkway
+Unknown - 3775,PG&E NGBA,TAP,Operational,41.08034626,-124.11296792,Humboldt County,
+Unknown - 3776,PG&E NGBA,TAP,Operational,38.48256256,-121.45298916,Sacramento County,Sacramento
+Unknown - 3777,PG&E GBA,TAP,Operational,37.6530857,-121.01859215,Stanislaus County,Modesto
+Unknown - 3778,PG&E GBA,TAP,Operational,37.92640613,-122.07359832,Contra Costa County,Pleasant Hill
+Unknown - 2607,PG&E,SUBSTATION,Operational,37.74248469,-121.7332844,Alameda County,
+Unknown - 3782,PG&E NGBA,TAP,Operational,38.6809439,-121.31797084,Sacramento County,Citrus Heights
+Unknown - 3783,PG&E NGBA,TAP,Operational,40.18640403,-122.24698303,Tehama County,
+Unknown - 2612,PG&E,SUBSTATION,Operational,38.13803131,-121.38616422,San Joaquin County,
+Unknown - 3784,PG&E KERN,TAP,Operational,35.42376608,-119.68699346,Kern County,
+Dyer Rd. Altamont,PG&E,SUBSTATION,Operational,37.75529694,-121.66002294,Alameda County,
+Unknown - 3785,PG&E GBA,TAP,Operational,36.59958586,-121.89249092,Monterey County,Monterey
+Unknown - 3786,PG&E FRESNO,TAP,Operational,36.53871795,-119.58090961,Fresno County,Kingsburg
+Unknown - 3787,PG&E NGBA,TAP,Operational,38.79503733,-121.3040653,Placer County,Roseville
+Domtar #2 Tap,PG&E GBA,TAP,Operational,37.71000302,-122.17873574,Alameda County,San Leandro
+Unknown - 3789,PG&E GBA,TAP,Operational,38.07761195,-121.28756192,San Joaquin County,
+Watershed Tap,PG&E GBA,TAP,Operational,37.48536757,-122.31428748,San Mateo County,
+Unknown - 3793,PG&E NGBA,TAP,Operational,38.53202192,-121.42229885,Sacramento County,Sacramento
+Unknown - 3794,PG&E NGBA,TAP,Operational,39.14486406,-122.13279165,Colusa County,Williams
+Bonita Tap,PG&E,SUBSTATION,Operational,36.967719,-120.20266215,Madera County,
+Wright Tap,PG&E NGBA,TAP,Operational,38.62538391,-121.40597184,Sacramento County,Arden-Arcade
+Unknown - 3796,PG&E NGBA,TAP,Operational,38.46384094,-121.65668082,Yolo County,
+Unknown - 3797,PG&E GBA,TAP,Operational,37.99343794,-121.28703471,San Joaquin County,Stockton
+Stroud Switching Station,PG&E,SUBSTATION,Operational,36.53156158,-120.17044206,Fresno County,
+Unknown - 3799,PG&E NGBA,TAP,Operational,38.595208,-121.34577588,Sacramento County,Carmichael
+Lemoore N.A.S.,PG&E,SUBSTATION,Operational,36.26450281,-119.90626323,Kings County,Lemoore Station
+Unknown - 3800,PG&E GBA,TAP,Operational,38.0140612,-121.87544446,Contra Costa County,Pittsburg
+Stockton A Tap,PG&E GBA,TAP,Operational,37.90888304,-121.30932234,San Joaquin County,Stockton
+Hilltop Tap,PG&E NGBA,TAP,Operational,41.53880702,-120.63199928,Modoc County,
+Unknown - 3805,PG&E NGBA,TAP,Operational,39.49187213,-121.53974382,Butte County,South Oroville
+Las Perillas Pumps,PG&E,SUBSTATION,Operational,35.84303809,-119.90836902,Kings County,
+Badger Hill Pumps,PG&E,SUBSTATION,Operational,35.8349828,-119.94260275,Kings County,
+Unknown - 3807,PG&E NGBA,TAP,Operational,38.60316674,-121.1787009,Sacramento County,
+Rossmoor Tap 1,PG&E GBA,TAP,Operational,37.85578567,-122.07602184,Contra Costa County,Walnut Creek
+Polonio Pass,PG&E,SUBSTATION,Operational,35.73092768,-120.20778507,San Luis Obispo County,
+Unknown - 3810,PG&E NGBA,TAP,Operational,38.50174585,-121.2232405,Sacramento County,
+Bluestone,PG&E,SUBSTATION,Operational,35.70755747,-120.0841762,Kern County,
+Unknown - 3811,PG&E FRESNO,TAP,Operational,37.10593296,-120.2334052,Madera County,Chowchilla
+Unknown - 3812,PG&E NGBA,TAP,Operational,38.74906168,-121.69256289,Yolo County,
+Unknown - 3813,PG&E GBA,TAP,Operational,38.03704682,-121.27895392,San Joaquin County,Stockton
+South Belridge Cogen,PG&E,SUBSTATION,Operational,35.44865889,-119.73398069,Kern County,
+Belridge 1A,PG&E,SUBSTATION,Operational,35.45621528,-119.63190522,,
+Unknown - 3818,PG&E KERN,TAP,Operational,35.0650668,-119.06482274,Kern County,
+Belridge 1B,PG&E,SUBSTATION,Operational,35.44394638,-119.66097757,Kern County,
+King Ellis,PG&E,SUBSTATION,Operational,35.47017653,-119.75101835,Kern County,
+Wind Gap,PG&E,SUBSTATION,Operational,35.01416018,-118.97753342,Kern County,
+Unknown - 3819,PG&E NGBA,TAP,Operational,38.49628795,-121.31631109,Sacramento County,Vineyard
+Unknown - 3820,PG&E GBA,TAP,Operational,38.26505163,-121.31153877,Sacramento County,"Galt, CA"
+Unknown - 3823,PG&E GBA,TAP,Operational,38.29107393,-121.32115649,Sacramento County,
+Unknown - 3825,PG&E NGBA,TAP,Operational,38.37218738,-121.4176631,Sacramento County,
+Unknown - 3827,PG&E GBA,TAP,Operational,37.70374,-121.01289943,Stanislaus County,Modesto
+Unknown - 3828,PG&E KERN,TAP,Operational,35.10813075,-119.34541675,Kern County,
+Ralston Tap,PG&E GBA,TAP,Operational,37.5115728,-122.33977692,San Mateo County,Highlands
+Unknown - 3835,PG&E KERN,TAP,Operational,35.09395673,-119.29650167,Kern County,
+Las Positas Tap,PG&E GBA,TAP,Operational,37.70477699,-121.7327669,Alameda County,Livermore
+Unknown - 3838,PG&E NGBA,TAP,Operational,38.43818786,-121.41800234,Sacramento County,Sacramento
+Unknown - 3839,PG&E NGBA,TAP,Operational,38.37959492,-121.41764827,Sacramento County,Elk Grove
+Unknown - 3841,PG&E NGBA,TAP,Operational,38.69090288,-121.14677787,Sacramento County,Folsom
+Unknown - 3843,PG&E NGBA,TAP,Operational,38.49039773,-122.88170775,Sonoma County,Forestville
+Unknown - 3844,PG&E KERN,TAP,Operational,35.60181154,-119.27699391,Kern County,
+Unknown - 3845,PG&E NGBA,TAP,Operational,40.24792859,-122.14880309,Tehama County,
+Union Chemical Tap,PG&E GBA,TAP,Operational,38.00445502,-122.23463779,Contra Costa County,
+Unknown - 3847,PG&E GBA,TAP,Operational,38.10163395,-121.18077398,San Joaquin County,
+Unknown - 3848,PG&E GBA,TAP,Operational,37.75207704,-121.67758085,Alameda County,
+Unknown - 3850,PG&E KERN,TAP,Operational,35.63454211,-118.47742818,Kern County,Lake Isabella
+Unknown - 3851,PG&E NGBA,TAP,Operational,40.05940998,-123.63891631,Humboldt County,
+Unknown - 3852,PG&E NGBA,TAP,Operational,39.36469888,-121.68491542,Butte County,Gridley
+Unknown - 3854,PG&E GBA,TAP,Operational,37.94839496,-121.33078893,San Joaquin County,Stockton
+Unknown - 3855,PG&E GBA,TAP,Operational,37.94791963,-121.26087098,San Joaquin County,Stockton
+Unknown - 3858,PG&E FRESNO,SUBSTATION,Operational,36.23352579,-119.91690388,Kings County,"Lemoore Station, CA"
+Unknown - 3859,PG&E NGBA,RISER,Operational,38.73673159,-121.29154975,Placer County,Roseville
+Kasson-Banta Carbona Junction,PG&E GBA,SUBSTATION,Operational,37.71074999,-121.38869995,San Joaquin County,"Tracy--Mountain House, CA"
+Unknown - 3862,PG&E GBA,NOT AVAILABLE,Operational,36.4159261,-121.3191751,Monterey County,Soledad
+Unknown - 3866,PG&E KERN,SUBSTATION,Operational,35.29538126,-118.85869543,Kern County,
+Unknown - 3867,PG&E GBA,SUBSTATION,Operational,38.12776728,-121.83233717,Solano County,
+Unknown - 3870,PG&E FRESNO,SUBSTATION,Operational,36.32377544,-119.64888155,Kings County,Hanford
+Unknown - 3871,PG&E GBA,NOT AVAILABLE,Operational,37.71742599,-122.16280535,Alameda County,San Leandro
+Unknown - 3873,PG&E FRESNO,SUBSTATION,Operational,36.84803145,-120.64680468,Fresno County,
+Unknown - 3875,PG&E FRESNO,SUBSTATION,Operational,36.13717277,-120.1361495,Fresno County,
+Unknown - 3878,PG&E KERN,NOT AVAILABLE,Operational,35.42370709,-119.72600645,Kern County,
+Unknown - 3879,PG&E KERN,SUBSTATION,Operational,35.62310761,-119.85804535,Kern County,
+Unknown - 3881,PG&E GBA,NOT AVAILABLE,Operational,37.71563619,-122.16170761,Alameda County,San Leandro
+Unknown - 3887,PG&E NGBA,NOT AVAILABLE,Operational,38.47444487,-121.38898717,Sacramento County,Florin
+Unknown - 3888,PG&E NGBA,SUBSTATION,Operational,40.19027597,-120.13830592,Lassen County,
+Unknown - 3890,PG&E KERN,SUBSTATION,Operational,35.60173438,-119.43870958,Kern County,
+Unknown - 3894,PG&E KERN,SUBSTATION,Operational,35.41283123,-119.63294189,Kern County,
+Unknown - 3897,PG&E FRESNO,SUBSTATION,Operational,37.47786095,-120.44440364,Merced County,
+Station G,PG&E GBA,SUBSTATION,Operational,37.78158112,-122.44060709,San Francisco County,San Francisco
+Unknown - 3902,PG&E GBA,SUBSTATION,Operational,38.29120114,-121.28290848,Sacramento County,Galt
+Unknown - 3905,PG&E NGBA,SUBSTATION,Operational,38.37925793,-121.45461286,Sacramento County,
+Unknown - 3907,PG&E NGBA,RISER,Operational,38.5804139,-121.28284786,Sacramento County,Rancho Cordova
+Unknown - 3908,PG&E NGBA,NOT AVAILABLE,Operational,38.47257592,-121.38822686,Sacramento County,Florin
+Unknown - 3915,PG&E KERN,SUBSTATION,Operational,35.7170764,-119.45563969,Kern County,
+Unknown - 3916,PG&E NGBA,SUBSTATION,Operational,40.40448314,-120.51316129,Lassen County,Susanville
+Unknown - 3921,PG&E GBA,RISER,Operational,37.43708868,-122.21232949,San Mateo County,Atherton
+Unknown - 3922,PG&E NGBA,RISER,Operational,38.58300607,-121.45198761,Sacramento County,Sacramento
+Unknown - 3923,PG&E KERN,SUBSTATION,Operational,35.09946543,-120.50114347,San Luis Obispo County,
+Unknown - 3924,PG&E GBA,SUBSTATION,Operational,36.64397929,-121.79229301,Monterey County,Seaside
+Unknown - 3926,PG&E GBA,SUBSTATION,Operational,38.12037286,-121.77743916,Solano County,
+Cache Junction,PG&E NGBA,SUBSTATION,Operational,39.01190997,-122.6118576,Lake County,
+Unknown - 3935,PG&E NGBA,SUBSTATION,Operational,40.97258978,-121.2517561,Lassen County,
+Unknown - 3937,PG&E GBA,SUBSTATION,Operational,37.90984527,-122.30652784,Contra Costa County,El Cerrito
+Unknown - 3939,PG&E GBA,NOT AVAILABLE,Operational,37.92551535,-121.64104881,Contra Costa County,
+Unknown - 3941,PG&E KERN,NOT AVAILABLE,Operational,36.03630476,-120.09265495,Kings County,
+Unknown - 3944,PG&E GBA,SUBSTATION,Operational,38.51694677,-120.22006112,Amador County,
+Unknown - 3952,PG&E KERN,SUBSTATION,Operational,35.48443108,-119.72828044,Kern County,
+Arkansas - (PG&E),PG&E,SUBSTATION,Operational,39.36527723,-122.26383027,Colusa County,
+Wolfskill,PG&E NGBA,SUBSTATION,Operational,38.22806899,-122.07515378,Solano County,Fairfield
+Unknown - 3959,PG&E FRESNO,NOT AVAILABLE,Operational,36.44521041,-119.89610633,Fresno County,
+Unknown - 3961,PG&E NGBA,SUBSTATION,Operational,38.57082039,-121.43269209,Sacramento County,Sacramento
+Santa Rosa B,PG&E,SUBSTATION ASSUMED,Operational,38.4402566,-122.70899346,Sonoma County,Santa Rosa
+Unknown - 3962,PG&E KERN,NOT AVAILABLE,Operational,35.49928876,-119.02885372,Kern County,
+Oakmont North,PG&E,SUBSTATION,Operational,38.4428208,-122.58380045,Sonoma County,Santa Rosa
+Oakmont South,PG&E,SUBSTATION,Operational,38.42885154,-122.59333015,Sonoma County,Santa Rosa
+Unknown - 3964,PG&E NGBA,SUBSTATION,Operational,38.69463908,-120.82473112,El Dorado County,Diamond Springs
+Crockett,PG&E,SUBSTATION,Operational,38.04858414,-122.22168609,Contra Costa County,
+Unknown - 3968,PG&E NGBA,NOT AVAILABLE,Operational,38.67131024,-121.26232824,Sacramento County,Citrus Heights
+Rio Vista - (PG&E),PG&E,SUBSTATION,Operational,38.16004469,-121.69648695,Solano County,Rio Vista
+STATELINE,PG&E NGBA,SUBSTATION,Operational,38.95239855,-119.94186836,El Dorado County,South Lake Tahoe
+De Sabla,PG&E NGBA,SUBSTATION,Operational,39.87074304,-121.63211567,Butte County,
+Unknown - 3972,PG&E GBA,RISER,Operational,37.42344805,-121.95401089,Santa Clara County,San Jose
+Trans Bay Cable,PG&E,SUBSTATION ASSUMED,Operational,38.01861191,-121.85085859,Contra Costa County,Pittsburg
+Sausalito Meter,PG&E,SUBSTATION,Operational,37.8398372,-122.47857094,Marin County,"San Francisco--Oakland, CA"
+Unknown - 3977,PG&E NGBA,TAP,Operational,38.61369164,-121.33667187,Sacramento County,Carmichael
+Meadow Lane Tap,PG&E GBA,TAP,Operational,37.91196841,-122.05134882,Contra Costa County,Walnut Creek
+Calmat Tap,PG&E GBA,TAP,Operational,37.66408155,-121.82980174,Alameda County,"Livermore--Pleasanton--Dublin, CA"
+Kirker Tap 2,PG&E GBA,TAP,Operational,38.02044767,-121.90644736,Contra Costa County,Pittsburg
+Unknown - 3984,PG&E NGBA,TAP,Operational,40.39524589,-121.87871427,Tehama County,
+Edes Tap 1,PG&E GBA,TAP,Operational,37.74149917,-122.19418156,Alameda County,Oakland
+Unknown - 3987,PG&E GBA,TAP,Operational,37.94352605,-121.31993181,San Joaquin County,Stockton
+Unknown - 3988,PG&E NGBA,TAP,Operational,38.38710056,-121.37311619,Sacramento County,Elk Grove
+Aidlin Tap,PG&E NGBA,TAP,Operational,38.80998501,-122.88090459,Sonoma County,
+Unknown - 3990,PGE,TAP,Operational,37.99553696,-122.35035303,Contra Costa County,Richmond
+Banta Carbona Tap,PG&E GBA,TAP,Operational,37.71285917,-121.31161388,San Joaquin County,
+Unknown - 3992,PG&E NGBA,TAP,Operational,40.58709583,-122.39504342,Shasta County,Redding
+Unknown - 3997,PG&E NGBA,TAP,Operational,39.1121333,-122.13286215,Colusa County,
+Unknown - 3998,PG&E GBA,TAP,Operational,38.10164464,-121.17819214,San Joaquin County,
+Unknown - 4001,PG&E NGBA,TAP,Operational,39.11368086,-121.33181009,Yuba County,Beale AFB
+Avena Tap 2,PG&E GBA,TAP,Operational,37.84281762,-121.05493416,San Joaquin County,
+Unknown - 4005,PG&E NGBA,TAP,Operational,38.62018099,-121.44627734,Sacramento County,Sacramento
+Unknown - 4007,PG&E FRESNO,TAP,Operational,36.22577601,-119.78010536,Kings County,
+Richmond Q,PG&E,SUBSTATION,Operational,37.92500847,-122.3373374,Contra Costa County,Richmond
+Oak - PG&E North,PG&E,SUBSTATION,Operational,37.9018784,-122.28628775,Contra Costa County,Kensington
+Fairmont - (PG&E),PG&E,SUBSTATION,Operational,37.90222724,-122.29661673,Contra Costa County,El Cerrito
+Stuart - (PG&E),PG&E,SUBSTATION,Operational,37.85803969,-122.26867425,Alameda County,Berkeley
+Oakland P,PG&E,SUBSTATION,Operational,37.82101499,-122.32871483,Alameda County,Oakland
+Geary,PG&E,SUBSTATION,Operational,37.92661022,-122.07493042,Contra Costa County,Pleasant Hill
+Pleasant Hill,PG&E,SUBSTATION,Operational,37.93879927,-122.08210038,Contra Costa County,Pleasant Hill
+Lawndale - (PG&E),PG&E,SUBSTATION,Operational,37.66251876,-122.44258138,San Mateo County,South San Francisco
+San Andreas,PG&E,SUBSTATION,Operational,37.60402609,-122.42314575,San Mateo County,"San Francisco--Oakland, CA"
+Hillsdale Junction,PG&E,SUBSTATION,Operational,37.52507399,-122.35628506,San Mateo County,Highlands
+Bancroft - PG&E,PG&E,SUBSTATION,Operational,37.73986467,-122.15539406,Alameda County,Oakland
+San Lorenzo,PG&E,SUBSTATION,Operational,37.68020511,-122.1262432,Alameda County,San Lorenzo
+Cherry - (PG&E),PG&E,SUBSTATION,Operational,37.71580899,-122.14391371,Alameda County,San Leandro
+Technical Ecological Services,PG&E,SUBSTATION,Operational,37.7821165,-121.96766765,Contra Costa County,Danville
+Tosco Byron Pumping,PG&E,SUBSTATION,Operational,37.78289145,-121.63173531,CONTRA COSTA,
+Westside,PG&E,SUBSTATION,Operational,37.77682879,-121.51761385,San Joaquin County,
+Unknown - 2847,PG&E,SUBSTATION,Operational,37.75214451,-121.80434584,Alameda County,
+Newark Distribution,PG&E,SUBSTATION,Operational,37.50279895,-121.98170382,Alameda County,Fremont
+Ragu,PG&E,SUBSTATION,Operational,37.96810144,-121.26868348,San Joaquin County,"Stockton, CA"
+Newark-Sierra-Paperbroad,PG&E,SUBSTATION,Operational,37.94315642,-121.30117643,San Joaquin County,Stockton
+Granite Vernallis,PG&E,SUBSTATION,Operational,37.61323386,-121.36008483,San Joaquin County,
+Pacheco Wind Power,PG&E,SUBSTATION,Operational,37.04146245,-121.01080288,Merced County,
+Blaine Street,PG&E,SUBSTATION,Operational,36.98147239,-122.0250848,Santa Cruz County,Santa Cruz
+Meder,PG&E,SUBSTATION,Operational,36.97465115,-122.05695446,Santa Cruz County,Santa Cruz
+Cliff Drive,PG&E,SUBSTATION,Operational,36.96013932,-122.05247924,Santa Cruz County,Santa Cruz
+Capitola,PG&E,SUBSTATION,Operational,36.97641917,-121.98013662,Santa Cruz County,Live Oak
+Opal Cliffs,PG&E,SUBSTATION,Operational,36.97632564,-121.9646418,Santa Cruz County,Capitola
+Roland,PG&E,SUBSTATION,Operational,36.96472289,-121.97376525,Santa Cruz County,Pleasure Point
+Soquel - (PG&E),PG&E,SUBSTATION,Operational,36.98677468,-121.95103262,Santa Cruz County,Soquel
+Seacliff,PG&E,SUBSTATION,Operational,36.98427873,-121.91540351,Santa Cruz County,Aptos
+Rio Del Mar,PG&E,SUBSTATION,Operational,36.97546456,-121.89428621,Santa Cruz County,Aptos
+Forest,PG&E,SUBSTATION,Operational,36.59011347,-121.9442677,Monterey County,Del Monte Forest
+Carmel,PG&E,SUBSTATION,Operational,36.56082237,-121.91964987,Monterey County,Carmel-by-the-Sea
+California Mens Colony,PG&E,SUBSTATION ASSUMED,Operational,35.32056653,-120.69315141,San Luis Obispo County,
+Lompoc - Control Building,PG&E,SUBSTATION,Operational,34.64277301,-120.45483396,Santa Barbara County,Lompoc
+Hatchet Ridge Wind,PG&E,SUBSTATION,Operational,40.89027562,-121.79687987,Shasta County,
+Calistoga 19,PG&E,SUBSTATION,Operational,38.78946373,-122.74443136,Lake County,
+Pardee - (PG&E),PG&E,SUBSTATION,Operational,38.25707326,-120.85036922,Amador County,
+Sonoma 3,PG&E,SUBSTATION,Operational,38.79007548,-122.75680661,Sonoma County,
+Grant 20,PG&E,SUBSTATION,Operational,38.77872592,-122.75521265,Sonoma County,
+San Miguel - (PG&E),PG&E,SUBSTATION,Operational,35.7523312,-120.68395411,San Luis Obispo County,San Miguel
+Keswick - (PG&E),PG&E,SUBSTATION,Operational,40.62385523,-122.46198494,Shasta County,Keswick
+Golden Valley,PG&E,SUBSTATION,Operational,35.40593299,-119.3368235,,
+Ames Distribution,PG&E,SUBSTATION,Operational,37.41852529,-122.06760274,Santa Clara County,Mountain View
+Barrett - (PG&E),PG&E,SUBSTATION,Operational,37.93955867,-122.34722127,Contra Costa County,Richmond
+Bay Point,PG&E,SUBSTATION,Operational,38.04165954,-122.02932065,Contra Costa County,
+Boswell Dairy Ave.,PG&E,SUBSTATION,Operational,36.06873736,-119.57166291,Kings County,"Corcoran, CA"
+Chevron Kettleman,PG&E,SUBSTATION,Operational,35.99695178,-119.96138445,Kings County,
+Coleman Hatchery,PG&E,SUBSTATION,Operational,40.40094895,-122.1410457,Shasta County,
+Dinosaur Point,PG&E,SUBSTATION,Operational,37.06359334,-121.20827132,Merced County,
+Woodchuck,PG&E,SUBSTATION,Operational,37.00856263,-118.98156545,Fresno County,
+South Bay 2,PG&E,SUBSTATION,Operational,37.77696997,-121.62531077,Alameda County,
+Aurora,PG&E,SUBSTATION,Operational,37.96115996,-121.28150137,San Joaquin County,Stockton
+Rio Dell Tap,PG&E,TAP,Operational,40.55124377,-124.07920165,Humboldt County,Hydesville
+Shiloh IV,PG&E,SUBSTATION,Operational,38.1248162,-121.83180154,Solano County,
+Orchard Street,PG&E,SUBSTATION,Operational,39.14378583,-123.1988654,Mendocino County,Ukiah
+Moffet Field Tap,PG&E GBA,TAP,Operational,37.4195562,-122.03716404,Santa Clara County,"San Jose, CA"
+Unknown - 4410,PG&E GBA,TAP,Operational,38.01262563,-121.8540592,Contra Costa County,Pittsburg
+Unknown - 4411,PG&E GBA,TAP,Operational,36.26251659,-121.15317471,Monterey County,
+Unknown - 4412,PG&E NGBA,TAP,Operational,40.59987383,-122.38069742,Shasta County,Redding
+Unknown - 4413,PG&E NGBA,TAP,Operational,38.5474893,-121.39087262,Sacramento County,Sacramento
+Unknown - 4414,PG&E FRESNO,SUBSTATION,Operational,36.54748962,-120.33521442,Fresno County,
+Unknown - 4415,PG&E FRESNO,TAP,Operational,36.61756292,-120.33405493,Fresno County,
+Unknown - 4416,PG&E NGBA,TAP,Operational,39.5533519,-122.1860036,Glenn County,
+Unknown - 4421,PG&E NGBA,TAP,Operational,38.60639272,-121.34591216,Sacramento County,Carmichael
+Unknown - 4422,PG&E NGBA,TAP,Operational,38.47368246,-123.13059918,Sonoma County,
+Unknown - 4423,PG&E GBA,TAP,Operational,36.98801724,-121.98112265,Santa Cruz County,Live Oak
+Unknown - 4425,PG&E GBA,TAP,Operational,37.94467824,-121.31070957,San Joaquin County,Stockton
+Unknown - 4431,PG&E GBA,TAP,Operational,37.75383452,-121.25211724,San Joaquin County,
+Unknown - 4432,PG&E GBA,TAP,Operational,37.81699851,-121.56108362,Contra Costa County,
+Unknown - 4438,PG&E GBA,TAP,Operational,37.99956376,-121.78784373,Contra Costa County,Antioch
+Unknown - 4439,PG&E GBA,TAP,Operational,37.98734577,-121.87281752,Contra Costa County,
+Unknown - 4466,PG&E KERN,SUBSTATION ASSUMED,Operational,35.2370528,-119.59617849,Kern County,
+Ukiah - (PGE),PGE,SUBSTATION ASSUMED,,39.14418501,-123.1979865,Mendocino County,UKIAH
+Unknown - 4008,PG&E GBA,TAP,Operational,38.28698636,-120.90929404,Amador County,
+Unknown - 4009,PG&E GBA,TAP,Operational,37.79879804,-122.2883608,Alameda County,Oakland
+Urich Tap,PG&E GBA,TAP,Operational,38.02636701,-122.1017688,Contra Costa County,"Concord--Walnut Creek, CA"
+Unknown - 4012,PG&E NGBA,TAP,Operational,38.60613186,-121.4601956,Sacramento County,Sacramento
+Unknown - 4014,PG&E FRESNO,TAP,Operational,37.47267895,-121.18775254,Stanislaus County,Patterson
+Unknown - 4016,PG&E GBA,TAP,Operational,38.49313279,-121.16088616,Sacramento County,
+Valley Home Tap 1,PG&E GBA,TAP,Operational,37.8563904,-120.94476734,San Joaquin County,
+Unknown - 4019,PG&E FRESNO,TAP,Operational,37.33329839,-121.04930056,Stanislaus County,
+Unknown - 4021,PG&E GBA,TAP,Operational,38.10191119,-121.26070141,San Joaquin County,Lodi
+Unknown - 4025,PG&E NGBA,TAP,Operational,40.42959546,-120.68622518,Lassen County,
+Unknown - 4027,PG&E NGBA,TAP,Operational,38.49172542,-121.45681801,Sacramento County,Parkway
+Unknown - 4029,PG&E FRESNO,TAP,Operational,36.70557197,-119.89709529,Fresno County,Fresno
+Lockheed 2 Tap,PG&E GBA,TAP,Operational,37.41482283,-122.00588186,Santa Clara County,Sunnyvale
+Woodland Tap,PG&E NGBA,TAP,Operational,38.80407392,-121.75521576,Yolo County,
+Unknown - 4035,PG&E GBA,TAP,Operational,37.98837677,-121.19460451,San Joaquin County,
+Unknown - 4038,PG&E FRESNO,TAP,Operational,36.12349477,-119.32855079,Tulare County,
+Unknown - 4040,PG&E FRESNO,TAP,Operational,37.52883752,-121.26155217,Stanislaus County,
+Unknown - 4041,PG&E KERN,TAP,Operational,35.10815697,-119.48165176,Kern County,
+Tulloch Tap,PG&E GBA,TAP,Operational,37.88019691,-120.60791905,Calaveras County,
+Unknown - 4044,PG&E NGBA,TAP,Operational,38.68311909,-121.39209704,Sacramento County,North Highlands
+Unknown - 4045,PG&E NGBA,TAP,Operational,38.4781245,-121.37208815,Sacramento County,Vineyard
+Unknown - 4046,PG&E NGBA,TAP,Operational,40.02728523,-120.96295966,Plumas County,
+Valley Home Tap 2,PG&E GBA,TAP,Operational,37.85630108,-120.94477589,San Joaquin County,
+Unknown - 4050,PG&E NGBA,TAP,Operational,38.31174204,-122.73529867,Sonoma County,
+Unknown - 4052,PG&E GBA,TAP,Operational,38.34109255,-120.91702847,Amador County,
+Jessup Tap 1,PG&E NGBA,TAP,Operational,40.45087444,-122.32899333,Shasta County,
+Unknown - 4054,PG&E NGBA,TAP,Operational,40.41019572,-120.64113759,Lassen County,Susanville
+Unknown - 4055,PG&E GBA,TAP,Operational,38.05426894,-121.21025694,San Joaquin County,
+Unknown - 4058,PG&E NGBA,TAP,Operational,41.63307545,-121.22669624,Modoc County,
+Unknown - 4059,PG&E GBA,TAP,Operational,36.5817074,-121.4982006,Monterey County,Chualar
+Unknown - 4062,PG&E NGBA,TAP,Operational,38.43196472,-122.74213957,Sonoma County,Santa Rosa
+GWF #5 Tap,PG&E GBA,TAP,Operational,38.04232168,-121.98767779,Contra Costa County,"Antioch, CA"
+Unknown - 4064,PG&E NGBA,TAP,Operational,40.04528385,-122.09123255,Tehama County,
+Electra Tap 2,PG&E GBA,TAP,Operational,38.33164312,-120.66880853,Amador County,
+Unknown - 4067,PG&E KERN,TAP,Operational,35.19469887,-118.80622628,Kern County,
+Unknown - 4069,PG&E NGBA,TAP,Operational,38.23738053,-122.63367689,Sonoma County,Petaluma
+Unknown - 4071,PG&E NGBA,TAP,Operational,38.61381734,-121.34612189,Sacramento County,Carmichael
+Unknown - 4073,PG&E NGBA,TAP,Operational,38.48230771,-122.85159904,Sonoma County,
+Electra Tap 1,PG&E GBA,TAP,Operational,38.33150957,-120.66909406,Amador County,
+Unknown - 4076,PG&E NGBA,TAP,Operational,39.82056273,-120.39080684,Plumas County,
+Unknown - 4077,PG&E NGBA,TAP,Operational,38.51993992,-121.38051386,Sacramento County,Sacramento
+Unknown - 4079,PG&E NGBA,TAP,Operational,40.58688183,-122.39599942,Shasta County,Redding
+Carquinez Tap,PGE,TAP,Operational,38.08444302,-122.24549278,Solano County,Vallejo
+Unknown - 4082,PG&E NGBA,TAP,Operational,38.37927493,-121.45333986,Sacramento County,Franklin
+Unknown - 4083,PG&E NGBA,TAP,Operational,38.32095131,-121.44446496,Sacramento County,
+Unknown - 4084,PG&E FRESNO,TAP,Operational,36.19074405,-120.35468227,Fresno County,
+Unknown - 4086,PG&E NGBA,TAP,Operational,38.59452218,-121.36473504,Sacramento County,Arden-Arcade
+Dixon Tap - (PG&E NGBA),PG&E NGBA,TAP,Operational,38.44487313,-121.82592323,Solano County,Dixon
+Fairway Tap,PG&E KERN,TAP,Operational,34.96219161,-120.45132444,Santa Barbara County,Santa Maria
+Unknown - 4090,PG&E KERN,TAP,Operational,35.44161131,-119.08266984,Kern County,"Bakersfield, CA"
+Unknown - 4091,PG&E NGBA,TAP,Operational,40.88907091,-124.04727461,Humboldt County,
+Unknown - 4092,PG&E NGBA,TAP,Operational,38.49612639,-121.29788578,Sacramento County,Vineyard
+Unknown - 4093,PG&E GBA,TAP,Operational,37.66736544,-120.92115795,Stanislaus County,Modesto
+Unknown - 4094,PG&E NGBA,TAP,Operational,38.96933198,-122.06094361,Colusa County,
+Wolfskill Tap,PG&E NGBA,TAP,Operational,38.22864299,-122.08038578,Solano County,Fairfield
+Unknown - 4096,PG&E NGBA,TAP,Operational,40.58693583,-122.39572642,Shasta County,Redding
+Unknown - 4097,PG&E NGBA,TAP,Operational,39.14856048,-121.68888438,Sutter County,
+Unknown - 4098,PG&E FRESNO,TAP,Operational,36.61761191,-120.34305447,Fresno County,
+Unknown - 4099,PG&E NGBA,TAP,Operational,38.61279629,-121.52329963,Sacramento County,Sacramento
+Unknown - 4100,PG&E KERN,TAP,Operational,35.06295377,-119.06483009,Kern County,
+Unknown - 4102,PG&E FRESNO,TAP,Operational,37.52164586,-120.78919914,Stanislaus County,Denair
+Sutter-Vale Vista Tap,PG&E NGBA,TAP,Operational,38.63361888,-121.32818764,Sacramento County,Carmichael
+Country Club 2 Tap,PG&E NGBA,TAP,Operational,38.60333491,-121.38584584,Sacramento County,Arden-Arcade
+Geysers Tap 2,PG&E NGBA,TAP,Operational,38.76715287,-122.76151977,Sonoma County,
+Unknown - 4109,PG&E GBA,TAP,Operational,37.90403648,-122.29117651,Contra Costa County,El Cerrito
+Unknown - 4111,PG&E FRESNO,TAP,Operational,37.12690667,-120.14716079,Madera County,
+Unknown - 4112,PG&E NGBA,TAP,Operational,39.4917545,-121.53994508,Butte County,South Oroville
+Unknown - 4114,PG&E NGBA,TAP,Operational,40.42581845,-120.68634144,Lassen County,
+Unknown - 4115,PG&E GBA,TAP,Operational,37.76443318,-122.40733951,San Francisco County,San Francisco
+Unknown - 4116,PG&E GBA,TAP,Operational,36.96078204,-122.0313788,Santa Cruz County,Santa Cruz
+Unknown - 4118,PG&E GBA,SUBSTATION,Operational,38.12814546,-121.83103706,Solano County,
+Unknown - 4120,PG&E NGBA,SUBSTATION,Operational,39.81763374,-120.47347283,Plumas County,Portola
+Unknown - 4123,PG&E GBA,RISER,Operational,37.72178953,-122.16568094,Alameda County,San Leandro
+Unknown - 4126,PG&E GBA,SUBSTATION,Operational,38.23559526,-121.13750037,San Joaquin County,
+Skaggs Island Junction 2,PG&E NGBA,SUBSTATION,Operational,38.15267502,-122.38098475,Solano County,
+Unknown - 4133,PG&E NGBA,SUBSTATION,Operational,39.10549226,-122.10995193,Colusa County,
+Halsey - (PG&E NGBA),PG&E NGBA,SUBSTATION,Operational,38.9569067,-121.0432567,Placer County,
+Unknown - 4146,PG&E GBA,SUBSTATION,Operational,37.71033276,-120.96882339,Stanislaus County,
+Unknown - 4148,PG&E KERN,SUBSTATION,Operational,35.14753882,-118.87861747,Kern County,
+Unknown - 4152,PG&E NGBA,SUBSTATION,Operational,38.65387245,-121.35741492,Sacramento County,North Highlands
+Unknown - 4156,PG&E NGBA,NOT AVAILABLE,Operational,38.65289768,-121.2644626,Sacramento County,Fair Oaks
+Unknown - 4160,PG&E FRESNO,SUBSTATION,Operational,36.99763949,-119.70331378,Fresno County,
+Unknown - 4162,PG&E NGBA,SUBSTATION,Operational,38.58136291,-121.38528285,Sacramento County,Arden-Arcade
+Unknown - 4166,PG&E GBA,SUBSTATION,Operational,37.94926596,-121.27270894,San Joaquin County,Stockton
+Unknown - 4167,PG&E KERN,SUBSTATION,Operational,35.10932016,-119.33127045,Kern County,
+Unknown - 4170,PG&E NGBA,SUBSTATION,Operational,38.54559091,-121.34396386,Sacramento County,Rosemont
+Unknown - 4172,PG&E GBA,NOT AVAILABLE,Operational,37.66777779,-120.95869885,Stanislaus County,Modesto
+Unknown - 4173,PG&E FRESNO,SUBSTATION,Operational,36.72109749,-120.42205052,Fresno County,"Mendota, CA"
+Unknown - 4177,PG&E NGBA,NOT AVAILABLE,Operational,38.41923488,-121.41762407,Sacramento County,Elk Grove
+Unknown - 4179,PG&E KERN,NOT AVAILABLE,Operational,36.04371731,-120.09280855,Kings County,
+Unknown - 4180,PG&E GBA,NOT AVAILABLE,Operational,37.63804769,-120.93914761,Stanislaus County,Modesto
+Unknown - 4181,PG&E GBA,SUBSTATION,Operational,38.36969833,-120.94911719,Amador County,Ione
+Lime Saddle - (PG&E NGBA),PG&E NGBA,SUBSTATION,Operational,39.70215459,-121.57383384,Butte County,
+Unknown - 4183,PG&E GBA,SUBSTATION,Operational,36.97579817,-121.98074726,Santa Cruz County,Live Oak
+Unknown - 4184,PG&E NGBA,SUBSTATION,Operational,38.6553529,-121.33738484,Sacramento County,Carmichael
+Unknown - 4187,PG&E FRESNO,SUBSTATION,Operational,36.69610631,-119.73663848,Fresno County,Fresno
+Unknown - 4191,PG&E NGBA,SUBSTATION,Operational,38.40916353,-121.41745214,Sacramento County,Elk Grove
+Unknown - 4198,PG&E NGBA,SUBSTATION,Operational,39.13435325,-120.95324964,Placer County,
+Unknown - 4202,PG&E FRESNO,SUBSTATION,Operational,36.15192315,-119.58887651,Kings County,
+Woodland Biomass,PG&E,SUBSTATION,Operational,38.69506131,-121.734428,,
+Unknown - 4208,PG&E FRESNO,SUBSTATION,Operational,36.24047371,-119.90441564,Kings County,
+Unknown - 4211,PG&E GBA,NOT AVAILABLE,Operational,36.58771472,-121.86608751,Monterey County,Monterey
+Unknown - 4212,PG&E FRESNO,SUBSTATION,Operational,37.29154297,-119.52963638,Madera County,
+Trans Bay Cable Facility,PG&E GBA,SUBSTATION,Operational,37.75482931,-122.38600672,San Francisco County,San Francisco
+Unknown - 4215,PG&E NGBA,SUBSTATION,Operational,38.90278219,-121.30355733,Placer County,Lincoln
+Unknown - 4216,PG&E NGBA,SUBSTATION,Operational,38.64509758,-121.39759914,Sacramento County,North Highlands
+Unknown - 4217,PG&E FRESNO,SUBSTATION,Operational,36.61749568,-120.38789171,Fresno County,
+Unknown - 4220,PG&E GBA,SUBSTATION,Operational,37.65187432,-120.67478464,Stanislaus County,
+Unknown - 4221,PG&E KERN,SUBSTATION,Operational,35.11516924,-119.47495274,Kern County,
+Walnut - (PG&E GBA),PG&E GBA,SUBSTATION,Operational,37.49031745,-120.90708394,Stanislaus County,
+Unknown - 4229,PG&E NGBA,SUBSTATION,Operational,40.54168938,-124.06407317,Humboldt County,Hydesville
+Dynegy Oakland Power Plant,PG&E GBA,SUBSTATION,Operational,37.79642704,-122.2809158,Alameda County,Oakland
+Unknown - 4231,PG&E FRESNO,SUBSTATION,Operational,35.8123834,-119.4546487,Tulare County,
+Unknown - 4232,PG&E NGBA,DEAD END,Operational,38.199169,-122.15841477,Solano County,Fairfield
+Unknown - 4233,PG&E NGBA,SUBSTATION,Operational,38.57091916,-121.43271488,Sacramento County,Sacramento
+Unknown - 4240,PG&E KERN,SUBSTATION,Operational,35.32640686,-118.82431958,Kern County,
+Unknown - 4241,PG&E FRESNO,NOT AVAILABLE,Operational,36.5392822,-119.58091568,Fresno County,Kingsburg
+Unknown - 4247,PG&E FRESNO,SUBSTATION,Operational,36.53855409,-119.5807441,Fresno County,Kingsburg
+Unknown - 4248,PG&E NGBA,RISER,Operational,38.5859199,-121.28188486,Sacramento County,Rancho Cordova
+Unknown - 4249,PG&E FRESNO,SUBSTATION,Operational,37.5220859,-120.31015808,Mariposa County,
+Unknown - 4250,PG&E GBA,NOT AVAILABLE,Operational,37.67725884,-122.09195029,Alameda County,Hayward
+Imhoff Tap 1,PG&E GBA,TAP,Operational,38.01788358,-122.06714033,Contra Costa County,"Concord--Walnut Creek, CA"
+Unknown - 4253,PG&E FRESNO,TAP,Operational,37.07096962,-119.53435423,Fresno County,
+Unknown - 4254,PG&E NGBA,TAP,Operational,40.41308355,-120.73783518,Lassen County,
+Avena Tap 1,PG&E GBA,TAP,Operational,37.84303867,-121.05465402,San Joaquin County,
+Unknown - 4260,PG&E GBA,TAP,Operational,37.48280808,-122.16712128,San Mateo County,Menlo Park
+Unknown - 4261,PG&E KERN,TAP,Operational,35.44763108,-119.68965945,Kern County,
+Unknown - 4262,PG&E FRESNO,TAP,Operational,36.82686366,-119.61000318,Fresno County,
+Unknown - 4264,PG&E NGBA,TAP,Operational,39.11358349,-121.33176628,Yuba County,Beale AFB
+Dumbarton Tap,PG&E GBA,TAP,Operational,37.55046605,-122.07098786,Alameda County,Fremont
+James Black Tap,PG&E NGBA,TAP,Operational,40.92428321,-121.92984487,Shasta County,
+Bollman Tap 1,PG&E GBA,TAP,Operational,38.03092401,-122.03372481,Contra Costa County,
+Unknown - 4271,PG&E NGBA,TAP,Operational,38.07718202,-122.22184578,Solano County,Vallejo
+Unknown - 4273,PG&E NGBA,TAP,Operational,38.62733578,-121.49817879,Sacramento County,Sacramento
+Unknown - 4274,PG&E KERN,TAP,Operational,35.0912301,-119.44568353,Kern County,
+Unknown - 4275,PG&E NGBA,TAP,Operational,38.66426787,-121.26230061,Sacramento County,Fair Oaks
+Unknown - 4276,PG&E GBA,TAP,Operational,38.18954314,-121.40883661,San Joaquin County,
+Unknown - 4277,PG&E NGBA,TAP,Operational,38.5178364,-121.37861312,Sacramento County,Sacramento
+Unknown - 4278,PG&E KERN,TAP,Operational,35.08997446,-119.44239879,Kern County,
+Unknown - 4279,PG&E NGBA,TAP,Operational,38.46942107,-121.41832716,Sacramento County,Sacramento
+Unknown - 4280,PG&E NGBA,TAP,Operational,39.2779929,-122.03557766,Colusa County,
+Unknown - 4281,PG&E NGBA,TAP,Operational,38.47403839,-121.45003401,Sacramento County,Sacramento
+Unknown - 4283,PG&E FRESNO,TAP,Operational,36.30555001,-119.79765435,Kings County,Lemoore
+Unknown - 4284,PG&E NGBA,TAP,Operational,38.42334846,-121.36999761,Sacramento County,Elk Grove
+Unknown - 4285,PG&E NGBA,TAP,Operational,38.43059761,-121.45767453,Sacramento County,
+Unknown - 4288,PG&E NGBA,TAP,Operational,40.19899397,-123.70786628,Humboldt County,
+Unknown - 4290,PG&E KERN,TAP,Operational,34.66784521,-120.4398674,Santa Barbara County,
+Unknown - 4291,PG&E NGBA,TAP,Operational,39.12309392,-122.12665166,Colusa County,Williams
+Geysers Tap 7,PG&E NGBA,TAP,Operational,38.78161795,-122.76716913,Sonoma County,
+Unknown - 4293,PG&E NGBA,TAP,Operational,38.62464991,-121.44624683,Sacramento County,Sacramento
+Owens Illinois Tap,PG&E GBA,TAP,Operational,37.71227957,-121.48692323,San Joaquin County,
+Unknown - 4297,PG&E FRESNO,TAP,Operational,36.57465778,-119.36814794,Fresno County,
+Unknown - 4298,PG&E NGBA,TAP,Operational,40.26750697,-123.76846327,Humboldt County,
+Unknown - 4299,PG&E FRESNO,TAP,Operational,36.13708505,-120.2448973,Fresno County,Coalinga
+Unknown - 4300,PG&E NGBA,TAP,Operational,38.65329069,-121.22577315,Sacramento County,Fair Oaks
+Unknown - 4302,PG&E FRESNO,TAP,Operational,36.88019991,-120.11031021,Madera County,
+Unknown - 4303,PG&E NGBA,TAP,Operational,40.78039368,-124.17159417,Humboldt County,Eureka
+Unknown - 4304,PG&E KERN,TAP,Operational,35.47055943,-119.12528822,Kern County,
+Unknown - 4305,PG&E NGBA,TAP,Operational,40.72513766,-122.80653575,Trinity County,Lewiston
+Unknown - 4307,PG&E NGBA,TAP,Operational,38.47672095,-121.7967628,Solano County,
+Unknown - 4308,PG&E GBA,TAP,Operational,38.12872099,-121.25699067,San Joaquin County,Lodi
+San Bruno Tap,PG&E GBA,TAP,Operational,37.61570212,-122.43988453,San Mateo County,
+Unknown - 4310,PG&E FRESNO,TAP,Operational,36.6177134,-120.19757515,Fresno County,
+Unknown - 4311,PG&E NGBA,TAP,Operational,38.29555097,-121.80736882,Solano County,
+Unknown - 4314,PG&E FRESNO,TAP,Operational,37.18589528,-120.48835176,Merced County,
+Spring Gap Tap,PG&E GBA,TAP,Operational,38.16837278,-120.1000746,Tuolumne County,
+Unknown - 4316,PG&E NGBA,TAP,Operational,38.58039971,-121.36584102,Sacramento County,Arden-Arcade
+Unknown - 4318,PG&E NGBA,TAP,Operational,38.53202392,-121.42955385,Sacramento County,Sacramento
+Unknown - 4322,PG&E NGBA,TAP,Operational,40.58619755,-122.39570184,Shasta County,Redding
+Unknown - 4323,PG&E FRESNO,TAP,Operational,36.19477505,-120.31907728,Fresno County,
+Unknown - 4324,PG&E GBA,TAP,Operational,38.01260145,-121.85402352,Contra Costa County,Pittsburg
+Unknown - 4326,PG&E NGBA,TAP,Operational,38.7288849,-121.38312983,Placer County,
+Unknown - 4329,PG&E GBA,TAP,Operational,38.14641966,-121.24339255,San Joaquin County,
+Unknown - 4330,PG&E KERN,TAP,Operational,35.38335909,-119.64266747,Kern County,
+Evergreen Tap,PG&E GBA,TAP,Operational,37.29238606,-121.84881033,Santa Clara County,San Jose
+Unknown - 4332,PG&E GBA,TAP,Operational,37.73039234,-121.68914861,Alameda County,
+Mustang - (PG&E KERN),PG&E KERN,TAP,Operational,35.3133928,-120.65302493,San Luis Obispo County,
+Beardsley Tap,PG&E GBA,TAP,Operational,38.17951246,-120.06029323,Tuolumne County,
+Unknown - 4337,PG&E NGBA,TAP,Operational,41.44892796,-120.88057587,Modoc County,Canby
+Unknown - 4339,PG&E KERN,TAP,Operational,34.70071236,-120.43625378,Santa Barbara County,
+Robertson-Fairoaks Tap,PG&E NGBA,TAP,Operational,38.63205928,-121.32824468,Sacramento County,Carmichael
+Unknown - 4343,PG&E KERN,TAP,Operational,35.31440813,-118.97761261,Kern County,Bakersfield
+Evergreen Tap 2,PG&E GBA,TAP,Operational,37.31917526,-121.85738651,Santa Clara County,San Jose
+Unknown - 4345,PG&E NGBA,TAP,Operational,40.03328285,-122.09630355,Tehama County,Los Molinos
+Engle-Eastern Tap,PG&E NGBA,TAP,Operational,38.63199791,-121.36307984,Sacramento County,Arden-Arcade
+Daly City Tap,PG&E GBA,TAP,Operational,37.68093266,-122.42973879,San Mateo County,"San Francisco--Oakland, CA"
+Unknown - 4350,PG&E GBA,TAP,Operational,38.01256462,-121.85451039,Contra Costa County,Pittsburg
+Unknown - 4354,PG&E GBA,TAP,Operational,37.6670972,-120.92148954,Stanislaus County,Modesto
+Unknown - 4355,PG&E KERN,TAP,Operational,35.06025008,-119.06489459,Kern County,
+Unknown - 4357,PG&E GBA,TAP,Operational,38.39145214,-121.27391393,Sacramento County,Wilton
+Unknown - 4358,PG&E NGBA,TAP,Operational,38.6779319,-121.31544784,Sacramento County,Citrus Heights
+Unknown - 4359,PG&E GBA,TAP,Operational,37.9208599,-120.48154907,Tuolumne County,
+Unknown - 4360,PG&E NGBA,TAP,Operational,39.1134012,-121.3317227,Yuba County,Beale AFB
+Melones Tap 1,PG&E GBA,TAP,Operational,37.98499411,-120.64489423,Calaveras County,Copperopolis
+Luka Tap,PG&E GBA,TAP,Operational,37.67357101,-121.83555449,Alameda County,"Livermore--Pleasanton--Dublin, CA"
+Unknown - 4365,PG&E NGBA,TAP,Operational,39.09753884,-121.33614799,Yuba County,Beale AFB
+Unknown - 4366,PG&E GBA,TAP,Operational,37.71088098,-120.78135947,Stanislaus County,
+Geysers Tap  8,PG&E NGBA,TAP,Operational,38.78678845,-122.76744469,Sonoma County,
+Unknown - 4370,PG&E NGBA,TAP,Operational,38.60689291,-121.36462985,Sacramento County,Arden-Arcade
+Rincon Tap,PG&E NGBA,TAP,Operational,38.49698859,-122.66763532,Sonoma County,
+Unknown - 4374,PG&E FRESNO,TAP,Operational,36.30543859,-119.79306252,Kings County,Lemoore
+Unknown - 4375,PG&E GBA,TAP,Operational,37.63841695,-121.04913811,Stanislaus County,
+Unknown - 4376,PG&E NGBA,TAP,Operational,38.62749539,-121.47538441,Sacramento County,Sacramento
+Unknown - 4379,PG&E FRESNO,TAP,Operational,37.69207967,-120.44059019,Tuolumne County,
+Unknown - 4381,PG&E NGBA,TAP,Operational,38.71426709,-121.40150703,Sacramento County,Antelope
+Unknown - 4382,PG&E KERN,TAP,Operational,35.55776586,-120.68912733,San Luis Obispo County,
+Unknown - 4383,PG&E NGBA,TAP,Operational,39.0974272,-121.3367581,Yuba County,Beale AFB
+Unknown - 4384,PG&E NGBA,TAP,Operational,38.65794991,-121.38368284,Sacramento County,North Highlands
+Unknown - 4385,PG&E KERN,TAP,Operational,35.10895969,-119.10955113,Kern County,
+Zamora Tap,PG&E NGBA,TAP,Operational,38.75000493,-121.85818675,Yolo County,
+Unknown - 4387,PG&E NGBA,TAP,Operational,40.41538571,-120.73827271,Lassen County,
+Unknown - 4389,PG&E GBA,TAP,Operational,37.94536346,-121.32120532,San Joaquin County,Stockton
+Kenneth-Garfield Tap,PG&E NGBA,TAP,Operational,38.62114861,-121.33673772,Sacramento County,Carmichael
+Unknown - 4392,PG&E NGBA,TAP,Operational,38.63176991,-121.44616883,Sacramento County,Sacramento
+Pit 5 Tap,PG&E NGBA,TAP,Operational,40.92437085,-121.93050414,Shasta County,
+Unknown - 4394,PG&E FRESNO,TAP,Operational,36.91653042,-120.11048179,Madera County,
+Unknown - 4396,PG&E GBA,TAP,Operational,36.6867701,-121.67199802,Monterey County,Salinas
+Unknown - 4398,PG&E GBA,TAP,Operational,37.90332659,-122.29351865,Contra Costa County,El Cerrito
+Unknown - 4400,PG&E NGBA,TAP,Operational,38.43700829,-122.74265797,Sonoma County,Santa Rosa
+Kasson Tap 2,PG&E GBA,TAP,Operational,37.74538798,-121.33933395,San Joaquin County,
+Unknown - 4402,PG&E NGBA,TAP,Operational,40.59059976,-122.30835666,Shasta County,
+Unknown - 4404,PG&E GBA,TAP,Operational,37.31571312,-121.01282665,Stanislaus County,Newman
+Unknown - 4405,PG&E NGBA,TAP,Operational,38.58378618,-121.56160712,Yolo County,West Sacramento
+Unknown - 4406,PG&E FRESNO,TAP,Operational,36.6620077,-120.09722379,Fresno County,
+Unknown - 4407,PG&E GBA,TAP,Operational,36.51038847,-121.44904404,Monterey County,Gonzales
+Melones Tap 2,PG&E GBA,TAP,Operational,37.98517391,-120.64489833,Calaveras County,Copperopolis
+PGE BOTTLE ROCK 230kV,PG&E,SUBSTATION ASSUMED,,38.842615,-122.7639866,Lake,Cobb
+Monta Vista,PG&E,SUBSTATION,Operational,37.32391007,-122.07313689,Santa Clara County,Cupertino
+Mt. View - (PG&E),PG&E,SUBSTATION,Operational,37.3826034,-122.06970633,Santa Clara County,Mountain View
+San Jose Station A,PG&E,SUBSTATION,Operational,37.32816036,-121.90239191,Santa Clara County,San Jose
+San Jose Station B,PG&E,SUBSTATION,Operational,37.34095907,-121.90151191,Santa Clara County,San Jose
+Green Valley - (PG&E),PG&E,SUBSTATION,Operational,36.95193511,-121.7602839,Santa Cruz County,Interlaken
+Burney Forest Power,PG&E,SUBSTATION,Operational,40.87795875,-121.71509148,Shasta County,
+Cottonwood - (PG&E),PG&E,SUBSTATION,Operational,40.39787486,-122.2642114,Shasta County,Cottonwood
+Round Mt.,PG&E,SUBSTATION,Operational,40.8077762,-121.93584909,Shasta County,Round Mountain
+Vaca-Dixon & Gc Yard,PG&E,SUBSTATION,Operational,38.40116261,-121.9207726,Solano County,
+Rincon - (PG&E),PG&E,SUBSTATION,Operational,38.4900627,-122.66605899,Sonoma County,
+Westley - (Other),PG&E,SUBSTATION,Operational,37.51693802,-121.23112332,Stanislaus County,
+Warnerville,PG&E,SUBSTATION,Operational,37.74197461,-120.80244785,Stanislaus County,
+Salado,PG&E,SUBSTATION,Operational,37.42194298,-121.14746903,Stanislaus County,
+Crows Landing - (PG&E),PG&E,SUBSTATION,Operational,37.37737832,-121.08588977,Stanislaus County,
+Miller,PG&E,SUBSTATION,Operational,37.25318399,-121.11820651,Stanislaus County,
+Rio Oso,PG&E,SUBSTATION,Operational,38.93517384,-121.46682974,Sutter County,
+Red Bluff - (PG&E),PG&E,SUBSTATION,Operational,40.18238147,-122.24460425,Tehama County,Red Bluff
+Chinese Station,PG&E,SUBSTATION,Operational,37.87474099,-120.4785039,Tuolumne County,
+Mi-Wuk,PG&E,SUBSTATION,Operational,38.05288926,-120.21712205,Tuolumne County,Twain Harte
+Homestake,PG&E,SUBSTATION,Operational,38.83659049,-122.36955643,Napa County,
+Davis - In Davis,PG&E,SUBSTATION,Operational,38.54520313,-121.73421525,Yolo County,Davis
+New Colgate,PG&E,SUBSTATION,Operational,39.33096262,-121.19149152,Yuba County,
+Corona - (PG&E),PG&E,SUBSTATION,Operational,38.26500774,-122.65735523,Sonoma County,Petaluma
+Altamont,PG&E,SUBSTATION,Operational,37.74837151,-121.67719524,Alameda County,
+Dumbarton - (PG&E),PG&E,SUBSTATION,Operational,37.55698707,-122.05792688,Alameda County,Fremont
+Eastshore,PG&E,SUBSTATION,Operational,37.62507363,-122.11659806,Alameda County,Hayward
+Edes - (PG&E),PG&E,SUBSTATION,Operational,37.73868459,-122.19378589,Alameda County,Oakland
+Fremont - (PG&E),PG&E,SUBSTATION,Operational,37.54135816,-121.9619443,Alameda County,Fremont
+Newark,PG&E,SUBSTATION,Operational,37.50086816,-121.9862493,Alameda County,Fremont
+Ravenswood,PG&E,SUBSTATION,Operational,37.49296318,-122.13793301,San Mateo County,Menlo Park
+Tesla,PG&E,SUBSTATION,Operational,37.71239139,-121.56484479,SAN JOAQUIN,
+Cabrillo - (PG&E),PG&E,SUBSTATION,Operational,34.643265,-120.4372676,Santa Barbara County,Lompoc
+Palermo,PG&E,SUBSTATION,Operational,39.4543379,-121.51764826,Butte County,Palermo
+Table Mt.,PG&E,SUBSTATION,Operational,39.55527542,-121.64477404,Butte County,
+Valley Springs - (PG&E),PG&E,SUBSTATION,Operational,38.21657995,-120.76399746,Calaveras County,Valley Springs
+Alhambra - (PG&E),PG&E,SUBSTATION,Operational,37.99391824,-122.13010237,Contra Costa County,Martinez
+Christie,PG&E,SUBSTATION,Operational,38.00285704,-122.20835479,Contra Costa County,
+Contra Costa - (PG&E),PG&E,SUBSTATION,Operational,37.99954967,-121.78280995,Contra Costa County,Antioch
+El Cerrito Station G,PG&E,SUBSTATION,Operational,37.91624728,-122.30220899,Contra Costa County,El Cerrito
+Lakewood - (PG&E),PG&E,SUBSTATION,Operational,37.90840515,-122.05732168,Contra Costa County,Walnut Creek
+Moraga - (PG&E),PG&E,SUBSTATION,Operational,37.84775896,-122.16081867,Contra Costa County,Orinda
+El Dorado,PG&E,SUBSTATION ASSUMED,Operational,38.79560026,-120.6219084,El Dorado County,
+Cheney,PG&E,SUBSTATION,Operational,36.63275474,-120.53198075,Fresno County,
+Fig Garden,PG&E,SUBSTATION,Operational,36.82191363,-119.85891522,Fresno County,Fresno
+Helm,PG&E,SUBSTATION,Operational,36.59141844,-120.17618603,Fresno County,
+Herndon,PG&E,SUBSTATION,Operational,36.84471282,-119.922122,Fresno County,Fresno
+Kearney (New),PG&E,SUBSTATION,Operational,36.70561786,-119.88285232,Fresno,Fresno
+McCall,PG&E,SUBSTATION,Operational,36.61082397,-119.63919798,Fresno County,
+Panoche - PG&E,PG&E,SUBSTATION,Operational,36.65353128,-120.58174326,Fresno County,
+Humboldt Bay,PG&E,SUBSTATION,Operational,40.74032024,-124.20964206,Humboldt County,
+Windmaster,PG&E,SUBSTATION,Operational,37.801155,-121.64163792,Contra Costa County,
+Arco - (PG&E),PG&E,SUBSTATION,Operational,35.77551746,-119.91359121,Kern County,
+Famoso - (PG&E),PG&E,SUBSTATION,Operational,35.60503537,-119.20364064,Kern County,
+Ganso - (PG&E),PG&E,SUBSTATION,Operational,35.50111023,-119.44895435,Kern County,WASCO
+Goose Lake - (PG&E),PG&E,SUBSTATION,Operational,35.60163396,-119.57986802,Kern County,
+Kernridge,PG&E,SUBSTATION,Operational,35.44250495,-119.73961732,Kern County,
+Lakeview - (PG&E),PG&E,SUBSTATION,Operational,35.09413952,-119.10110982,Kern County,
+Midway - (PG&E),PG&E,SUBSTATION,Operational,35.40367602,-119.45236362,Kern County,Buttonwillow
+Mt. Poso,PG&E,SUBSTATION,Operational,35.54480703,-119.08133682,Kern County,
+Norco - (PG&E),PG&E,SUBSTATION,Operational,35.28599489,-119.30902494,Kern County,
+Rio Bravo - (PG&E),PG&E,SUBSTATION,Operational,35.44202467,-119.26070292,Kern County,"Shafter, CA"
+Taft - Other,PG&E,SUBSTATION,Operational,35.13594121,-119.48201534,Kern County,Taft
+Ukiah - (PG&E),PG&E,SUBSTATION,Operational,39.14314457,-123.19180142,Mendocino County,
+Dos Amigos,PG&E,SUBSTATION,Operational,36.92520625,-120.8297205,Merced County,
+El Nido - (PG&E),PG&E,SUBSTATION,Operational,37.12062842,-120.47268443,Merced County,
+Merced - (PG&E),PG&E,SUBSTATION,Operational,37.27330296,-120.48722615,Merced County,
+Los Banos,PG&E,SUBSTATION,Operational,37.05350814,-121.02108969,Merced County,
+Coburn,PG&E,SUBSTATION,Operational,36.26513395,-121.14582401,Monterey County,
+Salinas - (PG&E),PG&E,SUBSTATION,Operational,36.68227081,-121.65137249,Monterey County,Salinas
+Atlantic,PG&E,SUBSTATION,Operational,38.76362248,-121.26401909,Placer County,Roseville
+Lincoln - (PG&E),PG&E,SUBSTATION,Operational,38.90051818,-121.29408079,Placer County,Lincoln
+Summit - (PG&E),PG&E,SUBSTATION,Operational,39.3192799,-120.37883663,Nevada County,
+Brighton - (PG&E),PG&E,SUBSTATION,Operational,38.5481369,-121.40773039,Sacramento County,Sacramento
+Gold Hill,PG&E,SUBSTATION,Operational,38.65748247,-121.13674421,Sacramento County,Folsom
+West Park,PG&E,SUBSTATION,Operational,35.37392286,-119.04030422,Kern County,Bakersfield
+Guernsey - (PG&E),PG&E,SUBSTATION,Operational,36.22630837,-119.65521209,Kings County,Hanford
+Eagle Rock - (PG&E),PG&E,SUBSTATION,Operational,38.82904336,-122.81013875,Sonoma County,
+Chowchilla - (PG&E),PG&E,SUBSTATION,Operational,37.1207793,-120.25079161,Madera County,Chowchilla
+Gregg,PG&E,SUBSTATION,Operational,36.8528046,-119.91706767,Madera County,
+Newhall - (PG&E),PG&E,SUBSTATION,Operational,36.86695873,-120.32802942,Fresno,
+Martin,PG&E,SUBSTATION,Operational,37.70357221,-122.40952413,San Mateo County,Brisbane
+Bellota,PG&E,SUBSTATION,Operational,38.01550727,-121.01367355,San Joaquin County,
+Kasson,PG&E,SUBSTATION,Operational,37.74588541,-121.34117433,San Joaquin County,
+Manteca - (PG&E),PG&E,SUBSTATION,Operational,37.80112896,-121.22385696,San Joaquin County,Manteca
+Stockton Station A,PG&E,SUBSTATION,Operational,37.94745296,-121.28870892,San Joaquin County,Stockton
+Callendar,PG&E,SUBSTATION,Operational,35.04693954,-120.58609291,San Luis Obispo County,Callender
+Mesa - (PG&E),PG&E,SUBSTATION,Operational,35.00885973,-120.45318625,San Luis Obispo County,Nipomo
+Jefferson - (PG&E),PG&E,SUBSTATION,Operational,37.45761189,-122.28635778,San Mateo,Woodside
+Millbrae - (PG&E),PG&E,SUBSTATION,Operational,37.60593319,-122.39188025,San Mateo County,Millbrae
+Shiloh III,PG&E,SUBSTATION ASSUMED,Operational,38.16951763,-121.84690294,Solano County,
+Caliente,PG&E,SUBSTATION,Operational,35.37898578,-119.91703511,San Luis Obispo County,
+Unknown - 3327,PG&E KERN,SUBSTATION,Operational,35.29709734,-118.86300557,Kern County,
+Geysers 12/13,PG&E,TAP,Operational,38.77326001,-122.72929708,Lake County,
+Excelsior,PG&E,SUBSTATION,Operational,36.39940276,-120.23143041,Fresno County,
+Los Esteros,PG&E,SUBSTATION,Operational,37.42746526,-121.93291779,Santa Clara County,San Jose
+Birds Landing,PG&E,SUBSTATION,Operational,38.12464691,-121.83013466,Solano County,
+Thermalito,PG&E,SUBSTATION,Operational,39.51408656,-121.63245716,,
+Cresta,PG&E,SUBSTATION,Operational,39.82642896,-121.40947437,Butte County,
+Poe,PG&E,SUBSTATION,Operational,39.72353156,-121.46995778,Butte County,
+Collierville,PG&E,SUBSTATION ASSUMED,Operational,38.14455495,-120.38144217,Calaveras County,
+Martinez,PG&E,SUBSTATION,Operational,38.01494402,-122.11622225,Contra Costa County,"Concord--Walnut Creek, CA"
+Contra Costa Power,PG&E,SUBSTATION,Operational,38.01528472,-121.76228962,Contra Costa County,Antioch
+Standard Oil 2,PG&E,SUBSTATION,Operational,37.95040504,-122.39511277,Contra Costa,Richmond
+Delta Pumps,PG&E,SUBSTATION,Operational,37.8005837,-121.6209387,Alameda County,
+Midway Green Ridge Services,PG&E,SUBSTATION ASSUMED,Operational,37.7265258,-121.58724627,Alameda County,
+Exchequer - (PG&E),PG&E,SUBSTATION,Operational,37.58414275,-120.27253762,Mariposa County,
+Dixon Landing - (PG&E),PG&E,SUBSTATION,Operational,37.45754919,-121.92126489,Alameda County,Fremont
+Balch 1,PG&E,SUBSTATION,Operational,36.9199959,-119.0838384,Fresno County,
+Balch 2,PG&E,SUBSTATION,Operational,36.90898447,-119.08758086,Fresno County,
+Kerchoff 1 - (PG&E),PG&E,SUBSTATION,Operational,37.09224101,-119.55265374,Fresno County,Friant
+Pine Flat,PG&E,SUBSTATION,Operational,36.83274219,-119.32678825,Fresno County,
+Moss Landing,PG&E,SUBSTATION,Operational,36.80612492,-121.77571436,Monterey County,
+Poso Mt.,PG&E,SUBSTATION,Operational,35.55922992,-118.95763078,Kern County,
+Midway-Sunset Cogeneration,PG&E,SUBSTATION,Operational,35.2272951,-119.63098748,Kern County,
+Pit 1,PG&E,SUBSTATION,Operational,40.99102969,-121.49777812,Shasta County,
+Pit 3,PG&E,SUBSTATION,Operational,40.99769147,-121.7476301,Shasta County,
+Pit 4,PG&E,SUBSTATION,Operational,40.98708872,-121.84928974,Shasta County,
+Cove Road,PG&E,SUBSTATION,Operational,40.8776645,-121.92868619,Shasta County,
+James B. Black,PG&E,SUBSTATION,Operational,40.99252782,-121.97458795,Shasta County,
+Drum 1,PG&E,SUBSTATION,Operational,39.25666204,-120.7667826,Placer County,
+Sutter Power,PG&E,SUBSTATION,Operational,39.05250369,-121.69189098,Sutter County,
+Fitch Mt.,PG&E,SUBSTATION,Operational,38.60655203,-122.85284462,Sonoma County,"Santa Rosa, CA"
+Lambie Energy,PG&E,SUBSTATION,Operational,38.22145263,-121.86691168,Solano County,
+Lodi Stig,PG&E,SUBSTATION,Operational,38.08793318,-121.38819275,San Joaquin County,Lodi
+GWF Tracy,PG&E,SUBSTATION,Operational,37.71035585,-121.48994449,SAN JOAQUIN,TRACY
+Metcalf Energy Center,PG&E,SUBSTATION,Operational,37.22140909,-121.74658598,Santa Clara County,San Jose
+Metcalf 1,PG&E,SUBSTATION,Operational,37.22438153,-121.74189781,Santa Clara County,"San Jose, CA"
+Diablo Canyon,PG&E,SUBSTATION,Operational,35.21628717,-120.84737527,San Luis Obispo County,
+Solar - PGE,PG&E,SUBSTATION,Operational,35.38373733,-120.06017029,San Luis Obispo County,
+Olive - (PG&E),PG&E,SUBSTATION,Operational,35.8979967,-119.44517703,Tulare County,
+Donnells-Curtis,PG&E,SUBSTATION,Operational,38.24644492,-120.03382952,Tuolumne County,
+Sunrise Power,PG&E,SUBSTATION,Operational,35.21032844,-119.58263192,Kern County,
+Westley - (PG&E),PG&E,SUBSTATION,Operational,37.57957288,-121.20594716,Stanislaus County,
+GWF Hanford,PG&E,SUBSTATION,Operational,36.26974483,-119.64735799,,
+Tevis,PG&E,SUBSTATION,Operational,35.31959206,-119.12893978,Kern County,Bakersfield
+Padre Flats SW STA,PG&E,NOT AVAILABLE,Operational,37.01325625,-120.96448722,Merced,Los Banos
+Rock Creek,PG&E,SUBSTATION,Operational,39.90537388,-121.345596,Plumas County,
+Delevan,PG&E,SUBSTATION,Operational,39.36840297,-122.26930435,Colusa County,
+Parkway - (PG&E),PG&E,SUBSTATION,Operational,38.1381842,-122.20909725,Solano County,Vallejo
+Grimmway-Malaga,PG&E,SUBSTATION,Operational,35.24729157,-118.86084568,Kern County,
+Grizzly - (PG&E),PG&E,SUBSTATION,Operational,39.91096464,-121.3275671,Plumas County,
+Kelso,PG&E,SUBSTATION,Operational,37.79748436,-121.60329746,CONTRA COSTA,
+Lake View / Geysers 17,PG&E,SUBSTATION,Operational,38.82388603,-122.78130306,Lake,Cobb
+Carberry - (PG&E),PG&E,SUBSTATION,Operational,40.85914487,-121.75277277,,BURNEY
+Waukena,PG&E,SUBSTATION,Operational,36.13842863,-119.57649121,Kings County,
+Tranquility,PG&E,SUBSTATION,Operational,36.58931842,-120.40549505,Fresno,Levis
+Leprino - (PG&E),PG&E,SUBSTATION ASSUMED,Operational,36.23976956,-119.83331692,Kings County,
+Quinto,PG&E,SUBSTATION ASSUMED,Operational,37.11996941,-121.06876333,Merced ,Santa Nella
+Fink,PG&E,SUBSTATION,Proposed,37.4104445,-121.17278187,Stanislaus,Crows Landing
+Gates-Midway (Proposed),PG&E,SUBSTATION,Proposed,35.77771765,-119.75847621,Kings,Kettleman City
+Rancho Seco - Bellota (Proposed),PG&E,SUBSTATION,Proposed,38.13311963,-120.99698595,Calaveras,Wallace
+Midway - Wheeler Ridge (Proposed),PG&E,SUBSTATION,Proposed,35.12165129,-119.26865125,KERN,TAFT
+Crow Creek,PG&E,SUBSTATION,Operational,37.37399895,-121.13627698,Stanislaus County,
+Las Aguilas,PG&E,SUBSTATION ASSUMED,,36.63182605,-120.87883715,San Benito,Llanada
+Manning - (PG&E FRESNO),PG&E,SUBSTATION ASSUMED,,36.59063172,-120.59516415,FRESNO,FIREBAUGH
+New Sub - Los Banos - Midway (Proposed) - (PG&E FRESNO),PG&E,SUBSTATION ASSUMED,Proposed,36.48299502,-120.22098727,Fresno,Cantua Creek
+New Sub - Gates - Templeton (Proposed) - (PG&E KERN),PG&E,SUBSTATION ASSUMED,Proposed,36.04080006,-120.21387331,Kings,Avenal
+Humboldt (Proposed),PG&E,SUBSTATION,Operational,40.78257954,-124.11236616,HUMBOLDT,EUREKA
+Morro Bay (Proposed),PG&E,SUBSTATION,Operational,35.37432993,-120.85598887,SAN LUIS OBISPO,MORRO BAY
+Camanche,PG&E,SUBSTATION,Operational,38.21363106,-121.02444524,San Joaquin County,
+Cal Flats,PG&E,SUBSTATION ASSUMED,,35.87022518,-120.32255491,Monterey County,
+Collinsville,PG&E,SUBSTATION ASSUMED,,38.08083499,-121.83598684,Solano County,COLLINSVILLE
+Casaloma,PG&E,SUBSTATION ASSUMED,,35.34644505,-119.00508757,Kern,
+Crazy Horse Canyon,PG&E,SUBSTATION ASSUMED,,36.78048508,-121.59916702,,
+Estrella - (PGE),PG&E,SUBSTATION ASSUMED,,35.63768512,-120.59915729,San Luis Obispo County,Paso Robles
+Fern Road,PG&E,SUBSTATION ASSUMED,,40.64213479,-121.93783648,Shasta,Whitmore
+Caribou,PG&E,SUBSTATION ASSUMED,,40.08603093,-121.14894052,Plumas County,TWAIN
+Cooley Landing - (PGE GBA),PG&E,SUBSTATION,Operational,37.4735817,-122.12799053,San Mateo County,Palo Alto
+Crescent - (PGE Fresno),PG&E,SUBSTATION ASSUMED,,36.53078501,-120.16715727,Fresno County,Helm
+Lemoore - (PGE Fresno),PG&E,SUBSTATION,Operational,36.30932881,-119.79828795,Kings County,Lemoore
+Mercy Springs - (PGE Fresno),PG&E,SUBSTATION,Operational,36.93680663,-120.81947392,Merced County,Los Banos
+Soledad - (PGE GBA),PG&E,SUBSTATION,Operational,36.42963391,-121.33248337,Monterey County,Soledad
+Mustang - (PG&E),PG&E,SUBSTATION,Operational,36.23223107,-119.91927844,Kings,Lemore
+Old Colgate,PG&E,SUBSTATION,Operational,39.33110942,-121.18969251,Yuba County,
+Greenleaf 1 - Sutter,PG&E,SUBSTATION ASSUMED,Operational,39.05179575,-121.69623301,SUTTER,Yuba City
+Belden,PG&E,SUBSTATION,Operational,40.00740046,-121.24940873,Plumas County,Belden
+New Sub - Westley - Quinto (Proposed),PG&E,SUBSTATION ASSUMED,,37.51506627,-121.23035317,Stanislaus,Patterson
+Colusa Gen Sta,PG&E,SUBSTATION,,39.36588044,-122.27029265,Colusa County,
+Mineral,PG&E,SUBSTATION,,40.34741705,-121.63485597,Tehama County,
+Mtn Gate Jct,PG&E,SUBSTATION,,40.7406672,-122.30960215,Shasta County,
+Palo Alto Sw Sta,PG&E,SUBSTATION,,37.43902348,-122.11432099,Santa Clara County,
+Yerba Buena,PG&E,SUBSTATION,,37.30731756,-121.75009461,Santa Clara County,
+Alta Ph - PG&E,PG&E,SUBSTATION,,39.21592544,-120.80353676,Placer County,
+Dutch Flat #1 Ph - PG&E,PG&E,SUBSTATION,,39.21688716,-120.83544937,Placer County,
+Tranquillity Sw Sta,PG&E,SUBSTATION,,36.59168976,-120.40293428,Fresno County,
+Tule River Ph - PG&E,PG&E,SUBSTATION,,36.16306764,-118.7069903,Tulare County,
+Adobe Sw Sta,PG&E,SUBSTATION,,35.10871731,-118.97581487,Kern County,
+Acton - PG&E,PG&E,SUBSTATION,,37.70856832,-122.45062577,San Francisco County,
+Beach St,PG&E,SUBSTATION,,37.80763017,-122.41450892,San Francisco County,
+Eighteenth St,PG&E,SUBSTATION,,37.76084551,-122.4389845,San Francisco County,
+San Fran F (Marina),PG&E,SUBSTATION,,37.80367714,-122.43299686,San Francisco County,
+Ocean Ave,PG&E,SUBSTATION,,37.72332171,-122.45471603,San Francisco County,
+Portola - PG&E,PG&E,SUBSTATION,,37.74518937,-122.45287107,San Francisco County,
+Randolph - PG&E,PG&E,SUBSTATION,,37.7144506,-122.4696151,San Francisco County,
+San Fran E,PG&E,SUBSTATION,,37.7599734,-122.42030586,San Francisco County,
+San Fran J,PG&E,SUBSTATION,,37.79414677,-122.4020568,San Francisco County,
+San Fran K,PG&E,SUBSTATION,,37.77659957,-122.48367364,San Francisco County,
+San Fran L,PG&E,SUBSTATION,,37.73041113,-122.47098385,San Francisco County,
+San Fran M,PG&E,SUBSTATION,,37.73345823,-122.43050848,San Francisco County,
+San Fran N,PG&E,SUBSTATION,,37.76133081,-122.46646012,San Francisco County,
+Silver Ave,PG&E,SUBSTATION,,37.7293246,-122.41433351,San Francisco County,
+Sixth Ave,PG&E,SUBSTATION,,37.78168861,-122.46466682,San Francisco County,
+Sullivan - PG&E,PG&E,SUBSTATION,,37.68722026,-122.47196704,San Mateo County,
+Twenty-First Ave,PG&E,SUBSTATION,,37.75436568,-122.47823754,San Francisco County,
+Moscone - PG&E,PG&E,SUBSTATION,,37.78384824,-122.40123326,San Francisco County,
+Livingston Sw Sta,PG&E,SUBSTATION,,37.08757292,-120.83517282,Merced County,
+Yosemite Park,PG&E,SUBSTATION,,37.72162925,-119.70288515,Mariposa County,
+Mercy Springs Sw Sta,PG&E,SUBSTATION,,36.92528681,-120.81907899,Merced County,
+Freedom,PG&E,SUBSTATION,,36.94700239,-121.78967403,Santa Cruz County,
+Felton - PG&E,PG&E,SUBSTATION,,37.04882691,-122.06455083,Santa Cruz County,
+Anzar Jct,PG&E,SUBSTATION,,36.86792412,-121.56341531,San Benito County,
+Mcdonald Island,PG&E,SUBSTATION,,37.98820812,-121.47932086,San Joaquin County,
+Alpine - PG&E,PG&E,SUBSTATION,,38.46639941,-120.03834742,Alpine County,
+Cabbage Patch Sw Sta,PG&E,SUBSTATION,,38.41618163,-120.13391346,Calaveras County,
+Sutter Home Sw Sta,PG&E,SUBSTATION,,38.15653101,-121.40860984,San Joaquin County,
+Elk Creek Jct,PG&E,SUBSTATION,,39.55313238,-122.19401989,Glenn County,
+Grizzly Ph - PG&E,PG&E,SUBSTATION,,39.88939715,-121.27951848,Plumas County,
+Toadtown Ph - PG&E,PG&E,SUBSTATION,,39.89359459,-121.59343408,Butte County,
+Oak Flat Ph - PG&E,PG&E,SUBSTATION,,40.07526166,-121.16141886,Plumas County,
+Desabla Ph - PG&E,PG&E,SUBSTATION,,39.8693849,-121.63191452,Butte County,
+Philo Jct,PG&E,SUBSTATION,,39.10249807,-123.15639813,Mendocino County,
+Reclamation Dist#999,PG&E,SUBSTATION,,38.37346215,-121.55287861,Yolo County,
+Stauffer - PG&E Northeast,PG&E,SUBSTATION,,38.03393239,-122.11603423,Contra Costa County,
+Concord,PG&E,SUBSTATION,,37.97570316,-122.02473595,Contra Costa County,
+Whitney - PG&E,PG&E,SUBSTATION,,38.0224848,-121.88537446,Contra Costa County,
+Gateway Pp,PG&E,SUBSTATION,,38.01636238,-121.75853944,Contra Costa County,
+Beck,PG&E,SUBSTATION,,37.76623994,-122.17597168,Alameda County,
+Eighth Ave,PG&E,SUBSTATION,,37.80046424,-122.24193903,Alameda County,
+Oakland I - PG&E Southeast,PG&E,SUBSTATION,,37.74785853,-122.17443146,Alameda County,
+Oak - PG&E South,PG&E,SUBSTATION,,37.90115903,-122.28653022,Contra Costa County,
+Maple - PG&E,PG&E,SUBSTATION,,37.79736966,-122.20547679,Alameda County,
+Bethany Comp Sta,PG&E,SUBSTATION,,37.79613641,-121.60264329,Alameda County,
+Phoenix Ph,PG&E,SUBSTATION,,38.03261877,-120.32648965,Tuolumne County,
+Spaulding #3 Ph,PG&E,SUBSTATION,,39.33742812,-120.63562097,Nevada County,
+Spaulding #2 Ph,PG&E,SUBSTATION,,39.32443133,-120.64486136,Nevada County,
+Volta 2 Ph,PG&E,SUBSTATION,,40.45253926,-121.86245775,Shasta County,
+Humboldt,PG&E,SUBSTATION,Operational,40.78243171,-124.1123627,Humboldt County,
+New Sub - Midway - Wheeler Ridge (Proposed),PG&E,SUBSTATION,Operational,35.15800295,-119.3488547,Kern County,
+New Sub - Pit 1 - Cottonwood (Proposed),PG&E,SUBSTATION,Operational,40.82294665,-121.82122179,Shasta County,Round Mountain
+Schulte,PG&E,SUBSTATION,Operational,37.71023759,-121.48993086,San Joaquin County,
+New Sub - Rancho Seco - Bellota (Proposed),PG&E,SUBSTATION,Operational,38.21343125,-121.02442367,San Joaquin County,
+Union (Estrella),PGE,SUBSTATION ASSUMED,,35.63744103,-120.5991179,San Luis Obispo County,Paso Robles
+Topaz,PG&E,SUBSTATION,Operational,35.38224508,-120.05987471,San Luis Obispo County,

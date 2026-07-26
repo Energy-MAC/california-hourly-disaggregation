@@ -50,6 +50,16 @@ Filtering logic (per utility)
            by haversine distance from util_lat/util_lon is chosen.
       dist_to_basin_km is computed after both steps.
 
+  High-side voltage (highside_kv)
+    - SCE/SDGE: first token of substation_voltage (e.g. "115/33 kV" -> 115),
+      a pure transform, no join.
+    - PGE (and fallback for all): CEC max_voltage_kv attached via .map() on
+      normalized substation name (norm() from build_cec_name_dictionary.py),
+      using cecSourceDictionary.csv for names that differ from CEC's. .map()
+      is used deliberately instead of merge -- an unmatched name yields NaN,
+      it can never drop or duplicate a row. main() asserts substation counts
+      are unchanged before/after this step.
+
 Output columns
 --------------
   substation_attributes_clean.csv
@@ -60,6 +70,11 @@ Output columns
       sub_type,                     -- SCE: D/A/S/T; NaN otherwise
       substation_voltage,           -- ratio string (SCE and SDGE)
       voltage_kv,                   -- numeric secondary kV
+      highside_kv,                  -- transmission voltage: substation_voltage's
+                                     -- first token (SCE/SDGE) else CEC max_voltage_kv
+                                     -- (all utilities, only source for PGE)
+      highside_kv_source,           -- "utility" | "cec" | "none"
+      cec_max_voltage_kv,           -- raw CEC value (NaN/-99 sentinel dropped)
       sys_name, division, subst_id,
       existing_gen, queued_gen, total_gen,
       projected_load, der_penetration, max_remain_cap,
@@ -85,11 +100,15 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from build_cec_name_dictionary import norm as cec_norm  # noqa: E402
+
 ROOT     = Path(__file__).resolve().parents[3]
 RAW      = ROOT / "data" / "raw"
 PROC     = ROOT / "data" / "processed"
 OUT_DIR  = PROC / "substations"
 DICT_PATH = ROOT / "data" / "basinSourceDictionary.csv"
+CEC_FILE = PROC / "substation_misc" / "ca_substations_cec.csv"
+CEC_DICT_PATH = ROOT / "data" / "cecSourceDictionary.csv"
 
 # PGE removed some substations from their published ArcGIS layer between scrapes.
 # The older non-clean processed file is the only remaining source for those profiles.
@@ -103,6 +122,7 @@ ATTR_COLS = [
     "basin_lat", "basin_lon", "dist_to_basin_km",
     "sub_type", "substation_voltage",
     "voltage_kv",
+    "highside_kv", "highside_kv_source", "cec_max_voltage_kv",
     "sys_name", "division", "subst_id",
     "existing_gen", "queued_gen", "total_gen",
     "projected_load", "der_penetration", "max_remain_cap",
@@ -250,6 +270,85 @@ def add_basin_coords(
             merged.loc[has, "basin_lat"], merged.loc[has, "basin_lon"],
         )
     return merged
+
+
+# ── High-side (transmission) voltage ────────────────────────────────────────
+#
+# SCE/SDGE publish a transformer-ratio string (substation_voltage, e.g.
+# "115/33 kV") whose first token is the high side -- a pure transform of a
+# column already in the frame, no join involved.  PGE publishes no high-side
+# field at all, so its only source is CEC's max_voltage_kv, attached via
+# normalized-name .map() (never .merge()) so an unmatched name yields NaN
+# and can never drop or duplicate a substation row -- critical because PGE's
+# legacy-recovered substations (see LEGACY_PGE_* below) exist nowhere else.
+
+def _load_cec_voltage_lookup() -> dict[tuple[str, str], float]:
+    """(utility, norm(substation_name)) -> CEC max_voltage_kv.
+
+    Built from a direct normalized-name match against CEC records of the same
+    (or "_assumed") owner, plus a cecSourceDictionary.csv fallback for names
+    that differ between the utility source and CEC.  Uses norm() imported from
+    build_cec_name_dictionary.py -- the same function the dictionary itself
+    was built with -- so dictionary lookups stay consistent.  The -99 sentinel
+    (CEC's "unknown voltage" marker, SDGE-only) and NaN are dropped.
+    """
+    if not CEC_FILE.exists():
+        print("  WARNING: CEC substation file not found "
+              f"({CEC_FILE.relative_to(ROOT)}); highside_kv will use utility data only.")
+        return {}
+
+    cec = pd.read_csv(CEC_FILE)
+    cec = cec[cec.max_voltage_kv.notna() & (cec.max_voltage_kv != -99)].copy()
+    cec["owner_base"] = cec.owner_std.astype(str).str.replace("_assumed", "", regex=False)
+    cec["name_norm"] = cec.name.map(cec_norm)
+    cec_by_name = (cec.drop_duplicates(["owner_base", "name_norm"])
+                      .set_index(["owner_base", "name_norm"])["max_voltage_kv"])
+
+    lookup: dict[tuple[str, str], float] = dict(cec_by_name.items())
+
+    if CEC_DICT_PATH.exists():
+        dic = pd.read_csv(CEC_DICT_PATH)
+        dic["util_lc"] = dic.Utility.astype(str).str.strip().str.lower()
+        dic["source_norm"] = dic.SourceName.map(cec_norm)
+        dic["cecname_norm"] = dic.CECName.map(cec_norm)
+        for row in dic.itertuples(index=False):
+            key_cec = (row.util_lc, row.cecname_norm)
+            if key_cec in cec_by_name.index:
+                lookup[(row.util_lc, row.source_norm)] = cec_by_name.loc[key_cec]
+    else:
+        print(f"  WARNING: {CEC_DICT_PATH.relative_to(ROOT)} not found; "
+              "skipping dictionary-fallback CEC voltage matches.")
+
+    return lookup
+
+
+def attach_highside_voltage(attrs_all: pd.DataFrame) -> pd.DataFrame:
+    """Add highside_kv, highside_kv_source, cec_max_voltage_kv.
+
+    highside_kv is the utility-published value (substation_voltage first
+    token, SCE/SDGE) where available, else CEC max_voltage_kv (all utilities,
+    but the only source for PGE).  Index-aligned .map()/Series construction
+    throughout -- row count and order are guaranteed unchanged; this is
+    verified by an explicit assertion in main().
+    """
+    a = attrs_all.copy()
+
+    first_tok = a["substation_voltage"].astype(str).str.extract(r"(\d+\.?\d*)")[0]
+    kv_util = pd.to_numeric(first_tok, errors="coerce")
+    kv_util = kv_util.where(a["substation_voltage"].notna())
+
+    cec_lookup = _load_cec_voltage_lookup()
+    keys = list(zip(a["utility"], a["substation_name"].map(cec_norm)))
+    kv_cec = pd.Series([cec_lookup.get(k, np.nan) for k in keys], index=a.index)
+
+    a["cec_max_voltage_kv"] = kv_cec
+    a["highside_kv"] = kv_util.combine_first(kv_cec)
+    a["highside_kv_source"] = np.select(
+        [kv_util.notna(), kv_cec.notna()],
+        ["utility", "cec"],
+        default="none",
+    )
+    return a
 
 
 # ── PGE ──────────────────────────────────────────────────────────────────────
@@ -647,6 +746,23 @@ def main() -> None:
 
     attrs_all = pd.concat(all_attrs, ignore_index=True)
     loads_all = pd.concat([pge_loads, sce_loads, sdge_loads], ignore_index=True)
+
+    # ── High-side voltage (highside_kv / highside_kv_source / cec_max_voltage_kv) ──
+    # Guard: this enrichment must never change which substations exist -- PGE's
+    # legacy-recovered rows (added above) have no other source. See
+    # attach_highside_voltage()/_load_cec_voltage_lookup() docstrings.
+    n_before = attrs_all.groupby("utility").size().sort_index()
+    attrs_all = attach_highside_voltage(attrs_all)
+    n_after = attrs_all.groupby("utility").size().sort_index()
+    assert n_before.equals(n_after), (
+        "substation counts changed after voltage enrichment! "
+        f"before={n_before.to_dict()} after={n_after.to_dict()}"
+    )
+    print(f"\nVoltage enrichment guard passed: substation counts unchanged "
+          f"{n_after.to_dict()}")
+    for util, grp in attrs_all.groupby("utility"):
+        src_counts = grp["highside_kv_source"].value_counts().to_dict()
+        print(f"  {util}: highside_kv source counts {src_counts}")
 
     # Convert wall-clock Pacific hours to fixed PST (UTC-8, no DST) using majority-month rule.
     # METHODOLOGICAL ASSUMPTION: min/max load profiles represent percentile envelopes over a

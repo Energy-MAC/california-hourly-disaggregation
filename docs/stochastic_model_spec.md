@@ -2,9 +2,9 @@
 
 Status: **implemented as Approach 2** (2026-07-17) — see README "Approach 2 —
 Stochastic conditional disaggregation" for user-facing docs. Implementation:
-`src/load_projection/stochastic.py`, `scripts/load_projection/estimate_stochastic.py`,
-`scripts/load_projection/generate_stochastic.py`. Supporting diagnostics:
-`scripts/load_projection/stochastic_diagnostics.py`.
+`src/load_projection/stochastic.py`, `scripts/load_projection/approach2/estimate_stochastic.py`,
+`scripts/load_projection/approach2/generate_stochastic.py`. Supporting diagnostics:
+`scripts/load_projection/approach2/stochastic_diagnostics.py`.
 
 ## Notation
 

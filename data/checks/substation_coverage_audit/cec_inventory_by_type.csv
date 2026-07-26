@@ -1,0 +1,18 @@
+utility,type,category,cec_records
+PGE,DEAD END,line_structure,3
+PGE,NOT AVAILABLE,unknown,42
+PGE,RISER,line_structure,14
+PGE,SUBSTATION,substation,1627
+PGE,SUBSTATION ASSUMED,substation,101
+PGE,TAP,line_structure,459
+SCE,DEAD END,line_structure,12
+SCE,NOT AVAILABLE,unknown,28
+SCE,RISER,line_structure,86
+SCE,SUBSTATION,substation,1202
+SCE,SUBSTATION ASSUMED,substation,67
+SCE,TAP,line_structure,203
+SDGE,NOT AVAILABLE,unknown,4
+SDGE,RISER,line_structure,3
+SDGE,SUBSTATION,substation,324
+SDGE,SUBSTATION ASSUMED,substation,13
+SDGE,TAP,line_structure,22

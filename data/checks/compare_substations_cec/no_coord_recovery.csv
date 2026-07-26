@@ -1,0 +1,13 @@
+utility,substation_name,cec_recovered,cec_lat,cec_lon,cec_type
+sce,Safari,False,,,
+sce,Poole,False,,,
+sce,Mountain Pass,False,,,
+sce,Camino,False,,,
+sce,Bishop Creek Plant 2,False,,,
+sce,Autobody,False,,,
+sce,Lunar,False,,,
+sce,Santa Ana River 1,False,,,
+sce,Palm Springs 'A',False,,,
+sce,Palm Springs 'B',False,,,
+sce,Topanga,True,34.08957509,-118.60509937,SUBSTATION
+sce,Paularino,True,33.65319074,-117.89115436,SUBSTATION
