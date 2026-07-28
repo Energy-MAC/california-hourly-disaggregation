@@ -265,6 +265,65 @@ nets out 2024 BTM-PV, a scope difference no CAISO window can absorb). This
 revises the earlier "trend-free, pooling is safe" note: pooling is safe for
 *describing 2015–2025*, but leaves a recency gap against a forward projection.
 
+### Recency-weighted calibration (soft kernel, 2026-07-27)
+
+A hard window is a rectangular kernel — it discards everything older than `N`
+years and weights the rest equally. Replacing it with a **decayed weight per
+observation** generalizes this and removes the discard:
+
+```
+w_i = 0.5^(age_i / H)          age_i = calendar days from the "as-of" date to obs i
+ȳ_c = Σ_i w_i y_i / Σ_i w_i    (weighted; sd_c and n_eff analogous)
+n_eff(c) = (Σ w_i)² / Σ w_i²   effective sample size (Bessel-corrects sd_c)
+```
+
+Calendar age (not seasonal distance) is the right staleness measure because the
+non-stationarity is BTM growth, which accrues in calendar time. `H → ∞` recovers
+the unweighted all-history calibration; `H → 0` collapses each cell onto its
+single most-recent same-month day.
+
+**Why per-cell, not a contiguous window.** Each cell `(month, hour)` is estimated
+independently from *its own* observations, so a cell reaches back only to recent
+occurrences of that month — a July cell to recent Julys, a December cell to
+recent Decembers. No single contiguous recent window (which would cover only a
+few months) is needed to populate all 288 cells; recency is applied per cell,
+and because `ȳ_c` is a *weight ratio* `Σw_i y_i / Σw_i`, no cell ever empties —
+even at `H = 1 d` the median effective count is ~3 obs/cell (the ~3 most recent
+same-month days), rising to ~30 at `H = 1 mo` and ~92 at `H = 1 yr`. A *hard
+contiguous sub-year window* is the construction that fails (as-of December it
+contains no June data, so June cells go empty); that is why the soft kernel
+spans day→years while the hard `--calibration-window` is integer-years only.
+The grid search (`rolling_origin_cv.py` → `calibration_search.png`) sweeps the
+half-life 1 day→7 yr: relRMSE is degenerate-high at `H < 1 wk` (~3 obs/cell
+collapses ρ/s(c)), minimized at `H ≈ 1 yr`, and creeps back to the all-history
+value as `H → ∞`.
+
+**What recency actually buys — shape, not level.** By the invariance above the
+output level is unchanged (Σμ_s, ~164 TWh) for any kernel. What recency corrects
+is the **shape** `s(c)`, which is genuinely non-stationary: BTM has deepened the
+net-load duck curve, so `corr(s(c) over 2016–18, s(c) over 2023–25) ≈ 0.77` and
+the drift concentrates in summer-midday solar hours (July `h14` `s(c)` 0.83 →
+0.98). Recent data carries the current duck shape; the decay weights it up.
+
+**The half-life is the one tunable hyperparameter** the closed-form / method-of-
+moments estimators otherwise lack, and the rolling-origin CV selects it. On the
+current record (`rolling_origin_cv.py`, held-out one-year-ahead), the soft kernel
+**beats** both the all-history and hard-window calibrations on relRMSE:
+`H = 365 d` gives relRMSE 5.97% vs trailing-5 6.27% vs expanding 6.57% — because,
+unlike a hard cutoff, it keeps the older data (smoother `s(c)`/`ρ(c)`) while
+still emphasizing recency. Its mean bias is a small +0.8% (vs trailing-5's
+well-centered −0.4%): the soft kernel trades a hair of bias for lower variance.
+Very short half-lives (`H = 90 d`) inflate the shape-estimation noise and give
+back the gain — the same bias–variance turn as the hard windows.
+
+**Decision (2026-07-27):** expose the kernel as `--decay-halflife H` (calendar
+days; composes with `--calibration-window`; **default unweighted, unchanged**).
+CV-calibrated recency default `H ≈ 365 d`. Same caveats as the hard window: it
+addresses the temporal-drift component of the *shape/level* only, so a target
+with a structurally different level (RESOLVE's 2024-BTM net) still needs an
+explicit `--F` — and note the one-year-ahead CV optimizes a proxy, not any
+specific projection, whose level is out-of-sample by construction.
+
 ## Decided
 
 - Substation envelopes are **net-of-BTM** (evidence in CLAUDE.md consistency

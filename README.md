@@ -378,14 +378,20 @@ expected total to the reference works out to **ȳ_train(c) / y_target(t) −
 CAISO 2015–2025 training mean sits ~4.7% *above* RESOLVE's weather-year cells
 (equivalently RESOLVE ~4.5% below) — RESOLVE nets out *2024* BTM-PV levels,
 while the historical training mean is propped up by 2016–2018, when metered
-CAISO demand ran ~26 GW (less BTM) vs ~25 GW from 2019 on. The model, driven
-only by shape and anchored to the training level, doesn't self-adjust for a
-target whose absolute level differs; feeding it a target of known level via
-an explicit `--F` (rather than `cal`) removes this component. The residual
-after the level offset — that s(c)/ρ(c) also encode CAISO's specific
-duck-curve shape, which RESOLVE's cells don't reproduce exactly — is the part
-that no level rescale can fix. See "Rolling-origin calibration CV" below for
-how much of this same drift is present *within* the historical record.
+CAISO demand ran ~26 GW (less BTM) vs ~25 GW from 2019 on. The `min(1,·)` in ρ
+never binds, so the whole effect is this level ratio.
+
+Note this bias is **exactly F-invariant** (verified: identical at F = cal /
+0.60 / 0.85): check (iii) scores the output against the model's *own* reference
+`F·s(c)·y`, and `--F` scales output and reference together, so it cancels.
+`--F` is still the right lever for a projection's *absolute output level* — it
+just doesn't show up in this self-referential metric. What the metric *does*
+respond to is the calibration window (which moves `ȳ_train`, hence the
+reference `f(c)`) — see "Rolling-origin calibration CV" and "Calibration-window
+search" below. The part a window cannot remove is the per-cell *shape* mismatch:
+`ȳ_train(c)/y_target(c)` varies across cells because BTM has reshaped CAISO's
+duck curve over time (s(c) drifts; corr(2016–18, 2023–25 shape) ≈ 0.77), so no
+single scalar and no level-only fix reproduces RESOLVE's cell-by-cell shape.
 
 ```bash
 python scripts/load_projection/approach2/build_resolve_target.py
@@ -402,61 +408,97 @@ form `ȳ_train(c)/y_test(t) − 1` (above), a forecast is just an extreme case o
 using an old calibration window on a new target, and the drift is measurable
 without leaving the historical record. Scoring uses the semi-analytic draw-mean
 of check (iii) (reproduces `--validate`'s bias/relRMSE to <0.03 pp), so the
-whole sweep runs in seconds. Two calibration strategies are compared:
+whole sweep runs in seconds. Three calibration strategies are compared:
 
 - **expanding** — all complete CAISO years ≤ origin (current behavior).
-- **trailing-N** — only the last N complete years; re-estimated as the origin
-  advances, so it can "run into the future" by always using the latest window.
+- **trailing-N** — only the last N complete years; a rectangular kernel,
+  re-estimated as the origin advances so it "runs into the future."
+- **decay-H** — all years ≤ origin, but exponentially recency-weighted with a
+  calendar-day half-life H (a *soft* kernel — down-weights old years instead of
+  discarding them). **H is the one genuinely tunable hyperparameter** the
+  closed-form estimators otherwise lack, and this CV selects it.
 
 Complete CAISO years 2016–2025 (2015 is the partial stub, excluded):
 
-| Strategy | 1-yr-ahead mean bias | 1-yr-ahead mean \|bias\| | bias sd | mean relRMSE | all-horizon mean \|bias\| |
-|----------|----------------------|--------------------------|---------|--------------|---------------------------|
-| expanding | **+1.84%** | 2.09% | 2.55 | 6.57% | 2.97% |
-| trailing-3 | +0.83% | 2.32% | **3.36** | 6.47% | 2.26% |
-| trailing-5 | **−0.36%** | **1.47%** | **1.73** | **6.27%** | **1.36%** |
+| Strategy | 1-yr-ahead mean bias | 1-yr-ahead mean \|bias\| | bias sd | **mean relRMSE** | all-horizon \|bias\| |
+|----------|----------------------|--------------------------|---------|------------------|----------------------|
+| expanding | +1.84% | 2.09% | 2.55 | 6.57% | 2.97% |
+| trailing-3 | +0.83% | 2.32% | 3.36 | 6.47% | 2.26% |
+| trailing-5 | −0.36% | **1.47%** | **1.73** | 6.27% | **1.36%** |
+| decay-180 | +0.58% | 1.75% | 2.53 | 6.03% | 2.99% |
+| **decay-365** | +0.82% | 1.85% | 2.62 | **5.97%** | 2.94% |
+| decay-730 | +1.15% | 1.99% | 2.65 | 6.12% | 2.92% |
 
 Findings:
 
 - **The RESOLVE +5.56% bias is the same mechanism, present in-history.**
   Expanding-window calibration over-predicts one-year-ahead by +1.84% (up to
   +3–4% at longer horizons) because it stays anchored to the higher-demand
-  2016–2018 years (~26 GW metered) while recent years run ~25 GW. Same sign,
-  same cause as the RESOLVE gap; the RESOLVE number is just larger because
-  RESOLVE also differs in BTM-netting level and geographic scope, which no
-  window choice can fix. The `origin 2018 → test 2019` spike to +7% is the
-  2018→2019 demand drop.
-- **A trailing window reduces it, using only historical data.** Trailing-5
-  cuts one-year-ahead |bias| 2.09% → 1.47%, centers the mean bias (+1.84% →
-  −0.36%), lowers relRMSE, and is the *most stable* (bias sd 1.73 vs 2.55).
-- **But too short a window trades bias for variance** — trailing-3 lowers the
-  *mean* bias (+0.83%) yet has the highest spread (sd 3.36) and highest
-  |bias|, exactly the bias–variance tension expected from a short look-back.
-  Five years is the sweet spot on this record.
+  2016–2018 years (~26 GW metered) while recent years run ~25 GW. The `origin
+  2018 → test 2019` spike to +7% is the 2018→2019 demand drop.
+- **Recency helps, and the soft kernel helps most.** By held-out one-year-ahead
+  relRMSE — the metric that balances bias and variance — **decay-365 is best
+  (5.97%)**, beating trailing-5 (6.27%) and expanding (6.57%). Unlike a hard
+  cutoff, the decay keeps the older data (smoother s(c)/ρ(c)) while still
+  emphasizing recency, so it trades a hair of bias (+0.8%) for lower error.
+- **Bias vs variance both ways:** trailing-5 has the lowest, best-*centered*
+  bias but a noisier shape; trailing-3 and decay-90 (a too-short half-life,
+  omitted from the table) push shape-estimation noise up and give the gain back.
+  The CV-selected recency default is **H ≈ 365 d**.
 
-The trailing window is exposed as `generate_stochastic.py --calibration-window N`
-(calibrate F\*/s(c)/ρ(c) on the last N complete CAISO years; **default is
-all-history, byte-for-byte unchanged**; appends `__cw{N}` to the run tag). See
-"Calibration-window search" below for the full validation tables under each
-window, and `docs/stochastic_model_spec.md` → "Rolling-window calibration" for
-how it fits the model. For genuine multi-decade horizons the trailing window
-removes *historical* drift but can't anticipate future structural change, so it
-complements — does not replace — supplying the target's own level via `--F`.
+**Grid search over both knobs** (`calibration_search.png` /
+`data/checks/stochastic/calibration_search.csv`). A crucial mechanics point
+first: the decay is **cell-dependent by construction** — each (month, hour) cell
+reaches back to *its own* recent same-month occurrences, so a 30-day half-life ≈
+the most recent ~30 days *of that cell's month* and no cell ever empties (median
+effective obs/cell: 3 at 1 day, 30 at 1 month, 92 at 1 year). A *hard contiguous
+sub-year window* is the thing that can't work (as-of December it holds no June
+data → June cells empty), which is why the decay spans day→years while the hard
+window is integer-years only.
+
+| Decay half-life | 1 d | 1 wk | 1 mo | 3 mo | **1 yr** | 2 yr | 3 yr | 5 yr | 7 yr | all-history |
+|-----------------|-----|------|------|------|----------|------|------|------|------|-------------|
+| relRMSE | 8.97% | 6.76% | 6.37% | 6.25% | **5.97%** | 6.12% | 6.23% | 6.35% | 6.41% | 6.57% |
+
+- **Panel (a) — decay:** a clean U over the full 9-origin set. Too short (1 day,
+  ~3 obs/cell) is *degenerate* — ρ/s(c) collapse and relRMSE spikes to 8.97%.
+  The minimum is at **H ≈ 1 year (5.97%)**; beyond it the curve creeps back up
+  toward all-history (6.57%). This is the visual hyperparameter selection.
+- **Panel (b) — hard window:** a window is only definable back N years, so it
+  can't share a large origin set; each N is instead compared to all-history on
+  *its own* origins (matched Δ; `n` shrinks with N). A **2–3 yr window is best
+  (−0.58 pp)**, tapering to zero by 7 yr — consistent with the soft kernel, and a
+  reminder the window is data-limited where the decay is not.
+
+Both are exposed on `generate_stochastic.py`: `--calibration-window N` (hard
+window, last N complete years) and `--decay-halflife H` (soft kernel, calendar
+days; composes with the window). **Both default off — all-history, byte-for-byte
+unchanged** — and tag the run `__cw{N}` / `__hl{H}`. See "Calibration-window
+search" below for the full validation tables, and `docs/stochastic_model_spec.md`
+→ "Rolling-window calibration" for how they fit the model. For genuine
+multi-decade horizons recency removes *historical* drift but can't anticipate
+future structural change, so it complements — does not replace — supplying the
+target's own level via `--F`.
 
 ```bash
 python scripts/load_projection/approach2/rolling_origin_cv.py
-python scripts/load_projection/approach2/rolling_origin_cv.py --windows 3,5,7
+python scripts/load_projection/approach2/rolling_origin_cv.py --windows 3,5,7 --halflives 90,180,365,730
 ```
 
-#### Calibration-window search (`--calibration-window`)
+#### Calibration-window search (`--calibration-window`, `--decay-halflife`)
 
-The same three `--validate` checks, recomputed under each calibration window
-(normal family; uniform tracks it — the window changes only the CAISO-side
+The same three `--validate` checks, recomputed under each calibration (normal
+family; uniform tracks it — the calibration changes only the CAISO-side
 `f(c)`/`s(c)`/`ρ(c)`, which feed both families identically). check (i) is the
 pooled-q10/q90 median per-cell total error; the all-history row is the original
-no-window calibration. **The mean simulated total is 164 TWh/yr in every row** —
-the level is set by the fixed substation envelopes Σμ_s and is window-invariant
-(only the *reference* the checks score against moves).
+no-window calibration; **decay-365 is the CV-selected soft kernel above**. **The
+mean simulated total is 164 TWh/yr in every row** — the level is set by the fixed
+envelopes Σμ_s and is calibration-invariant (only the *reference* the checks
+score against moves).
+
+Note these two tables score the **full** targets, where recency is *not* what you
+want (see the reading guide) — the decay's win is specifically one-year-*ahead*
+(the CV table above), not on a full record or an out-of-distribution projection.
 
 Historical target — **EIA-930 2015–2025** (calibrate on a sub-window, score on
 the whole record):
@@ -466,39 +508,54 @@ the whole record):
 | all-history (2016–25) | 0.7361 | **0.15%** | 1.1% / 3.3% | **0.40% / +0.00%** |
 | trailing-5 (2021–25)  | 0.7407 | 1.84% | 1.13% / 3.29% | 2.68% / −0.46% |
 | trailing-3 (2023–25)  | 0.7401 | 2.82% | 1.12% / 3.29% | 4.23% / −0.19% |
+| decay-365 d           | 0.7370 | 2.61% | 1.12% / 3.25% | 3.68% / +0.18% |
 
 Projected target — **RESOLVE** (2024-BTM-net weather years):
 
 | Calibration | F\* | (i) total err | (ii) recovery med / p95 | (iii) relRMSE / bias |
 |-------------|-----|---------------|-------------------------|----------------------|
-| all-history (2016–25) | 0.7361 | 4.15% | 0.81% / 2.44% | 9.43% / +5.56% |
+| all-history (2016–25) | 0.7361 | **4.15%** | 0.81% / 2.44% | **9.43% / +5.56%** |
 | trailing-7 (2019–25)  | 0.7462 | **3.89%** | 0.81% / 2.47% | **8.08% / +4.12%** |
 | trailing-5 (2021–25)  | 0.7407 | 5.51% | 0.80% / 2.39% | 9.11% / +5.04% |
 | trailing-3 (2023–25)  | 0.7401 | 7.32% | 0.78% / 2.36% | 10.69% / +5.38% |
+| decay-365 d           | 0.7370 | 6.86% | 0.79% / 2.36% | 11.01% / +5.81% |
 
-Reading the two tables together — the rule is **match the calibration period to
-the target period**:
+Reading the tables — the rule is **match the calibration period to the target
+period**, and these two full targets are *not* "next year," so recency loses:
 
 - **check (ii) is flat everywhere** (~1.1% historical, ~0.8% projected): the
   utility-envelope recovery is set by the fixed μ_s/σ_s and the idiosyncratic
-  draw, so the calibration window barely touches it. All the action is in
-  checks (i)/(iii), which score against the window-dependent `f(c)·y(t)`.
-- **Historical: all-history wins** (in-sample, 0.15% / 0.40%). Narrowing the
-  window monotonically worsens (i)/(iii) — you're scoring against 2015–2020
-  years the window excluded. Use all history to describe the historical record.
-- **Projected: a window helps, but not monotonically.** trailing-7 is the only
-  window that beats all-history (bias +5.56% → +4.12%, relRMSE 9.43% → 8.08%),
-  because 2019–2025's lower mean demand (the 2019–20 dip included) is closest to
-  RESOLVE's 2024-BTM-net level. trailing-5 and trailing-3 overshoot — shorter,
+  draw, so the calibration barely touches it. All the action is in checks
+  (i)/(iii), which score against the calibration-dependent `f(c)·y(t)`.
+- **Historical: all-history wins** (in-sample, 0.15% / 0.40%). Every recency
+  scheme — hard window or decay — worsens (i)/(iii), because it down-weights the
+  2016–2020 years the full record is still scored on. Use all history to
+  *describe* the historical record.
+- **Projected: recency mostly doesn't help RESOLVE either** — decay-365 is
+  slightly *worse* than all-history (bias +5.81% vs +5.56%), because it
+  emphasizes 2023–2025 (~25.5 GW), which is *further* from RESOLVE's low
+  2024-BTM-net level than the all-history mean. Only trailing-7 beats all-history
+  (+5.56% → +4.12%), and only by luck: 2019–2025 includes the anomalously-low
+  2019–20 dip nearest RESOLVE's level. trailing-5/trailing-3 overshoot — shorter,
   higher-mean, noisier windows push bias and error back up. This matches the
-  rolling-origin CV's message that too short a window trades bias for variance,
-  and the residual +4.12% at the best window is the **structural** BTM/scope gap
-  no CAISO window can close (that part needs an explicit `--F`).
+  rolling-origin CV's message that too short a window trades bias for variance.
+  The residual +4.12% at the best window is `ȳ_train/y_target` that no window
+  zeroed: mostly the **average level** gap (RESOLVE's 2024-BTM net sits below
+  every CAISO window, so recency can't reach it — decay-365 confirms this,
+  landing *above* all-history). This is the concrete demonstration of the earlier
+  point: recency tuned on a historical one-year-ahead proxy does **not** transfer
+  to an out-of-distribution projection. The average-level part is `--F`'s job in
+  the **output** (it is F-invariant in *this* self-referential metric, above);
+  RESOLVE's remaining per-cell shape mismatch is its own weather-year shape, not
+  recent CAISO's, so no CAISO-recency scheme addresses it.
 
 ```bash
 # default (all-history) — unchanged
 python scripts/load_projection/approach2/generate_stochastic.py --validate
-# trailing 5-year calibration against a RESOLVE forecast target
+# CV-selected soft-kernel recency (365-day half-life)
+python scripts/load_projection/approach2/generate_stochastic.py \
+    --decay-halflife 365 --validate
+# hard 5-year window against a RESOLVE forecast target
 python scripts/load_projection/approach2/generate_stochastic.py \
     --target data/processed/resolve/resolve_caiso_target.csv \
     --calibration-window 5 --validate
@@ -531,8 +588,10 @@ python scripts/load_projection/approach2/generate_stochastic.py --target forecas
   `--weather-year`, `--month`, `--day`, `--seed`.
 
 `scripts/load_projection/approach2/rolling_origin_cv.py` writes
-`rolling_origin_cv.png` (two panels: one-year-ahead bias by origin, and bias
-vs horizon) to the same folder, plus `data/checks/stochastic/rolling_origin_cv.csv`.
+`rolling_origin_cv.png` (mechanism: one-year-ahead bias by origin, and bias vs
+horizon) and `calibration_search.png` (the recency grid search: relRMSE vs decay
+half-life 1 day→7 yr, and vs hard window 1–7 yr) to the same folder, plus
+`data/checks/stochastic/rolling_origin_cv.csv` and `calibration_search.csv`.
 
 ---
 
