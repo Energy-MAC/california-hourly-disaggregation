@@ -335,6 +335,47 @@ Mean simulated total: 157.5 TWh/yr = F\* × CAISO mean (~214 TWh/yr) ✓.
 Residual marginal-recovery error comes from the empirical z(t) not being
 exactly standard normal (skewed weather distribution), not from the sampler.
 
+#### Out-of-sample: RESOLVE weather-year target (not a validation)
+
+The same three checks, recomputed with a RESOLVE-derived CAISO-total target
+in place of EIA-930: PGE+SCE+SDGE `demand_mw_net` summed across all 23
+RESOLVE weather years (2000–2022, 2024 annual-energy basis) —
+`scripts/load_projection/approach2/build_resolve_target.py` writes this to
+`data/processed/resolve/resolve_caiso_target.csv`. ρ(c), s(c), F\*, and every
+substation envelope are estimated purely from the utility scrape + EIA-930
+2015–2025 and never touch RESOLVE, so this is **not a validation** — RESOLVE
+isn't ground truth for the substations either. It's a look at how the
+already-fit model behaves on a target series outside its training data.
+
+| Check | normal | uniform |
+|-------|--------|---------|
+| (i) per-cell total q10 error | median 3.68%, max 46.4% | median 3.80%, max 47.8% |
+| (i) per-cell total q90 error | median 4.85%, max 28.6% | median 4.66%, max 27.8% |
+| (ii) envelope recovery q10 (width-normalized, 375,906 sub-cells) | median 0.81%, p95 2.44% | median 2.42%, p95 3.56% |
+| (ii) envelope recovery q90 (width-normalized, 375,906 sub-cells) | median 0.76%, p95 2.22% | median 2.47%, p95 3.53% |
+| (iii) hourly tracking relRMSE / bias | 9.43%, +5.56% | 9.52%, +5.57% |
+
+Mean simulated total: 164.2 TWh/yr (normal) — higher than EIA-930's 157.5
+TWh/yr because F\* is fixed and RESOLVE's own y(t) runs higher, not a model
+artifact. **Check (ii), against the actual utility q10/q90, barely moves**
+(normal 0.81%/0.76% vs 1.1% on EIA-930; uniform 2.42%/2.47% vs 2.4%) — it's
+dominated by the idiosyncratic ε_s draw and the fixed μ_s/σ_s, so it's
+largely indifferent to which z(t) drives it. **Checks (i) and (iii), which
+compare against F·s(c)·y(t) computed from the target's *own* cell-level
+distribution, degrade sharply** (total error medians 3.7–4.9% vs
+0.16–0.22%; tracking relRMSE ~9.5% vs 0.4–0.8%, with a consistent +5.6%
+bias): s(c) and ρ(c) encode CAISO's historical duck-curve shape and diurnal
+correlation structure, and RESOLVE's weather-year cell distribution doesn't
+reproduce that shape as closely — the model's "expected" per-cell
+distribution and RESOLVE's actual one disagree by more than sampler/MC
+noise alone would predict.
+
+```bash
+python scripts/load_projection/approach2/build_resolve_target.py
+python scripts/load_projection/approach2/generate_stochastic.py \
+    --target data/processed/resolve/resolve_caiso_target.csv --validate
+```
+
 #### Run commands
 
 ```bash
@@ -693,6 +734,111 @@ approach_totals_vs_reference.csv`,
 
 ```bash
 python scripts/load_projection/checks/validate_approach_totals.py
+```
+
+---
+
+### Machine-learning prediction cookbook
+
+A reusable, target-agnostic ML methodology (`src/ml/`) so every predictive model in
+the project is built and evaluated the same way: leakage-safe splitting, declarative
+feature specs, a model registry with tuning spaces, a fixed metric suite, and standard
+diagnostics — orchestrated by `run_cookbook()`. This is **not** a disaggregation
+"Approach"; it is shared method that other targets (e.g. future EIA-930 forecasting,
+via the `TimeSeriesSplit` re-export in `src/ml/splits.py`) reuse unchanged.
+
+**First application — cross-sectional substation load**
+(`scripts/load_projection/ml/predict_substation_load.py`). The substation profiles are
+month×hour percentile envelopes, **not time series**, so this is cross-sectional
+regression: predict a substation's per-cell `max_load`/`min_load` from structural +
+calendar features. **Validation holds out whole substations, never random cells** — the
+cross-sectional analogue of a time-based split. Random k-fold would let a model memorize
+each substation's level and massively overstate accuracy.
+
+Two configurations of the same cookbook:
+- **explanatory** — all features incl. SCE-only attributes (customer mix, DER, projected
+  load) + diurnal-neighbour lags; group hold-out by substation. Answers *"given part of a
+  substation, predict the rest."*
+- **imputable** — only features that also exist for substations with **no** profile
+  (location, `highside_kv` + CATS voltage class, county population / `ca_load_fraction` /
+  BTM-PV, calendar; **no lags**); spatial-block hold-out. The configuration applicable to
+  the ~1,000+ load-eligible unscraped CEC substations from the coverage audit.
+
+Models: baselines (`global_mean`, `cell_mean`) + `linear`/`ridge`/`lasso`/`elasticnet` +
+`arx_ols` (statsmodels OLS, retains coefficients/p-values) + `svr` (RBF, subsampled to
+≤15 k rows — kernel cost) + `hist_gbm`/`xgboost`/`lightgbm`. Metrics: RMSE, MAE, R²,
+**WAPE** (MAPE is excluded — loads go negative/near-zero from BTM reverse flow), peak-cell
+MAE, and **skill vs the `cell_mean` baseline**; segmented by hour/month/utility/voltage
+class.
+
+**Key result — and the whole methodological point.** On a representative run (~520
+substations; the full fleet runs via the same command without `--max-rows`), the
+explanatory config reaches **R² ≈ 0.61 / skill ≈ 0.37** vs the cell-mean baseline — a
+cell's neighbouring-hour load, the strongest single feature, correlates only ≈0.82 with
+it, so "predict a cell from its neighbours" helps a lot but is far from perfect (and
+linear/ARX slightly edge the boosters here). The imputable config drops to **R² ≈ 0.12 /
+skill ≈ 0.06** (boosting best) — cold-start prediction of a substation's absolute load
+*magnitude* from location / county / voltage is weak, because magnitude is idiosyncratic
+to substation size, which those features barely capture. That drop (0.37 → 0.06 skill) is
+the honest, important point: reporting the explanatory number as if it were the imputation
+number would badly overstate what the model can do for a genuinely unseen substation.
+Structural features can place a substation in space and shape but not *size* it,
+motivating a magnitude-vs-shape decomposition before profiles are imputed onto unscraped
+substations.
+
+Outputs: `data/checks/ml/substation_load/comparison_{config}.csv` (+ `segmented_errors_*`,
+`tuned_params_*`); figures in `data/figures/ml/substation_load/` (model comparison,
+diagnostics, permutation importance). Leakage + imputable-feasibility guards:
+`scripts/load_projection/ml/test_leakage_guards.py`.
+
+```bash
+python scripts/load_projection/ml/predict_substation_load.py           # both configs, all models
+python scripts/load_projection/ml/predict_substation_load.py --config imputable --target min_load
+python scripts/load_projection/ml/test_leakage_guards.py
+```
+
+#### Cold-start imputation onto unscraped substations (SCE first)
+
+The coverage audit found ~2,017 load-eligible CEC substations we never scraped a profile
+for. `scripts/load_projection/ml/impute_unscraped_load.py` produces a 288-cell
+`min_load`/`max_load` profile for each (SCE first: the **688** sub-500 kV unscraped SCE
+substations) via a **magnitude × shape decomposition** with empirical anchoring — because
+the direct per-cell model is weak (imputable skill ≈0.06) and, on inspection, both parts are
+only weakly predictable from the features an unscraped substation has:
+
+- **Magnitude** `M = mean_c(max_load)` (substation size). Estimated from similar scraped
+  substations (a cookbook regressor **or** k-NN median — chosen per held-out validation).
+- **Shape** — normalized 288-cell templates (`max_load/M`, `min_load/M`) from either k-NN
+  donors or a voltage-class group average, again chosen by validation. `profile = M̂ · shape`.
+
+Validation holds out whole **spatial blocks** of scraped SCE substations and reports the
+three facets **separately** (a single conflated number would hide where the error is):
+
+| Facet | Result (held-out scraped SCE) |
+|-------|-------------------------------|
+| **Magnitude** | k-NN median MAE ≈13.6 MW, R²≈−0.04 (beats the tree, which overfits training geography). **Rich SCE features roughly halve MAE (16.4→9.3)** but R² stays ≈0 — and `projected_load` adds almost nothing (rich ≈ rich-no-projected), so it is *not* a circular size oracle. |
+| **Shape** | voltage-class group template median correlation ≈**0.55** (max) / 0.53 (min), beating k-NN donor (0.46/0.49). |
+| **Combined per-cell** | imputed MAE ≈13.8 vs naive-baseline 20.5, but RMSE barely moves (38.0 vs 38.2) → **skill ≈ 0**. |
+
+**The honest conclusion** (visible in `example_profiles.png`): imputation recovers the
+*shape* well but the *magnitude* poorly — held-out rural substations that actually carry ≈0
+load still get sized at 10–20 MW, because location/voltage cannot reveal they are tiny. So
+the deliverable is **right-shape, uncertain-magnitude** profiles with a donor-spread
+uncertainty band, not accurate reconstructions. The **ceiling run** answers "would SCE's rich
+features fix it?" — they materially improve typical-substation magnitude (MAE) but not the
+tail, and cannot be deployed anyway (only 2% of unscraped SCE targets have them). This argues
+that a usable magnitude needs a direct size proxy or conservation to county totals (deferred).
+
+The imputed profiles are a **standalone artifact** — not yet wired into the nodal
+mapping / projection pipeline. Outputs:
+`data/processed/ml/imputed_substation_profiles_sce.csv` (688 subs × 288 cells: imputed
+envelopes, `M̂`, `donor_spread`, method tags), validation tables in
+`data/checks/ml/imputation/`, figures (ceiling bar, shape-correlation, example profiles) in
+`data/figures/ml/imputation/`.
+
+```bash
+python scripts/load_projection/ml/impute_unscraped_load.py                  # SCE, validate + deploy
+python scripts/load_projection/ml/impute_unscraped_load.py --no-deploy      # validation/ceiling only
 ```
 
 ---

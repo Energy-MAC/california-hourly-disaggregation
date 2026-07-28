@@ -54,69 +54,42 @@ sys.path.insert(0, str(ROOT / "scripts/load_projection/nodal"))
 from ml.config import RunConfig  # noqa: E402
 from ml.features import FeatureSpec, add_cyclic, add_cyclic_neighbors  # noqa: E402
 from ml.pipeline import run_cookbook, write_outputs  # noqa: E402
-from map_loads_to_nodes import band_to_cats_class  # noqa: E402
+from substation_features import (COUNTY_FEATURES, IMPUTABLE_STRUCT, RICH_ATTRS,  # noqa: E402
+                                 scraped_structural)
 
 PROF_FILE = ROOT / "data/processed/substations/substation_load_profiles_clean.csv"
-ATTR_FILE = ROOT / "data/processed/substations/substation_attributes_clean.csv"
-COUNTY_MAP = ROOT / "data/processed/substations/substation_county_reeds_mapping.csv"
-POP_FILE = ROOT / "data/raw/reeds/ReEDS-2.0/inputs/disaggregation/county_population.csv"
 
 OUT_CHECKS = ROOT / "data/checks/ml/substation_load"
 OUT_FIG = ROOT / "data/figures/ml/substation_load"
 OUT_PROC = ROOT / "data/processed/ml/substation_load"
 
-# county-level structural features (available for ANY substation via its county)
-COUNTY_FEATURES = ["county_population", "ca_load_fraction", "btm_pv_2024_mw"]
-# SCE-only / scraped-only rich attributes (explanatory config only)
-RICH_ATTRS = ["voltage_kv", "circuit_count", "existing_gen", "queued_gen", "total_gen",
-              "projected_load", "der_penetration", "max_remain_cap",
-              "res_pct", "com_pct", "agr_pct", "ind_pct", "other_pct"]
-
 
 def assemble(target: str) -> tuple[pd.DataFrame, FeatureSpec, list[str]]:
-    """Build the (substation, month, hour) modeling frame + the FeatureSpec."""
+    """Build the (substation, month, hour) modeling frame + the FeatureSpec.
+    Structural features come from the shared substation_features module (one
+    source of truth); calendar + diurnal lags are engineered here at cell level."""
     prof = pd.read_csv(PROF_FILE, usecols=["utility", "substation_name", "month",
                                            "hour_pst", target]).rename(
         columns={"hour_pst": "hour"})
     prof = prof.dropna(subset=[target]).copy()
     prof["substation_id"] = prof.utility + "|" + prof.substation_name
 
-    cmap = pd.read_csv(COUNTY_MAP)
-    pop = pd.read_csv(POP_FILE).rename(columns={"FIPS": "fips_key", "value": "county_population"})
-    cmap = cmap.merge(pop, on="fips_key", how="left")
-    cmap_cols = ["utility", "substation_name", "lat", "lon", "p_region",
-                 "ca_load_fraction", "btm_pv_2024_mw", "county_population"]
-    df = prof.merge(cmap[cmap_cols], on=["utility", "substation_name"], how="left")
-
-    attrs = pd.read_csv(ATTR_FILE)
-    attrs["utility"] = attrs.utility.str.lower()
-    attrs["sub_kv_class"] = attrs.highside_kv.map(band_to_cats_class)
-    keep = ["utility", "substation_name", "highside_kv", "sub_kv_class", *RICH_ATTRS]
-    df = df.merge(attrs[keep], on=["utility", "substation_name"], how="left")
+    struct = scraped_structural()  # per-substation structural features + one-hots
+    df = prof.merge(struct, on=["utility", "substation_name"], how="left")
 
     # --- engineered calendar features ---
     cal_cols = add_cyclic(df, "month", 12) + add_cyclic(df, "hour", 24)
-
-    # --- one-hot low-cardinality categoricals (numeric so every model can use them) ---
-    for util in ["pge", "sce", "sdge"]:
-        df[f"util_{util}"] = (df.utility == util).astype(float)
-    for preg in ["p9", "p10", "p11"]:
-        df[f"preg_{preg}"] = (df.p_region == preg).astype(float)
-    onehot_cols = [f"util_{u}" for u in ["pge", "sce", "sdge"]] + \
-                  [f"preg_{p}" for p in ["p9", "p10", "p11"]]
 
     # --- diurnal-neighbor lags of the target (EXPLANATORY ONLY) ---
     df["_submonth"] = df.substation_id + "|" + df.month.astype(str)
     lag_cols = add_cyclic_neighbors(df, "_submonth", "hour", target, period=24, offsets=(1, 2))
 
-    # imputable features exist for a substation we have NO profile for:
-    #   location, voltage(+class), county proxies, calendar (raw + cyclic), utility, p_region
-    imputable = (["lat", "lon", "highside_kv", "sub_kv_class", *COUNTY_FEATURES,
-                  "month", "hour", *cal_cols, *onehot_cols])
+    # imputable = shared structural set (location, voltage, county, one-hots)
+    #             + calendar (raw + cyclic); explanatory adds SCE-only + lags
+    imputable = IMPUTABLE_STRUCT + ["month", "hour", *cal_cols]
     explanatory = imputable + RICH_ATTRS + lag_cols
 
     spec = FeatureSpec(explanatory=explanatory, imputable=imputable)
-    # guard: imputable features must all exist in the frame
     spec.assert_imputable_available(set(df.columns))
     return df, spec, ["month", "hour"]
 

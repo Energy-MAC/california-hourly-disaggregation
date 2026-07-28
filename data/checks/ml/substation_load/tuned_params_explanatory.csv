@@ -1,4 +1,12 @@
-model,l2_regularization,learning_rate,max_depth,max_leaf_nodes,min_samples_leaf
-cell_mean,,,,,
-linear,,,,,
-hist_gbm,0.030332002719541333,0.025421050711698624,9.0,34.0,115.0
+model,model__alpha,model__l1_ratio,model__C,model__epsilon,model__gamma,l2_regularization,learning_rate,max_depth,max_leaf_nodes,min_samples_leaf,colsample_bytree,min_child_weight,reg_lambda,subsample,min_child_samples,num_leaves
+global_mean,,,,,,,,,,,,,,,,
+cell_mean,,,,,,,,,,,,,,,,
+linear,,,,,,,,,,,,,,,,
+ridge,330.90978022026417,,,,,,,,,,,,,,,
+lasso,0.024100107652212877,,,,,,,,,,,,,,,
+elasticnet,0.024100107652212877,0.8635477285690584,,,,,,,,,,,,,,
+svr,,,3.9453681860170735,0.13330122251145238,0.0003932239820028298,,,,,,,,,,,
+hist_gbm,,,,,,0.009737522639795205,0.03885113463836385,9.0,24.0,138.0,,,,,,
+arx_ols,,,,,,,,,,,,,,,,
+xgboost,,,,,,,0.023174723695839866,7.0,,,0.9638446353872882,1.0,1.333012225114524,0.659463999678442,,
+lightgbm,,,,,,,0.16330807145418588,3.0,,,0.9010660800699741,,0.2873855354505506,0.9947761516670943,35.0,94.0
