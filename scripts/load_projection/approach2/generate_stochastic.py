@@ -16,6 +16,12 @@ CLI parameters:
                 redrawn independently per draw so weather varies across
                 the ensemble)
   --block-days  bootstrap block length in days (default 7)
+  --calibration-window  calibrate F*/s(c)/rho(c) on only the last N complete
+                CAISO years instead of all history (default: all). Reduces the
+                level-drift bias when the target's period differs from the full
+                record (see README + docs/stochastic_model_spec.md); appends
+                __cw{N} to the run tag so windowed runs never overwrite the
+                all-history ones.
   --n-draws     Monte Carlo draws (default 5)
   --year-start/--year-end   subset of target years (default all)
   --seed        RNG seed (default 0)
@@ -23,7 +29,7 @@ CLI parameters:
   --save-output write hourly wide parquet per draw (~47 MB/draw-year, off by default)
 
 Outputs (data/processed/load_projection/projections/<run_tag>/ where run_tag =
-stochastic__{target}__{family}__F{level}__{z-mode}):
+stochastic__{target}__{family}__F{level}__{z-mode}[__cw{N}]):
   substation_annual_mwh.csv       always: per (substation, year, draw) energy
   validation_totals_cells.csv     with --validate: per-cell total q10/q90 check
   validation_marginals_subs.csv   with --validate: per-substation envelope recovery
@@ -55,6 +61,7 @@ from load_projection.stochastic import (  # noqa: E402
     load_caiso_history,
     load_envelope_cells,
     standardize_z,
+    trailing_window,
 )
 
 PROJ_DIR = ROOT / "data/processed/load_projection/projections"
@@ -182,6 +189,25 @@ def marginal_pass(mats, env, cells, target, z_draws, family, scale, n_draws, see
     return per_sub
 
 
+def annualized_mean_twh(annual: pd.DataFrame, target: pd.DataFrame) -> float:
+    """Mean simulated total (TWh/yr) across draws, annualized over COMPLETE
+    calendar years only. Dividing summed energy by the raw count of distinct
+    years understates the rate when the target has a partial year (EIA-930
+    starts mid-2015 with 4,417 hours; that stub is also summer-skewed, so
+    hours-normalizing it in would instead over-state the rate). Years with
+    >= 8000 observed hours are treated as complete; if none are, fall back to
+    hours-normalization so the number is still a sane annual rate."""
+    hrs_by_year = target.groupby(target.dt_pst_hb.dt.year).size()
+    full_years = hrs_by_year.index[hrs_by_year >= 8000]
+    per_draw = annual.groupby("draw").annual_mwh.sum()  # fallback: full period
+    if len(full_years):
+        per_draw = annual[annual.year.isin(full_years)].groupby("draw").annual_mwh.sum()
+        n_year_equiv = len(full_years)
+    else:
+        n_year_equiv = len(target) / 8760
+    return per_draw.mean() / 1e6 / n_year_equiv
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--target", default="eia930")
@@ -189,6 +215,10 @@ def main() -> None:
     ap.add_argument("--F", default="cal")
     ap.add_argument("--z-mode", choices=["native", "bootstrap"], default="native")
     ap.add_argument("--block-days", type=int, default=7)
+    ap.add_argument("--calibration-window", type=int, default=None,
+                    help="calibrate F*/s(c)/rho(c) on only the last N complete "
+                         "CAISO years (default: all history). See README "
+                         "'Rolling-origin calibration CV' and the model spec.")
     ap.add_argument("--n-draws", type=int, default=5)
     ap.add_argument("--year-start", type=int, default=None)
     ap.add_argument("--year-end", type=int, default=None)
@@ -199,7 +229,8 @@ def main() -> None:
 
     env = load_envelope_cells()
     caiso = load_caiso_history()
-    cells, f_star = build_system_cells(env, caiso)
+    calib = trailing_window(caiso, args.calibration_window)
+    cells, f_star = build_system_cells(env, calib)
     mats = EnvelopeMatrices(env)
     target = load_target(args, caiso)
 
@@ -217,23 +248,26 @@ def main() -> None:
 
     tname = "eia930" if args.target == "eia930" else Path(args.target).stem
     f_tag = "cal" if args.F == "cal" else f"{F_level:.2f}"
+    cw_tag = f"__cw{args.calibration_window}" if args.calibration_window else ""
     families = ["normal", "uniform"] if args.family == "both" else [args.family]
 
+    calib_desc = (f"last {args.calibration_window} complete yrs "
+                  f"({calib.dt_pst_hb.dt.year.min()}-{calib.dt_pst_hb.dt.year.max()})"
+                  if args.calibration_window else "all history")
     print(f"target: {tname} {target.dt_pst_hb.dt.year.min()}-"
           f"{target.dt_pst_hb.dt.year.max()} ({len(target):,} hours)   "
           f"F = {F_level:.4f} (scale {scale:.3f})   z-mode: {args.z_mode}   "
-          f"draws: {args.n_draws}")
+          f"draws: {args.n_draws}   calibration: {calib_desc}")
 
     for family in families:
-        run_tag = f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}"
+        run_tag = f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}{cw_tag}"
         out_dir = PROJ_DIR / run_tag
         out_dir.mkdir(parents=True, exist_ok=True)
         annual, totals = trajectory_pass(mats, cells, target, z_draws, family,
                                          scale, args.n_draws, args.seed, out_dir,
                                          args.save_output)
         annual.to_csv(out_dir / "substation_annual_mwh.csv", index=False)
-        mean_twh = annual.groupby("draw").annual_mwh.sum().mean() / 1e6 \
-            / target.dt_pst_hb.dt.year.nunique()
+        mean_twh = annualized_mean_twh(annual, target)
         print(f"\n[{family}] -> {run_tag}: mean {mean_twh:.1f} TWh/yr across draws")
         if args.validate:
             vt = validate_totals(cells, target, totals, family, F_level)
