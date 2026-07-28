@@ -212,34 +212,42 @@ minimum.) The optimum is a **~1-year decay half-life** (relRMSE 5.97% vs all-his
 because it keeps all the data (smoother s(c)/ρ(c)) and isn't data-limited the way the window
 is (its n shrinks with N). Too short a decay (1 day, ~3 obs/cell) is degenerate.
 
-**But that one-year-ahead optimum is *not* the best calibration for either real job.** This
+**But those one-year-ahead optima are *not* the best calibration for either real job.** This
 is the key, and it is why the plot and the tables below look different — they answer
 different questions. Re-scoring a *fixed* calibration through the full `--validate` checks on
-each **complete** target:
+each **complete** target (both tables use the same five calibrations, so the two
+one-year-ahead CV optima — trailing-2 and decay-365 — appear in both even where they lose;
+bold = best on that target):
 
 *Historical target — EIA-930, scored on the whole 2015–2025 record:*
 
 | Calibration | F\* | (i) total err | (ii) recovery med/p95 | (iii) relRMSE / bias |
 |-------------|-----|---------------|-----------------------|----------------------|
 | **all-history** (best here) | 0.7361 | **0.15%** | 1.1% / 3.3% | **0.40% / +0.00%** |
+| trailing-2 yr *(CV window opt)* | 0.7340 | 3.17% | 1.14% / 3.35% | 4.49% / +0.61% |
 | trailing-5 yr | 0.7407 | 1.84% | 1.13% / 3.29% | 2.68% / −0.46% |
-| decay-365 d (plot optimum) | 0.7370 | 2.61% | 1.12% / 3.25% | 3.68% / +0.18% |
+| trailing-7 yr | 0.7462 | 1.25% | 1.13% / 3.28% | 2.09% / −1.30% |
+| decay-365 d *(CV decay opt)* | 0.7370 | 2.61% | 1.12% / 3.25% | 3.68% / +0.18% |
 
 *Projected target — RESOLVE (2024-BTM-net weather years):*
 
 | Calibration | F\* | (i) total err | (ii) recovery med/p95 | (iii) relRMSE / bias |
 |-------------|-----|---------------|-----------------------|----------------------|
 | all-history | 0.7361 | 4.15% | 0.81% / 2.44% | 9.43% / +5.56% |
+| trailing-2 yr *(CV window opt)* | 0.7340 | 7.23% | 0.79% / 2.42% | 11.87% / +6.26% |
+| trailing-5 yr | 0.7407 | 5.51% | 0.80% / 2.39% | 9.11% / +5.04% |
 | **trailing-7 yr** (best here) | 0.7462 | **3.89%** | 0.81% / 2.47% | **8.08% / +4.12%** |
-| decay-365 d (plot optimum) | 0.7370 | 6.86% | 0.79% / 2.36% | 11.01% / +5.81% |
+| decay-365 d *(CV decay opt)* | 0.7370 | 6.86% | 0.79% / 2.36% | 11.01% / +5.81% |
 
 **The rule is: match the calibration period to the target period** — which is exactly why no
 single "optimal" row exists across the plot and both tables. The one-year-ahead search picks
-recency (≈1-yr decay / ≈2-yr window) because its target is *next year*. All-history wins for
-*describing the whole historical record* (it is in-sample there). And *neither* rescues the
-RESOLVE projection — its level gap is structural and belongs to `--F`, not to recency. The
-recency knobs are `generate_stochastic.py --decay-halflife H` (soft) and
-`--calibration-window N` (hard); both default off (all-history, unchanged).
+recency (≈1-yr decay / ≈2-yr window) because its target is *next year* — and note both of
+those optima (trailing-2, decay-365) are *worse* than all-history on both full targets.
+All-history wins for *describing the whole historical record* (it is in-sample there). For
+RESOLVE, only trailing-7 beats all-history — and only by luck (2019–25 is the lowest-demand
+window, nearest RESOLVE's solar-heavy level); it still leaves +4.12%, a structural level gap
+that belongs to `--F`, not to recency. The recency knobs are `generate_stochastic.py
+--decay-halflife H` (soft) and `--calibration-window N` (hard); both default off.
 
 ```bash
 python scripts/load_projection/approach2/rolling_origin_cv.py
