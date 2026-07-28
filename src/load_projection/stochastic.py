@@ -22,6 +22,7 @@ EIA_FILE = ROOT / "data/processed/eia/eia930_operations.csv"
 Z90 = 1.2815515655446004  # Phi^-1(0.9)
 N_CELLS = 288  # 12 months x 24 hours
 YEAR_RANGE = (2015, 2025)  # complete PST years of EIA-930 used for estimation
+FULL_YEAR_MIN_HOURS = 8000  # a year with fewer observed hours is "incomplete"
 
 
 def cell_index(month, hour) -> np.ndarray:
@@ -79,6 +80,26 @@ def load_caiso_history() -> pd.DataFrame:
     out["hour_pst"] = out.dt_pst_hb.dt.hour
     out["cell"] = cell_index(out.month, out.hour_pst)
     return out.reset_index(drop=True)
+
+
+def complete_years(caiso: pd.DataFrame, min_hours: int = FULL_YEAR_MIN_HOURS) -> list[int]:
+    """Calendar years in `caiso` with at least `min_hours` observed hours
+    (i.e. not a partial stub; EIA-930's 2015 has only 4,417)."""
+    hrs = caiso.groupby(caiso.dt_pst_hb.dt.year).size()
+    return sorted(int(y) for y in hrs.index[hrs >= min_hours])
+
+
+def trailing_window(caiso: pd.DataFrame, window: int | None,
+                    min_hours: int = FULL_YEAR_MIN_HOURS) -> pd.DataFrame:
+    """Restrict a CAISO history to its last `window` COMPLETE calendar years,
+    for a recency-limited calibration (see docs/stochastic_model_spec.md,
+    "Rolling-window calibration"). `window=None` returns `caiso` unchanged, so
+    the default all-history behavior is byte-for-byte preserved. `window`
+    larger than the number of complete years keeps all of them."""
+    if not window:
+        return caiso
+    keep = complete_years(caiso, min_hours)[-window:]
+    return caiso[caiso.dt_pst_hb.dt.year.isin(keep)].reset_index(drop=True)
 
 
 def build_system_cells(env: pd.DataFrame, caiso: pd.DataFrame) -> tuple[pd.DataFrame, float]:

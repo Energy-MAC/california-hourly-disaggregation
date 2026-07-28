@@ -210,6 +210,61 @@ synchronization — a data-inconsistency signal, which is why the estimator
 reports the number of capped cells (zero on our data; largest ρ̂ = 0.48, so
 the cap is currently dormant and no estimate is distorted by it).
 
+## Rolling-window calibration (extension, 2026-07-27)
+
+The estimators above pool a fixed calibration window `W` of CAISO history (the
+original decision: all complete years 2015–2025). Making `W` an explicit knob
+does not change the model — only which slice of history the CAISO-side moments
+come from. Everything estimated from CAISO becomes window-conditional:
+
+```
+ȳ_c^W , sd_c^W          within-cell mean / sd over the hours of W
+f_W(c)  = Σ_s μ_s / ȳ_c^W
+F*_W    = energy-weighted mean of f_W(c)          s_W(c) = f_W(c)/F*_W
+ρ_W(c)  = min(1, (f_W(c)·sd_c^W / Σ_s σ_s)²)
+```
+
+The envelope-side quantities `μ_s, σ_s, Σ_s μ_s, Σ_s σ_s` are **window-invariant**
+(they come from the utility envelopes, not CAISO). Two consequences:
+
+1. **The output level is window-invariant.** At the calibrated level, the
+   expected total per cell is `E[Σ_s m_s(t) | c] = Σ_s μ_s` (because `z^W` has
+   within-cell mean 0 by construction), so the expected annual total is
+   `Σ_c Σ_s μ_s(c) · (hours in that cell)` **for any `W`**. Narrowing the window
+   never moves the level — it re-estimates the *shape* `s_W(c)`, the
+   *correlation* `ρ_W(c)`, and the *tracking reference* `f_W(c)·y(t)`.
+
+2. **The window is the lever on the tracking bias.** For a target series `y(·)`
+   scored under calibration `W`, the per-hour bias of the expected total against
+   the reference is, exactly,
+
+   ```
+   bias(t) = Σ_s μ_s(c) / (f_W(c)·y(t)) − 1 = ȳ_c^W / y(t) − 1
+   ```
+
+   i.e. the ratio of the calibration window's cell mean to the target's actual
+   demand. When `W` and the target come from the same period this is ≈ 0 (the
+   in-sample case); the RESOLVE +5.56% and the rolling-origin CV drift are both
+   this term with `ȳ_c^W` from an older/broader period than the target.
+
+**Bias–variance tradeoff.** Observations per cell fall roughly linearly with
+`|W|` (all history ≈ 319 obs/cell; a 5-year window ≈ 145), so `ρ_W(c)` and
+`s_W(c)` grow noisier as the window shrinks. The rolling-origin CV
+(`rolling_origin_cv.py`) shows the turn: a 5-year trailing window minimizes
+one-year-ahead |bias| and is the most stable, while a 3-year window lowers the
+*mean* bias further but has the highest cross-origin variance.
+
+**Decision (2026-07-27):** expose `W` as `--calibration-window N` (last `N`
+complete CAISO years); **default remains all-history**, byte-for-byte unchanged.
+Use all history to describe the historical record (in-sample optimal); use a
+trailing window (≈5–7 yr on the current record) when projecting a target whose
+level and shape reflect recent conditions. Because the window removes only the
+*temporal-drift* component of a level gap, pair it with an explicit `--F` when
+the target's absolute level is known and differs structurally (e.g. RESOLVE
+nets out 2024 BTM-PV, a scope difference no CAISO window can absorb). This
+revises the earlier "trend-free, pooling is safe" note: pooling is safe for
+*describing 2015–2025*, but leaves a recency gap against a forward projection.
+
 ## Decided
 
 - Substation envelopes are **net-of-BTM** (evidence in CLAUDE.md consistency
@@ -224,10 +279,13 @@ the cap is currently dormant and no estimate is distorted by it).
   vs non-residential shares) could in principle inform β_s but a realistic
   mapping is out of reach. Decision (2026-07-17): **constant β within cell**,
   stated as a model assumption.
-- **CAISO estimation window: all years, 2015–2025** (~319 obs/cell). Decision
-  2026-07-17. CAISO net demand is trend-free over this period (annual means
-  24.5–28.0 GW), so pooling is safe. `--year-start/--year-end` remain available
-  for window sensitivity.
+- **CAISO estimation window: all years, 2015–2025** (~319 obs/cell) by default.
+  Decision 2026-07-17. CAISO net demand is roughly trend-free over this period
+  (annual means 24.5–28.0 GW), so pooling is safe *for describing the record
+  itself*. Revisited 2026-07-27 (see "Rolling-window calibration"): the mild
+  recency gap does bias tracking against a forward-looking target, so
+  `--calibration-window N` now exposes a trailing window; the all-history
+  default is unchanged. `--year-start/--year-end` remain for window sensitivity.
 - Marginal families to compare: **normal** and **uniform** (same `z(t)` and
   `ρ`, different marginal shape).
 

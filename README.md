@@ -331,7 +331,11 @@ draws/draw{k}.parquet          --save-output: hourly wide matrix per draw
 | (ii) envelope recovery (width-normalized, 375,906 sub-cells) | median 1.1%, p95 3.3% | median 2.4%, p95 4.0% |
 | (iii) hourly tracking relRMSE (copula/MC error) | 0.40%, bias +0.002% | 0.78%, bias +0.013% |
 
-Mean simulated total: 157.5 TWh/yr = F\* × CAISO mean (~214 TWh/yr) ✓.
+Mean simulated total: 164.3 TWh/yr = F\* × CAISO mean (~223 TWh/yr) ✓,
+annualized over the ten **complete** calendar years (2016–2025). EIA-930
+starts mid-2015 with a 4,417-hour, summer-skewed stub; dividing summed energy
+by the raw count of distinct years (11) understated the rate as 157.5 TWh/yr
+in earlier revisions. `annualized_mean_twh()` now excludes incomplete years.
 Residual marginal-recovery error comes from the empirical z(t) not being
 exactly standard normal (skewed weather distribution), not from the sampler.
 
@@ -355,25 +359,149 @@ already-fit model behaves on a target series outside its training data.
 | (ii) envelope recovery q90 (width-normalized, 375,906 sub-cells) | median 0.76%, p95 2.22% | median 2.47%, p95 3.53% |
 | (iii) hourly tracking relRMSE / bias | 9.43%, +5.56% | 9.52%, +5.57% |
 
-Mean simulated total: 164.2 TWh/yr (normal) — higher than EIA-930's 157.5
-TWh/yr because F\* is fixed and RESOLVE's own y(t) runs higher, not a model
-artifact. **Check (ii), against the actual utility q10/q90, barely moves**
-(normal 0.81%/0.76% vs 1.1% on EIA-930; uniform 2.42%/2.47% vs 2.4%) — it's
-dominated by the idiosyncratic ε_s draw and the fixed μ_s/σ_s, so it's
-largely indifferent to which z(t) drives it. **Checks (i) and (iii), which
-compare against F·s(c)·y(t) computed from the target's *own* cell-level
-distribution, degrade sharply** (total error medians 3.7–4.9% vs
-0.16–0.22%; tracking relRMSE ~9.5% vs 0.4–0.8%, with a consistent +5.6%
-bias): s(c) and ρ(c) encode CAISO's historical duck-curve shape and diurnal
-correlation structure, and RESOLVE's weather-year cell distribution doesn't
-reproduce that shape as closely — the model's "expected" per-cell
-distribution and RESOLVE's actual one disagree by more than sampler/MC
-noise alone would predict.
+Mean simulated total: 164.2 TWh/yr (normal) — essentially identical to
+EIA-930's 164.3, because the simulated level is set by the (fixed) substation
+envelopes Σμ_s and is **independent of the target**: with `--F cal` the mean
+per cell collapses to Σμ_s(c) whatever y(t) is (z is standardized to mean 0
+within each cell). So the level is not what differs out of sample.
+
+**Check (ii), against the actual utility q10/q90, barely moves** (normal
+0.81%/0.76% vs 1.1% on EIA-930; uniform 2.42%/2.47% vs 2.4%) — it's dominated
+by the idiosyncratic ε_s draw and the fixed μ_s/σ_s, so it's largely
+indifferent to which z(t) drives it. **Checks (i) and (iii), which compare
+against F·s(c)·y(t) built from the target's *own* cell distribution, degrade
+sharply** (total error medians 3.7–4.9% vs 0.16–0.22%; tracking relRMSE ~9.5%
+vs 0.4–0.8%, with a consistent **+5.56% bias**). This bias has a closed form:
+since s(c) = Σμ_s(c) / (F\*·ȳ_train(c)), the per-hour ratio of the model's
+expected total to the reference works out to **ȳ_train(c) / y_target(t) −
+1**. Energy-weighted across cells, ȳ_CAISO / ȳ_RESOLVE = **1.047**, i.e. the
+CAISO 2015–2025 training mean sits ~4.7% *above* RESOLVE's weather-year cells
+(equivalently RESOLVE ~4.5% below) — RESOLVE nets out *2024* BTM-PV levels,
+while the historical training mean is propped up by 2016–2018, when metered
+CAISO demand ran ~26 GW (less BTM) vs ~25 GW from 2019 on. The model, driven
+only by shape and anchored to the training level, doesn't self-adjust for a
+target whose absolute level differs; feeding it a target of known level via
+an explicit `--F` (rather than `cal`) removes this component. The residual
+after the level offset — that s(c)/ρ(c) also encode CAISO's specific
+duck-curve shape, which RESOLVE's cells don't reproduce exactly — is the part
+that no level rescale can fix. See "Rolling-origin calibration CV" below for
+how much of this same drift is present *within* the historical record.
 
 ```bash
 python scripts/load_projection/approach2/build_resolve_target.py
 python scripts/load_projection/approach2/generate_stochastic.py \
     --target data/processed/resolve/resolve_caiso_target.csv --validate
+```
+
+#### Rolling-origin calibration CV (historical data only)
+
+`scripts/load_projection/approach2/rolling_origin_cv.py` measures the same
+tracking bias *within* EIA-930 — no RESOLVE, no forecast — by calibrating on
+one period and scoring a held-out later one. Because the bias has the closed
+form `ȳ_train(c)/y_test(t) − 1` (above), a forecast is just an extreme case of
+using an old calibration window on a new target, and the drift is measurable
+without leaving the historical record. Scoring uses the semi-analytic draw-mean
+of check (iii) (reproduces `--validate`'s bias/relRMSE to <0.03 pp), so the
+whole sweep runs in seconds. Two calibration strategies are compared:
+
+- **expanding** — all complete CAISO years ≤ origin (current behavior).
+- **trailing-N** — only the last N complete years; re-estimated as the origin
+  advances, so it can "run into the future" by always using the latest window.
+
+Complete CAISO years 2016–2025 (2015 is the partial stub, excluded):
+
+| Strategy | 1-yr-ahead mean bias | 1-yr-ahead mean \|bias\| | bias sd | mean relRMSE | all-horizon mean \|bias\| |
+|----------|----------------------|--------------------------|---------|--------------|---------------------------|
+| expanding | **+1.84%** | 2.09% | 2.55 | 6.57% | 2.97% |
+| trailing-3 | +0.83% | 2.32% | **3.36** | 6.47% | 2.26% |
+| trailing-5 | **−0.36%** | **1.47%** | **1.73** | **6.27%** | **1.36%** |
+
+Findings:
+
+- **The RESOLVE +5.56% bias is the same mechanism, present in-history.**
+  Expanding-window calibration over-predicts one-year-ahead by +1.84% (up to
+  +3–4% at longer horizons) because it stays anchored to the higher-demand
+  2016–2018 years (~26 GW metered) while recent years run ~25 GW. Same sign,
+  same cause as the RESOLVE gap; the RESOLVE number is just larger because
+  RESOLVE also differs in BTM-netting level and geographic scope, which no
+  window choice can fix. The `origin 2018 → test 2019` spike to +7% is the
+  2018→2019 demand drop.
+- **A trailing window reduces it, using only historical data.** Trailing-5
+  cuts one-year-ahead |bias| 2.09% → 1.47%, centers the mean bias (+1.84% →
+  −0.36%), lowers relRMSE, and is the *most stable* (bias sd 1.73 vs 2.55).
+- **But too short a window trades bias for variance** — trailing-3 lowers the
+  *mean* bias (+0.83%) yet has the highest spread (sd 3.36) and highest
+  |bias|, exactly the bias–variance tension expected from a short look-back.
+  Five years is the sweet spot on this record.
+
+The trailing window is exposed as `generate_stochastic.py --calibration-window N`
+(calibrate F\*/s(c)/ρ(c) on the last N complete CAISO years; **default is
+all-history, byte-for-byte unchanged**; appends `__cw{N}` to the run tag). See
+"Calibration-window search" below for the full validation tables under each
+window, and `docs/stochastic_model_spec.md` → "Rolling-window calibration" for
+how it fits the model. For genuine multi-decade horizons the trailing window
+removes *historical* drift but can't anticipate future structural change, so it
+complements — does not replace — supplying the target's own level via `--F`.
+
+```bash
+python scripts/load_projection/approach2/rolling_origin_cv.py
+python scripts/load_projection/approach2/rolling_origin_cv.py --windows 3,5,7
+```
+
+#### Calibration-window search (`--calibration-window`)
+
+The same three `--validate` checks, recomputed under each calibration window
+(normal family; uniform tracks it — the window changes only the CAISO-side
+`f(c)`/`s(c)`/`ρ(c)`, which feed both families identically). check (i) is the
+pooled-q10/q90 median per-cell total error; the all-history row is the original
+no-window calibration. **The mean simulated total is 164 TWh/yr in every row** —
+the level is set by the fixed substation envelopes Σμ_s and is window-invariant
+(only the *reference* the checks score against moves).
+
+Historical target — **EIA-930 2015–2025** (calibrate on a sub-window, score on
+the whole record):
+
+| Calibration | F\* | (i) total err | (ii) recovery med / p95 | (iii) relRMSE / bias |
+|-------------|-----|---------------|-------------------------|----------------------|
+| all-history (2016–25) | 0.7361 | **0.15%** | 1.1% / 3.3% | **0.40% / +0.00%** |
+| trailing-5 (2021–25)  | 0.7407 | 1.84% | 1.13% / 3.29% | 2.68% / −0.46% |
+| trailing-3 (2023–25)  | 0.7401 | 2.82% | 1.12% / 3.29% | 4.23% / −0.19% |
+
+Projected target — **RESOLVE** (2024-BTM-net weather years):
+
+| Calibration | F\* | (i) total err | (ii) recovery med / p95 | (iii) relRMSE / bias |
+|-------------|-----|---------------|-------------------------|----------------------|
+| all-history (2016–25) | 0.7361 | 4.15% | 0.81% / 2.44% | 9.43% / +5.56% |
+| trailing-7 (2019–25)  | 0.7462 | **3.89%** | 0.81% / 2.47% | **8.08% / +4.12%** |
+| trailing-5 (2021–25)  | 0.7407 | 5.51% | 0.80% / 2.39% | 9.11% / +5.04% |
+| trailing-3 (2023–25)  | 0.7401 | 7.32% | 0.78% / 2.36% | 10.69% / +5.38% |
+
+Reading the two tables together — the rule is **match the calibration period to
+the target period**:
+
+- **check (ii) is flat everywhere** (~1.1% historical, ~0.8% projected): the
+  utility-envelope recovery is set by the fixed μ_s/σ_s and the idiosyncratic
+  draw, so the calibration window barely touches it. All the action is in
+  checks (i)/(iii), which score against the window-dependent `f(c)·y(t)`.
+- **Historical: all-history wins** (in-sample, 0.15% / 0.40%). Narrowing the
+  window monotonically worsens (i)/(iii) — you're scoring against 2015–2020
+  years the window excluded. Use all history to describe the historical record.
+- **Projected: a window helps, but not monotonically.** trailing-7 is the only
+  window that beats all-history (bias +5.56% → +4.12%, relRMSE 9.43% → 8.08%),
+  because 2019–2025's lower mean demand (the 2019–20 dip included) is closest to
+  RESOLVE's 2024-BTM-net level. trailing-5 and trailing-3 overshoot — shorter,
+  higher-mean, noisier windows push bias and error back up. This matches the
+  rolling-origin CV's message that too short a window trades bias for variance,
+  and the residual +4.12% at the best window is the **structural** BTM/scope gap
+  no CAISO window can close (that part needs an explicit `--F`).
+
+```bash
+# default (all-history) — unchanged
+python scripts/load_projection/approach2/generate_stochastic.py --validate
+# trailing 5-year calibration against a RESOLVE forecast target
+python scripts/load_projection/approach2/generate_stochastic.py \
+    --target data/processed/resolve/resolve_caiso_target.csv \
+    --calibration-window 5 --validate
 ```
 
 #### Run commands
@@ -401,6 +529,10 @@ python scripts/load_projection/approach2/generate_stochastic.py --target forecas
   legibility.
 - Args: `--which`, `--substation "utility:NAME"`, `--n-draws`, `--year`,
   `--weather-year`, `--month`, `--day`, `--seed`.
+
+`scripts/load_projection/approach2/rolling_origin_cv.py` writes
+`rolling_origin_cv.png` (two panels: one-year-ahead bias by origin, and bias
+vs horizon) to the same folder, plus `data/checks/stochastic/rolling_origin_cv.csv`.
 
 ---
 
