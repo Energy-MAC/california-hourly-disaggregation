@@ -22,6 +22,10 @@ CLI parameters:
                 record (see README + docs/stochastic_model_spec.md); appends
                 __cw{N} to the run tag so windowed runs never overwrite the
                 all-history ones.
+  --decay-halflife  recency-weight the calibration with an exponential kernel of
+                this half-life in calendar days (smooth alternative to the hard
+                window; composes with it). Captures BTM-driven shape drift;
+                appends __hl{N} to the run tag.
   --n-draws     Monte Carlo draws (default 5)
   --year-start/--year-end   subset of target years (default all)
   --seed        RNG seed (default 0)
@@ -57,6 +61,7 @@ from load_projection.stochastic import (  # noqa: E402
     bootstrap_z,
     build_system_cells,
     cell_index,
+    decay_weights,
     generate,
     load_caiso_history,
     load_envelope_cells,
@@ -219,6 +224,11 @@ def main() -> None:
                     help="calibrate F*/s(c)/rho(c) on only the last N complete "
                          "CAISO years (default: all history). See README "
                          "'Rolling-origin calibration CV' and the model spec.")
+    ap.add_argument("--decay-halflife", type=float, default=None,
+                    help="recency-weight the calibration with an exponential "
+                         "kernel of this half-life in CALENDAR DAYS (smooth "
+                         "alternative to --calibration-window; composes with it "
+                         "if both given). Default: unweighted. Appends __hl{N}.")
     ap.add_argument("--n-draws", type=int, default=5)
     ap.add_argument("--year-start", type=int, default=None)
     ap.add_argument("--year-end", type=int, default=None)
@@ -230,7 +240,8 @@ def main() -> None:
     env = load_envelope_cells()
     caiso = load_caiso_history()
     calib = trailing_window(caiso, args.calibration_window)
-    cells, f_star = build_system_cells(env, calib)
+    weights = decay_weights(calib, args.decay_halflife) if args.decay_halflife else None
+    cells, f_star = build_system_cells(env, calib, weights)
     mats = EnvelopeMatrices(env)
     target = load_target(args, caiso)
 
@@ -249,18 +260,21 @@ def main() -> None:
     tname = "eia930" if args.target == "eia930" else Path(args.target).stem
     f_tag = "cal" if args.F == "cal" else f"{F_level:.2f}"
     cw_tag = f"__cw{args.calibration_window}" if args.calibration_window else ""
+    hl_tag = f"__hl{int(args.decay_halflife)}" if args.decay_halflife else ""
     families = ["normal", "uniform"] if args.family == "both" else [args.family]
 
     calib_desc = (f"last {args.calibration_window} complete yrs "
                   f"({calib.dt_pst_hb.dt.year.min()}-{calib.dt_pst_hb.dt.year.max()})"
                   if args.calibration_window else "all history")
+    if args.decay_halflife:
+        calib_desc += f", decay half-life {args.decay_halflife:g} d (median n_eff {cells.n_obs.median():.0f})"
     print(f"target: {tname} {target.dt_pst_hb.dt.year.min()}-"
           f"{target.dt_pst_hb.dt.year.max()} ({len(target):,} hours)   "
           f"F = {F_level:.4f} (scale {scale:.3f})   z-mode: {args.z_mode}   "
           f"draws: {args.n_draws}   calibration: {calib_desc}")
 
     for family in families:
-        run_tag = f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}{cw_tag}"
+        run_tag = f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}{cw_tag}{hl_tag}"
         out_dir = PROJ_DIR / run_tag
         out_dir.mkdir(parents=True, exist_ok=True)
         annual, totals = trajectory_pass(mats, cells, target, z_draws, family,

@@ -102,7 +102,47 @@ def trailing_window(caiso: pd.DataFrame, window: int | None,
     return caiso[caiso.dt_pst_hb.dt.year.isin(keep)].reset_index(drop=True)
 
 
-def build_system_cells(env: pd.DataFrame, caiso: pd.DataFrame) -> tuple[pd.DataFrame, float]:
+def decay_weights(caiso: pd.DataFrame, halflife_days: float,
+                  as_of: pd.Timestamp | None = None) -> np.ndarray:
+    """Exponential recency weights `0.5**(age_days / halflife_days)` for each
+    CAISO row, aged in CALENDAR time from `as_of` (default: the latest hour in
+    `caiso`). Calendar age is the right staleness measure for a BTM-driven
+    non-stationarity: an observation's weight reflects how much BTM has grown
+    since it was recorded. Fed to `build_system_cells(..., weights=)`; per cell
+    this down-weights older years' occurrences of that (month, hour) -- the
+    smooth generalization of `trailing_window` (a rectangular kernel).
+    halflife_days -> inf recovers the unweighted all-history calibration; a very
+    short halflife collapses each cell onto its most recent same-month day."""
+    if as_of is None:
+        as_of = caiso["dt_pst_hb"].max()
+    age_days = (as_of - caiso["dt_pst_hb"]).dt.total_seconds().to_numpy() / 86400.0
+    return 0.5 ** (age_days / float(halflife_days))
+
+
+def _cell_moments(caiso: pd.DataFrame, weights: np.ndarray | None) -> pd.DataFrame:
+    """Per-cell ybar, sd, n_obs. `weights=None` is the plain unweighted groupby
+    (byte-for-byte the original path); otherwise weighted moments with an
+    effective sample size n_eff = (sum w)^2 / sum(w^2) and its Bessel correction."""
+    if weights is None:
+        return caiso.groupby("cell")["demand_mw"].agg(ybar="mean", sd="std", n_obs="count")
+    c = caiso["cell"].to_numpy()
+    y = caiso["demand_mw"].to_numpy()
+    w = np.asarray(weights, dtype=float)
+    sw = np.bincount(c, w, N_CELLS)
+    swy = np.bincount(c, w * y, N_CELLS)
+    swy2 = np.bincount(c, w * y * y, N_CELLS)
+    sw2 = np.bincount(c, w * w, N_CELLS)
+    with np.errstate(invalid="ignore", divide="ignore"):
+        ybar = swy / sw
+        var_pop = swy2 / sw - ybar ** 2
+        neff = sw ** 2 / sw2
+        sd = np.sqrt(np.clip(var_pop, 0, None) * np.where(neff > 1, neff / (neff - 1), np.nan))
+    return pd.DataFrame({"ybar": ybar, "sd": sd, "n_obs": neff},
+                        index=pd.RangeIndex(N_CELLS, name="cell"))
+
+
+def build_system_cells(env: pd.DataFrame, caiso: pd.DataFrame,
+                       weights: np.ndarray | None = None) -> tuple[pd.DataFrame, float]:
     """Per-cell system table and the calibrated level F*.
 
     Columns: sum_mu, sum_sigma (envelope aggregates); ybar, sd, n_obs (CAISO
@@ -111,9 +151,14 @@ def build_system_cells(env: pd.DataFrame, caiso: pd.DataFrame) -> tuple[pd.DataF
 
     F* is the energy-weighted mean of implied_f: total envelope-implied energy
     over total CAISO energy, so F* = the calibrated annual IOU share.
+
+    `weights` (optional, one per CAISO row -- e.g. from `decay_weights`) makes
+    ybar, sd, n_obs, and hence f(c)/s(c)/rho(c) recency-weighted; `None` is the
+    unweighted all-history default (see docs/stochastic_model_spec.md,
+    "Rolling-window calibration").
     """
     agg = env.groupby("cell").agg(sum_mu=("mu", "sum"), sum_sigma=("sigma", "sum"))
-    cy = caiso.groupby("cell")["demand_mw"].agg(ybar="mean", sd="std", n_obs="count")
+    cy = _cell_moments(caiso, weights)
     cells = agg.join(cy)
     cells["implied_f"] = cells.sum_mu / cells.ybar
     f_star = (cells.sum_mu * cells.n_obs).sum() / (cells.ybar * cells.n_obs).sum()
