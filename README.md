@@ -188,37 +188,57 @@ not this self-referential metric.
 **Calibration-recency search** (`rolling_origin_cv.py`; figure `calibration_search.png`).
 The one tunable hyperparameter is *how much recent CAISO years count more* when calibrating
 s(c)/ρ(c). A rolling-origin CV — a genuine chronological train/test split within EIA-930 —
-selects it by held-out one-year-ahead error:
+selects it by **held-out one-year-ahead error**. The two tables below are the two panels of
+`calibration_search.png`; the starred optima in the plot are the bolded cells here.
+
+*Panel (a) — soft decay kernel* (all half-lives share the same 9 origins → absolute
+one-year-ahead relRMSE):
 
 | Decay half-life | 1 d | 1 wk | 1 mo | 3 mo | **1 yr** | 2 yr | 3 yr | 5 yr | 7 yr | all-history |
 |-----------------|-----|------|------|------|----------|------|------|------|------|-------------|
-| one-year-ahead relRMSE | 8.97% | 6.76% | 6.37% | 6.25% | **5.97%** | 6.12% | 6.23% | 6.35% | 6.41% | 6.57% |
+| relRMSE | 8.97% | 6.76% | 6.37% | 6.25% | **5.97%** | 6.12% | 6.23% | 6.35% | 6.41% | 6.57% |
 
-A clean U: too short (1 day, ~3 obs/cell) is degenerate; the optimum is a **~1-year decay
-half-life** (soft exponential kernel), which beats both a hard trailing window and using all
-history equally. Applying the chosen calibrations back through the full `--validate` checks,
-on both targets:
+*Panel (b) — hard look-back window* (a window is only definable back N years, so each is
+scored against all-history on *its own* origins — a matched Δ; below 0 = beats all-history):
 
-*Historical target — EIA-930 (calibrate on a sub-window, score the whole record):*
+| Hard window (yr) | 1 | **2** | 3 | 4 | 5 | 6 | 7 |
+|------------------|---|-------|---|---|---|---|---|
+| relRMSE vs matched all-history (pp) | −0.18 | **−0.58** | −0.58 | −0.37 | −0.26 | −0.09 | +0.00 |
+| n origins | 9 | 8 | 7 | 6 | 5 | 4 | 3 |
+
+(2 yr and 3 yr are effectively tied at −0.58 pp; the plot stars **2 yr** as the marginal
+minimum.) The optimum is a **~1-year decay half-life** (relRMSE 5.97% vs all-history's
+6.57%) or, equivalently, a **~2-year hard window** (−0.58 pp) — the soft decay is preferred
+because it keeps all the data (smoother s(c)/ρ(c)) and isn't data-limited the way the window
+is (its n shrinks with N). Too short a decay (1 day, ~3 obs/cell) is degenerate.
+
+**But that one-year-ahead optimum is *not* the best calibration for either real job.** This
+is the key, and it is why the plot and the tables below look different — they answer
+different questions. Re-scoring a *fixed* calibration through the full `--validate` checks on
+each **complete** target:
+
+*Historical target — EIA-930, scored on the whole 2015–2025 record:*
 
 | Calibration | F\* | (i) total err | (ii) recovery med/p95 | (iii) relRMSE / bias |
 |-------------|-----|---------------|-----------------------|----------------------|
-| all-history | 0.7361 | **0.15%** | 1.1% / 3.3% | **0.40% / +0.00%** |
+| **all-history** (best here) | 0.7361 | **0.15%** | 1.1% / 3.3% | **0.40% / +0.00%** |
 | trailing-5 yr | 0.7407 | 1.84% | 1.13% / 3.29% | 2.68% / −0.46% |
-| decay-365 d | 0.7370 | 2.61% | 1.12% / 3.25% | 3.68% / +0.18% |
+| decay-365 d (plot optimum) | 0.7370 | 2.61% | 1.12% / 3.25% | 3.68% / +0.18% |
 
 *Projected target — RESOLVE (2024-BTM-net weather years):*
 
 | Calibration | F\* | (i) total err | (ii) recovery med/p95 | (iii) relRMSE / bias |
 |-------------|-----|---------------|-----------------------|----------------------|
 | all-history | 0.7361 | 4.15% | 0.81% / 2.44% | 9.43% / +5.56% |
-| trailing-7 yr | 0.7462 | **3.89%** | 0.81% / 2.47% | **8.08% / +4.12%** |
-| decay-365 d | 0.7370 | 6.86% | 0.79% / 2.36% | 11.01% / +5.81% |
+| **trailing-7 yr** (best here) | 0.7462 | **3.89%** | 0.81% / 2.47% | **8.08% / +4.12%** |
+| decay-365 d (plot optimum) | 0.7370 | 6.86% | 0.79% / 2.36% | 11.01% / +5.81% |
 
-**The rule is: match the calibration period to the target period.** All-history best
-*describes the historical record* (in-sample); recency (decay ≈ 1 yr) best predicts *next
-year*; neither rescues the RESOLVE projection, whose level gap is structural and belongs to
-`--F`. The recency knobs are `generate_stochastic.py --decay-halflife H` (soft) and
+**The rule is: match the calibration period to the target period** — which is exactly why no
+single "optimal" row exists across the plot and both tables. The one-year-ahead search picks
+recency (≈1-yr decay / ≈2-yr window) because its target is *next year*. All-history wins for
+*describing the whole historical record* (it is in-sample there). And *neither* rescues the
+RESOLVE projection — its level gap is structural and belongs to `--F`, not to recency. The
+recency knobs are `generate_stochastic.py --decay-halflife H` (soft) and
 `--calibration-window N` (hard); both default off (all-history, unchanged).
 
 ```bash
