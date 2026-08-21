@@ -1,0 +1,58 @@
+fips_int,county_name,n_nodes,n_covered,coverage,gated,in_pool_nodes
+6001,Alameda,99,40,0.4040404,True,99
+6003,Alpine,1,1,1.0,True,1
+6005,Amador,19,9,0.47368421,True,19
+6007,Butte,55,17,0.30909091,True,55
+6009,Calaveras,13,3,0.23076923,False,3
+6011,Colusa,15,8,0.53333333,True,15
+6013,Contra Costa,125,50,0.4,True,125
+6017,El Dorado,26,6,0.23076923,False,6
+6019,Fresno,123,50,0.40650407,True,123
+6021,Glenn,15,8,0.53333333,True,15
+6023,Humboldt,32,19,0.59375,True,32
+6025,Imperial,98,0,0.0,False,0
+6027,Inyo,30,3,0.1,False,3
+6029,Kern,259,85,0.32818533,True,259
+6031,Kings,33,10,0.3030303,True,33
+6033,Lake,18,8,0.44444444,True,18
+6035,Lassen,27,0,0.0,False,0
+6037,Los Angeles,524,200,0.38167939,True,524
+6039,Madera,22,11,0.5,True,22
+6041,Marin,18,15,0.83333333,True,18
+6043,Mariposa,5,3,0.6,True,5
+6045,Mendocino,23,12,0.52173913,True,23
+6047,Merced,51,17,0.33333333,True,51
+6049,Modoc,14,0,0.0,False,0
+6051,Mono,9,4,0.44444444,True,9
+6053,Monterey,56,28,0.5,True,56
+6055,Napa,10,10,1.0,True,10
+6057,Nevada,19,4,0.21052632,False,4
+6059,Orange,120,70,0.58333333,True,120
+6061,Placer,67,18,0.26865672,False,18
+6063,Plumas,26,7,0.26923077,False,7
+6065,Riverside,172,59,0.34302326,True,172
+6067,Sacramento,289,2,0.00692042,False,2
+6069,San Benito,5,1,0.2,False,1
+6071,San Bernardino,236,101,0.4279661,True,236
+6073,San Diego,183,98,0.53551913,True,183
+6075,San Francisco,11,7,0.63636364,True,11
+6077,San Joaquin,97,39,0.40206186,True,97
+6079,San Luis Obispo,27,19,0.7037037,True,27
+6081,San Mateo,49,28,0.57142857,True,49
+6083,Santa Barbara,42,22,0.52380952,True,42
+6085,Santa Clara,103,38,0.36893204,True,103
+6087,Santa Cruz,22,12,0.54545455,True,22
+6089,Shasta,93,21,0.22580645,False,21
+6091,Sierra,6,1,0.16666667,False,1
+6093,Siskiyou,41,0,0.0,False,0
+6095,Solano,50,16,0.32,True,50
+6097,Sonoma,53,26,0.49056604,True,53
+6099,Stanislaus,94,5,0.05319149,False,5
+6101,Sutter,22,10,0.45454545,True,22
+6103,Tehama,12,8,0.66666667,True,12
+6105,Trinity,22,2,0.09090909,False,2
+6107,Tulare,56,33,0.58928571,True,56
+6109,Tuolumne,26,7,0.26923077,False,7
+6111,Ventura,65,23,0.35384615,True,65
+6113,Yolo,18,8,0.44444444,True,18
+6115,Yuba,23,9,0.39130435,True,23

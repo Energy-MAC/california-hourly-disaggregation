@@ -1,4 +1,16 @@
-"""Reusable, target-agnostic ML prediction cookbook.
+"""LEGACY (2026-08-14) -- reusable, target-agnostic ML prediction cookbook.
+
+NOT part of the project's method. This project measures the impact of
+DISAGGREGATING a known load across a network; it does not predict load, so a
+supervised prediction problem is outside the question being asked. Nothing in
+the disaggregation, nodal, or GenX pipelines imports this package. It is kept
+because it is self-contained, its leakage guards pass, and its negative result
+(structural features recover a substation's shape but not its magnitude) is the
+documented reason cold-start imputation was never wired into the projection
+pipeline. See docs/ml_cookbook.md.
+
+--------------------------------------------------------------------------
+
 
 A consistent methodology for supervised prediction so every model in the paper
 is built and evaluated the same way: leakage-safe splitting, declarative feature

@@ -226,3 +226,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# GenX scenario inputs and rescaled outputs (bulk CSV; regenerate via
+# scripts/load_projection/genx/). Manifests are kept for provenance.
+genx/*
+!genx/scenarios_2019.csv
+!genx/rep_week_calendar.csv
+!genx/rescaled/
+genx/rescaled/*/Demand_data__*.csv
+genx/rescaled/*/node_shares.csv
+
+# Materialized GenX cases (full copies of the control tree, ~255 MB per run;
+# regenerate with materialize_genx_cases.py). Manifests kept.
+!genx/scenarios_rescaled/
+genx/scenarios_rescaled/*/p*/
+genx/scenarios_rescaled/*/scenarios_2019.csv
+!genx/settings_2019.yml

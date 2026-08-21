@@ -11,6 +11,21 @@ hourly forecast. This is a proportional scaling approach: it preserves the
 regional total at every hour. It does **not** account for substation-specific
 growth trajectories or changing load shapes (that is Approach 2's role).
 
+## Where this is implemented
+
+| Concept in this doc | Function | File |
+|---|---|---|
+| Load the percentile envelopes | `load_profiles()` | `src/load_projection/weights.py` |
+| Collapse to annual / monthly / hourly / month-hour | `aggregate_to_level()` | same |
+| The weight itself (share within a region) | `normalize_within()` | same |
+| Expand weights to an hourly matrix | `broadcast_to_matrix()` | same |
+| IOU chain (IEPR / RESOLVE → substation) | `build_iou_weight_matrices()` | same |
+| ReEDS chain (p-region → county → substation) | `build_reeds_chain_matrices()` | same |
+| p-region → county geographic split | `compute_county_pgroup_fractions()` | same |
+| Synthetic substations for county gaps | `_add_synthetic_rows()` | same |
+| Apply weights to a projected series | `apply_weights_to_series()` | same |
+| Drivers | `disaggregate_reeds.py`, `disaggregate_iou.py` | `scripts/load_projection/approach1/` |
+
 ## Method
 
 For each (month, hour) cell:
@@ -55,7 +70,7 @@ sub_iou_weight[s, m, h] = max(weight_col[s,m,h], 0) / Σ max(weight_col[s,m,h], 
 substation_load[s, t]   = IOU_load[IOU(s), t] × sub_iou_weight[s, month(t), hour(t)]
 ```
 
-PGE (664 subs), SCE (578 subs), SDGE (99 subs) only. IEPR VEA load and RESOLVE
+PGE (670 subs), SCE (578 subs), SDGE (99 subs) only. IEPR VEA load and RESOLVE
 IID/LDWP/NCNC load are excluded (no substation data for those utilities).
 
 Substation profiles are **net-of-BTM load** — pair them with net statewide targets
@@ -94,7 +109,7 @@ projections/reeds_projected__max_load__monthhour/
   [substation_monthly_load.parquet]          # ~3.4M rows / ~33 MB  (--save-output)
 
 projections/iepr__v2025__planningscenario__baselineconsumption__max_load__monthhour/
-  substation_iou_weights.csv                 # 1,341 subs × 288 cells
+  substation_iou_weights.csv                 # 1,347 subs × 288 cells
   substation_annual_load.csv                 # annual MWh 2025–2050
   [substation_disaggregated_load.parquet]    # ~2.4 GB  (--save-output)
 

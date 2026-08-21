@@ -1,0 +1,121 @@
+{
+  "run_tag": "genx__reedsco__prox__a0__monthhour",
+  "axes": {
+    "weights": "reedsco",
+    "map": "prox",
+    "alpha": "0",
+    "stoch_gate": 0.3,
+    "stoch_topoff": "none",
+    "draw": "mean",
+    "level": "monthhour"
+  },
+  "float_format": "one_decimal",
+  "git_rev": "0ee0fccc2b545951bea9da15170fdd6a53c951cc",
+  "timestamp": "2026-08-17T11:26:13",
+  "control_tree": "genx\\scenarios_historical_2019\\scenarios_historical_2019",
+  "control_md5": {
+    "Summer": "22982260bbcb8fa719bdfb75feeeabbb",
+    "Winter": "42f69feadcda84463f4786a4a3a24e95",
+    "Spring": "237cef184e56a6d26d5a5e82ccad276d",
+    "Fall": "054a8abd17faf5a78d070baccb3ebc13"
+  },
+  "seasons": {
+    "Summer": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 1.4551915228366852e-11,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 4420260.1,
+      "rescaled_total_mwh": 4420260.1,
+      "coverage_share": 0.5449544926100617,
+      "n_zones_gaining": 799,
+      "n_zones_losing": 1773,
+      "n_zones_unchanged": 6298,
+      "n_zones_newly_nonzero": 101,
+      "n_zones_zeroed": 1395,
+      "peak_zone_mw_control": 213.4,
+      "peak_zone_mw_rescaled": 934.3,
+      "source_case": "p1",
+      "output_md5": "1b8cb145ade5e77acba0758295a93824"
+    },
+    "Winter": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 7.275957614183426e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 3648702.7,
+      "rescaled_total_mwh": 3648702.6999999997,
+      "coverage_share": 0.5449649268492058,
+      "n_zones_gaining": 810,
+      "n_zones_losing": 1762,
+      "n_zones_unchanged": 6298,
+      "n_zones_newly_nonzero": 101,
+      "n_zones_zeroed": 1396,
+      "peak_zone_mw_control": 142.8,
+      "peak_zone_mw_rescaled": 605.7,
+      "source_case": "p8",
+      "output_md5": "c6ffceac483aae3c37d2036c6ec74c9c"
+    },
+    "Spring": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 3.637978807091713e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 3622454.5,
+      "rescaled_total_mwh": 3622454.5,
+      "coverage_share": 0.5449687221744262,
+      "n_zones_gaining": 806,
+      "n_zones_losing": 1766,
+      "n_zones_unchanged": 6298,
+      "n_zones_newly_nonzero": 101,
+      "n_zones_zeroed": 1393,
+      "peak_zone_mw_control": 159.4,
+      "peak_zone_mw_rescaled": 701.0,
+      "source_case": "p15",
+      "output_md5": "296fc88a07335d0bcf8308aaba99fdf6"
+    },
+    "Fall": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 7.275957614183426e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 4858565.0,
+      "rescaled_total_mwh": 4858565.0,
+      "coverage_share": 0.5449598801292151,
+      "n_zones_gaining": 805,
+      "n_zones_losing": 1767,
+      "n_zones_unchanged": 6298,
+      "n_zones_newly_nonzero": 101,
+      "n_zones_zeroed": 1395,
+      "peak_zone_mw_control": 211.1,
+      "peak_zone_mw_rescaled": 937.7,
+      "source_case": "p22",
+      "output_md5": "c2c54db16d66fdad73174889b83416a0"
+    }
+  },
+  "provenance": {
+    "allocation": "county_first",
+    "alpha": "0",
+    "county_reference_year": 2019,
+    "weights": {
+      "weight_definition": "mean max_load envelope per substation",
+      "map_file": "data\\processed\\load_projection\\nodal\\CATS\\substation_node_map.csv",
+      "map_md5": "ad0b02cc7a982c3e262b436da7948884",
+      "n_substations": 1347,
+      "n_substations_nonpositive_envelope": 28,
+      "n_substations_mapped": 1326,
+      "n_nodes_weighted": 1028
+    },
+    "n_counties": 57,
+    "n_counties_no_substation": 3,
+    "n_nodes_with_share": 1180,
+    "envelope_governed_share": 0.9854211103611324,
+    "topoff_fraction": 0.0,
+    "cells": {
+      "weight_definition": "max_load envelope per (month, hour_pst) cell",
+      "map_file": "data\\processed\\load_projection\\nodal\\CATS\\substation_node_map.csv",
+      "map_md5": "ad0b02cc7a982c3e262b436da7948884",
+      "n_cells": 120,
+      "n_cells_filled_from_substation_mean": 768,
+      "n_nodes_weighted": 1029,
+      "n_cells_with_no_covered_weight": 0,
+      "n_nodes_any_cell": 1180
+    }
+  }
+}

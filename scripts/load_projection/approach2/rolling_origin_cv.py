@@ -1,11 +1,29 @@
 """
+LEGACY (retired 2026-08-14) -- NOT part of the Approach 2 method.
+
+This script tunes calibration recency by held-out one-year-ahead error, i.e. it
+treats the model as a predictor. Approach 2 does not predict: it takes a load
+series that is already known and decides where on the network that load sits, so
+optimizing predictive generalization answers a question the project does not
+ask, and cannot improve a disaggregation of a series that is given. The method
+now calibrates on the series being disaggregated
+(generate_stochastic.py --calibrate-on target).
+
+Kept, not deleted: the closed-form bias result below explains why --validate's
+check (iii) moves when the target changes, and the knobs it calibrated
+(--calibration-window, --decay-halflife) still exist and still default off. See
+docs/approach2_stochastic.md -> "LEGACY" for the measured tables and the
+reasoning that retired this line of work.
+
+--------------------------------------------------------------------------
+
 Rolling-origin cross-validation of the Approach 2 CALIBRATION, using EIA-930
 CAISO history only (no RESOLVE, no forecast) -- an honest, historical-data-only
 estimate of how much the model's per-cell tracking drifts when its calibration
 window and the target come from different periods.
 
-Why this exists
----------------
+Why this existed
+----------------
 Against a RESOLVE target the model's hourly tracking (check iii in
 generate_stochastic.py --validate) shows a +5.56% bias. That bias has a closed
 form -- with --F cal the model's expected total per cell is Sum_mu(c) (fixed,

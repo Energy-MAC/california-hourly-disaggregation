@@ -1,0 +1,58 @@
+fips_int,county_name,n_nodes,n_covered,coverage,gated,in_pool_nodes
+6001,Alameda,99,99,1.0,False,99
+6003,Alpine,1,1,1.0,False,1
+6005,Amador,19,17,0.89473684,False,17
+6007,Butte,55,54,0.98181818,False,54
+6009,Calaveras,13,13,1.0,False,13
+6011,Colusa,15,15,1.0,False,15
+6013,Contra Costa,125,125,1.0,False,125
+6017,El Dorado,26,26,1.0,False,26
+6019,Fresno,123,123,1.0,False,123
+6021,Glenn,15,15,1.0,False,15
+6023,Humboldt,32,32,1.0,False,32
+6025,Imperial,98,98,1.0,False,98
+6027,Inyo,30,27,0.9,False,27
+6029,Kern,259,233,0.8996139,False,233
+6031,Kings,33,29,0.87878788,False,29
+6033,Lake,18,18,1.0,False,18
+6035,Lassen,27,27,1.0,False,27
+6037,Los Angeles,524,473,0.90267176,False,473
+6039,Madera,22,22,1.0,False,22
+6041,Marin,18,18,1.0,False,18
+6043,Mariposa,5,5,1.0,False,5
+6045,Mendocino,23,23,1.0,False,23
+6047,Merced,51,51,1.0,False,51
+6049,Modoc,14,14,1.0,False,14
+6051,Mono,9,8,0.88888889,False,8
+6053,Monterey,56,56,1.0,False,56
+6055,Napa,10,10,1.0,False,10
+6057,Nevada,19,19,1.0,False,19
+6059,Orange,120,119,0.99166667,False,119
+6061,Placer,67,67,1.0,False,67
+6063,Plumas,26,26,1.0,False,26
+6065,Riverside,172,158,0.91860465,False,158
+6067,Sacramento,289,289,1.0,False,289
+6069,San Benito,5,5,1.0,False,5
+6071,San Bernardino,236,204,0.86440678,False,204
+6073,San Diego,183,183,1.0,False,183
+6075,San Francisco,11,11,1.0,False,11
+6077,San Joaquin,97,97,1.0,False,97
+6079,San Luis Obispo,27,27,1.0,False,27
+6081,San Mateo,49,49,1.0,False,49
+6083,Santa Barbara,42,36,0.85714286,False,36
+6085,Santa Clara,103,103,1.0,False,103
+6087,Santa Cruz,22,22,1.0,False,22
+6089,Shasta,93,90,0.96774194,False,90
+6091,Sierra,6,6,1.0,False,6
+6093,Siskiyou,41,17,0.41463415,False,17
+6095,Solano,50,50,1.0,False,50
+6097,Sonoma,53,53,1.0,False,53
+6099,Stanislaus,94,94,1.0,False,94
+6101,Sutter,22,22,1.0,False,22
+6103,Tehama,12,12,1.0,False,12
+6105,Trinity,22,22,1.0,False,22
+6107,Tulare,56,56,1.0,False,56
+6109,Tuolumne,26,26,1.0,False,26
+6111,Ventura,65,65,1.0,False,65
+6113,Yolo,18,18,1.0,False,18
+6115,Yuba,23,23,1.0,False,23

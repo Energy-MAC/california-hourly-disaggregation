@@ -109,6 +109,9 @@ OUT_DIR  = PROC / "substations"
 DICT_PATH = ROOT / "data" / "basinSourceDictionary.csv"
 CEC_FILE = PROC / "substation_misc" / "ca_substations_cec.csv"
 CEC_DICT_PATH = ROOT / "data" / "cecSourceDictionary.csv"
+# Hand-curated coordinates for substations no automatic source can place (see
+# apply_coordinate_overrides). Same hand-maintained tier as the two name dicts.
+COORD_OVERRIDE_PATH = ROOT / "data" / "substationCoordinateOverrides.csv"
 
 # PGE removed some substations from their published ArcGIS layer between scrapes.
 # The older non-clean processed file is the only remaining source for those profiles.
@@ -118,7 +121,7 @@ LEGACY_PGE_ATTRS = OUT_DIR / "substation_attributes.csv"
 
 ATTR_COLS = [
     "utility", "substation_name",
-    "util_lat", "util_lon",
+    "util_lat", "util_lon", "coord_source",
     "basin_lat", "basin_lon", "dist_to_basin_km",
     "sub_type", "substation_voltage",
     "voltage_kv",
@@ -695,6 +698,71 @@ def process_sdge() -> tuple[pd.DataFrame, pd.DataFrame]:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
+def apply_coordinate_overrides(attrs: pd.DataFrame) -> pd.DataFrame:
+    """Fill `util_lat`/`util_lon` from the hand-curated override table.
+
+    A handful of substations have no coordinate from any automatic source: the
+    utility publishes none, no basin name matches, and no CEC record matches by
+    name.  They still carry real load, so leaving them unplaced drops them from
+    every downstream spatial step (nodal mapping, GenX rescaling, county
+    assignment).  `data/substationCoordinateOverrides.csv` is where a
+    hand-researched coordinate goes; it is the coordinate analogue of
+    basinSourceDictionary.csv / cecSourceDictionary.csv.
+
+    Schema: utility, substation_name, lat, lon, source, notes.  Rows with a
+    blank lat/lon are placeholders for still-unresolved sites and are skipped,
+    so the file doubles as the worklist of what remains.
+
+    Overrides are LAST-RESORT ONLY: a row whose `util_lat` is already populated
+    is never touched, so this can never silently contradict a utility-published
+    coordinate.  `coord_source` records the provenance ('utility', the override
+    file's own `source` value, or '' when still unplaced).
+
+    Never adds or removes substations -- asserted by the caller.
+    """
+    attrs = attrs.copy()
+    attrs["coord_source"] = np.where(attrs["util_lat"].notna(), "utility", "")
+    if not COORD_OVERRIDE_PATH.exists():
+        print("  no substationCoordinateOverrides.csv; skipping coordinate overrides")
+        return attrs
+
+    ov = pd.read_csv(COORD_OVERRIDE_PATH)
+    ov = ov[ov["lat"].notna() & ov["lon"].notna()]
+    if ov.empty:
+        print(f"  {COORD_OVERRIDE_PATH.name}: no filled rows yet "
+              f"(all placeholders) -- nothing to apply")
+        return attrs
+
+    # `norm` here is Series-based, so both sides are normalised in one call --
+    # that keeps the override key identical to the basin-join key
+    attr_key = list(zip(attrs.utility.astype(str).str.lower(),
+                        norm(attrs.substation_name)))
+    ov_key = list(zip(ov.utility.astype(str).str.lower(), norm(ov.substation_name)))
+    lut = {k: (float(la), float(lo), str(src) if pd.notna(src) else "override")
+           for k, la, lo, src in zip(ov_key, ov.lat, ov.lon,
+                                     ov.get("source", pd.Series([None] * len(ov))))}
+
+    c_lat, c_lon, c_src = (attrs.columns.get_loc(c)
+                           for c in ("util_lat", "util_lon", "coord_source"))
+    n_applied = n_skipped = 0
+    for i, k in enumerate(attr_key):
+        hit = lut.pop(k, None)
+        if hit is None:
+            continue
+        if pd.notna(attrs.iat[i, c_lat]):
+            n_skipped += 1          # already placed; an override must not win
+            continue
+        attrs.iat[i, c_lat], attrs.iat[i, c_lon], attrs.iat[i, c_src] = hit
+        n_applied += 1
+    n_unmatched = len(lut)
+    print(f"  coordinate overrides: {n_applied} applied"
+          + (f", {n_skipped} skipped (already had a utility coordinate)" if n_skipped else "")
+          + (f", {n_unmatched} override row(s) matched no substation" if n_unmatched else ""))
+    if n_unmatched:
+        print(f"    unmatched: {sorted(f'{u}/{n}' for u, n in lut)}")
+    return attrs
+
+
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -760,6 +828,17 @@ def main() -> None:
     )
     print(f"\nVoltage enrichment guard passed: substation counts unchanged "
           f"{n_after.to_dict()}")
+
+    # ── Hand-curated coordinate overrides (last resort; never overwrite a
+    # utility-published coordinate). Same no-row-change guard as voltage.
+    print("Applying coordinate overrides ...")
+    attrs_all = apply_coordinate_overrides(attrs_all)
+    assert n_after.equals(attrs_all.groupby("utility").size().sort_index()), (
+        "substation counts changed after coordinate overrides!")
+    n_placed = attrs_all["util_lat"].notna().sum()
+    n_any = (attrs_all["util_lat"].notna() | attrs_all["basin_lat"].notna()).sum()
+    print(f"  {n_placed}/{len(attrs_all)} with a utility/override coordinate; "
+          f"{len(attrs_all) - n_any} still unplaced by any source")
     for util, grp in attrs_all.groupby("utility"):
         src_counts = grp["highside_kv_source"].value_counts().to_dict()
         print(f"  {util}: highside_kv source counts {src_counts}")

@@ -26,15 +26,25 @@ CLI parameters:
                 this half-life in calendar days (smooth alternative to the hard
                 window; composes with it). Captures BTM-driven shape drift;
                 appends __hl{N} to the run tag.
+  --calibrate-on  history (default, EIA-930) | target (calibrate F*/s(c)/rho(c)
+                on the --target series itself); appends __calibtgt to the run tag
+  --calib-target  with --calibrate-on target: calibrate on THIS series rather than
+                --target, so a longer record can sharpen F*/s(c)/rho(c) while only
+                the weeks of interest are disaggregated
   --n-draws     Monte Carlo draws (default 5)
   --year-start/--year-end   subset of target years (default all)
   --seed        RNG seed (default 0)
   --validate    run the three spec validation checks (totals, marginals, tracking)
   --save-output write hourly wide parquet per draw (~47 MB/draw-year, off by default)
+  --save-cells  write per-(substation, draw, month, hour_pst) mean MW over the
+                target period -- the per-cell weight table the GenX rescaler's
+                stochastic month-hour allocation consumes (off by default)
 
 Outputs (data/processed/load_projection/projections/<run_tag>/ where run_tag =
 stochastic__{target}__{family}__F{level}__{z-mode}[__cw{N}]):
   substation_annual_mwh.csv       always: per (substation, year, draw) energy
+  substation_cell_mw.csv          with --save-cells: per (substation, draw, cell)
+                                  mean MW + n_hours over the whole target period
   validation_totals_cells.csv     with --validate: per-cell total q10/q90 check
   validation_marginals_subs.csv   with --validate: per-substation envelope recovery
   draws/draw{k}.parquet           with --save-output: hourly wide matrix per draw
@@ -88,21 +98,29 @@ def load_target(args, caiso: pd.DataFrame) -> pd.DataFrame:
 
 
 def trajectory_pass(mats, cells, target, z_draws, family, scale, n_draws, seed,
-                    out_dir, save_output):
-    """Per-draw generation chunked by year. Returns (annual_df, totals [H, D]).
+                    out_dir, save_output, save_cells=False):
+    """Per-draw generation chunked by year. Returns (annual_df, totals [H, D],
+    cell_df) where cell_df is the per-(substation, draw, cell) mean-MW table
+    (None unless save_cells).
 
     z_draws is one z array per draw: identical in native mode (observed
     trajectory shared, draws differ only in allocation), independently
     bootstrapped per draw in bootstrap mode (weather varies across ensemble).
     """
     years = target.dt_pst_hb.dt.year.values
+    n_subs = len(mats.subs)
     totals = np.empty((len(target), n_draws), dtype=np.float64)
-    annual_rows = []
+    annual_rows, cell_rows = [], []
     if save_output:
         (out_dir / "draws").mkdir(parents=True, exist_ok=True)
     for d in range(n_draws):
         rng = np.random.default_rng(seed + 1000 * d)
         draw_chunks = []
+        # per-cell accumulators over the WHOLE target period (not per year):
+        # the cell mean is the weight the GenX rescaler wants, and a (month,
+        # hour) cell is a within-year concept, so years pool
+        cellsum = np.zeros((288, n_subs))
+        cellcnt = np.zeros((288, n_subs), dtype=np.int64)
         for yr in np.unique(years):
             mask = years == yr
             chunk = target[mask]
@@ -113,13 +131,29 @@ def trajectory_pass(mats, cells, target, z_draws, family, scale, n_draws, seed,
                 "year": yr, "draw": d, "annual_mwh": np.nansum(L, axis=0),
             })
             annual_rows.append(annual)
+            if save_cells:
+                k = chunk.cell.values
+                np.add.at(cellsum, k, np.nan_to_num(L, nan=0.0))
+                np.add.at(cellcnt, k, (~np.isnan(L)).astype(np.int64))
             if save_output:
                 draw_chunks.append(pd.DataFrame(
                     L, index=chunk.dt_pst_hb,
                     columns=[f"{u}|{n}" for u, n in mats.subs.itertuples(index=False)]))
+        if save_cells:
+            has = cellcnt > 0
+            cell_i, sub_i = np.nonzero(has)
+            cell_rows.append(pd.DataFrame({
+                "utility": mats.subs.utility.values[sub_i],
+                "substation_name": mats.subs.substation_name.values[sub_i],
+                "draw": d,
+                "month": cell_i // 24 + 1, "hour_pst": cell_i % 24,
+                "mean_mw": cellsum[has] / cellcnt[has],
+                "n_hours": cellcnt[has],
+            }))
         if save_output:
             pd.concat(draw_chunks).to_parquet(out_dir / "draws" / f"draw{d}.parquet")
-    return pd.concat(annual_rows, ignore_index=True), totals
+    cell_df = pd.concat(cell_rows, ignore_index=True) if cell_rows else None
+    return pd.concat(annual_rows, ignore_index=True), totals, cell_df
 
 
 def validate_totals(cells, target, totals, family, F_level):
@@ -229,21 +263,57 @@ def main() -> None:
                          "kernel of this half-life in CALENDAR DAYS (smooth "
                          "alternative to --calibration-window; composes with it "
                          "if both given). Default: unweighted. Appends __hl{N}.")
+    ap.add_argument("--calib-target", default=None,
+                    help="with --calibrate-on target: calibrate F*/s(c)/rho(c) on THIS "
+                         "series instead of --target, so a longer record can inform the "
+                         "calibration while only the weeks of interest are disaggregated")
+    ap.add_argument("--calibrate-on", choices=["history", "target"], default="history",
+                    help="which series F*, s(c) and rho(c) are estimated on. "
+                         "'history' = EIA-930 CAISO (default, preserves published "
+                         "F*=0.7361); 'target' = the --target series itself, so the "
+                         "calibration belongs to the load actually being disaggregated")
     ap.add_argument("--n-draws", type=int, default=5)
     ap.add_argument("--year-start", type=int, default=None)
     ap.add_argument("--year-end", type=int, default=None)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--validate", action="store_true")
     ap.add_argument("--save-output", action="store_true")
+    ap.add_argument("--save-cells", action="store_true",
+                    help="write substation_cell_mw.csv: per (substation, draw, "
+                         "month, hour_pst) mean MW over the target period, for "
+                         "the GenX rescaler's per-cell stochastic weights")
     args = ap.parse_args()
+    if args.calib_target and args.calibrate_on != "target":
+        ap.error("--calib-target only makes sense with --calibrate-on target; "
+                 "without it the calibration series would silently stay EIA-930")
 
     env = load_envelope_cells()
     caiso = load_caiso_history()
-    calib = trailing_window(caiso, args.calibration_window)
+    target_pre = load_target(args, caiso)
+    # F*, s(c) and rho(c) are calibrated on `calib`. Default is the EIA-930
+    # history, which makes F* a statement about how the fleet relates to the
+    # PAST. --calibrate-on target instead calibrates against the series being
+    # disaggregated, so nothing is inherited from another dataset except the
+    # substations' own envelopes (see docs/genx_rescale.md, "Recalibrating F*").
+    if args.calibrate_on == "target":
+        # the calibration series may be LONGER than the series being
+        # disaggregated: F*, s(c) and rho(c) want as many observations per cell
+        # as exist, while the CEP analysis only ever looks at the chosen weeks.
+        # --calib-target supplies that longer series; it defaults to --target.
+        if args.calib_target:
+            calib_src = pd.read_csv(args.calib_target, parse_dates=["dt_pst_hb"])
+            calib_src["month"] = calib_src.dt_pst_hb.dt.month
+            calib_src["hour_pst"] = calib_src.dt_pst_hb.dt.hour
+            calib_src["cell"] = cell_index(calib_src.month, calib_src.hour_pst)
+        else:
+            calib_src = target_pre
+    else:
+        calib_src = caiso
+    calib = trailing_window(calib_src, args.calibration_window)
     weights = decay_weights(calib, args.decay_halflife) if args.decay_halflife else None
     cells, f_star = build_system_cells(env, calib, weights)
     mats = EnvelopeMatrices(env)
-    target = load_target(args, caiso)
+    target = target_pre
 
     F_level = f_star if args.F == "cal" else float(args.F)
     scale = F_level / f_star
@@ -261,6 +331,7 @@ def main() -> None:
     f_tag = "cal" if args.F == "cal" else f"{F_level:.2f}"
     cw_tag = f"__cw{args.calibration_window}" if args.calibration_window else ""
     hl_tag = f"__hl{int(args.decay_halflife)}" if args.decay_halflife else ""
+    ct_tag = "__calibtgt" if args.calibrate_on == "target" else ""
     families = ["normal", "uniform"] if args.family == "both" else [args.family]
 
     calib_desc = (f"last {args.calibration_window} complete yrs "
@@ -274,13 +345,18 @@ def main() -> None:
           f"draws: {args.n_draws}   calibration: {calib_desc}")
 
     for family in families:
-        run_tag = f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}{cw_tag}{hl_tag}"
+        run_tag = f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}{cw_tag}{hl_tag}{ct_tag}"
         out_dir = PROJ_DIR / run_tag
         out_dir.mkdir(parents=True, exist_ok=True)
-        annual, totals = trajectory_pass(mats, cells, target, z_draws, family,
-                                         scale, args.n_draws, args.seed, out_dir,
-                                         args.save_output)
+        annual, totals, cell_df = trajectory_pass(
+            mats, cells, target, z_draws, family, scale, args.n_draws,
+            args.seed, out_dir, args.save_output, args.save_cells)
         annual.to_csv(out_dir / "substation_annual_mwh.csv", index=False)
+        if cell_df is not None:
+            cell_df.round(4).to_csv(out_dir / "substation_cell_mw.csv", index=False)
+            print(f"[{family}] wrote substation_cell_mw.csv: {len(cell_df):,} rows, "
+                  f"{cell_df.groupby(['month', 'hour_pst']).ngroups} cells, "
+                  f"{cell_df.draw.nunique()} draws")
         mean_twh = annualized_mean_twh(annual, target)
         print(f"\n[{family}] -> {run_tag}: mean {mean_twh:.1f} TWh/yr across draws")
         if args.validate:

@@ -1,4 +1,17 @@
 """
+LEGACY (retired 2026-08-14) -- supports the out-of-sample study only.
+
+The RESOLVE target exists to check how the fitted model behaves on a series
+outside its training data, which is a question about PREDICTION. Approach 2
+disaggregates a load series that is already known, so out-of-sample behaviour is
+not a property the method needs. Kept because the run is cheap and the finding
+(a closed-form, F-invariant level bias) is documented; see
+docs/approach2_stochastic.md -> "LEGACY". The script itself is still correct and
+still runs -- disaggregating a RESOLVE series is a legitimate thing to do, it is
+only the out-of-sample *scoring* that was retired.
+
+--------------------------------------------------------------------------
+
 Build a CAISO-consistent RESOLVE hourly target CSV for generate_stochastic.py's
 --target flag (dt_pst_hb, demand_mw columns).
 

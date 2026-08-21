@@ -6,6 +6,20 @@ Stochastic conditional disaggregation" for user-facing docs. Implementation:
 `scripts/load_projection/approach2/generate_stochastic.py`. Supporting diagnostics:
 `scripts/load_projection/approach2/stochastic_diagnostics.py`.
 
+## Where this is implemented
+
+Model code is `src/load_projection/stochastic.py`; the driver is
+`scripts/load_projection/approach2/generate_stochastic.py`.
+
+| Symbol / step in this spec | Function |
+|---|---|
+| μ_s(c), σ_s(c), uniform bounds, hygiene flags | `load_envelope_cells()` |
+| cell index c = (month, hour_pst) | `cell_index()` |
+| ȳ_c, sd_c, f(c), **F\***, s(c), ρ(c) | `build_system_cells()` |
+| z(t) | `standardize_z()` (native) / `bootstrap_z()` (block bootstrap) |
+| L_s(t) — one Monte Carlo draw | `generate()` |
+| *(legacy)* window W, decay kernel | `trailing_window()` / `decay_weights()` |
+
 ## Notation
 
 | Symbol | Meaning |
@@ -210,7 +224,18 @@ synchronization — a data-inconsistency signal, which is why the estimator
 reports the number of capped cells (zero on our data; largest ρ̂ = 0.48, so
 the cap is currently dormant and no estimate is distorted by it).
 
-## Rolling-window calibration (extension, 2026-07-27)
+## LEGACY — Rolling-window calibration (extension, 2026-07-27)
+
+> **Not part of the method** (retired 2026-08-14). This section and the
+> recency-weighted subsection below treat calibration recency as a hyperparameter
+> to be tuned by held-out predictive error. Approach 2 disaggregates a *known*
+> load series rather than predicting one, so that tuning optimizes a question the
+> project does not pose. The theory is kept because it is correct and because the
+> window-invariance results below explain the behaviour of `--validate`; the
+> knobs still exist and still default off. See
+> [approach2_stochastic.md → LEGACY](approach2_stochastic.md) for the measured
+> tables and the reasoning that retired them. The method now calibrates on the
+> series being disaggregated (`--calibrate-on target`).
 
 The estimators above pool a fixed calibration window `W` of CAISO history (the
 original decision: all complete years 2015–2025). Making `W` an explicit knob
@@ -265,7 +290,7 @@ nets out 2024 BTM-PV, a scope difference no CAISO window can absorb). This
 revises the earlier "trend-free, pooling is safe" note: pooling is safe for
 *describing 2015–2025*, but leaves a recency gap against a forward projection.
 
-### Recency-weighted calibration (soft kernel, 2026-07-27)
+### LEGACY — Recency-weighted calibration (soft kernel, 2026-07-27)
 
 A hard window is a rectangular kernel — it discards everything older than `N`
 years and weights the rest equally. Replacing it with a **decayed weight per

@@ -1,0 +1,121 @@
+{
+  "run_tag": "genx__reedsco__catch__aratio__monthhour",
+  "axes": {
+    "weights": "reedsco",
+    "map": "catch",
+    "alpha": "ratio",
+    "stoch_gate": 0.3,
+    "stoch_topoff": "none",
+    "draw": "mean",
+    "level": "monthhour"
+  },
+  "float_format": "one_decimal",
+  "git_rev": "0ee0fccc2b545951bea9da15170fdd6a53c951cc",
+  "timestamp": "2026-08-17T11:39:36",
+  "control_tree": "genx\\scenarios_historical_2019\\scenarios_historical_2019",
+  "control_md5": {
+    "Summer": "22982260bbcb8fa719bdfb75feeeabbb",
+    "Winter": "42f69feadcda84463f4786a4a3a24e95",
+    "Spring": "237cef184e56a6d26d5a5e82ccad276d",
+    "Fall": "054a8abd17faf5a78d070baccb3ebc13"
+  },
+  "seasons": {
+    "Summer": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 7.275957614183426e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 4420260.1,
+      "rescaled_total_mwh": 4420260.1,
+      "coverage_share": 0.9981330057930302,
+      "n_zones_gaining": 2186,
+      "n_zones_losing": 1540,
+      "n_zones_unchanged": 5144,
+      "n_zones_newly_nonzero": 1256,
+      "n_zones_zeroed": 47,
+      "peak_zone_mw_control": 213.4,
+      "peak_zone_mw_rescaled": 293.8,
+      "source_case": "p1",
+      "output_md5": "4595217d368e2af556a69338645cc6e7"
+    },
+    "Winter": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 3.637978807091713e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 3648702.7,
+      "rescaled_total_mwh": 3648702.7,
+      "coverage_share": 0.9981332543207753,
+      "n_zones_gaining": 2186,
+      "n_zones_losing": 1543,
+      "n_zones_unchanged": 5141,
+      "n_zones_newly_nonzero": 1258,
+      "n_zones_zeroed": 45,
+      "peak_zone_mw_control": 142.8,
+      "peak_zone_mw_rescaled": 240.0,
+      "source_case": "p8",
+      "output_md5": "aed2d3de6d384de01ffc739847806fa5"
+    },
+    "Spring": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 3.637978807091713e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 3622454.5,
+      "rescaled_total_mwh": 3622454.5000000005,
+      "coverage_share": 0.9981333098869841,
+      "n_zones_gaining": 2208,
+      "n_zones_losing": 1529,
+      "n_zones_unchanged": 5133,
+      "n_zones_newly_nonzero": 1266,
+      "n_zones_zeroed": 37,
+      "peak_zone_mw_control": 159.4,
+      "peak_zone_mw_rescaled": 268.7,
+      "source_case": "p15",
+      "output_md5": "3d8f6fd96a19e43a0b899b91ae6166b5"
+    },
+    "Fall": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 7.275957614183426e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 4858565.0,
+      "rescaled_total_mwh": 4858565.0,
+      "coverage_share": 0.9981332553953688,
+      "n_zones_gaining": 2200,
+      "n_zones_losing": 1542,
+      "n_zones_unchanged": 5128,
+      "n_zones_newly_nonzero": 1271,
+      "n_zones_zeroed": 36,
+      "peak_zone_mw_control": 211.1,
+      "peak_zone_mw_rescaled": 325.0,
+      "source_case": "p22",
+      "output_md5": "1fd1f7dcbf2b4d00f426251c50fc022c"
+    }
+  },
+  "provenance": {
+    "allocation": "county_first",
+    "alpha": "ratio",
+    "county_reference_year": 2019,
+    "weights": {
+      "weight_definition": "mean max_load envelope per substation",
+      "map_file": "data\\processed\\load_projection\\nodal\\CATS\\substation_node_map__catchment.csv",
+      "map_md5": "d1477e95698c3693f9e9d0928c065361",
+      "n_substations": 1347,
+      "n_substations_nonpositive_envelope": 28,
+      "n_substations_mapped": 1326,
+      "n_nodes_weighted": 3637
+    },
+    "n_counties": 57,
+    "n_counties_no_substation": 0,
+    "n_nodes_with_share": 3768,
+    "envelope_governed_share": 0.9587948668926599,
+    "topoff_fraction": 0.0,
+    "cells": {
+      "weight_definition": "max_load envelope per (month, hour_pst) cell",
+      "map_file": "data\\processed\\load_projection\\nodal\\CATS\\substation_node_map__catchment.csv",
+      "map_md5": "d1477e95698c3693f9e9d0928c065361",
+      "n_cells": 120,
+      "n_cells_filled_from_substation_mean": 768,
+      "n_nodes_weighted": 3641,
+      "n_cells_with_no_covered_weight": 0,
+      "n_nodes_any_cell": 3768
+    }
+  }
+}

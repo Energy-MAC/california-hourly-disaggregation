@@ -1,4 +1,13 @@
-# Machine-learning prediction cookbook
+# Machine-learning prediction cookbook (LEGACY)
+
+> **Legacy — not part of the method** (2026-08-14). This project measures the
+> impact of *disaggregating a known load* across a network; it does not predict
+> load. A supervised prediction problem therefore sits outside the question being
+> asked, and no result here feeds the disaggregation, nodal, or GenX pipelines.
+> Everything below is retained as-is: the code runs, the leakage guards still
+> pass, and the negative result (structural features recover shape but not
+> magnitude) is the documented reason cold-start imputation was never wired into
+> the projection pipeline. Treat it as a self-contained side study.
 
 Full detail. The README carries a one-paragraph summary; this document holds the
 cookbook design, the two configurations, the key results, and the cold-start

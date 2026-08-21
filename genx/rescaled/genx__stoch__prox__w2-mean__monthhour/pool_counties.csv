@@ -1,0 +1,58 @@
+fips_int,county_name,n_nodes,n_covered,coverage,gated,in_pool_nodes
+6001,Alameda,99,37,0.37373737,False,37
+6003,Alpine,1,1,1.0,False,1
+6005,Amador,19,6,0.31578947,False,6
+6007,Butte,55,10,0.18181818,False,10
+6009,Calaveras,13,2,0.15384615,False,2
+6011,Colusa,15,4,0.26666667,False,4
+6013,Contra Costa,125,38,0.304,False,38
+6017,El Dorado,26,4,0.15384615,False,4
+6019,Fresno,123,31,0.25203252,False,31
+6021,Glenn,15,5,0.33333333,False,5
+6023,Humboldt,32,11,0.34375,False,11
+6025,Imperial,98,0,0.0,False,0
+6027,Inyo,30,4,0.13333333,False,4
+6029,Kern,259,56,0.21621622,False,56
+6031,Kings,33,11,0.33333333,False,11
+6033,Lake,18,5,0.27777778,False,5
+6035,Lassen,27,1,0.03703704,False,1
+6037,Los Angeles,524,181,0.34541985,False,181
+6039,Madera,22,6,0.27272727,False,6
+6041,Marin,18,11,0.61111111,False,11
+6043,Mariposa,5,2,0.4,False,2
+6045,Mendocino,23,8,0.34782609,False,8
+6047,Merced,51,10,0.19607843,False,10
+6049,Modoc,14,0,0.0,False,0
+6051,Mono,9,1,0.11111111,False,1
+6053,Monterey,56,20,0.35714286,False,20
+6055,Napa,10,7,0.7,False,7
+6057,Nevada,19,2,0.10526316,False,2
+6059,Orange,120,64,0.53333333,False,64
+6061,Placer,67,14,0.20895522,False,14
+6063,Plumas,26,3,0.11538462,False,3
+6065,Riverside,172,54,0.31395349,False,54
+6067,Sacramento,289,2,0.00692042,False,2
+6069,San Benito,5,1,0.2,False,1
+6071,San Bernardino,236,77,0.32627119,False,77
+6073,San Diego,183,85,0.46448087,False,85
+6075,San Francisco,11,7,0.63636364,False,7
+6077,San Joaquin,97,32,0.32989691,False,32
+6079,San Luis Obispo,27,13,0.48148148,False,13
+6081,San Mateo,49,23,0.46938776,False,23
+6083,Santa Barbara,42,16,0.38095238,False,16
+6085,Santa Clara,103,34,0.33009709,False,34
+6087,Santa Cruz,22,10,0.45454545,False,10
+6089,Shasta,93,10,0.10752688,False,10
+6091,Sierra,6,1,0.16666667,False,1
+6093,Siskiyou,41,0,0.0,False,0
+6095,Solano,50,11,0.22,False,11
+6097,Sonoma,53,17,0.32075472,False,17
+6099,Stanislaus,94,4,0.04255319,False,4
+6101,Sutter,22,8,0.36363636,False,8
+6103,Tehama,12,6,0.5,False,6
+6105,Trinity,22,1,0.04545455,False,1
+6107,Tulare,56,19,0.33928571,False,19
+6109,Tuolumne,26,5,0.19230769,False,5
+6111,Ventura,65,23,0.35384615,False,23
+6113,Yolo,18,6,0.33333333,False,6
+6115,Yuba,23,6,0.26086957,False,6

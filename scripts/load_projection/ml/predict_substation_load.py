@@ -1,4 +1,14 @@
-"""First application of the ML cookbook (src/ml): cross-sectional prediction of
+"""LEGACY (2026-08-14) -- not part of the project's method; see docs/ml_cookbook.md.
+
+This is a PREDICTION problem. The project's question is the impact of
+disaggregating a KNOWN load across a network, so predicting unknown substation
+load is a side study: no disaggregation, nodal, or GenX output depends on it.
+Kept and still runnable; the honest skill drop it measures (explanatory ~0.37 ->
+imputable ~0.06) is the reason imputed profiles were never fed downstream.
+
+--------------------------------------------------------------------------
+
+First application of the ML cookbook (src/ml): cross-sectional prediction of
 substation per-cell load.
 
 The substation "profiles" are month x hour percentile envelopes (max_load /

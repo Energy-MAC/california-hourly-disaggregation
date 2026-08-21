@@ -11,6 +11,22 @@ works via `--id-col/--lat-col/--lon-col`). This is the payoff for capacity-expan
 research: it turns the substation-level disaggregation into loads on the test
 system's own buses.
 
+### Where this is implemented
+
+| Concept in this doc | Function | File |
+|---|---|---|
+| Nearest-node assignment, ties, synthetic split | `build_mapping()`, `assign_synthetic()` | `nodal/map_loads_to_nodes.py` |
+| Candidate-node filtering (zero-demand rule) | `filter_zero_demand()`, `demand_totals()` | same |
+| Voltage-aware restriction | `band_to_cats_class()` (used inside `build_mapping`) | same |
+| Applying a projection onto nodes | `apply_projection()`, `apply_long()`, `apply_wide()` | same |
+| Identity (CEC-lineage) matching | `identity_pairs()` | `nodal/build_identity_catchment_maps.py` |
+| Identity-first map assembly | `build_nameprox()` | same |
+| Catchment transportation LP | `solve_catchment()` | same |
+| Substation name normalisation | `norm()` | `data/substations/build_cec_name_dictionary.py` |
+| Coordinate overrides | `apply_coordinate_overrides()` | `data/substations/process_substations_clean.py` |
+| Override sanity check (duplicate / isolated) | `main()` | `data/substations/check_coordinate_overrides.py` |
+| Substation → county | `assign_substation_counties.py` | `data/substations/` |
+
 ## Assignment rules
 
 - Each substation's load goes to its **closest candidate node**; nodes within
@@ -33,34 +49,157 @@ system's own buses.
   2022). Only matters for Approach 1. If a county has zero candidate nodes (Del Norte
   on CATS), that one substation falls back to the nearest node to the county centroid.
 - Assignments farther than `--max-dist-km` (10) are flagged, not dropped.
-- `--unmapped {drop,renormalize}` handles the 22 coordinate-less substations (0.17% of
-  fleet load): `drop` (default) leaves that load unassigned; `renormalize` scales every
-  mapped node up so the applied total equals the input total.
+- `--unmapped {drop,renormalize}` handles the coordinate-less substations (**1** as of
+  2026-08-17, down from 12, and it carries no load — see the worklist below): `drop` (default) leaves that load
+  unassigned; `renormalize` scales every mapped node up so the applied total equals the
+  input total.
 - Works with **both approaches** via `--apply`: Approach 1 outputs
   (`substation_annual_load.csv`, `substation_monthly_load.parquet`) and Approach 2
   outputs (`substation_annual_mwh.csv`, hourly `draws/draw{k}.parquet`). Long tables
   matched on (utility, substation_name) case-insensitively; wide draw parquets
   matrix-multiplied through the share matrix.
 
-**CATS result** (post zero-demand filter, 1,861 candidate buses): 1,325 real
-substations (nearest-node, 76 tie-shared) + 4 synthetic (county equal-split: Lassen
-9 nodes, Modoc 8, Siskiyou 12; Del Norte falls back to its nearest node, 49.0 km) →
-**1,070** distinct buses receive load. Real-substation distance: median **0.13 km**
-(p95 19.8 km, max 105.7 km); 157 substations land > 10 km away. Conservation out/in:
-0.99837 (stochastic) / 0.99904 (ReEDS) with `--unmapped drop`; exactly 1.0 with
-`renormalize`.
+**CATS result** (post zero-demand filter, 1,861 candidate buses; refreshed 2026-08-17
+after the coordinate overrides): **1,336** real substations (nearest-node, 77
+tie-shared) + 4 synthetic (county equal-split: Lassen 9 nodes, Modoc 8, Siskiyou 12;
+Del Norte falls back to its nearest node, 49.0 km) → **1,071** distinct buses receive
+load. Real-substation distance: median **0.133 km** (p95 19.85 km, max 105.7 km);
+159 substations land > 10 km away. Conservation out/in approaches 1.0 with
+`--unmapped drop` as the unplaced set shrinks; exactly 1.0 with `renormalize`.
+
+The eleven substations placed by the override file mostly land far from a bus — they are
+remote SCE sites (Mountain Pass, Camino, Bishop Creek, Poole) — which is why the >10 km
+count rose from 157 to **159** even though median distance barely moved. That is honest
+coverage, not degraded matching: previously their load was simply dropped.
 
 Outputs (`data/processed/load_projection/nodal/{system}/`): `substation_node_map.csv`
 (off-mode) / `substation_node_map__voltrestrict.csv` (restrict-mode; both coexist),
 `unmapped_substations.csv`, and per `--apply` input a `nodal__{run_tag}__{stem}.csv/.parquet`.
 
-**TODO:** 22 substations (21 SCE, 1 PGE — Visalia, Safari, Costa Mesa, Fair Oaks, …)
-have no coordinates; adding them would remove the need for `--unmapped` entirely.
-
 ```bash
 python scripts/load_projection/nodal/map_loads_to_nodes.py --system CATS \
     --apply data/processed/load_projection/projections/stochastic__eia930__normal__Fcal__native/substation_annual_mwh.csv
 ```
+
+### Substations with no coordinate — the worklist and how to fix one
+
+The count that matters is **12, not 22**: 22 substations lack a *utility-published*
+coordinate, but 10 of those are placed by a DataBasin name match, leaving 12 (all
+SCE) with no coordinate from any automatic source. All 12 carry real load profiles,
+so each one was load we could not place on the network.
+
+**Eleven of the twelve are now placed** (2026-08-17), leaving exactly one:
+`Autobody` — which is one of the six SCE sites with **no load data at all** (288
+cells, every one NaN). So the remaining coordinate gap carries no load, and the
+fleet stands at **1,346 of 1,347 substations with a coordinate**. This is the
+practical end of the coordinate work: nothing further can be gained, because the
+only unplaced substation has nothing to place.
+
+**The worklist is `data/substationCoordinateOverrides.csv`** — the coordinate
+analogue of `basinSourceDictionary.csv` / `cecSourceDictionary.csv`, and the one
+place a hand-researched coordinate should be written:
+
+| Column | Meaning |
+|---|---|
+| `utility`, `substation_name` | must match the cleaned name exactly (normalised on both sides, so punctuation/case are forgiving — `Palm Springs 'A'` is fine) |
+| `lat`, `lon` | WGS84 decimal degrees. **Leave blank while unresolved** — blank rows are skipped, so the file doubles as the to-do list |
+| `source` | provenance, written through to the `coord_source` column (e.g. `cec_exact_name_match`, `google_earth`, `sce_map_pdf`) |
+| `notes` | free text; the shipped placeholders record what has already been ruled out |
+
+Resolved: **Topanga** and **Paularino** from exact CEC name+owner matches;
+**Safari**, **Mountain Pass**, **Camino**, **Bishop Creek Plant 2**, **Santa Ana
+River 1**, **Poole** and **Lunar** from utility fact-sheets, Google Earth/Maps, a
+radio-site registry and a BESS interconnection filing; **Palm Springs 'A'** and
+**'B'** from DataBasin (both resolve to the same site, so they land on one bus).
+Still open: **Autobody** only — and it has no load data.
+
+Note `coord_source` is populated only where a *utility or override* coordinate
+exists; the ~10 substations placed by a DataBasin name match have `basin_lat`
+instead and a blank `coord_source`, which is why that column shows more blanks than
+the genuinely unplaced site.
+
+#### Provenance and caveats for the eleven researched coordinates
+
+Written out because these are hand-made decisions and a reader of the paper is
+entitled to see them. Verify any of it with
+`python scripts/data/substations/check_coordinate_overrides.py --cec`, which
+reports each override's nearest same-utility substation and nearest CEC record.
+
+| Substation | Corroboration | Note |
+|---|---|---|
+| Topanga, Paularino | CEC exact name+owner match, 0–1 m | Unambiguous |
+| Poole | CEC `Poole Ph` (SCE, Mono Co., 115 kV) at **75 m**; nearest SCE substation 8.7 km | Only "Poole" record in the CEC inventory statewide; clean |
+| Safari | CEC record at 658 m; nearest SCE substation 4.1 km | SCE's own Safari substation map PDF |
+| Mountain Pass | CEC `Mt. Pass` at 74 m; **our own `Mountain Pass A` at 169 m** | Same physical site as `Mountain Pass A` (both `Kramer 220/115 System`); CEC lists **one** facility there. Two banks at one site — they share a CATS bus and their loads sum. Not a duplication error. |
+| Camino | CEC `Camino - (Other)` at 133 m, 230 kV, San Bernardino Co. | Isolated (65 km to the nearest SCE substation) because it is in SCE's Needles-area territory — 22 SCE substations lie east of −116°. CEC's `owner_raw` is `Other (SCE - Assumed)`, an *unconfirmed-owner* tag, not a different owner; SCE's own `sys_name` for it is `Camino 220/16 System`, i.e. SCE names a transmission system after it. Confirmed. |
+| Bishop Creek Plant 2 | CEC `Bishop Creek 2` at 130 m | SCE Bishop Creek hydro chain, Inyo Co. |
+| Santa Ana River 1 | CEC `Santa Ana 3` at 97 m | SCE Santa Ana River hydro chain; zero envelope (see below) |
+| Palm Springs 'A' / 'B' | CEC `Palm Springs` at 1 m | **Deliberately the same coordinate** — two banks at one station. They map to one bus and their loads sum (1.35 + 0.70 MW). |
+| **Lunar** | **No CEC record named "Lunar" exists anywhere in the state** | ⚠️ **See the caveat below.** |
+
+> **⚠️ Lunar — an unresolved placement, recorded for the write-up.**
+> The coordinate used (34.68577, −118.30349) sits in the Antelope Valley, 333 m
+> from CEC's `Antelope - (SCE)` 500 kV station, and was inferred from the Luna
+> BESS project, which interconnects via Big Sky to Antelope. Nothing
+> independently confirms it: CEC has **zero** records containing "Lunar".
+>
+> **Counter-evidence:** SCE's own attribute for this substation is
+> `sys_name = "Big Creek 220/220 System"`, and the four other substations
+> carrying that `sys_name` (Timberwine, Pitman, Big Creek 2, Camp 10) all sit in
+> the Big Creek hydro complex in Fresno County, **286–294 km away**. `sys_name`
+> denotes the transmission area a substation is fed from, so this points at the
+> Sierra complex rather than the Antelope Valley. (The Big Creek 220 kV corridor
+> does run south toward Vincent/Antelope, which is why the Antelope reading is
+> not absurd — but the other four members cluster at Big Creek itself.)
+>
+> **Why it does not affect any result:** Lunar's mean `max_load` envelope is
+> **exactly 0.000 MW across all 288 cells.** It is one of the 28 substations with
+> a non-positive envelope, so it is clipped to zero weight in every
+> envelope-weighted and stochastic allocation and contributes nothing to any
+> share vector. Under the proximity map it lands on bus 8341 (0.333 km) — the
+> Antelope bus — carrying no load. The placement is therefore recorded as
+> uncertain and left as-is; resolving it would change no number in this paper.
+
+**Propagation is automatic.** `process_substations_clean.py` applies the file
+(`apply_coordinate_overrides()`) when it builds
+`substation_attributes_clean.csv`, filling `util_lat`/`util_lon`. Since every
+downstream consumer — nodal mapping, the identity/catchment map builder, GenX
+county assignment, the ML feature assembly — reads its coordinates from that
+one file, a filled row reaches all of them with no further edits. So the loop is:
+
+```bash
+# 1. edit data/substationCoordinateOverrides.csv (fill lat/lon/source)
+python scripts/data/substations/process_substations_clean.py     # 2. rebuild attributes
+python scripts/load_projection/nodal/map_loads_to_nodes.py --system CATS   # 3. remap
+python scripts/load_projection/nodal/build_identity_catchment_maps.py      # 4. rebuild GenX maps
+```
+
+Guard rails: an override is **last resort only** — a substation that already has
+a utility coordinate is never overwritten (those rows are counted and reported as
+skipped) — and the step asserts that the substation count is unchanged, so the
+file can add a location but never a substation.
+
+### What of this feeds the GenX rescaling
+
+Only a narrow slice of this pipeline is load-bearing for the GenX experiment:
+
+| Used by GenX | How |
+|---|---|
+| `substation_node_map.csv` | the `--map prox` artifact, used directly |
+| `substation_node_map__voltrestrict.csv` | the `--map voltres` artifact |
+| the substation set + coordinates behind them | `build_identity_catchment_maps.py` takes its substation list from the prox map and its coordinates from `substation_attributes_clean.csv`, then builds the `nameprox` / `catch` / `namecatch` artifacts |
+| `nodes_by_county()` (from `hybrid_county_topup.py`) | the point-in-polygon bus→county join behind the county-first allocation |
+
+**Not used by GenX:** the `--apply` outputs (`nodal__*.csv/parquet`) — the
+rescaler always recomputes bus loads from the substation level, because those
+frozen files are tied to one map mode; `--unmapped` renormalisation, since the
+GenX share vectors are normalised per allocation anyway; the coverage/diagnostic
+plots; and `hybrid_county_topup.py` itself, which is a prototype and supplies
+only its county-join helper. Note also that GenX's **candidate-bus pool is
+deliberately different** from this page's: it keeps all 3,168 `Type='Substation'`
+buses plus the 610 loaded `AddedNode`s (3,778), rather than applying the
+zero-demand filter that yields 1,861 here — see
+[genx_rescale.md](genx_rescale.md).
 
 ## Voltage-aware assignment (`--voltage-mode restrict`)
 
@@ -112,7 +251,7 @@ python scripts/load_projection/checks/compare_voltage_mapping.py
   `data/figures/load_projection/coverage/coverage_map_{system}.html` +
   `coverage_by_county_{system}.csv`.
 - **`plot_nodal_diagnostics.py`** — `dist_hist.png` (assignment distance, median
-  0.07 km), `tie_hist.png` (219 of 1,325 substations split across 2+ nodes),
+  0.07 km), `tie_hist.png` (substations split across 2+ nodes),
   `voronoi.png` (Voronoi partition of candidate nodes clipped to CA). →
   `data/figures/load_projection/nodal/{system}/`.
 - **`plot_pipeline_explainers.py`** — worked examples with real numbers:
