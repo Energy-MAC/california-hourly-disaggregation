@@ -1,0 +1,115 @@
+{
+  "run_tag": "genx__env__prox__hold__monthhour",
+  "axes": {
+    "weights": "env",
+    "map": "prox",
+    "alpha": "ratio",
+    "stoch_gate": 0.3,
+    "stoch_topoff": "none",
+    "draw": "mean",
+    "level": "monthhour"
+  },
+  "float_format": "one_decimal",
+  "git_rev": "0ee0fccc2b545951bea9da15170fdd6a53c951cc",
+  "timestamp": "2026-08-17T11:27:54",
+  "control_tree": "genx\\scenarios_historical_2019\\scenarios_historical_2019",
+  "control_md5": {
+    "Summer": "22982260bbcb8fa719bdfb75feeeabbb",
+    "Winter": "42f69feadcda84463f4786a4a3a24e95",
+    "Spring": "237cef184e56a6d26d5a5e82ccad276d",
+    "Fall": "054a8abd17faf5a78d070baccb3ebc13"
+  },
+  "seasons": {
+    "Summer": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 3.637978807091713e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 4420260.1,
+      "rescaled_total_mwh": 4420260.1,
+      "coverage_share": 0.5384357585654292,
+      "n_zones_gaining": 489,
+      "n_zones_losing": 539,
+      "n_zones_unchanged": 7842,
+      "n_zones_newly_nonzero": 0,
+      "n_zones_zeroed": 3,
+      "peak_zone_mw_control": 213.4,
+      "peak_zone_mw_rescaled": 541.8,
+      "source_case": "p1",
+      "output_md5": "2b645288a4196530cd2d8ef04374e083"
+    },
+    "Winter": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 3.637978807091713e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 3648702.7,
+      "rescaled_total_mwh": 3648702.7,
+      "coverage_share": 0.5384457056476538,
+      "n_zones_gaining": 516,
+      "n_zones_losing": 512,
+      "n_zones_unchanged": 7842,
+      "n_zones_newly_nonzero": 0,
+      "n_zones_zeroed": 4,
+      "peak_zone_mw_control": 142.8,
+      "peak_zone_mw_rescaled": 244.3,
+      "source_case": "p8",
+      "output_md5": "67927bfb756cc041d3d9d6dbc423a7a4"
+    },
+    "Spring": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 1.8189894035458565e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 3622454.5,
+      "rescaled_total_mwh": 3622454.5,
+      "coverage_share": 0.538449026757962,
+      "n_zones_gaining": 496,
+      "n_zones_losing": 532,
+      "n_zones_unchanged": 7842,
+      "n_zones_newly_nonzero": 0,
+      "n_zones_zeroed": 3,
+      "peak_zone_mw_control": 159.4,
+      "peak_zone_mw_rescaled": 401.8,
+      "source_case": "p15",
+      "output_md5": "cafb9dc204366f0821b13d6460a52234"
+    },
+    "Fall": {
+      "n_hours": 168,
+      "max_abs_hourly_dev_preround_mw": 3.637978807091713e-12,
+      "max_abs_hourly_dev_printed_mw": 0.0,
+      "control_total_mwh": 4858565.0,
+      "rescaled_total_mwh": 4858565.0,
+      "coverage_share": 0.5384396833221332,
+      "n_zones_gaining": 497,
+      "n_zones_losing": 531,
+      "n_zones_unchanged": 7842,
+      "n_zones_newly_nonzero": 0,
+      "n_zones_zeroed": 3,
+      "peak_zone_mw_control": 211.1,
+      "peak_zone_mw_rescaled": 509.8,
+      "source_case": "p22",
+      "output_md5": "971fceca45778415fbbc54a96c663904"
+    }
+  },
+  "provenance": {
+    "allocation": "envelope_hold",
+    "weights": {
+      "weight_definition": "mean max_load envelope per substation",
+      "map_file": "data\\processed\\load_projection\\nodal\\CATS\\substation_node_map.csv",
+      "map_md5": "ad0b02cc7a982c3e262b436da7948884",
+      "n_substations": 1347,
+      "n_substations_nonpositive_envelope": 28,
+      "n_substations_mapped": 1326,
+      "n_nodes_weighted": 1028
+    },
+    "n_nodes_with_share": 1028,
+    "topoff_fraction": 0.0,
+    "cells": {
+      "weight_definition": "max_load envelope per (month, hour_pst) cell",
+      "map_file": "data\\processed\\load_projection\\nodal\\CATS\\substation_node_map.csv",
+      "map_md5": "ad0b02cc7a982c3e262b436da7948884",
+      "n_cells": 120,
+      "n_cells_filled_from_substation_mean": 768,
+      "n_nodes_weighted": 1029,
+      "n_nodes_any_cell": 1028
+    }
+  }
+}

@@ -9,6 +9,17 @@ All scrapers support **safe stop/resume**: press `Ctrl+C` and re-run to continue
 
 ---
 
+## Where this is implemented
+
+| Stage | Entry point | Notes |
+|---|---|---|
+| Scrape (per source) | `scripts/data/{pge,sce,sdge,eia,iepr,resolve,reeds}/` | each has its own CLI; see Step 1 |
+| Unified substation build | `data/substations/process_substations_clean.py` | writes both `substation_attributes_clean.csv` and `substation_load_profiles_clean.csv` |
+| Substation → county | `data/substations/assign_substation_counties.py` | point-in-polygon, TIGER 2022 |
+| Coordinate overrides + their check | `apply_coordinate_overrides()`, `check_coordinate_overrides.py` | `data/substations/` |
+| Timezone conversion to fixed PST | the `pdt_mask` block in `process_substations_clean.main()` | majority-month rule, see "Time zone" below |
+| Rankings | `shared/rank_substations.py` | prerequisite for both approaches |
+
 ## Step 1 — Scrape raw data
 
 ### EIA 930
@@ -109,7 +120,7 @@ download preferred; most-recent year-vintage per cell); SDGE kW→MW.
 | res/com/agr/ind/other_pct, _total | SCE customer-class shares/counts |
 | note_sub | Data quality flag |
 
-**`substation_load_profiles_clean.csv`** — 386,136 rows:
+**`substation_load_profiles_clean.csv`** — 387,864 rows:
 
 | Column | Description |
 |--------|-------------|

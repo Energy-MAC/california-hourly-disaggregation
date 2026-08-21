@@ -14,6 +14,18 @@ table and the essential net-vs-gross rule.
 | ReEDS historic | p9–p11 (WECC_CA ≈ BANC+CISO+IID+LDWP+TIDC) | Net, actual observed | 2016–2023 | Ground truth at WECC_CA scale |
 | Substations | PGE+SCE+SDGE distribution | Net-of-BTM at the substation meter | Historical monthly | Sub-BA spatial resolution |
 
+## Where this is implemented
+
+| Concept in this doc | Function / script | File |
+|---|---|---|
+| RESOLVE ingest | `process_resolve.py` | `scripts/data/resolve/` |
+| ReEDS projected + historic ingest | `process_reeds.py`, `process_historic_load.py` | `scripts/data/reeds/` |
+| ReEDS county reference (**weights only**) | `reeds_county_annual()` | `scripts/load_projection/checks/validate_county_reeds.py` |
+| p-region → county split | `compute_county_pgroup_fractions()` | `src/load_projection/weights.py` |
+| IEPR ingest | `process_iepr.py` | `scripts/data/iepr/` |
+| Cross-source comparison (this doc's tables) | `compare_resolve_iepr_eia.py` | `scripts/data/` |
+| CAISO history for Approach 2 | `load_caiso_history()` | `src/load_projection/stochastic.py` |
+
 ## RESOLVE
 
 RESOLVE (E3/CPUC Integrated Resource Planning model) is the statewide optimization model

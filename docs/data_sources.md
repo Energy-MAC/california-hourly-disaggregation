@@ -7,6 +7,24 @@ forecast sources (RESOLVE, ReEDS, IEPR framework comparison, BTM treatment) are 
 [statewide_forecast_sources.md](statewide_forecast_sources.md). Scrape/process commands
 and column dictionaries are in [data_pipeline.md](data_pipeline.md).
 
+## Where this is implemented
+
+| Concept in this doc | Function / script | File |
+|---|---|---|
+| PG&E attribute + feeder scrape | `scrape_pge.py attributes` / `layer --layer-id 25` | `scripts/data/pge/` |
+| SCE bulk-download ingest | `ingest_sce_bulk_download.py` | `scripts/data/sce/` |
+| SDG&E attribute + profile scrape | `scrape_sdge.py attributes` / `substation-profiles` | `scripts/data/sdge/` |
+| Unified clean build (all three utilities) | `process_pge()`, `process_sce()`, `process_sdge()` | `data/substations/process_substations_clean.py` |
+| SCE year-stamp rule (highest year per cell) | the `groupby(...)["year"].idxmax()` block in `process_sce()` | same |
+| PG&E legacy recovery of deleted substations | the `LEGACY_PGE_LOADS` / `LEGACY_PGE_ATTRS` block in `main()` | same |
+| Basin coordinate join + name dictionary | `add_basin_coords()`, `_build_dict_map()` | same |
+| High-side voltage enrichment | `attach_highside_voltage()` | same |
+| Hand-researched coordinates | `apply_coordinate_overrides()` | same |
+| Name normalisation (the match definition) | `norm()` | `data/substations/build_cec_name_dictionary.py` |
+| CEC reference build + name dictionary | `process_substations_cec.py`, `build_cec_name_dictionary.py` | `data/substations/` |
+| CEC coverage audit / reverse gap | `audit_substation_coverage.py` | same |
+| EIA-930 ingest | `scrape_eia.py`, `process_eia.py` | `scripts/data/eia/` |
+
 ## EIA 930 (Hourly Balancing Authority Operations)
 
 Eight California-adjacent BAs: BANC, CISO, IID, LDWP, NEVP, PACW, TIDC, WALC.
@@ -67,26 +85,103 @@ the DataBasin CA Substations 2022 reference for coordinates:
 
 |                                      | PG&E    | SCE     | SDG&E  | Total     |
 |--------------------------------------|---------|---------|--------|-----------|
-| Raw substations scraped              | 664     | 748     | 107¹   | 1,519     |
-| Removed (P.T. nodes / failed scrapes)| —       | 170     | 8      | 178       |
-| **Cleaned (in processed output)**    | **664** | **578** | **99** | **1,341** |
-| Matched to basin by name             | 550     | 518     | 87     | 1,155     |
-| Added via name dictionary            | 50      | 9       | 9      | 68        |
-| **Basin-matched total**              | **600** | **527** | **96** | **1,223** |
-| Not matched to basin                 | 64      | 51      | 3      | 118       |
+| Raw substations published            | 704²    | 748     | 107¹   | 1,559     |
+| Removed (P.T. nodes / no load profile)| 34      | 170     | 8      | 212       |
+| **Cleaned (in processed output)**    | **670** | **578** | **99** | **1,347** |
+| **Basin-matched total**              | **605** | **527** | **96** | **1,228** |
+| Not matched to basin                 | 65      | 51      | 3      | 119       |
 | Basin substations not in any source  | 346     | 160     | 42     | 548       |
-| Load profile rows (processed)        | 191,184 | 166,440 | 28,512 | 386,136   |
+| With a utility/override coordinate   | 669     | 568     | 99     | 1,336     |
+| **With ANY coordinate**              | **670** | **577** | **99** | **1,346** |
+| Load profile rows (processed)        | 192,912 | 166,440 | 28,512 | 387,864   |
 
-¹ SDG&E: 99 substations with data + 8 failed scrapes = 107 attempted.
+¹ SDG&E: 99 substations with load profiles + 8 published with attributes but **no**
+profile (all 69/12 kV distribution sites) = 107 in the attribute layer.
+
+² PG&E publishes 704 named substations in the ArcGIS attribute layer, but only 670 of
+them carry feeder load data; the other 34 have attributes and coordinates but no
+profile, so they cannot be used. (The layer also returns 72 fully name-redacted rows —
+id, coordinates and DER capacity but no name — which cannot be joined to load and are
+dropped.)
 
 The **name dictionary** (`data/basinSourceDictionary.csv`, 79 entries) maps utility
 source names that differ from the DataBasin reference (e.g. "CRESTA PH" → "Cresta") to
 recover geolocation matches beyond the normalised-name join.
 
+### Coverage completeness check (re-scrape, 2026-08-17)
+
+All three utility sources were re-pulled and diffed against the frozen snapshot to
+confirm the substation set is complete. **No utility has added or removed a substation**,
+so the dataset covers everything the three IOUs currently publish load profiles for.
+Comparison artifacts are in `data/checks/rescrape_2026_08_17/`.
+
+| Utility | Method | Result |
+|---|---|---|
+| PG&E | `scrape_pge.py attributes --output-dir <tmp>` | **704 named substations in both** — none added, none removed. The live layer now returns 776 rows, but the extra 72 are fully **name-redacted** (id + coordinates + DER capacity, no name), so they cannot be joined to load and are not usable. Of the 704, still only 670 have feeder load. |
+| SCE | Fresh DRPEP "Download All" ZIP, diffed member-by-member | **709 members in both, identical name set.** Load *values* refresh monthly (the 2026 vintage has since extended from April to July), but no substation appears or disappears. |
+| SDG&E | `scrape_sdge.py attributes --output-dir <tmp>` | **107 in both, identical names.** 99 have load profiles; the 8 without are 69/12 kV distribution sites (Basilone, Division, Kyocera, Loveland, Mira Sorrento, Miramar, Pendleton, Warren Canyon) that SDG&E lists but publishes no profile for. |
+
+#### Can the 72 name-redacted PG&E rows be recovered? No — there is no load.
+
+Worth documenting because the idea is reasonable and the answer is definitive.
+The redacted rows *do* carry usable identity information: `substation_id`,
+longitude/latitude, and DER capacity. Matching them to the CEC inventory by
+coordinate works well — **34 of 72 fall within 100 m of a CEC record, 48 within
+500 m, 66 within 2 km**, and the matches are plainly real PG&E substations
+(Alta Ph, Skaggs Island, San Fran E, Randolph, Signetics, Toadtown Ph…). So we
+could name and place them.
+
+**But there is no load to attach.** Querying PG&E's live feeder layer (layer 25)
+directly for all 69 distinct redacted `subid`s returns **0 rows** — and the same
+is true of the frozen snapshot. The censoring is total: attributes, load, and
+even the DER values are placeholders (every one of the 72 reports exactly
+`existing_dg_kw = 1000`, `total_dg_kw = 2000`). These are almost certainly
+few-customer substations withheld for customer privacy.
+
+Since the disaggregation needs a **load profile** per substation — a coordinate
+and a name alone contribute nothing to a share vector — these 72 cannot enter the
+dataset. Imputing their load was considered and rejected: the cold-start study
+(now legacy, `ml_cookbook.md`) showed structural features recover profile *shape*
+but not *magnitude*, so imputed substations would carry invented load.
+
+#### Newly published PG&E feeder load (checked 2026-08-17, not ingested)
+
+The live feeder layer has grown to **639 distinct substations (from 628)** and
+184,008 rows (from 180,816). Cross-referencing:
+
+- **21 substations gained feeder load** since the snapshot — but **19 of them are
+  already in our build**, recovered through the PG&E legacy path. PG&E has simply
+  re-published what it had earlier deleted, which is direct confirmation that the
+  legacy-recovery mechanism was reconstructing real substations rather than
+  stale artifacts.
+- **2 are genuinely new: `RAINBOW` and `TEVIS`** — they previously had attributes
+  but no profile.
+- **10 substations dropped out** of the live layer (Lakewood, Bridgeville, Suisun,
+  Cuyama, Divide, Spring Gap, San Benito, Soquel, Sobrante, Haas). **All 10 remain
+  in our build** via the frozen snapshot, so the churn costs us nothing.
+
+**Deliberately not ingested.** Adding the 2 new substations (+0.15% of the fleet)
+would require re-scraping layer 25, which also restates every other PG&E
+substation's load values and would drop the 10 above unless legacy recovery
+happened to catch them. Perturbing a verified pipeline for a 0.15% coverage gain
+is a bad trade; the frozen snapshot is the published basis. Recorded here so the
+choice is visible rather than implicit.
+
+Two schema notes for anyone re-running the scrapers:
+
+- PG&E changed the `redacted` flag's casing from `Yes`/`No` to `YES`/`NO`, and moved 34
+  substations from redacted to non-redacted. This is **cosmetic for this pipeline**: the
+  field is only carried through as the `note_sub` passthrough column and is never
+  compared to a literal, so no code depends on the casing.
+- The load profiles are a **frozen snapshot by design.** SCE restates values and advances
+  year-stamps monthly, so re-ingesting mid-analysis would silently change every
+  downstream number. The published results correspond to the snapshot in
+  `data/raw/`, not to a live pull.
+
 **SCE year-stamp deduplication:** SCE publishes year-stamped profiles (2017–2026), each
 an independent 10th/90th-percentile snapshot from a non-public lookback window. 652 of
-709 unique SCE substations appear in multiple years. The 2026 vintage covers only
-January–April. The processed output keeps, per `(substation, month, hour)` cell, the row
+709 unique SCE substations appear in multiple years. The 2026 vintage covered January–April at the time of the frozen
+snapshot (it has since extended to July — see the re-scrape note below). The processed output keeps, per `(substation, month, hour)` cell, the row
 with the highest year, so May–December for 2026-batch substations falls back to 2025 —
 full 12-month coverage from the most recent snapshot. See `process_substations_clean.py`.
 
@@ -135,7 +230,8 @@ With the dictionary, the **CEC cross-reference rate** is **PGE 666/670, SCE 559/
 > **This is a cross-reference/enrichment rate, NOT coordinate availability — do not read
 > "666/670" as "4 PGE substations lack a location."** Every scraped substation already
 > carries the utility's own coordinate; basin/CEC are fallbacks + cross-checks. Of 1,347
-> scraped substations, 1,335 have a coordinate and **only 12 (all SCE) lack any** — CEC
+> scraped substations, **1,346 have a coordinate and only 1 (SCE `Autobody`, which has no load
+> data) lacks any** after the 2026-08-17 hand-researched overrides — CEC
 > recovers 2. The match's value is validating the utility coordinate and pulling CEC
 > attributes.
 
@@ -149,7 +245,9 @@ names → `data/checks/find_cec_name_candidates/cec_candidates_{util}.csv` (with
 `audit_substation_coverage.py` (→ `data/checks/substation_coverage_audit/`) separates
 three easily-conflated questions:
 
-1. **Coordinates** — 1,335 / 1,347 scraped substations have one; only 12 SCE lack one.
+1. **Coordinates** — 1,346 / 1,347 scraped substations have one; only SCE `Autobody` lacks one
+   (and it has no load data). See `data/substationCoordinateOverrides.csv` and
+   [nodal_mapping.md](nodal_mapping.md) for the hand-researched set and its provenance.
 2. **CEC cross-reference** — the 666 / 559 / 90 name-match counts.
 3. **Reverse gap** (`cec_unscraped_{util}.csv`) — CEC is a *location* inventory of every
    substation; our scrape is a *load* inventory of only those a utility publishes

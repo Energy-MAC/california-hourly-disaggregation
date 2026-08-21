@@ -1,0 +1,3 @@
+lp,n_arcs,n_free_buses,n_forced,n_fractional,objective_km,solve_seconds
+catchment,75386,3769,0,0,28191.97061576656,0.7
+namecatchment,56658,2527,1242,0,27917.796446826418,1.1

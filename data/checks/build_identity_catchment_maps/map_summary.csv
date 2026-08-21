@@ -1,0 +1,5 @@
+map,n_substations,n_buses,n_rows,by_method,dist_median_km,dist_p95_km,dist_max_km,pct_over_1km,pct_over_10km,catchment_max
+nameprox,1336,1345,1539,"{'name': 1242, 'nearest': 297}",0.065,9.27,105.7,22.4,4.4,4
+catchment,1336,3769,3769,{'catchment': 3769},1.961,33.64,115.6,60.0,19.0,99
+namecatchment,1336,3769,3769,"{'catchment': 2527, 'name': 1242}",1.933,33.43,152.2,59.4,19.2,99
+prox,1336,1043,1422,{'nearest': 1422},0.133,19.85,105.7,40.4,11.9,4

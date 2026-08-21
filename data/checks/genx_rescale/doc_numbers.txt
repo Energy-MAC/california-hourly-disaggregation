@@ -1,0 +1,136 @@
+
+=== [A] Control tree (quoted in genx_rescale.md 'The control set') ==
+cases: 28   seasons: 4 (Summer, Winter, Spring, Fall)   distinct demand files: 4
+  Summer  zones 8,870  nonzero 2,471  week total 4.420 TWh  hours 168
+  Winter  zones 8,870  nonzero 2,471  week total 3.649 TWh  hours 168
+  Spring  zones 8,870  nonzero 2,471  week total 3.622 TWh  hours 168
+  Fall    zones 8,870  nonzero 2,471  week total 4.859 TWh  hours 168
+control allocation season-invariance: per-bus share max deviation 7.82e-07; max seasonal relocation vs mean 0.011%
+
+=== [B] Candidate bus pool (genx_rescale.md 'Which buses are eligible') 
+Type=Substation non-IMPORT: 3,168
+AddedNodes CATS loads (kept): 610  carrying 15.9% of state load
+AddedNodes at zero (excluded): 5,089
+  candidate buses: 3,778 (3,168 substations + 610 loaded AddedNodes; 5,089 zero-load AddedNodes dropped)
+pool: 3,778; with a county polygon: 3,769 (the difference falls outside every county polygon)
+control loads 2,471 buses
+
+=== [C] Rep-week calendar (genx_rescale.md 'Rep-week calendar') =====
+season   start_datetime            timezone                                                                                                                              notes
+Winter 2019-12-09 00:00 America/Los_Angeles     PST (DST ended 2019-11-03); peak 30.5 GW; hour-beginning per user 2026-08-12; from settings_2019.yml time_slicing.sample_weeks
+Spring 2019-05-29 00:00 America/Los_Angeles PDT - clock is UTC-7 all week; spans May into June; peak 33.8 GW; hour-beginning; from settings_2019.yml time_slicing.sample_weeks
+Summer 2019-08-08 00:00 America/Los_Angeles        PDT - clock is UTC-7 all week; peak 44.0 GW (annual peak); hour-beginning; from settings_2019.yml time_slicing.sample_weeks
+  Fall 2019-09-01 00:00 America/Los_Angeles                      PDT - clock is UTC-7 all week; peak 43.8 GW; hour-beginning; from settings_2019.yml time_slicing.sample_weeks
+  Winter  24 distinct (month,hour) cells; first cell (12, 0)
+  Spring  48 distinct (month,hour) cells; first cell (5, 23)
+  Summer  24 distinct (month,hour) cells; first cell (8, 23)
+  Fall    25 distinct (month,hour) cells; first cell (8, 23)
+union across the four weeks: 120 of 288 cells
+
+=== [D] Envelope month-hour fallback (genx_rescale.md fallback table) 
+  Winter          24 cells  32,328 slots  0 missing (0.00%)
+  Spring          48 cells  64,656 slots  0 missing (0.00%)
+  Summer          24 cells  32,328 slots  0 missing (0.00%)
+  Fall            25 cells  33,675 slots  24 missing (0.07%)
+  all 288 cells  288 cells  387,936 slots  72 missing (0.02%)
+
+=== [E] Approach 2 CATS-calibrated run (genx_rescale.md 'Stochastic') 
+F* on CATS target: 0.8406   (EIA-930 history gives 0.7361)
+target: 672 hours, 120 cells, 3-8 obs/cell, mean 24,628 MW
+annual table: 5 draws, 1347 substations
+draw-to-draw substation share spread (cv): median 0.031, p90 0.063
+per-cell table: 804,360 rows, 120 cells, 1,341 substations, 5 draws
+  fallback-filled slots (sub x cell grid): 48 of 160,920 (0.03%)
+  negative cell means clipped to 0 (mean draw): 1337 (0.83%)
+
+=== [F] Nodal map artifacts (genx_rescale.md 'The map axis') ========
+          map  n_substations  n_buses  n_rows                         by_method  dist_median_km  dist_p95_km  dist_max_km  pct_over_1km  pct_over_10km  catchment_max
+     nameprox           1336     1345    1539    {'name': 1242, 'nearest': 297}           0.065         9.27        105.7          22.4            4.4              4
+    catchment           1336     3769    3769               {'catchment': 3769}           1.961        33.64        115.6          60.0           19.0             99
+namecatchment           1336     3769    3769 {'catchment': 2527, 'name': 1242}           1.933        33.43        152.2          59.4           19.2             99
+         prox           1336     1043    1422                 {'nearest': 1422}           0.133        19.85        105.7          40.4           11.9              4
+           lp  n_arcs  n_free_buses  n_forced  n_fractional  objective_km  solve_seconds
+    catchment   75386          3769         0             0  28191.970616            0.7
+namecatchment   56658          2527      1242             0  27917.796447            1.1
+identity matches: 1,242 buses across 1,077 substations
+         n_subs  n_buses  med_dist_km
+utility                              
+pge         530      625        0.039
+sce         466      523        0.060
+sdge         81       94        1.276
+(regenerate with scripts/load_projection/nodal/build_identity_catchment_maps.py)
+
+=== [G] Rescale runs on disk (genx_runbook.md run table + sanity numbers) 
+                                            run  printed_dev_mw preround_dev_mw  topoff_frac n_share_buses
+                                  genx__control             0.0         0.0e+00       0.0000              
+               genx__env__prox__hold__monthhour             0.0         3.6e-12       0.0000          1028
+                  genx__env__prox__hold__static             0.0         3.6e-12       0.0000          1028
+        genx__reedsco__catch__aratio__monthhour             0.0         7.3e-12       0.0000          3768
+    genx__reedsco__namecatch__aratio__monthhour             0.0         7.3e-12       0.0000          3768
+     genx__reedsco__nameprox__aratio__monthhour             0.0         1.5e-11       0.0000          3768
+             genx__reedsco__prox__a0__monthhour             0.0         1.5e-11       0.0000          1180
+                genx__reedsco__prox__a0__static             0.0         7.3e-12       0.0000          1180
+         genx__reedsco__prox__aratio__monthhour             0.0         7.3e-12       0.0000          3768
+            genx__reedsco__prox__aratio__static             0.0         7.3e-12       0.0000          3768
+         genx__stoch__catch__w2-mean__monthhour             0.0         7.3e-12       0.0000          3603
+     genx__stoch__namecatch__w2-mean__monthhour             0.0         7.3e-12       0.0000          3601
+genx__stoch__nameprox__w1g30top-mean__monthhour             0.0         7.3e-12       0.5560          2953
+         genx__stoch__prox__w1g30-d0__monthhour             0.0         7.3e-12       0.0000          2442
+         genx__stoch__prox__w1g30-d1__monthhour             0.0         7.3e-12       0.0000          2442
+         genx__stoch__prox__w1g30-d2__monthhour             0.0         7.3e-12       0.0000          2442
+       genx__stoch__prox__w1g30-mean__monthhour             0.0         7.3e-12       0.0000          2442
+      genx__stoch__prox__w1g30top-d0__monthhour             0.0         1.1e-11       0.5794          2442
+      genx__stoch__prox__w1g30top-d1__monthhour             0.0         1.1e-11       0.5799          2442
+      genx__stoch__prox__w1g30top-d2__monthhour             0.0         1.1e-11       0.5799          2442
+    genx__stoch__prox__w1g30top-mean__monthhour             0.0         1.1e-11       0.5799          2442
+            genx__stoch__prox__w2-d0__monthhour             0.0         3.6e-12       0.0000          1027
+            genx__stoch__prox__w2-d1__monthhour             0.0         3.6e-12       0.0000          1026
+            genx__stoch__prox__w2-d2__monthhour             0.0         3.6e-12       0.0000          1026
+          genx__stoch__prox__w2-mean__monthhour             0.0         3.6e-12       0.0000          1026
+
+25 runs; printed conservation violations: 0
+
+=== [H] Input divergence (genx_runbook.md / genx_comparison.md tables) 
+                                                 energy_relocated_pct  county_energy_relocated_pct  spearman_bus_energy  n_buses_method  jaccard_support
+run                                                                                                                                                     
+genx__env__prox__hold__monthhour                               20.660                        8.290                0.756         2467.75            0.999
+genx__env__prox__hold__static                                  20.314                        7.677                0.760         2467.00            0.998
+genx__reedsco__catch__aratio__monthhour                        50.366                       14.408                0.391         3692.50            0.651
+genx__reedsco__namecatch__aratio__monthhour                    50.746                       14.408                0.387         3691.00            0.652
+genx__reedsco__nameprox__aratio__monthhour                     48.128                       14.405                0.405         3758.25            0.653
+genx__reedsco__prox__a0__monthhour                             58.707                       14.409                0.457         1177.25            0.418
+genx__reedsco__prox__a0__static                                58.576                       14.409                0.458         1176.50            0.418
+genx__reedsco__prox__aratio__monthhour                         49.735                       14.405                0.403         3762.75            0.652
+genx__reedsco__prox__aratio__static                            49.667                       14.405                0.403         3762.00            0.652
+genx__stoch__catch__w2-mean__monthhour                         49.764                       17.847                0.447         3608.25            0.669
+genx__stoch__namecatch__w2-mean__monthhour                     49.580                       17.701                0.448         3607.25            0.671
+genx__stoch__nameprox__w1g30top-mean__monthhour                45.570                       17.207                0.403         3426.75            0.720
+genx__stoch__prox__w1g30-d0__monthhour                         47.954                       17.544                0.667         1692.25            0.685
+genx__stoch__prox__w1g30-d1__monthhour                         47.841                       17.436                0.668         1691.25            0.684
+genx__stoch__prox__w1g30-d2__monthhour                         47.870                       17.546                0.667         1691.25            0.684
+genx__stoch__prox__w1g30-mean__monthhour                       47.833                       17.481                0.668         1691.25            0.684
+genx__stoch__prox__w1g30top-d0__monthhour                      43.826                       14.199                0.466         3107.25            0.794
+genx__stoch__prox__w1g30top-d1__monthhour                      43.766                       14.177                0.468         3106.75            0.794
+genx__stoch__prox__w1g30top-d2__monthhour                      43.795                       14.205                0.467         3107.25            0.794
+genx__stoch__prox__w1g30top-mean__monthhour                    43.764                       14.199                0.469         3107.25            0.794
+genx__stoch__prox__w2-d0__monthhour                            20.583                        7.776                0.757         2467.75            0.999
+genx__stoch__prox__w2-d1__monthhour                            20.522                        7.718                0.758         2467.75            0.999
+genx__stoch__prox__w2-d2__monthhour                            20.544                        7.764                0.757         2468.25            0.999
+genx__stoch__prox__w2-mean__monthhour                          20.497                        7.738                0.758         2467.75            0.999
+(means over the four seasons; regenerate with compare_genx_demand.py)
+
+=== [I] Pool coverage, by bus count and by ENERGY (genx_rescale.md 'Which buses', genx_comparison.md reading guide) 
+Why the control loads 2,471 buses while the candidate pool is 3,778:
+  Type=Substation non-IMPORT            3168 buses, CATS loads  1861, leaves  1307 EMPTY
+  AddedNode that CATS loads              610 buses,  15.9% of energy
+  => control-loaded buses               2471 = 1861 + 610
+  => candidate pool                     3778 (3769 of them inside a county polygon)
+  => pool buses CATS leaves EMPTY       1307  <- full redistribution can light these up; a hold cannot
+
+Energy shares of the control's total (all four weeks):
+  on buses OUTSIDE the candidate pool    0.1085%  (4 buses: ['2408', '2759', '6994', '7610'])
+  env hold  pool:  1028 buses,  53.84% of control energy re-allocated;  46.16% left at its control value
+  stoch w2  pool:  1026 buses,  53.83% of control energy re-allocated;  46.17% left at its control value
+
+county-first (aratio) share vector: 3768 of 3769 candidate buses; 1 get zero share: ['2318']
+  their control energy: 0.0782% (zero-envelope substations in counties with no uncovered bus)

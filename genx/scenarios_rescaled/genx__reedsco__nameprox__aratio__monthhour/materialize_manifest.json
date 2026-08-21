@@ -1,0 +1,54 @@
+{
+  "run_tag": "genx__reedsco__nameprox__aratio__monthhour",
+  "rescale_run": "genx\\rescaled\\genx__reedsco__nameprox__aratio__monthhour",
+  "control_tree": "genx\\scenarios_historical_2019\\scenarios_historical_2019",
+  "manifest_md5": "0898ba02cdbc0930030dd2f600316ad5",
+  "enable_outputs": {
+    "WriteNSE": "true",
+    "WriteCurtailment": "true",
+    "WriteCommit": "true",
+    "WriteCapacityFactor": "true"
+  },
+  "cases": {
+    "p5": {
+      "season": "Summer",
+      "demand_md5": "fa1763742e3cc16f0c643127ba4d6d9f",
+      "output_settings_md5": "6138f6be12abadb539810f4c909ebd00"
+    },
+    "p6": {
+      "season": "Summer",
+      "demand_md5": "fa1763742e3cc16f0c643127ba4d6d9f",
+      "output_settings_md5": "6138f6be12abadb539810f4c909ebd00"
+    },
+    "p12": {
+      "season": "Winter",
+      "demand_md5": "9fa67f418babb372b0ce7585e712e13e",
+      "output_settings_md5": "6138f6be12abadb539810f4c909ebd00"
+    },
+    "p13": {
+      "season": "Winter",
+      "demand_md5": "9fa67f418babb372b0ce7585e712e13e",
+      "output_settings_md5": "6138f6be12abadb539810f4c909ebd00"
+    },
+    "p19": {
+      "season": "Spring",
+      "demand_md5": "61b80e5e68501da1ef1893163376b825",
+      "output_settings_md5": "6138f6be12abadb539810f4c909ebd00"
+    },
+    "p20": {
+      "season": "Spring",
+      "demand_md5": "61b80e5e68501da1ef1893163376b825",
+      "output_settings_md5": "6138f6be12abadb539810f4c909ebd00"
+    },
+    "p26": {
+      "season": "Fall",
+      "demand_md5": "e9f65ef0f48defe5debd1384e2684f35",
+      "output_settings_md5": "6138f6be12abadb539810f4c909ebd00"
+    },
+    "p27": {
+      "season": "Fall",
+      "demand_md5": "e9f65ef0f48defe5debd1384e2684f35",
+      "output_settings_md5": "6138f6be12abadb539810f4c909ebd00"
+    }
+  }
+}

@@ -1,4 +1,15 @@
-"""Cold-start load-profile imputation for unscraped CEC substations (SCE first).
+"""LEGACY (2026-08-14) -- not part of the project's method; see docs/ml_cookbook.md.
+
+Imputing profiles for substations we have no data for is a PREDICTION problem;
+the project's question is the impact of disaggregating a KNOWN load. This output
+(data/processed/ml/imputed_substation_profiles_sce.csv) is a standalone artifact
+and is deliberately NOT consumed by the nodal mapping or the GenX rescaling --
+the validation below is exactly why: the method recovers profile shape but not
+magnitude.
+
+--------------------------------------------------------------------------
+
+Cold-start load-profile imputation for unscraped CEC substations (SCE first).
 
 Produces a 288-cell (month x hour) min_load/max_load profile for each
 load-eligible unscraped SCE substation, via a MAGNITUDE x SHAPE decomposition

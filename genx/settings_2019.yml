@@ -1,0 +1,65 @@
+# settings_2019.yml
+# ---------------------------------------------------------------------------
+# 2019 HISTORICAL, CATS-ONLY operational (PCM) profile.
+#
+# Run with:  python run_pipeline.py --config settings_2019.yml
+#
+# This is the operational path (new_build: 0) restricted to the generator fleet
+# that exists in BOTH the 2019 CATS network and the 2019 PUDL/EIA inventory.
+# It reuses the standard operational plumbing; only the year knobs and three
+# gated branches (cats_only generator filter, cats_native demand, historical
+# PUDL filter) differ from the 2024 operational run. See README_2019.md.
+# ---------------------------------------------------------------------------
+
+pipeline_toggles:
+  run_network: true
+  run_demand: true
+  run_pudl_processing: true
+  run_atb_cost_processing: false   # no fixed/investment costs in a PCM run; ReeDS VOM only
+  run_generator_creation: true
+  run_fuel_costs: true
+  run_variability: true
+  run_policy: true
+  run_time_slicing: true
+  run_scenario_generation: true
+
+# --- Mode ---
+new_build: 0            # operational / production-cost run (no capacity expansion)
+cats_only: true         # keep ONLY generators present in the CATS network (skip KDTree new-gen addition)
+base_year: 2019         # PUDL roster, fuel/heat-rate receipts, demand & sample-week timeline
+planning_year: 2035     # unused when new_build: 0 (kept for settings symmetry)
+
+# --- Demand ---
+demand_source: cats_native   # use native 2019 CATS nodal load (vs "eia_scaled" 2024 behavior)
+caiso_to_ca_factor: 1      # scale CAISO-footprint CATS load toward full-CA demand
+apply_time_shift: True
+# TODO(verify): native CATS load time basis. If it is already local hour-beginning,
+# leave this at 0 so it stays aligned with the DST-shifted VRE profiles. Revisit
+# once the CATS load clock is confirmed against the solar alignment check.
+demand_hour_shift: 0
+
+# --- Fuels ---
+# Uses data/fuels/Fuels_data_2019.csv (BA-column format: CISO/BANCSMUD/NEVP/PACW +
+# Coal/Oil/Biomass/Nuclear/None). Falls back to 2024 prices if the file is absent.
+fuels_year: 2019
+
+# --- Time / weather ---
+dst_reference_year: 2019     # DST transition dates for the UTC->Pacific profile shift
+weather_years:               # meteorology years for capacity-factor profiles (fleet-year independent)
+  - 2007
+  - 2008
+  - 2009
+  - 2010
+  - 2011
+  - 2012
+  - 2013
+
+time_slicing:
+  # Highest-PEAK-load week per season in the 2019 CAISO series (168h window start).
+  sample_weeks:
+    - "2019-12-09"   # Winter (peak 30.5 GW)
+    - "2019-05-29"   # Spring (peak 33.8 GW)
+    - "2019-08-08"   # Summer (peak 44.0 GW, annual peak)
+    - "2019-09-01"   # Fall   (peak 43.8 GW)
+  hours_per_week: 168
+  num_of_weeks: 1
