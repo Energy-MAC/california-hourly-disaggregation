@@ -35,6 +35,7 @@ here.
 | **Approach 1 — proportional weights** | Deterministic disaggregation that conserves the regional total at every hour | `data/processed/load_projection/projections/` |
 | **Approach 2 — stochastic** | Monte Carlo per-substation draws with correct marginals + a CAISO-tied common factor | same |
 | **Nodal mapping** | Substation loads assigned to an external test system's demand buses (CATS by default) | `data/processed/load_projection/nodal/` |
+| **External deliverable packages** | Shareable zips for outside users — hourly nodal load, reference tables and a standalone README | `deliverables/` (gitignored) |
 
 ## Documentation
 
@@ -51,17 +52,29 @@ reference lives in [`docs/`](docs/):
 | [docs/genx_runbook.md](docs/genx_runbook.md) | **Runbook** — the 25 allocations, every command in order, cluster handoff, and where each output lands |
 | [docs/genx_comparison.md](docs/genx_comparison.md) | Comparing GenX runs across allocations — cost/price/power/energy divergence metrics, GenX output inventory |
 | [docs/ml_cookbook.md](docs/ml_cookbook.md) | Reusable ML methodology + cold-start substation imputation |
+| [docs/deliverables.md](docs/deliverables.md) | Packaged external deliverables — hard rules, the RESOLVE-2035-at-CATS package, target construction, measured divergence between variants |
 | [docs/data_sources.md](docs/data_sources.md) | Per-source detail, substation coverage, CEC reference & audit, SMUD/CAISO POI |
 | [docs/data_pipeline.md](docs/data_pipeline.md) | Scrape → process → validate commands, column dictionaries, timezone/DST conventions, data-quality notes |
 | [docs/statewide_forecast_sources.md](docs/statewide_forecast_sources.md) | RESOLVE, ReEDS, IEPR; BTM treatment by source; RESOLVE-vs-IEPR framework; EIA CA8; peak-hour alignment |
 
 ## Setup
 
+Built and verified on **Python 3.14** in a repo-root virtual environment. The pins
+in `requirements.txt` are resolved against that interpreter — several (pandas 3.x,
+numpy 2.4, pyarrow 24) will not resolve on an older Python, so create the venv from
+a 3.14+ interpreter rather than reusing a system or conda base environment.
+
 ```bash
-python -m venv .venv
+python -m venv .venv                 # must be Python 3.14+
 .venv\Scripts\activate          # Windows;  source .venv/bin/activate on macOS/Linux
 pip install -r requirements.txt
+python -c "import geopandas; print(geopandas.__version__)"   # smoke test
 ```
+
+**Activate the venv before running anything.** The geospatial stack (geopandas,
+shapely, pyproj, pyogrio) lives only there; on Windows install it with pip inside
+the venv rather than into a conda base environment, where the GDAL/GEOS/PROJ
+binaries are the usual source of a failed install.
 
 An `EIA_API_KEY` (free at <https://www.eia.gov/opendata/>, in a repo-root `.env`) is
 needed only for the direct EIA API scraper; the recommended PUDL path needs no key.
@@ -144,7 +157,18 @@ s(c) = implied_f(c) / F*     # empirical 288-value IOU-share shape (mean 1); duc
 ```
 
 Estimated from EIA-930 CISO 2015–2025: **F\* = 0.7361** (annual IOU energy share of CAISO),
-s(c) ∈ [0.78, 1.20], ρ(c) median 0.231. Full model theory:
+s(c) ∈ [0.78, 1.20], ρ(c) median 0.231.
+
+The **envelope input is pluggable, the model is not.** `μ` and `σ` are the exact solution of
+`L_k = μ + σ·Φ⁻¹(p_k)` for any set of percentiles — the two-quantile closed form above is the
+K=2 case, reproduced bit-for-bit — and a cell is whatever `--cells` says (`monthhour` default,
+down to `halfyear`, or a custom calendar). That lets an input carrying a single load value per
+node per season enter the same model unchanged. One percentile does not identify `σ`, so
+`--sigma-source` supplies it; the run reports ρ(c) and P(L<0) because a σ taken from the spread
+of loads *across* units measures inequality that `μ` already carries. Normal family only —
+uniform is frozen at the legacy settings.
+
+Full model theory, including the "Generalized envelope input" section:
 [docs/stochastic_model_spec.md](docs/stochastic_model_spec.md); scripts/params/outputs/figures
 and the extended calibration discussion: [docs/approach2_stochastic.md](docs/approach2_stochastic.md).
 
@@ -274,6 +298,23 @@ CATS loads only 2,471 of those 3,778, so **1,307 pool buses sit at zero in the
 control** — which is why full redistribution can raise the loaded-bus count while a
 hold never can. A hold re-allocates **53.8%** of state energy and leaves **46.2%** on
 buses no IOU substation reaches (LADWP/SMUD/IID and the loaded AddedNodes).
+
+**The candidate pool differs between the experiment and the deliverables — deliberately.**
+The allocation experiment above admits **every real substation bus** (3,778; 3,769 inside a
+county polygon), on the rule that a substation the reference model happens to leave unloaded
+is still somewhere a method may legitimately place load. There, that latitude *is* the
+treatment: the question being asked is where load may sit, so excluding valid locations would
+constrain the very thing under test. The external deliverable packages instead restrict to the
+**2,467** buses the reference system itself loads, because an outside user inherits our
+placement decisions without being able to audit them, and for the equal-split (uncovered) pool
+there is no measurement justifying load at a bus CATS never loads. The gap between the two is
+the **1,307 `Type='Substation'` buses that sit at zero in CATS's own demand table**.
+
+Both pools are reachable from either side (`pool` = `all` | `cats_loaded`), and each side's
+default path is byte-identical to what it produced before the option existed — so this is a
+stated choice about what each artifact is *for*, not an inconsistency between them. Detail:
+[docs/deliverables.md](docs/deliverables.md).
+
 Metric definitions and the GenX output inventory:
 [docs/genx_comparison.md](docs/genx_comparison.md).
 

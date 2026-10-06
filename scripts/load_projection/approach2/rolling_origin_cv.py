@@ -104,6 +104,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 
 from load_projection.stochastic import (  # noqa: E402
+    N_CELLS,
     build_system_cells,
     decay_weights,
     load_caiso_history,
@@ -132,10 +133,10 @@ def score(cells_train: pd.DataFrame, test: pd.DataFrame) -> tuple[float, float]:
     the Monte Carlo (see module docstring)."""
     t = standardize_z(test.copy())
     k = t.cell.values
-    sum_mu = cells_train.sum_mu.reindex(range(288)).values[k]
-    sum_sig = cells_train.sum_sigma.reindex(range(288)).values[k]
-    rho = cells_train.rho.reindex(range(288)).values[k]
-    impf = cells_train.implied_f.reindex(range(288)).values[k]
+    sum_mu = cells_train.sum_mu.reindex(range(N_CELLS)).values[k]
+    sum_sig = cells_train.sum_sigma.reindex(range(N_CELLS)).values[k]
+    rho = cells_train.rho.reindex(range(N_CELLS)).values[k]
+    impf = cells_train.implied_f.reindex(range(N_CELLS)).values[k]
     draw_mean = sum_mu + np.sqrt(rho) * t.z.values * sum_sig  # E[total] per hour
     fy = impf * t.demand_mw.values                            # F*.s(c).y reference
     e = (draw_mean - fy) / fy
@@ -321,7 +322,7 @@ def main() -> None:
         test_years = [y for y in full_years if y > T]
         for strat, (train_df, wts) in build_strategies(T).items():
             cells_train, _ = build_system_cells(env, train_df, wts)
-            implied_f[(strat, T)] = cells_train.implied_f.reindex(range(288))
+            implied_f[(strat, T)] = cells_train.implied_f.reindex(range(N_CELLS))
             for ty in test_years:
                 bias, rrmse = score(cells_train, by_year[ty])
                 rows.append({

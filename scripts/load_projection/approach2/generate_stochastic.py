@@ -36,23 +36,50 @@ CLI parameters:
   --seed        RNG seed (default 0)
   --validate    run the three spec validation checks (totals, marginals, tracking)
   --save-output write hourly wide parquet per draw (~47 MB/draw-year, off by default)
-  --save-cells  write per-(substation, draw, month, hour_pst) mean MW over the
-                target period -- the per-cell weight table the GenX rescaler's
+  --save-cells  write per-(substation, draw, cell) mean MW over the target
+                period -- the per-cell weight table the GenX rescaler's
                 stochastic month-hour allocation consumes (off by default)
+  --cells       cell definition: monthhour (default, 288 cells -- the published
+                behavior, bit-for-bit), monthdayhour, month, season3, halfyear,
+                or custom:<path>. Appends __cells{name} to the run tag when it is
+                not the default, so existing run tags never change.
+  --coarsen     how the (month, hour_pst) utility envelopes aggregate onto a
+                coarser --cells: variance (default; law of total variance, keeps
+                the diurnal swing) or average (drops it, inflates rho ~4x toward
+                the cap -- comparison only)
+  --envelope    a tidy long envelope to disaggregate onto INSTEAD of the CA
+                substation profiles: columns unit_id, cell_label, percentile,
+                load_mw. Lets a set of nodes carrying one value per season enter
+                the model. Needs a --cells spec with one key column. Check a file
+                first with validate_long_envelope.py
+  --sigma-source  with a single-percentile --envelope, where sigma comes from:
+                input-crosssec (default) = sd across units of the input loads in
+                that cell, identical for every unit | pinned-rho = the sigma that
+                makes rho(c) hit --rho-target by construction | scalar = a flat
+                --sigma-mw | proportional-cv = --sigma-cv * mu, so sigma scales
+                with unit size. rho(c) and P(L<0) are printed either way
+  --sigma-mw / --sigma-cv / --rho-target   parameters of the above
 
 Outputs (data/processed/load_projection/projections/<run_tag>/ where run_tag =
 stochastic__{target}__{family}__F{level}__{z-mode}[__cw{N}]):
   substation_annual_mwh.csv       always: per (substation, year, draw) energy
   substation_cell_mw.csv          with --save-cells: per (substation, draw, cell)
-                                  mean MW + n_hours over the whole target period
+                                  mean MW + n_hours over the whole target period;
+                                  the cell is spelled with --cells' own key
+                                  columns (month, hour_pst by default)
   validation_totals_cells.csv     with --validate: per-cell total q10/q90 check
   validation_marginals_subs.csv   with --validate: per-substation envelope recovery
   draws/draw{k}.parquet           with --save-output: hourly wide matrix per draw
+
+Only --family normal supports a generalized envelope; the uniform family is
+frozen at the legacy settings (two percentiles on monthhour cells) and the run
+aborts otherwise -- generalizing it is a TODO (see src/load_projection/envelopes.py).
 
 Usage:
   python scripts/load_projection/approach2/generate_stochastic.py --validate
   python scripts/load_projection/approach2/generate_stochastic.py --family normal --F 0.80 --n-draws 20
   python scripts/load_projection/approach2/generate_stochastic.py --target forecast.csv --z-mode bootstrap --save-output
+  python scripts/load_projection/approach2/generate_stochastic.py --family normal       --cells halfyear --envelope nodes.csv --sigma-source pinned-rho --save-cells
 """
 
 import argparse
@@ -66,7 +93,12 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 
+from load_projection import cells as cellspecs  # noqa: E402
+from load_projection import envelopes as envlib  # noqa: E402
+from scipy.stats import norm as _snorm  # noqa: E402
+
 from load_projection.stochastic import (  # noqa: E402
+    _cell_moments,
     EnvelopeMatrices,
     bootstrap_z,
     build_system_cells,
@@ -82,14 +114,20 @@ from load_projection.stochastic import (  # noqa: E402
 PROJ_DIR = ROOT / "data/processed/load_projection/projections"
 
 
-def load_target(args, caiso: pd.DataFrame) -> pd.DataFrame:
+def _label_series(t: pd.DataFrame, spec) -> pd.DataFrame:
+    """Derive month/day/hour_pst and the cell index for a target-like frame."""
+    t["month"] = t.dt_pst_hb.dt.month
+    t["day"] = t.dt_pst_hb.dt.day
+    t["hour_pst"] = t.dt_pst_hb.dt.hour
+    t["cell"] = cellspecs.encode(spec, t.month, t.hour_pst, t.day)
+    return t
+
+
+def load_target(args, caiso: pd.DataFrame, spec) -> pd.DataFrame:
     if args.target == "eia930":
         t = caiso.copy()
     else:
-        t = pd.read_csv(args.target, parse_dates=["dt_pst_hb"])
-        t["month"] = t.dt_pst_hb.dt.month
-        t["hour_pst"] = t.dt_pst_hb.dt.hour
-        t["cell"] = cell_index(t.month, t.hour_pst)
+        t = _label_series(pd.read_csv(args.target, parse_dates=["dt_pst_hb"]), spec)
     if args.year_start:
         t = t[t.dt_pst_hb.dt.year >= args.year_start]
     if args.year_end:
@@ -119,8 +157,8 @@ def trajectory_pass(mats, cells, target, z_draws, family, scale, n_draws, seed,
         # per-cell accumulators over the WHOLE target period (not per year):
         # the cell mean is the weight the GenX rescaler wants, and a (month,
         # hour) cell is a within-year concept, so years pool
-        cellsum = np.zeros((288, n_subs))
-        cellcnt = np.zeros((288, n_subs), dtype=np.int64)
+        cellsum = np.zeros((mats.spec.n_cells, n_subs))
+        cellcnt = np.zeros((mats.spec.n_cells, n_subs), dtype=np.int64)
         for yr in np.unique(years):
             mask = years == yr
             chunk = target[mask]
@@ -142,24 +180,27 @@ def trajectory_pass(mats, cells, target, z_draws, family, scale, n_draws, seed,
         if save_cells:
             has = cellcnt > 0
             cell_i, sub_i = np.nonzero(has)
-            cell_rows.append(pd.DataFrame({
+            block = pd.DataFrame({
                 "utility": mats.subs.utility.values[sub_i],
                 "substation_name": mats.subs.substation_name.values[sub_i],
                 "draw": d,
-                "month": cell_i // 24 + 1, "hour_pst": cell_i % 24,
-                "mean_mw": cellsum[has] / cellcnt[has],
-                "n_hours": cellcnt[has],
-            }))
+            })
+            lbl = cellspecs.label_frame(mats.spec)
+            for col in lbl.columns:
+                block[col] = lbl[col].to_numpy()[cell_i]
+            block["mean_mw"] = cellsum[has] / cellcnt[has]
+            block["n_hours"] = cellcnt[has]
+            cell_rows.append(block)
         if save_output:
             pd.concat(draw_chunks).to_parquet(out_dir / "draws" / f"draw{d}.parquet")
     cell_df = pd.concat(cell_rows, ignore_index=True) if cell_rows else None
     return pd.concat(annual_rows, ignore_index=True), totals, cell_df
 
 
-def validate_totals(cells, target, totals, family, F_level):
+def validate_totals(cells, target, totals, family, F_level, n_cells):
     """Check (i)+(iii): per-cell q10/q90 of simulated totals vs the target
     F*s(c)*y distribution, and hourly tracking error of the draw-mean total."""
-    fy = F_level * cells.shape_s.reindex(range(288)).values[target.cell.values] \
+    fy = F_level * cells.shape_s.reindex(range(n_cells)).values[target.cell.values] \
         * target.demand_mw.values
     df = pd.DataFrame({"cell": target.cell.values, "fy": fy})
     tgt = df.groupby("cell")["fy"].agg(tgt_q10=lambda s: s.quantile(0.1),
@@ -191,7 +232,7 @@ def marginal_pass(mats, env, cells, target, z_draws, family, scale, n_draws, see
     rng = np.random.default_rng(seed + 777)
     rows = []
     kvec = target.cell.values
-    for c in range(288):
+    for c in range(mats.spec.n_cells):
         rho_c = cells.rho.get(c, np.nan)
         zc = np.concatenate([zd[kvec == c] for zd in z_draws])
         if len(zc) == 0 or np.isnan(rho_c):
@@ -211,6 +252,13 @@ def marginal_pass(mats, env, cells, target, z_draws, family, scale, n_draws, see
             "utility": mats.subs.utility, "substation_name": mats.subs.substation_name,
             "cell": c, "sim_q10": q10, "sim_q90": q90}))
     sim = pd.concat(rows, ignore_index=True)
+    if "q10" not in env.columns:
+        # check (ii) scores recovered q10/q90 against the INPUT quantiles; a
+        # generalized envelope (coarsened, or a single percentile) has none to
+        # compare against, so the check is undefined rather than failing
+        print(f"[{family}] check (ii) skipped: the envelope carries no q10/q90 "
+              f"to recover (generalized input)")
+        return None
     chk = env.merge(sim, on=["utility", "substation_name", "cell"], how="inner")
     chk = chk[~chk.missing & ~chk.zero_width]
     width = (chk.q90 - chk.q10) * scale
@@ -247,6 +295,56 @@ def annualized_mean_twh(annual: pd.DataFrame, target: pd.DataFrame) -> float:
     return per_draw.mean() / 1e6 / n_year_equiv
 
 
+def load_envelope(args, spec, calib, weights):
+    """The per-(unit, cell) marginal table, from either input path.
+
+    Default: the CA substation percentile envelopes, fitted at (month, hour_pst)
+    and aggregated onto `spec`. With --envelope: the tidy long contract, whose
+    sigma comes from --sigma-source when it carries a single percentile.
+    """
+    if not args.envelope:
+        return load_envelope_cells(spec, coarsen_mode=args.coarsen)
+    value = (args.sigma_mw if args.sigma_source == "scalar"
+             else args.sigma_cv if args.sigma_source == "proportional-cv" else None)
+    src = envlib.SigmaSource(kind=args.sigma_source, value=value,
+                             rho_target=args.rho_target)
+    cy = _cell_moments(calib, weights, spec.n_cells)
+    sd_c = cy.sd.reindex(range(spec.n_cells)).to_numpy()
+    ybar_c = cy.ybar.reindex(range(spec.n_cells)).to_numpy()
+    df = pd.read_csv(args.envelope)
+    env = envlib.from_long(df, spec, sigma_source=src, sd_c=sd_c, ybar_c=ybar_c)
+    print(f"envelope: {args.envelope} -> {env.substation_name.nunique():,} units "
+          f"x {env.cell.nunique()} cells, sigma from {args.sigma_source}")
+    return env
+
+
+def report_marginal_diagnostics(env, cells, spec) -> None:
+    """Print the numbers that reveal a degenerate sigma choice.
+
+    A sigma taken from the CROSS-SECTIONAL spread of the input loads measures
+    inter-unit inequality, which mu already carries; used as sigma it becomes
+    hour-to-hour noise, so rho collapses and small units spend much of their time
+    negative. Both effects are reported here rather than left silent. The floor
+    is the smallest sigma that keeps rho <= 1.
+    """
+    capped = int((cells.rho >= 1.0).sum())
+    print(f"cells: {spec.n_cells} ({spec.name})   rho median "
+          f"{cells.rho.median():.4f} range {cells.rho.min():.4f}-"
+          f"{cells.rho.max():.4f}, capped {capped}")
+    ok = (env.sigma > 0) & np.isfinite(env.mu) & np.isfinite(env.sigma)
+    if ok.any():
+        ratio = (env.sigma[ok] / env.mu[ok]).replace([np.inf, -np.inf], np.nan)
+        pneg = _snorm.cdf(-(env.mu[ok].to_numpy() / env.sigma[ok].to_numpy()))
+        print(f"marginals: sigma/mu median {ratio.median():.3f}   P(L<0) median "
+              f"{np.median(pneg) * 100:.1f}%, units with P(L<0)>10%: "
+              f"{np.mean(pneg > 0.10) * 100:.1f}%")
+    n_units = env.groupby("cell").mu.size().reindex(range(spec.n_cells)).to_numpy()
+    floor = envlib.sigma_floor_for_rho(cells.sd.to_numpy(), n_units,
+                                      f=cells.implied_f.to_numpy())
+    print(f"sigma floor for rho<=1 (f*sd_c/N): median "
+          f"{np.nanmedian(floor):.3f} MW")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--target", default="eia930")
@@ -280,16 +378,51 @@ def main() -> None:
     ap.add_argument("--save-output", action="store_true")
     ap.add_argument("--save-cells", action="store_true",
                     help="write substation_cell_mw.csv: per (substation, draw, "
-                         "month, hour_pst) mean MW over the target period, for "
-                         "the GenX rescaler's per-cell stochastic weights")
+                         "cell) mean MW over the target period, for the GenX "
+                         "rescaler's per-cell stochastic weights")
+    ap.add_argument("--cells", default="monthhour",
+                    help="cell definition: monthhour (default, 288 cells, the "
+                         "published behavior), monthdayhour, month, season3, "
+                         "halfyear, or custom:<path>. See src/load_projection/cells.py")
+    ap.add_argument("--coarsen", choices=["variance", "average"], default="variance",
+                    help="how the (month, hour_pst) utility envelopes aggregate "
+                         "onto a coarser --cells: 'variance' applies the law of "
+                         "total variance and keeps the diurnal swing (default); "
+                         "'average' drops it and inflates rho (comparison only)")
+    ap.add_argument("--envelope", default=None,
+                    help="path to a tidy long envelope (unit_id, cell_label, "
+                         "percentile, load_mw) to disaggregate onto instead of "
+                         "the CA substation profiles. Requires a --cells spec "
+                         "with a single key column (month/season3/halfyear/custom)")
+    ap.add_argument("--sigma-source", choices=list(envlib.SIGMA_SOURCES),
+                    default="input-crosssec",
+                    help="with a single-percentile --envelope, where sigma comes "
+                         "from. input-crosssec (default) = sd across units of the "
+                         "input loads in that cell, identical for every unit")
+    ap.add_argument("--sigma-mw", type=float, default=None,
+                    help="with --sigma-source scalar: the flat per-unit sigma in MW")
+    ap.add_argument("--sigma-cv", type=float, default=None,
+                    help="with --sigma-source proportional-cv: sigma = cv * mu")
+    ap.add_argument("--rho-target", type=float, default=0.231,
+                    help="with --sigma-source pinned-rho: the rho(c) to hit by "
+                         "construction (default 0.231, the CA month-hour median)")
     args = ap.parse_args()
+    spec = cellspecs.get_spec(args.cells)
+    legacy_cells = spec.name == cellspecs.MONTHHOUR.name
+    if args.family in ("uniform", "both") and not (legacy_cells and not args.envelope):
+        ap.error("the uniform family is not implemented for generalized "
+                 "envelopes (TODO): it requires --cells monthhour and the "
+                 "two-percentile CA substation envelopes. Use --family normal.")
+    if args.envelope and len(spec.key_cols) != 1:
+        ap.error(f"--envelope addresses cells by a single cell_label, but "
+                 f"--cells {args.cells} has key columns {spec.key_cols}; "
+                 f"use month, season3, halfyear or custom:<path>")
     if args.calib_target and args.calibrate_on != "target":
         ap.error("--calib-target only makes sense with --calibrate-on target; "
                  "without it the calibration series would silently stay EIA-930")
 
-    env = load_envelope_cells()
-    caiso = load_caiso_history()
-    target_pre = load_target(args, caiso)
+    caiso = load_caiso_history(spec)
+    target_pre = load_target(args, caiso, spec)
     # F*, s(c) and rho(c) are calibrated on `calib`. Default is the EIA-930
     # history, which makes F* a statement about how the fleet relates to the
     # PAST. --calibrate-on target instead calibrates against the series being
@@ -301,19 +434,22 @@ def main() -> None:
         # as exist, while the CEP analysis only ever looks at the chosen weeks.
         # --calib-target supplies that longer series; it defaults to --target.
         if args.calib_target:
-            calib_src = pd.read_csv(args.calib_target, parse_dates=["dt_pst_hb"])
-            calib_src["month"] = calib_src.dt_pst_hb.dt.month
-            calib_src["hour_pst"] = calib_src.dt_pst_hb.dt.hour
-            calib_src["cell"] = cell_index(calib_src.month, calib_src.hour_pst)
+            calib_src = _label_series(
+                pd.read_csv(args.calib_target, parse_dates=["dt_pst_hb"]), spec)
         else:
             calib_src = target_pre
     else:
         calib_src = caiso
     calib = trailing_window(calib_src, args.calibration_window)
     weights = decay_weights(calib, args.decay_halflife) if args.decay_halflife else None
-    cells, f_star = build_system_cells(env, calib, weights)
-    mats = EnvelopeMatrices(env)
+    # the envelope is built AFTER calib because the pinned-rho sigma prior needs
+    # the calibration series' per-cell sd; nothing else depends on the order
+    env = load_envelope(args, spec, calib, weights)
+    cells, f_star = build_system_cells(env, calib, weights, spec)
+    mats = EnvelopeMatrices(env, spec)
     target = target_pre
+    if args.envelope or not legacy_cells:
+        report_marginal_diagnostics(env, cells, spec)
 
     F_level = f_star if args.F == "cal" else float(args.F)
     scale = F_level / f_star
@@ -332,6 +468,9 @@ def main() -> None:
     cw_tag = f"__cw{args.calibration_window}" if args.calibration_window else ""
     hl_tag = f"__hl{int(args.decay_halflife)}" if args.decay_halflife else ""
     ct_tag = "__calibtgt" if args.calibrate_on == "target" else ""
+    # only a non-default cell definition touches the run tag, so every existing
+    # run tag is unchanged
+    cell_tag = "" if legacy_cells else f"__cells{spec.name.replace(':', '-')}"
     families = ["normal", "uniform"] if args.family == "both" else [args.family]
 
     calib_desc = (f"last {args.calibration_window} complete yrs "
@@ -345,7 +484,8 @@ def main() -> None:
           f"draws: {args.n_draws}   calibration: {calib_desc}")
 
     for family in families:
-        run_tag = f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}{cw_tag}{hl_tag}{ct_tag}"
+        run_tag = (f"stochastic__{tname}__{family}__F{f_tag}__{args.z_mode}"
+                   f"{cw_tag}{hl_tag}{ct_tag}{cell_tag}")
         out_dir = PROJ_DIR / run_tag
         out_dir.mkdir(parents=True, exist_ok=True)
         annual, totals, cell_df = trajectory_pass(
@@ -355,16 +495,19 @@ def main() -> None:
         if cell_df is not None:
             cell_df.round(4).to_csv(out_dir / "substation_cell_mw.csv", index=False)
             print(f"[{family}] wrote substation_cell_mw.csv: {len(cell_df):,} rows, "
-                  f"{cell_df.groupby(['month', 'hour_pst']).ngroups} cells, "
+                  f"{cell_df.groupby(list(spec.key_cols)).ngroups} cells, "
                   f"{cell_df.draw.nunique()} draws")
         mean_twh = annualized_mean_twh(annual, target)
         print(f"\n[{family}] -> {run_tag}: mean {mean_twh:.1f} TWh/yr across draws")
         if args.validate:
-            vt = validate_totals(cells, target, totals, family, F_level)
+            vt = validate_totals(cells, target, totals, family, F_level,
+                                 spec.n_cells)
             vt.round(4).to_csv(out_dir / "validation_totals_cells.csv", index=False)
             vm = marginal_pass(mats, env, cells, target, z_draws, family, scale,
                                args.n_draws, args.seed)
-            vm.round(5).to_csv(out_dir / "validation_marginals_subs.csv", index=False)
+            if vm is not None:
+                vm.round(5).to_csv(out_dir / "validation_marginals_subs.csv",
+                                   index=False)
 
 
 if __name__ == "__main__":

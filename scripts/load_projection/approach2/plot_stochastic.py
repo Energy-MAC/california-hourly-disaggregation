@@ -57,7 +57,9 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 
+from load_projection.envelopes import Z90  # noqa: E402
 from load_projection.stochastic import (  # noqa: E402
+    N_CELLS,
     EnvelopeMatrices,
     build_system_cells,
     cell_index,
@@ -144,7 +146,7 @@ def draw_matrix(mats, cells, target, z, n_draws, seed, sub_idx, scale=1.0) -> np
 
 def conditional_mean(mats, cells, target, z, sub_idx, scale=1.0) -> np.ndarray:
     k = target.cell.values
-    rho = cells.rho.reindex(range(288)).values[k]
+    rho = cells.rho.reindex(range(N_CELLS)).values[k]
     return scale * (mats.mu[sub_idx, k] + mats.sigma[sub_idx, k] * np.sqrt(rho) * z)
 
 
@@ -153,9 +155,8 @@ def envelope_band(mats, target, sub_idx, scale=1.0) -> tuple[np.ndarray, np.ndar
     returns that envelope proportionally scaled (an implied future envelope,
     not an observed one)."""
     k = target.cell.values
-    z90 = 1.2815515655446004
     mu, sg = mats.mu[sub_idx, k], mats.sigma[sub_idx, k]
-    return scale * (mu - z90 * sg), scale * (mu + z90 * sg)
+    return scale * (mu - Z90 * sg), scale * (mu + Z90 * sg)
 
 
 def clt_gif(folder_name: str, target: pd.DataFrame, draws: np.ndarray,

@@ -14,7 +14,8 @@ Model code is `src/load_projection/stochastic.py`; the driver is
 | Symbol / step in this spec | Function |
 |---|---|
 | μ_s(c), σ_s(c), uniform bounds, hygiene flags | `load_envelope_cells()` |
-| cell index c = (month, hour_pst) | `cell_index()` |
+| the percentile → (μ, σ) fit itself | `envelopes.fit_normal()` |
+| cell index c (default (month, hour_pst)) | `cells.encode()` / `cell_index()` |
 | ȳ_c, sd_c, f(c), **F\***, s(c), ρ(c) | `build_system_cells()` |
 | z(t) | `standardize_z()` (native) / `bootstrap_z()` (block bootstrap) |
 | L_s(t) — one Monte Carlo draw | `generate()` |
@@ -28,7 +29,7 @@ Model code is `src/load_projection/stochastic.py`; the driver is
 | `s` | A substation (1,347 after cell-dedup; PGE + SCE + SDGE). |
 | `t` | A specific historical or forecast hour. Every `t` belongs to exactly one cell via (month(t), hour_pst(t)). |
 | `q10_s, q90_s` | The utility envelope values (`min_load`, `max_load`) for substation `s` in a cell: 10th/90th percentile of net-of-BTM load at the substation meter. |
-| `μ_s, σ_s` | Normal marginal parameters implied by the two quantiles (closed form, no estimation): `μ = (q10+q90)/2`, `σ = (q90−q10)/(2·1.28155)`. Uniform variant: `width = (q90−q10)/0.8`. |
+| `μ_s, σ_s` | Normal marginal parameters implied by the two quantiles (closed form, no estimation): `μ = (q10+q90)/2`, `σ = (q90−q10)/(2·1.28155)`. Uniform variant: `width = (q90−q10)/0.8`. These are not a separate assumption — they are the exact K=2 solution of the general relation in "Generalized envelope input" below. |
 | `y(t)` | CAISO hourly net demand (EIA-930 CISO, PST hour-beginning). |
 | `ȳ_c, sd_c` | Mean and std of `y(t)` over all historical hours falling in cell `c` (2015–2025 window, ~319 obs per cell). |
 | `z(t)` | CAISO's standardized within-cell deviation: `z(t) = (y(t) − ȳ_c) / sd_c`. Mean 0, variance 1 within each cell by construction. |
@@ -223,6 +224,90 @@ in that cell exceed what the envelopes can produce even under perfect
 synchronization — a data-inconsistency signal, which is why the estimator
 reports the number of capped cells (zero on our data; largest ρ̂ = 0.48, so
 the cap is currently dormant and no estimate is distorted by it).
+
+
+## Generalized envelope input (percentile sets and cell granularity)
+
+The two quantiles and the (month, hour_pst) cell are properties of the *input*,
+not of the model. Both are now pluggable; the published configuration is the
+default and is preserved **bit-for-bit**.
+
+### The marginal fit
+
+Every marginal parameterization above is the solution of one relation:
+
+$$L_k = \mu + \sigma\,\Phi^{-1}(p_k)$$
+
+for a set of K quantile values `L_k` at percentiles `p_k`.
+
+- **K = 2** is exact. At `p = {0.10, 0.90}` it *is* the historical closed form:
+  `σ = (L₂−L₁)/(z₂−z₁)` and `μ = (L₁+L₂)/2`, and since
+  `Φ⁻¹(0.9) − Φ⁻¹(0.1) == 2·1.28155…` holds exactly in float64, the result is
+  bit-identical — verified over 300,000 random envelopes including NaN,
+  zero-width, inverted and negative cells.
+- **K > 2** is over-determined; `envelopes.fit_normal` uses OLS of `L` on
+  `[1, Φ⁻¹(p)]` (the Q-Q / probability-plot estimator). Precision-weighting the
+  fit is a TODO.
+- **K = 1** does not identify σ, so a prior supplies it. At `p = 0.5`,
+  `Φ⁻¹(0.5) = 0` and therefore `μ = L` exactly, whatever the prior.
+
+The **uniform family is not generalized**. Its bounds stay on the original code
+path and are reachable only at the legacy settings (two percentiles, `monthhour`
+cells); any other configuration aborts. Generalizing it means fitting
+`L_k ≈ a + width·p_k` (OLS on `p`, not on `Φ⁻¹(p)`) and is a TODO.
+
+### σ for a single-percentile input
+
+`SigmaSource` supplies σ when the input carries one value per unit per cell. The
+feasibility constraint is `ρ(c) ≤ 1`, i.e. **σ ≥ f·sd_c/N**; below that floor the
+`min(1, ·)` cap binds. Measured on the 2,471 loaded CATS buses at half-year cells
+(`doc_numbers.py` section D; floor 1.19 MW in MayOct, 1.80 MW in NovApr):
+
+| σ source | ρ median | σ/μ median | P(L<0) median | units with P>10% |
+|---|---|---|---|---|
+| `input-crosssec` (default) | 0.0157 | 2.45 | 34.1% | 82.3% |
+| `pinned-rho` (target 0.231) | 0.2310 | 0.59 | 4.5% | 41.4% |
+| `scalar` 2.5 MW | 0.3710 | 0.49 | 2.1% | 35.8% |
+| `proportional-cv` 0.32 | 0.2555 | 0.32 | 0.1% | 0.0% |
+
+`input-crosssec` takes σ(c) from the spread of the input loads *across units*.
+That is inter-unit **inequality**, which `μ_s` already carries in full; used as σ
+it reappears as hour-to-hour noise, which is why ρ collapses and most units spend
+much of their time negative. The run prints ρ and P(L<0) so the effect is visible
+rather than silent.
+
+### Cell granularity
+
+A cell is whatever `cells.CellSpec` says: `monthhour` (288, default),
+`monthdayhour` (8,784), `month` (12), `season3` (4), `halfyear` (2), or
+`custom:<csv>`. The target series is standardized within the same cells, so
+`s(c)`, `ρ(c)` and `F*` all follow the choice. At `monthdayhour` the CAISO record
+gives only ~10 observations per cell, so `sd_c`, `ρ(c)` and `s(c)` get noisy —
+fit there and coarsen rather than calibrating there.
+
+`halfyear` is `MayOct` (months 5–10) and `NovApr` (11–4): **spring lumps with
+winter**. That is the best of the six contiguous 6-month partitions by a wide
+margin — 28.9% of the month-hour CAISO variance explained (18.8% of the envelope
+surface) against 3.2% for spring+summer (`Mar–Aug`), the worst available. March
+and April are the year's two lowest-load months (index 0.880 / 0.881) while
+August and July are the highest (1.220 / 1.195) and September is still 1.125, so
+any split that puts September in the cool block discards most of the signal.
+`May–Oct / Nov–Apr` is also the standard utility summer/winter convention.
+
+### Coarsening rule
+
+Aggregating the month-hour envelopes onto coarser cells uses the law of total
+variance, `σ²_coarse = mean(σ²_fine) + var(μ_fine)`, so the coarse marginal keeps
+the diurnal and seasonal swing the coarse cell genuinely contains. `μ` is the
+plain mean either way — the fit is linear in the quantile values, so averaging μ
+over fine cells equals fitting the averaged envelope.
+
+The alternative (`--coarsen average`, `mean(σ_fine)`) is offered for comparison
+and is **not sound**: it drops the median half-year CV from 0.382 to 0.189, which
+inflates ρ from a median 0.167 (max 0.209) to a median 0.688 (max 0.890) — about
+4.2×, most of the way to the `min(1, ·)` cap, though it does not actually bind on
+this data. Measured by `doc_numbers.py` sections B and C.
+
 
 ## LEGACY — Rolling-window calibration (extension, 2026-07-27)
 

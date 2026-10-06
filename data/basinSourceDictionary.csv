@@ -1,18 +1,18 @@
 ﻿SourceName,BasinName,Utility,Notes
-Artesian Ranch,Artesian,SDGE,
+Artesian Ranch,Artesian,SDGE,"2.1km, but SDGE coordinates are imprecise (median 1.3km even on exact name matches) and Artesian is the nearest SDGE station by 2.4km. Checked, keep."
 Boulevard East,Boulevard,SDGE,
-Chollas West,Chollas,SDGE,
-Granite,Granite Hills,SDGE,
+Chollas West,Chollas,SDGE,"1.2km; nearest SDGE station, next is 3.1km. Checked, keep."
+Granite,Granite Hills,SDGE,"2.3km; nearest SDGE station, next is 6.1km. The same-named basin -Granite- is 753km away, so this entry is doing real work. Checked, keep."
 Kearny West,Kearny,SDGE,
-Olivenhain,Olivanhain,SDGE,
+Olivenhain,Olivanhain,SDGE,"2.3km; basin misspells it. Nearest SDGE station. Checked, keep."
 San Juan Capistrano,Capistrano,SDGE,
-Wabash Canyon,Wabash,SDGE,
-Warners,Warner,SDGE,
-BALCH NO 1,Balch 1,PGE,
+Wabash Canyon,Wabash,SDGE,"1.3km; nearest SDGE station, next is 2.5km. Checked, keep."
+Warners,Warner,SDGE,"4.6km, the widest kept gap. Still the nearest SDGE station by a wide margin -- the next is 19.8km -- and SDGE 95th percentile is 4.4km. Checked, keep."
+BALCH NO 1,Balch 1,PGE,"Ambiguous and left to nearest-wins: PGE publishes only BALCH NO 1, and its coordinate is 142m from basin Balch 2 but 1.3km from Balch 1. Coordinate and 230kV favour Balch 2; only the name favours Balch 1. Effective result today is Balch 2."
 COALINGA NO 1,Coalinga 1,PGE,
 COALINGA NO 2,Coalinga 2,PGE,
 CRESTA PH,Cresta,PGE,
-DAVIS,UC Davis,PGE,
+DAVIS,Davis,PGE,"was UC Davis (2.4km, a separate campus station); basin Davis is 46m away and 115kV matches PGE highside. INERT today: basin labels it owner_raw=Other so the owner-filtered lookup cannot see it, and a second -Davis- (Oakland) shares the name."
 DRUM,Drum 1,PGE,
 DRUM,Drum 2,PGE,
 EL CERRITO G,El Cerrito Station G,PGE,
@@ -27,11 +27,11 @@ FITCH MOUNTAIN,Fitch Mt.,PGE,
 FORT BRAGG A,Fort Bragg,PGE,
 HALF MOON BAY,Half Moon Bay & CM&O Yard ,PGE,
 HUMBOLDT BAY PP,HUMBOLDT Bay,PGE,
-IONE,Ione Energy,PGE,
+IONE,Ione,PGE,"was Ione Energy (11.4km, a separate facility); basin Ione is 40m away and 60kV matches PGE highside. INERT today: basin labels it owner_raw=Other."
 KEARNEY,Kearney (New),PGE,
 KEARNEY,Kearney (Old),PGE,
 KERCKHOFF,Kerchoff 1,PGE,
-KERCKHOFF,Kerchoff 2,PGE,
+KERCKHOFF,Kerchoff 2,PGE,"Kerchoff 1 and 2 are distinct powerhouses 2.3km apart and PGE publishes one KERCKHOFF, 36m from Kerchoff 1. Kept so the inverted lookup can route basin Kerchoff 2 load; nearest-wins keeps the coordinate on Kerchoff 1."
 LAS GALLINAS A,Las Gallinas,PGE,
 MC CALL,McCall,PGE,
 MIWUK,Mi-Wuk,PGE,
@@ -65,7 +65,7 @@ Cal City 'B',Cal City,SCE,
 Colton,Colton (Century),SCE,
 Eagle Mountain,Eagle Mt.,SCE,
 George A.f.b.,George Air Force Base,SCE,
-Inyo Sce,Inyo,SCE,
+Inyo Sce,Inyo,SCE,"Correct (10m, SCE-owned) but inert in the cleaned table: Inyo Sce publishes no load profile. Live in compare_substations."
 Iron Mt. Sce,Iron Mt.,SCE,
 Second Avenue,Second Ave.,SCE,
 Universal,Universal Studios (Studio Master),SCE,
@@ -75,6 +75,16 @@ SF P (HUNTERS POINT),Hunters Point,PGE,
 SF X (MISSION),Mission,PGE,
 JARVIS,Air Liquide,PGE,Distance
 EL DORADO PH,Camino,PGE,Distance
-Blythe (Walc),Blythe-Bucks,SCE,Distance
-BUCKS CREEK,Grizzly,PGE,Distance
-Outplaw P.T.,Edgemont,SCE,Distance
+Blythe (Walc),Blythe Walc,SCE,"Distance; was Blythe-Bucks (621m). Name and position both say basin -Blythe Walc- (48m, owner_raw=Other = WAPA Lower Colorado), so INERT under the owner filter. Live SCE alternative at the same site is -Dunes- (106m, 161kV) if a working link matters more."
+BUCKS CREEK,Grizzly,PGE,"Distance; verified 95m. Earns its place -- the same-named basin -Bucks Creek- is 9.1km away, so the plain name join would have been wrong."
+Outlaw P.T.,Edgemont,SCE,"Distance; SourceName was misspelled -Outplaw- so this never fired. Target is right: 61m from the SCE Edgemont in Moreno Valley (the other basin Edgemont, Lassen County, is 765km off and excluded by the owner filter). Not in the profiled fleet -- a P.T. node with no load profile -- so it only matters to compare_substations."
+Palm Springs 'A',Palm Springs,SCE,"added 2026-10-05 review: 0m. SCE publishes 'A' and 'B' banks at one coordinate; basin has a single Palm Springs. Same pattern as Cal City."
+Palm Springs 'B',Palm Springs,SCE,"added 2026-10-05 review: 0m, the second bank at the same coordinate."
+Blythe City,Blythe,SCE,"added 2026-10-05 review: 52m. Distinct from Blythe-Bucks and Blythe Walc, both 7km+ away."
+O'neill,Oneill,SCE,"added 2026-10-05 review: 56m. The normaliser turns the apostrophe into a space, so 'o neill' never meets 'oneill'."
+Mountain Pass,Mt. Pass,SCE,"added 2026-10-05 review: 75m. Mountain/Mt. variant, as MOUNTAIN VIEW and MOUNTAIN QUARRIES already are."
+Mountain Pass A,Mt. Pass,SCE,"added 2026-10-05 review: 205m. Second source row at the same site, 170m from Mountain Pass."
+Poole,Poole Ph,SCE,"added 2026-10-05 review: 76m. Powerhouse suffix only."
+Bishop Creek Plant 2,Bishop Creek 2,SCE,"added 2026-10-05 review: 131m, and the numbers agree. Basin's Bishop Creek 2/3/4/5/6 are 3-4km apart each, so the pairing is unambiguous."
+Santa Ana River 1,Santa Ana 1,SCE,"added 2026-10-05 review: SCE publishes Santa Ana River 1 AND 3, basin has Santa Ana 1 AND 3, so the numbering pairs 1-1 and 3-3. The hand coordinate in substationCoordinateOverrides.csv landed 42m from basin Santa Ana 3 -- the Google lookup found the wrong powerhouse of the chain -- and that override has been corrected to basin Santa Ana 1. If you would rather trust the Google point, the alternative is Santa Ana 3."
+Santa Ana River 3,Santa Ana 3,SCE,"added 2026-10-05 review: the other half of the pair. Not in the profiled fleet (no load profile), so inert in substation_attributes_clean.csv and live only in compare_substations."

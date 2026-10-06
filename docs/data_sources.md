@@ -88,9 +88,9 @@ the DataBasin CA Substations 2022 reference for coordinates:
 | Raw substations published            | 704²    | 748     | 107¹   | 1,559     |
 | Removed (P.T. nodes / no load profile)| 34      | 170     | 8      | 212       |
 | **Cleaned (in processed output)**    | **670** | **578** | **99** | **1,347** |
-| **Basin-matched total**              | **605** | **527** | **96** | **1,228** |
-| Not matched to basin                 | 65      | 51      | 3      | 119       |
-| Basin substations not in any source  | 346     | 160     | 42     | 548       |
+| **Basin-matched total**              | **603** | **535** | **96** | **1,234** |
+| Not matched to basin                 | 67      | 43      | 3      | 113       |
+| Basin substations not in any source  | 346³    | 160³    | 42³    | 548³      |
 | With a utility/override coordinate   | 669     | 568     | 99     | 1,336     |
 | **With ANY coordinate**              | **670** | **577** | **99** | **1,346** |
 | Load profile rows (processed)        | 192,912 | 166,440 | 28,512 | 387,864   |
@@ -104,7 +104,13 @@ profile, so they cannot be used. (The layer also returns 72 fully name-redacted 
 id, coordinates and DER capacity but no name — which cannot be joined to load and are
 dropped.)
 
-The **name dictionary** (`data/basinSourceDictionary.csv`, 79 entries) maps utility
+³ Not re-derived in the 2026-10-05 dictionary review. This row is printed by
+`compare_substations.py`, which counts against the raw published name sets rather
+than the cleaned fleet, so it has a different denominator from the rows above.
+Re-run that script to refresh it; the review will have moved it by roughly the 9
+basin rows newly claimed less the 3 released.
+
+The **name dictionary** (`data/basinSourceDictionary.csv`, 89 entries) maps utility
 source names that differ from the DataBasin reference (e.g. "CRESTA PH" → "Cresta") to
 recover geolocation matches beyond the normalised-name join.
 
@@ -219,13 +225,14 @@ EPSG:3310; `Lat`/`Lon` are WGS84). **Processed:**
    point. PGE/SCE publish point coords.
 
 **CEC name dictionary** (`build_cec_name_dictionary.py` → `data/cecSourceDictionary.csv`):
-the CEC analogue of the basin dict. Because CEC inherited basin's naming, 70 of the basin
-dict's 79 targets exist verbatim in CEC. Four tiers: *basin_reuse* (transferable entries),
+the CEC analogue of the basin dict. Because CEC inherited basin's naming, 79 of the basin
+dict's 89 targets exist verbatim in CEC (was 70 of 79 before the 2026-10-05
+review). Four tiers: *basin_reuse* (transferable entries),
 *name_auto* (strips CEC's systematic " - (OWNER)" suffix via `norm_base()` — the reliable
 signal for SDGE centroids), *spatial_auto* (≤0.25 km), *name_auto_assumed* (rescues exact
 name matches whose only CEC hit has an unconfirmed "Other (PGE - Assumed)" owner tag).
 With the dictionary, the **CEC cross-reference rate** is **PGE 666/670, SCE 559/578, SDGE
-90/99** (vs basin's 605/527/96); aggregate **1,315 vs basin's 1,228 (+87)**.
+90/99** (vs basin's 603/535/96); aggregate **1,315 vs basin's 1,234 (+81)**.
 
 > **This is a cross-reference/enrichment rate, NOT coordinate availability — do not read
 > "666/670" as "4 PGE substations lack a location."** Every scraped substation already

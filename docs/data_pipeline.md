@@ -235,7 +235,7 @@ hour-beginning, hours 0–23**.
 | `eia930_operations.csv` (PUDL) | UTC | hour-ending (`datetime_utc`) | subtract **9h** (`_utc_to_pst()`) | n/a |
 | `eia_region.csv` (EIA API) | UTC | hour-ending, `YYYY-MM-DDTHH` | subtract 9h | n/a |
 | `iepr_hourly_forecast.csv` | Fixed PST | hour-ending, 1–24 (`HOUR`) | `hour0 = HOUR − 1` | No |
-| `resolve_hourly_profiles.csv` | Fixed PST | hour-beginning 0–23 (`datetime_pst`) | none | No |
+| `resolve_hourly_profiles.csv` | Fixed PST | hour-beginning 0–23 (`datetime_pst`) — `# VERIFIED` 2026-10-01, see `docs/deliverables.md` | none | No |
 | `substation_load_profiles_clean.csv` | Fixed PST | hour-beginning 0–23 (`hour_pst`) | none | No |
 | `reeds_ca_load_hourly.parquet` | Fixed PST | hour-beginning 0–23 (`hour`, int8) | none (cast int8→int64 first) | No |
 | `substation_load_profiles.csv` (raw) | Wall-clock Pacific | hour-beginning 0–23 | majority-month rule → `hour_pst` | Yes |

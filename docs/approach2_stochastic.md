@@ -14,7 +14,8 @@ Model logic lives in `src/load_projection/stochastic.py`; the driver is
 | Concept | Function | File |
 |---|---|---|
 | Envelope → per-cell μ, σ, uniform bounds; hygiene flags | `load_envelope_cells()` | `src/load_projection/stochastic.py` |
-| (month, hour) → cell index 0–287 | `cell_index()` | same |
+| The percentile → (μ, σ) fit; σ priors; coarsening | `fit_normal()`, `SigmaSource`, `coarsen()`, `from_long()` | `src/load_projection/envelopes.py` |
+| Cell definitions (default (month, hour) → 0–287) | `get_spec()`, `encode()`, `coarsen_map()` | `src/load_projection/cells.py` |
 | Per-cell system table: `implied_f`, **F\***, `shape_s`, `rho` | `build_system_cells()` | same |
 | One Monte Carlo draw of all substations | `generate()` | same |
 | z(t): native standardisation / block bootstrap | `standardize_z()` / `bootstrap_z()` | same |
@@ -30,6 +31,20 @@ Model logic lives in `src/load_projection/stochastic.py`; the driver is
 `scripts/load_projection/approach2/estimate_stochastic.py` — no arguments; writes
 the three parameter tables below.
 
+`scripts/load_projection/approach2/validate_long_envelope.py` — check a long
+envelope file before using it: reports every contract problem at once, then
+previews the fitted μ and what each `--sigma-source` would do to ρ and P(L<0).
+`--template` writes a skeleton for a chosen `--cells` spec.
+
+`scripts/load_projection/approach2/doc_numbers.py` — recomputes every measured
+number the generalized-envelope docs quote (sections A–E). Run it before editing
+any of those figures.
+
+`scripts/load_projection/approach2/test_envelope_cells.py` — nine fast guards on
+the generalization: the bit-identity of the default path, the single-percentile
+fit, the coarsening algebra, the refusals, and that the uniform family stays
+frozen.
+
 `scripts/load_projection/approach2/generate_stochastic.py`:
 
 | Flag | Options | Default |
@@ -43,6 +58,11 @@ the three parameter tables below.
 | `--decay-halflife` | float H (calendar days) — recency-weight the calibration with an exponential soft kernel; composes with the window; appends `__hl{H}` | unweighted |
 | `--n-draws` | int | `5` |
 | `--year-start` / `--year-end` | subset target years | all |
+| `--cells` | `monthhour` (288 — the published behaviour, bit-for-bit), `monthdayhour` (8,784), `month` (12), `season3` (4), `halfyear` (2), `custom:<path>`. Appends `__cells{name}` when non-default, so existing run tags never change | `monthhour` |
+| `--coarsen` | `variance` (law of total variance; keeps the diurnal swing) or `average` (drops it; inflates ρ ~4× toward the cap — comparison only) | `variance` |
+| `--envelope` | tidy long envelope (`unit_id`, `cell_label`, `percentile`, `load_mw`) to disaggregate onto instead of the CA substation profiles | none |
+| `--sigma-source` | with a single-percentile `--envelope`: `input-crosssec`, `pinned-rho`, `scalar`, `proportional-cv` | `input-crosssec` |
+| `--sigma-mw` / `--sigma-cv` / `--rho-target` | parameters of the above | — / — / `0.231` |
 | `--seed` | int | `0` |
 | `--validate` | flag — run the three spec checks | off |
 | `--save-output` | flag — hourly wide parquet per draw (~47 MB/draw-year) | off |

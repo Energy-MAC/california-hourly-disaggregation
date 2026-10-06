@@ -242,3 +242,9 @@ genx/rescaled/*/node_shares.csv
 genx/scenarios_rescaled/*/p*/
 genx/scenarios_rescaled/*/scenarios_2019.csv
 !genx/settings_2019.yml
+
+# Packaged external deliverables (bulk hourly CSVs + a ~100 MB zip per package;
+# regenerate via scripts/load_projection/deliverables/). The builders, the
+# recompute scripts and the package README templates all live under scripts/,
+# so nothing inside deliverables/ needs tracking.
+/deliverables/
