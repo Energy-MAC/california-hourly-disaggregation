@@ -172,6 +172,8 @@ one file, a filled row reaches all of them with no further edits. So the loop is
 python scripts/data/substations/process_substations_clean.py     # 2. rebuild attributes
 python scripts/load_projection/nodal/map_loads_to_nodes.py --system CATS   # 3. remap
 python scripts/load_projection/nodal/build_identity_catchment_maps.py      # 4. rebuild GenX maps
+#   (--system, default CATS; writes nodal/{system}/ and
+#    data/checks/build_identity_catchment_maps/{system}/)
 ```
 
 Guard rails: an override is **last resort only** — a substation that already has

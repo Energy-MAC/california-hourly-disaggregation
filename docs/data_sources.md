@@ -81,15 +81,42 @@ Physical + DER attributes from each utility's public ArcGIS FeatureServer:
 ## Substation coverage summary
 
 After cleaning (removing pass-through switching nodes and failed scrapes) and joining to
-the DataBasin CA Substations 2022 reference for coordinates:
+the DataBasin CA Substations 2022 reference for coordinates.
+
+**Basin-join rules (revised 2026-10-06, `process_substations_clean.py`).** Candidates for
+a substation are its own utility's basin rows **plus** rows basin labels owner
+`other`/`unknown`, which it does for many IOU-owned stations. Within that pool:
+
+- **Own-owner rows win and are never distance-gated** -- SDG&E's published coordinates are
+  genuinely imprecise (1,327 m median separation even on exact-name matches vs 34 m for
+  PG&E), so gating them would discard correct matches.
+- **Nearest wins among duplicate names.** Basin has two PG&E `Live Oak` rows 481 km apart
+  and two SDG&E `Eastgate` rows 3.1 km apart; taking whichever appeared first in the file
+  put `LIVE OAK` 481 km from its real location.
+- **A relaxed (`other`/`unknown`) row is admitted only within 250 m**
+  (`BASIN_RELAXED_MAX_KM`), and only when there is no own-owner candidate or the best
+  own-owner candidate is itself beyond that distance. The 23 matches this adds all land at
+  <= 244 m and the next candidate is at 1.0 km.
+- **Exact name first, `basinSourceDictionary.csv` second** -- and the dictionary is tried
+  whenever the exact name produced no *accepted* row, not merely no candidate. PGE
+  `BUCKS CREEK` has an `unknown`-owner `Bucks Creek` 9.1 km away that the guard rejects,
+  and the dictionary correctly points at `Grizzly` 95 m away.
+- The whole step runs **after** the coordinate overrides, since every decision and
+  `dist_to_basin_km` key on `util_lat`/`util_lon`.
+
+Net effect: +23 basin matches (PG&E +19, SCE +4, SDG&E 0), four coordinates corrected
+(`LIVE OAK` 481.16 -> 0.016 km, `EASTGATE` 4.09 -> 1.00, `Ritter Ranch` 3.24 -> 0.06,
+`Trona` 1.01 -> 0.08), and `dist_to_basin_km.max()` falls from 481.16 km to 10.86 km
+(`OAKLAND I`, whose PG&E-published coordinate is itself wrong). `util_lat`/`util_lon` are
+untouched, so the nodal maps are unaffected.
 
 |                                      | PG&E    | SCE     | SDG&E  | Total     |
 |--------------------------------------|---------|---------|--------|-----------|
 | Raw substations published            | 704²    | 748     | 107¹   | 1,559     |
 | Removed (P.T. nodes / no load profile)| 34      | 170     | 8      | 212       |
 | **Cleaned (in processed output)**    | **670** | **578** | **99** | **1,347** |
-| **Basin-matched total**              | **603** | **535** | **96** | **1,234** |
-| Not matched to basin                 | 67      | 43      | 3      | 113       |
+| **Basin-matched total**              | **622** | **539** | **96** | **1,257** |
+| Not matched to basin                 | 48      | 39      | 3      | 90        |
 | Basin substations not in any source  | 346³    | 160³    | 42³    | 548³      |
 | With a utility/override coordinate   | 669     | 568     | 99     | 1,336     |
 | **With ANY coordinate**              | **670** | **577** | **99** | **1,346** |
@@ -104,11 +131,18 @@ profile, so they cannot be used. (The layer also returns 72 fully name-redacted 
 id, coordinates and DER capacity but no name — which cannot be joined to load and are
 dropped.)
 
-³ Not re-derived in the 2026-10-05 dictionary review. This row is printed by
+³ **Stale and currently not re-derivable.** This row is printed by
 `compare_substations.py`, which counts against the raw published name sets rather
-than the cleaned fleet, so it has a different denominator from the rows above.
-Re-run that script to refresh it; the review will have moved it by roughly the 9
-basin rows newly claimed less the 3 released.
+than the cleaned fleet, so it has a different denominator from the rows above. It
+was not re-derived in the 2026-10-05 dictionary review, and an attempt on
+2026-10-06 (after the basin-join fix) failed: the script raises
+`KeyError: ['latitude', 'longitude'] not in index` in `section_b` on the
+`pge_loads` frame, which carries no coordinate columns. That is a pre-existing
+defect in `compare_substations.py` -- it reads only raw files and
+`basinSourceDictionary.csv`, none of which the basin-join fix touched -- so the
+row stays as last printed. For reference, the sections that do still run report
+PG&E attrs "Basin: 980 | Source: 704 | Matched by name: 575, dictionary +48 ->
+623; Only in basin: 405".
 
 The **name dictionary** (`data/basinSourceDictionary.csv`, 89 entries) maps utility
 source names that differ from the DataBasin reference (e.g. "CRESTA PH" → "Cresta") to
@@ -232,7 +266,7 @@ review). Four tiers: *basin_reuse* (transferable entries),
 signal for SDGE centroids), *spatial_auto* (≤0.25 km), *name_auto_assumed* (rescues exact
 name matches whose only CEC hit has an unconfirmed "Other (PGE - Assumed)" owner tag).
 With the dictionary, the **CEC cross-reference rate** is **PGE 666/670, SCE 559/578, SDGE
-90/99** (vs basin's 603/535/96); aggregate **1,315 vs basin's 1,234 (+81)**.
+90/99** (vs basin's 622/539/96); aggregate **1,315 vs basin's 1,257 (+58)**.
 
 > **This is a cross-reference/enrichment rate, NOT coordinate availability — do not read
 > "666/670" as "4 PGE substations lack a location."** Every scraped substation already

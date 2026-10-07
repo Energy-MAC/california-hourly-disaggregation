@@ -31,14 +31,26 @@ CLI parameters
   --name-sanity-km     reject an identity match whose bus lies farther than this
                        from the substation's own coordinate -- catches CEC name
                        collisions between distant sites (default 30)
+  --system             nodal artifact namespace (default CATS).  The prox-map
+                       INPUT and the three map OUTPUTS both resolve under it, so
+                       a run cannot mix vintages.  This namespaces the
+                       ARTIFACTS; it does not make the builder work for a
+                       different power system -- candidate_buses() and the
+                       CEC->CATS identity chain are CATS-specific.
 
 Outputs
-  data/processed/load_projection/nodal/CATS/substation_node_map__{nameprox,
+  data/processed/load_projection/nodal/{system}/substation_node_map__{nameprox,
       catchment,namecatchment}.csv
-  data/checks/build_identity_catchment_maps/  match + LP statistics
+  data/checks/build_identity_catchment_maps/{system}/  match + LP statistics
+
+  These are CACHED SOURCE FILES the GenX pipeline ingests, not a step inside it:
+  rescale_genx_demand.py only reads them.  Rebuilding under --system CATS
+  redefines the input under every existing GenX allocation and deliverable --
+  build a new namespace instead.  See the nodal-mapping skill.
 
 Usage
   python scripts/load_projection/nodal/build_identity_catchment_maps.py
+  python scripts/load_projection/nodal/build_identity_catchment_maps.py --system MYRUN
 """
 
 from __future__ import annotations
@@ -59,9 +71,8 @@ sys.path.insert(0, str(ROOT / "scripts/load_projection/genx"))
 from build_cec_name_dictionary import norm  # noqa: E402  (single match definition)
 from rescale_genx_demand import candidate_buses  # noqa: E402  (single pool definition)
 
-NODAL_DIR = ROOT / "data/processed/load_projection/nodal/CATS"
-CHECKS = ROOT / "data/checks/build_identity_catchment_maps"
-PROX_MAP = NODAL_DIR / "substation_node_map.csv"
+NODAL_ROOT = ROOT / "data/processed/load_projection/nodal"
+CHECKS_ROOT = ROOT / "data/checks/build_identity_catchment_maps"
 ATTR_FILE = ROOT / "data/processed/substations/substation_attributes_clean.csv"
 CEC_FILE = ROOT / "data/processed/substation_misc/ca_substations_cec.csv"
 CATS_CEC = ROOT / "data/checks/compare_cats_cec/cats_cec_join.csv"
@@ -77,14 +88,19 @@ def haversine_km(lat1, lon1, lat2, lon2):
     return 2 * 6371.0 * np.arcsin(np.sqrt(a))
 
 
-def load_substations() -> pd.DataFrame:
+def load_substations(prox_map: Path) -> pd.DataFrame:
     """The 1,325 real substations the proximity map assigns, with coordinates.
 
     The set is taken from the prox map itself (not attributes) so every map
     variant covers exactly the same substations -- the comparison then isolates
     the assignment method.  Coordinate = utility's own, falling back to basin.
+
+    `prox_map` is passed in rather than re-resolved so that every read in one
+    run comes from the same --system namespace; resolving it twice is how a run
+    could mix vintages (an old CATS prox map read while maps are written
+    elsewhere).
     """
-    prox = pd.read_csv(PROX_MAP, dtype={"node": str})
+    prox = pd.read_csv(prox_map, dtype={"node": str})
     subs = (prox[~prox.is_synthetic][["utility", "substation_name"]]
             .drop_duplicates().reset_index(drop=True))
     attr = pd.read_csv(ATTR_FILE)
@@ -322,12 +338,23 @@ def main() -> None:
     ap.add_argument("--sub-arcs", type=int, default=3)
     ap.add_argument("--cec-bus-dist-km", type=float, default=0.1)
     ap.add_argument("--name-sanity-km", type=float, default=30.0)
+    ap.add_argument("--system", default="CATS",
+                    help="nodal artifact namespace: read the prox map from, and "
+                         "write the three maps into, nodal/<system>/ "
+                         "(default CATS -- the published artifacts)")
     args = ap.parse_args()
-    CHECKS.mkdir(parents=True, exist_ok=True)
 
-    subs = load_substations()
+    # Every path below hangs off --system, so one run cannot read one namespace
+    # and write another.  Default "CATS" reproduces the published artifacts.
+    nodal_dir = NODAL_ROOT / args.system
+    checks = CHECKS_ROOT / args.system
+    prox_map = nodal_dir / "substation_node_map.csv"
+    nodal_dir.mkdir(parents=True, exist_ok=True)
+    checks.mkdir(parents=True, exist_ok=True)
+
+    subs = load_substations(prox_map)
     buses = load_buses()
-    prox = pd.read_csv(PROX_MAP, dtype={"node": str})
+    prox = pd.read_csv(prox_map, dtype={"node": str})
     print(f"{len(subs):,} substations, {len(buses):,} candidate buses")
 
     pairs = identity_pairs(subs, buses, args)
@@ -339,7 +366,7 @@ def main() -> None:
     print(pairs.groupby(pairs.utility).agg(
         n_subs=("substation_name", "nunique"), n_buses=("node", "nunique"),
         med_dist_km=("dist_km", "median")).round(3).to_string())
-    pairs.to_csv(CHECKS / "identity_pairs.csv", index=False)
+    pairs.to_csv(checks / "identity_pairs.csv", index=False)
 
     maps = {"nameprox": build_nameprox(subs, prox, pairs)}
     catch, st1 = solve_catchment(subs, buses, args)
@@ -351,17 +378,17 @@ def main() -> None:
 
     rows = []
     for tag, m in maps.items():
-        out = NODAL_DIR / f"substation_node_map__{tag}.csv"
+        out = nodal_dir / f"substation_node_map__{tag}.csv"
         m.to_csv(out, index=False)
         s = summarize(tag, m)
         rows.append(s)
         print(f"\nwrote {out.relative_to(ROOT)}")
         print(f"  {s}")
     rows.append(summarize("prox", prox[~prox.is_synthetic]))
-    pd.DataFrame(rows).to_csv(CHECKS / "map_summary.csv", index=False)
+    pd.DataFrame(rows).to_csv(checks / "map_summary.csv", index=False)
     pd.DataFrame([{"lp": "catchment", **st1}, {"lp": "namecatchment", **st2}]
-                 ).to_csv(CHECKS / "lp_stats.csv", index=False)
-    print(f"\nwrote {CHECKS.relative_to(ROOT)}\\map_summary.csv (incl. prox baseline)")
+                 ).to_csv(checks / "lp_stats.csv", index=False)
+    print(f"\nwrote {checks.relative_to(ROOT)}\\map_summary.csv (incl. prox baseline)")
 
 
 if __name__ == "__main__":

@@ -41,14 +41,19 @@ Filtering logic (per utility)
     - Excluded: no metered load profiles exist.
 
   All utilities
-    - Basin lat/lon (DataBasin CA Substations 2022) joined in two steps:
+    - Basin lat/lon (DataBasin CA Substations 2022). Candidates come from:
         1. Exact normalised-name match against the basin dataset.
         2. Fallback dictionary lookup via data/basinSourceDictionary.csv for
            substations whose names differ between the utility source and basin
            (e.g. "CRESTA PH" -> "Cresta", "DRUM" -> "Drum 1" / "Drum 2").
-           When a source name maps to multiple basin entries the nearest one
-           by haversine distance from util_lat/util_lon is chosen.
-      dist_to_basin_km is computed after both steps.
+      The candidate pool is this utility's basin rows PLUS rows basin labels
+      owner `other`/`unknown`, which it does for many IOU-owned stations.
+      Candidates are resolved by _pick_basin_row(): own-owner rows first and
+      never distance-gated, nearest wins among duplicates (basin has two PGE
+      `Live Oak` 481 km apart), and a relaxed row is admitted only within
+      BASIN_RELAXED_MAX_KM. dist_to_basin_km is computed from the chosen row.
+      This whole step runs AFTER the coordinate overrides, because it keys on
+      util_lat/util_lon.
 
   High-side voltage (highside_kv)
     - SCE/SDGE: first token of substation_voltage (e.g. "115/33 kV" -> 115),
@@ -65,8 +70,9 @@ Output columns
   substation_attributes_clean.csv
       utility, substation_name,
       util_lat, util_lon,           -- from utility source
-      basin_lat, basin_lon,         -- DataBasin 2022 (NaN if no name match)
-      dist_to_basin_km,
+      coord_source,                 -- 'utility', the override file's source, or ''
+      basin_lat, basin_lon,         -- DataBasin 2022 (NaN if no match)
+      dist_to_basin_km,             -- NaN when either coordinate is missing
       sub_type,                     -- SCE: D/A/S/T; NaN otherwise
       substation_voltage,           -- ratio string (SCE and SDGE)
       voltage_kv,                   -- numeric secondary kV
@@ -84,7 +90,7 @@ Output columns
       note_sub                      -- PGE: "Yes" if redacted attrs; SCE: deliverability text
 
   substation_load_profiles_clean.csv
-      utility, substation_name, year, month, hour, min_load, max_load
+      utility, substation_name, year, month, hour, hour_pst, min_load, max_load
       year is NaN for PGE and SDGE (typical month-hour profiles, no year stamp).
 
 Usage
@@ -196,12 +202,96 @@ def haversine_km(lat1, lon1, lat2, lon2) -> np.ndarray:
 
 # ── Basin join ────────────────────────────────────────────────────────────────
 
+# Max separation at which a basin row NOT owned by this utility may be accepted.
+# Calibrated on rows whose names already agree exactly, where median separation is
+# 36 m (PGE), 57 m (SCE) and 1,340 m (SDGE).  All 23 matches this admits land at
+# <= 244 m and the next candidate is at 1.0 km, so the threshold sits in a wide
+# empty band.  Own-owner candidates are deliberately NOT distance-gated: SDGE's
+# published coordinates are genuinely imprecise and gating them would discard
+# correct matches.  SDGE gains nothing from the relaxed pool at any threshold
+# (its unmatched substations' nearest non-SDGE rows are 2.7 km+ away), so this
+# single global value costs it nothing.
+BASIN_RELAXED_MAX_KM = 0.25
+
+
 def _load_basin_lookup(owner_std: str) -> pd.DataFrame:
+    """Candidate basin rows for one utility: its own, plus `other`/`unknown`.
+
+    Basin mislabels many IOU-owned stations as owner `Other` or `Unknown`, so an
+    `owner_std == utility` filter hides correct rows -- 23 profiled substations
+    have an exact-name basin row that the filter made invisible, and it also made
+    three reviewed basinSourceDictionary entries inert (DAVIS, IONE,
+    Blythe (Walc)).  The relaxed rows are marked so the caller can require them
+    to agree on coordinates (BASIN_RELAXED_MAX_KM) while leaving own-owner rows
+    ungated.
+
+    Rows literally named "Unknown" stay excluded.  Duplicate `name_norm` values
+    are NOT collapsed -- picking the first silently took the wrong row (PGE's two
+    `Live Oak` rows are 481 km apart), so the caller resolves by distance.
+    """
     b = pd.read_csv(PROC / "substation_misc" / "ca_substations_2022.csv")
-    b = b[b["owner_std"] == owner_std].dropna(subset=["latitude", "longitude"]).copy()
+    b = b[b["owner_std"].isin([owner_std, "other", "unknown"])].copy()
+    b = b.dropna(subset=["latitude", "longitude"])
     b = b[b["name"].str.strip().str.lower() != "unknown"].copy()
     b["name_norm"] = norm(b["name"])
-    return b.drop_duplicates("name_norm")[["name_norm", "latitude", "longitude"]]
+    b["relaxed"] = b["owner_std"] != owner_std
+    return b[["name_norm", "latitude", "longitude", "relaxed"]].reset_index(drop=True)
+
+
+def _pick_basin_row(cands: pd.DataFrame, u_lat, u_lon):
+    """Choose one basin row for a substation; returns (latitude, longitude) or None.
+
+    Two rules, in this order:
+
+    1. OWN-OWNER PRIORITY.  Rows this utility owns are preferred and are never
+       distance-gated.  Among several (basin has duplicate names -- PGE has two
+       `Live Oak` 481 km apart, SDGE two `Eastgate`), the one nearest the
+       substation's own coordinate wins.
+    2. RELAXED FALL-THROUGH.  A row basin labels `other`/`unknown` is accepted
+       only within BASIN_RELAXED_MAX_KM, and only when there is no own-owner
+       candidate, or the best own-owner candidate is itself beyond that distance
+       while the relaxed one is inside it.  So a relaxed row can rescue a
+       substation with no match and can replace a clearly-wrong match, but never
+       displaces an own-owner row that already agrees.
+
+    With no coordinate to compare against, the first own-owner row is taken and
+    relaxed rows are unusable, having nothing to verify them with.  Since the
+    caller runs after apply_coordinate_overrides(), only a substation unplaced by
+    every source reaches that branch (currently just SCE `Autobody`).
+    """
+    if cands.empty:
+        return None
+    own = cands[~cands["relaxed"]]
+    rel = cands[cands["relaxed"]]
+
+    if pd.isna(u_lat) or pd.isna(u_lon):
+        if own.empty:
+            return None
+        r = own.iloc[0]
+        return float(r["latitude"]), float(r["longitude"])
+
+    def nearest(df):
+        if df.empty:
+            return None, np.inf
+        d = haversine_km(np.full(len(df), float(u_lat)), np.full(len(df), float(u_lon)),
+                         df["latitude"].to_numpy(float), df["longitude"].to_numpy(float))
+        i = int(np.argmin(d))
+        return df.iloc[i], float(d[i])
+
+    own_row, own_d = nearest(own)
+    rel_row, rel_d = nearest(rel)
+
+    use = None
+    if own_row is not None:
+        use = own_row
+        if rel_row is not None and own_d > BASIN_RELAXED_MAX_KM >= rel_d:
+            use = rel_row
+    elif rel_row is not None and rel_d <= BASIN_RELAXED_MAX_KM:
+        use = rel_row
+
+    if use is None:
+        return None
+    return float(use["latitude"]), float(use["longitude"])
 
 
 def add_basin_coords(
@@ -210,59 +300,52 @@ def add_basin_coords(
     dict_map: dict[str, list[str]] | None = None,
 ) -> pd.DataFrame:
     """
-    Left-join basin lat/lon onto attrs, then compute haversine distance.
+    Attach basin lat/lon to attrs, then compute haversine distance.
 
-    Step 1 — exact normalised-name join against the basin lookup table.
-    Step 2 — for rows still missing basin coords, try the basinSourceDictionary
-              mappings in dict_map.  When a source name maps to multiple basin
-              entries, the nearest by haversine from util_lat/util_lon is chosen
-              (first entry used if util coords are also missing).
+    Candidates for each substation come from, in order (the dictionary is an
+    EXCEPTIONS list, so exact matching always goes first):
+
+      1. exact normalised-name match against the basin lookup;
+      2. the basinSourceDictionary mappings in dict_map, for rows where step 1
+         produced no ACCEPTED row -- either it had no candidate, or every
+         candidate failed the guard.
+
+    Whichever step supplies them, candidates are resolved by `_pick_basin_row`
+    (own-owner priority, nearest-wins, distance guard on relaxed rows).  Row
+    count and order are preserved -- this is a per-row assignment, not a merge,
+    because the basin lookup now carries duplicate `name_norm` values on purpose.
+
+    Call this AFTER apply_coordinate_overrides(): every candidate decision and
+    dist_to_basin_km depend on util_lat/util_lon, and 11 substations only get a
+    coordinate from the override table.
     """
-    a = attrs.copy()
-    a["_norm"] = norm(a["substation_name"])
+    merged = attrs.copy()
+    # not "_norm": itertuples() renames leading-underscore columns positionally
+    merged["norm_key"] = norm(merged["substation_name"])
+    by_name = {n: g for n, g in basin.groupby("name_norm", sort=False)}
 
-    # Step 1: exact name join
-    merged = a.merge(
-        basin.rename(columns={"latitude": "basin_lat", "longitude": "basin_lon"}),
-        left_on="_norm", right_on="name_norm", how="left",
-    ).drop(columns=["name_norm"])
+    lats: list[float] = []
+    lons: list[float] = []
+    empty = basin.iloc[0:0]
+    for row in merged.itertuples(index=False):
+        n = row.norm_key
+        hit = _pick_basin_row(by_name.get(n, empty), row.util_lat, row.util_lon)
+        # Dictionary second, and only if the exact name FAILED TO RESOLVE -- not
+        # merely if it had no candidate. The relaxed pool can surface a
+        # same-named row that the guard then rejects (PGE BUCKS CREEK has an
+        # `unknown`-owner `Bucks Creek` 9.1 km away, while the dictionary points
+        # at `Grizzly` 95 m away), and that must not shadow the dictionary.
+        if hit is None and dict_map:
+            parts = [by_name[bn] for bn in dict_map.get(n, ()) if bn in by_name]
+            if parts:
+                hit = _pick_basin_row(pd.concat(parts, ignore_index=True),
+                                      row.util_lat, row.util_lon)
+        lats.append(hit[0] if hit else np.nan)
+        lons.append(hit[1] if hit else np.nan)
 
-    # Step 2: dictionary fallback for unmatched rows
-    if dict_map:
-        basin_lat_by_norm = basin.set_index("name_norm")["latitude"]
-        basin_lon_by_norm = basin.set_index("name_norm")["longitude"]
-        for i in merged.index[merged["basin_lat"].isna()]:
-            src_norm = merged.at[i, "_norm"]
-            basin_norms = dict_map.get(src_norm)
-            if not basin_norms:
-                continue
-            cands = [
-                (bn, basin_lat_by_norm[bn], basin_lon_by_norm[bn])
-                for bn in basin_norms
-                if bn in basin_lat_by_norm.index
-            ]
-            if not cands:
-                continue
-            if len(cands) == 1:
-                _, b_lat, b_lon = cands[0]
-            else:
-                u_lat = merged.at[i, "util_lat"]
-                u_lon = merged.at[i, "util_lon"]
-                if pd.notna(u_lat) and pd.notna(u_lon):
-                    dists = [
-                        haversine_km(
-                            np.array([float(u_lat)]), np.array([float(u_lon)]),
-                            np.array([float(b_lat)]), np.array([float(b_lon)]),
-                        )[0]
-                        for _, b_lat, b_lon in cands
-                    ]
-                    _, b_lat, b_lon = cands[int(np.argmin(dists))]
-                else:
-                    _, b_lat, b_lon = cands[0]
-            merged.at[i, "basin_lat"] = float(b_lat)
-            merged.at[i, "basin_lon"] = float(b_lon)
-
-    merged = merged.drop(columns=["_norm"])
+    merged["basin_lat"] = lats
+    merged["basin_lon"] = lons
+    merged = merged.drop(columns=["norm_key"])
 
     has = (merged["basin_lat"].notna() & merged["basin_lon"].notna() &
            merged["util_lat"].notna()  & merged["util_lon"].notna())
@@ -778,41 +861,8 @@ def main() -> None:
     sdge_attrs, sdge_loads = process_sdge()
     print(f"  {sdge_attrs['substation_name'].nunique():,} substations  |  {len(sdge_loads):,} load rows")
 
-    # ── Combine and add basin coords ──────────────────────────────────────────
-    print("Joining basin coordinates ...")
-    if DICT_PATH.exists():
-        dict_entry_count = len(pd.read_csv(DICT_PATH))
-        print(f"  Dictionary: {DICT_PATH.relative_to(ROOT)} ({dict_entry_count} entries)")
-        dict_maps = {
-            "pge":  _build_dict_map("PGE"),
-            "sce":  _build_dict_map("SCE"),
-            "sdge": _build_dict_map("SDGE"),
-        }
-    else:
-        print("  WARNING: basinSourceDictionary.csv not found; skipping dict augmentation.")
-        dict_maps = {"pge": {}, "sce": {}, "sdge": {}}
-
-    all_attrs = []
-    for utility, df, owner_std in [("pge",  pge_attrs,  "pge"),
-                                    ("sce",  sce_attrs,  "sce"),
-                                    ("sdge", sdge_attrs, "sdge")]:
-        basin    = _load_basin_lookup(owner_std)
-        # Count name-only matches before dict augmentation for reporting
-        pre_norms   = set(norm(df["substation_name"]))
-        basin_norms = set(basin["name_norm"])
-        n_name_only = len(pre_norms & basin_norms)
-
-        part  = add_basin_coords(df, basin, dict_maps[owner_std])
-        n_m   = part["basin_lat"].notna().sum()
-        n_c   = part["util_lat"].notna().sum()
-        d_med = part["dist_to_basin_km"].median()
-        n_dict = n_m - n_name_only
-        print(f"  {utility}: {n_c}/{len(part)} with util coords  |  "
-              f"{n_m}/{len(part)} basin-matched "
-              f"(name: {n_name_only}, dict: {n_dict}, median dist: {d_med:.1f} km)")
-        all_attrs.append(part)
-
-    attrs_all = pd.concat(all_attrs, ignore_index=True)
+    # ── Combine ───────────────────────────────────────────────────
+    attrs_all = pd.concat([pge_attrs, sce_attrs, sdge_attrs], ignore_index=True)
     loads_all = pd.concat([pge_loads, sce_loads, sdge_loads], ignore_index=True)
 
     # ── High-side voltage (highside_kv / highside_kv_source / cec_max_voltage_kv) ──
@@ -836,12 +886,56 @@ def main() -> None:
     assert n_after.equals(attrs_all.groupby("utility").size().sort_index()), (
         "substation counts changed after coordinate overrides!")
     n_placed = attrs_all["util_lat"].notna().sum()
-    n_any = (attrs_all["util_lat"].notna() | attrs_all["basin_lat"].notna()).sum()
-    print(f"  {n_placed}/{len(attrs_all)} with a utility/override coordinate; "
-          f"{len(attrs_all) - n_any} still unplaced by any source")
+    print(f"  {n_placed}/{len(attrs_all)} with a utility/override coordinate")
     for util, grp in attrs_all.groupby("utility"):
         src_counts = grp["highside_kv_source"].value_counts().to_dict()
         print(f"  {util}: highside_kv source counts {src_counts}")
+
+    # ── Basin coordinates ───────────────────────────────────
+    # AFTER the overrides on purpose: candidate selection and dist_to_basin_km
+    # both key on util_lat/util_lon, and 11 substations are placed only by the
+    # override table. Joining first left those rows unable to resolve an
+    # ambiguous name and left 16 basin-matched rows with a NaN distance.
+    print("Joining basin coordinates ...")
+    if DICT_PATH.exists():
+        dict_entry_count = len(pd.read_csv(DICT_PATH))
+        print(f"  Dictionary: {DICT_PATH.relative_to(ROOT)} ({dict_entry_count} entries)")
+        dict_maps = {
+            "pge":  _build_dict_map("PGE"),
+            "sce":  _build_dict_map("SCE"),
+            "sdge": _build_dict_map("SDGE"),
+        }
+    else:
+        print("  WARNING: basinSourceDictionary.csv not found; skipping dict augmentation.")
+        dict_maps = {"pge": {}, "sce": {}, "sdge": {}}
+
+    n_basin_before = attrs_all.groupby("utility").size().sort_index()
+    all_attrs = []
+    for utility in ("pge", "sce", "sdge"):
+        df    = attrs_all[attrs_all["utility"] == utility]
+        basin = _load_basin_lookup(utility)
+        own   = basin[~basin["relaxed"]]
+        # own-owner exact-name matches, for reporting only
+        n_name_own = len(set(norm(df["substation_name"])) & set(own["name_norm"]))
+
+        part    = add_basin_coords(df, basin, dict_maps[utility])
+        n_m     = part["basin_lat"].notna().sum()
+        n_c     = part["util_lat"].notna().sum()
+        d_med   = part["dist_to_basin_km"].median()
+        n_extra = n_m - n_name_own
+        print(f"  {utility}: {n_c}/{len(part)} with util coords  |  "
+              f"{n_m}/{len(part)} basin-matched "
+              f"(own-owner name: {n_name_own}, relaxed+dict: {n_extra}, "
+              f"median dist: {d_med:.1f} km)")
+        all_attrs.append(part)
+
+    attrs_all = pd.concat(all_attrs, ignore_index=True)
+    # Per-row assignment, but the lookup now carries duplicate name_norm values
+    # on purpose -- guard the row count the way voltage and overrides are guarded.
+    assert n_basin_before.equals(attrs_all.groupby("utility").size().sort_index()), (
+        "substation counts changed after the basin join!")
+    n_any = (attrs_all["util_lat"].notna() | attrs_all["basin_lat"].notna()).sum()
+    print(f"  {len(attrs_all) - n_any} substations unplaced by any source")
 
     # Convert wall-clock Pacific hours to fixed PST (UTC-8, no DST) using majority-month rule.
     # METHODOLOGICAL ASSUMPTION: min/max load profiles represent percentile envelopes over a

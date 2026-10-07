@@ -5,9 +5,12 @@ Name-normalized join of our cleaned utility substations against the CEC
 Substation DataPull (07/24/2026), mirroring process_substations_clean.py's
 basin-matching stage (Step 1: exact normalized-name join; same norm()
 regex) so the "matched by name" counts are directly comparable to the
-existing DataBasin 2022 numbers in the README's Substation Coverage Summary
-table (555/518/87 matched by name for PGE/SCE/SDGE, before the hand-curated
-89-entry basinSourceDictionary.csv dictionary fallback adds 48/17/9 more).
+DataBasin 2022 numbers in docs/data_sources.md's Substation Coverage Summary
+table: own-owner exact-name matches are 555/518/87 for PGE/SCE/SDGE, and the
+relaxed owner pool (basin rows labelled other/unknown, admitted within 250 m)
+plus the hand-curated 89-entry basinSourceDictionary.csv fallback bring the
+totals to 622/539/96. Note this script's own `basin_name` column reports those
+TOTALS (622/539/96), not the exact-name subtotal.
 
 No CEC-specific name dictionary exists yet (the original was hand-curated
 over time via find_basin_name_candidates.py) — this script reports the
