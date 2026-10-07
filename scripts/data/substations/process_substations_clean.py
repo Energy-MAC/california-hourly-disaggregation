@@ -80,7 +80,9 @@ Output columns
                                      -- first token (SCE/SDGE) else CEC max_voltage_kv
                                      -- (all utilities, only source for PGE)
       highside_kv_source,           -- "utility" | "cec" | "none"
-      cec_max_voltage_kv,           -- raw CEC value (NaN/-99 sentinel dropped)
+      cec_max_voltage_kv,           -- CEC max_voltage_kv (NaN/-99 dropped), combined
+                                     -- by max across CO-LOCATED same-base-name CEC
+                                     -- records; see _cec_colocated_max()
       sys_name, division, subst_id,
       existing_gen, queued_gen, total_gen,
       projected_load, der_penetration, max_remain_cap,
@@ -107,6 +109,7 @@ import numpy as np
 import pandas as pd
 
 from build_cec_name_dictionary import norm as cec_norm  # noqa: E402
+from build_cec_name_dictionary import norm_base as cec_norm_base  # noqa: E402
 
 ROOT     = Path(__file__).resolve().parents[3]
 RAW      = ROOT / "data" / "raw"
@@ -166,28 +169,39 @@ def is_pt(s: pd.Series) -> pd.Series:
     return s.str.contains(r"p\.?\s*t\.?\s*$", case=False, regex=True, na=False)
 
 
-def _build_dict_map(utility_upper: str) -> dict[str, list[str]]:
+def _build_dict_map(utility_upper: str) -> tuple[dict[str, list[str]], set[str]]:
     """
-    Load data/basinSourceDictionary.csv and return a mapping
-      norm(SourceName) -> [norm(BasinName), ...]
-    filtered to the given utility label ("PGE", "SCE", or "SDGE").
+    Load data/basinSourceDictionary.csv for one utility and return
+      (mapping, veto)
+    where mapping is norm(SourceName) -> [norm(BasinName), ...] and veto is the
+    set of norm(SourceName) with a BLANK BasinName.
 
-    Returns an empty dict if the file does not exist or has no entries for
+    A blank BasinName means "no basin row corresponds to this substation" and
+    SUPPRESSES the match entirely, including the exact-name one.  It is for a
+    name collision between two different facilities -- see the OAKLAND I entry,
+    where basin carries only the 115 kV station and ours is the 12 kV one.  A
+    veto is the only case where the dictionary overrides exact matching; it
+    cannot invent a coordinate, only decline a wrong one.
+
+    Returns empty containers if the file does not exist or has no entries for
     this utility.  One SourceName can map to multiple BasinNames (e.g. DRUM
     maps to both Drum 1 and Drum 2 in the basin dataset).
     """
     if not DICT_PATH.exists():
-        return {}
+        return {}, set()
     d = pd.read_csv(DICT_PATH)
     d = d[d["Utility"].str.strip().str.upper() == utility_upper].copy()
     if d.empty:
-        return {}
+        return {}, set()
     d["src_norm"] = norm(d["SourceName"])
+    blank = d["BasinName"].isna() | (d["BasinName"].astype(str).str.strip() == "")
+    veto = set(d.loc[blank, "src_norm"])
+    d = d[~blank].copy()
     d["bas_norm"] = norm(d["BasinName"])
     mapping: dict[str, list[str]] = {}
     for _, row in d.iterrows():
         mapping.setdefault(row["src_norm"], []).append(row["bas_norm"])
-    return mapping
+    return mapping, veto
 
 
 # ── Geometry ──────────────────────────────────────────────────────────────────
@@ -298,6 +312,7 @@ def add_basin_coords(
     attrs: pd.DataFrame,
     basin: pd.DataFrame,
     dict_map: dict[str, list[str]] | None = None,
+    veto: set[str] | None = None,
 ) -> pd.DataFrame:
     """
     Attach basin lat/lon to attrs, then compute haversine distance.
@@ -309,6 +324,10 @@ def add_basin_coords(
       2. the basinSourceDictionary mappings in dict_map, for rows where step 1
          produced no ACCEPTED row -- either it had no candidate, or every
          candidate failed the guard.
+
+    A substation in `veto` (blank BasinName in the dictionary) is left unmatched
+    outright: its name collides with a different facility that basin happens to
+    carry under the same name, so no basin row is correct for it.
 
     Whichever step supplies them, candidates are resolved by `_pick_basin_row`
     (own-owner priority, nearest-wins, distance guard on relaxed rows).  Row
@@ -327,8 +346,13 @@ def add_basin_coords(
     lats: list[float] = []
     lons: list[float] = []
     empty = basin.iloc[0:0]
+    veto = veto or set()
     for row in merged.itertuples(index=False):
         n = row.norm_key
+        if n in veto:
+            lats.append(np.nan)
+            lons.append(np.nan)
+            continue
         hit = _pick_basin_row(by_name.get(n, empty), row.util_lat, row.util_lon)
         # Dictionary second, and only if the exact name FAILED TO RESOLVE -- not
         # merely if it had no candidate. The relaxed pool can surface a
@@ -368,8 +392,45 @@ def add_basin_coords(
 # and can never drop or duplicate a substation row -- critical because PGE's
 # legacy-recovered substations (see LEGACY_PGE_* below) exist nowhere else.
 
+# Max separation at which two CEC records are taken to describe ONE physical
+# site. 250 m matches BASIN_RELAXED_MAX_KM; the pair it exists for sits 65 m
+# apart. Measured: across 3,767 CEC records with a known voltage this raises
+# exactly one (`Oak - PG&E South`, 12 -> 60 kV) and changes exactly one
+# profiled substation (PGE OAK).
+CEC_COLOCATED_MAX_KM = 0.25
+
+
+def _cec_colocated_max(cec: pd.DataFrame) -> pd.Series:
+    """Per CEC record: max max_voltage_kv over co-located same-base-name records.
+
+    Grouping is (owner_base, norm_base(name)) -- norm_base strips CEC's trailing
+    owner/direction suffix, so `Oak - PG&E North` and `Oak - PG&E South` group
+    together while `Oregon Trail` and the neighbouring `College View` 143 m away
+    do NOT.  Within a group only records within CEC_COLOCATED_MAX_KM of the
+    record being scored count, which is what keeps the two `Oakland I` records
+    apart: they share a base name but lie 10.86 km apart and are genuinely
+    different facilities, so PGE OAKLAND I correctly keeps its 12 kV.
+
+    Distance is measured record-to-record, not record-to-substation, so the
+    result is a property of the CEC table alone -- independent of whether the
+    substation has a coordinate yet, and therefore of where this runs in main().
+    """
+    out = pd.Series(cec["max_voltage_kv"].to_numpy(float), index=cec.index)
+    base = cec["name"].map(cec_norm_base)
+    for _, g in cec.groupby([cec["owner_base"], base], sort=False):
+        if len(g) == 1:
+            continue
+        la = g["latitude"].to_numpy(float)
+        lo = g["longitude"].to_numpy(float)
+        kv = g["max_voltage_kv"].to_numpy(float)
+        for j, idx in enumerate(g.index):
+            d = haversine_km(np.full(len(g), la[j]), np.full(len(g), lo[j]), la, lo)
+            out.at[idx] = float(kv[d <= CEC_COLOCATED_MAX_KM].max())
+    return out
+
+
 def _load_cec_voltage_lookup() -> dict[tuple[str, str], float]:
-    """(utility, norm(substation_name)) -> CEC max_voltage_kv.
+    """(utility, norm(substation_name)) -> CEC high-side voltage in kV.
 
     Built from a direct normalized-name match against CEC records of the same
     (or "_assumed") owner, plus a cecSourceDictionary.csv fallback for names
@@ -377,6 +438,14 @@ def _load_cec_voltage_lookup() -> dict[tuple[str, str], float]:
     build_cec_name_dictionary.py -- the same function the dictionary itself
     was built with -- so dictionary lookups stay consistent.  The -99 sentinel
     (CEC's "unknown voltage" marker, SDGE-only) and NaN are dropped.
+
+    CO-LOCATED RECORDS ARE COMBINED BY MAX (see _cec_colocated_max).  CEC can
+    hold two records for one physical site, one per voltage level: PG&E `OAK`
+    has `Oak - PG&E South` (12 kV, source IOU/POU) and `Oak - PG&E North`
+    (60 kV, source CEC) 65 m apart, and the 12 kV record describes only the
+    distribution side.  highside_kv means the TRANSMISSION side, so the max of
+    a co-located same-base-name group is the right answer, not whichever record
+    the name match happened to land on.
     """
     if not CEC_FILE.exists():
         print("  WARNING: CEC substation file not found "
@@ -387,8 +456,9 @@ def _load_cec_voltage_lookup() -> dict[tuple[str, str], float]:
     cec = cec[cec.max_voltage_kv.notna() & (cec.max_voltage_kv != -99)].copy()
     cec["owner_base"] = cec.owner_std.astype(str).str.replace("_assumed", "", regex=False)
     cec["name_norm"] = cec.name.map(cec_norm)
+    cec["kv_eff"] = _cec_colocated_max(cec)
     cec_by_name = (cec.drop_duplicates(["owner_base", "name_norm"])
-                      .set_index(["owner_base", "name_norm"])["max_voltage_kv"])
+                      .set_index(["owner_base", "name_norm"])["kv_eff"])
 
     lookup: dict[tuple[str, str], float] = dict(cec_by_name.items())
 
@@ -905,9 +975,12 @@ def main() -> None:
             "sce":  _build_dict_map("SCE"),
             "sdge": _build_dict_map("SDGE"),
         }
+        n_veto = sum(len(v) for _, v in dict_maps.values())
+        if n_veto:
+            print(f"  {n_veto} entr(y/ies) veto a basin match (blank BasinName)")
     else:
         print("  WARNING: basinSourceDictionary.csv not found; skipping dict augmentation.")
-        dict_maps = {"pge": {}, "sce": {}, "sdge": {}}
+        dict_maps = {"pge": ({}, set()), "sce": ({}, set()), "sdge": ({}, set())}
 
     n_basin_before = attrs_all.groupby("utility").size().sort_index()
     all_attrs = []
@@ -918,7 +991,7 @@ def main() -> None:
         # own-owner exact-name matches, for reporting only
         n_name_own = len(set(norm(df["substation_name"])) & set(own["name_norm"]))
 
-        part    = add_basin_coords(df, basin, dict_maps[utility])
+        part    = add_basin_coords(df, basin, *dict_maps[utility])
         n_m     = part["basin_lat"].notna().sum()
         n_c     = part["util_lat"].notna().sum()
         d_med   = part["dist_to_basin_km"].median()

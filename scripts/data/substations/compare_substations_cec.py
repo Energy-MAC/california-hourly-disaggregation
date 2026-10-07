@@ -9,8 +9,10 @@ DataBasin 2022 numbers in docs/data_sources.md's Substation Coverage Summary
 table: own-owner exact-name matches are 555/518/87 for PGE/SCE/SDGE, and the
 relaxed owner pool (basin rows labelled other/unknown, admitted within 250 m)
 plus the hand-curated 89-entry basinSourceDictionary.csv fallback bring the
-totals to 622/539/96. Note this script's own `basin_name` column reports those
-TOTALS (622/539/96), not the exact-name subtotal.
+totals to 621/539/96 (one exact-name match, PGE OAKLAND I, is vetoed by a
+blank BasinName -- a name collision with a different facility). Note this
+script's own `basin_name` column reports those TOTALS, not the exact-name
+subtotal.
 
 No CEC-specific name dictionary exists yet (the original was hand-curated
 over time via find_basin_name_candidates.py) — this script reports the
