@@ -351,6 +351,13 @@ def main() -> None:
     prox_map = nodal_dir / "substation_node_map.csv"
     nodal_dir.mkdir(parents=True, exist_ok=True)
     checks.mkdir(parents=True, exist_ok=True)
+    if not prox_map.exists():
+        builder = ("python scripts/load_projection/nodal/map_loads_to_nodes.py "
+                   f"--system {args.system}")
+        raise FileNotFoundError(
+            f"prox map not found: {prox_map}\n"
+            "The three identity/catchment maps are derived FROM it, so "
+            f"build it first:\n  {builder}")
 
     subs = load_substations(prox_map)
     buses = load_buses()
