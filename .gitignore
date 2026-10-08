@@ -8,6 +8,39 @@ data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
+# ---------------------------------------------------------------------------
+# Exceptions: small, decision-relevant artifacts under data/processed.
+#
+# The bulk of data/processed (1.6 GB, incl. three files over GitHub's 100 MB
+# hard limit) stays ignored and is regenerated from data/raw. These few are
+# tracked because they are small AND their previous versions are not otherwise
+# recoverable -- the substation *_clean.csv pair was regenerated on 2026-10-06
+# and the prior version was lost, which made it impossible to confirm whether
+# a published nodal map matched the inputs that produced it.
+#
+# git cannot re-include a file whose parent directory is excluded, so each
+# directory is unwound before its contents are filtered. Verify any change
+# with `git check-ignore -v <path>`, not by reading these rules.
+# ---------------------------------------------------------------------------
+
+# substation->bus maps, every --system namespace (~1.5 MB).
+# The nodal__*.csv projection outputs are NOT maps and stay ignored (~21 MB).
+!data/processed/load_projection/
+data/processed/load_projection/*
+!data/processed/load_projection/nodal/
+data/processed/load_projection/nodal/**/nodal__*.csv
+
+# External weight artifacts: the provenance records only (~0.3 MB). The weight
+# tables themselves (~22 MB) regenerate from the input file plus the builder.
+!data/processed/load_projection/external_loads/
+data/processed/load_projection/external_loads/**/external_*.csv
+
+# Cleaned substation attributes and load profiles (~15 MB), the inputs every
+# nodal map is derived from.
+!data/processed/substations/
+data/processed/substations/*
+!data/processed/substations/*_clean.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

@@ -1,0 +1,1112 @@
+row_id,name,route,utility,input_utility,substation_name,node,dist_km,name_dist_km,ref_lat,ref_lon,status
+0,Mesquite,coord_spatial,,iid,,190,2.9266561649942333,,,,ok
+1,Heber Geothermal,coord_spatial,,iid,,186,5.298651932207872,,,,ok
+2,J J Elmore,coord_spatial,,iid,,1712,3.580168808076152,,,,ok
+3,Sonora,coord_spatial,,iid,,2325,9.408184120187927,,,,ok
+4,Avenue 58,coord_spatial,,iid,,1874,0.0,,,,ok
+5,Jefferson,coord_spatial,,iid,,772,0.0,124.11365710995601,,,ok; name matched sce/Jefferson but 124.1 km away (> 25); placed by coordinates instead
+6,La Quinta,coord_spatial,,iid,,1527,0.0,,,,ok
+7,Alamorio,coord_spatial,,iid,,181,0.0,,,,ok
+8,Avenue 48,coord_spatial,,iid,,1873,0.0,,,,ok
+9,Bombay,coord_spatial,,iid,,2325,23.580389553396756,,,,ok
+10,Carreon,coord_spatial,,iid,,770,0.0,,,,ok
+11,Sky Valley,coord_spatial,,iid,,777,0.0,,,,ok
+12,Dillon,coord_spatial,,iid,,1870,3.0708650053481015,,,,ok
+13,Avenue 42,coord_spatial,,iid,,1869,0.0,,,,ok
+14,Frances Way,coord_spatial,,iid,,1525,0.0,,,,ok
+15,Coachella Switching,coord_spatial,,iid,,1872,0.0,,,,ok
+16,Dixieland,coord_spatial,,iid,,1523,3.792528395024463,,,,ok
+17,U.S. Gypsum,coord_spatial,,iid,,1523,6.919951023566804,,,,ok
+18,Edom,coord_spatial,,iid,,771,0.0,,,,ok
+19,Terminal Station,coord_spatial,,iid,,8667,3.1177182023976218,,,,ok
+20,Euclid,coord_spatial,,iid,,187,2.035437801307953,238.00474854862685,,,ok; name matched sce/Euclid but 238.0 km away (> 25); placed by coordinates instead
+21,Heber,coord_spatial,,iid,,186,6.007049142797872,,,,ok
+22,Holtville,coord_spatial,,iid,,2042,11.456978411806038,,,,ok
+23,Clark,coord_spatial,,iid,,1524,0.0,262.67573576905716,,,ok; name matched sce/Clark but 262.7 km away (> 25); placed by coordinates instead
+24,Marshall,coord_spatial,,other,,1377,3.9767473208753406,,,,ok
+25,Avenue 52,coord_spatial,,iid,,1871,0.0,,,,ok
+26,North Shore,coord_spatial,,iid,,776,15.996163358123633,,,,ok
+27,Oasis,coord_spatial,,iid,,776,0.0,230.82431809023186,,,ok; name matched sce/Oasis but 230.8 km away (> 25); placed by coordinates instead
+28,Perry,unresolved,,iid,,,,,,,"name used by more than one utility (pge/PERRY, sce/Perry); supply a 'utility' column, or coordinates within 25 km of one candidate"
+29,Perry,utility_direct,pge,pge,PERRY,,,0.05908244356848263,,,ok
+30,Anza,coord_spatial,,iid,,1529,22.720771996162412,,,,ok
+31,San Felipe,coord_spatial,,iid,,8042,17.176341453345852,,,,ok
+32,Thermal,coord_spatial,,iid,,778,0.0,,,,ok
+33,Van Buren,coord_spatial,,iid,,779,0.0,,,,ok
+34,Verde,coord_spatial,,iid,,2043,8.8166328675714,,,,ok
+35,Calexico,coord_spatial,,iid,,186,0.0,,,,ok
+36,Shadow Hills,coord_spatial,,iid,,1870,0.0,,,,ok
+37,Niland,coord_spatial,,iid,,2325,0.12257999757447677,,,,ok
+38,Westmorland,coord_spatial,,iid,,207,0.0,,,,ok
+39,Black Mountain,coord_spatial,,iid,,190,14.549719196767906,,,,ok
+40,Calipatria,coord_spatial,,iid,,1712,7.750918177246676,,,,ok
+41,Dixieland Prison,coord_spatial,,iid,,1523,0.0,,,,ok
+42,Gem III,coord_spatial,,iid,,1715,1.8523820389850885,,,,ok
+43,Ormesa #2 Geo,coord_spatial,,iid,,1715,0.04104839101188066,,,,ok
+44,Ormesa #1 Geo,coord_spatial,,iid,,1714,0.04855963012240353,,,,ok
+45,Panno,coord_spatial,,iid,,1713,2.505611918129984,,,,ok
+46,Aten,coord_spatial,,iid,,2042,0.0,,,,ok
+47,Pruett,coord_spatial,,iid,,186,2.0294701015316132,,,,ok
+48,Winterhaven,coord_spatial,,iid,,193,4.348692468280852,,,,ok
+49,Bard,coord_spatial,,iid,,183,0.0,,,,ok
+50,Dahlia,coord_spatial,,iid,,8667,0.005531476861273879,,,,ok
+51,Brawley,coord_spatial,,unknown,,1713,7.5309705480622595,,,,ok
+52,Alpine,utility_direct,sdge,sdge,ALPINE,,,2.031842503612657,,,ok
+53,Ash,utility_direct,sdge,sdge,ASH,,,2.1663906409292,,,ok
+54,Artesian,utility_dict,sdge,sdge,ARTESIAN RANCH,,,2.0720267343789947,,,ok
+55,Avocado,utility_direct,sdge,sdge,AVOCADO,,,3.519355857291217,,,ok
+56,Barrett,utility_direct,sdge,sdge,BARRETT,,,0.8438415979428235,,,ok
+57,Basilone,coord_spatial,,unknown,,8823,2.5572761633680465,,,,ok
+58,Batiquitos,utility_direct,sdge,sdge,BATIQUITOS,,,1.2686841461858875,,,ok
+59,Bernardo,utility_direct,sdge,sdge,BERNARDO,,,1.4024599908300364,,,ok
+60,Border,utility_direct,sdge,sdge,BORDER,,,0.7052778710348034,,,ok
+61,Borrego,utility_direct,sdge,sdge,BORREGO,,,3.1147043159032304,,,ok
+62,Cabrillo,utility_direct,sdge,sdge,CABRILLO,,,1.0604810818898391,,,ok
+63,Cabrillo,utility_direct,pge,pge,CABRILLO,,,0.008448571039152487,,,ok
+64,Cameron,utility_direct,sdge,sdge,CAMERON,,,1.8430062296110767,,,ok
+65,Cannon,utility_direct,sdge,sdge,CANNON,,,1.6618948721295612,,,ok
+66,SAN JUAN CAPISTRANO,utility_direct,sdge,sdge,SAN JUAN CAPISTRANO,,,0.0,,,ok
+67,Carlton Hills,utility_direct,sdge,sdge,CARLTON HILLS,,,1.1896608690990997,,,ok
+68,Chicarita,utility_direct,sdge,sdge,CHICARITA,,,0.3400299702095156,,,ok
+69,Chollas,utility_dict,sdge,sdge,CHOLLAS WEST,,,1.1668534812220122,,,ok
+70,Clairemont,utility_direct,sdge,sdge,CLAIREMONT,,,0.5135002628910952,,,ok
+71,Coronado,utility_direct,sdge,sdge,CORONADO,,,3.505401525461654,,,ok
+72,Creelman,utility_direct,sdge,sdge,CREELMAN,,,2.4279987900811273,,,ok
+73,Del Mar,utility_direct,sdge,sdge,DEL MAR,,,2.1636833541305713,,,ok
+74,Del Mar,utility_direct,pge,pge,DEL MAR,,,0.010044003809472344,,,ok
+75,Descanso,utility_direct,sdge,sdge,DESCANSO,,,2.892592104155466,,,ok
+76,Division,coord_spatial,,sdge,,1064,0.0,,,,ok
+77,Dunhill,coord_spatial,,sdge,,1065,0.0,,,,ok
+78,Eastgate,utility_direct,sdge,sdge,EASTGATE,,,1.0021923921757656,,,ok
+79,El Cajon,utility_direct,sdge,sdge,EL CAJON,,,0.15935647828085203,,,ok
+80,Elliott,utility_direct,sdge,sdge,ELLIOTT,,,0.9160796213058048,,,ok
+81,Encinitas,utility_direct,sdge,sdge,ENCINITAS,,,2.08560304817722,,,ok
+82,Escondido,utility_direct,sdge,sdge,ESCONDIDO,,,2.453795668082766,,,ok
+83,Esco,utility_direct,sdge,sdge,ESCO,,,0.5778482807303776,,,ok
+84,Felicita,utility_direct,sdge,sdge,FELICITA,,,4.336258091921148,,,ok
+85,Friars,utility_direct,sdge,sdge,FRIARS,,,0.5964599344211784,,,ok
+86,Garfield,utility_direct,sdge,sdge,GARFIELD,,,0.7152094173223988,,,ok
+87,Genesee,utility_direct,sdge,sdge,GENESEE,,,1.022766464059735,,,ok
+88,Glencliff,utility_direct,sdge,sdge,GLENCLIFF,,,2.5964048357762595,,,ok
+89,Imperial Beach,utility_direct,sdge,sdge,IMPERIAL BEACH,,,0.40228381603225827,,,ok
+90,Jamacha,utility_direct,sdge,sdge,JAMACHA,,,9.401125019580666,,,ok
+91,Kearny,utility_dict,sdge,sdge,KEARNY WEST,,,0.4582212831419789,,,ok
+92,Kettner,utility_direct,sdge,sdge,KETTNER,,,0.5459328520302303,,,ok
+93,Kyocera,coord_spatial,,sdge,,1072,1.0063927701486906,,,,ok
+94,La Jolla,utility_direct,sdge,sdge,LA JOLLA,,,1.037760049649715,,,ok
+95,Las Pulgas,utility_direct,sdge,sdge,LAS PULGAS,,,3.4838657740462025,,,ok
+96,Las Pulgas,utility_direct,pge,pge,LAS PULGAS,,,0.03829848761905081,,,ok
+97,Lilac,utility_direct,sdge,sdge,LILAC,,,2.9440225896819543,,,ok
+98,Los Coches,utility_direct,sdge,sdge,LOS COCHES,,,1.753350196350302,,,ok
+99,Los Coches,utility_direct,pge,pge,LOS COCHES,,,0.037799875974352255,,,ok
+100,Loveland,coord_spatial,,sdge,,1544,0.0,,,,ok
+101,Margarita,utility_direct,sdge,sdge,MARGARITA,,,2.390217416739926,,,ok
+102,Melrose,utility_direct,sdge,sdge,MELROSE,,,1.5469545759171146,,,ok
+103,Mesa Rim,utility_direct,sdge,sdge,MESA RIM,,,0.42119669416833516,,,ok
+104,Mesa Heights,utility_direct,sdge,sdge,MESA HEIGHTS,,,0.3833303417839873,,,ok
+105,Miramar,coord_spatial,,sdge,,1088,0.0,,,,ok
+106,Mission,utility_direct,sdge,sdge,MISSION,,,1.0960863091517403,,,ok
+107,Mission,coord_spatial,,pge,,1130,2.2362647883562644e-12,733.693478960144,,,ok; name matched sdge/MISSION but 733.7 km away (> 25); placed by coordinates instead
+108,Monserate,utility_direct,sdge,sdge,MONSERATE,,,2.150673988451054,,,ok
+109,Montgomery,utility_direct,sdge,sdge,MONTGOMERY,,,1.207912963381686,,,ok
+110,Murray,utility_direct,sdge,sdge,MURRAY,,,0.677542976922257,,,ok
+111,National City,coord_spatial,,sdge,,1093,0.0,,,,ok
+112,Naval Station,coord_spatial,,sdge,,1880,0.0,,,,ok
+113,North City West,utility_direct,sdge,sdge,NORTH CITY WEST,,,1.916063550066224,,,ok
+114,OCEAN RANCH,utility_direct,sdge,sdge,OCEAN RANCH,,,0.0,,,ok
+115,Oceanside,utility_direct,sdge,sdge,OCEANSIDE,,,1.2838021341873136,,,ok
+116,Old Town,utility_direct,sdge,sdge,OLD TOWN,,,0.7645304928673423,,,ok
+117,Otay,utility_direct,sdge,sdge,OTAY,,,1.4877819027380985,,,ok
+118,Pacific Beach,utility_direct,sdge,sdge,PACIFIC BEACH,,,0.4544424030470873,,,ok
+119,Pala,utility_direct,sdge,sdge,PALA,,,1.8317741013601294,,,ok
+120,Palomar Airport,utility_direct,sdge,sdge,PALOMAR AIRPORT,,,1.3271675212523921,,,ok
+121,Paradise,utility_direct,sdge,sdge,PARADISE,,,0.9087591375234476,,,ok
+122,Paradise,utility_direct,pge,pge,PARADISE,,,0.04287093530380434,,,ok
+123,Pendleton,coord_spatial,,sdge,,1091,7.108831539225482,,,,ok
+124,Pico,utility_direct,sdge,sdge,PICO,,,1.951487427192118,,,ok
+125,Point Loma,utility_direct,sdge,sdge,POINT LOMA,,,0.5324326437083119,,,ok
+126,Pomerado,utility_direct,sdge,sdge,POMERADO,,,0.3069597987636557,,,ok
+127,Poway,utility_direct,sdge,sdge,POWAY,,,3.9850741775192033,,,ok
+128,Rincon,utility_direct,sdge,sdge,RINCON,,,5.075990435875064,,,ok
+129,Rincon,utility_direct,pge,pge,RINCON,,,0.014033244970399561,,,ok
+130,Rose Canyon,utility_direct,sdge,sdge,ROSE CANYON,,,0.8055735153026639,,,ok
+131,SALT CREEK,utility_direct,sdge,sdge,SALT CREEK,,,0.0,,,ok
+132,Sampson,utility_direct,sdge,sdge,SAMPSON,,,2.1190985534872895,,,ok
+133,San Luis Rey,utility_direct,sdge,sdge,SAN LUIS REY,,,1.955910984024516,,,ok
+134,San Mateo,utility_direct,sdge,sdge,SAN MATEO,,,4.977087017702988,,,ok
+135,San Mateo,utility_direct,pge,pge,SAN MATEO,,,0.189446925804216,,,ok
+136,San Marcos,utility_direct,sdge,sdge,SAN MARCOS,,,2.9225203753276383,,,ok
+137,Santee,utility_direct,sdge,sdge,SANTEE,,,0.5913441709463736,,,ok
+138,Santa Ysabel,utility_direct,sdge,sdge,SANTA YSABEL,,,9.692310711273572,,,ok
+139,San Ysidro,utility_direct,sdge,sdge,SAN YSIDRO,,,1.363769710247581,,,ok
+140,Scripps,utility_direct,sdge,sdge,SCRIPPS,,,1.0652585726684582,,,ok
+141,Shadowridge,utility_direct,sdge,sdge,SHADOWRIDGE,,,2.762163928772447,,,ok
+142,Spring Valley,utility_direct,sdge,sdge,SPRING VALLEY,,,0.45834909586837885,,,ok
+143,Streamview,utility_direct,sdge,sdge,STREAMVIEW,,,1.4985115195246799,,,ok
+144,Stuart,utility_direct,sdge,sdge,STUART,,,2.030883920170479,,,ok
+145,Sweetwater,utility_direct,sdge,sdge,SWEETWATER,,,0.738409494952381,,,ok
+146,Telegraph Canyon,utility_direct,sdge,sdge,TELEGRAPH CANYON,,,1.9078120667027316,,,ok
+147,Torrey Pines,utility_direct,sdge,sdge,TORREY PINES,,,1.3401907248065241,,,ok
+148,Trabuco,utility_direct,sdge,sdge,TRABUCO,,,1.0854570867628113,,,ok
+149,Grant Hill,utility_direct,sdge,sdge,GRANT HILL,,,0.7581552368284534,,,ok
+150,Urban,utility_direct,sdge,sdge,URBAN,,,0.7560228965385929,,,ok
+151,Valley Center,utility_direct,sdge,sdge,VALLEY CENTER,,,1.8323138961741219,,,ok
+152,Wabash,coord_spatial,,sdge,,1124,0.0,177.04296757493262,,,ok; name matched sce/Wabash but 177.0 km away (> 25); placed by coordinates instead
+153,WARNERS,utility_direct,sdge,sdge,WARNERS,,,0.0,,,ok
+154,Crestwood,utility_direct,sdge,sdge,CRESTWOOD,,,3.2389343418171492,,,ok
+155,Boulevard,utility_dict,sdge,sdge,BOULEVARD EAST,,,0.5741940520847355,,,ok
+156,Arco,coord_spatial,,sce,,2282,0.0,,,,ok
+157,Blythe,utility_dict,sce,sce,Blythe City,,,0.051719453075125967,,,ok
+158,Chino,utility_direct,sce,sce,Chino,,,0.09299140507113167,,,ok
+159,Del Amo,utility_direct,sce,sce,Del Amo,,,0.06113436011261361,,,ok
+160,El Nido,utility_direct,sce,sce,El Nido,,,0.079508356347692,,,ok
+161,El Nido,utility_direct,pge,pge,EL NIDO,,,0.034065667255434647,,,ok
+162,Etiwanda,utility_direct,sce,sce,Etiwanda,,,0.23397638120602945,,,ok
+163,Goleta,utility_direct,sce,sce,Goleta,,,0.6519089870531991,,,ok
+164,Hinson,coord_spatial,,sce,,419,1.0226553933675753,,,,ok
+165,Icegen,coord_spatial,,sce,,1700,0.0,,,,ok
+166,La Fresa,utility_direct,sce,sce,La Fresa,,,0.14780465281461927,,,ok
+167,Laguna Bell,utility_direct,sce,sce,Laguna Bell,,,0.029615848673166426,,,ok
+168,Moorpark,utility_direct,sce,sce,Moorpark,,,0.1619336486485487,,,ok
+169,Padua,utility_direct,sce,sce,Padua,,,0.06431701060164938,,,ok
+170,Procgen,coord_spatial,,sce,,1470,0.0,,,,ok
+171,Santiago,utility_direct,sce,sce,Santiago,,,0.04126677461531948,,,ok
+172,Saugus,utility_direct,sce,sce,Saugus,,,0.14805715560150098,,,ok
+173,Vestal,utility_direct,sce,sce,Vestal,,,0.403783949820631,,,ok
+174,Walnut,utility_direct,sce,sce,Walnut,,,0.018379649871244973,,,ok
+175,Valley,utility_direct,sce,sce,Valley,,,0.012594700810911371,,,ok
+176,Valley,coord_spatial,,other,,1941,0.0,120.52827748576982,,,ok; name matched sce/Valley but 120.5 km away (> 25); placed by coordinates instead
+177,Ellis,utility_direct,sce,sce,Ellis,,,0.033060898670978826,,,ok
+178,Chevmain,coord_spatial,,sce,,1699,0.0,,,,ok
+179,Barre,utility_direct,sce,sce,Barre,,,0.2112392205329698,,,ok
+180,Camino,utility_direct,sce,sce,Camino,,,0.13157516340960895,,,ok
+181,Center,utility_direct,sce,sce,Center,,,0.00961988201937818,,,ok
+182,Eagle Mt.,utility_dict,sce,sce,Eagle Mountain,,,0.0671121679972397,,,ok
+183,Eagle Rock,coord_spatial,,sce,,8580,0.005591494500148295,,,,ok
+184,Gould,utility_direct,sce,sce,Gould,,,0.21574965179034214,,,ok
+185,Johanna,utility_direct,sce,sce,Johanna,,,0.05460926383119979,,,ok
+186,Olinda,utility_direct,sce,sce,Olinda,,,0.26071069593538276,,,ok
+187,Rector,utility_direct,sce,sce,Rector,,,0.09844959596185916,,,ok
+188,Rio Hondo,utility_direct,sce,sce,Rio Hondo,,,0.31044425253372254,,,ok
+189,San Bernardino,utility_direct,sce,sce,San Bernardino,,,0.10090949480885417,,,ok
+190,Springville,coord_spatial,,sce,,1435,9.786114721475569,,,,ok
+191,Villa Park,utility_direct,sce,sce,Villa Park,,,0.16223321906296467,,,ok
+192,Big Creek 2,utility_direct,sce,sce,Big Creek 2,,,,,,ok
+193,Charmin,coord_spatial,,sce,,1470,0.10495098542133832,,,,ok
+194,Antelope,coord_spatial,,sce,,8341,0.0011354090521217522,188.18088048249146,,,ok; name matched pge/ANTELOPE but 188.2 km away (> 25); placed by coordinates instead
+195,Antelope,utility_direct,pge,pge,ANTELOPE,,,0.03347403160915933,,,ok
+196,Bailey,coord_spatial,,sce,,312,5.236446792354162,,,,ok
+197,Neenach,utility_direct,sce,sce,Neenach,,,0.014495606265300984,,,ok
+198,Westpac,coord_spatial,,sce,,312,0.0,,,,ok
+199,Huntington Beach,coord_spatial,,sce,,8344,0.004461646069302579,,,,ok
+200,Victor,utility_direct,sce,sce,Victor,,,0.16613648787169277,,,ok
+201,Cima,utility_direct,sce,sce,Cima,,,0.36466586908730475,,,ok
+202,Zack,utility_direct,sce,sce,Zack,,,0.276768670460145,,,ok
+203,Deep Springs,utility_direct,sce,sce,Deep Springs,,,0.19333693671708965,,,ok
+204,Control,coord_spatial,,sce,,212,2.033312763290615,,,,ok
+205,Oxbow,coord_spatial,,sce,,212,2.180640459657982,,,,ok
+206,Sherwin,utility_direct,sce,sce,Sherwin,,,0.22844770681927637,,,ok
+207,Searles,utility_direct,sce,sce,Searles,,,0.08759265791355243,,,ok
+208,Devers,utility_direct,sce,sce,Devers,,,0.3361872871744827,,,ok
+209,Mirage,coord_spatial,,sce,,771,1.9869953232255904,,,,ok
+210,Alberhill,coord_spatial,,sce,,1547,0.0,,,,ok
+211,Vista,coord_spatial,,sce,,8107,0.0014022342673685735,,,,ok
+212,Mountainview,coord_spatial,,sce,,8316,0.15744067102501677,,,,ok
+213,Goodrich,coord_spatial,,sce,,8793,0.0038174162547757024,,,,ok
+214,Viejo,utility_direct,sce,sce,Viejo,,,0.10673508833306407,,,ok
+215,El Casco,utility_direct,sce,sce,El Casco,,,0.07013810916282724,,,ok
+216,Castaic,coord_spatial,,ladwp,,415,11.352415696748066,,,,ok
+217,Harbor,coord_spatial,,ladwp,,346,0.049097174005767935,,,,ok
+218,Station L (Scattergood),coord_spatial,,ladwp,,390,1.27009213659914,,,,ok
+219,Station M (Valley),coord_spatial,,ladwp,,8019,0.0031984017905383926,,,,ok
+220,Halldale,coord_spatial,,ladwp,,8571,0.0037343427374527216,,,,ok
+221,Haynes,coord_spatial,,ladwp,,8208,0.004896694712644306,,,,ok
+222,Station A (St. John),coord_spatial,,ladwp,,8689,0.004862968817832608,,,,ok
+223,Station B (Century),coord_spatial,,ladwp,,7806,0.0037382178273862965,,,,ok
+224,Central F,coord_spatial,,other,,1336,1.6233386181925926,,,,ok
+225,Station C (Wilmington),coord_spatial,,ladwp,,8599,0.0006679369298299982,,,,ok
+226,Station D (Fairfax),coord_spatial,,ladwp,,8608,0.006115106025966013,,,,ok
+227,Station E (Toluca),coord_spatial,,ladwp,,7976,0.005786878950478028,,,,ok
+228,Station G (Atwater),coord_spatial,,ladwp,,8783,0.0016588941666307055,,,,ok
+229,Station K (Olympic),coord_spatial,,ladwp,,7691,0.0017012629847853581,,,,ok
+230,Station N (Airport),coord_spatial,,ladwp,,8117,0.0014295790512067763,,,,ok
+231,Station U (Tarzana),coord_spatial,,ladwp,,349,7.073230889886872e-13,,,,ok
+232,Rinaldi,coord_spatial,,ladwp,,8835,0.005233078056137665,,,,ok
+233,Lincoln,coord_spatial,,other,,350,0.0,585.3518662650183,,,ok; name matched pge/LINCOLN but 585.4 km away (> 25); placed by coordinates instead
+234,Lincoln,utility_direct,pge,pge,LINCOLN,,,0.014443668083212877,,,ok
+235,Lincoln,coord_spatial,,other,,1355,0.0,142.57317019523055,,,ok; name matched pge/LINCOLN but 142.6 km away (> 25); placed by coordinates instead
+236,Lake City,coord_spatial,,other,,622,9.120823934429373,,,,ok
+237,Acacia,coord_spatial,,other,,2082,1.4075681971521752,,,,ok
+238,Howard,utility_direct,sce,sce,Howard,,,0.0170668835703861,,,ok
+239,Scholl,coord_spatial,,other,,2082,2.7784411239486606,,,,ok
+240,Fremont,utility_direct,sce,sce,Fremont,,,0.017889512021289314,,,ok
+241,Fremont,utility_direct,pge,pge,FREMONT,,,0.050775356659181814,,,ok
+242,Glorietta,coord_spatial,,other,,445,2.439664466237059,,,,ok
+243,Tropico,coord_spatial,,other,,2082,1.61192993800953,,,,ok
+244,Montrose,coord_spatial,,other,,445,1.2415632402718881,,,,ok
+245,Indigo,coord_spatial,,sce,,796,1.3344853625986433,,,,ok
+246,Windhub,coord_spatial,,sce,,2205,6.454932349445415,,,,ok
+247,Logan Creek,utility_direct,pge,pge,LOGAN CREEK,,,0.039353642969313714,,,ok
+248,Delevan,coord_spatial,,unknown,,2106,18.727163832376334,,,,ok
+249,Fulton,utility_direct,pge,pge,FULTON,,,0.07893180330323438,,,ok
+250,Bahia,utility_direct,pge,pge,BAHIA,,,0.030658184622106212,,,ok
+251,Parkway,utility_direct,pge,pge,PARKWAY,,,0.03189937756040993,,,ok
+252,Peabody,utility_direct,pge,pge,PEABODY,,,0.08099773685622241,,,ok
+253,Weber,utility_direct,pge,pge,WEBER,,,0.03297158149743608,,,ok
+254,Cayetano,utility_direct,pge,pge,CAYETANO,,,0.04876478085794561,,,ok
+255,Tidewater,utility_direct,pge,pge,TIDEWATER,,,0.09957075298287534,,,ok
+256,Tesoro,coord_spatial,,other,,1915,1.6447596105522093,,,,ok
+257,North Dublin,utility_direct,pge,pge,NORTH DUBLIN,,,0.019934432412353455,,,ok
+258,Rossmoor,utility_direct,pge,pge,ROSSMOOR,,,0.05687049074349343,,,ok
+259,CASTRO,utility_direct,pge,pge,CASTRO,,,0.0,,,ok
+260,San Ramon,utility_direct,pge,pge,SAN RAMON,,,0.07404712655832754,,,ok
+261,Tassajara,utility_direct,pge,pge,TASSAJARA,,,0.034079745335726774,,,ok
+262,RESEARCH,utility_direct,pge,pge,RESEARCH,,,0.0,,,ok
+263,Brentwood,utility_direct,pge,pge,BRENTWOOD,,,0.054491539950173036,,,ok
+264,Lone Tree,utility_direct,pge,pge,LONE TREE,,,0.061273815655747604,,,ok
+265,Kelso,coord_spatial,,pge,,1615,1.5878486129841902,,,,ok
+266,Las Positas,utility_direct,pge,pge,LAS POSITAS,,,0.026517293618346843,,,ok
+267,Eight Mile,utility_direct,pge,pge,EIGHT MILE,,,0.056128123977956065,,,ok
+268,Newark Distribution,utility_dict,pge,pge,NEWARK 21KV,,,0.012924581977331321,,,ok
+269,Embarcadero,coord_spatial,,pge,,1128,0.0,,,,ok
+270,S.L.A.C,coord_spatial,,other,,7978,0.003663680816595286,,,,ok
+271,Saratoga,utility_direct,pge,pge,SARATOGA,,,0.03991888405158789,,,ok
+272,Hicks,utility_direct,pge,pge,HICKS,,,0.01536741974385595,,,ok
+273,Vasona,utility_direct,pge,pge,VASONA,,,0.008892182545622017,,,ok
+274,Panoche,utility_direct,pge,pge,PANOCHE,,,0.26969490566201304,,,ok
+275,Mc Mullin,utility_direct,pge,pge,MC MULLIN,,,0.02773116164513885,,,ok
+276,FIGARDEN,utility_direct,pge,pge,FIGARDEN,,,1.2649415259292941e-12,,,ok
+277,Ashlan Ave,utility_direct,pge,pge,ASHLAN AVE,,,0.05588477526407919,,,ok
+278,Templeton,utility_direct,pge,pge,TEMPLETON,,,0.011719039991153953,,,ok
+279,Diablo Canyon,coord_spatial,,pge,,1179,15.044532053502405,,,,ok
+280,Mesa,utility_direct,pge,pge,MESA,,,0.12065892095269543,,,ok
+281,Stockdale,utility_direct,pge,pge,STOCKDALE,,,0.07424212670622228,,,ok
+282,Bakersfield,utility_direct,pge,pge,BAKERSFIELD,,,0.1505489541693475,,,ok
+283,Summit,utility_direct,pge,pge,SUMMIT,,,0.034436368267916226,,,ok
+284,Low Gap,utility_direct,pge,pge,LOW GAP,,,0.06550287234931389,,,ok
+285,Forest Glen,coord_spatial,,other,,1407,24.414639087664032,,,,ok
+286,Orick,utility_direct,pge,pge,ORICK,,,0.023863961979930196,,,ok
+287,Big Lagoon,utility_direct,pge,pge,BIG LAGOON,,,0.06870042269804864,,,ok
+288,Trinidad,utility_direct,pge,pge,TRINIDAD,,,0.034332441458148726,,,ok
+289,Janes Creek,utility_direct,pge,pge,JANES CREEK,,,0.015351382507476077,,,ok
+290,Blue Lake,utility_direct,pge,pge,BLUE LAKE,,,0.04404066539459447,,,ok
+291,Simpson Paper (Humbolt),coord_spatial,,other,,1574,1.5452890267758619,,,,ok
+292,Arcata,utility_direct,pge,pge,ARCATA,,,0.028910194483661063,,,ok
+293,Fairhaven,utility_direct,pge,pge,FAIRHAVEN,,,0.012222944087447004,,,ok
+294,Harris,utility_direct,pge,pge,HARRIS,,,0.05176325621223517,,,ok
+295,EUREKA A,utility_direct,pge,pge,EUREKA A,,,1.1962948343307705e-12,,,ok
+296,Humboldt Bay,utility_dict,pge,pge,HUMBOLDT BAY PP,,,0.06569984675246734,,,ok
+297,Maple Creek,utility_direct,pge,pge,MAPLE CREEK,,,0.057813679530134554,,,ok
+298,Hyampom,coord_spatial,,other,,1408,0.0,,,,ok
+299,Willow Creek,utility_direct,pge,pge,WILLOW CREEK,,,0.016952682151298214,,,ok
+300,Hoopa,utility_direct,pge,pge,HOOPA,,,0.02786979371342512,,,ok
+301,Eel River,utility_direct,pge,pge,EEL RIVER,,,0.0230302155517507,,,ok
+302,Newburg,utility_direct,pge,pge,NEWBURG,,,0.02941468423086345,,,ok
+303,Carlotta,utility_direct,pge,pge,CARLOTTA,,,0.04571013710551597,,,ok
+304,Rio Dell,utility_direct,pge,pge,RIO DELL,,,0.007577348905635494,,,ok
+305,Bridgeville,utility_direct,pge,pge,BRIDGEVILLE,,,0.014168526490628504,,,ok
+306,Fruitland,utility_direct,pge,pge,FRUITLAND,,,0.09294599416064521,,,ok
+307,Fort Seward,utility_direct,pge,pge,FORT SEWARD,,,0.029038971205226666,,,ok
+308,Garberville,utility_direct,pge,pge,GARBERVILLE,,,0.05062301528903271,,,ok
+309,Calpella,utility_direct,pge,pge,CALPELLA,,,0.010901318218448091,,,ok
+310,Ukiah,utility_direct,pge,pge,UKIAH,,,0.020617426258179847,,,ok
+311,Cloverdale,utility_direct,pge,pge,CLOVERDALE,,,0.02548046805783139,,,ok
+312,Lucerne,utility_direct,pge,pge,LUCERNE,,,0.011149519868036858,,,ok
+313,Lucerne,unresolved,,pacificorp,,,,,,,"name used by more than one utility (pge/LUCERNE, sce/Lucerne); supply a 'utility' column, or coordinates within 25 km of one candidate"
+314,Redbud,utility_direct,pge,pge,REDBUD,,,0.027944218192877804,,,ok
+315,Highlands,utility_direct,pge,pge,HIGHLANDS,,,0.01748078538930544,,,ok
+316,Monroe,utility_direct,pge,pge,MONROE,,,0.007159010866018365,,,ok
+317,Santa Rosa A,utility_direct,pge,pge,SANTA ROSA A,,,0.01619878919805838,,,ok
+318,Stony Point,coord_spatial,,other,,1348,0.0,,,,ok
+319,Bellevue,utility_direct,pge,pge,BELLEVUE,,,0.03198258567083947,,,ok
+320,Penngrove,utility_direct,pge,pge,PENNGROVE,,,0.023569300429757137,,,ok
+321,Corona,utility_direct,pge,pge,CORONA,,,0.022208400069411882,,,ok
+322,Lakeville,utility_direct,pge,pge,LAKEVILLE,,,0.09711045320941462,,,ok
+323,Sonoma,utility_direct,pge,pge,SONOMA,,,0.004420923394439387,,,ok
+324,Mendocino,utility_direct,pge,pge,MENDOCINO,,,0.1077578707493546,,,ok
+325,Potter Valley,coord_spatial,,pge,,597,21.97510955722389,,,,ok
+326,WILLITS,utility_direct,pge,pge,WILLITS,,,0.0,,,ok
+327,Laytonville,utility_direct,pge,pge,LAYTONVILLE,,,0.04175754852673281,,,ok
+328,Covelo,utility_direct,pge,pge,COVELO,,,0.03176193746694332,,,ok
+329,Elk,utility_direct,pge,pge,ELK,,,0.02626785232955746,,,ok
+330,Point Arena,utility_direct,pge,pge,POINT ARENA,,,0.11026966404788639,,,ok
+331,Garcia,coord_spatial,,pge,,599,11.45924127422837,,,,ok
+332,Philo,utility_direct,pge,pge,PHILO,,,0.07683216039082406,,,ok
+333,Upper Lake,utility_direct,pge,pge,UPPER LAKE,,,0.051438338806711024,,,ok
+334,Hartley,utility_direct,pge,pge,HARTLEY,,,0.09199138771333618,,,ok
+335,Clear Lake,utility_direct,pge,pge,CLEAR LAKE,,,0.04752093243187931,,,ok
+336,Clear Lake,coord_spatial,,pacificorp,,620,0.0,329.6871045215585,,,ok; name matched pge/CLEAR LAKE but 329.7 km away (> 25); placed by coordinates instead
+337,Hopland,utility_direct,pge,pge,HOPLAND,,,0.010494701218074281,,,ok
+338,Konocti,utility_direct,pge,pge,KONOCTI,,,0.030218736343338753,,,ok
+339,Middletown,utility_direct,pge,pge,MIDDLETOWN,,,0.06822432844758564,,,ok
+340,Gualala,utility_direct,pge,pge,GUALALA,,,0.04827373242993253,,,ok
+341,Annapolis,utility_direct,pge,pge,ANNAPOLIS,,,0.11200281053803404,,,ok
+342,Fort Ross,utility_direct,pge,pge,FORT ROSS,,,0.05809367373474261,,,ok
+343,Salmon Creek,utility_direct,pge,pge,SALMON CREEK,,,0.008666202385140124,,,ok
+344,Monte Rio,utility_direct,pge,pge,MONTE RIO,,,0.06554492258447316,,,ok
+345,Wohler,coord_spatial,,pge,,8014,10.571326846519401,,,,ok
+346,Mirabel,utility_direct,pge,pge,MIRABEL,,,0.013622037125429988,,,ok
+347,Molino,utility_direct,pge,pge,MOLINO,,,0.06686541325252865,,,ok
+348,Geyserville,utility_direct,pge,pge,GEYSERVILLE,,,0.029833064336465962,,,ok
+349,WINDSOR,utility_direct,pge,pge,WINDSOR,,,0.0,,,ok
+350,Fitch Mt.,utility_dict,pge,pge,FITCH MOUNTAIN,,,0.03354915580013993,,,ok
+351,Cotati,utility_direct,pge,pge,COTATI,,,0.028982864464173808,,,ok
+352,Petaluma Station C,utility_dict,pge,pge,PETALUMA C,,,0.045875649346865804,,,ok
+353,Petaluma Station A,utility_dict,pge,pge,PETALUMA A,,,0.03829209185137552,,,ok
+354,Dunbar,utility_direct,pge,pge,DUNBAR,,,0.039424276789695574,,,ok
+355,Santa Fe Energy,coord_spatial,,other,,1938,1.8498878030281902,,,,ok
+356,Geysers Tap 7,coord_spatial,,unknown,,1760,1.5963926436635212,,,,ok
+357,Geysers Tap 1,coord_spatial,,unknown,,1913,3.9005800806139703,,,,ok
+358,Wildwood,coord_spatial,,pge,,1411,0.0,,,,ok
+359,Panorama,utility_direct,pge,pge,PANORAMA,,,0.039273224587510855,,,ok
+360,Oregon Trail,utility_direct,pge,pge,OREGON TRAIL,,,0.009316497297792457,,,ok
+361,Jessup,utility_direct,pge,pge,JESSUP,,,0.009817942130090814,,,ok
+362,Kanaka,utility_direct,pge,pge,KANAKA,,,0.018466607013796314,,,ok
+363,Wyandotte,utility_direct,pge,pge,WYANDOTTE,,,0.006501644965716702,,,ok
+364,Honcut,utility_direct,pge,pge,HONCUT,,,0.017374894028006786,,,ok
+365,Nord,utility_direct,pge,pge,NORD,,,0.004840849343854803,,,ok
+366,Sycamore Creek,utility_direct,pge,pge,SYCAMORE CREEK,,,0.06930859589516855,,,ok
+367,Notre Dame,utility_direct,pge,pge,NOTRE DAME,,,0.014279959361663942,,,ok
+368,Butte,utility_direct,pge,pge,BUTTE,,,0.02291346402789317,,,ok
+369,Chico B,utility_direct,pge,pge,CHICO B,,,0.03168779407675967,,,ok
+370,Cottonwood,utility_direct,pge,pge,COTTONWOOD,,,0.2658968258963287,,,ok
+371,Mc Arthur,utility_direct,pge,pge,MC ARTHUR,,,0.020011863129698694,,,ok
+372,Trinity Hydro,coord_spatial,,other,,2255,17.328819138608345,,,,ok
+373,Big Bar,coord_spatial,,other,,1407,21.402990962428788,,,,ok
+374,Grouse Creek,coord_spatial,,other,,1408,9.044016398002483,,,,ok
+375,French Gulch,utility_direct,pge,pge,FRENCH GULCH,,,0.05685340806745907,,,ok
+376,Keswick,coord_spatial,,pge,,1737,6.013823037484571,,,,ok
+377,Girvan,utility_direct,pge,pge,GIRVAN,,,0.019509273618275858,,,ok
+378,Anderson,utility_direct,pge,pge,ANDERSON,,,0.04279943168350469,,,ok
+379,Stillwater,utility_direct,pge,pge,STILLWATER,,,0.018667667034383488,,,ok
+380,Antler,utility_direct,pge,pge,ANTLER,,,0.051521279097934636,,,ok
+381,Whitmore,utility_direct,pge,pge,WHITMORE,,,0.062253790163776086,,,ok
+382,Cedar Creek,utility_direct,pge,pge,CEDAR CREEK,,,0.05420006451515992,,,ok
+383,Deschutes,utility_direct,pge,pge,DESCHUTES,,,0.012376025661587728,,,ok
+384,VOLTA,utility_direct,pge,pge,VOLTA,,,0.0,,,ok
+385,Red Bluff,utility_direct,pge,pge,RED BLUFF,,,0.011493298118924569,,,ok
+386,Tyler,utility_direct,pge,pge,TYLER,,,0.037766745477156895,,,ok
+387,Dairyville,utility_direct,pge,pge,DAIRYVILLE,,,0.010237403909926484,,,ok
+388,Fibreboard Standard Spi,coord_spatial,,other,,1511,6.251804055833471,,,,ok
+389,Gerber,utility_direct,pge,pge,GERBER,,,0.024786859773841863,,,ok
+390,Vina,utility_direct,pge,pge,VINA,,,0.035061815674305385,,,ok
+391,Corning,utility_direct,pge,pge,CORNING,,,0.025854722460020418,,,ok
+392,Pit 1,utility_dict,pge,pge,PIT NO 1,,,0.0635076869286142,,,ok
+393,Hat Creek 2,coord_spatial,,pge,,1726,5.400421184082521,,,,ok
+394,Burney,utility_direct,pge,pge,BURNEY,,,0.042967542363119234,,,ok
+395,Tres Vias,utility_direct,pge,pge,TRES VIAS,,,0.04538925076091009,,,ok
+396,Peachton,utility_direct,pge,pge,PEACHTON,,,0.060966143746858784,,,ok
+397,Oroville,utility_direct,pge,pge,OROVILLE,,,0.023591331853387146,,,ok
+398,Louisiana Pacific Corp.,coord_spatial,,other,,2301,0.0,,,,ok
+399,Bangor,utility_direct,pge,pge,BANGOR,,,0.03652660213697407,,,ok
+400,Dobbins,utility_direct,pge,pge,DOBBINS,,,0.04751083251883276,,,ok
+401,Challenge,utility_direct,pge,pge,CHALLENGE,,,0.04386368426398346,,,ok
+402,Chester,utility_direct,pge,pge,CHESTER,,,0.04944519620028288,,,ok
+403,Hamilton Branch,utility_direct,pge,pge,HAMILTON BRANCH,,,0.0074405603969655565,,,ok
+404,Big Meadows,utility_direct,pge,pge,BIG MEADOWS,,,0.1198203212905684,,,ok
+405,Grays Flat,utility_direct,pge,pge,GRAYS FLAT,,,0.14884532917025062,,,ok
+406,Gansner,utility_direct,pge,pge,GANSNER,,,0.050727640299536185,,,ok
+407,Spanish Creek,coord_spatial,,pge,,769,0.0,,,,ok
+408,East Quincy,utility_direct,pge,pge,EAST QUINCY,,,0.03567362769034739,,,ok
+409,De Sabla,coord_spatial,,unknown,,52,19.930088892780823,,,,ok
+410,Clark Road,utility_direct,pge,pge,CLARK ROAD,,,0.03403709224724352,,,ok
+411,Chico A,utility_direct,pge,pge,CHICO A,,,0.015336646064238256,,,ok
+412,Esquon,utility_direct,pge,pge,ESQUON,,,0.009278795218821233,,,ok
+413,Glenn,utility_direct,pge,pge,GLENN,,,0.06601123198138122,,,ok
+414,Orland B,utility_direct,pge,pge,ORLAND B,,,0.007130153007983088,,,ok
+415,Elk Creek,utility_direct,pge,pge,ELK CREEK,,,0.06578704854691718,,,ok
+416,Willows A,utility_direct,pge,pge,WILLOWS A,,,0.022501701969925132,,,ok
+417,Capay,utility_direct,pge,pge,CAPAY,,,0.06712110451310403,,,ok
+418,Hamilton A,utility_direct,pge,pge,HAMILTON A,,,0.018948212395936376,,,ok
+419,Anita,utility_direct,pge,pge,ANITA,,,0.0262933577010476,,,ok
+420,Jacinto,utility_direct,pge,pge,JACINTO,,,0.017547317517849735,,,ok
+421,Pit 7,coord_spatial,,pge,,1273,30.268083707010856,,,,ok
+422,Burney Forest Power,coord_spatial,,other,,1273,7.1700906560483775,,,,ok
+423,Pit 3,utility_dict,pge,pge,PIT NO 3,,,0.04706305934068143,,,ok
+424,Pit 5,utility_dict,pge,pge,PIT NO 5,,,0.023660502649787734,,,ok
+425,Bucks Creek,utility_direct,pge,unknown,BUCKS CREEK,,,9.087234574832811,,,ok
+426,Collins Pine Co.,coord_spatial,,other,,1573,19.242607523198206,,,,ok
+427,Putah Creek,utility_direct,pge,pge,PUTAH CREEK,,,0.059317358164571655,,,ok
+428,Amerigas,coord_spatial,,pge,,1320,0.0,,,,ok
+429,Cordelia,utility_direct,pge,pge,CORDELIA,,,0.05760991351043183,,,ok
+430,Knights Landing,utility_direct,pge,pge,KNIGHTS LANDING,,,0.11832215340261576,,,ok
+431,Woodland,utility_direct,pge,pge,WOODLAND,,,0.07819334233399863,,,ok
+432,Zamora,utility_direct,pge,pge,ZAMORA,,,0.11137248704415764,,,ok
+433,Madison,utility_direct,pge,pge,MADISON,,,0.10934597872858433,,,ok
+434,West Sacramento,utility_direct,pge,pge,WEST SACRAMENTO,,,0.03216352591570534,,,ok
+435,Deepwater,utility_direct,pge,pge,DEEPWATER,,,0.024811863676115743,,,ok
+436,Barker Slough Pumping Station,coord_spatial,,pge,,1328,4.786928173494752,,,,ok
+437,Davis,utility_direct,pge,pge,DAVIS,,,0.04620988590240435,,,ok
+438,Grand Island,utility_direct,pge,pge,GRAND ISLAND,,,0.024448130359335872,,,ok
+439,VACA DIXON,utility_direct,pge,pge,VACA DIXON,,,0.0,,,ok
+440,Vacaville,utility_direct,pge,pge,VACAVILLE,,,0.012866311195822945,,,ok
+441,Suisun,utility_direct,pge,pge,SUISUN,,,0.06785079805562487,,,ok
+442,Jameson,utility_direct,pge,pge,JAMESON,,,0.011129540514477187,,,ok
+443,Hale,coord_spatial,,other,,1330,0.0,,,,ok
+444,Rice,utility_direct,pge,pge,RICE,,,0.07460473312521683,,,ok
+445,Maxwell,utility_direct,pge,pge,MAXWELL,,,0.035344381419491776,,,ok
+446,Arbuckle,utility_direct,pge,pge,ARBUCKLE,,,0.03468543844947558,,,ok
+447,Williams,utility_direct,pge,pge,WILLIAMS,,,0.0034542899538306526,,,ok
+448,Dunnigan,utility_direct,pge,pge,DUNNIGAN,,,0.05528539037323912,,,ok
+449,Colusa,utility_direct,pge,pge,COLUSA,,,0.04682739168032046,,,ok
+450,Meridian,utility_direct,pge,pge,MERIDIAN,,,0.05131861244934229,,,ok
+451,Wilkins Slough,utility_direct,pge,pge,WILKINS SLOUGH,,,0.07349634393593261,,,ok
+452,Winters,utility_direct,pge,pge,WINTERS,,,0.11608661403236709,,,ok
+453,Plainfield,utility_direct,pge,pge,PLAINFIELD,,,0.13468549137712005,,,ok
+454,Travis AB,coord_spatial,,unknown,,1325,0.0047757030584510704,,,,ok
+455,Travis Air Force Base,coord_spatial,,other,,1325,0.0,,,,ok
+456,Dixon,utility_direct,pge,pge,DIXON,,,0.008334512707340615,,,ok
+457,Dixon Canning,coord_spatial,,other,,1329,4.304036640455335,,,,ok
+458,Maine Prairie,coord_spatial,,pge,,1331,0.0,,,,ok
+459,UC Davis,coord_spatial,,pge,,1776,0.0,,,,ok
+460,Goose Haven,coord_spatial,,pge,,1325,9.2547667132566,,,,ok
+461,Wolfskill,coord_spatial,,unknown,,1330,2.0854390595364616,,,,ok
+462,Pease,utility_direct,pge,pge,PEASE,,,0.01796860833594832,,,ok
+463,East Marysville,utility_direct,pge,pge,EAST MARYSVILLE,,,0.01328344837408073,,,ok
+464,Olivehurst,utility_direct,pge,pge,OLIVEHURST,,,0.021283904889330112,,,ok
+465,Bogue,utility_direct,pge,pge,BOGUE,,,0.06081808016998619,,,ok
+466,East Nicolaus,utility_direct,pge,pge,EAST NICOLAUS,,,0.03636594880488068,,,ok
+467,Brunswick,utility_direct,pge,pge,BRUNSWICK,,,0.023318208271247913,,,ok
+468,Placer,utility_direct,pge,pge,PLACER,,,0.029627837848511047,,,ok
+469,Horseshoe,utility_direct,pge,pge,HORSESHOE,,,0.025971438828178605,,,ok
+470,Higgins,utility_direct,pge,pge,HIGGINS,,,0.021165389077612756,,,ok
+471,Bell,utility_direct,pge,pge,BELL,,,0.02293641850322528,,,ok
+472,Rocklin,utility_direct,pge,pge,ROCKLIN,,,0.014170879331134709,,,ok
+473,EL DORADO PH,utility_direct,pge,pge,EL DORADO PH,,,1.4202631792643102e-12,,,ok
+474,Apple Hill,utility_direct,pge,pge,APPLE HILL,,,0.037102882800057524,,,ok
+475,Diamond Springs,utility_direct,pge,pge,DIAMOND SPRINGS,,,0.014765216214425768,,,ok
+476,Clarksville,utility_direct,pge,pge,CLARKSVILLE,,,0.038578731551812344,,,ok
+477,Taylor ,coord_spatial,,other,,757,0.0,,,,ok
+478,Penryn,utility_direct,pge,pge,PENRYN,,,0.04122278553501498,,,ok
+479,Catlett,utility_direct,pge,pge,CATLETT,,,0.009338448127746644,,,ok
+480,Narrows,utility_direct,pge,pge,NARROWS,,,0.04469719896837611,,,ok
+481,Yuba Gold Fields,coord_spatial,,pge,,2108,2.5390735443724655,,,,ok
+482,SMARTVILLE,utility_direct,pge,pge,SMARTVILLE,,,0.0,,,ok
+483,Browns  Valley,utility_direct,pge,pge,BROWNS VALLEY,,,0.060503020923319,,,ok
+484,Marysville,utility_direct,pge,pge,MARYSVILLE,,,0.012282922607189838,,,ok
+485,Encinal,coord_spatial,,pge,,1492,0.0,,,,ok
+486,Harter,utility_direct,pge,pge,HARTER,,,0.028694093283509057,,,ok
+487,Live Oak,utility_direct,pge,pge,LIVE OAK,,,0.016310828703082106,,,ok
+488,Barry,utility_direct,pge,pge,BARRY,,,0.010781974331671494,,,ok
+489,Tudor,utility_direct,pge,pge,TUDOR,,,0.022624088948912636,,,ok
+490,Plumas,utility_direct,pge,pge,PLUMAS,,,0.035679291017628546,,,ok
+491,Beale Afb 1,coord_spatial,,other,,664,12.711616095548827,,,,ok
+492,Beale Afb 2,coord_spatial,,other,,664,10.920179790876254,,,,ok
+493,Wheatland,utility_direct,pge,pge,WHEATLAND,,,0.02335845928247582,,,ok
+494,Columbia Hill,utility_direct,pge,pge,COLUMBIA HILL,,,0.031728483164206144,,,ok
+495,Pike City,utility_direct,pge,pge,PIKE CITY,,,0.0179976958827129,,,ok
+496,Alleghany,utility_direct,pge,pge,ALLEGHANY,,,0.04612831881005195,,,ok
+497,Tamarack,utility_direct,pge,pge,TAMARACK,,,0.06274708810880081,,,ok
+498,Cape Horn,coord_spatial,,other,,755,0.9622570731774319,,,,ok
+499,SPAULDING,utility_direct,pge,pge,SPAULDING,,,0.0,,,ok
+500,Drum 1,utility_dict,pge,pge,DRUM,,,0.03355153363162413,,,ok
+501,Bonnie Nook,utility_direct,pge,pge,BONNIE NOOK,,,0.03435913383059274,,,ok
+502,Shady Glen,utility_direct,pge,pge,SHADY GLEN,,,0.07598383525013108,,,ok
+503,Foresthill,utility_direct,pge,pge,FORESTHILL,,,0.10908306333706788,,,ok
+504,Halsey,utility_direct,pge,pge,HALSEY,,,0.056357338005603066,,,ok
+505,Auburn,utility_direct,pge,pge,AUBURN,,,0.02095281709451037,,,ok
+506,Limestone,coord_spatial,,pge,,101,0.0,628.0540274751185,,,ok; name matched sce/Limestone but 628.1 km away (> 25); placed by coordinates instead
+507,Pleasant Grove,utility_direct,pge,pge,PLEASANT GROVE,,,0.022810979396307152,,,ok
+508,Mt. Quarries,utility_dict,pge,pge,MOUNTAIN QUARRIES,,,0.036317837511077374,,,ok
+509,Greenleaf Unit Ii,coord_spatial,,other,,1753,0.0,,,,ok
+510,Yuba City Station A,coord_spatial,,pge,,1753,0.2939575271894362,,,,ok
+511,Silverado,utility_direct,pge,pge,SILVERADO,,,0.022841720689618667,,,ok
+512,Monticello,utility_direct,pge,pge,MONTICELLO,,,0.06991774083825276,,,ok
+513,Pueblo,utility_direct,pge,pge,PUEBLO,,,0.03306393957192302,,,ok
+514,Ignacio,utility_direct,pge,pge,IGNACIO,,,0.16043066982888582,,,ok
+515,LAS GALLINAS A,utility_direct,pge,pge,LAS GALLINAS A,,,0.0,,,ok
+516,San Rafael,utility_direct,pge,pge,SAN RAFAEL,,,0.04261811085947467,,,ok
+517,Highway,utility_direct,pge,pge,HIGHWAY,,,0.036790496798155596,,,ok
+518,North Tower,utility_direct,pge,pge,NORTH TOWER,,,0.0651776800480924,,,ok
+519,Carquinez,utility_direct,pge,pge,CARQUINEZ,,,0.013120870633890124,,,ok
+520,Calistoga,utility_direct,pge,pge,CALISTOGA,,,0.06212490951339311,,,ok
+521,Tulucay,utility_direct,pge,pge,TULUCAY,,,0.05400722013615928,,,ok
+522,Napa,utility_direct,pge,pge,NAPA,,,0.04516558976051402,,,ok
+523,Basalt,utility_direct,pge,pge,BASALT,,,0.016846028631102506,,,ok
+524,Novato,utility_direct,pge,pge,NOVATO,,,0.03036307794545815,,,ok
+525,Stafford,utility_direct,pge,pge,STAFFORD,,,0.01449432605499508,,,ok
+526,Bolinas,utility_direct,pge,pge,BOLINAS,,,0.05416850038945906,,,ok
+527,Olema,utility_direct,pge,pge,OLEMA,,,0.009360397510955108,,,ok
+528,Woodacre,utility_direct,pge,pge,WOODACRE,,,0.056922670541225594,,,ok
+529,Greenbrae,utility_direct,pge,pge,GREENBRAE,,,0.02186259360434209,,,ok
+530,Alto,utility_direct,pge,pge,ALTO,,,0.00783197111313026,,,ok
+531,Sausalito,utility_direct,pge,pge,SAUSALITO,,,0.027547645335804873,,,ok
+532,Hillside,coord_spatial,,other,,2134,0.0,,,,ok
+533,San Pablo,utility_direct,pge,pge,SAN PABLO,,,0.07383569001174842,,,ok
+534,Point Pinole,utility_direct,pge,pge,POINT PINOLE,,,0.017532199649562877,,,ok
+535,Standard Oil 1,coord_spatial,,other,,1598,0.45527069038384743,,,,ok
+536,Valley View,utility_direct,pge,pge,VALLEY VIEW,,,0.04678208546418358,,,ok
+537,EL CERRITO G,utility_direct,pge,pge,EL CERRITO G,,,0.0,,,ok
+538,Richmond,coord_spatial,,other,,336,0.7908441581820946,,,,ok
+539,Grizzly,utility_dict,pge,pge,BUCKS CREEK,,,0.09521931409273166,,,ok
+540,Claremont,coord_spatial,,pge,,8007,0.0028080151188683024,,,,ok
+541,Oakland D,utility_direct,pge,pge,OAKLAND D,,,0.17829613034867584,,,ok
+542,Oakland C,utility_direct,pge,pge,OAKLAND C,,,0.09650096137894673,,,ok
+543,Oakland L,utility_direct,pge,pge,OAKLAND L,,,0.016043614482978967,,,ok
+544,Oakland X,utility_direct,pge,pge,OAKLAND X,,,0.019067181551292604,,,ok
+545,Oakland J,utility_direct,pge,pge,OAKLAND J,,,0.04277205055482419,,,ok
+546,Schnitzer Steel,coord_spatial,,other,,2141,0.0,,,,ok
+547,Edes,utility_direct,pge,pge,EDES,,,0.03810823096352384,,,ok
+548,Port Costa Brick,coord_spatial,,other,,94,0.0,,,,ok
+549,Franklin,utility_direct,pge,pge,FRANKLIN,,,0.03226179195233306,,,ok
+550,Franklin,coord_spatial,,smud,,884,2.217926486778013e-12,81.79178479692378,,,ok; name matched pge/FRANKLIN but 81.8 km away (> 25); placed by coordinates instead
+551,Unocal,coord_spatial,,pge,,1332,3.6183337610340702,,,,ok
+552,Union Chemical,coord_spatial,,other,,88,2.6463966666024152,,,,ok
+553,Kirker,utility_direct,pge,pge,KIRKER,,,0.02315892278382251,,,ok
+554,Clayton,utility_direct,pge,pge,CLAYTON,,,0.025158501493261168,,,ok
+555,Meadow Lane,utility_direct,pge,pge,MEADOW LANE,,,0.02770623774303264,,,ok
+556,Lakewood,utility_direct,pge,pge,LAKEWOOD,,,0.04700281882161731,,,ok
+557,Martinez,coord_spatial,,pge,,75,0.0913613503475781,,,,ok
+558,Bollman,coord_spatial,,other,,80,0.0,,,,ok
+559,Domtar 2,coord_spatial,,other,,2154,0.0,,,,ok
+560,Sobrante,utility_direct,pge,pge,SOBRANTE,,,0.012441328070411335,,,ok
+561,East Portal,coord_spatial,,pge,,86,0.0,,,,ok
+562,Moraga,utility_direct,pge,pge,MORAGA,,,0.12368655805257678,,,ok
+563,Du Pont,coord_spatial,,other,,87,2.2633707390826574,,,,ok
+564,Briones,coord_spatial,,other,,81,0.0,,,,ok
+565,Balfour,utility_direct,pge,pge,BALFOUR,,,0.04502895977803775,,,ok
+566,Antioch,coord_spatial,,pge,,84,0.0,,,,ok
+567,Pittsburg,utility_direct,pge,pge,PITTSBURG,,,2.505771668757148,,,ok
+568,Shell Chemical,coord_spatial,,pge,,1322,0.0,,,,ok
+569,Willow Pass,utility_direct,pge,pge,WILLOW PASS,,,0.03298345236651912,,,ok
+570,SFPP LP,coord_spatial,,other,,1915,0.0,,,,ok
+571,Urich,coord_spatial,,pge,,96,0.0,,,,ok
+572,Stauffer,coord_spatial,,pge,,96,1.525242098568049,,,,ok
+573,Shell Oil 1,coord_spatial,,other,,75,7.073230889886872e-13,,,,ok
+574,Tosco Byron Pumping,coord_spatial,,other,,2161,0.0,,,,ok
+575,Windmaster,coord_spatial,,other,,174,0.0,,,,ok
+576,Potrero,coord_spatial,,other,,1503,0.0,511.81249597279424,,,ok; name matched sce/Potrero but 511.8 km away (> 25); placed by coordinates instead
+577,SF P (HUNTERS POINT),utility_direct,pge,pge,SF P (HUNTERS POINT),,,0.0,,,ok
+578,Bayshore ,coord_spatial,,pge,,1799,0.0,,,,ok
+579,Martin,utility_dict,pge,pge,SF H (MARTIN),,,0.0799184548704701,,,ok
+580,Larkin,coord_spatial,,pge,,1129,0.0,,,,ok
+581,Daly City,utility_direct,pge,pge,DALY CITY,,,0.045285527813926585,,,ok
+582,Serramonte,utility_direct,pge,pge,SERRAMONTE,,,0.017053796758385104,,,ok
+583,East Grand,utility_direct,pge,pge,EAST GRAND,,,0.09298011969845471,,,ok
+584,Shaw Road,coord_spatial,,other,,1189,1.022908551073806,,,,ok
+585,Millbrae,utility_direct,pge,pge,MILLBRAE,,,0.058053885679006906,,,ok
+586,Bay Meadows,utility_direct,pge,pge,BAY MEADOWS,,,0.03758923662594617,,,ok
+587,Belmont,utility_direct,pge,pge,BELMONT,,,0.05894434052396322,,,ok
+588,Belmont,unresolved,,pacificorp,,,,,,,"name used by more than one utility (pge/BELMONT, sce/Belmont); supply a 'utility' column, or coordinates within 25 km of one candidate"
+589,Bair,coord_spatial,,pge,,8591,0.8147421241092473,,,,ok
+590,Shredder,coord_spatial,,pge,,1207,0.0,,,,ok
+591,Sneath Lane,utility_direct,pge,pge,SNEATH LANE,,,0.007120756061069793,,,ok
+592,San Bruno Tap,coord_spatial,,unknown,,1208,0.9298033754855108,,,,ok
+593,Pacifica,utility_direct,pge,pge,PACIFICA,,,0.035711286326506296,,,ok
+594,Burlingame,utility_direct,pge,pge,BURLINGAME,,,0.0493223759603432,,,ok
+595,Beresford,utility_direct,pge,pge,BERESFORD,,,0.04010113914140208,,,ok
+596,Carolands,utility_direct,pge,pge,CAROLANDS,,,0.03040581395198076,,,ok
+597,Hillsdale,utility_direct,pge,pge,HILLSDALE,,,0.045027823030340794,,,ok
+598,Ralston,utility_direct,pge,pge,RALSTON,,,0.032493197629362446,,,ok
+599,Oracle,coord_spatial,,other,,8587,3.2758835629339225,,,,ok
+600,San Carlos,utility_direct,pge,pge,SAN CARLOS,,,0.08258168126661598,,,ok
+601,HALF MOON BAY,utility_direct,pge,pge,HALF MOON BAY,,,0.0,,,ok
+602,Redwood City,utility_direct,pge,pge,REDWOOD CITY,,,0.04152666363166141,,,ok
+603,Belle Haven,coord_spatial,,pge,,1191,8.824327552309344e-06,,,,ok
+604,Emerald Lake,utility_direct,pge,pge,EMERALD LAKE,,,0.02103405523536192,,,ok
+605,Watershed,utility_direct,pge,pge,WATERSHED,,,0.1048292161473367,,,ok
+606,Glenwood,utility_direct,pge,pge,GLENWOOD,,,0.0396599254387517,,,ok
+607,Menlo,utility_direct,pge,pge,MENLO,,,0.05301980162547958,,,ok
+608,Stanford,coord_spatial,,other,,1188,0.0,,,,ok
+609,Woodside,utility_direct,pge,pge,WOODSIDE,,,0.016882348421696922,,,ok
+610,Sri,coord_spatial,,pge,,1807,0.0,,,,ok
+611,Frogtown,utility_direct,pge,pge,FROGTOWN,,,0.019274142862710824,,,ok
+612,Stanislaus,utility_direct,pge,pge,STANISLAUS,,,0.24416902659251993,,,ok
+613,Avena,utility_direct,pge,pge,AVENA,,,0.05423789616333517,,,ok
+614,Manteca,utility_direct,pge,pge,MANTECA,,,0.05349680419866489,,,ok
+615,Vierra,utility_direct,pge,pge,VIERRA,,,0.039736570570437446,,,ok
+616,Ripon,utility_direct,pge,pge,RIPON,,,0.023154396915773163,,,ok
+617,Lammers,utility_direct,pge,pge,LAMMERS,,,0.10935999248052368,,,ok
+618,AEC 300,coord_spatial,,other,,1131,0.0,,,,ok
+619,Tracy,utility_direct,pge,pge,TRACY,,,0.07996718825289476,,,ok
+620,Stockton A Tap,coord_spatial,,unknown,,1165,3.3519593813389714,,,,ok
+621,Lockeford,utility_direct,pge,pge,LOCKEFORD,,,0.06621608191567727,,,ok
+622,West Point,utility_direct,pge,pge,WEST POINT,,,0.08226478648767846,,,ok
+623,ELECTRA,utility_direct,pge,pge,ELECTRA,,,1.2395511416344496e-12,,,ok
+624,Pine Grove,utility_direct,pge,pge,PINE GROVE,,,0.04312077223080053,,,ok
+625,Martell,utility_direct,pge,pge,MARTELL,,,0.0389793695548571,,,ok
+626,Oleta,utility_direct,pge,pge,OLETA,,,0.013187573754183439,,,ok
+627,Clay,utility_direct,pge,pge,CLAY,,,0.006451273038410887,,,ok
+628,Corral,utility_direct,pge,pge,CORRAL,,,0.07786903988388615,,,ok
+629,Linden,utility_direct,pge,pge,LINDEN,,,0.032257600775498586,,,ok
+630,Mormon,utility_direct,pge,pge,MORMON,,,0.07634632598891218,,,ok
+631,Dana,coord_spatial,,other,,2297,0.0,,,,ok
+632,Cargill,coord_spatial,,other,,1165,0.0,,,,ok
+633,Jm Manufacturing,coord_spatial,,other,,1790,0.8853679536778535,,,,ok
+634,Cherokee,utility_direct,pge,pge,CHEROKEE,,,0.028710092761739137,,,ok
+635,Waterloo,utility_direct,pge,pge,WATERLOO,,,0.051697652228674076,,,ok
+636,STOCKTON A,utility_direct,pge,pge,STOCKTON A,,,0.0,,,ok
+637,Cal-Cedar,coord_spatial,,other,,2168,0.8417539257171995,,,,ok
+638,East Stockton,utility_direct,pge,pge,EAST STOCKTON,,,0.06498276542466737,,,ok
+639,Monarch,utility_direct,pge,pge,MONARCH,,,0.024179464328125448,,,ok
+640,Oak Park,coord_spatial,,pge,,1161,0.0,478.5993730275234,,,ok; name matched sce/Oak Park but 478.6 km away (> 25); placed by coordinates instead
+641,Harding,utility_direct,pge,pge,HARDING,,,0.027457399740847894,,,ok
+642,Stockton Acres,utility_direct,pge,pge,STOCKTON ACRES,,,0.034405386147299113,,,ok
+643,Stockton Wastewater,coord_spatial,,other,,1151,0.11798859016260081,,,,ok
+644,Rough & Ready,utility_dict,pge,pge,ROUGH AND READY ISLA,,,0.022179967720462733,,,ok
+645,Port Of Stockton,coord_spatial,,other,,2320,0.0,,,,ok
+646,Channel,utility_direct,pge,pge,CHANNEL,,,0.019911133996188195,,,ok
+647,French Camp,utility_direct,pge,pge,FRENCH CAMP,,,0.02182319102734721,,,ok
+648,Stagg,utility_direct,pge,pge,STAGG,,,0.09470646903855391,,,ok
+649,Country Club,utility_direct,pge,pge,COUNTRY CLUB,,,0.07459855168735413,,,ok
+650,West Lane,utility_direct,pge,pge,WEST LANE,,,0.04344271177008965,,,ok
+651,Hammer,utility_direct,pge,pge,HAMMER,,,0.006261876283128139,,,ok
+652,Mettler,utility_direct,pge,pge,METTLER,,,0.03642924347793048,,,ok
+653,Terminous,utility_direct,pge,pge,TERMINOUS,,,0.09988898553872619,,,ok
+654,New Hope,utility_direct,pge,pge,NEW HOPE,,,0.09481498579234322,,,ok
+655,Lodi,utility_direct,pge,pge,LODI,,,0.06965579623123505,,,ok
+656,Colony,utility_direct,pge,pge,COLONY,,,0.07892318500921999,,,ok
+657,Louise,coord_spatial,,other,,1134,0.0,,,,ok
+658,Carbona,coord_spatial,,pge,,1139,0.0,,,,ok
+659,Banta Carbona,coord_spatial,,other,,1132,0.0,,,,ok
+660,Herdlyn,utility_direct,pge,pge,HERDLYN,,,0.09300583851241487,,,ok
+661,Westside,coord_spatial,,pge,,2162,0.0,,,,ok
+662,Salt Springs,utility_direct,pge,pge,SALT SPRINGS,,,0.05047715407601995,,,ok
+663,GWF Tracy,coord_spatial,,pge,,1139,6.754301374568974,,,,ok
+664,Buena Vista,utility_direct,pge,pge,BUENA VISTA,,,0.008459638047745997,,,ok
+665,Stockton Cogen,coord_spatial,,pge,,1790,0.0,,,,ok
+666,Tiger Creek,coord_spatial,,pge,,1958,5.906341159513432,,,,ok
+667,Altamont,coord_spatial,,pge,,1619,1.861610254879684,,,,ok
+668,Spring Gap,utility_direct,pge,pge,SPRING GAP,,,0.05187923271343013,,,ok
+669,Mi-Wuk,utility_dict,pge,pge,MIWUK,,,0.00956656542849892,,,ok
+670,Curtis,utility_direct,pge,pge,CURTIS,,,0.017385129998109226,,,ok
+671,Peoria,utility_direct,pge,pge,PEORIA,,,0.07451840164421489,,,ok
+672,Riverbank,utility_direct,pge,pge,RIVERBANK,,,0.03674821839652243,,,ok
+673,Valley Home,utility_direct,pge,pge,VALLEY HOME,,,0.03795646874543821,,,ok
+674,Miller,coord_spatial,,other,,1382,0.0,,,,ok
+675,Teichert,coord_spatial,,other,,1376,8.208467900790351,,,,ok
+676,Westley,utility_direct,pge,pge,WESTLEY,,,0.050482671663281915,,,ok
+677,Newman,utility_direct,pge,pge,NEWMAN,,,0.05708865990925689,,,ok
+678,Crows Landing,utility_direct,pge,pge,CROWS LANDING,,,0.054992043451188966,,,ok
+679,Crows Landing,coord_spatial,,other,,2328,0.0,27.01749095218797,,,ok; name matched pge/CROWS LANDING but 27.0 km away (> 25); placed by coordinates instead
+680,Gustine,utility_direct,pge,pge,GUSTINE,,,0.020330758858345108,,,ok
+681,Chowchilla,utility_direct,pge,pge,CHOWCHILLA,,,0.03322492522890877,,,ok
+682,Atwater,utility_direct,pge,pge,ATWATER,,,0.008590584819872283,,,ok
+683,Le Grand,utility_direct,pge,pge,LE GRAND,,,0.04045123399696056,,,ok
+684,Sharon,coord_spatial,,pge,,1967,15.019704912623785,,,,ok
+685,Oakhurst,utility_direct,pge,pge,OAKHURST,,,0.02356920110349709,,,ok
+686,Coarsegold,utility_direct,pge,pge,COARSEGOLD,,,0.018323826888383334,,,ok
+687,Livingston,utility_direct,pge,pge,LIVINGSTON,,,0.02198759966069768,,,ok
+688,Gallo,coord_spatial,,pge,,602,0.0,,,,ok
+689,Wilson,utility_direct,pge,pge,WILSON,,,0.019791007457520025,,,ok
+690,El Capitan,utility_direct,pge,pge,EL CAPITAN,,,0.01272623528771913,,,ok
+691,Cressey,utility_direct,pge,pge,CRESSEY,,,0.016063068171427483,,,ok
+692,Merced,utility_direct,pge,pge,MERCED,,,0.025523913756574666,,,ok
+693,Newhall,coord_spatial,,pge,,574,0.0,319.4619135646687,,,ok; name matched sce/Newhall but 319.5 km away (> 25); placed by coordinates instead
+694,Dairyland,utility_direct,pge,pge,DAIRYLAND,,,0.038638353033698815,,,ok
+695,Mendota,utility_direct,pge,pge,MENDOTA,,,0.04513737958114005,,,ok
+696,Hammonds,utility_direct,pge,pge,HAMMONDS,,,0.06763752523219833,,,ok
+697,San Luis 3,coord_spatial,,pge,,604,9.118432679962993,,,,ok
+698,San Luis 5,coord_spatial,,pge,,1647,0.0,,,,ok
+699,Oxford,coord_spatial,,pge,,1910,5.94825771302685,,,,ok
+700,Westlands,coord_spatial,,pge,,148,3.264776852292968,,,,ok
+701,Westland #1 RA PP,coord_spatial,,other,,1910,0.0,,,,ok
+702,Oro Loma,utility_direct,pge,pge,ORO LOMA,,,0.12241059130524656,,,ok
+703,Canal,utility_direct,pge,pge,CANAL,,,0.036445533601572294,,,ok
+704,Wright,utility_direct,pge,pge,WRIGHT,,,0.06983637935534265,,,ok
+705,Storey,utility_direct,pge,pge,STOREY,,,0.011008711191598762,,,ok
+706,Santa Nella,utility_direct,pge,pge,SANTA NELLA,,,0.018908086007507534,,,ok
+707,Midway,utility_direct,pge,pge,MIDWAY,,,0.45663551762166954,,,ok
+708,Santa Rita,utility_direct,pge,pge,SANTA RITA,,,0.04341348771139961,,,ok
+709,Dos Palos,utility_direct,pge,pge,DOS PALOS,,,0.053638294710916995,,,ok
+710,MC CALL,utility_direct,pge,pge,MC CALL,,,1.2684225872569768e-12,,,ok
+711,Ortiga,utility_direct,pge,pge,ORTIGA,,,0.03180341659514609,,,ok
+712,Arburua,coord_spatial,,other,,601,0.0,,,,ok
+713,Mariposa,utility_direct,pge,pge,MARIPOSA,,,0.020673263882426025,,,ok
+714,Mariposa,unresolved,,other,,,,,,,"name used by more than one utility (pge/MARIPOSA, sce/Mariposa); supply a 'utility' column, or coordinates within 25 km of one candidate"
+715,Merced Falls,utility_direct,pge,pge,MERCED FALLS,,,0.018925005658470932,,,ok
+716,Bonita,utility_direct,pge,pge,BONITA,,,4.88362151281301,,,ok
+717,Glass,coord_spatial,,other,,564,0.0,,,,ok
+718,Bear Valley,utility_direct,pge,pge,BEAR VALLEY,,,0.0765539432253449,,,ok
+719,Indian Flat,utility_direct,pge,pge,INDIAN FLAT,,,0.08216935766334342,,,ok
+720,YOSEMITE,utility_direct,pge,pge,YOSEMITE,,,0.0,,,ok
+721,Madera,utility_direct,pge,pge,MADERA,,,0.037197041940111523,,,ok
+722,Borden,utility_direct,pge,pge,BORDEN,,,0.027279603644011167,,,ok
+723,Cassidy,utility_direct,pge,pge,CASSIDY,,,0.01800376567261735,,,ok
+724,El Peco,utility_direct,pge,pge,EL PECO,,,0.028911503035280995,,,ok
+725,Firebaugh,utility_direct,pge,pge,FIREBAUGH,,,0.05267591472322738,,,ok
+726,Northstar,coord_spatial,,other,,736,0.0,,,,ok
+727,SHEPHERD,utility_direct,pge,pge,SHEPHERD,,,0.0,,,ok
+728,Schindler,utility_direct,pge,pge,SCHINDLER,,,0.024935705922984098,,,ok
+729,Airways,utility_direct,pge,pge,AIRWAYS,,,0.023684919085207392,,,ok
+730,Clovis,utility_direct,pge,pge,CLOVIS,,,0.032646299084555505,,,ok
+731,Sanger,utility_direct,pge,pge,SANGER,,,0.055593437713907755,,,ok
+732,Las Palmas,coord_spatial,,other,,108,0.0,,,,ok
+733,Malaga,utility_direct,pge,pge,MALAGA,,,0.05403197106352131,,,ok
+734,Ranchers Cotton,utility_direct,pge,pge,RANCHERS COTTON,,,0.04674072290821151,,,ok
+735,Reedley,utility_direct,pge,pge,REEDLEY,,,0.02364347290588236,,,ok
+736,Wahtoke,utility_direct,pge,pge,WAHTOKE,,,0.03748256236919375,,,ok
+737,Rainbow,coord_spatial,,pge,,142,0.0,,,,ok
+738,West Fresno,utility_direct,pge,pge,WEST FRESNO,,,0.021513619853753555,,,ok
+739,Barton,utility_direct,pge,pge,BARTON,,,0.015924425878725914,,,ok
+740,Manchester,utility_direct,pge,pge,MANCHESTER,,,0.012090314296868552,,,ok
+741,Woodward,utility_direct,pge,pge,WOODWARD,,,0.017262341843178076,,,ok
+742,Kingsburg,utility_direct,pge,pge,KINGSBURG,,,0.021069625182898923,,,ok
+743,Corcoran,utility_direct,pge,pge,CORCORAN,,,0.03867256798483678,,,ok
+744,Alpaugh,utility_direct,pge,pge,ALPAUGH,,,0.04910119689134469,,,ok
+745,Contadina,coord_spatial,,other,,1976,0.0,,,,ok
+746,GWF Hanford,coord_spatial,,other,,316,0.11708956338378404,,,,ok
+747,Wishon,coord_spatial,,other,,575,22.17295849104983,,,,ok
+748,River Rock,coord_spatial,,pge,,114,0.0,,,,ok
+749,Hardwick,coord_spatial,,pge,,321,0.0,,,,ok
+750,Guernsey,utility_direct,pge,pge,GUERNSEY,,,0.05228086259069542,,,ok
+751,Coppermine,utility_direct,pge,pge,COPPERMINE,,,0.05614756462593302,,,ok
+752,Biola,utility_direct,pge,pge,BIOLA,,,0.02376383193808448,,,ok
+753,Giffen,utility_direct,pge,pge,GIFFEN,,,0.0892506521137969,,,ok
+754,Bowles,utility_direct,pge,pge,BOWLES,,,0.025268097058880407,,,ok
+755,San Joaquin,utility_direct,pge,pge,SAN JOAQUIN,,,0.03180671237733863,,,ok
+756,Tivy Valley,utility_direct,pge,pge,TIVY VALLEY,,,0.05952311815411906,,,ok
+757,KEARNEY,utility_direct,pge,pge,KEARNEY,,,0.0,,,ok
+758,Kerman,utility_direct,pge,pge,KERMAN,,,0.01495376997684733,,,ok
+759,Fresno Waste Water,coord_spatial,,other,,2187,0.0,,,,ok
+760,Parlier,utility_direct,pge,pge,PARLIER,,,0.01472256463907432,,,ok
+761,Auberry,utility_direct,pge,pge,AUBERRY,,,0.048836714268119426,,,ok
+762,Dunlap,utility_direct,pge,pge,DUNLAP,,,0.04480581478600855,,,ok
+763,Sand Creek,utility_direct,pge,pge,SAND CREEK,,,0.11057162578520936,,,ok
+764,Stone Corral,utility_direct,pge,pge,STONE CORRAL,,,0.054461338424761564,,,ok
+765,Dinuba,utility_direct,pge,pge,DINUBA,,,0.03763476958777019,,,ok
+766,Orosi,utility_direct,pge,pge,OROSI,,,0.01906279293095711,,,ok
+767,Camden,utility_direct,pge,pge,CAMDEN,,,0.03444295497173733,,,ok
+768,Caruthers,utility_direct,pge,pge,CARUTHERS,,,0.06479011302465204,,,ok
+769,Leprino,coord_spatial,,other,,2193,0.0,,,,ok
+770,Lemoore,utility_direct,pge,pge,LEMOORE,,,0.05171533594756431,,,ok
+771,Reserve Oil,utility_direct,pge,pge,RESERVE OIL,,,0.03768620875060782,,,ok
+772,Angiola,coord_spatial,,pge,,315,0.0,,,,ok
+773,Boswell,coord_spatial,,pge,,314,0.0,,,,ok
+774,Henrietta,utility_direct,pge,pge,HENRIETTA,,,0.13973312329793602,,,ok
+775,Jacobs Corner,utility_direct,pge,pge,JACOBS CORNER,,,0.036399378451247515,,,ok
+776,Tulare Lake,utility_direct,pge,pge,TULARE LAKE,,,0.02518628640714806,,,ok
+777,Kettleman Hills,utility_direct,pge,pge,KETTLEMAN HILLS,,,0.10871324589744158,,,ok
+778,Calflax,utility_direct,pge,pge,CALFLAX,,,0.01463063203185084,,,ok
+779,Tornado,coord_spatial,,other,,115,0.0,,,,ok
+780,Badger Hill Pumps,coord_spatial,,pge,,1978,0.0,,,,ok
+781,Devils Den,utility_direct,pge,pge,DEVILS DEN,,,0.08569496735424209,,,ok
+782,Agrico,coord_spatial,,other,,136,10.280536442034247,,,,ok
+783,Gates,utility_direct,pge,pge,GATES,,,0.24922427291988983,,,ok
+784,Balch 1,utility_dict,pge,pge,BALCH NO 1,,,1.315736997536682,,,ok
+785,Coalinga Cogen,coord_spatial,,pge,,115,3.1914649420966166,,,,ok
+786,Smyrna,utility_direct,pge,pge,SMYRNA,,,0.015057877936842698,,,ok
+787,WESTPARK,utility_direct,pge,pge,WESTPARK,,,0.0,,,ok
+788,Charca,utility_direct,pge,pge,CHARCA,,,0.005935726962381082,,,ok
+789,Famoso,utility_direct,pge,pge,FAMOSO,,,0.06416743054397996,,,ok
+790,Lerdo,utility_direct,pge,pge,LERDO,,,0.00890800099883423,,,ok
+791,Kern Oil,utility_direct,pge,pge,KERN OIL,,,0.030377502355641964,,,ok
+792,Cal Water,utility_direct,pge,pge,CAL WATER,,,0.026926418648903053,,,ok
+793,Magunden,utility_direct,pge,pge,MAGUNDEN,,,0.20964947472937687,,,ok
+794,Bolthouse Farms,coord_spatial,,other,,2197,0.0,,,,ok
+795,Grimmway-Malaga,coord_spatial,,other,,2202,0.0,,,,ok
+796,Semitropic,utility_direct,pge,pge,SEMITROPIC,,,0.014362713235366911,,,ok
+797,Ganso,utility_direct,pge,pge,GANSO,,,0.028308764738334893,,,ok
+798,Tupman,utility_direct,pge,pge,TUPMAN,,,0.11687707165692818,,,ok
+799,Kern Power,utility_direct,pge,pge,KERN POWER,,,0.17673986552772233,,,ok
+800,Tevis,coord_spatial,,pge,,263,7.898410396954678,,,,ok
+801,Lamont,utility_direct,pge,pge,LAMONT,,,0.05161404065235697,,,ok
+802,Rio Bravo,utility_direct,pge,pge,RIO BRAVO,,,0.008732635699165776,,,ok
+803,Renfro,utility_direct,pge,pge,RENFRO,,,0.06686595369593874,,,ok
+804,Shafter,utility_direct,pge,pge,SHAFTER,,,0.0005096159758907751,,,ok
+805,Taft,utility_direct,pge,pge,TAFT,,,0.03896227103790874,,,ok
+806,Fellows,utility_direct,pge,pge,FELLOWS,,,0.08902212275732721,,,ok
+807,Cawelo C,coord_spatial,,pge,,218,0.0,,,,ok
+808,Norco,utility_direct,pge,pge,NORCO,,,0.05234336796849568,,,ok
+809,Carrizo Plains,utility_direct,pge,pge,CARRIZO PLAINS,,,0.037448891680257994,,,ok
+810,Belridge 1A,coord_spatial,,pge,,1984,0.0,,,,ok
+811,Arvin-Edison,coord_spatial,,other,,227,0.0,,,,ok
+812,Rosedale,utility_direct,pge,pge,ROSEDALE,,,0.04887764149695921,,,ok
+813,Poso Mt.,utility_dict,pge,pge,POSO MOUNTAIN,,,0.017182071466806573,,,ok
+814,Carneras,utility_direct,pge,pge,CARNERAS,,,0.06151033736709633,,,ok
+815,Mckittrick,utility_direct,pge,pge,MCKITTRICK,,,0.08550943333072507,,,ok
+816,Maricopa,utility_direct,pge,pge,MARICOPA,,,0.0862465913471918,,,ok
+817,Gardner,coord_spatial,,other,,246,0.0,,,,ok
+818,Copus,utility_direct,pge,pge,COPUS,,,0.021375299335939877,,,ok
+819,Lakeview,utility_direct,pge,pge,LAKEVIEW,,,0.05601722211384174,,,ok
+820,Wheeler,coord_spatial,,other,,1679,0.0,,,,ok
+821,Tejon,utility_direct,pge,pge,TEJON,,,0.04682693462465871,,,ok
+822,San Bernard,coord_spatial,,pge,,264,0.0,,,,ok
+823,Arvin,utility_direct,pge,pge,ARVIN,,,0.053177214398293905,,,ok
+824,Weedpatch,utility_direct,pge,pge,WEEDPATCH,,,0.017042159949889543,,,ok
+825,Eisen,coord_spatial,,pge,,240,0.0,,,,ok
+826,Old River,utility_direct,pge,pge,OLD RIVER,,,0.014232931862727125,,,ok
+827,Panama,utility_direct,pge,pge,PANAMA,,,0.015003379295614664,,,ok
+828,Carnation Dairy,coord_spatial,,pge,,259,6.070003847647965,,,,ok
+829,Wellfield,utility_direct,pge,pge,WELLFIELD,,,0.09199731895105552,,,ok
+830,Fruitvale,utility_direct,pge,pge,FRUITVALE,,,0.057257751057684235,,,ok
+831,Moco,coord_spatial,,other,,251,2.0503116516481286,,,,ok
+832,Elk Hills,utility_direct,pge,pge,ELK HILLS,,,0.019657070796582587,,,ok
+833,Cawelo B,coord_spatial,,pge,,217,0.0,,,,ok
+834,Mc Farland,utility_direct,pge,pge,MC FARLAND,,,0.013500819816359588,,,ok
+835,Wasco,utility_direct,pge,pge,WASCO,,,0.021221127780188687,,,ok
+836,Cuyama,utility_direct,pge,pge,CUYAMA,,,0.09526613768643695,,,ok
+837,Pacific Pipeline,coord_spatial,,other,,223,0.0,,,,ok
+838,Lost Hills,coord_spatial,,pge,,221,0.0,,,,ok
+839,Tecuya,coord_spatial,,pge,,272,0.0,,,,ok
+840,Lebec,coord_spatial,,other,,216,2.9232287759714137,,,,ok
+841,Kelley,coord_spatial,,other,,222,4.838132284605603,,,,ok
+842,Berrenda C,coord_spatial,,pge,,215,0.0,,,,ok
+843,Berrenda A,coord_spatial,,pge,,224,6.118142554001181,,,,ok
+844,Twisselman,coord_spatial,,pge,,221,6.168481405697394,,,,ok
+845,Double C,coord_spatial,,other,,361,3.358868675223221,,,,ok
+846,Dexel,coord_spatial,,other,,283,1.6519840940045227,,,,ok
+847,Kern Front,coord_spatial,,pge,,361,2.4248724405206654,,,,ok
+848,Badger Creek,coord_spatial,,pge,,361,2.2663381272533165,,,,ok
+849,Mt. Poso,coord_spatial,,other,,218,4.221657660117856,,,,ok
+850,Kernridge,coord_spatial,,pge,,1983,0.8537984271422758,,,,ok
+851,San Leandro U,utility_direct,pge,pge,SAN LEANDRO U,,,0.04367169130064894,,,ok
+852,Grant,utility_direct,pge,pge,GRANT,,,0.05951286328332308,,,ok
+853,Mt. Eden,utility_direct,pge,pge,MT EDEN,,,0.04399708062190227,,,ok
+854,Dumbarton,utility_direct,pge,pge,DUMBARTON,,,0.038674419215164846,,,ok
+855,JARVIS,utility_direct,pge,pge,JARVIS,,,0.0,,,ok
+856,Cryogenics,coord_spatial,,other,,13,0.05264730907877232,,,,ok
+857,Newark,utility_dict,pge,pge,NEWARK 12KV,,,0.24864310609930426,,,ok
+858,Western Digital,coord_spatial,,other,,2164,0.0,,,,ok
+859,Vasco,utility_direct,pge,pge,VASCO,,,0.02388498463069556,,,ok
+860,Livermore,utility_direct,pge,pge,LIVERMORE,,,0.03058382242333627,,,ok
+861,Radum,utility_direct,pge,pge,RADUM,,,0.030661075684367246,,,ok
+862,Vallecitos,coord_spatial,,pge,,22,0.0,,,,ok
+863,Sunol,utility_direct,pge,pge,SUNOL,,,0.005158892219206554,,,ok
+864,Vineyard,utility_direct,pge,pge,VINEYARD,,,0.041224885242982255,,,ok
+865,Cal Mat,coord_spatial,,pge,,1536,0.0,,,,ok
+866,Nummi,coord_spatial,,other,,9,0.0,,,,ok
+867,Russell,utility_direct,pge,pge,RUSSELL,,,0.02056209112118151,,,ok
+868,Ames Distribution,coord_spatial,,pge,,2289,0.0,,,,ok
+869,Whisman,utility_direct,pge,pge,WHISMAN,,,0.04256522041249126,,,ok
+870,Mt. View,utility_dict,pge,pge,MOUNTAIN VIEW,,,0.008855598394845579,,,ok
+871,Stelling,utility_direct,pge,pge,STELLING,,,0.017993222087970884,,,ok
+872,Wolfe,utility_direct,pge,pge,WOLFE,,,0.04251619828538001,,,ok
+873,Moffet Field,coord_spatial,,wapa,,1238,0.0,,,,ok
+874,LOCKHEED NO 1,utility_direct,pge,pge,LOCKHEED NO 1,,,0.0,,,ok
+875,LOCKHEED NO 2,utility_direct,pge,pge,LOCKHEED NO 2,,,0.0,,,ok
+876,Lawrence,utility_direct,pge,pge,LAWRENCE,,,0.020786683275152592,,,ok
+877,Britton,utility_direct,pge,pge,BRITTON,,,0.04150322162598922,,,ok
+878,Applied Materials,coord_spatial,,other,,2290,0.0,,,,ok
+879,Nasa,coord_spatial,,other,,2289,0.3681156480571795,,,,ok
+880,Los Altos,utility_direct,pge,pge,LOS ALTOS,,,0.04093517582950839,,,ok
+881,Loyola,utility_direct,pge,pge,LOYOLA,,,0.03803961836619159,,,ok
+882,Permanente,coord_spatial,,other,,1233,0.0,,,,ok
+883,Los Gatos,utility_direct,pge,pge,LOS GATOS,,,0.015396618638972702,,,ok
+884,Montague,utility_direct,pge,pge,MONTAGUE,,,0.043704873254675744,,,ok
+885,Montague,coord_spatial,,pacificorp,,1309,0.0,483.83037218657967,,,ok; name matched pge/MONTAGUE but 483.8 km away (> 25); placed by coordinates instead
+886,Trimble,utility_direct,pge,pge,TRIMBLE,,,0.11115119094357769,,,ok
+887,FMC,utility_direct,pge,pge,FMC,,,0.035739120600424425,,,ok
+888,El Patio,utility_direct,pge,pge,EL PATIO,,,0.04591211080892461,,,ok
+889,Swift,utility_direct,pge,pge,SWIFT,,,0.01954928709233138,,,ok
+890,Milpitas,utility_direct,pge,pge,MILPITAS,,,0.03455698950299981,,,ok
+891,Mc Kee,utility_direct,pge,pge,MC KEE,,,0.03830557426275114,,,ok
+892,Mabury,utility_direct,pge,pge,MABURY,,,0.04163902524399189,,,ok
+893,Evergreen,utility_direct,pge,pge,EVERGREEN,,,0.025197150419624465,,,ok
+894,Edenvale,utility_direct,pge,pge,EDENVALE,,,0.0425920530897322,,,ok
+895,IBM Bailey Road,coord_spatial,,other,,1818,0.0,,,,ok
+896,Coyote Pumping,coord_spatial,,other,,1230,0.0,,,,ok
+897,Morgan Hill,utility_direct,pge,pge,MORGAN HILL,,,0.030171996692805687,,,ok
+898,Llagas,utility_direct,pge,pge,LLAGAS,,,0.02359396973864529,,,ok
+899,Gilroy Food I,coord_spatial,,other,,1247,2.085419433948479,,,,ok
+900,Piercy,utility_direct,pge,pge,PIERCY,,,0.12399137546054394,,,ok
+901,Nortech,utility_direct,pge,pge,NORTECH,,,0.05890171062544701,,,ok
+902,Almaden,utility_direct,pge,pge,ALMADEN,,,0.01694331852688137,,,ok
+903,Green Valley,utility_direct,pge,pge,GREEN VALLEY,,,0.021552569246359145,,,ok
+904,Camp Evers,utility_direct,pge,pge,CAMP EVERS,,,0.035420622929740374,,,ok
+905,Paul Sweet,utility_direct,pge,pge,PAUL SWEET,,,0.03236647073542323,,,ok
+906,Rob Roy,utility_direct,pge,pge,ROB ROY,,,0.02643511742892984,,,ok
+907,Hollister,utility_direct,pge,pge,HOLLISTER,,,0.008230718145323068,,,ok
+908,Prunedale,utility_direct,pge,pge,PRUNEDALE,,,0.0548625940380163,,,ok
+909,Soledad,utility_direct,pge,pge,SOLEDAD,,,0.016591799267592196,,,ok
+910,Salinas,utility_direct,pge,pge,SALINAS,,,0.06813362126131772,,,ok
+911,Castro Valley,utility_direct,pge,pge,CASTRO VALLEY,,,0.05595498009795495,,,ok
+912,Dolan Road,utility_direct,pge,pge,DOLAN ROAD,,,0.013613330576922952,,,ok
+913,Del Monte,utility_direct,pge,pge,DEL MONTE,,,0.14560396008361828,,,ok
+914,SAN BENITO,utility_direct,pge,pge,SAN BENITO,,,0.0,,,ok
+915,Big Basin,utility_direct,pge,pge,BIG BASIN,,,0.042963751221797186,,,ok
+916,Burns,utility_direct,pge,pge,BURNS,,,0.05582538167014475,,,ok
+917,Lone Star,coord_spatial,,other,,1265,0.0,,,,ok
+918,Crusher,coord_spatial,,pge,,1269,0.0,,,,ok
+919,Erta,utility_direct,pge,pge,ERTA,,,0.030304335970013946,,,ok
+920,Watsonville,utility_direct,pge,pge,WATSONVILLE,,,0.06545922708230749,,,ok
+921,Brigatano,coord_spatial,,other,,1960,0.0,,,,ok
+922,Lagunitas,coord_spatial,,pge,,642,0.0,,,,ok
+923,Gabilan,utility_direct,pge,pge,GABILAN,,,0.010841844855525763,,,ok
+924,Boronda,utility_direct,pge,pge,BORONDA,,,0.042151639239695955,,,ok
+925,Fort Ord,utility_direct,pge,pge,FORT ORD,,,0.018955670005851393,,,ok
+926,Monterey,coord_spatial,,pge,,646,0.0,,,,ok
+927,Navy School,coord_spatial,,pge,,648,0.0,,,,ok
+928,Hatton,utility_direct,pge,pge,HATTON,,,0.03215374520539562,,,ok
+929,Laureles,utility_direct,pge,pge,LAURELES,,,0.02795846910674274,,,ok
+930,Otter,utility_direct,pge,pge,OTTER,,,0.06385643964593478,,,ok
+931,Fresh Express,coord_spatial,,other,,649,0.0,,,,ok
+932,Spence,utility_direct,pge,pge,SPENCE,,,0.04848301500949093,,,ok
+933,Gonzales,utility_direct,pge,pge,GONZALES,,,0.05546951470494515,,,ok
+934,Camphora,coord_spatial,,pge,,638,6.7798146182712635,,,,ok
+935,Los Ositos,utility_direct,pge,pge,LOS OSITOS,,,0.03949960546670539,,,ok
+936,King City,utility_direct,pge,pge,KING CITY,,,0.02998004989899713,,,ok
+937,Jolon,utility_direct,pge,pge,JOLON,,,0.05959308457446708,,,ok
+938,San Ardo,utility_direct,pge,pge,SAN ARDO,,,0.042376320337591464,,,ok
+939,OILFIELDS,utility_direct,pge,pge,OILFIELDS,,,0.0,,,ok
+940,Salinas River,coord_spatial,,other,,641,27.79850831824414,,,,ok
+941,Foothills,coord_spatial,,other,,2222,0.0,,,,ok
+942,Morro Bay,utility_direct,pge,pge,MORRO BAY,,,0.03384238581081373,,,ok
+943,San Luis Obispo,utility_direct,pge,pge,SAN LUIS OBISPO,,,0.028111766247447434,,,ok
+944,Sisquoc,utility_direct,pge,pge,SISQUOC,,,0.03275691785583492,,,ok
+945,Santa Maria,utility_direct,pge,pge,SANTA MARIA,,,0.009901402708637744,,,ok
+946,Fairway Tap,coord_spatial,,unknown,,1832,2.0224809428468955,,,,ok
+947,Buellton,utility_direct,pge,pge,BUELLTON,,,0.06007975923940231,,,ok
+948,Oceano,utility_direct,pge,pge,OCEANO,,,0.0007516281933626622,,,ok
+949,Surf,coord_spatial,,other,,1211,0.0,,,,ok
+950,Palmer,utility_direct,pge,pge,PALMER,,,0.039617264988121445,,,ok
+951,Zaca,utility_direct,pge,pge,ZACA,,,0.023083499836009217,,,ok
+952,Santa Ynez,utility_direct,pge,pge,SANTA YNEZ,,,0.03577740018015609,,,ok
+953,Manville,coord_spatial,,other,,1215,0.0,,,,ok
+954,Purisima,utility_direct,pge,pge,PURISIMA,,,0.010667672886337114,,,ok
+955,Goldtree,utility_direct,pge,pge,GOLDTREE,,,0.013077589417840815,,,ok
+956,Cholame,utility_direct,pge,pge,CHOLAME,,,0.029090264680027667,,,ok
+957,San Miguel,utility_direct,pge,pge,SAN MIGUEL,,,0.01804386063902142,,,ok
+958,Paso Robles,utility_direct,pge,pge,PASO ROBLES,,,0.020530284963854915,,,ok
+959,Atascadero,utility_direct,pge,pge,ATASCADERO,,,0.031158266240193213,,,ok
+960,Cayucos,utility_direct,pge,pge,CAYUCOS,,,0.030581417135271755,,,ok
+961,Baywood,utility_direct,pge,pge,BAYWOOD,,,0.030379390019977914,,,ok
+962,Divide,utility_direct,pge,pge,DIVIDE,,,0.10160544667062632,,,ok
+963,Union Oil,coord_spatial,,other,,1186,0.0,,,,ok
+964,Garey,coord_spatial,,other,,2206,0.0,,,,ok
+965,Stone,utility_direct,pge,pge,STONE,,,0.052676780030363746,,,ok
+966,Fairview,utility_direct,pge,pge,FAIRVIEW,,,0.019772913228182483,,,ok
+967,Chestnut 1,coord_spatial,,other,,336,1.2690757721517876,,,,ok
+968,Calaveras Cement,utility_direct,pge,pge,CALAVERAS CEMENT,,,0.12819856805623547,,,ok
+969,Carmichael,coord_spatial,,smud,,8283,0.006268548123101836,,,,ok
+970,Elk Grove-Colton,coord_spatial,,smud,,871,0.0,,,,ok
+971,Elverta-Cherrybrooke,coord_spatial,,smud,,874,0.0,,,,ok
+972,Foothill,coord_spatial,,smud,,863,0.06676236464564879,383.09457513851305,,,ok; name matched pge/FOOTHILL but 383.1 km away (> 25); placed by coordinates instead
+973,Hedge,coord_spatial,,smud,,827,2.251910692050498,,,,ok
+974,Hurley,coord_spatial,,smud,,8476,0.004183383955901399,,,,ok
+975,Lake,coord_spatial,,smud,,7835,0.37686915555413053,,,,ok
+976,Orangevale,coord_spatial,,smud,,899,0.7072680819784091,,,,ok
+977,Pocket,coord_spatial,,smud,,942,0.0,,,,ok
+978,Bond-Elk Grove Florin,coord_spatial,,smud,,843,0.0,,,,ok
+979,Natomas,coord_spatial,,smud,,7653,0.004988523734073697,,,,ok
+980,Cordova-Folsom,coord_spatial,,smud,,869,1.8321616781142402,,,,ok
+981,Mid City,coord_spatial,,smud,,930,2.3226012339435395e-12,,,,ok
+982,East City,coord_spatial,,smud,,864,2.32288387652259e-12,,,,ok
+983,South City,coord_spatial,,smud,,845,0.31661967276858016,,,,ok
+984,Mcclellan,coord_spatial,,smud,,900,1.0511845244699511,,,,ok
+985,Procter & Gamble,coord_spatial,,smud,,958,0.2509126307169183,,,,ok
+986,Knauf,coord_spatial,,other,,1737,2.3715199330206556,,,,ok
+987,Airport Road 1,coord_spatial,,other,,1744,0.0,,,,ok
+988,Canby 2,coord_spatial,,other,,625,0.0,,,,ok
+989,Canby,coord_spatial,,other,,1515,2.325950474284249,,,,ok
+990,College View,coord_spatial,,other,,1515,4.817671833842769,,,,ok
+991,Eureka Way,coord_spatial,,other,,1280,4.305771785503069,,,,ok
+992,Moore Road,coord_spatial,,other,,1283,2.416720267109543,,,,ok
+993,Redding Power,coord_spatial,,other,,1499,7.073230889886872e-13,,,,ok
+994,Sulphur Creek,coord_spatial,,other,,1515,1.4932405628899634,,,,ok
+995,Texas Springs,coord_spatial,,other,,1540,0.0,,,,ok
+996,Waldon,coord_spatial,,other,,1280,1.4680427582012374,,,,ok
+997,Cartwright,coord_spatial,,other,,1618,0.0,,,,ok
+998,City of Healdsburg,coord_spatial,,other,,1338,11.99168900481857,,,,ok
+999,City Of Biggs,coord_spatial,,other,,38,0.0,,,,ok
+1000,Gridley,coord_spatial,,other,,36,1.1119493840139327e-06,,,,ok
+1001,Industrial,coord_spatial,,other,,1513,1.8729881001896314,,,,ok
+1002,Fiddyment Receiving,coord_spatial,,other,,2223,3.2825144554272034,,,,ok
+1003,Cirby,coord_spatial,,other,,1949,0.0,,,,ok
+1004,Dave Bakkie,coord_spatial,,other,,2222,2.376472571883211,,,,ok
+1005,Douglas,coord_spatial,,other,,741,2.0413678512227333,,,,ok
+1006,South East,coord_spatial,,other,,978,3.424413558795177,,,,ok
+1007,Collierville,coord_spatial,,other,,56,9.139601960901249,,,,ok
+1008,NCPA 1&2,coord_spatial,,pge,,1913,1.649220792361306,,,,ok
+1009,NCPA 3&4,coord_spatial,,pge,,1912,1.9453792606369293,,,,ok
+1010,Mclain,coord_spatial,,other,,1788,3.4439021398843144,,,,ok
+1011,Mohawk,coord_spatial,,other,,1751,0.0,,,,ok
+1012,Graeagle,coord_spatial,,other,,1751,4.0771149769542685,,,,ok
+1013,Sierraville,coord_spatial,,other,,1294,0.0,,,,ok
+1014,Beckworth,coord_spatial,,other,,764,7.846668810000842,,,,ok
+1015,Chilcoot,coord_spatial,,other,,1295,17.69988342980663,,,,ok
+1016,Herlong,coord_spatial,,other,,2337,0.0,,,,ok
+1017,Milford,coord_spatial,,other,,2337,16.918270339691585,,,,ok
+1018,Edgemont,coord_spatial,,other,,334,4.094418341281639,,,,ok
+1019,Parker,coord_spatial,,other,,8797,0.0008122502252574162,,,,ok
+1020,IBM Cottle,coord_spatial,,other,,1244,0.11965554062925347,,,,ok
+1021,Santa Cruz,coord_spatial,,other,,1362,0.0,,,,ok
+1022,Hershey,coord_spatial,,pge,,1381,0.0,,,,ok
+1023,Standiford,coord_spatial,,other,,1368,1.6020193682013415,,,,ok
+1024,Finney,coord_spatial,,other,,1353,0.0,,,,ok
+1025,Rosemore A,coord_spatial,,other,,1800,0.0,,,,ok
+1026,8th Street,coord_spatial,,other,,1803,0.0,,,,ok
+1027,Prescott,coord_spatial,,other,,1359,0.0,,,,ok
+1028,Briggsmore,coord_spatial,,other,,1351,0.0,,,,ok
+1029,Enslen,coord_spatial,,other,,1352,0.0,,,,ok
+1030,Woodrow,coord_spatial,,other,,1368,0.0,,,,ok
+1031,12th Street,coord_spatial,,other,,1802,0.0,,,,ok
+1032,Santa Rosa,coord_spatial,,other,,1363,0.0,598.4482126713327,,,ok; name matched sce/Santa Rosa but 598.4 km away (> 25); placed by coordinates instead
+1033,Lapham,coord_spatial,,other,,1355,1.7886120041874207,,,,ok
+1034,Claus,coord_spatial,,other,,7930,0.005969959908465601,,,,ok
+1035,Oakdale,coord_spatial,,other,,1381,1.8088413751978893,,,,ok
+1036,Sylvan,coord_spatial,,other,,1367,0.0,,,,ok
+1037,Reinway,coord_spatial,,other,,1550,12.59157405817968,,,,ok
+1038,Sisk,coord_spatial,,other,,1364,0.0,,,,ok
+1039,Poust,coord_spatial,,other,,1358,0.0,,,,ok
+1040,Roselle,coord_spatial,,other,,1361,0.0,,,,ok
+1041,Ladd,coord_spatial,,other,,1354,0.0,,,,ok
+1042,Stoddard,utility_direct,sce,sce,Stoddard,,,0.08292817222676607,,,ok
+1043,Mt. House,coord_spatial,,pge,,1613,0.0,,,,ok
+1044,Castle ,coord_spatial,,other,,605,4.594838384391503,,,,ok
+1045,Cooper,coord_spatial,,other,,7913,5.519215981313319,,,,ok
+1046,Cortez,coord_spatial,,other,,1370,0.0,454.9580227027936,,,ok; name matched sce/Cortez but 455.0 km away (> 25); placed by coordinates instead
+1047,Hilmar,coord_spatial,,other,,1372,0.0,,,,ok
+1048,Taylor,coord_spatial,,other,,1550,0.0,,,,ok
+1049,August,coord_spatial,,other,,1548,0.0,,,,ok
+1050,Roeding,coord_spatial,,other,,1374,0.0,,,,ok
+1051,La Grange,coord_spatial,,other,,1350,3.962442770897358,,,,ok
+1052,College,coord_spatial,,other,,1513,4.140060210437031,,,,ok
+1053,Ceres,coord_spatial,,other,,1369,0.0,,,,ok
+1054,Hawkins,coord_spatial,,other,,1371,0.0,,,,ok
+1055,Gilstrap,coord_spatial,,other,,2328,3.5771958459180127,,,,ok
+1056,Hughson,coord_spatial,,other,,1550,7.237896187436137,,,,ok
+1057,Geer,coord_spatial,,other,,1550,3.435667265461566,,,,ok
+1058,F Street,coord_spatial,,other,,1805,0.0,,,,ok
+1059,Montpellier,coord_spatial,,other,,1550,3.697739633931683,,,,ok
+1060,Westport,coord_spatial,,other,,1552,7.492968321541738,,,,ok
+1061,Fairground,coord_spatial,,other,,1805,2.8326568528038245,,,,ok
+1062,Commons,coord_spatial,,other,,1552,0.0,,,,ok
+1063,Delta Pumps,coord_spatial,,other,,1615,0.0,,,,ok
+1064,Thermalito,coord_spatial,,pge,,53,5.652702475020872,,,,ok
+1065,Kenneth,coord_spatial,,svp,,2378,0.29873269359320437,,,,ok
+1066,Oak,utility_direct,pge,pge,OAK,,,0.09525092801294274,,,ok
+1067,Camanche,coord_spatial,,other,,2294,0.0,,,,ok
+1068,Hunter,coord_spatial,,other,,2333,0.0,,,,ok
+1069,Morrison Creek,coord_spatial,,pacificorp,,1304,65.14806287352542,,,,ok
+1070,Weed,coord_spatial,,pacificorp,,1315,13.208707830770544,,,,ok
+1071,Mccloud,coord_spatial,,pacificorp,,1308,0.0,,,,ok
+1072,Snow Brush,coord_spatial,,pacificorp,,1316,0.0,,,,ok
+1073,Hornbrook,coord_spatial,,pacificorp,,1306,0.0,,,,ok
+1074,Alturas,coord_spatial,,pacificorp,,1570,29.54228173921573,,,,ok
+1075,Castella,coord_spatial,,pacificorp,,1290,4.31471621939686,,,,ok
+1076,Glendale,coord_spatial,,other,,1695,0.0,,,,ok
+1077,Dorris,coord_spatial,,pacificorp,,626,45.13999497034472,,,,ok
+1078,North Dunsmuir,coord_spatial,,pacificorp,,2308,2.1600495459699784,,,,ok
+1079,Fort Jones,coord_spatial,,pacificorp,,1317,13.313448301409549,,,,ok
+1080,Greenhorn,coord_spatial,,pacificorp,,1309,9.5065738589178,752.8784621565136,,,ok; name matched sce/Greenhorn but 752.9 km away (> 25); placed by coordinates instead
+1081,Newell,coord_spatial,,pacificorp,,626,0.0,,,,ok
+1082,Hamburg,coord_spatial,,pacificorp,,1303,0.0,,,,ok
+1083,Perez,coord_spatial,,pacificorp,,627,0.0,919.0670136129595,,,ok; name matched sce/Perez but 919.1 km away (> 25); placed by coordinates instead
+1084,Big Springs,coord_spatial,,pacificorp,,1300,0.0,,,,ok
+1085,International Paper,coord_spatial,,pacificorp,,1315,13.060964709047086,,,,ok
+1086,Little Shasta,coord_spatial,,pacificorp,,1300,9.764936803052574,,,,ok
+1087,Macdoel,coord_spatial,,pacificorp,,1300,40.544940234678144,,,,ok
+1088,Modoc,coord_spatial,,other,,1562,0.0,669.8203765824031,,,ok; name matched sce/Modoc but 669.8 km away (> 25); placed by coordinates instead
+1089,Nutglade,coord_spatial,,pacificorp,,1290,0.0,,,,ok
+1090,Gasquet,coord_spatial,,pacificorp,,1304,49.485530752558674,,,,ok
+1091,Happy Camp,coord_spatial,,pacificorp,,1304,0.0,,,,ok
+1092,Lake Earl,coord_spatial,,pacificorp,,2239,62.45387855012225,,,,ok
+1093,Patrick'S Creek,coord_spatial,,pacificorp,,1304,41.675061376444084,,,,ok
+1094,Smith River,coord_spatial,,pacificorp,,1304,64.26761126601059,,,,ok
+1095,Yurok,coord_spatial,,pacificorp,,2239,27.70170866412401,,,,ok
+1096,Scott Bar,coord_spatial,,pacificorp,,1313,0.0,,,,ok
+1097,Seiad,coord_spatial,,pacificorp,,1303,12.046588153890612,,,,ok
+1098,Shastina,coord_spatial,,pacificorp,,1315,0.0,,,,ok
+1099,Shotgun Creek,coord_spatial,,pacificorp,,1290,15.78810305848564,,,,ok
+1100,Steamboat,coord_spatial,,other,,622,10.35168185526223,,,,ok
+1101,Tulelake,coord_spatial,,pacificorp,,626,10.582817092212283,,,,ok
+1102,Tunnel,coord_spatial,,pacificorp,,626,16.104075913068954,,,,ok
+1103,Walker Bryan,coord_spatial,,pacificorp,,1317,0.0,,,,ok
+1104,Yreka,coord_spatial,,pacificorp,,1309,7.831695809250908,,,,ok
+1105,Yuba,coord_spatial,,pacificorp,,1318,0.0,,,,ok
+1106,Dog Creek,coord_spatial,,pacificorp,,1736,24.337503304824505,,,,ok
+1107,South Dunsmuir,coord_spatial,,pacificorp,,2308,0.0,,,,ok
+1108,Cal Poly,coord_spatial,,other,,1181,0.0,,,,ok
+1109,Adobe,coord_spatial,,pge,,264,7.446237598166531,,,,ok
+1110,Slate Creek,coord_spatial,,other,,1290,26.319594149719958,,,,ok

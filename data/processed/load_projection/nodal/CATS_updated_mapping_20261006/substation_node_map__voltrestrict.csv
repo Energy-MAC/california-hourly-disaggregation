@@ -1,0 +1,1456 @@
+utility,substation_name,node,share,dist_km,n_tied,is_synthetic,assignment_method,sub_kv_highside,sub_kv_class,node_kv,voltage_match
+pge,HOLLISTER,987,1.0,9.456374,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,OROVILLE,37,0.5,3.544798,2,False,nearest,60.0,66.0,66.0,True
+pge,OROVILLE,2301,0.5,3.429523,2,False,nearest,60.0,66.0,66.0,True
+pge,HOPLAND,2403,1.0,21.551399,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,PANORAMA,1278,1.0,3.606722,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,HAMILTON A,47,1.0,0.018948,1,False,nearest_novoltage,,,66.0,False
+pge,BROOKSIDE,2123,1.0,0.013811,1,False,nearest,60.0,66.0,66.0,True
+pge,EIGHT MILE,1905,1.0,0.056128,1,False,nearest,230.0,230.0,230.0,True
+pge,STROUD,136,1.0,12.428507,1,False,nearest_voltage_fallback,60.0,66.0,230.0,False
+pge,COARSEGOLD,575,1.0,11.629693,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,SCHINDLER,119,1.0,13.194272,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,STANISLAUS,56,1.0,9.057861,1,False,nearest,115.0,115.0,115.0,True
+pge,FAMOSO,218,1.0,8.825483,1,False,nearest,115.0,115.0,115.0,True
+pge,FAIRVIEW,75,1.0,0.194763,1,False,nearest,115.0,115.0,115.0,True
+pge,OTTER,651,1.0,0.063856,1,False,nearest,60.0,66.0,66.0,True
+pge,STOCKTON A,2168,1.0,1.166591,1,False,nearest,115.0,115.0,115.0,True
+pge,GABILAN,637,1.0,0.010842,1,False,nearest,60.0,66.0,66.0,True
+pge,BRUNSWICK,663,1.0,12.563202,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,GOOSE LAKE,266,1.0,12.869776,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,CANAL,606,1.0,0.036446,1,False,nearest_novoltage,,,66.0,False
+pge,PETALUMA C,1343,1.0,0.045876,1,False,nearest,60.0,66.0,66.0,True
+pge,BOGUE,1753,1.0,4.747621,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,PERRY,1184,1.0,0.059082,1,False,nearest,60.0,66.0,66.0,True
+pge,HICKS,1907,1.0,6.178376,1,False,nearest,230.0,230.0,230.0,True
+pge,PINEDALE,2185,1.0,0.018576,1,False,nearest,115.0,115.0,115.0,True
+pge,CALFLAX,119,1.0,0.014631,1,False,nearest,60.0,66.0,66.0,True
+pge,STILLWATER,1287,1.0,0.018668,1,False,nearest,60.0,66.0,66.0,True
+pge,SAN RAFAEL,581,1.0,5.872911,1,False,nearest,115.0,115.0,115.0,True
+pge,CHICO B,44,1.0,0.031688,1,False,nearest,115.0,115.0,115.0,True
+pge,VACA DIXON,1320,1.0,0.463132,1,False,nearest_voltage_fallback,500.0,500.0,230.0,False
+pge,ZAMORA,1485,1.0,10.532938,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,NEW HOPE,821,1.0,0.094815,1,False,nearest,60.0,66.0,66.0,True
+pge,ASHLAN AVE,7845,1.0,4.283956,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,DEEPWATER,845,1.0,8.855169,1,False,nearest,115.0,115.0,115.0,True
+pge,WOLFE,1264,1.0,0.042516,1,False,nearest,115.0,115.0,115.0,True
+pge,CLARK ROAD,1911,1.0,16.113656,1,False,nearest_voltage_fallback,60.0,66.0,115.0,False
+pge,DOLAN ROAD,1648,1.0,0.013613,1,False,nearest_novoltage,,,66.0,False
+pge,RICHMOND R,1598,1.0,2.637302,1,False,nearest,115.0,115.0,115.0,True
+pge,PINE GROVE,33,1.0,0.043121,1,False,nearest,60.0,66.0,66.0,True
+pge,LE GRAND,619,1.0,16.904192,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,WEBER,2297,1.0,1.645064,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,STOCKDALE,259,1.0,4.808197,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,BALFOUR,91,1.0,4.66032,1,False,nearest,60.0,66.0,66.0,True
+pge,BOWLES,139,1.0,0.025268,1,False,nearest,60.0,66.0,66.0,True
+pge,LAMMERS,1139,1.0,5.92017,1,False,nearest,115.0,115.0,115.0,True
+pge,HIGHLANDS,329,1.0,11.423036,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,TIDEWATER,1326,1.0,9.408404,1,False,nearest,230.0,230.0,230.0,True
+pge,MOUNTAIN QUARRIES,102,1.0,0.036318,1,False,nearest,60.0,66.0,66.0,True
+pge,CASTRO VALLEY,4,1.0,0.055955,1,False,nearest,230.0,230.0,230.0,True
+pge,CLAY,26,1.0,0.006451,1,False,nearest,60.0,66.0,66.0,True
+pge,OLIVEHURST,1493,1.0,4.507532,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,LLAGAS,1247,1.0,0.023594,1,False,nearest,115.0,115.0,115.0,True
+pge,SARANAP,2146,1.0,0.086151,1,False,nearest_novoltage,,,66.0,False
+pge,KEARNEY,133,0.5,0.274614,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,KEARNEY,2187,0.5,0.346943,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,KING CITY,632,1.0,1.282828,1,False,nearest,60.0,66.0,66.0,True
+pge,OROSI,1414,1.0,0.019063,1,False,nearest,70.0,66.0,66.0,True
+pge,LIVERMORE,15,1.0,0.030584,1,False,nearest,60.0,66.0,66.0,True
+pge,PLACERVILLE,99,1.0,5.565501,1,False,nearest,115.0,115.0,115.0,True
+pge,DUMBARTON,7,1.0,0.038674,1,False,nearest,115.0,115.0,115.0,True
+pge,UPPER LAKE,332,1.0,0.051438,1,False,nearest,60.0,66.0,66.0,True
+pge,ERTA,1270,1.0,0.030304,1,False,nearest,60.0,66.0,66.0,True
+pge,CAPAY,1580,1.0,8.195736,1,False,nearest,60.0,66.0,66.0,True
+pge,NORTH DUBLIN,2236,1.0,7.548544,1,False,nearest,230.0,230.0,230.0,True
+pge,CALIFORNIA AVE,1968,1.0,3.261175,1,False,nearest,115.0,115.0,115.0,True
+pge,ORICK,2239,1.0,0.023864,1,False,nearest,60.0,66.0,66.0,True
+pge,VALLEY VIEW,93,1.0,6.885609,1,False,nearest,115.0,115.0,115.0,True
+pge,DRUM,755,1.0,22.429372,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,MARTELL,29,1.0,0.038979,1,False,nearest,60.0,66.0,66.0,True
+pge,CRESSEY,608,1.0,0.016063,1,False,nearest,115.0,115.0,115.0,True
+pge,HENRIETTA,1971,1.0,2.522922,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,MILLBRAE,1202,0.5,0.058054,2,False,nearest,115.0,115.0,115.0,True
+pge,MILLBRAE,2148,0.5,0.06373,2,False,nearest,115.0,115.0,115.0,True
+pge,OLETA,31,1.0,0.013188,1,False,nearest,60.0,66.0,66.0,True
+pge,WATSONVILLE,1909,1.0,0.065459,1,False,nearest,60.0,66.0,66.0,True
+pge,GUERNSEY,1976,1.0,3.251468,1,False,nearest,70.0,66.0,66.0,True
+pge,HOLLYWOOD,2142,1.0,2.637035,1,False,nearest,12.0,66.0,66.0,True
+pge,WESTLEY,1349,1.0,7.039164,1,False,nearest,115.0,115.0,115.0,True
+pge,CHOWCHILLA,1967,1.0,17.544977,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,SF A (POTRERO),1503,1.0,0.019866,1,False,nearest,230.0,230.0,230.0,True
+pge,FOOTHILL,1179,1.0,0.039439,1,False,nearest,115.0,115.0,115.0,True
+pge,KERN POWER,263,0.5,1.861347,2,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,KERN POWER,2198,0.5,1.916125,2,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,GUALALA,594,1.0,0.048274,1,False,nearest,60.0,66.0,66.0,True
+pge,PANAMA,259,1.0,0.015003,1,False,nearest,70.0,66.0,66.0,True
+pge,KONOCTI,329,1.0,0.030219,1,False,nearest,60.0,66.0,66.0,True
+pge,BORONDA,8337,1.0,0.036132,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,ALMADEN,1241,1.0,0.016943,1,False,nearest,60.0,66.0,66.0,True
+pge,BUELLTON,1212,1.0,0.06008,1,False,nearest,115.0,115.0,115.0,True
+pge,EL NIDO,7913,1.0,16.998821,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,FORESTHILL,748,1.0,0.109083,1,False,nearest,60.0,66.0,66.0,True
+pge,PRUNEDALE,652,1.0,0.054863,1,False,nearest_novoltage,,,115.0,False
+pge,DAYTON ROAD,44,1.0,0.867543,1,False,nearest,115.0,115.0,115.0,True
+pge,LAKEWOOD,92,1.0,6.069048,1,False,nearest,115.0,115.0,115.0,True
+pge,LODI,1789,1.0,0.069656,1,False,nearest,60.0,66.0,66.0,True
+pge,BARTON,108,1.0,3.454692,1,False,nearest,115.0,115.0,115.0,True
+pge,ALHAMBRA,69,1.0,0.026718,1,False,nearest,115.0,115.0,115.0,True
+pge,BRIDGEVILLE,167,1.0,22.091895,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,IONE,27,1.0,0.039613,1,False,nearest,60.0,66.0,66.0,True
+pge,MABURY,1250,1.0,0.041639,1,False,nearest,115.0,115.0,115.0,True
+pge,TUDOR,1754,1.0,9.265944,1,False,nearest,60.0,66.0,66.0,True
+pge,GATES,323,1.0,10.636407,1,False,nearest_voltage_fallback,500.0,500.0,66.0,False
+pge,WESTPARK,280,1.0,0.013774,1,False,nearest,115.0,115.0,115.0,True
+pge,GIFFEN,148,1.0,12.822008,1,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,SALINAS,7695,1.0,0.064045,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,CLARKSVILLE,2345,1.0,4.115283,1,False,nearest_novoltage,,,66.0,False
+pge,ORO FINO,52,1.0,21.488331,1,False,nearest_novoltage,,,115.0,False
+pge,SAN RAMON,95,0.5,4.981771,2,False,nearest,230.0,230.0,230.0,True
+pge,SAN RAMON,2160,0.5,4.955257,2,False,nearest,230.0,230.0,230.0,True
+pge,EAST NICOLAUS,1388,1.0,11.404905,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,WILLITS,597,1.0,27.802781,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,TRES VIAS,53,1.0,0.045389,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,CARUTHERS,123,1.0,0.06479,1,False,nearest_novoltage,,,66.0,False
+pge,SAN JOAQUIN,148,1.0,14.634863,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,MANTECA,7758,1.0,0.048924,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,BRENTWOOD,1603,1.0,7.84608,1,False,nearest,230.0,230.0,230.0,True
+pge,SAN MIGUEL,1183,1.0,15.192763,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,LOCKHEED NO 2,1238,1.0,0.70949,1,False,nearest,115.0,115.0,115.0,True
+pge,WRIGHT,2173,1.0,6.613847,1,False,nearest,230.0,230.0,230.0,True
+pge,CLOVIS,2186,1.0,5.410016,1,False,nearest,115.0,115.0,115.0,True
+pge,CAYETANO,1551,1.0,0.048765,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,PIERCY,1813,1.0,0.123991,1,False,nearest,115.0,115.0,115.0,True
+pge,COLONY,1142,1.0,0.078923,1,False,nearest,60.0,66.0,66.0,True
+pge,SANTA TERESA,1244,0.5,0.784406,2,False,nearest,115.0,115.0,115.0,True
+pge,SANTA TERESA,1815,0.5,0.843432,2,False,nearest,115.0,115.0,115.0,True
+pge,PLUMAS,1493,1.0,2.817082,1,False,nearest,60.0,66.0,66.0,True
+pge,VICTOR,1142,1.0,5.024143,1,False,nearest,60.0,66.0,66.0,True
+pge,PEACHTON,36,1.0,1.565417,1,False,nearest_novoltage,,,66.0,False
+pge,CORDELIA,1330,1.0,2.647066,1,False,nearest,115.0,115.0,115.0,True
+pge,MORGAN HILL,1255,1.0,0.030172,1,False,nearest,115.0,115.0,115.0,True
+pge,ARANA,2174,1.0,0.024842,1,False,nearest,60.0,66.0,66.0,True
+pge,VACAVILLE,1320,1.0,7.23643,1,False,nearest_voltage_fallback,115.0,115.0,230.0,False
+pge,EL DORADO PH,106,1.0,0.022944,1,False,nearest,115.0,115.0,115.0,True
+pge,NEWARK 12KV,8336,1.0,0.246094,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,NARROWS,664,1.0,4.154475,1,False,nearest,60.0,66.0,66.0,True
+pge,UKIAH,2403,1.0,0.621767,1,False,nearest,115.0,115.0,115.0,True
+pge,ARLINGTON,2133,1.0,0.007053,1,False,nearest,60.0,66.0,66.0,True
+pge,MESA,8618,1.0,0.115937,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,FAIRHAVEN,1574,0.5,1.323405,2,False,nearest,60.0,66.0,66.0,True
+pge,FAIRHAVEN,1575,0.5,1.552282,2,False,nearest,60.0,66.0,66.0,True
+pge,SUISUN,1333,1.0,0.067851,1,False,nearest_novoltage,,,66.0,False
+pge,LINCOLN,751,1.0,0.014444,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,FAIRWAY,1213,1.0,0.039828,1,False,nearest,115.0,115.0,115.0,True
+pge,HUMBOLDT BAY PP,1574,0.5,6.28588,2,False,nearest_novoltage,,,66.0,False
+pge,HUMBOLDT BAY PP,1575,0.5,6.34324,2,False,nearest_novoltage,,,66.0,False
+pge,MORRO BAY,7637,1.0,0.038152,1,False,nearest_voltage_fallback,500.0,500.0,115.0,False
+pge,WALNUT CREEK,2145,1.0,0.00942,1,False,nearest_novoltage,,,66.0,False
+pge,ATWATER,605,1.0,0.008591,1,False,nearest,115.0,115.0,115.0,True
+pge,HERDLYN,70,1.0,0.002191,1,False,nearest,60.0,66.0,66.0,True
+pge,VALLEY HOME,1136,1.0,9.755165,1,False,nearest,115.0,115.0,115.0,True
+pge,WEST FRESNO,1968,1.0,7.572367,1,False,nearest,115.0,115.0,115.0,True
+pge,HARDING,1148,1.0,0.027457,1,False,nearest,60.0,66.0,66.0,True
+pge,RICE,67,1.0,0.074605,1,False,nearest,60.0,66.0,66.0,True
+pge,ELK HILLS,1689,1.0,7.995006,1,False,nearest,230.0,230.0,230.0,True
+pge,CARRIZO PLAINS,232,1.0,27.407071,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,GANSO,266,1.0,11.103658,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,RED BLUFF,1401,1.0,0.011493,1,False,nearest,60.0,66.0,66.0,True
+pge,SMARTVILLE,664,1.0,0.073226,1,False,nearest,60.0,66.0,66.0,True
+pge,KERN OIL,283,1.0,0.030378,1,False,nearest,115.0,115.0,115.0,True
+pge,CORNING,1395,1.0,0.025855,1,False,nearest,60.0,66.0,66.0,True
+pge,FAIRMOUNT,2130,1.0,0.043698,1,False,nearest,60.0,66.0,66.0,True
+pge,BANGOR,41,1.0,0.036527,1,False,nearest_novoltage,,,66.0,False
+pge,TYLER,1400,1.0,1.110355,1,False,nearest,60.0,66.0,66.0,True
+pge,CORCORAN,314,1.0,2.754155,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,SANTA YNEZ,1218,1.0,0.035777,1,False,nearest,115.0,115.0,115.0,True
+pge,BERKELEY F,2135,1.0,0.011725,1,False,nearest_novoltage,,,66.0,False
+pge,KINGSBURG,107,0.5,5.797969,2,False,nearest,115.0,115.0,115.0,True
+pge,KINGSBURG,1653,0.5,5.650527,2,False,nearest,115.0,115.0,115.0,True
+pge,VIERRA,1137,1.0,8.381866,1,False,nearest,115.0,115.0,115.0,True
+pge,GARBERVILLE,167,1.0,20.642883,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,LAKEVIEW,222,1.0,4.868491,1,False,nearest,70.0,66.0,66.0,True
+pge,LAS GALLINAS A,581,1.0,0.022395,1,False,nearest,115.0,115.0,115.0,True
+pge,DEL MONTE,645,1.0,2.509307,1,False,nearest,115.0,115.0,115.0,True
+pge,PARADISE,1911,1.0,15.53075,1,False,nearest_novoltage,,,115.0,False
+pge,ANDERSON,1278,1.0,0.042799,1,False,nearest,60.0,66.0,66.0,True
+pge,FRUITLAND,167,1.0,0.092946,1,False,nearest,60.0,66.0,66.0,True
+pge,KNIGHTS LANDING,1485,1.0,0.118322,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,PEASE,1393,1.0,0.017969,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,REEDLEY,1413,1.0,9.484582,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,RENFRO,263,0.5,7.904466,2,False,nearest,115.0,115.0,115.0,True
+pge,RENFRO,2198,0.5,7.959352,2,False,nearest,115.0,115.0,115.0,True
+pge,PLEASANT GROVE,753,0.5,0.022811,2,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,PLEASANT GROVE,2110,0.5,0.18383,2,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,CLOVERDALE,1338,1.0,13.165186,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,SISQUOC,1216,1.0,6.632037,1,False,nearest,115.0,115.0,115.0,True
+pge,LOCKEFORD,1142,0.5,8.337398,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,LOCKEFORD,1185,0.5,8.109167,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,COLUMBUS,238,0.333333,4.663177,3,False,nearest,115.0,115.0,115.0,True
+pge,COLUMBUS,281,0.333333,4.731122,3,False,nearest,115.0,115.0,115.0,True
+pge,COLUMBUS,2197,0.333333,4.689048,3,False,nearest,115.0,115.0,115.0,True
+pge,SILVERADO,8044,1.0,0.021512,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,SAN PABLO,93,1.0,1.502212,1,False,nearest,115.0,115.0,115.0,True
+pge,BRITTON,1229,1.0,0.041503,1,False,nearest,115.0,115.0,115.0,True
+pge,ALTO,7684,1.0,0.013853,1,False,nearest_novoltage,,,66.0,False
+pge,RACETRACK,1452,1.0,0.058559,1,False,nearest,115.0,115.0,115.0,True
+pge,CHEROKEE,1141,1.0,0.02871,1,False,nearest,60.0,66.0,66.0,True
+pge,BONNIE NOOK,755,1.0,16.562487,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,DIXON,1329,1.0,0.008335,1,False,nearest_novoltage,,,66.0,False
+pge,BUCKS CREEK,769,0.5,33.544297,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,BUCKS CREEK,1749,0.5,33.324224,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,CLEAR LAKE,330,1.0,13.366873,1,False,nearest_voltage_fallback,60.0,66.0,115.0,False
+pge,DEVILS DEN,237,1.0,0.085695,1,False,nearest,70.0,66.0,66.0,True
+pge,COPUS,246,1.0,8.493506,1,False,nearest,70.0,66.0,66.0,True
+pge,MAPLE,2142,1.0,4.526819,1,False,nearest,12.0,66.0,66.0,True
+pge,BERESFORD,1192,1.0,0.040101,1,False,nearest,60.0,66.0,66.0,True
+pge,GEYSERVILLE,1338,1.0,0.029833,1,False,nearest,60.0,66.0,66.0,True
+pge,COVELO,591,1.0,0.031762,1,False,nearest,60.0,66.0,66.0,True
+pge,MARIPOSA,2303,1.0,10.094162,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,MORMON,1158,1.0,0.076346,1,False,nearest,60.0,66.0,66.0,True
+pge,WINTERS,1334,1.0,0.116087,1,False,nearest,60.0,66.0,66.0,True
+pge,WHISMAN,1263,1.0,0.042565,1,False,nearest,115.0,115.0,115.0,True
+pge,OAKLAND X,1611,1.0,0.019067,1,False,nearest,115.0,115.0,115.0,True
+pge,TUPMAN,275,1.0,0.116877,1,False,nearest,115.0,115.0,115.0,True
+pge,AUBERRY,114,0.5,30.763462,2,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,AUBERRY,575,0.5,30.752356,2,False,nearest_voltage_fallback,70.0,66.0,115.0,False
+pge,TRES PINOS,987,1.0,18.927922,1,False,nearest_voltage_fallback,21.0,66.0,66.0,True
+pge,SPENCE,649,1.0,7.372622,1,False,nearest,60.0,66.0,66.0,True
+pge,WAHTOKE,140,1.0,6.222496,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,SAN MATEO,8647,1.0,0.193806,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,WELLFIELD,279,1.0,0.091997,1,False,nearest,70.0,66.0,66.0,True
+pge,RIVERBANK,1381,1.0,5.84458,1,False,nearest,115.0,115.0,115.0,True
+pge,OLEMA,583,1.0,0.009359,1,False,nearest,60.0,66.0,66.0,True
+pge,ZACA,1219,1.0,0.023083,1,False,nearest,115.0,115.0,115.0,True
+pge,DINUBA,1413,1.0,0.037635,1,False,nearest,60.0,66.0,66.0,True
+pge,PARLIER,140,1.0,0.014723,1,False,nearest_novoltage,,,66.0,False
+pge,ELECTRA,33,1.0,9.140034,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,SANTA RITA,611,1.0,8.925326,1,False,nearest_novoltage,,,66.0,False
+pge,STUART,2137,1.0,0.022689,1,False,nearest,60.0,66.0,66.0,True
+pge,PEABODY,7893,1.0,0.081179,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,BASALT,657,1.0,0.016846,1,False,nearest,60.0,66.0,66.0,True
+pge,SANTA ROSA A,1345,1.0,7.203298,1,False,nearest,115.0,115.0,115.0,True
+pge,HONCUT,1391,1.0,7.457266,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,BARRY,1387,1.0,0.010782,1,False,nearest,60.0,66.0,66.0,True
+pge,PIKE CITY,1297,1.0,13.326626,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,ARCATA,160,1.0,0.02891,1,False,nearest,60.0,66.0,66.0,True
+pge,TAFT,271,1.0,6.225796,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,CORRAL,2294,1.0,15.189965,1,False,nearest_voltage_fallback,60.0,66.0,230.0,False
+pge,PUEBLO,660,1.0,0.033064,1,False,nearest,115.0,115.0,115.0,True
+pge,CHICO A,42,1.0,0.986901,1,False,nearest_novoltage,,,115.0,False
+pge,REDBUD,329,1.0,12.5553,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,SEMITROPIC,266,1.0,0.014363,1,False,nearest,115.0,115.0,115.0,True
+pge,WILSON,619,1.0,0.019791,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,WATERLOO,1170,1.0,0.051698,1,False,nearest,60.0,66.0,66.0,True
+pge,DAIRYVILLE,1396,1.0,0.010237,1,False,nearest,60.0,66.0,66.0,True
+pge,LOGAN CREEK,154,1.0,0.039354,1,False,nearest,230.0,230.0,230.0,True
+pge,PALO SECO,1611,1.0,2.663955,1,False,nearest,115.0,115.0,115.0,True
+pge,LOS GATOS,1814,1.0,0.015397,1,False,nearest,60.0,66.0,66.0,True
+pge,RIO DELL,177,1.0,0.007577,1,False,nearest,60.0,66.0,66.0,True
+pge,SAN CARLOS,8591,1.0,2.849662,1,False,nearest_novoltage,,,66.0,False
+pge,BONITA,1967,1.0,0.043746,1,False,nearest,70.0,66.0,66.0,True
+pge,CHARCA,234,1.0,0.005936,1,False,nearest,115.0,115.0,115.0,True
+pge,WILLOW PASS,80,1.0,7.272106,1,False,nearest,115.0,115.0,115.0,True
+pge,OLD RIVER,259,1.0,12.070749,1,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,COLUMBIA HILL,663,1.0,0.031728,1,False,nearest,60.0,66.0,66.0,True
+pge,MALAGA,147,1.0,0.735694,1,False,nearest,115.0,115.0,115.0,True
+pge,WASCO,277,1.0,0.021221,1,False,nearest,115.0,115.0,115.0,True
+pge,VOLTA,2296,1.0,24.029378,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,CHALLENGE,1489,1.0,0.043864,1,False,nearest,60.0,66.0,66.0,True
+pge,JOLON,641,1.0,0.059593,1,False,nearest,60.0,66.0,66.0,True
+pge,CARQUINEZ,1324,1.0,0.952029,1,False,nearest,115.0,115.0,115.0,True
+pge,WEST LANE,1171,1.0,0.043443,1,False,nearest,60.0,66.0,66.0,True
+pge,HAMMER,1147,1.0,0.006262,1,False,nearest,60.0,66.0,66.0,True
+pge,HIGGINS,758,1.0,8.936793,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,HARRIS,169,1.0,0.051763,1,False,nearest,60.0,66.0,66.0,True
+pge,PAUL SWEET,1268,1.0,6.683164,1,False,nearest,115.0,115.0,115.0,True
+pge,SPAULDING,756,1.0,12.701365,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,DESCHUTES,1744,1.0,7.612559,1,False,nearest_voltage_fallback,60.0,66.0,115.0,False
+pge,WEEDPATCH,278,1.0,0.017042,1,False,nearest,70.0,66.0,66.0,True
+pge,SHADY GLEN,755,1.0,0.075984,1,False,nearest,60.0,66.0,66.0,True
+pge,COLUSA,63,1.0,0.046827,1,False,nearest,60.0,66.0,66.0,True
+pge,FRUITVALE,263,0.5,1.336291,2,False,nearest_novoltage,,,115.0,False
+pge,FRUITVALE,2198,0.5,1.390908,2,False,nearest_novoltage,,,115.0,False
+pge,TERMINOUS,1167,1.0,0.099889,1,False,nearest,60.0,66.0,66.0,True
+pge,BANCROFT,2153,1.0,0.068682,1,False,nearest_novoltage,,,66.0,False
+pge,WEST SACRAMENTO,8661,1.0,0.034989,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,PASO ROBLES,1183,1.0,0.02053,1,False,nearest,60.0,66.0,66.0,True
+pge,PITTSBURG,2121,1.0,2.09792,1,False,nearest,230.0,230.0,230.0,True
+pge,HORSESHOE,750,1.0,0.025971,1,False,nearest,115.0,115.0,115.0,True
+pge,ORLAND B,1580,1.0,4.392573,1,False,nearest,60.0,66.0,66.0,True
+pge,GUSTINE,1382,1.0,9.304004,1,False,nearest_voltage_fallback,60.0,66.0,230.0,False
+pge,BEAR VALLEY,2303,1.0,12.362933,1,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,JESSUP,1744,1.0,6.347764,1,False,nearest,115.0,115.0,115.0,True
+pge,LAS PULGAS,1200,1.0,0.038298,1,False,nearest,60.0,66.0,66.0,True
+pge,SWIFT,1261,1.0,0.019549,1,False,nearest,115.0,115.0,115.0,True
+pge,GRAND ISLAND,905,1.0,9.900277,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,BURNEY,1273,1.0,3.473628,1,False,nearest_novoltage,,,66.0,False
+pge,BAY MEADOWS,1193,1.0,7.563273,1,False,nearest,115.0,115.0,115.0,True
+pge,MENDOTA,124,1.0,11.721619,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,CABRILLO,39,1.0,0.008449,1,False,nearest,115.0,115.0,115.0,True
+pge,EMERALD LAKE,1200,0.333333,4.36039,3,False,nearest,60.0,66.0,66.0,True
+pge,EMERALD LAKE,1209,0.333333,4.147718,3,False,nearest,60.0,66.0,66.0,True
+pge,EMERALD LAKE,1210,0.333333,4.118408,3,False,nearest,60.0,66.0,66.0,True
+pge,MONROE,1345,1.0,7.945001,1,False,nearest,115.0,115.0,115.0,True
+pge,EL PECO,571,1.0,0.028912,1,False,nearest,70.0,66.0,66.0,True
+pge,PENRYN,752,1.0,0.041223,1,False,nearest,60.0,66.0,66.0,True
+pge,PUTAH CREEK,1334,1.0,3.886213,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,BAKERSFIELD,228,1.0,0.150549,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,SARATOGA,1907,1.0,5.323807,1,False,nearest,230.0,230.0,230.0,True
+pge,HARTER,1390,1.0,0.028694,1,False,nearest,60.0,66.0,66.0,True
+pge,FIGARDEN,7845,1.0,0.061347,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,OAKLAND D,1608,1.0,0.178296,1,False,nearest,115.0,115.0,115.0,True
+pge,ROSSMOOR,2146,1.0,3.429156,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,ARVIN,264,1.0,6.394125,1,False,nearest,70.0,66.0,66.0,True
+pge,TRIMBLE,1262,1.0,0.111151,1,False,nearest,115.0,115.0,115.0,True
+pge,SANTA NELLA,617,1.0,0.018908,1,False,nearest_novoltage,,,66.0,False
+pge,HILLSDALE,1192,0.25,3.169168,4,False,nearest,60.0,66.0,66.0,True
+pge,HILLSDALE,1205,0.25,3.20154,4,False,nearest,60.0,66.0,66.0,True
+pge,HILLSDALE,2150,0.25,3.235833,4,False,nearest,60.0,66.0,66.0,True
+pge,HILLSDALE,8587,0.25,3.111866,4,False,nearest,60.0,66.0,66.0,True
+pge,PINECREST,1450,1.0,24.64169,1,False,nearest_voltage_fallback,17.0,66.0,115.0,False
+pge,BECK STREET,2153,1.0,3.43274,1,False,nearest,12.0,66.0,66.0,True
+pge,MONARCH,1157,1.0,0.024179,1,False,nearest,60.0,66.0,66.0,True
+pge,LONE TREE,1603,1.0,0.061274,1,False,nearest,230.0,230.0,230.0,True
+pge,BIG LAGOON,161,1.0,0.0687,1,False,nearest,60.0,66.0,66.0,True
+pge,ALPAUGH,315,1.0,10.861192,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,EVERGREEN,1260,1.0,2.454546,1,False,nearest,115.0,115.0,115.0,True
+pge,BARRETT,2291,1.0,0.051208,1,False,nearest,60.0,66.0,66.0,True
+pge,MOUNTAIN VIEW,1256,1.0,0.008856,1,False,nearest,115.0,115.0,115.0,True
+pge,FRENCH CAMP,1145,1.0,0.021823,1,False,nearest,60.0,66.0,66.0,True
+pge,SF X (MISSION),1130,1.0,0.050958,1,False,nearest,115.0,115.0,115.0,True
+pge,CASTRO,2322,1.0,4.7899,1,False,nearest,12.0,66.0,66.0,True
+pge,LOS OSITOS,632,1.0,9.618384,1,False,nearest,60.0,66.0,66.0,True
+pge,HAMILTON BRANCH,1573,1.0,6.722193,1,False,nearest,60.0,66.0,66.0,True
+pge,7TH STANDARD,263,0.5,8.462889,2,False,nearest,115.0,115.0,115.0,True
+pge,7TH STANDARD,2198,0.5,8.500794,2,False,nearest,115.0,115.0,115.0,True
+pge,LOS COCHES,644,1.0,0.0378,1,False,nearest,60.0,66.0,66.0,True
+pge,PLACER,100,1.0,2.576288,1,False,nearest,115.0,115.0,115.0,True
+pge,MC FARLAND,252,1.0,0.013501,1,False,nearest,70.0,66.0,66.0,True
+pge,FULTON,8014,1.0,0.076491,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,BULLARD,2185,1.0,4.234212,1,False,nearest,115.0,115.0,115.0,True
+pge,BUENA VISTA,649,1.0,0.458267,1,False,nearest,60.0,66.0,66.0,True
+pge,PEORIA,1588,1.0,5.603924,1,False,nearest_voltage_fallback,115.0,115.0,230.0,False
+pge,KANAKA,1489,1.0,12.387558,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,BAHIA,1326,1.0,0.030658,1,False,nearest,230.0,230.0,230.0,True
+pge,GANSNER,1749,1.0,3.941181,1,False,nearest,60.0,66.0,66.0,True
+pge,TRACY,1149,1.0,0.079967,1,False,nearest_novoltage,,,115.0,False
+pge,LAS POSITAS,15,1.0,4.744529,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,CONTRA COSTA,1603,0.5,6.181231,2,False,nearest,230.0,230.0,230.0,True
+pge,CONTRA COSTA,2121,0.5,6.331151,2,False,nearest,230.0,230.0,230.0,True
+pge,DAIRYLAND,1967,1.0,14.055798,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,CHANNEL,1140,1.0,0.019911,1,False,nearest,60.0,66.0,66.0,True
+pge,JAMESON,1781,1.0,1.03159,1,False,nearest,115.0,115.0,115.0,True
+pge,BELL,743,1.0,0.022936,1,False,nearest,115.0,115.0,115.0,True
+pge,CUYAMA,271,1.0,24.508525,1,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,GILL,80,0.333333,2.852297,3,False,nearest,115.0,115.0,115.0,True
+pge,GILL,90,0.333333,2.867773,3,False,nearest,115.0,115.0,115.0,True
+pge,GILL,92,0.333333,2.842587,3,False,nearest,115.0,115.0,115.0,True
+pge,LIVE OAK,1391,1.0,0.016311,1,False,nearest,60.0,66.0,66.0,True
+pge,ANTLER,1736,1.0,18.206016,1,False,nearest_novoltage,,,66.0,False
+pge,WOOD,2142,1.0,1.153357,1,False,nearest,12.0,66.0,66.0,True
+pge,BABEL,2321,1.0,3.880817,1,False,nearest,21.0,66.0,66.0,True
+pge,NEWMAN,1382,1.0,11.523738,1,False,nearest_voltage_fallback,60.0,66.0,230.0,False
+pge,HATTON,639,1.0,0.032154,1,False,nearest,60.0,66.0,66.0,True
+pge,WEIMAR,758,1.0,0.027417,1,False,nearest,60.0,66.0,66.0,True
+pge,SONOMA,7680,1.0,10.818705,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,LIVINGSTON,614,1.0,0.021988,1,False,nearest_novoltage,,,66.0,False
+pge,RANDOLPH,8463,1.0,7.209885,1,False,nearest,12.0,66.0,66.0,True
+pge,DAVIS,7648,1.0,0.049191,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,MONTAGUE,1254,1.0,0.043705,1,False,nearest,115.0,115.0,115.0,True
+pge,ESQUON,42,1.0,12.243505,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,NEWBURG,177,1.0,11.461194,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,SHAFTER,267,1.0,0.00051,1,False,nearest,115.0,115.0,115.0,True
+pge,PANOCHE,124,1.0,4.775472,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,NORD,48,1.0,0.004841,1,False,nearest,115.0,115.0,115.0,True
+pge,FORT SEWARD,167,1.0,21.932539,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,DIVIDE,1213,1.0,9.052815,1,False,nearest,115.0,115.0,115.0,True
+pge,CASSIDY,568,1.0,0.018004,1,False,nearest,70.0,66.0,66.0,True
+pge,PHILO,2403,1.0,22.383435,1,False,nearest_voltage_fallback,60.0,66.0,115.0,False
+pge,PALMER,1216,1.0,0.039617,1,False,nearest,115.0,115.0,115.0,True
+pge,SHINGLE SPRINGS,104,1.0,0.041157,1,False,nearest_novoltage,,,66.0,False
+pge,BLUE LAKE,171,1.0,8.224626,1,False,nearest,60.0,66.0,66.0,True
+pge,WHITNEY,1590,0.5,1.669344,2,False,nearest,21.0,66.0,66.0,True
+pge,WHITNEY,8147,0.5,1.788223,2,False,nearest,21.0,66.0,66.0,True
+pge,MOSHER,1159,1.0,0.019446,1,False,nearest,60.0,66.0,66.0,True
+pge,CAL WATER,238,0.5,6.901166,2,False,nearest,115.0,115.0,115.0,True
+pge,CAL WATER,281,0.5,6.997601,2,False,nearest,115.0,115.0,115.0,True
+pge,RIDGE,2132,1.0,0.023946,1,False,nearest_novoltage,,,66.0,False
+pge,LAMONT,227,1.0,6.847551,1,False,nearest,115.0,115.0,115.0,True
+pge,JARVIS,5,0.5,0.050722,2,False,nearest,115.0,115.0,115.0,True
+pge,JARVIS,13,0.5,0.005311,2,False,nearest,115.0,115.0,115.0,True
+pge,WOODWARD,2184,0.5,6.828407,2,False,nearest,115.0,115.0,115.0,True
+pge,WOODWARD,2185,0.5,6.958001,2,False,nearest,115.0,115.0,115.0,True
+pge,SOTO,2158,1.0,0.040307,1,False,nearest_novoltage,,,66.0,False
+pge,ROSEDALE,263,0.5,0.048878,2,False,nearest,115.0,115.0,115.0,True
+pge,ROSEDALE,2198,0.5,0.051508,2,False,nearest,115.0,115.0,115.0,True
+pge,ALLEGHANY,1297,1.0,0.046128,1,False,nearest,60.0,66.0,66.0,True
+pge,FORT ORD,636,1.0,0.018956,1,False,nearest,115.0,115.0,115.0,True
+pge,FROGTOWN,56,1.0,9.90706,1,False,nearest,115.0,115.0,115.0,True
+pge,SMYRNA,266,1.0,13.13075,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,GIRVAN,1283,1.0,0.019509,1,False,nearest_novoltage,,,66.0,False
+pge,WHEATLAND,1493,1.0,11.804165,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,MERCED,619,1.0,7.422647,1,False,nearest,115.0,115.0,115.0,True
+pge,SAN JOSE A,1257,1.0,0.011605,1,False,nearest,115.0,115.0,115.0,True
+pge,PLYMOUTH,8463,1.0,6.86976,1,False,nearest,12.0,66.0,66.0,True
+pge,COPPERMINE,114,1.0,9.730705,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,SAN JOSE B,1258,1.0,0.033595,1,False,nearest,115.0,115.0,115.0,True
+pge,EL CAPITAN,605,0.5,10.026245,2,False,nearest,115.0,115.0,115.0,True
+pge,EL CAPITAN,619,0.5,9.892315,2,False,nearest,115.0,115.0,115.0,True
+pge,TEMPLETON,8406,1.0,0.014834,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,FMC,1231,1.0,0.035739,1,False,nearest,115.0,115.0,115.0,True
+pge,ORO LOMA,150,1.0,6.4014,1,False,nearest,115.0,115.0,115.0,True
+pge,LOCKHEED NO 1,1238,1.0,1.228203,1,False,nearest,115.0,115.0,115.0,True
+pge,FITCH MOUNTAIN,1338,1.0,12.405784,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,MARICOPA,251,1.0,0.086247,1,False,nearest,70.0,66.0,66.0,True
+pge,ROUGH AND READY ISLA,2320,1.0,0.054621,1,False,nearest,60.0,66.0,66.0,True
+pge,GLENWOOD,1198,1.0,0.03966,1,False,nearest,60.0,66.0,66.0,True
+pge,RESEARCH,95,0.5,0.03222,2,False,nearest,230.0,230.0,230.0,True
+pge,RESEARCH,2160,0.5,0.042446,2,False,nearest,230.0,230.0,230.0,True
+pge,PACIFICA,1203,1.0,0.035711,1,False,nearest,60.0,66.0,66.0,True
+pge,GERBER,1398,1.0,6.112705,1,False,nearest,60.0,66.0,66.0,True
+pge,AMES,2289,1.0,0.064914,1,False,nearest,115.0,115.0,115.0,True
+pge,HAMMONDS,1910,1.0,3.776677,1,False,nearest_voltage_fallback,115.0,115.0,230.0,False
+pge,VASONA,1907,1.0,0.008892,1,False,nearest,230.0,230.0,230.0,True
+pge,DEL MAR,747,1.0,0.010044,1,False,nearest,60.0,66.0,66.0,True
+pge,HIGHWAY,659,1.0,0.03679,1,False,nearest_novoltage,,,115.0,False
+pge,SALT SPRINGS,2317,1.0,3.154116,1,False,nearest,115.0,115.0,115.0,True
+pge,SAN LUIS OBISPO,1179,1.0,7.043818,1,False,nearest,115.0,115.0,115.0,True
+pge,AUBURN,742,1.0,0.020953,1,False,nearest_novoltage,,,66.0,False
+pge,WHEELER RIDGE,1679,1.0,7.085554,1,False,nearest,230.0,230.0,230.0,True
+pge,RALSTON,1205,1.0,0.032493,1,False,nearest,60.0,66.0,66.0,True
+pge,GREENBRAE,580,1.0,0.021863,1,False,nearest,60.0,66.0,66.0,True
+pge,21ST AVENUE,2322,1.0,7.545308,1,False,nearest,12.0,66.0,66.0,True
+pge,EL CERRITO G,11,1.0,6.703321,1,False,nearest,115.0,115.0,115.0,True
+pge,CURTIS,1511,1.0,5.893923,1,False,nearest,115.0,115.0,115.0,True
+pge,ACTON,8463,1.0,6.436049,1,False,nearest,12.0,66.0,66.0,True
+pge,MIWUK,1450,1.0,0.009567,1,False,nearest,115.0,115.0,115.0,True
+pge,PURISIMA,1217,1.0,0.010668,1,False,nearest,115.0,115.0,115.0,True
+pge,RISING RIVER,1273,1.0,8.46306,1,False,nearest,60.0,66.0,66.0,True
+pge,TASSAJARA,2236,1.0,0.03408,1,False,nearest,230.0,230.0,230.0,True
+pge,HURON,119,1.0,11.011919,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,MENLO,1201,1.0,0.05302,1,False,nearest,60.0,66.0,66.0,True
+pge,WOODACRE,587,1.0,0.056923,1,False,nearest,60.0,66.0,66.0,True
+pge,CONCORD NO 1,2321,1.0,1.855669,1,False,nearest,21.0,66.0,66.0,True
+pge,SERRAMONTE,1127,0.5,4.546476,2,False,nearest,115.0,115.0,115.0,True
+pge,SERRAMONTE,1197,0.5,4.493889,2,False,nearest,115.0,115.0,115.0,True
+pge,CHESTER,1573,1.0,17.724607,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,MONTE RIO,1341,1.0,0.065545,1,False,nearest,60.0,66.0,66.0,True
+pge,DUNBAR,2115,1.0,7.60098,1,False,nearest_voltage_fallback,60.0,66.0,230.0,False
+pge,BIG BEND,37,0.5,23.63795,2,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,BIG BEND,2301,0.5,23.414794,2,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,COUNTRY CLUB,1143,1.0,0.074599,1,False,nearest,60.0,66.0,66.0,True
+pge,CEDAR CREEK,1273,1.0,28.291627,1,False,nearest_novoltage,,,66.0,False
+pge,POINT ARENA,599,1.0,0.11027,1,False,nearest,60.0,66.0,66.0,True
+pge,VALLEJO C,1324,1.0,1.492415,1,False,nearest_novoltage,,,115.0,False
+pge,GREEN VALLEY,1272,1.0,9.984973,1,False,nearest,115.0,115.0,115.0,True
+pge,BIG BASIN,1266,1.0,0.042964,1,False,nearest,60.0,66.0,66.0,True
+pge,STOREY,564,0.5,8.720736,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,STOREY,577,0.5,8.536291,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,SPRING GAP,1450,1.0,17.493467,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,BELMONT,8587,1.0,3.904728,1,False,nearest_novoltage,,,66.0,False
+pge,MC CALL,8574,1.0,0.099412,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,8TH AVENUE,2141,1.0,4.086173,1,False,nearest,12.0,66.0,66.0,True
+pge,CAMDEN,120,1.0,0.034443,1,False,nearest,60.0,66.0,66.0,True
+pge,EUREKA E,1574,0.5,0.313235,2,False,nearest,60.0,66.0,66.0,True
+pge,EUREKA E,1575,0.5,0.070792,2,False,nearest,60.0,66.0,66.0,True
+pge,LAURELES,643,1.0,0.027958,1,False,nearest,60.0,66.0,66.0,True
+pge,TULUCAY,8660,1.0,0.051725,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,STAFFORD,585,1.0,0.014494,1,False,nearest,60.0,66.0,66.0,True
+pge,LOS ALTOS,1248,1.0,0.040935,1,False,nearest,60.0,66.0,66.0,True
+pge,BORDEN,577,1.0,0.79428,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,AVENAL,323,1.0,7.290426,1,False,nearest,60.0,66.0,66.0,True
+pge,MIDDLETOWN,1912,0.5,9.246671,2,False,nearest_novoltage,,,230.0,False
+pge,MIDDLETOWN,1913,0.5,9.129577,2,False,nearest_novoltage,,,230.0,False
+pge,OAK,2129,1.0,0.095251,1,False,nearest,60.0,66.0,66.0,True
+pge,BEN LOMOND,1267,1.0,4.256751,1,False,nearest,21.0,66.0,66.0,True
+pge,SAN JOAQUIN #2,575,1.0,17.943011,1,False,nearest_voltage_fallback,60.0,66.0,115.0,False
+pge,DUNNIGAN,1484,1.0,0.055285,1,False,nearest,60.0,66.0,66.0,True
+pge,LINDEN,1153,1.0,0.032258,1,False,nearest,60.0,66.0,66.0,True
+pge,GOLDTREE,1181,1.0,3.654817,1,False,nearest,60.0,66.0,66.0,True
+pge,BOLINAS,579,1.0,0.054169,1,False,nearest,60.0,66.0,66.0,True
+pge,LOW GAP,1408,1.0,22.681468,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,ELK CREEK,154,1.0,24.773545,1,False,nearest_voltage_fallback,60.0,66.0,230.0,False
+pge,APPLE HILL,106,1.0,7.834166,1,False,nearest_novoltage,,,115.0,False
+pge,FRANKLIN,88,1.0,0.032262,1,False,nearest,60.0,66.0,66.0,True
+pge,CHICO C,44,1.0,2.082094,1,False,nearest_voltage_fallback,12.0,66.0,115.0,False
+pge,SAUSALITO,584,1.0,0.027548,1,False,nearest_novoltage,,,115.0,False
+pge,SOLEDAD,8711,1.0,0.014519,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,AIRWAYS,2186,1.0,0.023685,1,False,nearest,115.0,115.0,115.0,True
+pge,ESTUDILLO,2156,1.0,1.333567,1,False,nearest,12.0,66.0,66.0,True
+pge,BUTTE,42,1.0,0.022913,1,False,nearest,115.0,115.0,115.0,True
+pge,SAN BENITO,987,1.0,3.577667,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,CARLOTTA,177,1.0,5.895977,1,False,nearest,60.0,66.0,66.0,True
+pge,CALAVERAS CEMENT,55,1.0,0.128199,1,False,nearest,60.0,66.0,66.0,True
+pge,18TH STREET,2322,1.0,4.185726,1,False,nearest,12.0,66.0,66.0,True
+pge,AVENA,1136,1.0,0.054238,1,False,nearest,115.0,115.0,115.0,True
+pge,LAKEVILLE,7680,1.0,0.099163,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,PETALUMA A,1344,1.0,0.038292,1,False,nearest,60.0,66.0,66.0,True
+pge,TEJON,272,1.0,2.27237,1,False,nearest,70.0,66.0,66.0,True
+pge,INDUSTRIAL ACRES,640,1.0,0.045098,1,False,nearest,60.0,66.0,66.0,True
+pge,WILKINS SLOUGH,1484,1.0,13.915592,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,MARYSVILLE,1494,1.0,0.012283,1,False,nearest,60.0,66.0,66.0,True
+pge,MEADOW LANE,92,1.0,0.027706,1,False,nearest,115.0,115.0,115.0,True
+pge,ANNAPOLIS,1335,1.0,0.112003,1,False,nearest,60.0,66.0,66.0,True
+pge,GRASS VALLEY,663,0.5,14.063296,2,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,GRASS VALLEY,755,0.5,14.009528,2,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,KERMAN,118,1.0,12.229522,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,CALISTOGA,658,1.0,0.062125,1,False,nearest,60.0,66.0,66.0,True
+pge,RINCON,1345,1.0,0.014033,1,False,nearest,115.0,115.0,115.0,True
+pge,EAST MARYSVILLE,1491,1.0,0.013283,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,FIREBAUGH,122,1.0,2.184673,1,False,nearest,60.0,66.0,66.0,True
+pge,SAND CREEK,128,0.5,13.746434,2,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,SAND CREEK,1414,0.5,13.728001,2,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,VALLEJO B,1324,1.0,2.751074,1,False,nearest_novoltage,,,115.0,False
+pge,MAGUNDEN,2197,0.5,0.429637,2,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,MAGUNDEN,8158,0.5,0.20531,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,MAPLE CREEK,8176,1.0,20.136462,1,False,nearest_novoltage,,,66.0,False
+pge,PIT NO 1,1726,1.0,0.103184,1,False,nearest,230.0,230.0,230.0,True
+pge,WILLOW CREEK,171,0.5,36.624304,2,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,WILLOW CREEK,1408,0.5,36.796842,2,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,TAR FLAT,1511,1.0,2.038038,1,False,nearest_voltage_fallback,17.0,66.0,115.0,False
+pge,BERKELEY T,2136,1.0,0.068896,1,False,nearest_novoltage,,,66.0,False
+pge,DOS PALOS,611,1.0,0.053638,1,False,nearest_novoltage,,,66.0,False
+pge,LERDO,218,1.0,8.486274,1,False,nearest,115.0,115.0,115.0,True
+pge,SAN ARDO,641,1.0,21.862868,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,MANCHESTER,2185,1.0,7.004725,1,False,nearest,115.0,115.0,115.0,True
+pge,NORTH TOWER,1332,1.0,0.065178,1,False,nearest,115.0,115.0,115.0,True
+pge,TRINIDAD,180,1.0,0.034332,1,False,nearest,60.0,66.0,66.0,True
+pge,VASCO,1551,0.5,5.7668,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,VASCO,1619,0.5,6.005141,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,OILFIELDS,641,1.0,29.174864,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,SAN JUSTO,987,1.0,0.071792,1,False,nearest_novoltage,,,66.0,False
+pge,ROCKLIN,754,1.0,0.014171,1,False,nearest,60.0,66.0,66.0,True
+pge,ORTIGA,616,1.0,0.031803,1,False,nearest_novoltage,,,66.0,False
+pge,COLUSA JUNCTION,63,1.0,2.755592,1,False,nearest,60.0,66.0,66.0,True
+pge,CATLETT,1388,1.0,0.009338,1,False,nearest,60.0,66.0,66.0,True
+pge,GRAYS FLAT,769,1.0,8.58366,1,False,nearest,60.0,66.0,66.0,True
+pge,BALCH NO 1,128,1.0,22.70435,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,OAKLAND I,2153,1.0,1.879075,1,False,nearest,12.0,66.0,66.0,True
+pge,MIRA VISTA,2125,1.0,0.014397,1,False,nearest,60.0,66.0,66.0,True
+pge,PARKWAY,2116,1.0,0.031899,1,False,nearest,230.0,230.0,230.0,True
+pge,WALDO,2128,1.0,0.042722,1,False,nearest,60.0,66.0,66.0,True
+pge,TULARE LAKE,2295,1.0,1.280881,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,CRESCENT MILLS,769,1.0,8.679207,1,False,nearest_novoltage,,,66.0,False
+pge,LAWRENCE,1228,0.5,1.285778,2,False,nearest,115.0,115.0,115.0,True
+pge,LAWRENCE,1234,0.5,1.38695,2,False,nearest,115.0,115.0,115.0,True
+pge,EDENVALE,1244,0.5,0.042592,2,False,nearest,115.0,115.0,115.0,True
+pge,EDENVALE,1815,0.5,0.102709,2,False,nearest,115.0,115.0,115.0,True
+pge,KETTLEMAN HILLS,323,1.0,0.108713,1,False,nearest,60.0,66.0,66.0,True
+pge,LUCERNE,330,1.0,0.01115,1,False,nearest,115.0,115.0,115.0,True
+pge,EAST STOCKTON,1144,1.0,0.064983,1,False,nearest_novoltage,,,66.0,False
+pge,SALMON CREEK,1346,1.0,0.008666,1,False,nearest,60.0,66.0,66.0,True
+pge,IGNACIO,8512,1.0,0.16318,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,EAST QUINCY,1899,1.0,1.94814,1,False,nearest,60.0,66.0,66.0,True
+pge,STELLING,1259,1.0,0.017993,1,False,nearest,115.0,115.0,115.0,True
+pge,HAYWARD O,2157,1.0,0.040982,1,False,nearest,60.0,66.0,66.0,True
+pge,CASSERLY,8692,1.0,2.081959,1,False,nearest,21.0,66.0,66.0,True
+pge,SF H (MARTIN),1503,1.0,6.103115,1,False,nearest,230.0,230.0,230.0,True
+pge,FORT ROSS,1335,1.0,17.404716,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,YOSEMITE,2322,1.0,5.98729,1,False,nearest,12.0,66.0,66.0,True
+pge,TIVY VALLEY,146,1.0,0.059523,1,False,nearest_novoltage,,,66.0,False
+pge,CORONA,1342,1.0,5.979941,1,False,nearest,115.0,115.0,115.0,True
+pge,SHEPHERD,114,1.0,7.813433,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,PACIFIC GROVE,2181,1.0,0.028648,1,False,nearest,60.0,66.0,66.0,True
+pge,CAROLANDS,1195,1.0,0.030406,1,False,nearest,60.0,66.0,66.0,True
+pge,CAMP EVERS,1268,1.0,0.035421,1,False,nearest,115.0,115.0,115.0,True
+pge,GLENN,1580,1.0,5.047153,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,SILVER,2322,1.0,6.121667,1,False,nearest,12.0,66.0,66.0,True
+pge,MONTICELLO,660,1.0,19.67278,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,RANCHERS COTTON,1968,1.0,1.509677,1,False,nearest,115.0,115.0,115.0,True
+pge,MADISON,1334,1.0,17.037318,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,LAYTONVILLE,596,1.0,0.041758,1,False,nearest,60.0,66.0,66.0,True
+pge,HOOPA,171,1.0,36.809846,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,MADERA,564,1.0,4.311839,1,False,nearest,70.0,66.0,66.0,True
+pge,LAWNDALE,8463,1.0,1.661668,1,False,nearest_novoltage,,,66.0,False
+pge,OREGON TRAIL,1515,1.0,4.957745,1,False,nearest,60.0,66.0,66.0,True
+pge,PENNGROVE,1342,1.0,0.023569,1,False,nearest,115.0,115.0,115.0,True
+pge,COTTLE,1381,1.0,2.953586,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,EDES,8,1.0,0.038108,1,False,nearest,115.0,115.0,115.0,True
+pge,OCEAN,2322,0.5,8.205758,2,False,nearest,12.0,66.0,66.0,True
+pge,OCEAN,8463,0.5,8.059694,2,False,nearest,12.0,66.0,66.0,True
+pge,6TH AVENUE,2322,1.0,5.677227,1,False,nearest,12.0,66.0,66.0,True
+pge,VIEJO,656,1.0,0.026229,1,False,nearest,60.0,66.0,66.0,True
+pge,SAN BRUNO,1206,1.0,0.017505,1,False,nearest,60.0,66.0,66.0,True
+pge,EL PATIO,1245,1.0,0.045912,1,False,nearest,115.0,115.0,115.0,True
+pge,OCEANO,1182,1.0,0.000752,1,False,nearest,115.0,115.0,115.0,True
+pge,FORT BRAGG A,593,1.0,0.054993,1,False,nearest,60.0,66.0,66.0,True
+pge,HALF MOON BAY,1199,1.0,0.063097,1,False,nearest,60.0,66.0,66.0,True
+pge,LOYOLA,1249,1.0,0.03804,1,False,nearest,60.0,66.0,66.0,True
+pge,MIRABEL,1340,1.0,8.953809,1,False,nearest,60.0,66.0,66.0,True
+pge,KERCKHOFF,575,1.0,26.556709,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+pge,MENDOCINO,597,1.0,8.577532,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,BURNS,1267,1.0,0.055825,1,False,nearest,60.0,66.0,66.0,True
+pge,WILLOWS A,154,0.5,6.639435,2,False,nearest_voltage_fallback,60.0,66.0,230.0,False
+pge,WILLOWS A,2106,0.5,6.428825,2,False,nearest_voltage_fallback,60.0,66.0,230.0,False
+pge,MOLINO,1340,1.0,0.066865,1,False,nearest,60.0,66.0,66.0,True
+pge,WARD,2152,1.0,0.038958,1,False,nearest,60.0,66.0,66.0,True
+pge,DALY CITY,1127,1.0,0.045286,1,False,nearest,115.0,115.0,115.0,True
+pge,SF E,2322,1.0,3.119415,1,False,nearest,12.0,66.0,66.0,True
+pge,BIOLA,118,1.0,0.023764,1,False,nearest,70.0,66.0,66.0,True
+pge,CHOLAME,1981,1.0,12.607108,1,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,BROWNS VALLEY,2108,1.0,3.86925,1,False,nearest,60.0,66.0,66.0,True
+pge,ANITA,48,1.0,5.735782,1,False,nearest_novoltage,,,115.0,False
+pge,SULLIVAN,8463,1.0,4.333846,1,False,nearest,12.0,66.0,66.0,True
+pge,JUDAH,2322,1.0,8.568673,1,False,nearest,12.0,66.0,66.0,True
+pge,FREMONT,2164,1.0,3.612155,1,False,nearest,115.0,115.0,115.0,True
+pge,MC KEE,1252,1.0,0.038306,1,False,nearest,115.0,115.0,115.0,True
+pge,CAYUCOS,1177,1.0,0.030581,1,False,nearest,60.0,66.0,66.0,True
+pge,NEWARK 21KV,8336,1.0,0.471709,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,WEST POINT,1958,1.0,0.082265,1,False,nearest,60.0,66.0,66.0,True
+pge,WILLIAMS,63,1.0,13.978341,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,KIRKER,83,0.5,3.788428,2,False,nearest,115.0,115.0,115.0,True
+pge,KIRKER,1914,0.5,3.770591,2,False,nearest,115.0,115.0,115.0,True
+pge,MERCED FALLS,1350,1.0,22.157602,1,False,nearest_voltage_fallback,69.0,66.0,66.0,True
+pge,REDWOOD CITY,8591,1.0,0.045885,1,False,nearest_novoltage,,,66.0,False
+pge,METTLER,1156,1.0,0.036429,1,False,nearest,60.0,66.0,66.0,True
+pge,COTTONWOOD,1278,1.0,6.647193,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,RIVER OAKS,1533,1.0,0.054804,1,False,nearest,115.0,115.0,115.0,True
+pge,BEACH (Q),2322,1.0,3.002132,1,False,nearest,12.0,66.0,66.0,True
+pge,DOBBINS,663,1.0,8.141553,1,False,nearest,60.0,66.0,66.0,True
+pge,DIAMOND SPRINGS,99,1.0,0.014765,1,False,nearest,115.0,115.0,115.0,True
+pge,WESTLAKE,8463,1.0,5.810683,1,False,nearest,12.0,66.0,66.0,True
+pge,MC MULLIN,136,1.0,0.027731,1,False,nearest,230.0,230.0,230.0,True
+pge,VINA,1403,1.0,0.035062,1,False,nearest,60.0,66.0,66.0,True
+pge,STAGG,1905,1.0,7.891237,1,False,nearest,230.0,230.0,230.0,True
+pge,SUMMIT,2358,1.0,8.415073,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,STOCKTON ACRES,2243,1.0,0.034405,1,False,nearest,60.0,66.0,66.0,True
+pge,BIG RIVER,590,1.0,0.013282,1,False,nearest,60.0,66.0,66.0,True
+pge,NORIEGA,2322,1.0,9.799442,1,False,nearest,12.0,66.0,66.0,True
+pge,SOBRANTE,8085,1.0,0.008071,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,GONZALES,638,1.0,0.05547,1,False,nearest,60.0,66.0,66.0,True
+pge,HAAS,128,1.0,24.257661,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,CLAYTON,82,1.0,0.025159,1,False,nearest,115.0,115.0,115.0,True
+pge,SOLANO,2131,1.0,0.011585,1,False,nearest,60.0,66.0,66.0,True
+pge,RIO BRAVO,261,1.0,0.008733,1,False,nearest,115.0,115.0,115.0,True
+pge,NAPA,660,1.0,5.852309,1,False,nearest,115.0,115.0,115.0,True
+pge,ARBUCKLE,64,0.5,5.537787,2,False,nearest,60.0,66.0,66.0,True
+pge,ARBUCKLE,65,0.5,5.448361,2,False,nearest,60.0,66.0,66.0,True
+pge,BELLEVUE,1342,1.0,7.552421,1,False,nearest,115.0,115.0,115.0,True
+pge,LEMOORE,2192,0.5,0.68132,2,False,nearest,70.0,66.0,66.0,True
+pge,LEMOORE,2193,0.5,0.902712,2,False,nearest,70.0,66.0,66.0,True
+pge,SNEATH LANE,1208,1.0,0.007121,1,False,nearest,60.0,66.0,66.0,True
+pge,MERIDIAN,1392,1.0,0.051319,1,False,nearest,60.0,66.0,66.0,True
+pge,INDIAN FLAT,589,1.0,0.082169,1,False,nearest,70.0,66.0,66.0,True
+pge,RESERVATION ROAD,1649,1.0,0.053624,1,False,nearest,60.0,66.0,66.0,True
+pge,RADUM,17,1.0,0.030661,1,False,nearest,60.0,66.0,66.0,True
+pge,RAWSON,1400,1.0,1.089516,1,False,nearest,60.0,66.0,66.0,True
+pge,RUSSELL,2138,1.0,0.020562,1,False,nearest,60.0,66.0,66.0,True
+pge,COALINGA NO 1,115,1.0,6.316744,1,False,nearest,60.0,66.0,66.0,True
+pge,COTATI,1336,1.0,0.028983,1,False,nearest,60.0,66.0,66.0,True
+pge,VIRGINIA,2127,1.0,0.009704,1,False,nearest,60.0,66.0,66.0,True
+pge,WHITMORE,2296,1.0,31.775093,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,HALSEY,749,1.0,0.056357,1,False,nearest,60.0,66.0,66.0,True
+pge,SYCAMORE CREEK,52,1.0,0.069309,1,False,nearest,115.0,115.0,115.0,True
+pge,MT EDEN,7824,1.0,1.472173,1,False,nearest,115.0,115.0,115.0,True
+pge,NOTRE DAME,1911,1.0,0.01428,1,False,nearest,115.0,115.0,115.0,True
+pge,CORTINA,63,0.5,21.693315,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,CORTINA,65,0.5,21.448701,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,WALL,2125,1.0,1.362088,1,False,nearest,12.0,66.0,66.0,True
+pge,WYANDOTTE,2301,1.0,2.65575,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,SF M,2322,1.0,6.125876,1,False,nearest,12.0,66.0,66.0,True
+pge,RIPON,179,1.0,3.363554,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,NORTECH,1534,1.0,0.058902,1,False,nearest,115.0,115.0,115.0,True
+pge,OAKHURST,575,1.0,0.023569,1,False,nearest,115.0,115.0,115.0,True
+pge,STONE CORRAL,1415,1.0,0.054461,1,False,nearest,60.0,66.0,66.0,True
+pge,SAN LEANDRO U,19,1.0,0.043672,1,False,nearest,115.0,115.0,115.0,True
+pge,PLAINFIELD,7648,1.0,9.626481,1,False,nearest,60.0,66.0,66.0,True
+pge,STONE,1260,1.0,0.052677,1,False,nearest,115.0,115.0,115.0,True
+pge,ELK,590,1.0,21.231382,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,ROB ROY,1272,1.0,0.026435,1,False,nearest,115.0,115.0,115.0,True
+pge,SAN JOAQUIN #3,575,1.0,12.681733,1,False,nearest_novoltage,,,115.0,False
+pge,JANES CREEK,171,1.0,0.015351,1,False,nearest,60.0,66.0,66.0,True
+pge,MC ARTHUR,1726,1.0,10.110899,1,False,nearest_voltage_fallback,69.0,66.0,230.0,False
+pge,MIDWAY,2251,1.0,10.172791,1,False,nearest_voltage_fallback,500.0,500.0,115.0,False
+pge,MIDDLE RIVER,72,1.0,6.960934,1,False,nearest,60.0,66.0,66.0,True
+pge,DIXON LANDING,8285,1.0,3.45321,1,False,nearest,115.0,115.0,115.0,True
+pge,MILPITAS,1253,1.0,0.034557,1,False,nearest,115.0,115.0,115.0,True
+pge,HARTLEY,332,1.0,7.811319,1,False,nearest,60.0,66.0,66.0,True
+pge,JACINTO,151,1.0,0.017547,1,False,nearest,60.0,66.0,66.0,True
+pge,EAST GRAND,1197,1.0,0.09298,1,False,nearest,115.0,115.0,115.0,True
+pge,VINEYARD,24,1.0,0.041225,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,LOS MOLINOS,1398,1.0,0.023923,1,False,nearest,60.0,66.0,66.0,True
+pge,ATASCADERO,1172,1.0,0.031158,1,False,nearest,60.0,66.0,66.0,True
+pge,NOVATO,582,1.0,0.030363,1,False,nearest,60.0,66.0,66.0,True
+pge,MORAGA,8849,1.0,0.123588,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,SANGER,142,1.0,6.491132,1,False,nearest,115.0,115.0,115.0,True
+pge,OAKLAND L,1612,1.0,0.016043,1,False,nearest,115.0,115.0,115.0,True
+pge,POINT PINOLE,93,1.0,0.017532,1,False,nearest,115.0,115.0,115.0,True
+pge,WINDSOR,8014,1.0,9.81266,1,False,nearest,60.0,66.0,66.0,True
+pge,TEMBLOR,1983,1.0,8.036112,1,False,nearest,115.0,115.0,115.0,True
+pge,PIT NO 5,1273,1.0,29.443682,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+pge,SUNOL,21,1.0,0.005159,1,False,nearest_novoltage,,,115.0,False
+pge,TAMARACK,756,1.0,0.062747,1,False,nearest_novoltage,,,66.0,False
+pge,ANTELOPE,224,1.0,0.033474,1,False,nearest,70.0,66.0,66.0,True
+pge,ALPINE,2317,1.0,17.87078,1,False,nearest_voltage_fallback,17.0,66.0,115.0,False
+pge,FELLOWS,1938,1.0,1.750054,1,False,nearest,115.0,115.0,115.0,True
+pge,COALINGA NO 2,126,1.0,2.434067,1,False,nearest,60.0,66.0,66.0,True
+pge,JACOBS CORNER,2191,0.333333,9.171681,3,False,nearest,60.0,66.0,66.0,True
+pge,JACOBS CORNER,2192,0.333333,9.310307,3,False,nearest,60.0,66.0,66.0,True
+pge,JACOBS CORNER,2193,0.333333,9.153374,3,False,nearest,60.0,66.0,66.0,True
+pge,FRENCH GULCH,1737,1.0,21.788192,1,False,nearest_voltage_fallback,60.0,66.0,115.0,False
+pge,CANTUA,1921,1.0,15.746797,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+pge,MCKITTRICK,255,1.0,8.270084,1,False,nearest,70.0,66.0,66.0,True
+pge,WOODLAND,1885,1.0,0.078193,1,False,nearest,115.0,115.0,115.0,True
+pge,POSO MOUNTAIN,361,1.0,8.443972,1,False,nearest,115.0,115.0,115.0,True
+pge,EUREKA A,1574,0.5,0.034133,2,False,nearest,60.0,66.0,66.0,True
+pge,EUREKA A,1575,0.5,0.22374,2,False,nearest,60.0,66.0,66.0,True
+pge,BLACKWELL,224,0.333333,13.766587,3,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,BLACKWELL,260,0.333333,13.714853,3,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,BLACKWELL,1922,0.333333,13.623343,3,False,nearest_voltage_fallback,70.0,66.0,66.0,True
+pge,SF N,2322,1.0,6.300364,1,False,nearest,12.0,66.0,66.0,True
+pge,DUNLAP,128,1.0,0.044806,1,False,nearest,60.0,66.0,66.0,True
+pge,CRESTA PH,1911,1.0,34.736798,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+pge,TARAVAL,2322,1.0,9.364534,1,False,nearest,12.0,66.0,66.0,True
+pge,SANTA MARIA,1832,1.0,1.392802,1,False,nearest,115.0,115.0,115.0,True
+pge,POINT MORETTI,1265,1.0,1.825575,1,False,nearest,60.0,66.0,66.0,True
+pge,OAKLAND C,1609,0.5,0.096501,2,False,nearest,115.0,115.0,115.0,True
+pge,OAKLAND C,1610,0.5,0.024825,2,False,nearest,115.0,115.0,115.0,True
+pge,FLORENCE,2142,1.0,0.031964,1,False,nearest_novoltage,,,66.0,False
+pge,RESERVE OIL,325,1.0,0.037686,1,False,nearest,60.0,66.0,66.0,True
+pge,WOODSIDE,1210,1.0,0.016882,1,False,nearest,60.0,66.0,66.0,True
+pge,NORCO,257,1.0,0.052343,1,False,nearest,115.0,115.0,115.0,True
+pge,OAKLAND J,20,1.0,0.042772,1,False,nearest,115.0,115.0,115.0,True
+pge,BIG MEADOWS,1573,1.0,15.097443,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,SF P (HUNTERS POINT),1798,1.0,0.056665,1,False,nearest,115.0,115.0,115.0,True
+pge,MAXWELL,63,1.0,14.766202,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,PARSONS,2159,1.0,0.042512,1,False,nearest_novoltage,,,66.0,False
+pge,GRANT,10,1.0,0.059513,1,False,nearest,115.0,115.0,115.0,True
+pge,EEL RIVER,177,1.0,15.142823,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,CARNERAS,260,0.5,4.823753,2,False,nearest,70.0,66.0,66.0,True
+pge,CARNERAS,1922,0.5,4.693069,2,False,nearest,70.0,66.0,66.0,True
+pge,ECHO SUMMIT,2318,1.0,15.564697,1,False,nearest_novoltage,,,66.0,False
+pge,WATERSHED,1209,1.0,0.104829,1,False,nearest,60.0,66.0,66.0,True
+pge,CALPELLA,2403,1.0,5.972556,1,False,nearest,115.0,115.0,115.0,True
+pge,BAYWOOD,1173,1.0,0.030379,1,False,nearest,60.0,66.0,66.0,True
+pge,CROWS LANDING,1377,1.0,11.034427,1,False,nearest_voltage_fallback,60.0,66.0,66.0,True
+pge,BURLINGAME,1193,1.0,0.049322,1,False,nearest,115.0,115.0,115.0,True
+pge,PIT NO 3,1273,1.0,13.276688,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+sce,Acton,2316,1.0,5.469877,1,False,nearest,66.0,66.0,66.0,True
+sce,Alder,990,1.0,0.027086,1,False,nearest,66.0,66.0,66.0,True
+sce,Alessandro,782,1.0,0.061399,1,False,nearest,115.0,115.0,115.0,True
+sce,Alhambra,354,1.0,0.055252,1,False,nearest,66.0,66.0,66.0,True
+sce,Alola,2024,0.5,5.374558,2,False,nearest,12.0,66.0,66.0,True
+sce,Alola,8455,0.5,5.298647,2,False,nearest,12.0,66.0,66.0,True
+sce,Alon,355,1.0,0.028282,1,False,nearest,66.0,66.0,66.0,True
+sce,Amador,356,1.0,0.048814,1,False,nearest,66.0,66.0,66.0,True
+sce,Amalia,2066,1.0,0.015217,1,False,nearest,16.0,66.0,66.0,True
+sce,Amargo,1990,1.0,6.001463,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Amboy,2017,1.0,53.916009,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Anaverde,358,1.0,0.133304,1,False,nearest,66.0,66.0,66.0,True
+sce,Anita,359,1.0,0.072177,1,False,nearest,66.0,66.0,66.0,True
+sce,Apple Valley,992,1.0,0.1128,1,False,nearest,115.0,115.0,115.0,True
+sce,Aqueduct,993,1.0,0.034617,1,False,nearest,115.0,115.0,115.0,True
+sce,Arcadia,362,1.0,0.016941,1,False,nearest,66.0,66.0,66.0,True
+sce,Archibald,994,1.0,0.001864,1,False,nearest,66.0,66.0,66.0,True
+sce,Archline,995,1.0,0.015395,1,False,nearest,66.0,66.0,66.0,True
+sce,Arro,996,1.0,0.034964,1,False,nearest,33.0,66.0,66.0,True
+sce,Arrowhead,8098,1.0,0.133489,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Arroyo,364,1.0,0.194901,1,False,nearest,66.0,66.0,66.0,True
+sce,Athens,2077,1.0,0.035502,1,False,nearest,16.0,66.0,66.0,True
+sce,Atwood,667,1.0,0.017926,1,False,nearest,66.0,66.0,66.0,True
+sce,Auld,811,1.0,7.368313,1,False,nearest,115.0,115.0,115.0,True
+sce,Bain,783,1.0,0.142332,1,False,nearest,66.0,66.0,66.0,True
+sce,Bandini,368,1.0,0.03402,1,False,nearest,66.0,66.0,66.0,True
+sce,Banducci,290,1.0,9.586939,1,False,nearest,66.0,66.0,66.0,True
+sce,Banning,1996,1.0,5.433203,1,False,nearest,115.0,115.0,115.0,True
+sce,Barre,668,1.0,0.211239,1,False,nearest,66.0,66.0,66.0,True
+sce,Barstow,2012,1.0,0.005126,1,False,nearest,33.0,66.0,66.0,True
+sce,Bassett,353,1.0,0.045106,1,False,nearest,66.0,66.0,66.0,True
+sce,Basta,2219,1.0,0.056704,1,False,nearest,12.0,66.0,66.0,True
+sce,Bayside,669,1.0,0.03039,1,False,nearest,66.0,66.0,66.0,True
+sce,Beaumont,2229,1.0,0.02488,1,False,nearest,12.0,66.0,66.0,True
+sce,Bedford,371,1.0,1.153934,1,False,nearest,16.0,66.0,66.0,True
+sce,Belding,2234,1.0,0.090043,1,False,nearest,33.0,66.0,66.0,True
+sce,Belmont,366,1.0,0.017164,1,False,nearest,12.0,66.0,66.0,True
+sce,Belvedere,2064,1.0,0.007361,1,False,nearest,16.0,66.0,66.0,True
+sce,Beverly,371,1.0,0.01085,1,False,nearest,66.0,66.0,66.0,True
+sce,Bicknell,2065,1.0,0.020362,1,False,nearest,16.0,66.0,66.0,True
+sce,Big Bend Bia,1017,1.0,33.456172,1,False,nearest_voltage_fallback,33.0,66.0,66.0,True
+sce,Bishop Creek Plant 2,212,1.0,12.76147,1,False,nearest_novoltage,,,66.0,False
+sce,Bixby,389,1.0,1.345268,1,False,nearest,12.0,66.0,66.0,True
+sce,Black Meadows,1017,1.0,24.893496,1,False,nearest_voltage_fallback,33.0,66.0,66.0,True
+sce,Bliss,1429,1.0,11.155284,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Bloomington,997,1.0,0.155278,1,False,nearest,66.0,66.0,66.0,True
+sce,Bluff Cove,2103,1.0,0.036759,1,False,nearest,16.0,66.0,66.0,True
+sce,Blythe (Walc),2269,1.0,0.105994,1,False,nearest_voltage_fallback,161.0,115.0,66.0,False
+sce,Blythe City,2258,1.0,0.051719,1,False,nearest,33.0,66.0,66.0,True
+sce,Bolsa,670,1.0,0.024895,1,False,nearest,66.0,66.0,66.0,True
+sce,Borrego,671,1.0,0.020624,1,False,nearest,66.0,66.0,66.0,True
+sce,Bovine,373,1.0,0.030428,1,False,nearest,66.0,66.0,66.0,True
+sce,Bowl,374,1.0,0.028623,1,False,nearest,66.0,66.0,66.0,True
+sce,Boxwood,1435,1.0,20.246234,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Bradbury,375,1.0,0.035651,1,False,nearest,66.0,66.0,66.0,True
+sce,Brea,672,1.0,0.133095,1,False,nearest,66.0,66.0,66.0,True
+sce,Brewster,2076,1.0,0.044856,1,False,nearest,16.0,66.0,66.0,True
+sce,Bridge,378,1.0,0.013019,1,False,nearest,66.0,66.0,66.0,True
+sce,Bridgeport,629,1.0,31.374855,1,False,nearest_voltage_fallback,16.0,66.0,115.0,False
+sce,Brighton,380,1.0,0.032529,1,False,nearest,66.0,66.0,66.0,True
+sce,Broadway,381,1.0,0.026798,1,False,nearest,66.0,66.0,66.0,True
+sce,Brookhurst,673,1.0,0.123177,1,False,nearest,66.0,66.0,66.0,True
+sce,Browning,252,1.0,6.861445,1,False,nearest,66.0,66.0,66.0,True
+sce,Bryan,674,1.0,0.10644,1,False,nearest,66.0,66.0,66.0,True
+sce,Bryman,1836,1.0,8.886688,1,False,nearest,33.0,66.0,66.0,True
+sce,Bullis,382,1.0,0.052343,1,False,nearest,66.0,66.0,66.0,True
+sce,Bunker,784,1.0,0.085613,1,False,nearest,115.0,115.0,115.0,True
+sce,Burnt Mill,2271,1.0,0.037389,1,False,nearest,33.0,66.0,66.0,True
+sce,Cabazon,8455,1.0,8.198902,1,False,nearest,33.0,66.0,66.0,True
+sce,Cabrillo,676,1.0,0.021305,1,False,nearest,66.0,66.0,66.0,True
+sce,Cady,2274,1.0,13.200447,1,False,nearest_voltage_fallback,33.0,66.0,66.0,True
+sce,Cajalco,785,1.0,0.079139,1,False,nearest,115.0,115.0,115.0,True
+sce,Cal City 'A',1990,1.0,27.343825,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Cal City 'B',1990,1.0,27.343825,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Calden,383,1.0,0.011142,1,False,nearest,66.0,66.0,66.0,True
+sce,Calectric,998,1.0,0.035074,1,False,nearest,115.0,115.0,115.0,True
+sce,Camarillo,1454,1.0,0.096182,1,False,nearest,66.0,66.0,66.0,True
+sce,Camden,677,1.0,0.035259,1,False,nearest,66.0,66.0,66.0,True
+sce,Cameron,419,0.5,1.515219,2,False,nearest,66.0,66.0,66.0,True
+sce,Cameron,2089,0.5,1.394021,2,False,nearest,66.0,66.0,66.0,True
+sce,Camino,988,1.0,0.131575,1,False,nearest_novoltage,,,230.0,False
+sce,Camp 10,575,1.0,36.900263,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Cantil,1990,1.0,37.896855,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Canyon,678,1.0,0.101248,1,False,nearest,66.0,66.0,66.0,True
+sce,Canyon Lake,810,1.0,5.619523,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Capitan,1222,1.0,14.344812,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Cardiff,1000,1.0,0.056223,1,False,nearest,66.0,66.0,66.0,True
+sce,Carmenita,385,1.0,0.011042,1,False,nearest,66.0,66.0,66.0,True
+sce,Carodean,2017,1.0,6.559844,1,False,nearest,115.0,115.0,115.0,True
+sce,Carolina,679,1.0,0.025282,1,False,nearest,66.0,66.0,66.0,True
+sce,Carpinteria,1220,1.0,0.062158,1,False,nearest,66.0,66.0,66.0,True
+sce,Carson,411,1.0,0.573145,1,False,nearest,66.0,66.0,66.0,True
+sce,Casa Diablo,211,1.0,36.844167,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Casitas,1462,1.0,6.433824,1,False,nearest,66.0,66.0,66.0,True
+sce,Cedarwood,2224,1.0,0.043801,1,False,nearest,12.0,66.0,66.0,True
+sce,Center,8570,1.0,0.008141,1,False,nearest,66.0,66.0,66.0,True
+sce,Channel Island,1456,1.0,0.011429,1,False,nearest,66.0,66.0,66.0,True
+sce,Chase,786,1.0,0.038495,1,False,nearest,66.0,66.0,66.0,True
+sce,Chatham,1979,1.0,6.563836,1,False,nearest,66.0,66.0,66.0,True
+sce,Chatsworth,1457,1.0,0.129997,1,False,nearest,66.0,66.0,66.0,True
+sce,Cherry,389,1.0,0.034107,1,False,nearest,66.0,66.0,66.0,True
+sce,Chestnut,680,1.0,0.079859,1,False,nearest,66.0,66.0,66.0,True
+sce,Chino,7787,1.0,0.096282,1,False,nearest,66.0,66.0,66.0,True
+sce,Chiquita,7732,1.0,4.251374,1,False,nearest,66.0,66.0,66.0,True
+sce,Cima,988,1.0,67.799966,1,False,nearest_voltage_fallback,220.0,230.0,230.0,True
+sce,Citrus,391,1.0,0.02321,1,False,nearest,66.0,66.0,66.0,True
+sce,Clark,392,1.0,0.03854,1,False,nearest,66.0,66.0,66.0,True
+sce,Coffee,2404,0.5,0.076096,2,False,nearest,33.0,66.0,66.0,True
+sce,Coffee,8501,0.5,0.043429,2,False,nearest,33.0,66.0,66.0,True
+sce,Colonia,1470,1.0,4.063139,1,False,nearest,66.0,66.0,66.0,True
+sce,Colorado,2093,1.0,0.742766,1,False,nearest,66.0,66.0,66.0,True
+sce,Colton,1530,0.5,0.822408,2,False,nearest,66.0,66.0,66.0,True
+sce,Colton,1531,0.5,0.786575,2,False,nearest,66.0,66.0,66.0,True
+sce,Columbine,1420,1.0,0.23493,1,False,nearest,66.0,66.0,66.0,True
+sce,Compton,2087,1.0,0.072736,1,False,nearest,16.0,66.0,66.0,True
+sce,Concho,787,1.0,0.104576,1,False,nearest,115.0,115.0,115.0,True
+sce,Converse Flats,2395,0.5,5.15697,2,False,nearest,33.0,66.0,66.0,True
+sce,Converse Flats,2397,0.5,5.174348,2,False,nearest,33.0,66.0,66.0,True
+sce,Cornuta,398,1.0,0.021111,1,False,nearest,66.0,66.0,66.0,True
+sce,Corona,788,1.0,0.055122,1,False,nearest,66.0,66.0,66.0,True
+sce,Cortez,399,1.0,0.049369,1,False,nearest,66.0,66.0,66.0,True
+sce,Corum,296,1.0,21.646061,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Coso,2327,1.0,1.339248,1,False,nearest,115.0,115.0,115.0,True
+sce,Cottage Grove,2271,1.0,1.110418,1,False,nearest,12.0,66.0,66.0,True
+sce,Cottonwood,1837,1.0,7.385274,1,False,nearest,115.0,115.0,115.0,True
+sce,Crater,401,1.0,0.129208,1,False,nearest,66.0,66.0,66.0,True
+sce,Crest,402,1.0,0.043864,1,False,nearest,66.0,66.0,66.0,True
+sce,Crestwind U.g.s.,2103,1.0,2.966983,1,False,nearest,16.0,66.0,66.0,True
+sce,Crown,683,1.0,0.131237,1,False,nearest,66.0,66.0,66.0,True
+sce,Cucamonga,1002,1.0,0.034749,1,False,nearest,66.0,66.0,66.0,True
+sce,Cudahy,404,1.0,0.057558,1,False,nearest,66.0,66.0,66.0,True
+sce,Culver,405,0.5,0.005585,2,False,nearest,66.0,66.0,66.0,True
+sce,Culver,2094,0.5,0.065738,2,False,nearest,66.0,66.0,66.0,True
+sce,Cummings,290,1.0,0.15395,1,False,nearest,66.0,66.0,66.0,True
+sce,Cypress,684,1.0,0.037631,1,False,nearest,66.0,66.0,66.0,True
+sce,Daggett,2010,1.0,0.365591,1,False,nearest,33.0,66.0,66.0,True
+sce,Daisy,532,1.0,0.220889,1,False,nearest,12.0,66.0,66.0,True
+sce,Dalton,455,1.0,0.250693,1,False,nearest,66.0,66.0,66.0,True
+sce,Declez,1003,1.0,0.14248,1,False,nearest,66.0,66.0,66.0,True
+sce,Deep Springs,208,1.0,0.193337,1,False,nearest,55.0,66.0,66.0,True
+sce,Defrain,2266,1.0,5.788927,1,False,nearest,33.0,66.0,66.0,True
+sce,Del Amo,8116,1.0,0.059682,1,False,nearest,66.0,66.0,66.0,True
+sce,Del Rosa,1004,1.0,0.061158,1,False,nearest,66.0,66.0,66.0,True
+sce,Del Sur,8341,1.0,3.577496,1,False,nearest,66.0,66.0,66.0,True
+sce,Delano,291,1.0,0.039198,1,False,nearest,66.0,66.0,66.0,True
+sce,Desert Outpost,2234,1.0,4.589354,1,False,nearest,33.0,66.0,66.0,True
+sce,Devers,1851,1.0,3.46478,1,False,nearest,115.0,115.0,115.0,True
+sce,Diamond Bar,408,1.0,0.125177,1,False,nearest,66.0,66.0,66.0,True
+sce,Dike,470,1.0,0.326155,1,False,nearest,66.0,66.0,66.0,True
+sce,Ditmar,410,1.0,0.046184,1,False,nearest,16.0,66.0,66.0,True
+sce,Doheny,371,1.0,1.99218,1,False,nearest,16.0,66.0,66.0,True
+sce,Downey,376,1.0,0.021871,1,False,nearest,12.0,66.0,66.0,True
+sce,Downs,1678,1.0,0.179703,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Duarte,2046,1.0,0.016816,1,False,nearest,16.0,66.0,66.0,True
+sce,Dunes,2269,1.0,0.084029,1,False,nearest,33.0,66.0,66.0,True
+sce,Dunn Siding,2274,1.0,21.697078,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Eagle Mountain,1831,1.0,48.399556,1,False,nearest_voltage_fallback,66.0,66.0,230.0,False
+sce,Earlimart,1422,1.0,0.170374,1,False,nearest,66.0,66.0,66.0,True
+sce,East Barstow,2012,1.0,2.256073,1,False,nearest,33.0,66.0,66.0,True
+sce,Eaton,414,1.0,0.011524,1,False,nearest,66.0,66.0,66.0,True
+sce,Edinger,2227,1.0,0.023883,1,False,nearest,12.0,66.0,66.0,True
+sce,Edwards,307,0.5,18.428882,2,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+sce,Edwards,1990,0.5,18.351656,2,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+sce,Eisenhower,792,1.0,0.052726,1,False,nearest,115.0,115.0,115.0,True
+sce,El Casco,1038,1.0,7.36644,1,False,nearest,115.0,115.0,115.0,True
+sce,El Nido,530,1.0,0.559361,1,False,nearest,66.0,66.0,66.0,True
+sce,El Sobrante,2225,1.0,0.029526,1,False,nearest,33.0,66.0,66.0,True
+sce,Elizabeth Lake,415,1.0,0.12507,1,False,nearest,66.0,66.0,66.0,True
+sce,Ellis,2226,0.5,0.210179,2,False,nearest,66.0,66.0,66.0,True
+sce,Ellis,7628,0.5,0.033362,2,False,nearest,66.0,66.0,66.0,True
+sce,Elsinore,793,1.0,0.030838,1,False,nearest,115.0,115.0,115.0,True
+sce,Ely,685,1.0,0.052917,1,False,nearest,66.0,66.0,66.0,True
+sce,Eric,416,1.0,0.015938,1,False,nearest,66.0,66.0,66.0,True
+sce,Estero,1992,1.0,1.86359,1,False,nearest,66.0,66.0,66.0,True
+sce,Estrella,686,1.0,0.06687,1,False,nearest,66.0,66.0,66.0,True
+sce,Etiwanda,991,0.5,0.942628,2,False,nearest,66.0,66.0,66.0,True
+sce,Etiwanda,1026,0.5,0.806021,2,False,nearest,66.0,66.0,66.0,True
+sce,Euclid,1040,1.0,2.03414,1,False,nearest,12.0,66.0,66.0,True
+sce,Fairfax,2091,1.0,0.038743,1,False,nearest,66.0,66.0,66.0,True
+sce,Fairview,687,1.0,0.070338,1,False,nearest,66.0,66.0,66.0,True
+sce,Falcon Ridge,990,1.0,2.997448,1,False,nearest,66.0,66.0,66.0,True
+sce,Farrell,794,1.0,0.086943,1,False,nearest,115.0,115.0,115.0,True
+sce,Felton,417,1.0,0.040519,1,False,nearest,66.0,66.0,66.0,True
+sce,Fernwood,418,0.5,0.028017,2,False,nearest,66.0,66.0,66.0,True
+sce,Fernwood,2075,0.5,0.27005,2,False,nearest,66.0,66.0,66.0,True
+sce,Fillmore,1461,1.0,0.034375,1,False,nearest,66.0,66.0,66.0,True
+sce,Firehouse,1006,1.0,0.098744,1,False,nearest,66.0,66.0,66.0,True
+sce,Floraday,2059,1.0,0.003315,1,False,nearest,12.0,66.0,66.0,True
+sce,Fogarty,793,1.0,5.300156,1,False,nearest,115.0,115.0,115.0,True
+sce,Forest Home,2270,1.0,0.003162,1,False,nearest,33.0,66.0,66.0,True
+sce,Francis,1007,1.0,0.041841,1,False,nearest,66.0,66.0,66.0,True
+sce,Frazier Park,293,1.0,0.065353,1,False,nearest,66.0,66.0,66.0,True
+sce,Fremont,1510,1.0,0.01789,1,False,nearest,16.0,66.0,66.0,True
+sce,Fruitland,421,1.0,0.016844,1,False,nearest,66.0,66.0,66.0,True
+sce,Fullerton,688,1.0,0.034025,1,False,nearest,66.0,66.0,66.0,True
+sce,Gage,7869,1.0,1.618954,1,False,nearest,16.0,66.0,66.0,True
+sce,Gale,2010,1.0,2.270825,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Gallatin,423,1.0,0.023099,1,False,nearest,66.0,66.0,66.0,True
+sce,Ganesha,425,1.0,0.086066,1,False,nearest,66.0,66.0,66.0,True
+sce,Garfield,426,1.0,0.140553,1,False,nearest,66.0,66.0,66.0,True
+sce,Garnet,796,1.0,0.042034,1,False,nearest,115.0,115.0,115.0,True
+sce,Garvey,513,1.0,1.61667,1,False,nearest,16.0,66.0,66.0,True
+sce,Gavilan,784,1.0,5.761641,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Gaviota,1212,1.0,16.566302,1,False,nearest_voltage_fallback,66.0,66.0,115.0,False
+sce,Genamic,1010,1.0,0.106363,1,False,nearest,66.0,66.0,66.0,True
+sce,George A.f.b.,2383,1.0,1.154889,1,False,nearest,33.0,66.0,66.0,True
+sce,Gilbert,689,1.0,0.125441,1,False,nearest,66.0,66.0,66.0,True
+sce,Gisler,690,1.0,0.020319,1,False,nearest,66.0,66.0,66.0,True
+sce,Glen Avon,797,1.0,0.103951,1,False,nearest,66.0,66.0,66.0,True
+sce,Glennville,299,1.0,22.105848,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Goldhill,2398,1.0,0.208887,1,False,nearest,33.0,66.0,66.0,True
+sce,Goldtown,2205,1.0,15.255091,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Goleta,1222,0.5,5.018764,2,False,nearest,66.0,66.0,66.0,True
+sce,Goleta,1224,0.5,4.795737,2,False,nearest,66.0,66.0,66.0,True
+sce,Gonzales,1463,1.0,0.006798,1,False,nearest,66.0,66.0,66.0,True
+sce,Gorman,312,1.0,7.346956,1,False,nearest,66.0,66.0,66.0,True
+sce,Goshen,1423,1.0,4.528439,1,False,nearest,66.0,66.0,66.0,True
+sce,Gould,7949,1.0,0.216092,1,False,nearest,66.0,66.0,66.0,True
+sce,Graham,2073,1.0,0.073052,1,False,nearest,16.0,66.0,66.0,True
+sce,Granada,515,1.0,2.11009,1,False,nearest,16.0,66.0,66.0,True
+sce,Great Lakes,296,1.0,0.158095,1,False,nearest,66.0,66.0,66.0,True
+sce,Greenhorn,299,1.0,13.696096,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Greening,430,1.0,0.052288,1,False,nearest,66.0,66.0,66.0,True
+sce,Hamilton,691,1.0,0.064085,1,False,nearest,66.0,66.0,66.0,True
+sce,Hanford,1973,1.0,1.27931,1,False,nearest,66.0,66.0,66.0,True
+sce,Harper Lake,1901,1.0,4.878204,1,False,nearest,33.0,66.0,66.0,True
+sce,Harvard,2274,1.0,0.061794,1,False,nearest,33.0,66.0,66.0,True
+sce,Haskell,8010,1.0,0.133679,1,False,nearest,66.0,66.0,66.0,True
+sce,Hathaway,431,1.0,0.035612,1,False,nearest,66.0,66.0,66.0,True
+sce,Havasu,1017,1.0,19.863611,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Haveda,2214,1.0,0.008813,1,False,nearest,16.0,66.0,66.0,True
+sce,Havilah,298,1.0,0.076397,1,False,nearest,66.0,66.0,66.0,True
+sce,Hedda,398,1.0,1.895002,1,False,nearest,12.0,66.0,66.0,True
+sce,Helendale,1836,1.0,14.878935,1,False,nearest_voltage_fallback,33.0,66.0,66.0,True
+sce,Hemet,2023,1.0,0.01271,1,False,nearest,33.0,66.0,66.0,True
+sce,Hesperia,1012,1.0,0.018124,1,False,nearest,115.0,115.0,115.0,True
+sce,Hi Desert,2017,1.0,11.680894,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+sce,Highland,1014,1.0,0.076593,1,False,nearest,66.0,66.0,66.0,True
+sce,Hinkley,2014,1.0,0.160465,1,False,nearest,33.0,66.0,66.0,True
+sce,Holgate,1990,1.0,1.88191,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Holiday,2232,1.0,0.020582,1,False,nearest,33.0,66.0,66.0,True
+sce,Homart,998,1.0,3.116308,1,False,nearest,115.0,115.0,115.0,True
+sce,Howard,434,1.0,0.017067,1,False,nearest,66.0,66.0,66.0,True
+sce,Hoyt,2053,1.0,0.098145,1,False,nearest,16.0,66.0,66.0,True
+sce,Huntington Park,421,0.5,1.796386,2,False,nearest,16.0,66.0,66.0,True
+sce,Huntington Park,501,0.5,1.908399,2,False,nearest,16.0,66.0,66.0,True
+sce,Huston,1995,1.0,0.041974,1,False,nearest,33.0,66.0,66.0,True
+sce,Imperial,437,1.0,0.043662,1,False,nearest,66.0,66.0,66.0,True
+sce,Indian Wells,787,1.0,3.206565,1,False,nearest,115.0,115.0,115.0,True
+sce,Industry,369,1.0,0.100574,1,False,nearest,66.0,66.0,66.0,True
+sce,Inglewood,439,1.0,0.139343,1,False,nearest,66.0,66.0,66.0,True
+sce,Inyokern,2279,1.0,2.073958,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Inyokern Town,2279,1.0,0.097141,1,False,nearest,33.0,66.0,66.0,True
+sce,Iron Mt. (Sce),1831,1.0,0.196865,1,False,nearest_voltage_fallback,7.0,66.0,230.0,False
+sce,Irvine,692,1.0,0.050308,1,False,nearest,66.0,66.0,66.0,True
+sce,Isabella,299,1.0,0.125251,1,False,nearest,66.0,66.0,66.0,True
+sce,Isla Vista,1224,1.0,0.119528,1,False,nearest,66.0,66.0,66.0,True
+sce,Ivar,2052,1.0,0.002844,1,False,nearest,16.0,66.0,66.0,True
+sce,Ivyglen,798,1.0,0.056297,1,False,nearest,115.0,115.0,115.0,True
+sce,Jefferson,799,1.0,0.068998,1,False,nearest,66.0,66.0,66.0,True
+sce,Jersey,441,1.0,0.02722,1,False,nearest,66.0,66.0,66.0,True
+sce,Johanna,8074,1.0,0.056594,1,False,nearest,66.0,66.0,66.0,True
+sce,Joshua Tree,2016,1.0,0.038899,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Junction,1829,1.0,105.714515,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,June Lake,629,1.0,20.535135,1,False,nearest_voltage_fallback,2.4,66.0,115.0,False
+sce,Kernville,299,1.0,16.059531,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Kimball,2315,1.0,0.065683,1,False,nearest,66.0,66.0,66.0,True
+sce,Kramer,1990,1.0,15.220479,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,La Canada,445,1.0,0.020661,1,False,nearest,16.0,66.0,66.0,True
+sce,La Fresa,7710,1.0,0.153715,1,False,nearest,66.0,66.0,66.0,True
+sce,La Habra,694,1.0,0.0427,1,False,nearest,66.0,66.0,66.0,True
+sce,La Mirada,446,1.0,0.01567,1,False,nearest,66.0,66.0,66.0,True
+sce,La Palma,695,1.0,0.031953,1,False,nearest,66.0,66.0,66.0,True
+sce,La Veta,696,1.0,0.052498,1,False,nearest,66.0,66.0,66.0,True
+sce,Lafayette,697,1.0,0.01876,1,False,nearest,66.0,66.0,66.0,True
+sce,Laguna Bell,7869,1.0,0.030049,1,False,nearest,66.0,66.0,66.0,True
+sce,Lakeview,1865,1.0,4.659754,1,False,nearest,115.0,115.0,115.0,True
+sce,Lakewood,447,1.0,0.015643,1,False,nearest,66.0,66.0,66.0,True
+sce,Lampson,699,1.0,0.070548,1,False,nearest,66.0,66.0,66.0,True
+sce,Lancaster,448,1.0,0.017195,1,False,nearest,66.0,66.0,66.0,True
+sce,Landing,1017,1.0,0.045836,1,False,nearest,66.0,66.0,66.0,True
+sce,Lark Ellen,450,1.0,0.064914,1,False,nearest,66.0,66.0,66.0,True
+sce,Las Lomas,692,1.0,3.972501,1,False,nearest,66.0,66.0,66.0,True
+sce,Latigo,451,1.0,0.09512,1,False,nearest,66.0,66.0,66.0,True
+sce,Laurel,1426,1.0,0.082282,1,False,nearest,66.0,66.0,66.0,True
+sce,Lawndale,530,1.0,1.608313,1,False,nearest,16.0,66.0,66.0,True
+sce,Layfair,452,1.0,0.231373,1,False,nearest,66.0,66.0,66.0,True
+sce,Lemon Cove,1441,1.0,14.888948,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Lennox,453,1.0,0.071696,1,False,nearest,66.0,66.0,66.0,True
+sce,Levy,1464,1.0,0.039236,1,False,nearest,66.0,66.0,66.0,True
+sce,Liberty,1428,1.0,0.048416,1,False,nearest,66.0,66.0,66.0,True
+sce,Lighthipe,7982,1.0,0.068019,1,False,nearest,66.0,66.0,66.0,True
+sce,Limestone,700,1.0,0.038713,1,False,nearest,66.0,66.0,66.0,True
+sce,Linden,547,1.0,0.003555,1,False,nearest,12.0,66.0,66.0,True
+sce,Lindsay,1429,1.0,0.04148,1,False,nearest,66.0,66.0,66.0,True
+sce,Little Rock,456,1.0,0.09579,1,False,nearest,66.0,66.0,66.0,True
+sce,Live Oak,457,1.0,0.091248,1,False,nearest,66.0,66.0,66.0,True
+sce,Lockheed,1237,1.0,0.155765,1,False,nearest,66.0,66.0,66.0,True
+sce,Locust,2090,1.0,0.035931,1,False,nearest,12.0,66.0,66.0,True
+sce,Longdon,2078,1.0,0.011701,1,False,nearest,16.0,66.0,66.0,True
+sce,Loraine,310,1.0,13.156432,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Los Cerritos,559,1.0,1.318932,1,False,nearest,66.0,66.0,66.0,True
+sce,Lucas,459,1.0,0.02638,1,False,nearest,66.0,66.0,66.0,True
+sce,Lucerne,2009,1.0,0.091404,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Lunada,402,1.0,0.897946,1,False,nearest,16.0,66.0,66.0,True
+sce,Lunar,8341,1.0,0.333058,1,False,nearest_novoltage,,,66.0,False
+sce,Lundy,629,1.0,11.301842,1,False,nearest_voltage_fallback,55.0,66.0,115.0,False
+sce,Lynwood,2075,1.0,0.031491,1,False,nearest,16.0,66.0,66.0,True
+sce,Macarthur,701,1.0,0.022179,1,False,nearest,66.0,66.0,66.0,True
+sce,Madrid,2102,1.0,1.529269,1,False,nearest,16.0,66.0,66.0,True
+sce,Malibu,461,1.0,0.077825,1,False,nearest,66.0,66.0,66.0,True
+sce,Manhattan,410,0.5,2.018694,2,False,nearest,16.0,66.0,66.0,True
+sce,Manhattan,2099,0.5,2.135728,2,False,nearest,16.0,66.0,66.0,True
+sce,Maraschino,801,1.0,0.056946,1,False,nearest,115.0,115.0,115.0,True
+sce,Marine,462,1.0,0.059347,1,False,nearest,66.0,66.0,66.0,True
+sce,Marion,702,1.0,0.043981,1,False,nearest,66.0,66.0,66.0,True
+sce,Mariposa,1420,1.0,5.487521,1,False,nearest,66.0,66.0,66.0,True
+sce,Marymount,463,1.0,0.049455,1,False,nearest,66.0,66.0,66.0,True
+sce,Mascot,2260,1.0,0.034437,1,False,nearest,66.0,66.0,66.0,True
+sce,Maxwell,802,1.0,0.075661,1,False,nearest,115.0,115.0,115.0,True
+sce,Mayberry,803,1.0,0.064433,1,False,nearest,115.0,115.0,115.0,True
+sce,Mayflower,2048,1.0,0.031857,1,False,nearest,16.0,66.0,66.0,True
+sce,Mentone,1020,1.0,0.155704,1,False,nearest,115.0,115.0,115.0,True
+sce,Merced,465,1.0,0.062277,1,False,nearest,66.0,66.0,66.0,True
+sce,Mesa,8125,1.0,0.534891,1,False,nearest,66.0,66.0,66.0,True
+sce,Michillinda,2050,1.0,0.002975,1,False,nearest,16.0,66.0,66.0,True
+sce,Milliken,8083,1.0,3.984009,1,False,nearest,66.0,66.0,66.0,True
+sce,Minaret,629,1.0,34.672327,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Minneola,2273,1.0,4.415986,1,False,nearest,33.0,66.0,66.0,True
+sce,Mira Loma,8083,1.0,0.014388,1,False,nearest,66.0,66.0,66.0,True
+sce,Modena,703,1.0,0.065335,1,False,nearest,66.0,66.0,66.0,True
+sce,Modoc,1221,0.5,2.902859,2,False,nearest,16.0,66.0,66.0,True
+sce,Modoc,1226,0.5,2.720401,2,False,nearest,16.0,66.0,66.0,True
+sce,Moneta,378,1.0,1.519118,1,False,nearest,16.0,66.0,66.0,True
+sce,Monolith,290,1.0,10.365974,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Monrovia,2047,1.0,0.007548,1,False,nearest,16.0,66.0,66.0,True
+sce,Montecito,1225,0.5,4.653907,2,False,nearest,16.0,66.0,66.0,True
+sce,Montecito,1226,0.5,4.757873,2,False,nearest,16.0,66.0,66.0,True
+sce,Moorpark,8629,1.0,0.158006,1,False,nearest,66.0,66.0,66.0,True
+sce,Moraga,804,1.0,0.046029,1,False,nearest,115.0,115.0,115.0,True
+sce,Moreno,805,1.0,0.101414,1,False,nearest,115.0,115.0,115.0,True
+sce,Morningside,439,0.5,2.610318,2,False,nearest,16.0,66.0,66.0,True
+sce,Morningside,453,0.5,2.628755,2,False,nearest,16.0,66.0,66.0,True
+sce,Morro,704,1.0,0.05263,1,False,nearest,66.0,66.0,66.0,True
+sce,Moulton,705,1.0,0.078969,1,False,nearest,66.0,66.0,66.0,True
+sce,Mountain Pass,988,1.0,90.352216,1,False,nearest_novoltage,,,230.0,False
+sce,Mountain Pass A,988,1.0,90.481432,1,False,nearest_voltage_fallback,115.0,115.0,230.0,False
+sce,Movie,343,1.0,0.026154,1,False,nearest,66.0,66.0,66.0,True
+sce,Mt. Tom,212,1.0,0.036585,1,False,nearest,55.0,66.0,66.0,True
+sce,Mt. Vernon,2007,1.0,0.013097,1,False,nearest,33.0,66.0,66.0,True
+sce,Murphy,468,1.0,0.041999,1,False,nearest,66.0,66.0,66.0,True
+sce,Murrietta 2,811,1.0,2.427267,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Muscoy,996,0.333333,4.798016,3,False,nearest,33.0,66.0,66.0,True
+sce,Muscoy,2005,0.333333,4.889145,3,False,nearest,33.0,66.0,66.0,True
+sce,Muscoy,2007,0.333333,4.866652,3,False,nearest,33.0,66.0,66.0,True
+sce,Naomi,2068,1.0,0.027373,1,False,nearest,16.0,66.0,66.0,True
+sce,Naples,381,1.0,1.859284,1,False,nearest,12.0,66.0,66.0,True
+sce,Narod,1021,1.0,0.109865,1,False,nearest,66.0,66.0,66.0,True
+sce,Narrows,469,1.0,0.123692,1,False,nearest,66.0,66.0,66.0,True
+sce,Navy Mole,395,1.0,1.867924,1,False,nearest,66.0,66.0,66.0,True
+sce,Neenach,480,1.0,20.24238,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Nelson,806,1.0,0.022383,1,False,nearest,115.0,115.0,115.0,True
+sce,Neptune,472,1.0,0.008756,1,False,nearest,66.0,66.0,66.0,True
+sce,Newbury,1465,1.0,0.080234,1,False,nearest,66.0,66.0,66.0,True
+sce,Newcomb,1876,1.0,5.652169,1,False,nearest,115.0,115.0,115.0,True
+sce,Newhall,474,1.0,0.027801,1,False,nearest,66.0,66.0,66.0,True
+sce,Newmark,473,1.0,0.03438,1,False,nearest,66.0,66.0,66.0,True
+sce,Niguel,708,1.0,0.074032,1,False,nearest,66.0,66.0,66.0,True
+sce,Nogales,475,1.0,0.026176,1,False,nearest,66.0,66.0,66.0,True
+sce,Nola,476,1.0,0.033016,1,False,nearest,66.0,66.0,66.0,True
+sce,North Intake,2265,1.0,0.103287,1,False,nearest,33.0,66.0,66.0,True
+sce,North Muroc,1990,1.0,16.600545,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,North Oaks,477,1.0,0.07673,1,False,nearest,66.0,66.0,66.0,True
+sce,Northwind,2205,1.0,5.224502,1,False,nearest,66.0,66.0,66.0,True
+sce,Nugget,2016,1.0,9.325758,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,O'neill,7732,1.0,4.355153,1,False,nearest,66.0,66.0,66.0,True
+sce,Oak Grove,1431,1.0,0.118975,1,False,nearest,66.0,66.0,66.0,True
+sce,Oak Park,1466,1.0,0.09095,1,False,nearest,66.0,66.0,66.0,True
+sce,Oasis,478,1.0,0.083179,1,False,nearest,66.0,66.0,66.0,True
+sce,Ocean Park,462,1.0,1.575204,1,False,nearest,16.0,66.0,66.0,True
+sce,Oceanview,711,1.0,0.01974,1,False,nearest,66.0,66.0,66.0,True
+sce,Octol,1430,1.0,6.020695,1,False,nearest,66.0,66.0,66.0,True
+sce,Ojai,1467,1.0,0.040446,1,False,nearest,66.0,66.0,66.0,True
+sce,Oldfield,534,1.0,0.015616,1,False,nearest,12.0,66.0,66.0,True
+sce,Olinda,479,1.0,0.260711,1,False,nearest,66.0,66.0,66.0,True
+sce,Olive Lake,2258,1.0,4.626026,1,False,nearest,33.0,66.0,66.0,True
+sce,Olympic,371,1.0,1.630224,1,False,nearest,16.0,66.0,66.0,True
+sce,Ontario,1022,0.5,0.200777,2,False,nearest,12.0,66.0,66.0,True
+sce,Ontario,1999,0.5,0.012188,2,False,nearest,12.0,66.0,66.0,True
+sce,Orange,712,1.0,0.046291,1,False,nearest,66.0,66.0,66.0,True
+sce,Ordway,2015,1.0,0.214899,1,False,nearest,33.0,66.0,66.0,True
+sce,Oro Grande,1836,1.0,0.419093,1,False,nearest,33.0,66.0,66.0,True
+sce,Ortega,1225,1.0,0.367932,1,False,nearest,66.0,66.0,66.0,True
+sce,Padua,8210,1.0,0.064639,1,False,nearest,66.0,66.0,66.0,True
+sce,Palm Canyon,2027,1.0,0.004297,1,False,nearest,33.0,66.0,66.0,True
+sce,Palm Springs 'A',2233,1.0,0.0,1,False,nearest_novoltage,,,66.0,False
+sce,Palm Springs 'B',2233,1.0,0.0,1,False,nearest_novoltage,,,66.0,False
+sce,Palm Village,1526,1.0,0.078932,1,False,nearest,33.0,66.0,66.0,True
+sce,Palmdale,484,1.0,0.025396,1,False,nearest,66.0,66.0,66.0,True
+sce,Palos Verdes,511,1.0,2.278567,1,False,nearest,16.0,66.0,66.0,True
+sce,Parker Strip,1017,1.0,34.454361,1,False,nearest_voltage_fallback,33.0,66.0,66.0,True
+sce,Parkwood,716,1.0,0.029725,1,False,nearest,66.0,66.0,66.0,True
+sce,Passons,486,1.0,0.003764,1,False,nearest,66.0,66.0,66.0,True
+sce,Pauba,807,1.0,0.206074,1,False,nearest,115.0,115.0,115.0,True
+sce,Paularino,669,1.0,1.5323,1,False,nearest_novoltage,,,66.0,False
+sce,Peacock U.g.s.,2103,1.0,1.734367,1,False,nearest,16.0,66.0,66.0,True
+sce,Pearl,2092,1.0,0.035142,1,False,nearest,16.0,66.0,66.0,True
+sce,Pechanga,1514,1.0,0.706118,1,False,nearest,115.0,115.0,115.0,True
+sce,Pedley,808,1.0,0.04625,1,False,nearest,66.0,66.0,66.0,True
+sce,Peerless,1990,1.0,11.22607,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Pepper,1023,1.0,0.114916,1,False,nearest,115.0,115.0,115.0,True
+sce,Perez,2022,1.0,0.017826,1,False,nearest,33.0,66.0,66.0,True
+sce,Perry,2100,1.0,0.014738,1,False,nearest,16.0,66.0,66.0,True
+sce,Peyton,1024,1.0,0.202667,1,False,nearest,66.0,66.0,66.0,True
+sce,Phelan,1025,1.0,0.141014,1,False,nearest,115.0,115.0,115.0,True
+sce,Pico,493,1.0,0.14576,1,False,nearest,66.0,66.0,66.0,True
+sce,Pierpont,1556,1.0,0.0766,1,False,nearest,16.0,66.0,66.0,True
+sce,Pioneer,489,1.0,0.007394,1,False,nearest,66.0,66.0,66.0,True
+sce,Pitman,575,1.0,37.26756,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Piute,491,1.0,0.077946,1,False,nearest,66.0,66.0,66.0,True
+sce,Pixley,1422,1.0,9.333343,1,False,nearest,66.0,66.0,66.0,True
+sce,Placentia,717,1.0,0.044968,1,False,nearest,66.0,66.0,66.0,True
+sce,Playa,1839,1.0,0.180668,1,False,nearest,16.0,66.0,66.0,True
+sce,Pomona,424,1.0,0.009852,1,False,nearest,12.0,66.0,66.0,True
+sce,Poole,629,1.0,8.696456,1,False,nearest_novoltage,,,115.0,False
+sce,Poplar,1444,1.0,9.264877,1,False,nearest,66.0,66.0,66.0,True
+sce,Porterville,1435,1.0,0.079693,1,False,nearest,66.0,66.0,66.0,True
+sce,Potrero,1469,1.0,0.220769,1,False,nearest,66.0,66.0,66.0,True
+sce,Proctor,438,1.0,1.292728,1,False,nearest,66.0,66.0,66.0,True
+sce,Puente,496,1.0,0.088295,1,False,nearest,66.0,66.0,66.0,True
+sce,Quartz Hill,498,1.0,0.023062,1,False,nearest,66.0,66.0,66.0,True
+sce,Queen Mary U.g.s.,493,1.0,2.235911,1,False,nearest,12.0,66.0,66.0,True
+sce,Quinn,306,1.0,0.168952,1,False,nearest,66.0,66.0,66.0,True
+sce,Railroad,499,1.0,0.022296,1,False,nearest,66.0,66.0,66.0,True
+sce,Ramona,500,1.0,0.059833,1,False,nearest,66.0,66.0,66.0,True
+sce,Rancho,1993,1.0,0.133668,1,False,nearest,33.0,66.0,66.0,True
+sce,Randall,1028,1.0,0.063713,1,False,nearest,66.0,66.0,66.0,True
+sce,Randolph,501,1.0,0.040212,1,False,nearest,66.0,66.0,66.0,True
+sce,Randsburg,1678,1.0,27.111279,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Ravendale,502,1.0,0.084476,1,False,nearest,66.0,66.0,66.0,True
+sce,Rector,7626,1.0,0.100328,1,False,nearest,66.0,66.0,66.0,True
+sce,Redlands,8313,1.0,0.048968,1,False,nearest,66.0,66.0,66.0,True
+sce,Redman,491,1.0,7.993739,1,False,nearest,66.0,66.0,66.0,True
+sce,Redondo,2101,1.0,0.025547,1,False,nearest,16.0,66.0,66.0,True
+sce,Repetto,507,1.0,0.056936,1,False,nearest,66.0,66.0,66.0,True
+sce,Rialto,2004,1.0,0.016692,1,False,nearest,33.0,66.0,66.0,True
+sce,Ridgecrest,1678,1.0,1.503174,1,False,nearest,33.0,66.0,66.0,True
+sce,Rio Hondo,375,0.5,3.114235,2,False,nearest,66.0,66.0,66.0,True
+sce,Rio Hondo,2048,0.5,3.039398,2,False,nearest,66.0,66.0,66.0,True
+sce,Ripley,2269,1.0,9.792655,1,False,nearest,33.0,66.0,66.0,True
+sce,Ritter Ranch,2316,1.0,3.244633,1,False,nearest,66.0,66.0,66.0,True
+sce,Rivera,464,1.0,0.008037,1,False,nearest,12.0,66.0,66.0,True
+sce,Riverway,1979,1.0,0.016478,1,False,nearest,66.0,66.0,66.0,True
+sce,Roadway,1030,1.0,0.084958,1,False,nearest,115.0,115.0,115.0,True
+sce,Rolling Hills,511,1.0,0.01146,1,False,nearest,66.0,66.0,66.0,True
+sce,Rosamond,296,1.0,8.054144,1,False,nearest,66.0,66.0,66.0,True
+sce,Rosemead,512,1.0,0.045886,1,False,nearest,66.0,66.0,66.0,True
+sce,Royal,1472,1.0,0.105813,1,False,nearest,66.0,66.0,66.0,True
+sce,Rubidoux,797,1.0,3.881237,1,False,nearest,33.0,66.0,66.0,True
+sce,Running Springs,2281,1.0,0.025834,1,False,nearest,33.0,66.0,66.0,True
+sce,Rush,513,1.0,0.001564,1,False,nearest,66.0,66.0,66.0,True
+sce,Safari,700,0.5,4.157601,2,False,nearest_novoltage,,,66.0,False
+sce,Safari,705,0.5,4.206062,2,False,nearest_novoltage,,,66.0,False
+sce,San Antonio,1032,1.0,0.052702,1,False,nearest,66.0,66.0,66.0,True
+sce,San Bernardino,8316,1.0,0.10324,1,False,nearest,66.0,66.0,66.0,True
+sce,San Dimas,514,1.0,0.106449,1,False,nearest,66.0,66.0,66.0,True
+sce,San Fernando,342,1.0,0.135791,1,False,nearest,66.0,66.0,66.0,True
+sce,San Gabriel,515,1.0,0.022111,1,False,nearest,66.0,66.0,66.0,True
+sce,San Marcos,1227,1.0,5.05096,1,False,nearest,66.0,66.0,66.0,True
+sce,San Marino,502,1.0,1.737953,1,False,nearest,16.0,66.0,66.0,True
+sce,San Miguel,1473,1.0,0.018182,1,False,nearest,66.0,66.0,66.0,True
+sce,San Vicente,518,1.0,1.593991,1,False,nearest,16.0,66.0,66.0,True
+sce,Santa Ana River 1,1843,0.5,8.121279,2,False,nearest_novoltage,,,115.0,False
+sce,Santa Ana River 1,2281,0.5,8.075768,2,False,nearest_novoltage,,,66.0,False
+sce,Santa Barbara,1226,1.0,0.040683,1,False,nearest,66.0,66.0,66.0,True
+sce,Santa Fe Springs,517,1.0,0.015127,1,False,nearest,66.0,66.0,66.0,True
+sce,Santa Monica,518,1.0,0.032488,1,False,nearest,66.0,66.0,66.0,True
+sce,Santa Rosa,809,1.0,0.123697,1,False,nearest,115.0,115.0,115.0,True
+sce,Santa Susana,1474,1.0,0.110868,1,False,nearest,66.0,66.0,66.0,True
+sce,Santiago,7871,1.0,0.042982,1,False,nearest,66.0,66.0,66.0,True
+sce,Saticoy,1475,1.0,0.059524,1,False,nearest,66.0,66.0,66.0,True
+sce,Saugus,7951,1.0,0.146079,1,False,nearest,66.0,66.0,66.0,True
+sce,Savage,1033,1.0,0.16246,1,False,nearest,115.0,115.0,115.0,True
+sce,Sawtelle,519,1.0,0.031734,1,False,nearest,66.0,66.0,66.0,True
+sce,Seabright,520,1.0,0.131484,1,False,nearest,66.0,66.0,66.0,True
+sce,Searles,1829,1.0,7.586825,1,False,nearest,115.0,115.0,115.0,True
+sce,Second Avenue,2266,1.0,0.114777,1,False,nearest,33.0,66.0,66.0,True
+sce,Sepulveda,521,1.0,0.021139,1,False,nearest,66.0,66.0,66.0,True
+sce,Shandin,1034,1.0,0.078981,1,False,nearest,115.0,115.0,115.0,True
+sce,Shawnee,719,1.0,0.148776,1,False,nearest,66.0,66.0,66.0,True
+sce,Sherwin,211,1.0,22.608692,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Shuttle,523,1.0,0.118716,1,False,nearest,66.0,66.0,66.0,True
+sce,Sierra Madre,2049,1.0,0.005784,1,False,nearest,16.0,66.0,66.0,True
+sce,Signal Hill,524,1.0,0.011895,1,False,nearest,12.0,66.0,66.0,True
+sce,Silver Spur,773,1.0,0.167894,1,False,nearest,33.0,66.0,66.0,True
+sce,Sixteenth Street,2007,1.0,1.069272,1,False,nearest,33.0,66.0,66.0,True
+sce,Skiland,629,1.0,37.519594,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Skylark,810,1.0,0.078791,1,False,nearest,115.0,115.0,115.0,True
+sce,Slater,720,1.0,0.020605,1,False,nearest,66.0,66.0,66.0,True
+sce,Smiley,2018,1.0,0.105693,1,False,nearest,12.0,66.0,66.0,True
+sce,Solemint,526,1.0,0.110377,1,False,nearest,66.0,66.0,66.0,True
+sce,Somerset,527,1.0,0.01023,1,False,nearest,66.0,66.0,66.0,True
+sce,Somis,1478,0.5,0.103123,2,False,nearest,66.0,66.0,66.0,True
+sce,Somis,2211,0.5,0.239927,2,False,nearest,66.0,66.0,66.0,True
+sce,Soquel,1001,1.0,2.836749,1,False,nearest,66.0,66.0,66.0,True
+sce,South Gate,2074,1.0,0.054067,1,False,nearest,16.0,66.0,66.0,True
+sce,Southwind,2205,1.0,0.134617,1,False,nearest,66.0,66.0,66.0,True
+sce,Stadium,8114,1.0,0.062534,1,False,nearest,66.0,66.0,66.0,True
+sce,Stadler,811,1.0,0.024541,1,False,nearest,115.0,115.0,115.0,True
+sce,State Street,532,1.0,0.005394,1,False,nearest,66.0,66.0,66.0,True
+sce,Stetson,812,1.0,0.037121,1,False,nearest,115.0,115.0,115.0,True
+sce,Stewart,533,1.0,0.009265,1,False,nearest,66.0,66.0,66.0,True
+sce,Stoddard,1036,1.0,0.082928,1,False,nearest,33.0,66.0,66.0,True
+sce,Strathmore,1436,1.0,0.089705,1,False,nearest,66.0,66.0,66.0,True
+sce,Sullivan,722,1.0,0.003729,1,False,nearest,66.0,66.0,66.0,True
+sce,Sun City,1876,1.0,0.108747,1,False,nearest,115.0,115.0,115.0,True
+sce,Sunny Dunes,2026,1.0,0.00385,1,False,nearest,33.0,66.0,66.0,True
+sce,Sunnyside,536,1.0,0.018756,1,False,nearest,66.0,66.0,66.0,True
+sce,Surrey U.g.s.,402,1.0,2.479536,1,False,nearest,16.0,66.0,66.0,True
+sce,Tahiti,7676,1.0,0.095806,1,False,nearest,66.0,66.0,66.0,True
+sce,Talbert,724,1.0,0.077296,1,False,nearest,66.0,66.0,66.0,True
+sce,Tamarisk,813,1.0,0.008799,1,False,nearest,115.0,115.0,115.0,True
+sce,Tapia,537,1.0,1.277579,1,False,nearest,66.0,66.0,66.0,True
+sce,Team,725,1.0,0.008502,1,False,nearest,66.0,66.0,66.0,True
+sce,Telegraph,538,1.0,0.021782,1,False,nearest,66.0,66.0,66.0,True
+sce,Temple,2051,1.0,0.011452,1,False,nearest,16.0,66.0,66.0,True
+sce,Tenaja,2285,1.0,0.167914,1,False,nearest,115.0,115.0,115.0,True
+sce,Tennessee,2018,1.0,5.023017,1,False,nearest,66.0,66.0,66.0,True
+sce,Terra Bella,1435,1.0,11.586319,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Terrace,2063,1.0,0.024564,1,False,nearest,16.0,66.0,66.0,True
+sce,Thornhill,815,1.0,0.059317,1,False,nearest,115.0,115.0,115.0,True
+sce,Thousand Oaks,1453,1.0,0.091256,1,False,nearest,66.0,66.0,66.0,True
+sce,Three Rivers,1415,1.0,26.708115,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Timberwine,575,1.0,38.98088,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Timoteo,8135,1.0,0.030293,1,False,nearest,66.0,66.0,66.0,True
+sce,Tippecanoe,2008,1.0,0.014444,1,False,nearest,12.0,66.0,66.0,True
+sce,Tipton,1439,1.0,0.051378,1,False,nearest,66.0,66.0,66.0,True
+sce,Topanga,550,1.0,6.921344,1,False,nearest_novoltage,,,66.0,False
+sce,Topaz,541,1.0,0.058431,1,False,nearest,66.0,66.0,66.0,True
+sce,Torrance,542,1.0,0.036682,1,False,nearest,66.0,66.0,66.0,True
+sce,Tortilla,2013,1.0,3.465525,1,False,nearest_voltage_fallback,115.0,115.0,66.0,False
+sce,Trask,726,1.0,0.035879,1,False,nearest,66.0,66.0,66.0,True
+sce,Triton,804,1.0,4.919148,1,False,nearest,115.0,115.0,115.0,True
+sce,Trona,1829,1.0,1.009569,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Trophy,546,0.5,0.280452,2,False,nearest,66.0,66.0,66.0,True
+sce,Trophy,1697,0.5,0.242373,2,False,nearest,66.0,66.0,66.0,True
+sce,Tulare,1440,1.0,0.079978,1,False,nearest,66.0,66.0,66.0,True
+sce,Twentynine Palms,2017,1.0,0.0539,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Universal,535,0.5,0.258156,2,False,nearest,66.0,66.0,66.0,True
+sce,Universal,548,0.5,0.10197,2,False,nearest,66.0,66.0,66.0,True
+sce,Upland,1040,1.0,0.006671,1,False,nearest,66.0,66.0,66.0,True
+sce,Vail,549,1.0,0.05168,1,False,nearest,66.0,66.0,66.0,True
+sce,Valdez,550,1.0,0.017916,1,False,nearest,66.0,66.0,66.0,True
+sce,Valley,1876,1.0,5.948703,1,False,nearest,115.0,115.0,115.0,True
+sce,Vegas,1227,1.0,0.04055,1,False,nearest,66.0,66.0,66.0,True
+sce,Venice Hill,1441,1.0,0.121512,1,False,nearest,66.0,66.0,66.0,True
+sce,Venida,7626,1.0,10.134691,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Vera,727,1.0,0.017795,1,False,nearest,66.0,66.0,66.0,True
+sce,Verdant,2269,1.0,21.851,1,False,nearest_voltage_fallback,33.0,66.0,66.0,True
+sce,Vestal,1444,1.0,9.027223,1,False,nearest,66.0,66.0,66.0,True
+sce,Victor,1030,1.0,8.071488,1,False,nearest,115.0,115.0,115.0,True
+sce,Victoria,553,1.0,0.0169,1,False,nearest,66.0,66.0,66.0,True
+sce,Victorville,1994,1.0,0.043286,1,False,nearest,33.0,66.0,66.0,True
+sce,Viejo,7732,1.0,0.10331,1,False,nearest,66.0,66.0,66.0,True
+sce,Villa Park,7867,1.0,0.160354,1,False,nearest,66.0,66.0,66.0,True
+sce,Wabash,555,1.0,0.032248,1,False,nearest,66.0,66.0,66.0,True
+sce,Wakefield,1482,1.0,0.002128,1,False,nearest,66.0,66.0,66.0,True
+sce,Walker Basin,310,1.0,0.103699,1,False,nearest,66.0,66.0,66.0,True
+sce,Walnut,7990,1.0,0.021408,1,False,nearest,66.0,66.0,66.0,True
+sce,Walteria,556,1.0,0.018753,1,False,nearest,66.0,66.0,66.0,True
+sce,Washington,728,1.0,0.085476,1,False,nearest,66.0,66.0,66.0,True
+sce,Watson,558,1.0,0.030797,1,False,nearest,66.0,66.0,66.0,True
+sce,Wave,729,1.0,0.048524,1,False,nearest,66.0,66.0,66.0,True
+sce,Weldon,311,1.0,0.176586,1,False,nearest,66.0,66.0,66.0,True
+sce,West Barstow,2013,1.0,0.067557,1,False,nearest,33.0,66.0,66.0,True
+sce,Westfall P.m.,1839,1.0,5.772591,1,False,nearest,16.0,66.0,66.0,True
+sce,Wheatland,1444,1.0,0.213565,1,False,nearest,66.0,66.0,66.0,True
+sce,Whipple,1017,1.0,30.348732,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,White Mt.,2311,1.0,0.104342,1,False,nearest,55.0,66.0,66.0,True
+sce,Whitewater,1850,1.0,0.813661,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Wilsona,487,1.0,19.949863,1,False,nearest_voltage_fallback,66.0,66.0,230.0,False
+sce,Wimbledon,1998,1.0,1.801123,1,False,nearest,66.0,66.0,66.0,True
+sce,Windsor Hills,8368,1.0,1.796951,1,False,nearest,16.0,66.0,66.0,True
+sce,Woodruff,2060,1.0,0.036066,1,False,nearest,12.0,66.0,66.0,True
+sce,Woodville,1439,1.0,11.63242,1,False,nearest_voltage_fallback,66.0,66.0,66.0,True
+sce,Wrightwood,1025,1.0,9.625073,1,False,nearest_voltage_fallback,33.0,66.0,115.0,False
+sce,Yermo,2273,1.0,0.134626,1,False,nearest,33.0,66.0,66.0,True
+sce,Yorba Linda,730,1.0,0.181469,1,False,nearest,66.0,66.0,66.0,True
+sce,Yucaipa,817,1.0,0.121413,1,False,nearest,66.0,66.0,66.0,True
+sce,Yucca,2016,1.0,10.368257,1,False,nearest_voltage_fallback,115.0,115.0,115.0,True
+sce,Yukon,563,0.5,0.056405,2,False,nearest,66.0,66.0,66.0,True
+sce,Yukon,2096,0.5,0.26118,2,False,nearest,66.0,66.0,66.0,True
+sce,Zack,1627,1.0,22.323096,1,False,nearest_voltage_fallback,55.0,66.0,66.0,True
+sce,Zanja,1843,1.0,2.711531,1,False,nearest,115.0,115.0,115.0,True
+sdge,ALPINE,1044,1.0,2.031843,1,False,nearest,69.0,66.0,66.0,True
+sdge,ARTESIAN RANCH,2038,1.0,2.072027,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+sdge,ASH,1045,1.0,2.166391,1,False,nearest,69.0,66.0,66.0,True
+sdge,AVOCADO,1046,1.0,3.519356,1,False,nearest,69.0,66.0,66.0,True
+sdge,BARRETT,2037,1.0,0.843842,1,False,nearest,69.0,66.0,66.0,True
+sdge,BATIQUITOS,1056,1.0,9.794327,1,False,nearest,138.0,115.0,115.0,True
+sdge,BERNARDO,1049,1.0,1.40246,1,False,nearest,69.0,66.0,66.0,True
+sdge,BORDER,1096,1.0,3.396125,1,False,nearest,69.0,66.0,66.0,True
+sdge,BORREGO,8042,1.0,12.699609,1,False,nearest_voltage_fallback,69.0,66.0,66.0,True
+sdge,BOULEVARD EAST,1074,1.0,26.531817,1,False,nearest_voltage_fallback,138.0,115.0,66.0,False
+sdge,CABRILLO,1054,1.0,1.060481,1,False,nearest,69.0,66.0,66.0,True
+sdge,CAMERON,1047,1.0,16.783258,1,False,nearest_voltage_fallback,69.0,66.0,66.0,True
+sdge,CANNON,1056,1.0,1.661895,1,False,nearest,138.0,115.0,115.0,True
+sdge,CARLTON HILLS,1057,1.0,1.189661,1,False,nearest,138.0,115.0,115.0,True
+sdge,CHICARITA,1058,1.0,0.34003,1,False,nearest,138.0,115.0,115.0,True
+sdge,CHOLLAS WEST,1059,1.0,1.166853,1,False,nearest,69.0,66.0,66.0,True
+sdge,CLAIREMONT,1060,1.0,0.5135,1,False,nearest,69.0,66.0,66.0,True
+sdge,CORONADO,1108,0.5,3.246498,2,False,nearest,69.0,66.0,66.0,True
+sdge,CORONADO,8861,0.5,3.40212,2,False,nearest,69.0,66.0,66.0,True
+sdge,CREELMAN,1061,1.0,2.427999,1,False,nearest_voltage_fallback,69.0,66.0,115.0,False
+sdge,CRESTWOOD,1074,1.0,15.175081,1,False,nearest_voltage_fallback,69.0,66.0,66.0,True
+sdge,DEL MAR,1062,1.0,2.163683,1,False,nearest,69.0,66.0,66.0,True
+sdge,DESCANSO,1063,1.0,2.892592,1,False,nearest,69.0,66.0,66.0,True
+sdge,EASTGATE,1073,1.0,2.092585,1,False,nearest,69.0,66.0,66.0,True
+sdge,EL CAJON,2246,1.0,2.238014,1,False,nearest,69.0,66.0,66.0,True
+sdge,ELLIOTT,8641,1.0,0.921496,1,False,nearest,69.0,66.0,66.0,True
+sdge,ENCINITAS,1066,1.0,2.085603,1,False,nearest,69.0,66.0,66.0,True
+sdge,ESCO,1067,1.0,0.577848,1,False,nearest,69.0,66.0,66.0,True
+sdge,ESCONDIDO,8753,0.5,2.509997,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+sdge,ESCONDIDO,8839,0.5,2.449098,2,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+sdge,FELICITA,1069,1.0,4.336258,1,False,nearest,69.0,66.0,66.0,True
+sdge,FRIARS,2040,1.0,7.219508,1,False,nearest,138.0,115.0,115.0,True
+sdge,GARFIELD,2246,1.0,0.715209,1,False,nearest,69.0,66.0,66.0,True
+sdge,GENESEE,1879,1.0,0.753229,1,False,nearest,69.0,66.0,66.0,True
+sdge,GLENCLIFF,1074,1.0,2.596405,1,False,nearest,69.0,66.0,66.0,True
+sdge,GRANITE,1075,1.0,2.320312,1,False,nearest,69.0,66.0,66.0,True
+sdge,GRANT HILL,2040,1.0,0.758155,1,False,nearest,138.0,115.0,115.0,True
+sdge,IMPERIAL BEACH,1077,1.0,0.402284,1,False,nearest,69.0,66.0,66.0,True
+sdge,JAMACHA,1078,1.0,9.401125,1,False,nearest,69.0,66.0,66.0,True
+sdge,KEARNY WEST,1072,1.0,0.608714,1,False,nearest,69.0,66.0,66.0,True
+sdge,KETTNER,1081,1.0,0.545933,1,False,nearest,69.0,66.0,66.0,True
+sdge,LA JOLLA,1082,1.0,1.03776,1,False,nearest,69.0,66.0,66.0,True
+sdge,LAGUNA NIGUEL,733,1.0,0.938598,1,False,nearest,138.0,115.0,115.0,True
+sdge,LAS PULGAS,1083,1.0,3.483866,1,False,nearest,69.0,66.0,66.0,True
+sdge,LILAC,1084,1.0,2.944023,1,False,nearest,69.0,66.0,66.0,True
+sdge,LOS COCHES,8556,1.0,1.751621,1,False,nearest_voltage_fallback,138.0,115.0,66.0,False
+sdge,MARGARITA,1516,1.0,2.390217,1,False,nearest,138.0,115.0,115.0,True
+sdge,MELROSE,1085,1.0,1.546955,1,False,nearest,69.0,66.0,66.0,True
+sdge,MESA HEIGHTS,1072,1.0,1.601531,1,False,nearest,69.0,66.0,66.0,True
+sdge,MESA RIM,1070,1.0,2.18873,1,False,nearest,69.0,66.0,66.0,True
+sdge,MISSION,1068,1.0,3.85738,1,False,nearest,230.0,230.0,230.0,True
+sdge,MONSERATE,1089,1.0,2.150675,1,False,nearest,69.0,66.0,66.0,True
+sdge,MONTGOMERY,1090,1.0,1.207913,1,False,nearest,69.0,66.0,66.0,True
+sdge,MORRO HILL,1091,1.0,2.242153,1,False,nearest,69.0,66.0,66.0,True
+sdge,MURRAY,1092,1.0,0.677543,1,False,nearest,69.0,66.0,66.0,True
+sdge,NORTH CITY WEST,8331,1.0,1.912512,1,False,nearest,69.0,66.0,66.0,True
+sdge,OCEAN RANCH,1091,1.0,2.959949,1,False,nearest,69.0,66.0,66.0,True
+sdge,OCEANSIDE,1094,1.0,1.283802,1,False,nearest,69.0,66.0,66.0,True
+sdge,OLD TOWN,1068,1.0,2.985769,1,False,nearest,230.0,230.0,230.0,True
+sdge,OLIVENHAIN,1069,0.333333,4.654216,3,False,nearest,69.0,66.0,66.0,True
+sdge,OLIVENHAIN,1519,0.333333,4.712672,3,False,nearest,69.0,66.0,66.0,True
+sdge,OLIVENHAIN,8753,0.333333,4.499744,3,False,nearest,69.0,66.0,66.0,True
+sdge,OTAY,1095,1.0,1.487782,1,False,nearest,69.0,66.0,66.0,True
+sdge,PACIFIC BEACH,1097,1.0,0.454442,1,False,nearest,69.0,66.0,66.0,True
+sdge,PALA,1046,1.0,10.230305,1,False,nearest_voltage_fallback,69.0,66.0,66.0,True
+sdge,PALOMAR AIRPORT,1056,1.0,5.163797,1,False,nearest,138.0,115.0,115.0,True
+sdge,PARADISE,1099,1.0,0.908759,1,False,nearest,69.0,66.0,66.0,True
+sdge,PICO,732,1.0,2.749279,1,False,nearest,138.0,115.0,115.0,True
+sdge,POINT LOMA,1101,1.0,0.532433,1,False,nearest,69.0,66.0,66.0,True
+sdge,POMERADO,1518,1.0,0.30696,1,False,nearest,69.0,66.0,66.0,True
+sdge,POWAY,1126,1.0,0.923846,1,False,nearest,69.0,66.0,66.0,True
+sdge,PROCTOR VALLEY,1103,1.0,0.663875,1,False,nearest_voltage_fallback,138.0,115.0,230.0,False
+sdge,RANCHO CARMEL,1104,1.0,0.348565,1,False,nearest,69.0,66.0,66.0,True
+sdge,RANCHO MISSION VIEJO,1516,1.0,3.840358,1,False,nearest,138.0,115.0,115.0,True
+sdge,RANCHO SANTA FE,1105,1.0,1.918192,1,False,nearest,69.0,66.0,66.0,True
+sdge,RINCON,1106,1.0,5.07599,1,False,nearest,69.0,66.0,66.0,True
+sdge,ROSE CANYON,1107,1.0,0.805574,1,False,nearest,69.0,66.0,66.0,True
+sdge,SALT CREEK,1096,1.0,3.496388,1,False,nearest,69.0,66.0,66.0,True
+sdge,SAMPSON,1064,0.5,1.91562,2,False,nearest,69.0,66.0,66.0,True
+sdge,SAMPSON,1108,0.5,2.119099,2,False,nearest,69.0,66.0,66.0,True
+sdge,SAN JUAN CAPISTRANO,731,1.0,0.880811,1,False,nearest_voltage_fallback,230.0,230.0,115.0,False
+sdge,SAN LUIS REY,8590,1.0,1.955961,1,False,nearest_voltage_fallback,230.0,230.0,66.0,False
+sdge,SAN MARCOS,1109,1.0,2.92252,1,False,nearest,69.0,66.0,66.0,True
+sdge,SAN MATEO,732,1.0,7.9139,1,False,nearest,138.0,115.0,115.0,True
+sdge,SAN YSIDRO,1110,1.0,1.36377,1,False,nearest,69.0,66.0,66.0,True
+sdge,SANTA YSABEL,1052,1.0,5.957404,1,False,nearest,69.0,66.0,66.0,True
+sdge,SANTEE,1057,1.0,4.540628,1,False,nearest,138.0,115.0,115.0,True
+sdge,SCRIPPS,1114,1.0,1.065259,1,False,nearest,69.0,66.0,66.0,True
+sdge,SHADOWRIDGE,8791,1.0,2.764836,1,False,nearest_voltage_fallback,138.0,115.0,66.0,False
+sdge,SPRING VALLEY,1115,1.0,0.458349,1,False,nearest,69.0,66.0,66.0,True
+sdge,STATION B,1116,1.0,0.365526,1,False,nearest,69.0,66.0,66.0,True
+sdge,STATION F,1117,1.0,0.14903,1,False,nearest,69.0,66.0,66.0,True
+sdge,STREAMVIEW,1118,1.0,1.498512,1,False,nearest,69.0,66.0,66.0,True
+sdge,STUART,1094,1.0,5.375951,1,False,nearest,69.0,66.0,66.0,True
+sdge,SUNNYSIDE,1120,1.0,1.157335,1,False,nearest,69.0,66.0,66.0,True
+sdge,SWEETWATER,1121,1.0,0.738409,1,False,nearest,69.0,66.0,66.0,True
+sdge,TELEGRAPH CANYON,1517,1.0,1.907812,1,False,nearest_voltage_fallback,138.0,115.0,230.0,False
+sdge,TORREY PINES,1065,1.0,0.773689,1,False,nearest,69.0,66.0,66.0,True
+sdge,TRABUCO,734,1.0,1.085457,1,False,nearest,138.0,115.0,115.0,True
+sdge,URBAN,1123,1.0,0.756023,1,False,nearest,69.0,66.0,66.0,True
+sdge,VALLEY CENTER,1541,1.0,1.832314,1,False,nearest,69.0,66.0,66.0,True
+sdge,VINE,1081,1.0,0.926112,1,False,nearest,69.0,66.0,66.0,True
+sdge,WABASH CANYON,1124,1.0,1.254902,1,False,nearest,69.0,66.0,66.0,True
+sdge,WARNERS,1125,1.0,4.585326,1,False,nearest,69.0,66.0,66.0,True
+synthetic,SYNTHETIC_DEL_NORTE,1304,1.0,48.960417,1,True,centroid_fallback,,,,
+synthetic,SYNTHETIC_LASSEN,334,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_LASSEN,336,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_LASSEN,1558,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_LASSEN,1562,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_LASSEN,1564,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_LASSEN,1565,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_LASSEN,1566,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_LASSEN,1573,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_LASSEN,2337,0.111111,,9,True,county_equal_split,,,,
+synthetic,SYNTHETIC_MODOC,620,0.125,,8,True,county_equal_split,,,,
+synthetic,SYNTHETIC_MODOC,622,0.125,,8,True,county_equal_split,,,,
+synthetic,SYNTHETIC_MODOC,623,0.125,,8,True,county_equal_split,,,,
+synthetic,SYNTHETIC_MODOC,624,0.125,,8,True,county_equal_split,,,,
+synthetic,SYNTHETIC_MODOC,625,0.125,,8,True,county_equal_split,,,,
+synthetic,SYNTHETIC_MODOC,626,0.125,,8,True,county_equal_split,,,,
+synthetic,SYNTHETIC_MODOC,627,0.125,,8,True,county_equal_split,,,,
+synthetic,SYNTHETIC_MODOC,1570,0.125,,8,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1300,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1303,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1304,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1306,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1308,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1309,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1313,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1315,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1316,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1317,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,1318,0.083333,,12,True,county_equal_split,,,,
+synthetic,SYNTHETIC_SISKIYOU,2308,0.083333,,12,True,county_equal_split,,,,

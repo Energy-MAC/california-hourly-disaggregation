@@ -1,0 +1,635 @@
+{
+  "tag": "cec2022_shaped_vrestrict_v2",
+  "shape_mode": "utility",
+  "shape_col": "avg_load",
+  "shape_file": null,
+  "units": "relative",
+  "weight_column": "weight",
+  "name_coord_tol_km": 25.0,
+  "max_name_dist_km": 25.0,
+  "tie_tol_km": 0.25,
+  "voltage_mode": "restrict",
+  "input_columns": [
+    "name",
+    "utility",
+    "summer_load",
+    "winter_load",
+    "lat",
+    "lon",
+    "voltage_kv",
+    "row_id"
+  ],
+  "on_duplicate": "sum",
+  "duplicate_targets": [
+    {
+      "target": "pge/BUCKS CREEK",
+      "rows": [
+        "Bucks Creek",
+        "Grizzly"
+      ]
+    },
+    {
+      "target": "node 115",
+      "rows": [
+        "Tornado",
+        "Coalinga Cogen"
+      ]
+    },
+    {
+      "target": "node 1151",
+      "rows": [
+        "Cal-Cedar",
+        "Stockton Wastewater"
+      ]
+    },
+    {
+      "target": "node 1273",
+      "rows": [
+        "Hat Creek 2",
+        "Pit 7",
+        "Burney Forest Power"
+      ]
+    },
+    {
+      "target": "node 1283",
+      "rows": [
+        "Airport Road 1",
+        "Moore Road",
+        "Redding Power",
+        "Texas Springs"
+      ]
+    },
+    {
+      "target": "node 1290",
+      "rows": [
+        "Castella",
+        "Nutglade",
+        "Shotgun Creek",
+        "Slate Creek"
+      ]
+    },
+    {
+      "target": "node 1300",
+      "rows": [
+        "Big Springs",
+        "Little Shasta",
+        "Macdoel",
+        "Shastina"
+      ]
+    },
+    {
+      "target": "node 1303",
+      "rows": [
+        "Hamburg",
+        "Seiad"
+      ]
+    },
+    {
+      "target": "node 1304",
+      "rows": [
+        "Morrison Creek",
+        "Gasquet",
+        "Happy Camp",
+        "Patrick'S Creek",
+        "Smith River"
+      ]
+    },
+    {
+      "target": "node 1309",
+      "rows": [
+        "Montague",
+        "Greenhorn",
+        "Yreka"
+      ]
+    },
+    {
+      "target": "node 1315",
+      "rows": [
+        "Weed",
+        "International Paper"
+      ]
+    },
+    {
+      "target": "node 1317",
+      "rows": [
+        "Fort Jones",
+        "Walker Bryan"
+      ]
+    },
+    {
+      "target": "node 1325",
+      "rows": [
+        "Travis AB",
+        "Travis Air Force Base",
+        "Goose Haven"
+      ]
+    },
+    {
+      "target": "node 1368",
+      "rows": [
+        "Standiford",
+        "Woodrow"
+      ]
+    },
+    {
+      "target": "node 1407",
+      "rows": [
+        "Forest Glen",
+        "Big Bar"
+      ]
+    },
+    {
+      "target": "node 1408",
+      "rows": [
+        "Hyampom",
+        "Grouse Creek"
+      ]
+    },
+    {
+      "target": "node 1470",
+      "rows": [
+        "Procgen",
+        "Charmin"
+      ]
+    },
+    {
+      "target": "node 1513",
+      "rows": [
+        "Industrial",
+        "College",
+        "Fairground"
+      ]
+    },
+    {
+      "target": "node 1515",
+      "rows": [
+        "Keswick",
+        "Canby",
+        "College View",
+        "Eureka Way",
+        "Waldon"
+      ]
+    },
+    {
+      "target": "node 1523",
+      "rows": [
+        "Dixieland",
+        "U.S. Gypsum",
+        "Dixieland Prison"
+      ]
+    },
+    {
+      "target": "node 1550",
+      "rows": [
+        "Reinway",
+        "Taylor",
+        "Hughson"
+      ]
+    },
+    {
+      "target": "node 1552",
+      "rows": [
+        "Westport",
+        "Commons"
+      ]
+    },
+    {
+      "target": "node 1615",
+      "rows": [
+        "Kelso",
+        "Delta Pumps"
+      ]
+    },
+    {
+      "target": "node 1712",
+      "rows": [
+        "J J Elmore",
+        "Calipatria"
+      ]
+    },
+    {
+      "target": "node 1713",
+      "rows": [
+        "Panno",
+        "Brawley"
+      ]
+    },
+    {
+      "target": "node 1715",
+      "rows": [
+        "Gem III",
+        "Ormesa #2 Geo"
+      ]
+    },
+    {
+      "target": "node 1737",
+      "rows": [
+        "Knauf",
+        "Sulphur Creek"
+      ]
+    },
+    {
+      "target": "node 1751",
+      "rows": [
+        "Mohawk",
+        "Graeagle"
+      ]
+    },
+    {
+      "target": "node 1753",
+      "rows": [
+        "Greenleaf Unit Ii",
+        "Yuba City Station A"
+      ]
+    },
+    {
+      "target": "node 1799",
+      "rows": [
+        "Potrero",
+        "Bayshore "
+      ]
+    },
+    {
+      "target": "node 1805",
+      "rows": [
+        "Geer",
+        "F Street",
+        "Montpellier"
+      ]
+    },
+    {
+      "target": "node 186",
+      "rows": [
+        "Heber Geothermal",
+        "Heber",
+        "Calexico",
+        "Pruett"
+      ]
+    },
+    {
+      "target": "node 187",
+      "rows": [
+        "Terminal Station",
+        "Euclid",
+        "Clark",
+        "Dahlia"
+      ]
+    },
+    {
+      "target": "node 1870",
+      "rows": [
+        "Dillon",
+        "Shadow Hills"
+      ]
+    },
+    {
+      "target": "node 190",
+      "rows": [
+        "Mesquite",
+        "Black Mountain"
+      ]
+    },
+    {
+      "target": "node 1910",
+      "rows": [
+        "Oxford",
+        "Westland #1 RA PP"
+      ]
+    },
+    {
+      "target": "node 1912",
+      "rows": [
+        "Geysers Tap 1",
+        "NCPA 1&2",
+        "NCPA 3&4"
+      ]
+    },
+    {
+      "target": "node 2042",
+      "rows": [
+        "Holtville",
+        "Aten"
+      ]
+    },
+    {
+      "target": "node 2082",
+      "rows": [
+        "Acacia",
+        "Scholl",
+        "Tropico"
+      ]
+    },
+    {
+      "target": "node 212",
+      "rows": [
+        "Control",
+        "Oxbow"
+      ]
+    },
+    {
+      "target": "node 2161",
+      "rows": [
+        "Tosco Byron Pumping",
+        "Windmaster"
+      ]
+    },
+    {
+      "target": "node 217",
+      "rows": [
+        "Cawelo B",
+        "Double C",
+        "Mt. Poso"
+      ]
+    },
+    {
+      "target": "node 221",
+      "rows": [
+        "Lost Hills",
+        "Twisselman"
+      ]
+    },
+    {
+      "target": "node 2222",
+      "rows": [
+        "Foothills",
+        "Dave Bakkie"
+      ]
+    },
+    {
+      "target": "node 2239",
+      "rows": [
+        "Lake Earl",
+        "Yurok"
+      ]
+    },
+    {
+      "target": "node 2289",
+      "rows": [
+        "Ames Distribution",
+        "Nasa"
+      ]
+    },
+    {
+      "target": "node 2297",
+      "rows": [
+        "Dana",
+        "Jm Manufacturing"
+      ]
+    },
+    {
+      "target": "node 2299",
+      "rows": [
+        "Carbona",
+        "GWF Tracy"
+      ]
+    },
+    {
+      "target": "node 2308",
+      "rows": [
+        "North Dunsmuir",
+        "South Dunsmuir"
+      ]
+    },
+    {
+      "target": "node 2322",
+      "rows": [
+        "Mission",
+        "Larkin"
+      ]
+    },
+    {
+      "target": "node 2325",
+      "rows": [
+        "Sonora",
+        "Bombay",
+        "Niland"
+      ]
+    },
+    {
+      "target": "node 2328",
+      "rows": [
+        "Crows Landing",
+        "Gilstrap"
+      ]
+    },
+    {
+      "target": "node 2337",
+      "rows": [
+        "Herlong",
+        "Milford"
+      ]
+    },
+    {
+      "target": "node 264",
+      "rows": [
+        "San Bernard",
+        "Adobe"
+      ]
+    },
+    {
+      "target": "node 272",
+      "rows": [
+        "Wheeler",
+        "Tecuya"
+      ]
+    },
+    {
+      "target": "node 312",
+      "rows": [
+        "Bailey",
+        "Westpac"
+      ]
+    },
+    {
+      "target": "node 313",
+      "rows": [
+        "Dexel",
+        "Kern Front",
+        "Badger Creek"
+      ]
+    },
+    {
+      "target": "node 336",
+      "rows": [
+        "Richmond",
+        "Chestnut 1"
+      ]
+    },
+    {
+      "target": "node 445",
+      "rows": [
+        "Glorietta",
+        "Montrose"
+      ]
+    },
+    {
+      "target": "node 622",
+      "rows": [
+        "Lake City",
+        "Steamboat"
+      ]
+    },
+    {
+      "target": "node 625",
+      "rows": [
+        "Canby 2",
+        "Alturas"
+      ]
+    },
+    {
+      "target": "node 626",
+      "rows": [
+        "Dorris",
+        "Newell",
+        "Tulelake",
+        "Tunnel"
+      ]
+    },
+    {
+      "target": "node 664",
+      "rows": [
+        "Beale Afb 1",
+        "Beale Afb 2"
+      ]
+    },
+    {
+      "target": "node 771",
+      "rows": [
+        "Edom",
+        "Mirage"
+      ]
+    },
+    {
+      "target": "node 776",
+      "rows": [
+        "North Shore",
+        "Oasis"
+      ]
+    },
+    {
+      "target": "node 88",
+      "rows": [
+        "Unocal",
+        "Union Chemical"
+      ]
+    },
+    {
+      "target": "node 96",
+      "rows": [
+        "Urich",
+        "Stauffer",
+        "Shell Oil 1"
+      ]
+    }
+  ],
+  "n_rows_with_coordinates": 1111,
+  "on_duplicate_name": "sum",
+  "colocate_km": 0.5,
+  "duplicate_names": 134,
+  "map": "prox",
+  "system": "CATS_updated_mapping_20261006",
+  "pool": "cats_loaded",
+  "bus_types": "substation",
+  "map_file": "data/processed/load_projection/nodal/CATS/substation_node_map.csv",
+  "map_md5": "ad0b02cc7a982c3e262b436da7948884",
+  "input_file": "C:\\Users\\cloit\\Downloads\\joinedWinterSummerWecc.csv",
+  "input_md5": "63ad4b45891362e81b9cc47ba43a501c",
+  "n_input_rows": 1111,
+  "routes": {
+    "utility_direct": 649,
+    "coord_spatial": 434,
+    "utility_dict": 24,
+    "unresolved": 4
+  },
+  "counts": {
+    "n_rows_resolved": 1107,
+    "n_rows_unresolved": 4,
+    "n_rows_coord_spatial": 434,
+    "n_rows_utility_dict": 24,
+    "n_rows_utility_direct": 649,
+    "n_substations_named": 672,
+    "n_route1_cells_shape_from_fallback": 72,
+    "n_nodes_spatial": 367
+  },
+  "reference_tables": {
+    "profiles": "data/processed/substations/substation_load_profiles_clean.csv",
+    "name_dictionary": "data/basinSourceDictionary.csv",
+    "reference_substations": "data/processed/substation_misc/ca_substations_2022.csv"
+  },
+  "ambiguous_refused": {
+    "profiled_names_ambiguous_across_utilities": [
+      "acton",
+      "alhambra",
+      "alpine",
+      "anita",
+      "barrett",
+      "belmont",
+      "borrego",
+      "cabrillo",
+      "camden",
+      "cameron",
+      "corona",
+      "cottonwood",
+      "del mar",
+      "el nido",
+      "fairview",
+      "fremont",
+      "fruitland",
+      "garfield",
+      "gonzales",
+      "lakeview",
+      "lakewood",
+      "las pulgas",
+      "lawndale",
+      "linden",
+      "live oak",
+      "los coches",
+      "lucerne",
+      "mariposa",
+      "maxwell",
+      "merced",
+      "mesa",
+      "moraga",
+      "narrows",
+      "paradise",
+      "perry",
+      "pico",
+      "randolph",
+      "rincon",
+      "san marcos",
+      "san mateo",
+      "san miguel",
+      "soquel",
+      "stuart",
+      "sullivan",
+      "sunnyside",
+      "victor",
+      "viejo",
+      "wheatland"
+    ],
+    "dictionary_inversions_ambiguous": [
+      "cal city",
+      "mt pass",
+      "palm springs"
+    ],
+    "reference_names_ambiguous": [
+      "cal resources llc",
+      "taylor"
+    ]
+  },
+  "name_match_distance_km": {
+    "count": 696.0,
+    "mean": 13.847,
+    "std": 84.426,
+    "min": 0.0,
+    "50%": 0.043,
+    "90%": 1.321,
+    "99%": 515.489,
+    "max": 919.067
+  },
+  "notes": [
+    "Weights are LEVELS in relative units; every consumption site normalizes, so the scale cancels. No sigma and no q10/q90 are implied.",
+    "Spatial rows (coord_spatial, cec_spatial) do not honour the --map axis.",
+    "name_dist_km is the distance from a row's own coordinates to the substation its NAME matched -- large values mean the name agreed but the location did not."
+  ]
+}
