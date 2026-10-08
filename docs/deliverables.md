@@ -468,6 +468,329 @@ per-cell (0.851–1.297 on the 2035 net series, so −15% to +32% by cell).
 
 ---
 
+## `emilia2` — hourly load at sub-nodes, coordinate-free (2026-10-08)
+
+Builder `scripts/load_projection/deliverables/build_emilia2_package.py`; README
+template `README_emilia2.md` beside it; output `deliverables/emilia2/` (+ `.zip`).
+**The first deliverable built on `Approach 3`**, and the case that forced the
+deliverable-rule amendment: the target is an arbitrary bus list with no
+coordinate-based nodal map, so `county_first_shares` is unreachable and there is
+no existing allocation to import. Per the amended rule the deliverable **cites**
+Approach 3 rather than inventing anything — all allocation logic is imported from
+`src/load_projection/proportional.py`.
+
+### Input shape
+
+One row per (bus-list bus, sub-node), as in `data/example.csv`:
+`bus_id, bus_label, name, lat, long, source, utility, base_kv,
+bus_number_x, summer_load, 'ID', bus_number_y, winter_load, Count`.
+
+`ingest_node_table.py` maps this onto Approach 3's contract: `base_id` is the
+bus-list bus, `subname` is the `'ID'` column, `node_id` is `{bus}|{ID}`. The
+sub-node axis therefore becomes Approach 3's sibling axis and all of its sibling
+machinery applies unchanged.
+
+### Which input columns are actually needed (`--audit`, measured)
+
+| class | columns |
+|---|---|
+| REQUIRED | `bus_id`, `'ID'`, `summer_load`, `winter_load`, and ONE join key |
+| JOIN KEY | `lat`+`long` **or** `name` (+`utility`). **Not equivalent** — see below |
+| OPTIONAL | `utility` — needed only for a NAME join on a shared name |
+| IGNORED | `base_kv` — Approach 3 has no voltage axis |
+| REDUNDANT | `bus_number_x`, `bus_number_y` (== the bus), `bus_label` (== `name`), `Count` (== rows per bus), `source` (constant) |
+
+Verified by dropping each and re-running: coords-only works, name+`utility`
+works, and **name without `utility` or coordinates is REFUSED** because the
+example name is shared across utilities.
+
+### `# VERIFIED` — the bus NAME is not a reliable join key
+
+On `data/example.csv` the row is named `LIVE OAK`, but its coordinates sit **4 m**
+from PG&E's profiled `EL CERRITO G`, while the nearest substation actually called
+Live Oak is **161 km** away in Sutter County (four Live Oaks exist statewide: pge
+Kern, pge Sutter, sce LA, smud Sacramento; none near these coordinates). The two
+keys resolve to different substations with different load:
+
+| candidate | reached by | mean `avg_load` | peak `max_load` |
+|---|---|---|---|
+| `pge / EL CERRITO G` | coordinates, 4 m | 34.89 MW | 53.93 MW |
+| `pge / LIVE OAK` | name | 5.14 MW | 15.15 MW |
+
+So `bus_label`/`name` is the bus **label** and need not equal a utility
+substation name. **`--match coords` is the default**, the name is kept as a
+cross-check, and any bus whose two keys disagree by more than
+`--max-name-dist-km` (25 km) is reported in `reference/column_audit.txt` rather
+than silently resolved. Do not switch the default to `name` without re-running
+`--audit` on the real file.
+
+A second, subtler finding: ambiguity must be decided on `norm(name)`, not the
+verbatim string. Our fleet carries pge `"LIVE OAK"` and sce `"Live Oak"`, which
+differ only in CASE, so a verbatim index treats them as two names and would
+resolve on that coincidence alone. `ingest_bus_nodes.match_by_name` uses the
+project's single `norm` definition.
+
+### `load_station` is the join key (2026-10-08)
+
+A substation NAME is not a key in California: `Mission` is three distinct
+stations, `Potrero` three, `Newhall` and `Antelope` two each, and by bare name
+the nearest same-name candidates sit 6-1,035 km apart (`ANTELOPE` 188 km,
+`BELMONT` 501 km, `LINCOLN` 143 km). Matching on name both misses real matches
+and produces confident-sounding nonsense.
+
+The input therefore carries **`load_station`** -- the `substation_name` to join
+`substation_load_profiles_clean.csv` on, together with `utility`. It is produced
+upstream by coordinate IDENTITY (an exact key match, not a nearest-neighbour
+search) or by a name lookup confined to the single table where the name IS the
+key; it never matches names across tables. A BLANK value is a definite "no load
+profile for this station", not an unattempted lookup, because the profiles table
+holds exactly the stations of the attributes table.
+
+Match order in `ingest_node_table.py`:
+
+0. `load_station` + `utility` -- supersedes everything where present
+1. `station_name` -- exact/normalized fleet match, then the inverted
+   `basinSourceDictionary`. The fallback for blank `load_station`; it recovers
+   e.g. `Balch 1` -> `pge/BALCH NO 1`, a known 1.3 km name/coordinate ambiguity
+2. coordinates -- available but NOT recommended
+
+Where both routes answer a bus they are compared and any disagreement printed;
+there are currently **zero**, so one appearing later is a regression signal.
+Measured on the `emilia2` run: mapping 732 -> 741 rows, 0 changed assignments,
+`Potrero` now resolving to `pge/SF A (POTRERO)` and `Mission` to
+`pge/SF X (MISSION)`.
+
+**Do NOT promote `--match coords` as the fix.** It takes the nearest profiled
+substation within 5 km, and in dense areas that is routinely the wrong station:
+Moss Landing -> `DOLAN ROAD` at 898 m, Larkin -> `SF X (MISSION)` at 721 m,
+Alamitos -> `Stadium` at 794 m, Antelope -> `Lunar` at 332 m -- all different
+stations. Proximity with no name or identity agreement is not evidence at this
+scale.
+
+**Correction (2026-10-08):** an earlier note reported four buses as "0.0 km from
+<station>, label looks wrong, recoverable". Those distances came from a
+synthetic fixture whose coordinates were set equal to the candidate's, and were
+wrongly presented as describing the real input. The real distances are 319.5,
+511.8, 188.2 and 733.7 km -- all genuinely different stations, correctly left
+unmapped. The haversine step itself is sound (independently re-verified).
+
+### The input contract is source-agnostic
+
+Nothing in the reader is specific to any source system. Canonical column names
+are `bus_id`, `sub_id`, `summer_load`, `winter_load`, plus `load_station` /
+`station_name` / `utility` / `lat` / `lon` / `base_kv` / `source` / `bus_label`.
+`COLUMN_ALIASES` accepts the common export spellings (`'ID'`, `name`, `long`,
+`bus_number`, `kv`, ...) so most exports read unchanged.
+
+### Curating on `name`, and the usable-envelope rule (2026-10-08)
+
+The real bus list differs from `data/example.csv` in a way that changes the
+default. There, `bus_label == name` for every row. In the real file they are
+**different columns with different jobs**:
+
+| column | role |
+|---|---|
+| `bus_label` | the bus's own label, ALWAYS present (`GATE 42A`). Carried as provenance; **never a join key**, because a bus label need not be a substation name |
+| `name` | the CURATED match to a utility substation, **blank when the bus was not matched** (`Mesquite`, or blank) |
+
+So **`--match name` is the default** (user, 2026-10-08). `--match coords` would
+override the caller's own decision: a row with blank `name` but populated
+coordinates would be mapped on proximity anyway, which is exactly the judgement
+the blank was expressing. Both the substation match AND the usable-envelope
+check key on `name` only.
+
+**A match is only useful if the substation has a USABLE LOAD ENVELOPE** (user,
+2026-10-08). Being in `substation_load_profiles_clean.csv` is not enough. If the
+envelope is degenerate, Approach 3's shape guard (G8) replaces it with a flat
+1.0 — so the bus would be counted as "mapped" while carrying the statewide shape
+anyway, making the coverage figure a lie. `usable_envelopes()` therefore
+restricts the match index to substations that are non-degenerate, and
+`unusable_envelopes()` exists purely so a dropped match can be named correctly
+("in the fleet but no usable envelope") rather than as "not in the fleet".
+
+Measured on the current fleet: **1,308 of 1,347 substations are usable.** The 39
+that are not break down as 6 with no data at all (all 288 cells NaN, e.g.
+`sce/Autobody`), plus substations whose envelope nets to zero or below
+(`sce/Alola` at exactly 0.000, `pge/HENRIETTA` at −5,975 MW of net reverse flow,
+`pge/CABRILLO` at −426 MW) or whose net-to-gross falls under 0.20
+(`pge/PIT NO 5` at 0.024, `pge/SALT SPRINGS` at 0.021).
+
+**Buses outside PG&E / SCE / SDG&E can never match**, because those are the only
+utilities we hold envelopes for. A row with `utility = iid` (or `ladwp`, `smud`)
+is reported with that reason explicitly and carries the statewide shape. This is
+not a defect: 100% of its load is still allocated.
+
+Every unmapped bus is therefore attributed to one of four distinguishable
+reasons, counted in the ingest's COVERAGE block:
+
+1. `no name supplied` — the mapping does not cover this bus (the normal case)
+2. `utility '<x>' is outside ['pge','sce','sdge']` — no envelopes exist for it
+3. `matched [...] but that substation has NO USABLE LOAD ENVELOPE`
+4. `name not in the profiled fleet` — a genuine match failure worth checking
+
+### Basin-sourced names go through `basinSourceDictionary` (2026-10-08)
+
+A bus list that sources some rows from the basin dataset carries the **basin
+spelling** in `name`, and **86 of the 90 dictionary rows have
+`BasinName != SourceName`** -- `Artesian` vs `Artesian Ranch`, `Capistrano` vs
+`San Juan Capistrano`, `Balch 1` vs `BALCH NO 1`, `Chollas` vs `Chollas West`.
+A direct fleet match fails on every one of those even though the substation is
+right there.
+
+So `ingest_bus_nodes.match_by_name` has a rule 2, exactly as
+`external_loads.resolve_names` does: exact/normalized fleet match first, then
+the inverted `basinSourceDictionary`. It reuses the production
+`invert_basin_dictionary`, so the blank-`BasinName` VETO and the many-to-one
+refusal behave identically. The index is built from the USABLE-envelope fleet
+only, so the dictionary route cannot smuggle in a substation with no shape to
+lend. A row resolved this way is reported as `ok; matched via
+basinSourceDictionary`.
+
+**The coordinate is irrelevant to this.** Under the default `--match name` the
+match keys on `name` alone, so it does not matter whether a row's `lat`/`long`
+came from the utility source or the basin source -- they are carried as
+provenance and used only for the disagreement report.
+
+**Trap, and it bit once:** a resolved row may carry `ok; <note>`, so edge
+selection must gate on `status.startswith("ok")`, NOT `== "ok"`. Gating on
+equality silently dropped every basin-matched bus from the edge list (measured:
+2 edges instead of 7 on the basin fixture) while still *reporting* them as
+resolved. `external_loads.py` documents the same trap as "gate on ROUTE, not
+status".
+
+### THE NODE UNIVERSE AND THE MAPPING ARE TWO DIFFERENT INPUTS
+
+The easiest way to get a badly wrong answer, so it is called out in the ingest's
+module docstring, the builder's `--input` help and the package README.
+
+* The **node universe** (`--input`) is every node load is allocated to. It is
+  the allocation denominator: a node absent from it receives NOTHING.
+* The **mapping** is the subset of buses that can borrow a measured hourly shape
+  from a profiled utility substation. It is normally far smaller, and that is
+  fine -- a mapping covering 1 of 2,000 buses gives that bus its substation's
+  measured pattern while the other 1,999 carry the STATEWIDE pattern, each
+  scaled by its own level. **100% of load is allocated either way; what the
+  mapping changes is only the shape.**
+
+If the mapping file is passed as `--input`, the other 1,999 buses are simply not
+in the universe and all of California's load lands on the one bus. Measured on a
+2,000-bus fixture: that mistake yields `1 bus / 6 sub-nodes` instead of
+`2,000 / 4,004`.
+
+Two supported ways to express the split, giving identical levels and edges
+(verified on the fixture):
+
+1. **One file** -- the universe with `name` and `lat`/`long` left BLANK on rows
+   the mapping does not cover. A blank key means "deliberately unmapped" and is
+   reported as `no name supplied` / `no coordinates supplied`, never as a failed
+   match. (A blank read back from CSV is NaN and `str(NaN)` is `"nan"`, so the
+   ingest normalizes blanks explicitly rather than letting `"nan"` be matched as
+   a substation name.)
+2. **Two files** -- `--input` the universe (levels alone suffice: just
+   `bus_id`, `'ID'`, `summer_load`, `winter_load`) plus
+   `--mapping-input` the smaller match file, joined by bus number. A bus in the
+   mapping absent from the universe is **refused**, since that is the signature
+   of the mistake above.
+
+Guards: `--expect-buses N` / `--expect-nodes N` refuse unless the universe has
+exactly that size, and the ingest always prints a COVERAGE block giving buses
+mapped, sub-nodes mapped, and the share of level mass whose shape is
+measurement-driven versus statewide.
+
+Measured on the 2,000-bus / 1-mapped fixture: `Lambda_M` = 0.000583,
+`Lambda_U` = 0.999417, `A(b)` = **1.0002**, and an unmapped node's shape is
+1.0 +- 0.0002 -- i.e. flat, which IS the statewide profile. So a sparse mapping
+is the BEST-conditioned regime for the slack path, not the worst. Energy exact
+to 4.9e-17 pp and conservation 1.46e-11 MW across all 40 combinations.
+
+### The grid and the compact format (2026-10-08)
+
+Default package: model years **2026, 2030, 2035, 2040, 2045** crossed with
+weather years **2007-2014** = **40 datasets**. Built by
+`approach3/build_proportional_grid.py`.
+
+Speed comes from doing each step at the right level: the reads and the envelope
+surface once overall, `build_target` once per MODEL year (5x, not 40x), and only
+a 288 x n_nodes normalize + share step per combination. No hourly file is written
+at build time. Measured: 40 combinations x 4,004 sub-nodes in **75 s**.
+
+**It ships `env`, NOT the share matrix `S`.** `# VERIFIED` 2026-10-08:
+Approach 3's shares are NOT invariant to the model year or weather year, because
+the shape normalization is target-energy weighted -- shape moves **8.2e-04**
+between weather years and **1.4e-03** between model years. **The CATS compact
+format's "share matrices do not depend on the model year or the weather year at
+all" claim must NOT be carried over.** What IS target-invariant is `env` and the
+level shares `l`, so the package ships those once plus one statewide series per
+combination, and `expand.py` recomputes the normalization by importing the
+SHIPPED `code/load_projection/` (a verbatim copy of the building repo's
+modules). Expansion is therefore exact by construction, verified byte-for-byte
+against a direct hourly write.
+
+The statewide series is written at `%.17g`, not `%.4f`: largest-remainder
+apportionment breaks ties on the discarded fractions, so a y(t) differing in the
+15th decimal hands a 0.1 MW unit to a different node. Both results conserve
+exactly, but only an exact round-trip is byte-identical. `test_approach3.py` T16
+guards the expander's copy of `round_to_printed` against drift, the same way
+`test_compact.py` guards the CATS one.
+
+Measured sizes at 4,004 sub-nodes: compact package **10.85 MB**; one expanded
+hourly file 45.6 MB, so all 40 would be ~1.8 GB (~170x).
+
+### Degeneracy of the one-bus example — read before interpreting it
+
+`data/example.csv` has **one** bus with 6 sub-nodes, all mapped. Then:
+
+- `Λ_U = 0`, so `--conserve slack` correctly refuses (no slack basis).
+  `--conserve auto` falls back to `renorm` and says why.
+- With a single mapped base and one shared shape, `D(c) = shape(c)` and
+  `S = l_n·shape/shape = l_n` **exactly**: the shape cancels completely and the
+  output is the statewide series × each sub-node's level share. Measured
+  within-block share CV **0.0** for every sub-node. Energy share is exact anyway
+  (5.6e-15 pp), as a by-product.
+
+So the example package demonstrates the plumbing, the conservation guarantee and
+the negative-level handling, but **not** the shape layer.
+
+A synthetic 4-bus check (3 mapped
+to different substations + 1 unmapped) confirms the shape layer does work on this
+input format: `--conserve auto` chose `slack`, seasonal energy stayed exact
+(1.1e-16), `Λ_M/Λ_U` = 0.416/0.584 (NovApr), `A(b)` = 1.190, and the three mapped
+buses' per-cell share vectors correlate **0.40, 0.54 and −0.17** with each other
+— a negative pair is only possible if each bus carries its own measured pattern.
+
+### Negative sub-nodes
+
+The example's `'EE'` sub-node is negative (summer −7.74, winter −1.85). Under the
+default `net-base` the bus is allocated its signed **net** (winter 96.40, not the
+positive-only 98.25) and that net is split among the bus's **positive** siblings,
+so `EE` is written literal `0.0` with its level preserved in `node_index.csv`.
+Measured: `z0006` is zero at all 8,760 hours.
+
+### Measured package (RESOLVE 2035, weather year 2012, net of BTM)
+
+| quantity | value |
+|---|---|
+| target | **402.83 TWh**, peak **76,624 MW** |
+| buses / sub-nodes | 1 / 6 (1 mapped, 0 unmapped) |
+| max hourly conservation error, printed grid | **1.455e-11 MW** |
+| target grid-snap offset (not an error) | 0.04999 MW |
+| max seasonal energy share deviation | 5.6e-15 pp |
+| max per-node printed-vs-float annual | 3.62 MWh |
+| package / zip | 0.52 MB / **0.32 MB** |
+
+### Rebuild
+
+```bash
+python scripts/load_projection/deliverables/build_emilia2_package.py     --input data/example.csv --year 2035 --weather-year 2012
+```
+
+`--conserve auto` (default) picks `slack` when some buses are unmapped and
+`renorm` when all are, printing which and why. Other axes: `--match`,
+`--negative-nodes`, `--shape-sources`, `--sibling-draws`, `--target-csv`.
+**The README is a template under `scripts/`** — the builder deletes and rewrites
+the package directory every run, so an edit inside `deliverables/emilia2/` is
+discarded.
+
 ## External seasonal load weight source (2026-10-01)
 
 A third value of the `county_weights` axis, beside `envelope` and `stoch`:

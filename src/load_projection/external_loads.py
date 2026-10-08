@@ -29,16 +29,28 @@ run tag.
 Name resolution is a strict cascade -- each input row takes the FIRST rule that
 fires (see `resolve_names`):
 
-  1. the name is a profiled utility substation                  -> route 1
+  1. the name is a profiled utility substation       -> ROUTE_UTILITY_DIRECT
+     (by `(utility, name)` when the row supplies a utility, else by name alone
+     when unambiguous, else by PROXIMITY among the shared-name candidates when
+     the row supplies coordinates)
   2. the name is a BasinName in basinSourceDictionary whose
-     SourceName is a profiled utility substation                -> route 1
-  3. the name is a same-owner record in ca_substations_2022.csv  -> route 2
-  4. otherwise                                                   -> unresolved
+     SourceName is a profiled utility substation     -> ROUTE_UTILITY_DICT
+  3. the row's OWN lat/lon                           -> ROUTE_COORD_SPATIAL
+  4. the name is a record in ca_substations_2022.csv,
+     placed by THAT record's coordinates             -> ROUTE_CEC_SPATIAL
+  5. otherwise                                       -> ROUTE_UNRESOLVED
 
 Rule 1 precedes rule 2 because the dictionary is an EXCEPTIONS list, not a
-complete mapping. Route 1 rows ride the nodal map and therefore honour the
-`--map` axis and its tie shares; route 2 rows are placed spatially and are
-map-independent, which is a real limitation recorded per row rather than hidden.
+complete mapping. Rule 3 precedes rule 4 because a row's own coordinates beat a
+name lookup into a reference table. Rules 1-2 ride the nodal map and therefore
+honour the `--map` axis and its tie shares; rules 3-4 are placed spatially and
+are map-independent, which is a real limitation recorded per row rather than
+hidden.
+
+A shared name that proximity cannot settle is REFUSED, not allowed to fall
+through to rule 3: a utility substation placed by coordinates is a different
+assignment. With no coordinates at all the cascade collapses to rules 1-2 (see
+skill `approach3-proportional`).
 
 Per CLAUDE.md, name matching uses `cecSourceDictionary.csv` or
 `basinSourceDictionary.csv` ONLY. This module uses the basin one, because the

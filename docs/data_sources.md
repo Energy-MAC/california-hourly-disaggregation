@@ -229,8 +229,8 @@ dictionary entry -- only its target moved.
 | Raw substations published            | 704²    | 748     | 107¹   | 1,559     |
 | Removed (P.T. nodes / no load profile)| 34      | 170     | 8      | 212       |
 | **Cleaned (in processed output)**    | **670** | **578** | **99** | **1,347** |
-| **Basin-matched total**              | **621** | **539** | **96** | **1,256** |
-| Not matched to basin                 | 49      | 39      | 3      | 91        |
+| **Basin-matched total**              | **622** | **539** | **96** | **1,257** |
+| Not matched to basin                 | 48      | 39      | 3      | 90        |
 | Basin substations not in any source  | 346³    | 160³    | 42³    | 548³      |
 | With a utility/override coordinate   | 669     | 568     | 99     | 1,336     |
 | **With ANY coordinate**              | **670** | **577** | **99** | **1,346** |
@@ -258,7 +258,7 @@ row stays as last printed. For reference, the sections that do still run report
 PG&E attrs "Basin: 980 | Source: 704 | Matched by name: 575, dictionary +48 ->
 623; Only in basin: 405".
 
-The **name dictionary** (`data/basinSourceDictionary.csv`, 89 entries) maps utility
+The **name dictionary** (`data/basinSourceDictionary.csv`, 91 entries) maps utility
 source names that differ from the DataBasin reference (e.g. "CRESTA PH" → "Cresta") to
 recover geolocation matches beyond the normalised-name join.
 
@@ -374,13 +374,13 @@ EPSG:3310; `Lat`/`Lon` are WGS84). **Processed:**
 
 **CEC name dictionary** (`build_cec_name_dictionary.py` → `data/cecSourceDictionary.csv`):
 the CEC analogue of the basin dict. Because CEC inherited basin's naming, 79 of the basin
-dict's 89 targets exist verbatim in CEC (was 70 of 79 before the 2026-10-05
-review). Four tiers: *basin_reuse* (transferable entries),
+dict's 90 named targets exist verbatim in CEC (the 91st row is an OAKLAND I veto
+with a blank BasinName). Was 70 of 79 before the 2026-10-05 review. Four tiers: *basin_reuse* (transferable entries),
 *name_auto* (strips CEC's systematic " - (OWNER)" suffix via `norm_base()` — the reliable
 signal for SDGE centroids), *spatial_auto* (≤0.25 km), *name_auto_assumed* (rescues exact
 name matches whose only CEC hit has an unconfirmed "Other (PGE - Assumed)" owner tag).
 With the dictionary, the **CEC cross-reference rate** is **PGE 666/670, SCE 559/578, SDGE
-90/99** (vs basin's 621/539/96); aggregate **1,315 vs basin's 1,256 (+59)**.
+90/99** (vs basin's 622/539/96); aggregate **1,315 vs basin's 1,257 (+58)**.
 
 > **This is a cross-reference/enrichment rate, NOT coordinate availability — do not read
 > "666/670" as "4 PGE substations lack a location."** Every scraped substation already

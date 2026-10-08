@@ -288,8 +288,8 @@ Outputs land in `data/processed/load_projection/external_loads/<tag>/`:
 
 | File | Contents |
 |---|---|
-| `external_substation_weights.csv` | `utility, substation_name, month, hour_pst, load_mw` — rule 1 and 2 rows |
-| `external_node_weights.csv` | `node, month, hour_pst, load_mw` — rule 3 rows, already on a bus |
+| `external_substation_weights.csv` | `utility, substation_name, month, hour_pst, weight` — rule 1 and 2 rows |
+| `external_node_weights.csv` | `node, month, hour_pst, weight` — rule 3 rows, already on a bus |
 | `resolution_report.csv` | every input row: `name, route, utility, substation_name, node, dist_km, status` |
 | `manifest.json` | shape mode, map, reference tables and their md5s, per-route counts, refused ambiguities |
 

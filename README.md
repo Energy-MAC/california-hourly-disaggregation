@@ -34,6 +34,7 @@ here.
 | **Substation dataset** | 1,347 IOU substations (PGE 670 · SCE 578 · SDGE 99) with coordinates, high-side voltage, DER attributes, and month×hour load-percentile profiles | `data/processed/substations/` |
 | **Approach 1 — proportional weights** | Deterministic disaggregation that conserves the regional total at every hour | `data/processed/load_projection/projections/` |
 | **Approach 2 — stochastic** | Monte Carlo per-substation draws with correct marginals + a CAISO-tied common factor | same |
+| **Approach 3 — coordinate-free proportional** | Disaggregation onto a node system we have **no coordinates for**, proportional to supplied seasonal node levels | `data/processed/load_projection/approach3/` |
 | **Nodal mapping** | Substation loads assigned to an external test system's demand buses (CATS by default) | `data/processed/load_projection/nodal/` |
 | **External deliverable packages** | Shareable zips for outside users — hourly nodal load, reference tables and a standalone README | `deliverables/` (gitignored) |
 
@@ -47,6 +48,7 @@ reference lives in [`docs/`](docs/):
 | [docs/stochastic_model_spec.md](docs/stochastic_model_spec.md) | Approach 2 model derivations, optimization view, estimation, rolling-window calibration theory |
 | [docs/approach1_weights.md](docs/approach1_weights.md) | Approach 1 chains, parameters, output files, run commands |
 | [docs/approach2_stochastic.md](docs/approach2_stochastic.md) | Approach 2 scripts/params/outputs/figures + extended calibration discussion |
+| [docs/approach3_proportional.md](docs/approach3_proportional.md) | Approach 3 coordinate-free proportional disaggregation — slack-absorption algebra, the feasibility theorem, negative-level modes, the base/subname axis |
 | [docs/nodal_mapping.md](docs/nodal_mapping.md) | Nodal assignment rules, voltage-aware mode, coverage gaps, hybrid top-up, ReEDS/statewide validation |
 | [docs/genx_rescale.md](docs/genx_rescale.md) | GenX demand rescaling — the three allocation families (county-first, stochastic pool, envelope hold), the α/β splits, the four-way map axis, conservation, month-hour weighting |
 | [docs/genx_runbook.md](docs/genx_runbook.md) | **Runbook** — the 25 allocations, every command in order, cluster handoff, and where each output lands |
@@ -214,6 +216,52 @@ substations' own envelopes.
 > pose. Tables, findings, and the still-functional `--calibration-window` / `--decay-halflife`
 > knobs (both default off) are in
 > [docs/approach2_stochastic.md → Legacy](docs/approach2_stochastic.md#legacy--calibration-recency-and-out-of-sample-behaviour).
+
+## Approach 3 — Coordinate-free proportional disaggregation
+
+Approaches 1 and 2 both end up on a node system through the nodal map, which needs
+coordinates. Approach 3 is for the case where **the target node system's coordinates are
+not available at all** — the county layer, ReEDS county weights and the nodal map are then
+all structurally unreachable, so the allocation can only be proportional to the node levels
+the source supplies.
+
+Input is a node table carrying two dimensionless, possibly negative levels per node
+(`winter_load`, `summer_load`), optionally two-level (`base_id` groups sibling `node_id`s),
+plus a **supplied** `base_id → substation_name` edge list that lets a node borrow an hourly
+shape from our utility envelopes.
+
+With `Y(c)` the target's energy in month-hour cell `c` and blocks MayOct / NovApr:
+
+```
+s_n(c) = l_n(b) · shape_n(c)        shape_n has Y-weighted block mean exactly 1
+M(c)   = Σ over mapped of s_i(c)    R(c) = 1 − M(c)
+unmapped j:  s_j(c) = R(c) · L_j(b) / Σ over unmapped L(b)
+```
+
+`Σ_n s_n(c) = 1` is an algebraic identity, so the statewide total is conserved exactly
+every hour — in float and at printed precision. And because `R`'s own Y-weighted block mean
+is exactly `Λ_U`, **every node, mapped and unmapped, receives exactly its input share of
+each half-year's energy**. What unmapped nodes give up is *shape*, not energy.
+
+Two properties worth knowing before using it:
+
+- **The shape normalization must be target-energy-weighted.** The unweighted cell mean
+  (which `external_loads.normalized_shapes` uses, correctly, in its own context) is off by
+  0.1242 pp here, and the error is absorbed silently by the slack.
+- **Feasibility is a theorem, not a bug.** When the unmapped share `Λ_U` is small relative
+  to the mapped fleet's shape dispersion, no construction satisfies per-cell conservation,
+  exact seasonal energy and bounded unmapped shapes at once. The guard names a ladder:
+  `--shape-common strip` (free — amplification 1.293 → 1.018), `--shape-source flat`
+  (provably safe), `--conserve renorm` (keeps shape, drops exactness).
+
+```bash
+python scripts/load_projection/approach3/build_proportional_nodal.py     --nodes nodes.csv --mapping mapping.csv --target resolve --year 2035 --weather-year 2012
+python scripts/load_projection/approach3/test_approach3.py            # guards
+python scripts/load_projection/approach3/doc_numbers.py --sections C  # feasibility matrix
+```
+
+Full detail, the four negative-level modes, the base/subname axis and per-sibling
+stochastic draws: [docs/approach3_proportional.md](docs/approach3_proportional.md).
 
 ## Nodal mapping — projecting substation loads onto an external test system
 
