@@ -135,7 +135,8 @@ def write_demand(path: Path, demand: GenXDemand, values: np.ndarray | None = Non
 
 
 def round_to_printed(values: np.ndarray, targets: np.ndarray,
-                     decimals: int = 1) -> np.ndarray:
+                     decimals: int = 1,
+                     allow_negative: bool = False) -> np.ndarray:
     """Round each row to `decimals` places so its sum hits `targets` exactly.
 
     Naive per-cell rounding leaves a residual of up to n_zones/2 * 10^-decimals
@@ -147,6 +148,25 @@ def round_to_printed(values: np.ndarray, targets: np.ndarray,
 
     `targets` are the desired row sums in MW; they are themselves snapped to the
     unit grid first, since a target off-grid is unreachable by construction.
+
+    The floor/remainder arithmetic is sign-agnostic (np.floor goes toward -inf,
+    so remainder is in [0, 1) for every sign), but the reclaim branch is NOT:
+    by default it refuses to take a unit below zero, which is correct for GenX
+    demand (`read_demand` rejects negative input outright) and is what every
+    published run was produced with.
+
+    allow_negative:
+      False -- default; bit-for-bit the historical behaviour, non-negativity
+               floor included.  Do not change this: `expand_template.py` carries
+               a copy of this function that `test_compact.py` checks against the
+               original every run, and the GenX outputs are published.
+      True  -- reclaim from the smallest discarded fractions unconditionally, no
+               floor.  Needed by Approach 3, where a node-hour can legitimately
+               be negative (an envelope shape goes negative in a measured
+               reverse-flow cell) and where biasing every downward adjustment
+               onto the positive columns would be a systematic distortion.
+               Exhaustion is impossible in this mode: |deficit| < n_cols and
+               there are always n_cols cells to take a unit from.
     """
     scale = 10 ** decimals
     scaled = values * scale
@@ -155,13 +175,26 @@ def round_to_printed(values: np.ndarray, targets: np.ndarray,
     target_units = np.rint(np.asarray(targets, dtype=np.float64) * scale)
 
     out = floor.copy()
+    n_cols = out.shape[1]
     for r in range(out.shape[0]):
         deficit = int(round(target_units[r] - out[r].sum()))
         if deficit == 0:
             continue
+        # |deficit| is bounded by the number of discarded fractions, so it can
+        # never exceed n_cols.  Asserted because the hand-out branch slices
+        # [:deficit] and would silently under-deliver if it ever did.
+        if abs(deficit) > n_cols:
+            raise ValueError(
+                f"row {r}: deficit {deficit} exceeds {n_cols} cells "
+                f"(floor sum {out[r].sum() / scale:.6f}, "
+                f"target {target_units[r] / scale:.6f}) -- the row sum and its "
+                f"target are further apart than rounding can explain")
         if deficit > 0:  # hand out units to the largest discarded fractions
             order = np.argsort(-remainder[r], kind="stable")[:deficit]
             out[r, order] += 1
+        elif allow_negative:  # reclaim from the smallest fractions, no floor
+            order = np.argsort(remainder[r], kind="stable")[:-deficit]
+            out[r, order] -= 1
         else:  # overshoot: reclaim units, never below zero
             order = np.argsort(remainder[r], kind="stable")
             reclaim = -deficit

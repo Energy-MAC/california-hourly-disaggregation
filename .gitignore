@@ -284,3 +284,12 @@ genx/scenarios_rescaled/results/
 # recompute scripts and the package README templates all live under scripts/,
 # so nothing inside deliverables/ needs tracking.
 /deliverables/
+
+# Approach 3 scratch and staging. Everything here regenerates:
+#   approach3/<pkg>/        the ingest's staging copy of the caller's OWN node
+#                           table and mapping -- real input data, must not be
+#                           committed (build_emilia2_package.py rewrites it)
+#   approach3/fixture/      the reference fixture, from make_reference_fixture.py
+#                           (seed 7, deterministic)
+#   approach3/doc_numbers.txt  from approach3/doc_numbers.py
+data/checks/approach3/
