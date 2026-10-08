@@ -270,6 +270,15 @@ def invert_basin_dictionary(dict_path: str | Path, name_index: dict, norm
     recorded as ambiguous and refused at resolution time rather than guessed.
     `SourceName`s absent from the profiled fleet are dropped.
     """
+    # A BLANK BasinName is a deliberate VETO: "no basin row corresponds to this
+    # substation" (added 2026-10-06 for PGE OAKLAND I, where two distinct
+    # facilities share the name and basin carries only the other one). It must
+    # not become a rule-2 route. The scalar `norm` here returns "" for a blank,
+    # which the `if not key` test below drops -- so the veto is invisible to the
+    # inversion, which is what we want. DO NOT switch this to the Series-based
+    # `norm` in process_substations_clean: that one returns NaN for a blank, and
+    # `not NaN` is False, so the veto row would become a bogus NaN key and
+    # inflate the invertible-key count.
     bd = pd.read_csv(dict_path, encoding="utf-8-sig")
     for col in ("SourceName", "BasinName", "Utility"):
         if col not in bd.columns:
@@ -622,8 +631,34 @@ def _levels_long(inp: pd.DataFrame, report: pd.DataFrame) -> pd.DataFrame:
     long = pd.concat(out, ignore_index=True)
     bad = long[~np.isfinite(long.level)]
     if len(bad):
-        raise ValueError(f"{len(bad)} (name, block) pair(s) have a non-finite load, "
-                         f"e.g. {bad.name.head(3).tolist()}")
+        # Report per BLOCK and per ROW, not just a count of pairs: a row blank in
+        # one season only is a different data problem from a row blank in both,
+        # and the old message could not tell them apart. The cause is virtually
+        # always empty cells in the input -- `read_input` coerces with
+        # errors="coerce", so a blank, a dash, "N/A" or a number carrying units
+        # all arrive here as NaN rather than failing at read time.
+        per_block = bad.groupby("block").size().to_dict()
+        n_rows = bad.row_id.nunique()
+        both = bad.row_id.value_counts()
+        n_both = int((both > 1).sum())
+        src = {b: c for c, b in SEASON_COL_BLOCK.items()}
+        detail = ", ".join(
+            f"{src.get(b, b)} ({b}): {n}" for b, n in sorted(per_block.items()))
+        ex = (bad[["name", "block"]].drop_duplicates("name").head(5)
+              .itertuples(index=False))
+        raise ValueError(
+            f"{len(bad)} (row, block) pair(s) across {n_rows} input row(s) have a "
+            f"non-finite load, so their weight is undefined.\n"
+            f"  by season column: {detail}\n"
+            f"  rows blank in BOTH seasons: {n_both}\n"
+            f"  e.g. " + "; ".join(f"{t.name!r} ({t.block})" for t in ex) + "\n"
+            f"These are blank or non-numeric cells in the input: read_input "
+            f"coerces with errors='coerce', so a blank, '-', 'N/A' or a value "
+            f"carrying units/separators becomes NaN here rather than failing "
+            f"earlier.\n"
+            f"Decide what a missing seasonal value MEANS for your source before "
+            f"proceeding -- a genuine zero (no load that season) and an unknown "
+            f"are not interchangeable, and this code refuses rather than guess.")
     return long
 
 
