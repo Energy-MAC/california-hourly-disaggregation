@@ -685,6 +685,37 @@ def _external_tables(args) -> tuple[Path, pd.DataFrame, pd.DataFrame]:
         raise FileNotFoundError(
             "external weight table not found: " + str(sub_path)
             + "\nRun build_external_weights.py --input <file> first.")
+    # Vintage guard. The node weights in this artifact were produced by
+    # coordinate placement against ONE nodal-map namespace; using them on another
+    # silently mixes vintages, because the bus ids still resolve and nothing
+    # downstream can tell they came from a different map. An artifact written
+    # before --system existed has no key and is treated as "CATS", which is what
+    # it was.
+    man_path = d / "manifest.json"
+    if man_path.exists():
+        try:
+            man = json.loads(man_path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            man = {}
+        want = getattr(args, "system", "CATS")
+        got = man.get("system", "CATS")
+        if got != want:
+            raise ValueError(
+                f"external artifact '{tag}' was built against nodal namespace "
+                f"'{got}', but this run uses '{want}'.\n"
+                f"Its node weights reference buses chosen under a different "
+                f"mapping vintage, so pairing them is a silent error.\n"
+                f"Rebuild it with:  build_external_weights.py --system {want} "
+                f"--tag <new tag>   (use a NEW tag -- the folder name is the "
+                f"artifact's identity)")
+        for key, attr in (("map", "map"), ("pool", "pool"),
+                          ("bus_types", "bus_types")):
+            mv, av = man.get(key), getattr(args, attr, None)
+            if mv is not None and av is not None and mv != av:
+                print(f"  WARNING external artifact '{tag}' was built with "
+                      f"{key}={mv!r} but this run uses {av!r}; coordinate-placed "
+                      f"rows were pooled differently")
+
     sub = pd.read_csv(sub_path)
     sub["utility"] = sub.utility.astype(str).str.lower()
     node = (pd.read_csv(node_path, dtype={"node": str}) if node_path.exists()

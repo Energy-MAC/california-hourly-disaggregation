@@ -218,7 +218,7 @@ def place_by_coordinates(rows: pd.DataFrame, args) -> pd.DataFrame:
     # case: CATS loads it, but it falls outside every California county polygon.
     import rescale_genx_demand as RS
     pool = set(RS.candidate_pool(
-        Namespace(map=args.map, system="CATS", pool=args.pool,
+        Namespace(map=args.map, system=args.system, pool=args.pool,
                   bus_types=args.bus_types)).node.astype(str))
     before = len(nodes)
     nodes = nodes[nodes[nargs.id_col].astype(str).isin(pool)].reset_index(drop=True)
@@ -274,6 +274,12 @@ def main() -> None:
     ap.add_argument("--shape", choices=list(ext.SHAPE_MODES), default="utility")
     ap.add_argument("--shape-col", choices=list(ext.SHAPE_COLS), default="avg_load")
     ap.add_argument("--map", choices=list(MAP_FILES), default="prox")
+    ap.add_argument("--system", default="CATS",
+                    help="nodal artifact namespace to read the map from, i.e. "
+                         "data/processed/load_projection/nodal/<system>/. MUST "
+                         "match the --system the deliverable will run with, or "
+                         "the placement pool is computed against a different "
+                         "mapping vintage than the allocation (default CATS)")
     ap.add_argument("--tag", default=None)
     ap.add_argument("--out", default=str(OUT_PARENT))
     ap.add_argument("--units", choices=["relative", "mw"], default="relative",
@@ -475,6 +481,7 @@ def main() -> None:
                             if rep_collapse is not None else
                             int(inp.name.duplicated().sum())),
         "map": args.map,
+        "system": args.system,
         "pool": args.pool,
         "bus_types": args.bus_types,
         "map_file": rel(map_path), "map_md5": md5(map_path),

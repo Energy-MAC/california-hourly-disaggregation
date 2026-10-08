@@ -427,6 +427,14 @@ def _f(pkg: Path) -> None:
     section_f2(pkg)
 
 
+# Allocation config section I recomputes against. The defaults ARE the
+# published package's settings, so the documented figures are reproduced by a
+# bare run; main() overrides them from the CLI for a pre-flight check of a run
+# that uses a different namespace or bus-type restriction.
+GOV_CFG = {"system": "CATS", "pool": "cats_loaded", "uncovered": "cats",
+           "bus_types": "all"}
+
+
 def section_i(pkg: Path) -> None:
     """External seasonal load weight source: resolution, shape, coverage gain."""
     head("I", "External seasonal load weight source (docs/external_loads.md)")
@@ -485,12 +493,18 @@ def section_i(pkg: Path) -> None:
 
     print("\n  measurement-driven share of load -- NOTE 100% of load is always")
     print("  allocated; this is the share whose WITHIN-COUNTY split is measured:")
+    dflt = {"system": "CATS", "pool": "cats_loaded", "uncovered": "cats",
+            "bus_types": "all"}
+    if GOV_CFG != dflt:
+        print(f"    [config: {', '.join(f'{k}={v}' for k, v in GOV_CFG.items())}]")
+        print("    NOT the published configuration -- these figures do not "
+              "belong in the docs")
 
     def gov(src, ext=None):
-        a = Namespace(map="prox", system="CATS", alpha="ratio", county_year=2023,
-                      county_weights=src, weights="reedsco", pool="cats_loaded",
-                      uncovered="cats", external_loads=ext, draw="mean",
-                      min_draws=3, stochastic_run="", year=None)
+        a = Namespace(map="prox", alpha="ratio", county_year=2023,
+                      county_weights=src, weights="reedsco",
+                      external_loads=ext, draw="mean",
+                      min_draws=3, stochastic_run="", year=None, **GOV_CFG)
         shares, detail, meta = RS.county_first_shares(a, {})
         return meta["envelope_governed_share"], int(detail.n_substation_nodes.sum()), detail
 
@@ -591,7 +605,19 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--package", default=str(DEFAULT_PKG))
     ap.add_argument("--sections", default=",".join(SECTIONS))
+    # section I only: recompute against a different allocation config. Defaults
+    # are the published package's, so omitting these reproduces the docs.
+    ap.add_argument("--system", default="CATS",
+                    help="nodal namespace for section I's recompute")
+    ap.add_argument("--bus-types", choices=["all", "substation"], default="all",
+                    help="section I: 'substation' excludes every CATS AddedNode")
+    ap.add_argument("--uncovered", choices=["cats", "equal"], default="cats",
+                    help="section I: how a county's uncovered pool splits")
+    ap.add_argument("--pool", choices=["cats_loaded", "all"], default="cats_loaded",
+                    help="section I: which buses are eligible at all")
     args = ap.parse_args()
+    GOV_CFG.update(system=args.system, pool=args.pool,
+                   uncovered=args.uncovered, bus_types=args.bus_types)
     pkg = Path(args.package)
     wanted = [x.strip().upper() for x in args.sections.split(",") if x.strip()]
     # section I recomputes from the repo, not from a built package, so it stays

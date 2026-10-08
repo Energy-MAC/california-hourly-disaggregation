@@ -548,7 +548,7 @@ def county_first_variant(map_name: str, county_year: int, cache: dict,
                          weight_src: str = "envelope", draw: str = "mean",
                          run: str = "", pool: str = "cats_loaded",
                          uncovered: str = "cats", external: str | None = None,
-                         bus_types: str = "all"
+                         bus_types: str = "all", system: str = "CATS"
                          ) -> tuple[list[str], np.ndarray, pd.DataFrame, dict]:
     """County-first shares for one (map, weight source, draw), expanded to 288 cells.
 
@@ -579,7 +579,7 @@ def county_first_variant(map_name: str, county_year: int, cache: dict,
     the largest axis in the package because the uncovered pool carries ~51% of
     CA-wide load.
     """
-    args = Namespace(map=map_name, system="CATS", alpha="ratio", county_year=county_year,
+    args = Namespace(map=map_name, system=system, alpha="ratio", county_year=county_year,
                      county_weights=weight_src, weights="reedsco", pool=pool,
                      uncovered=uncovered, external_loads=external,
                      bus_types=bus_types,
@@ -610,9 +610,9 @@ def stoch_weight_year(run: str) -> int:
     return int(pd.read_csv(path, usecols=["year"]).year.max())
 
 
-def stoch_variant(map_name: str, run: str, cache: dict
+def stoch_variant(map_name: str, run: str, cache: dict, system: str = "CATS"
                   ) -> tuple[list[str], np.ndarray, pd.DataFrame, dict]:
-    args = Namespace(map=map_name, system="CATS", weights="stoch", level="monthhour",
+    args = Namespace(map=map_name, system=system, weights="stoch", level="monthhour",
                      stoch_gate=0.30, stoch_topoff="equal", draw="mean", min_draws=3,
                      stochastic_run=run, year=stoch_weight_year(run))
     shares, coverage, meta = RS.stoch_pool_shares(args, cache)
@@ -814,6 +814,13 @@ def main() -> None:
                          "weight comes from that external measurement. Built by "
                          "scripts/load_projection/external_loads/build_external_weights.py")
     ap.add_argument("--maps", default="prox,voltres")
+    ap.add_argument("--system", default="CATS",
+                    help="nodal artifact namespace: read substation->bus maps "
+                         "from data/processed/load_projection/nodal/<system>/. "
+                         "Default CATS is the published vintage. A separate "
+                         "namespace isolates a run from it; any --external-loads "
+                         "artifact MUST have been built with the same --system, "
+                         "which the builder checks"),
     ap.add_argument("--draws", default="0,1",
                     help="Approach-2 draw indices shipped alongside the mean; "
                          "empty string ships the mean only")
@@ -883,7 +890,7 @@ def main() -> None:
     for tag, m, src, draw, unc, ext in specs:
         nodes, S, detail, meta = county_first_variant(
             m, args.county_year, cache, src, draw, args.stochastic_run, args.pool,
-            unc, ext, args.bus_types)
+            unc, ext, args.bus_types, system=args.system)
         if county_detail is None:
             county_detail = detail
         print(f"  {tag:<44} {len(nodes):,} buses, "
@@ -949,7 +956,7 @@ def main() -> None:
     # ---- write ------------------------------------------------------------
     meta_cols = {"load_basis": args.load_basis, "overlays": args.overlays,
                  "bus_types": args.bus_types, "uncovered": args.uncovered,
-                 "pool": args.pool}
+                 "pool": args.pool, "system": args.system}
     if args.format == "compact":
         annual, peak, rows = write_compact(out, series, variants, args, meta_cols)
     else:
