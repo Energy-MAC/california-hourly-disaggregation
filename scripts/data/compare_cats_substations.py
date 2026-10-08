@@ -41,7 +41,7 @@ from sklearn.neighbors import BallTree
 # ── Config ────────────────────────────────────────────────────────────────────
 
 ROOT      = Path(__file__).resolve().parents[2]
-CATS_FILE = ROOT / "data" / "raw" / "PotentialData" / "CATS" / "CATS_buses.csv"
+CATS_FILE = ROOT / "data" / "raw" / "CATS" / "CATS_buses.csv"
 SUBS_FILE = ROOT / "data" / "processed" / "substations" / "substation_attributes_clean.csv"
 FIGS_DIR  = ROOT / "data" / "figures" / "substation_maps"
 OUT_DIR   = ROOT / "data" / "checks" / "compare_cats_substations"

@@ -193,13 +193,16 @@ def section_e_stochastic() -> None:
 
 def section_f_maps() -> None:
     hdr("F", "Nodal map artifacts (genx_rescale.md 'The map axis')")
-    summ = CHECKS / "build_identity_catchment_maps/map_summary.csv"
+    # build_identity_catchment_maps.py namespaces its stats by --system
+    # (2026-10-06); the published GenX numbers are the CATS build.
+    bicm = CHECKS / "build_identity_catchment_maps/CATS"
+    summ = bicm / "map_summary.csv"
     if summ.exists():
         print(pd.read_csv(summ).to_string(index=False))
-    lp = CHECKS / "build_identity_catchment_maps/lp_stats.csv"
+    lp = bicm / "lp_stats.csv"
     if lp.exists():
         print(pd.read_csv(lp).to_string(index=False))
-    pairs = CHECKS / "build_identity_catchment_maps/identity_pairs.csv"
+    pairs = bicm / "identity_pairs.csv"
     if pairs.exists():
         p = pd.read_csv(pairs)
         print(f"identity matches: {len(p):,} buses across "

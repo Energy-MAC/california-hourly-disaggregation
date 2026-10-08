@@ -1,12 +1,21 @@
 """Shared logic for the stochastic substation disaggregation model (Approach 2).
 
 Implements docs/stochastic_model_spec.md: closed-form marginals per
-(substation, month, hour_pst) cell, the calibrated IOU-share shape s(c) and
-level F*, the per-cell common-factor share rho(c), z-trajectory construction
-(native standardization or month-matched block bootstrap), and the conditional
-Monte Carlo generator (normal marginals directly; uniform marginals via a
-Gaussian copula). See the spec for derivations; scripts in
-scripts/load_projection/ are the CLI entry points.
+(substation, cell), the calibrated IOU-share shape s(c) and level F*, the
+per-cell common-factor share rho(c), z-trajectory construction (native
+standardization or month-matched block bootstrap), and the conditional Monte
+Carlo generator (normal marginals directly; uniform marginals via a Gaussian
+copula). See the spec for derivations; scripts in scripts/load_projection/ are
+the CLI entry points.
+
+The INPUT layer is pluggable while the model is not. A cell is whatever
+`cells.CellSpec` says it is -- (month, hour_pst) by default, and every function
+here takes `spec` with that default, so the published behavior is bit-for-bit
+unchanged. The marginal fit lives in `envelopes.py`, which solves
+`L_k = mu + sigma * Phi^-1(p_k)` for any percentile set and reduces exactly to
+the historical `mu = (q10+q90)/2`, `sigma = (q90-q10)/(2*Z90)` at two quantiles.
+The uniform family is NOT generalized: its bounds are computed here, verbatim,
+and are only available at the legacy settings.
 """
 
 from pathlib import Path
@@ -15,32 +24,50 @@ import numpy as np
 import pandas as pd
 from scipy.stats import norm as _norm
 
+from . import cells as _cells
+from . import envelopes as _envelopes
+
 ROOT = Path(__file__).resolve().parents[2]
 SUB_FILE = ROOT / "data/processed/substations/substation_load_profiles_clean.csv"
 EIA_FILE = ROOT / "data/processed/eia/eia930_operations.csv"
 
-Z90 = 1.2815515655446004  # Phi^-1(0.9)
-N_CELLS = 288  # 12 months x 24 hours
+Z90 = _envelopes.Z90  # Phi^-1(0.9)
+MONTHHOUR = _cells.MONTHHOUR  # the default cell definition: (month, hour_pst)
+N_CELLS = MONTHHOUR.n_cells  # 288 = 12 months x 24 hours (default spec only)
 YEAR_RANGE = (2015, 2025)  # complete PST years of EIA-930 used for estimation
 FULL_YEAR_MIN_HOURS = 8000  # a year with fewer observed hours is "incomplete"
 
 
-def cell_index(month, hour) -> np.ndarray:
-    """Map (month 1-12, hour_pst 0-23) to a flat cell index 0-287."""
-    return (np.asarray(month) - 1) * 24 + np.asarray(hour)
+def cell_index(month, hour, spec: _cells.CellSpec = MONTHHOUR) -> np.ndarray:
+    """Map (month 1-12, hour_pst 0-23) to a flat cell index.
+
+    Thin wrapper over `cells.encode` kept for the many existing callers. With
+    the default `monthhour` spec this is exactly `(month - 1) * 24 + hour`,
+    int64, as it always was.
+    """
+    return _cells.encode(spec, month, hour)
 
 
 # ---------------------------------------------------------------------------
 # Estimation
 # ---------------------------------------------------------------------------
 
-def load_envelope_cells() -> pd.DataFrame:
-    """Per-(utility, substation, month, hour_pst) envelope quantiles with
-    closed-form marginal parameters and hygiene flags.
+def load_envelope_cells(spec: _cells.CellSpec = MONTHHOUR,
+                        coarsen_mode: str = "variance") -> pd.DataFrame:
+    """Per-(utility, substation, cell) envelope quantiles with closed-form
+    marginal parameters and hygiene flags.
 
     Duplicate cells are resolved by the cell mean (matches rank_substations.py).
     Inverted cells (min > max) are swapped; zero-width cells flagged; cells with
     either quantile NaN are flagged `missing` (params NaN, excluded everywhere).
+
+    The utility envelopes are published at (month, hour_pst), so the fit always
+    happens there; a coarser `spec` is then obtained by aggregating, using the
+    law of total variance by default so the coarse marginal keeps the diurnal and
+    seasonal swing (`coarsen_mode='average'` drops it and inflates rho ~4x toward
+    the min(1,.) cap -- see `envelopes.coarsen`). q10/q90 and the uniform bounds
+    survive only at `monthhour`, the only cell definition the uniform family
+    supports.
     """
     df = pd.read_csv(SUB_FILE)
     df = df.groupby(["utility", "substation_name", "month", "hour_pst"], as_index=False)[
@@ -53,19 +80,35 @@ def load_envelope_cells() -> pd.DataFrame:
     lo = np.minimum(df.min_load.values, df.max_load.values)
     hi = np.maximum(df.min_load.values, df.max_load.values)
     df["q10"], df["q90"] = lo, hi
-    df["mu"] = (lo + hi) / 2
-    df["sigma"] = (hi - lo) / (2 * Z90)
+    # the two-quantile solution of L_k = mu + sigma * Phi^-1(p_k); bit-for-bit
+    # the historical (lo + hi) / 2 and (hi - lo) / (2 * Z90) at p = {0.10, 0.90}
+    df["mu"], df["sigma"] = _envelopes.fit_normal(
+        np.stack([lo, hi]), _envelopes.LEGACY_PERCENTILES)
+    # uniform family frozen verbatim: it is reachable only at `monthhour` with
+    # two percentiles (see envelopes.py), so it is not generalized here
     width = (hi - lo) / 0.8
     df["unif_a"] = lo - width / 8
     df["unif_b"] = hi + width / 8
     df["zero_width"] = df.sigma == 0
     df["cell"] = cell_index(df.month, df.hour_pst)
+    if spec.name != MONTHHOUR.name:
+        if spec.needs_day:
+            raise ValueError(
+                f"cell spec {spec.name!r} needs a day axis, but the utility "
+                f"envelopes are published per (month, hour_pst) only -- there is "
+                f"no finer resolution to recover. Supply a day-resolved input via "
+                f"the long envelope contract (envelopes.from_long) instead.")
+        df = _envelopes.coarsen(df, _cells.coarsen_map(MONTHHOUR, spec),
+                                mode=coarsen_mode)
     return df
 
 
-def load_caiso_history() -> pd.DataFrame:
+def load_caiso_history(spec: _cells.CellSpec = MONTHHOUR) -> pd.DataFrame:
     """CAISO hourly net demand (EIA-930 CISO), UTC hour-ending -> PST
-    hour-beginning, complete PST years 2015-2025, with cell labels."""
+    hour-beginning, complete PST years 2015-2025, with cell labels.
+
+    Carries month, day and hour_pst so any cell spec can be encoded from it.
+    """
     eia = pd.read_csv(EIA_FILE, parse_dates=["datetime_utc"])
     c = eia[eia.ba_code == "CISO"].copy()
     c["dt_pst_hb"] = c.datetime_utc - pd.Timedelta(hours=9)
@@ -77,8 +120,9 @@ def load_caiso_history() -> pd.DataFrame:
         "demand_mw": c.demand_mwh.values,
     })
     out["month"] = out.dt_pst_hb.dt.month
+    out["day"] = out.dt_pst_hb.dt.day
     out["hour_pst"] = out.dt_pst_hb.dt.hour
-    out["cell"] = cell_index(out.month, out.hour_pst)
+    out["cell"] = _cells.encode(spec, out.month, out.hour_pst, out.day)
     return out.reset_index(drop=True)
 
 
@@ -119,7 +163,8 @@ def decay_weights(caiso: pd.DataFrame, halflife_days: float,
     return 0.5 ** (age_days / float(halflife_days))
 
 
-def _cell_moments(caiso: pd.DataFrame, weights: np.ndarray | None) -> pd.DataFrame:
+def _cell_moments(caiso: pd.DataFrame, weights: np.ndarray | None,
+                  n_cells: int = N_CELLS) -> pd.DataFrame:
     """Per-cell ybar, sd, n_obs. `weights=None` is the plain unweighted groupby
     (byte-for-byte the original path); otherwise weighted moments with an
     effective sample size n_eff = (sum w)^2 / sum(w^2) and its Bessel correction."""
@@ -128,21 +173,23 @@ def _cell_moments(caiso: pd.DataFrame, weights: np.ndarray | None) -> pd.DataFra
     c = caiso["cell"].to_numpy()
     y = caiso["demand_mw"].to_numpy()
     w = np.asarray(weights, dtype=float)
-    sw = np.bincount(c, w, N_CELLS)
-    swy = np.bincount(c, w * y, N_CELLS)
-    swy2 = np.bincount(c, w * y * y, N_CELLS)
-    sw2 = np.bincount(c, w * w, N_CELLS)
+    sw = np.bincount(c, w, n_cells)
+    swy = np.bincount(c, w * y, n_cells)
+    swy2 = np.bincount(c, w * y * y, n_cells)
+    sw2 = np.bincount(c, w * w, n_cells)
     with np.errstate(invalid="ignore", divide="ignore"):
         ybar = swy / sw
         var_pop = swy2 / sw - ybar ** 2
         neff = sw ** 2 / sw2
         sd = np.sqrt(np.clip(var_pop, 0, None) * np.where(neff > 1, neff / (neff - 1), np.nan))
     return pd.DataFrame({"ybar": ybar, "sd": sd, "n_obs": neff},
-                        index=pd.RangeIndex(N_CELLS, name="cell"))
+                        index=pd.RangeIndex(n_cells, name="cell"))
 
 
 def build_system_cells(env: pd.DataFrame, caiso: pd.DataFrame,
-                       weights: np.ndarray | None = None) -> tuple[pd.DataFrame, float]:
+                       weights: np.ndarray | None = None,
+                       spec: _cells.CellSpec = MONTHHOUR
+                       ) -> tuple[pd.DataFrame, float]:
     """Per-cell system table and the calibrated level F*.
 
     Columns: sum_mu, sum_sigma (envelope aggregates); ybar, sd, n_obs (CAISO
@@ -158,7 +205,7 @@ def build_system_cells(env: pd.DataFrame, caiso: pd.DataFrame,
     "Rolling-window calibration").
     """
     agg = env.groupby("cell").agg(sum_mu=("mu", "sum"), sum_sigma=("sigma", "sum"))
-    cy = _cell_moments(caiso, weights)
+    cy = _cell_moments(caiso, weights, spec.n_cells)
     cells = agg.join(cy)
     cells["implied_f"] = cells.sum_mu / cells.ybar
     f_star = (cells.sum_mu * cells.n_obs).sum() / (cells.ybar * cells.n_obs).sum()
@@ -166,8 +213,7 @@ def build_system_cells(env: pd.DataFrame, caiso: pd.DataFrame,
     # min(1,.) projects the unbounded moment ratio onto rho's [0,1] parameter
     # space; a binding cap would signal envelope/CAISO inconsistency (see spec)
     cells["rho"] = np.minimum(1.0, (cells.implied_f * cells.sd / cells.sum_sigma) ** 2)
-    cells["month"] = cells.index // 24 + 1
-    cells["hour_pst"] = cells.index % 24
+    cells = cells.join(_cells.label_frame(spec))
     return cells, f_star
 
 
@@ -226,24 +272,27 @@ def bootstrap_z(z_hist: pd.DataFrame, target: pd.DataFrame, block_days: int,
 # ---------------------------------------------------------------------------
 
 class EnvelopeMatrices:
-    """Envelope parameters pivoted to [n_subs, 288] arrays (NaN = missing cell)."""
+    """Envelope parameters pivoted to [n_subs, n_cells] arrays (NaN = missing)."""
 
-    def __init__(self, env: pd.DataFrame):
+    def __init__(self, env: pd.DataFrame, spec: _cells.CellSpec = MONTHHOUR):
         subs = env[["utility", "substation_name"]].drop_duplicates().sort_values(
             ["utility", "substation_name"]).reset_index(drop=True)
         self.subs = subs
+        self.spec = spec
         idx = pd.MultiIndex.from_frame(subs)
 
         def pivot(col: str) -> np.ndarray:
             wide = env.pivot_table(index=["utility", "substation_name"],
                                    columns="cell", values=col, dropna=False)
-            wide = wide.reindex(index=idx, columns=range(N_CELLS))
+            wide = wide.reindex(index=idx, columns=range(spec.n_cells))
             return wide.values
 
         self.mu = pivot("mu")
         self.sigma = pivot("sigma")
-        self.unif_a = pivot("unif_a")
-        self.unif_b = pivot("unif_b")
+        # the uniform family is frozen at the legacy settings, so its bounds are
+        # only present when the envelope came straight from the two quantiles
+        self.unif_a = pivot("unif_a") if "unif_a" in env.columns else None
+        self.unif_b = pivot("unif_b") if "unif_b" in env.columns else None
 
 
 def generate(mats: EnvelopeMatrices, cells: pd.DataFrame, target: pd.DataFrame,
@@ -258,7 +307,7 @@ def generate(mats: EnvelopeMatrices, cells: pd.DataFrame, target: pd.DataFrame,
     """
     k = target.cell.values
     n_hours, n_subs = len(k), len(mats.subs)
-    rho = cells.rho.reindex(range(N_CELLS)).values[k]        # [H]
+    rho = cells.rho.reindex(range(mats.spec.n_cells)).values[k]  # [H]
     w_common = (np.sqrt(rho) * z)[:, None]                    # [H,1]
     w_idio_coef = np.sqrt(1.0 - rho)[:, None]                 # [H,1]
 
@@ -275,6 +324,11 @@ def generate(mats: EnvelopeMatrices, cells: pd.DataFrame, target: pd.DataFrame,
     if family == "normal":
         out = mats.mu[:, k].T + mats.sigma[:, k].T * w
     elif family == "uniform":
+        if mats.unif_a is None:
+            raise ValueError(
+                "the uniform family is not implemented for generalized envelopes "
+                f"(cell spec {mats.spec.name!r}); it requires two percentiles on "
+                "the 'monthhour' cells -- see envelopes.py (TODO)")
         u = _norm.cdf(w)
         a, b = mats.unif_a[:, k].T, mats.unif_b[:, k].T
         out = a + (b - a) * u

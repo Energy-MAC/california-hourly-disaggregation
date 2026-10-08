@@ -1,6 +1,4 @@
 from pathlib import Path
-from unicodedata import name
-from attr import attributes
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker

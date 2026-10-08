@@ -25,6 +25,8 @@ unless noted. Search these names to check any claim in this document.
 | County-first allocation, the α split | `county_first_shares()` |
 | County-first per-cell expansion | `expand_shares_to_cells()` |
 | Envelope weights (static / per-cell) | `envelope_node_weights()` / `envelope_cell_weights()` |
+| External-source weights (static / per-cell) | `external_node_weights()` / `external_cell_weights()` |
+| Which within-county weight a run uses | `county_weight_src()` |
 | Stochastic pool + gate + β | `stoch_pool_shares()` |
 | Stochastic per-cell weights and expansion | `stoch_cell_weights()` / `expand_stoch_shares_to_cells()` |
 | Envelope hold | `env_hold_shares()` / `expand_env_shares_to_cells()` |

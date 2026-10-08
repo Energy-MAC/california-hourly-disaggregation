@@ -81,16 +81,157 @@ Physical + DER attributes from each utility's public ArcGIS FeatureServer:
 ## Substation coverage summary
 
 After cleaning (removing pass-through switching nodes and failed scrapes) and joining to
-the DataBasin CA Substations 2022 reference for coordinates:
+the DataBasin CA Substations 2022 reference for coordinates.
+
+**Basin-join rules (revised 2026-10-06, `process_substations_clean.py`).** Candidates for
+a substation are its own utility's basin rows **plus** rows basin labels owner
+`other`/`unknown`, which it does for many IOU-owned stations. Within that pool:
+
+- **Own-owner rows win and are never distance-gated** -- SDG&E's published coordinates are
+  genuinely imprecise (1,327 m median separation even on exact-name matches vs 34 m for
+  PG&E), so gating them would discard correct matches.
+- **Nearest wins among duplicate names.** Basin has two PG&E `Live Oak` rows 481 km apart
+  and two SDG&E `Eastgate` rows 3.1 km apart; taking whichever appeared first in the file
+  put `LIVE OAK` 481 km from its real location.
+- **A relaxed (`other`/`unknown`) row is admitted only within 250 m**
+  (`BASIN_RELAXED_MAX_KM`), and only when there is no own-owner candidate or the best
+  own-owner candidate is itself beyond that distance. The 23 matches this adds all land at
+  <= 244 m and the next candidate is at 1.0 km.
+- **Exact name first, `basinSourceDictionary.csv` second** -- and the dictionary is tried
+  whenever the exact name produced no *accepted* row, not merely no candidate. PGE
+  `BUCKS CREEK` has an `unknown`-owner `Bucks Creek` 9.1 km away that the guard rejects,
+  and the dictionary correctly points at `Grizzly` 95 m away.
+- **A blank `BasinName` in the dictionary VETOES the match**, including the exact-name one.
+  This is the one case where the dictionary overrides exact matching, and it is for a name
+  collision between two different facilities: it can decline a wrong coordinate, never
+  invent one. Currently one entry, PG&E `OAKLAND I` (below). The veto is invisible to
+  `invert_basin_dictionary()` in the external-load cascade, because the scalar `norm()`
+  maps a blank to `""` which that function already skips -- verified: `invertible_basin_keys`
+  stays 80.
+- The whole step runs **after** the coordinate overrides, since every decision and
+  `dist_to_basin_km` key on `util_lat`/`util_lon`.
+
+Net effect: +23 basin matches (PG&E +19, SCE +4, SDG&E 0), four coordinates corrected
+(`LIVE OAK` 481.16 -> 0.016 km, `EASTGATE` 4.09 -> 1.00, `Ritter Ranch` 3.24 -> 0.06,
+`Trona` 1.01 -> 0.08), one false match vetoed (`OAKLAND I`), and
+`dist_to_basin_km.max()` falls from 481.16 km to 9.69 km (SDG&E `SANTA YSABEL`, a genuine
+SDG&E coordinate-imprecision case rather than a wrong match). `util_lat`/`util_lon` are
+untouched, so the nodal maps are unaffected.
+
+### `OAKLAND I` -- a name collision, not a bad coordinate
+
+Two different PG&E facilities are named `Oakland I`, and basin carries only one of them.
+CEC carries both, disambiguated: `Oakland I - PG&E Northwest` (115 kV, `source=CEC`,
+`hifld_id` 300963) is the row basin has, and `Oakland I - PG&E Southeast` (12 kV,
+`source=IOU/POU`, i.e. PG&E's own submission) sits **17 m** from PG&E's published
+coordinate. Ours is the Southeast one:
+
+| | our `OAKLAND I` | Oakland C / D / J / L / X |
+|---|---|---|
+| peak `max_load` | **2.30 MW** | 49.6 - 718.8 MW |
+| mean `max_load` | **1.52 MW** | 33.7 - 119.6 MW |
+| `highside_kv` | **12** | 115 |
+| `circuit_count` | **2** | 4 - 6 |
+
+A 115 kV West Oakland transmission substation cannot carry a 1.5 MW profile. PG&E's
+coordinate is therefore **correct**, and the 10.86 km figure was a false name match -- a
+40x outlier against PG&E's own p99 of 0.26 km. basin has no row for the Southeast site
+(nearest is `Bancroft`, 1.88 km), so the right basin value is *none*, which is what the
+veto records. Earlier notes in this repo described this as a wrong PG&E coordinate
+belonging in `substationCoordinateOverrides.csv`; that diagnosis was backwards, and an
+override would also have been a no-op because `apply_coordinate_overrides()` never
+replaces a populated `util_lat`.
+
+A possible second case was examined and **rejected**: PG&E `BONITA` matches basin `Bonita`
+at 4.88 km while basin's `Bonita Tap` sits 40 m away, but a tap is not the substation, so
+this reads as the same site with a poor basin coordinate rather than a collision. The match
+stands (user decision 2026-10-06).
+
+### `highside_kv` where CEC holds two records for one site
+
+CEC can carry **two records for one physical substation, one per voltage level**, and a
+plain name match lands on whichever it happens to resolve. PG&E `OAK` is the case:
+
+| CEC record | voltage | source | separation |
+|---|---|---|---|
+| `Oak - PG&E South` | 12 kV | `IOU/POU` | — |
+| `Oak - PG&E North` | 60 kV | `CEC`, Operational, Kensington | 65 m apart |
+
+`highside_kv` means the **transmission** side, so 12 kV (the distribution side) was wrong.
+basin independently gives `Oak` 60 kV, PG&E-owned, 95 m away. `_cec_colocated_max()` now
+takes the **max over co-located records sharing a base name**, keyed on
+`(owner_base, norm_base(name))` with a 250 m radius (`CEC_COLOCATED_MAX_KM`). Three
+properties make this safe rather than blunt:
+
+- **`norm_base` strips CEC's trailing owner/direction suffix**, so `Oak - PG&E North` and
+  `Oak - PG&E South` group while `Oregon Trail` and the neighbouring but differently named
+  `College View` (143 m, 115 kV) do not.
+- **The radius separates records from facilities.** The two `Oakland I` records share a base
+  name but lie 10.86 km apart, so they never combine and `OAKLAND I` correctly keeps 12 kV.
+- **Distance is measured record-to-record**, not record-to-substation, so the result is a
+  property of the CEC table alone and does not depend on whether a substation has a
+  coordinate yet.
+
+Measured blast radius: of 3,767 CEC records with a known voltage this raises exactly
+**one** (`Oak - PG&E South`, 12 -> 60 kV) and changes exactly **one** substation
+(`OAK`, 12 -> 60 kV). Utility-published values are untouched, because `highside_kv` still
+prefers the utility's own `substation_voltage` and only falls back to CEC. That precedence
+matters: a site-max rule applied to SCE would have overwritten 87 utility-published
+high-side values with transmission-yard voltages (e.g. `Barre` 66 -> 230 kV), which is why
+the rule is scoped to the CEC-sourced path.
+
+`OAK`'s CATS voltage class is unchanged -- `band_to_cats_class` maps both 12 and 60 kV to
+the 66 kV class -- so the voltage-restricted nodal map's assignments are unaffected.
+
+### `SF A (POTRERO)` -- a wrong `cecSourceDictionary` target
+
+`highside_kv` read **200 kV**, which is the Trans Bay Cable HVDC link voltage, not a PG&E
+high side. `cecSourceDictionary.csv` mapped the substation to `Trans Bay Cable Facility`
+via the `spatial_auto` tier because that is the nearest **confirmed-owner** CEC record
+(130 m); the actual substation, `Potrero - (Other)` at **19 m**, carries the unconfirmed
+`Other (PGE - Assumed)` owner tag and the spatial tier skipped it.
+
+| CEC record | voltage | owner | source | distance |
+|---|---|---|---|---|
+| `Potrero - (Other)` | **230 kV** | `Other (PGE - Assumed)` | CEC | **0.019 km** |
+| `Trans Bay Cable Facility` | 200 kV | PG&E GBA | HIFLD | 0.130 km |
+| `Potrero - (PG&E GBA)` | 230 kV | PG&E | HIFLD | 0.164 km |
+
+Retargeted to `Potrero - (Other)` (tier `spatial`, hand-reviewed), giving **230 kV**. Three
+things corroborate it: both `Potrero` records agree on 230 kV; CATS bus **1503** is
+`Type=Substation`, **230 kV**, 1.3 m from that CEC record and 20 m from our substation; and
+`Potrero - (PG&E GBA)`, the HIFLD-lineage duplicate of the same yard, is reached by no CATS
+bus at all.
+
+**This is the one fix in this series that touches the identity maps**, since
+`build_identity_catchment_maps.py` reads the same dictionary. Measured on a rebuild
+(`--system` scratch namespace, published maps untouched):
+
+- identity matches 1,242 -> **1,243** across 1,077 -> 1,078 substations;
+- `nameprox`: **one row**, `SF A (POTRERO)`, `assignment_method` `nearest` -> `name`.
+  **Node 1503, share and `n_tied` unchanged** -- the identity link confirms the bus
+  proximity already chose, so routing is identical;
+- `catchment`: **byte-identical** (it does not use identity pairs);
+- `namecatchment`: `SF A (POTRERO)` `catchment` -> `name` on the same node, plus
+  `Palm Springs 'A'`/`'B'` swapping buses 2233 <-> 2278. That swap is **LP degeneracy, not
+  an effect of this change**: both carry the identical hand-curated coordinate, so the two
+  assignments are exactly equivalent and the extra forced row perturbed which optimum the
+  solver returned (objective 27906.702 -> 27906.682 km).
+
+Bus 1503 is CATS-loaded, so the documented **422 CATS-unloaded `nameprox` name matches** is
+unchanged. `band_to_cats_class` maps both 200 and 230 kV to the 230 kV class, so the
+voltage-restricted map's assignments are unaffected here too. The CEC cross-reference rate
+(PGE 666/670, SCE 559/578, SDGE 90/99) is unchanged, since the substation already had a
+dictionary entry -- only its target moved.
 
 |                                      | PG&E    | SCE     | SDG&E  | Total     |
 |--------------------------------------|---------|---------|--------|-----------|
 | Raw substations published            | 704²    | 748     | 107¹   | 1,559     |
 | Removed (P.T. nodes / no load profile)| 34      | 170     | 8      | 212       |
 | **Cleaned (in processed output)**    | **670** | **578** | **99** | **1,347** |
-| **Basin-matched total**              | **605** | **527** | **96** | **1,228** |
-| Not matched to basin                 | 65      | 51      | 3      | 119       |
-| Basin substations not in any source  | 346     | 160     | 42     | 548       |
+| **Basin-matched total**              | **621** | **539** | **96** | **1,256** |
+| Not matched to basin                 | 49      | 39      | 3      | 91        |
+| Basin substations not in any source  | 346³    | 160³    | 42³    | 548³      |
 | With a utility/override coordinate   | 669     | 568     | 99     | 1,336     |
 | **With ANY coordinate**              | **670** | **577** | **99** | **1,346** |
 | Load profile rows (processed)        | 192,912 | 166,440 | 28,512 | 387,864   |
@@ -104,7 +245,20 @@ profile, so they cannot be used. (The layer also returns 72 fully name-redacted 
 id, coordinates and DER capacity but no name — which cannot be joined to load and are
 dropped.)
 
-The **name dictionary** (`data/basinSourceDictionary.csv`, 79 entries) maps utility
+³ **Stale and currently not re-derivable.** This row is printed by
+`compare_substations.py`, which counts against the raw published name sets rather
+than the cleaned fleet, so it has a different denominator from the rows above. It
+was not re-derived in the 2026-10-05 dictionary review, and an attempt on
+2026-10-06 (after the basin-join fix) failed: the script raises
+`KeyError: ['latitude', 'longitude'] not in index` in `section_b` on the
+`pge_loads` frame, which carries no coordinate columns. That is a pre-existing
+defect in `compare_substations.py` -- it reads only raw files and
+`basinSourceDictionary.csv`, none of which the basin-join fix touched -- so the
+row stays as last printed. For reference, the sections that do still run report
+PG&E attrs "Basin: 980 | Source: 704 | Matched by name: 575, dictionary +48 ->
+623; Only in basin: 405".
+
+The **name dictionary** (`data/basinSourceDictionary.csv`, 89 entries) maps utility
 source names that differ from the DataBasin reference (e.g. "CRESTA PH" → "Cresta") to
 recover geolocation matches beyond the normalised-name join.
 
@@ -219,13 +373,14 @@ EPSG:3310; `Lat`/`Lon` are WGS84). **Processed:**
    point. PGE/SCE publish point coords.
 
 **CEC name dictionary** (`build_cec_name_dictionary.py` → `data/cecSourceDictionary.csv`):
-the CEC analogue of the basin dict. Because CEC inherited basin's naming, 70 of the basin
-dict's 79 targets exist verbatim in CEC. Four tiers: *basin_reuse* (transferable entries),
+the CEC analogue of the basin dict. Because CEC inherited basin's naming, 79 of the basin
+dict's 89 targets exist verbatim in CEC (was 70 of 79 before the 2026-10-05
+review). Four tiers: *basin_reuse* (transferable entries),
 *name_auto* (strips CEC's systematic " - (OWNER)" suffix via `norm_base()` — the reliable
 signal for SDGE centroids), *spatial_auto* (≤0.25 km), *name_auto_assumed* (rescues exact
 name matches whose only CEC hit has an unconfirmed "Other (PGE - Assumed)" owner tag).
 With the dictionary, the **CEC cross-reference rate** is **PGE 666/670, SCE 559/578, SDGE
-90/99** (vs basin's 605/527/96); aggregate **1,315 vs basin's 1,228 (+87)**.
+90/99** (vs basin's 621/539/96); aggregate **1,315 vs basin's 1,256 (+59)**.
 
 > **This is a cross-reference/enrichment rate, NOT coordinate availability — do not read
 > "666/670" as "4 PGE substations lack a location."** Every scraped substation already

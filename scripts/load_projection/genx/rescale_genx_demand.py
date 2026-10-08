@@ -102,6 +102,11 @@ from validate_county_reeds import reeds_county_annual  # noqa: E402
 
 PROCESSED = ROOT / "data/processed"
 PROJ_ROOT = PROCESSED / "load_projection/projections"
+EXTERNAL_ROOT = PROCESSED / "load_projection/external_loads"
+
+#: within-county weight sources. 'envelope' is the published default, so callers
+#: that never set `args.county_weights` are byte-for-byte unchanged.
+COUNTY_WEIGHT_SRCS = ("envelope", "stoch", "external")
 NODAL_DIR = PROCESSED / "load_projection/nodal"
 CATS_BUSES = ROOT / "data/raw/CATS/CATS_buses.csv"
 DEFAULT_OUT_ROOT = GENX_ROOT / "rescaled"
@@ -148,7 +153,7 @@ def substation_annual(args) -> tuple[pd.DataFrame, dict]:
     enter -- levels must cancel.  The minimum-intervention contrast is now the
     envelope-weighted hold (--weights env), which uses no ReEDS at all.
     """
-    if args.weights != "stoch":
+    if args.weights != "stoch" and county_weight_src(args) != "stoch":
         raise ValueError(f"no substation table for weights={args.weights!r}")
     path = PROJ_ROOT / args.stochastic_run / "substation_annual_mwh.csv"
     if not path.exists():
@@ -220,6 +225,144 @@ def substation_to_node(sub: pd.DataFrame, map_path: Path) -> tuple[pd.Series, di
 # --------------------------------------------------------------------------
 
 _CANDIDATE_CACHE: pd.DataFrame | None = None
+_LOADED_CACHE: set[str] | None = None
+_CATS_DEMAND_CACHE: pd.Series | None = None
+
+
+def _scan_control_demand() -> tuple[set[str], pd.Series]:
+    """One pass over the GenX control demand: (loaded bus ids, per-bus total MWh).
+
+    Read from the control being rescaled -- the authoritative, current copy -- NOT
+    from data/raw/CATS/Demand_data.csv, which is an earlier GenX run's output.
+    (Their loaded-bus sets happen to be identical, 2,471 buses.)  Memoized.
+    """
+    global _LOADED_CACHE, _CATS_DEMAND_CACHE
+    if _LOADED_CACHE is None or _CATS_DEMAND_CACHE is None:
+        tree = scenario_seasons()
+        loaded: set[str] = set()
+        totals: dict[str, float] = {}
+        for season, case in tree.canonical.items():
+            d = read_demand(tree.demand_path(case))
+            col = d.values.sum(axis=0)
+            # the loaded set keeps its original semantics: positive in ANY season
+            loaded |= {z for z, tot in zip(d.zones, col) if tot > 0}
+            for z, tot in zip(d.zones, col):
+                totals[z] = totals.get(z, 0.0) + float(tot)
+        _LOADED_CACHE, _CATS_DEMAND_CACHE = loaded, pd.Series(totals, dtype=float)
+    return _LOADED_CACHE, _CATS_DEMAND_CACHE
+
+
+def cats_loaded_buses() -> set[str]:
+    """Bus ids CATS itself puts load on (see `_scan_control_demand`)."""
+    return _scan_control_demand()[0]
+
+
+def cats_bus_demand() -> pd.Series:
+    """Per-bus total MWh in CATS's own control demand, summed over the 4 seasons.
+
+    Used as the within-county weight for UNCOVERED buses under
+    `uncovered_src(args) == "cats"`: where no metered substation reaches a bus, the
+    target model's own spatial pattern is better information than a flat split.
+    Consistent with the standing decision that CATS is taken as the true allocation.
+    """
+    return _scan_control_demand()[1]
+
+
+def name_assigned_nodes(args) -> set[str]:
+    """Buses the chosen nodal map reaches by DIRECT NAME MATCH, not by proximity.
+
+    Only the identity-lineage maps (nameprox / namecatch, built from
+    cecSourceDictionary.csv / basinSourceDictionary.csv) carry
+    `assignment_method == 'name'`; prox and voltres have none, so this is empty
+    for them.
+    """
+    m = pd.read_csv(map_path_for(args), dtype={"node": str})
+    if "assignment_method" not in m.columns:
+        return set()
+    hit = m.assignment_method.astype(str).str.lower().str.contains("name")
+    return set(m.loc[hit, "node"])
+
+
+def pool_src(args) -> str:
+    """Which candidate-bus pool the allocation may place load on.
+
+    'all' (default) is the 2026-08-12 rule: every Type='Substation' non-IMPORT bus
+    plus the AddedNodes CATS loads. Callers that never set `args.pool` are
+    unchanged, so every existing `genx__*` run tag keeps its meaning.
+
+    'cats_loaded' restricts to buses CATS ITSELF puts load on, plus any bus the
+    chosen map reaches by direct name match -- an identity match to a specific
+    CATS bus is evidence that bus is the right place even where CATS leaves it at
+    zero. Rationale: placing load on a bus the target model never loads puts it
+    somewhere CATS never intended, and for the uncovered (equal-split) pool there
+    is no measurement justifying it either.
+    """
+    return getattr(args, "pool", "all")
+
+
+def uncovered_src(args) -> str:
+    """How a county's UNCOVERED pool is split among its uncovered buses.
+
+    'equal' (default) is the published behaviour -- a flat `alpha * w_c / u` per
+    bus.  Callers that never set `args.uncovered` are unchanged, so every existing
+    `genx__*` run keeps its meaning.
+
+    'cats' splits that same pool in proportion to each uncovered bus's own load in
+    CATS's control demand (`cats_bus_demand`).  The pool SIZE (`alpha * w_c`) and
+    every county total are untouched -- only the split inside the uncovered pool
+    changes.  Motivation: CATS does not treat those buses as interchangeable (its
+    own MWh across a county's uncovered buses has a median CV of 0.79), so a flat
+    split discards real information for roughly half the state's load.  A county
+    whose uncovered buses carry no CATS load at all falls back to the equal split.
+    """
+    return getattr(args, "uncovered", "equal")
+
+
+def bus_types_src(args) -> str:
+    """Which CATS bus TYPES may carry load.
+
+    'all' (default) keeps the `candidate_buses()` pool as built: every
+    Type='Substation' non-IMPORT bus plus the `AddedNode` buses CATS itself loads.
+    Callers that never set `args.bus_types` are unchanged.
+
+    'substation' drops EVERY `AddedNode`, including the 607 CATS does load. Those
+    are topology helpers rather than real substations, so a consumer who wants
+    load only at physical substations asks for this; their load is then
+    redistributed within their own county by the normal county-first split, and
+    the county total is unchanged.
+
+    Independent of `pool_src`: the two compose, and this one is applied second.
+    """
+    return getattr(args, "bus_types", "all")
+
+
+def candidate_pool(args) -> pd.DataFrame:
+    """`candidate_buses()`, optionally restricted per `pool_src` / `bus_types_src`."""
+    nodes = candidate_buses()
+    out = nodes
+    if pool_src(args) != "all":
+        keep = cats_loaded_buses() | name_assigned_nodes(args)
+        out = out[out.node.isin(keep)]
+        print(f"  pool restricted to CATS-loaded (+name matches): "
+              f"{len(nodes):,} -> {len(out):,} buses")
+    if bus_types_src(args) == "substation":
+        types = pd.read_csv(CATS_BUSES)
+        for c in types.columns:
+            if pd.api.types.is_string_dtype(types[c]):
+                types[c] = types[c].str.strip().str.strip("'").str.strip()
+        sub = set(types.loc[types.Type == "Substation", "bus_i"].astype(str))
+        before = len(out)
+        out = out[out.node.isin(sub)]
+        print(f"  AddedNode buses excluded (bus_types=substation): "
+              f"{before:,} -> {len(out):,} buses")
+    out = out.reset_index(drop=True)
+    dead = set(nodes.fips_int) - set(out.fips_int)
+    if dead:
+        raise ValueError(
+            f"pool={pool_src(args)!r} / bus_types={bus_types_src(args)!r} leaves "
+            f"{len(dead)} county/counties with no candidate bus, so their share "
+            f"cannot be placed: {sorted(dead)}")
+    return out
 
 
 def candidate_buses() -> pd.DataFrame:
@@ -253,11 +396,7 @@ def candidate_buses() -> pd.DataFrame:
         # the authoritative, current copy -- not data/raw/CATS/Demand_data.csv,
         # which came from an earlier GenX run. (Their loaded-bus sets happen to
         # be identical, 2,471 buses, but the control's magnitudes are current.)
-        tree = scenario_seasons()
-        loaded = set()
-        for season, case in tree.canonical.items():
-            d = read_demand(tree.demand_path(case))
-            loaded |= {z for z, tot in zip(d.zones, d.values.sum(axis=0)) if tot > 0}
+        loaded = cats_loaded_buses()
         ids = nodes.bus_i.astype(str)
         keep = (nodes.Import != "IMPORT") & (
             (nodes.Type == "Substation") | ids.isin(loaded))
@@ -416,6 +555,73 @@ def envelope_cell_weights(args, cache: dict, cells: set) -> tuple[pd.DataFrame, 
     return cache[key]
 
 
+def county_weight_src(args) -> str:
+    """Which within-county weight source the county-first family uses.
+
+    'envelope' (default) is the published behaviour -- callers that never set
+    `args.county_weights` are byte-for-byte unchanged, so every existing
+    `genx__reedsco__*` run tag keeps its meaning.
+
+    'stoch' substitutes Approach 2's own per-substation output for the max-load
+    envelope at the ONE place the weight enters (`county_first_shares` ->
+    `df["weight"]`, and `expand_shares_to_cells` -> per-cell weights).
+    Everything downstream -- the ReEDS county totals, alpha = u/n, the equal
+    pool, the renormalisation -- is weight-source agnostic, so this is
+    county-first with a different weight, NOT a new allocation family and NOT a
+    new `Approach N`.
+
+    'external' substitutes a measurement from outside this repo, built by
+    `scripts/load_projection/external_loads/build_external_weights.py` into the
+    folder named by `args.external_loads` (which also records whether the
+    seasonal level was given a borrowed diurnal shape or left flat). It pairs
+    with that attribute the same way 'stoch' pairs with `args.stochastic_run`.
+    It is the one weight source that can reach buses the utilities do not
+    profile: reference substations with no utility load profile are placed
+    spatially, so part of what county-first otherwise fills with an UNCOVERED
+    county split becomes measurement-driven instead. Still county-first, still
+    not a new `Approach N`.
+
+    Rule-clean: the envelope was preferred over Approach 1's disaggregated MWh
+    because that MWh already descends from ReEDS, which would apply the same
+    regional signal twice. Approach 2 descends from the utility envelopes plus
+    the target series, never from ReEDS, so it carries no ReEDS signal to
+    double-count.
+
+    There is deliberately no CLI flag: exposing it would add an axis to
+    `run_tag()`, and those tags are stable citation ids. The deliverable builder
+    sets the attribute on its own args namespace.
+    """
+    src = getattr(args, "county_weights", "envelope")
+    if src not in COUNTY_WEIGHT_SRCS:
+        raise ValueError(f"unknown county_weights {src!r}; "
+                         f"expected one of {COUNTY_WEIGHT_SRCS}")
+    return src
+
+
+def county_node_weights(args, cache: dict) -> tuple[pd.Series, dict]:
+    """Per-node within-county weight for county-first -- dispatches on county_weight_src."""
+    src = county_weight_src(args)
+    if src == "external":
+        return external_node_weights(args, cache)
+    if src == "stoch":
+        sub, meta_w = substation_annual(args)
+        per_node, meta_m = substation_to_node(sub, map_path_for(args))
+        return per_node, {"weight_definition": "Approach 2 per-substation annual MWh "
+                                               f"(draw={getattr(args, 'draw', 'mean')})",
+                          "source": meta_w, "mapping": meta_m}
+    return envelope_node_weights(args, cache)
+
+
+def county_cell_weights(args, cache: dict, cells: set) -> tuple[pd.DataFrame, dict]:
+    """Per-(node, cell) within-county weight for county-first -- same dispatch."""
+    src = county_weight_src(args)
+    if src == "external":
+        return external_cell_weights(args, cache, cells)
+    if src == "stoch":
+        return stoch_cell_weights(args, cache, cells)
+    return envelope_cell_weights(args, cache, cells)
+
+
 def envelope_node_weights(args, cache: dict) -> tuple[pd.Series, dict]:
     """Per-bus weight from the substations' own max-load envelopes.
 
@@ -459,6 +665,175 @@ def envelope_node_weights(args, cache: dict) -> tuple[pd.Series, dict]:
     return cache[args.map]
 
 
+def _external_tables(args) -> tuple[Path, pd.DataFrame, pd.DataFrame]:
+    """The two weight tables written by build_external_weights.py.
+
+    `args.external_loads` names a folder under
+    data/processed/load_projection/external_loads/. Opt-in like the other
+    weight-source attributes: no CLI flag, so no run tag moves.
+    """
+    tag = getattr(args, "external_loads", None)
+    if not tag:
+        raise ValueError(
+            "county_weights='external' needs args.external_loads set to a folder "
+            "under data/processed/load_projection/external_loads/ (see "
+            "scripts/load_projection/external_loads/build_external_weights.py)")
+    d = EXTERNAL_ROOT / tag
+    sub_path = d / "external_substation_weights.csv"
+    node_path = d / "external_node_weights.csv"
+    if not sub_path.exists():
+        raise FileNotFoundError(
+            "external weight table not found: " + str(sub_path)
+            + "\nRun build_external_weights.py --input <file> first.")
+    # Vintage guard. The node weights in this artifact were produced by
+    # coordinate placement against ONE nodal-map namespace; using them on another
+    # silently mixes vintages, because the bus ids still resolve and nothing
+    # downstream can tell they came from a different map. An artifact written
+    # before --system existed has no key and is treated as "CATS", which is what
+    # it was.
+    man_path = d / "manifest.json"
+    if man_path.exists():
+        try:
+            man = json.loads(man_path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            man = {}
+        want = getattr(args, "system", "CATS")
+        got = man.get("system", "CATS")
+        if got != want:
+            raise ValueError(
+                f"external artifact '{tag}' was built against nodal namespace "
+                f"'{got}', but this run uses '{want}'.\n"
+                f"Its node weights reference buses chosen under a different "
+                f"mapping vintage, so pairing them is a silent error.\n"
+                f"Rebuild it with:  build_external_weights.py --system {want} "
+                f"--tag <new tag>   (use a NEW tag -- the folder name is the "
+                f"artifact's identity)")
+        for key, attr in (("map", "map"), ("pool", "pool"),
+                          ("bus_types", "bus_types")):
+            mv, av = man.get(key), getattr(args, attr, None)
+            if mv is not None and av is not None and mv != av:
+                print(f"  WARNING external artifact '{tag}' was built with "
+                      f"{key}={mv!r} but this run uses {av!r}; coordinate-placed "
+                      f"rows were pooled differently")
+
+    sub = pd.read_csv(sub_path)
+    sub["utility"] = sub.utility.astype(str).str.lower()
+    node = (pd.read_csv(node_path, dtype={"node": str}) if node_path.exists()
+            else pd.DataFrame(columns=["node", "month", "hour_pst", "weight"]))
+    return d, sub, node
+
+
+def external_cell_weights(args, cache: dict, cells: set) -> tuple[pd.DataFrame, dict]:
+    """Per-bus weight in each (month, hour_pst) cell, from an EXTERNAL load source.
+
+    The external analogue of envelope_cell_weights. Two inputs combine: a
+    substation-keyed table, which rides the nodal map and so honours the --map
+    axis and its tie shares, and a node-keyed table for reference substations the
+    utilities do not profile, which were placed spatially and are therefore
+    map-independent. The second is what lets this source reach municipal
+    territory the utility envelopes cannot.
+
+    Weights are LEVELS, like every other weight source here; the absolute scale
+    cancels at each normalisation site. A substation missing a cell falls back to
+    its own mean over the cells it has, mirroring the envelope fallback.
+    """
+    key = (args.map, getattr(args, "external_loads", None), tuple(sorted(cells)))
+    cache = cache.setdefault("external_cells", {})
+    if key not in cache:
+        d, sub, node = _external_tables(args)
+        cell_df = pd.DataFrame(sorted(cells), columns=["month", "hour_pst"])
+
+        sub = sub[[(m, h) in cells for m, h in zip(sub.month, sub.hour_pst)]]
+        subs = sub[["utility", "substation_name"]].drop_duplicates()
+        full = subs.merge(cell_df, how="cross").merge(
+            sub, on=["utility", "substation_name", "month", "hour_pst"], how="left")
+        fallback = sub.groupby(["utility", "substation_name"])["weight"].mean()
+        idx = pd.MultiIndex.from_frame(full[["utility", "substation_name"]])
+        n_filled = int(full.weight.isna().sum())
+        full["weight"] = full.weight.fillna(pd.Series(fallback.reindex(idx).values))
+        full["weight"] = full.weight.fillna(0.0).clip(lower=0.0)
+
+        map_path = map_path_for(args)
+        mapping = pd.read_csv(map_path, dtype={"node": str})
+        mapping["utility"] = mapping.utility.astype(str).str.lower()
+        mapped_keys = mapping[["utility", "substation_name"]].drop_duplicates()
+        n_unmapped = int(subs.merge(mapped_keys, on=["utility", "substation_name"],
+                                    how="left", indicator=True)
+                         ._merge.eq("left_only").sum())
+        j = full.merge(mapping[["utility", "substation_name", "node", "share"]],
+                       on=["utility", "substation_name"], how="inner")
+        j["weight"] = j.weight * j.share
+        parts = [j[["node", "month", "hour_pst", "weight"]]]
+
+        node = node[[(m, h) in cells for m, h in zip(node.month, node.hour_pst)]]
+        n_node_tbl = int(node.node.nunique()) if len(node) else 0
+        if len(node):
+            nd = node.copy()
+            nd["weight"] = nd.weight.fillna(0.0).clip(lower=0.0)
+            parts.append(nd[["node", "month", "hour_pst", "weight"]])
+
+        per_cell = (pd.concat(parts, ignore_index=True)
+                    .groupby(["node", "month", "hour_pst"], as_index=False)["weight"].sum())
+        manifest = d / "manifest.json"
+        meta = {
+            "weight_definition": "external seasonal load x shape, per (month, hour_pst) cell",
+            "external_dir": rel(d),
+            "external_manifest_md5": md5(manifest) if manifest.exists() else None,
+            "map_file": rel(map_path), "map_md5": md5(map_path),
+            "n_cells": len(cells),
+            "n_cells_filled_from_substation_mean": n_filled,
+            "n_substations_not_in_nodal_map": n_unmapped,
+            "n_nodes_from_substation_table": int(j.node.nunique()),
+            "n_nodes_from_node_table": n_node_tbl,
+            "n_nodes_weighted": int(per_cell[per_cell.weight > 0].node.nunique()),
+        }
+        cache[key] = (per_cell, meta)
+    return cache[key]
+
+
+def external_node_weights(args, cache: dict) -> tuple[pd.Series, dict]:
+    """Per-bus weight from an external load source, collapsed over cells.
+
+    The static read, which is what decides COVERAGE (`weight > 0`) and therefore
+    alpha. Derived from the same tables as external_cell_weights, so the two
+    cannot disagree about which buses the source reaches.
+    """
+    cache_k = (args.map, getattr(args, "external_loads", None))
+    cache = cache.setdefault("external", {})
+    if cache_k not in cache:
+        d, sub, node = _external_tables(args)
+        env = sub.groupby(["utility", "substation_name"], as_index=False)["weight"].mean()
+        n_nonpos = int((env.weight <= 0).sum())
+        env["weight"] = env.weight.clip(lower=0.0)
+
+        map_path = map_path_for(args)
+        mapping = pd.read_csv(map_path, dtype={"node": str})
+        mapping["utility"] = mapping.utility.astype(str).str.lower()
+        j = env.merge(mapping[["utility", "substation_name", "node", "share"]],
+                      on=["utility", "substation_name"], how="inner")
+        per_node = (j.weight * j.share).groupby(j.node).sum()
+
+        n_node_tbl = int(node.node.nunique()) if len(node) else 0
+        if len(node):
+            nd = node.groupby("node")["weight"].mean().clip(lower=0.0)
+            per_node = per_node.add(nd, fill_value=0.0)
+
+        manifest = d / "manifest.json"
+        meta = {
+            "weight_definition": "mean external seasonal load x shape per substation",
+            "external_dir": rel(d),
+            "external_manifest_md5": md5(manifest) if manifest.exists() else None,
+            "map_file": rel(map_path), "map_md5": md5(map_path),
+            "n_substations": int(len(env)),
+            "n_substations_nonpositive": n_nonpos,
+            "n_substations_mapped": int(j.substation_name.nunique()),
+            "n_nodes_from_node_table": n_node_tbl,
+            "n_nodes_weighted": int((per_node > 0).sum()),
+        }
+        cache[cache_k] = (per_node, meta)
+    return cache[cache_k]
+
+
 def county_first_shares(args, cache: dict) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     """County-first allocation: ReEDS sets county energy, alpha splits it inside.
 
@@ -483,9 +858,15 @@ def county_first_shares(args, cache: dict) -> tuple[pd.DataFrame, pd.DataFrame, 
     A county with no weighted substation bus is forced to alpha = 1 (equal split
     over all its buses) -- there is nothing to weight.  A county with no
     uncovered bus is forced to alpha = 0, since the equal pool has nowhere to go.
+
+    The within-county weight `w_i` comes from `county_node_weights`: the max-load
+    envelope by default, Approach 2's per-substation output when
+    `args.county_weights == "stoch"` (see `county_weight_src`).  Nothing else here
+    depends on which -- the ReEDS county totals, alpha, the equal pool and the
+    renormalisation are all weight-source agnostic.
     """
-    per_node, meta_w = envelope_node_weights(args, cache)
-    node_county = candidate_buses()
+    per_node, meta_w = county_node_weights(args, cache)
+    node_county = candidate_pool(args)
 
     reeds = reeds_county_annual()
     reeds = reeds[reeds.year == args.county_year][["fips_int", "reeds_mwh"]]
@@ -501,6 +882,7 @@ def county_first_shares(args, cache: dict) -> tuple[pd.DataFrame, pd.DataFrame, 
 
     total_ref = counties.groupby("fips_int").reeds_mwh.first().sum()
     rows, detail = [], []
+    n_unc_fallback = 0   # counties whose uncovered buses carry no CATS load
     for fips, g in counties.groupby("fips_int"):
         e_c = float(g.reeds_mwh.iloc[0]) / total_ref      # county share of the state
         cov = g[g.weight > 0]
@@ -517,8 +899,22 @@ def county_first_shares(args, cache: dict) -> tuple[pd.DataFrame, pd.DataFrame, 
             alpha = float(args.alpha)
 
         if u:
-            rows += [{"node": nd, "share": alpha * e_c / u, "pool": "equal"}
-                     for nd in unc.node]
+            # pool label stays "equal" -- it names the UNCOVERED pool, which
+            # expand_shares_to_cells carries through unchanged; its internal split
+            # is equal or CATS-proportional per uncovered_src(args)
+            w = None
+            if uncovered_src(args) == "cats":
+                w = unc.node.map(cats_bus_demand()).fillna(0.0).clip(lower=0.0)
+                if float(w.sum()) <= 0:
+                    w, n_unc_fallback = None, n_unc_fallback + 1
+            if w is None:
+                rows += [{"node": nd, "share": alpha * e_c / u, "pool": "equal"}
+                         for nd in unc.node]
+            else:
+                wsum_u = float(w.sum())
+                rows += [{"node": nd, "share": alpha * e_c * wi / wsum_u,
+                          "pool": "equal"}
+                         for nd, wi in zip(unc.node, w)]
         if s:
             wsum = cov.weight.sum()
             rows += [{"node": nd, "share": (1 - alpha) * e_c * w / wsum,
@@ -544,6 +940,11 @@ def county_first_shares(args, cache: dict) -> tuple[pd.DataFrame, pd.DataFrame, 
     county_detail = pd.DataFrame(detail)
     meta = {
         "allocation": "county_first", "alpha": args.alpha,
+        "county_weights": county_weight_src(args),
+        "pool": pool_src(args),
+        "bus_types": bus_types_src(args),
+        "uncovered_split": uncovered_src(args),
+        "n_counties_uncovered_fallback_to_equal": n_unc_fallback,
         "county_reference_year": args.county_year,
         "weights": meta_w,
         "n_counties": int(len(county_detail)),
@@ -566,7 +967,7 @@ def expand_shares_to_cells(shares: pd.DataFrame, county_detail: pd.DataFrame,
     hour.  So the equal pool is carried through unchanged and only the envelope
     pool is re-split cell by cell.
     """
-    cell_w, meta = envelope_cell_weights(args, cache, cells)
+    cell_w, meta = county_cell_weights(args, cache, cells)
     cell_df = pd.DataFrame(sorted(cells), columns=["month", "hour_pst"])
     det = county_detail.set_index("fips_int")
 
@@ -585,9 +986,17 @@ def expand_shares_to_cells(shares: pd.DataFrame, county_detail: pd.DataFrame,
     dead = cw.loc[wsum <= 0, ["fips_int", "month", "hour_pst"]].drop_duplicates()
     n_dead = len(dead)
     if n_dead and len(eq):
-        u = det.n_uncovered_nodes
         add = eq.merge(dead, on=["fips_int", "month", "hour_pst"], how="inner")
-        add["share"] = add.fips_int.map(det.envelope_pool_share) / add.fips_int.map(u)
+        if uncovered_src(args) == "cats":
+            # hand the dead cell's envelope pool out on the SAME basis the
+            # uncovered pool already uses, not a flat split
+            w = add.node.map(cats_bus_demand()).fillna(0.0).clip(lower=0.0)
+            tot = w.groupby(add.fips_int).transform("sum")
+            frac = np.where(tot > 0, w / tot.where(tot > 0),
+                            1.0 / add.fips_int.map(det.n_uncovered_nodes))
+        else:
+            frac = 1.0 / add.fips_int.map(det.n_uncovered_nodes)
+        add["share"] = add.fips_int.map(det.envelope_pool_share) * frac
         eq = pd.concat([eq, add[eq.columns]], ignore_index=True)
 
     out = pd.concat([eq[["node", "month", "hour_pst", "share"]],

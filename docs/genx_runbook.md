@@ -288,7 +288,7 @@ output from this build, so confirm it before trusting the numbers.
 | `genx/scenarios_rescaled/<tag>/p*/` | Runnable GenX cases |
 | `genx/scenarios_rescaled/<tag>/p*/results/` | **GenX output** — costs, power, prices, flow, charge, nse, curtail, commit |
 | `data/processed/load_projection/nodal/CATS/substation_node_map__{nameprox,catchment,namecatchment}.csv` | The cached map artifacts |
-| `data/checks/build_identity_catchment_maps/` | Identity pairs, map summary, LP stats |
+| `data/checks/build_identity_catchment_maps/{system}/` | Identity pairs, map summary, LP stats |
 | `data/checks/genx_rescale/demand_comparison_summary.csv` | Input-side divergence per run × season |
 | `data/checks/genx_rescale/demand_{bus,county}_deltas.csv` | Per-bus / per-county load change vs control |
 | `data/checks/genx_rescale/local_run_log.csv` | Per case: status and wall seconds |

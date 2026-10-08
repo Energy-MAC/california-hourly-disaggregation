@@ -98,7 +98,6 @@ Warnerville,PG&E,pge,SUBSTATION,substation,False,230.0,37.74197461,-120.80244785
 Stanislaus Resource Recovery Facility,Other (PGE - Assumed),pge_assumed,SUBSTATION,substation,False,230.0,37.38596444,-121.14070092,Stanislaus County,,Operational,PGE Fresno,303907.0
 Rio Oso,PG&E,pge,SUBSTATION,substation,False,230.0,38.93517384,-121.46682974,Sutter County,,Operational,PGE NGBA,304864.0
 New Colgate,PG&E,pge,SUBSTATION,substation,False,230.0,39.33096262,-121.19149152,Yuba County,,Operational,PGE NGBA,309538.0
-Potrero - (Other),Other (PGE - Assumed),pge_assumed,SUBSTATION,substation,False,230.0,37.75609912,-122.38645941,San Francisco County,San Francisco,Operational,PGE GBA,305050.0
 Altamont,PG&E,pge,SUBSTATION,substation,False,230.0,37.74837151,-121.67719524,Alameda County,,Operational,PGE GBA,306256.0
 Eastshore,PG&E,pge,SUBSTATION,substation,False,230.0,37.62507363,-122.11659806,Alameda County,Hayward,Operational,PGE GBA,301389.0
 Ravenswood,PG&E,pge,SUBSTATION,substation,False,230.0,37.49296318,-122.13793301,San Mateo County,Menlo Park,Operational,PGE GBA,308197.0
@@ -165,6 +164,7 @@ Gateway Pp,PG&E,pge,SUBSTATION,substation,False,230.0,38.01636238,-121.75853944,
 New Sub - Midway - Wheeler Ridge (Proposed),PG&E,pge,SUBSTATION,substation,False,230.0,35.15800295,-119.3488547,Kern County,,Operational,PGE Kern,303320.0
 New Sub - Rancho Seco - Bellota (Proposed),PG&E,pge,SUBSTATION,substation,False,230.0,38.21343125,-121.02442367,San Joaquin County,,Operational,PGE GBA,309360.0
 Topaz,PG&E,pge,SUBSTATION,substation,False,230.0,35.38224508,-120.05987471,San Luis Obispo County,,Operational,PGE Kern,304105.0
+Trans Bay Cable Facility,PG&E GBA,pge,SUBSTATION,substation,False,200.0,37.75482931,-122.38600672,San Francisco County,San Francisco,Operational,PGE GBA,309801.0
 Signetics,PG&E,pge,SUBSTATION,substation,False,115.0,37.38492928,-122.01296515,Santa Clara County,Sunnyvale,Operational,PGE GBA,303084.0
 Gish,PG&E,pge,SUBSTATION,substation,False,115.0,37.35410059,-121.91263016,Santa Clara County,San Jose,Operational,PGE GBA,300614.0
 Markham,PG&E,pge,SUBSTATION ASSUMED,substation,False,115.0,37.3362673,-121.87816304,Santa Clara County,San Jose,Operational,PGE GBA,
@@ -1600,6 +1600,7 @@ Peabody,PG&E,pge,SUBSTATION,substation,True,230.0,38.28545909,-121.97069289,Sola
 Fulton,PG&E,pge,SUBSTATION,substation,True,230.0,38.49781345,-122.76065559,Sonoma County,Fulton,Operational,PGE NGBA,310238.0
 Lakeville,PG&E,pge,SUBSTATION,substation,True,230.0,38.2509507,-122.58163211,Sonoma County,,Operational,PGE NGBA,304694.0
 Cottle,PG&E,pge,SUBSTATION,substation,True,230.0,37.77265169,-120.82644581,Stanislaus County,Oakdale,Operational,PGE GBA,301897.0
+Potrero - (Other),Other (PGE - Assumed),pge_assumed,SUBSTATION,substation,True,230.0,37.75609912,-122.38645941,San Francisco County,San Francisco,Operational,PGE GBA,305050.0
 Castro Valley,PG&E,pge,SUBSTATION,substation,True,230.0,37.69127602,-122.06126424,Alameda County,Castro Valley,Operational,PGE GBA,303892.0
 Las Positas,PG&E,pge,SUBSTATION,substation,True,230.0,37.70081925,-121.73323137,Alameda County,Livermore,Operational,PGE GBA,301848.0
 Newark,PG&E,pge,SUBSTATION,substation,True,230.0,37.50086816,-121.9862493,Alameda County,Fremont,Operational,PGE GBA,306611.0
@@ -1652,7 +1653,6 @@ Vasona,PG&E,pge,SUBSTATION,substation,True,230.0,37.25375803,-121.96626415,Santa
 Kern Power,PG&E,pge,SUBSTATION,substation,True,230.0,35.37999622,-119.097354,Kern County,Bakersfield,Operational,PGE Kern,306334.0
 Parkway - (PG&E),PG&E,pge,SUBSTATION,substation,True,230.0,38.1381842,-122.20909725,Solano County,Vallejo,Operational,PGE NGBA,301574.0
 Tassajara,PG&E,pge,SUBSTATION,substation,True,230.0,37.79994,-121.90784082,Contra Costa County,Blackhawk,Operational,PGE GBA,309217.0
-Trans Bay Cable Facility,PG&E GBA,pge,SUBSTATION,substation,True,200.0,37.75482931,-122.38600672,San Francisco County,San Francisco,Operational,PGE GBA,309801.0
 Britton,PG&E,pge,SUBSTATION,substation,True,115.0,37.37455725,-122.01635278,Santa Clara County,Sunnyvale,Operational,PGE GBA,306909.0
 Ames,PG&E,pge,SUBSTATION,substation,True,115.0,37.41762533,-122.06640351,Santa Clara County,Mountain View,Operational,PGE GBA,301906.0
 Lawrence,PG&E,pge,SUBSTATION,substation,True,115.0,37.39720119,-122.01031639,Santa Clara County,Sunnyvale,Operational,PGE GBA,304425.0

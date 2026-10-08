@@ -10,7 +10,7 @@ raw name differs from the CEC name.
 Why this is mostly a reuse, not a rebuild
 -----------------------------------------
 CEC is a descendant of the same dataset as DataBasin 2022 ("basin"), and it
-inherited basin's substation naming: 70 of the 79 basinSourceDictionary.csv
+inherited basin's substation naming: 79 of the 89 basinSourceDictionary.csv
 `BasinName` targets exist verbatim as a CEC name for the same utility. So the
 existing hand-curated `SourceName -> BasinName` pairs transfer almost
 one-to-one into `SourceName -> CECName`. This script:

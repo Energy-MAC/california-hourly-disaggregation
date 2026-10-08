@@ -1,4 +1,4 @@
-SourceName,CECName,Utility,source,Notes
+﻿SourceName,CECName,Utility,source,Notes
 18TH STREET,Eighteenth St,PGE,spatial_auto,auto: spatial 0.032km
 21ST AVENUE,Twenty-First Ave,PGE,spatial_auto,auto: spatial 0.021km
 6TH AVENUE,Sixth Ave,PGE,spatial_auto,auto: spatial 0.012km
@@ -135,7 +135,7 @@ SAN JOSE A,San Jose Station A,PGE,basin_reuse,
 SAN JOSE B,San Jose Station B,PGE,basin_reuse,
 SAN MATEO,San Mateo - (PG&E),PGE,name_auto,"auto: name match, 0.19km"
 SAN MIGUEL,San Miguel - (PG&E),PGE,name_auto,"auto: name match, 0.017km"
-SF A (POTRERO),Trans Bay Cable Facility,PGE,spatial_auto,auto: spatial 0.13km
+SF A (POTRERO),Potrero - (Other),PGE,spatial,"corrected 2026-10-06: spatial_auto picked the HVDC converter station 'Trans Bay Cable Facility' (200 kV, 0.130km) because it is the nearest CONFIRMED-owner CEC record; the actual substation 'Potrero - (Other)' sits at 0.019km but carries the unconfirmed 'Other (PGE - Assumed)' owner tag, so the spatial tier skipped it. 200 kV is the Trans Bay DC link voltage, not a PG&E high side. CATS bus 1503 (230 kV, Type=Substation) is 0.0013km from 'Potrero - (Other)' and 0.020km from our substation, and 230 kV matches both Potrero CEC records, so this target is right on voltage AND on identity. 'Potrero - (PG&E GBA)' (confirmed owner, 0.164km) is the HIFLD-lineage duplicate of the same yard but no CATS bus resolves to it."
 SF E,San Fran E,PGE,spatial_auto,auto: spatial 0.001km
 SF H (MARTIN),Martin,PGE,basin_reuse,
 SF M,San Fran M,PGE,spatial_auto,auto: spatial 0.007km

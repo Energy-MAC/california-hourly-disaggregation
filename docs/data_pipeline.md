@@ -137,7 +137,7 @@ download preferred; most-recent year-vintage per cell); SDGE kW→MW.
 
 ```bash
 python scripts/data/reeds/process_county_disaggregation.py     # county_ca_reference.csv (58 rows)
-python scripts/data/substations/assign_substation_counties.py  # substation_county_reeds_mapping.csv (1,329 rows)
+python scripts/data/substations/assign_substation_counties.py  # substation_county_reeds_mapping.csv (1,346 rows)
 ```
 
 `county_ca_reference.csv` (58 CA counties) from `county2zone.csv` (county→p-region),
@@ -146,11 +146,13 @@ python scripts/data/substations/assign_substation_counties.py  # substation_coun
 `ca_load_fraction` (sums to 1.0 over 58 counties), `btm_pv_{year}_mw`. Distribution: p9 =
 44 counties (37.4% of CA load), p10 = 10 (55.2%), p11 = 1 (7.1%), p8 = 3 (0.3%, PacifiCorp).
 
-`substation_county_reeds_mapping.csv` (1,329 substations; 12 excluded for missing coords):
-spatial join against TIGER 2022 county shapefile, merged to the county reference. All
-1,329 fall in p9/p10/p11; none in p8. Columns: utility, substation_name, lat, lon,
-coord_source (`util` 1,320 / `basin` 9), fips_int/fips_key, county_name, p_region,
-ca_load_fraction, btm_pv_{year}_mw.
+`substation_county_reeds_mapping.csv` (1,346 substations; 1 excluded for missing coords --
+SCE `Autobody`, which has no load data either): spatial join against TIGER 2022 county
+shapefile, merged to the county reference. All 1,346 fall in p9/p10/p11 (p9 638, p10 615,
+p11 93); none in p8. Columns: utility, substation_name, lat, lon, coord_source
+(`util` 1,336 / `basin` 10), fips_int/fips_key, county_name, p_region, ca_load_fraction,
+btm_pv_{year}_mw. (Counts refreshed 2026-10-06; the previous 1,329/12 figures predated the
+coordinate-override table.)
 
 ### EIA interchange
 
@@ -235,7 +237,7 @@ hour-beginning, hours 0–23**.
 | `eia930_operations.csv` (PUDL) | UTC | hour-ending (`datetime_utc`) | subtract **9h** (`_utc_to_pst()`) | n/a |
 | `eia_region.csv` (EIA API) | UTC | hour-ending, `YYYY-MM-DDTHH` | subtract 9h | n/a |
 | `iepr_hourly_forecast.csv` | Fixed PST | hour-ending, 1–24 (`HOUR`) | `hour0 = HOUR − 1` | No |
-| `resolve_hourly_profiles.csv` | Fixed PST | hour-beginning 0–23 (`datetime_pst`) | none | No |
+| `resolve_hourly_profiles.csv` | Fixed PST | hour-beginning 0–23 (`datetime_pst`) — `# VERIFIED` 2026-10-01, see `docs/deliverables.md` | none | No |
 | `substation_load_profiles_clean.csv` | Fixed PST | hour-beginning 0–23 (`hour_pst`) | none | No |
 | `reeds_ca_load_hourly.parquet` | Fixed PST | hour-beginning 0–23 (`hour`, int8) | none (cast int8→int64 first) | No |
 | `substation_load_profiles.csv` (raw) | Wall-clock Pacific | hour-beginning 0–23 | majority-month rule → `hour_pst` | Yes |

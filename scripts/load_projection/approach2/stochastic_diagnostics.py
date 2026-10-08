@@ -36,17 +36,23 @@ Usage:
 """
 
 import argparse
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / "src"))
+
+from load_projection.cells import MONTHHOUR  # noqa: E402
+from load_projection.envelopes import LEGACY_PERCENTILES, Z90, fit_normal  # noqa: E402
+
 SUB_FILE = ROOT / "data/processed/substations/substation_load_profiles_clean.csv"
 EIA_FILE = ROOT / "data/processed/eia/eia930_operations.csv"
 OUT_DIR = ROOT / "data/processed/load_projection/stochastic"
 
-Z90 = 1.2815515655446004  # Phi^-1(0.9): standard-normal 90th-percentile z-score
+N_CELLS = MONTHHOUR.n_cells  # 288: this script reports on the published cells
 FULL_YEAR_RANGE = (2015, 2025)  # complete PST years available in EIA-930
 
 
@@ -72,7 +78,7 @@ def hygiene_checks(sub: pd.DataFrame) -> dict:
     neg_max = sub[sub.max_load < 0]
     missing = sub[sub.min_load.isna() | sub.max_load.isna()]
     dataless_subs = missing.groupby(["utility", "substation_name"]).size()
-    dataless_subs = dataless_subs[dataless_subs == 288]
+    dataless_subs = dataless_subs[dataless_subs == N_CELLS]
     half_missing = missing[missing.min_load.notna() | missing.max_load.notna()]
 
     zw_per_sub = zw.groupby(["utility", "substation_name"]).size().sort_values(ascending=False)
@@ -97,7 +103,7 @@ def hygiene_checks(sub: pd.DataFrame) -> dict:
           f"positive (all <= {zw.min_load.max():.2f} MW): {(zw.min_load > 0).sum()}")
     print(f"  by utility: {zw.groupby('utility').size().to_dict()}")
     print(f"  substations affected: {len(zw_per_sub)}   "
-          f"fully flat (288/288 cells, all 0.0 MW): {(zw_per_sub == 288).sum()}")
+          f"fully flat ({N_CELLS}/{N_CELLS} cells, all 0.0 MW): {(zw_per_sub == N_CELLS).sum()}")
     aff_size = fleet_size.loc[zw_per_sub.index]
     print(f"  mean load of affected substations: {aff_size.mean():.2f} MW "
           f"(max {aff_size.max():.2f}) vs fleet mean {fleet_size.mean():.1f} MW")
@@ -105,7 +111,7 @@ def hygiene_checks(sub: pd.DataFrame) -> dict:
           f"of fleet total {fleet_size.sum():,.0f} MW")
 
     print(f"\nmissing cells (min and/or max NaN): {len(missing):,}")
-    print(f"  substations with NO data (288/288 NaN): {len(dataless_subs)} "
+    print(f"  substations with NO data ({N_CELLS}/{N_CELLS} NaN): {len(dataless_subs)} "
           f"({', '.join(n for _, n in dataless_subs.index)})")
     print(f"  half-missing cells (one quantile NaN): {len(half_missing)} across "
           f"{half_missing.groupby(['utility', 'substation_name']).ngroups} substations")
@@ -133,8 +139,8 @@ def hygiene_checks(sub: pd.DataFrame) -> dict:
 def write_hygiene_report(h: dict) -> Path:
     """Human-readable anatomy of every hygiene issue + handling decision."""
     inv, zw, per_sub = h["inverted"], h["zero_width"], h["zw_per_sub"]
-    full_flat = per_sub[per_sub == 288]
-    partial = per_sub[per_sub < 288]
+    full_flat = per_sub[per_sub == N_CELLS]
+    partial = per_sub[per_sub < N_CELLS]
     lines = [
         "# Substation Envelope Hygiene Report",
         "",
@@ -165,7 +171,7 @@ def write_hygiene_report(h: dict) -> Path:
         f"{len(zw):,} cells ({len(zw) / h['n_cells']:.2%}), **all SCE**, concentrated in",
         f"{len(per_sub)} substations:",
         "",
-        f"- **{len(full_flat)} substations are fully flat**: all 288 cells report exactly",
+        f"- **{len(full_flat)} substations are fully flat**: all {N_CELLS} cells report exactly",
         "  0.0 MW (e.g. Cima, Deep Springs, Iron Mt. (Sce), Mountain Pass A, Blythe",
         "  (Walc), Harper Lake, Edwards, George A.f.b.). Names indicate remote desert",
         "  sites, generation tie points, inter-utility interchange, and decommissioned",
@@ -191,7 +197,7 @@ def write_hygiene_report(h: dict) -> Path:
         "",
         f"{len(h['missing']):,} cells have min_load and/or max_load NaN:",
         "",
-        f"- **{len(h['dataless_subs'])} SCE substations have no data at all** (all 288",
+        f"- **{len(h['dataless_subs'])} SCE substations have no data at all** (all {N_CELLS}",
         f"  cells NaN): {', '.join(n for _, n in h['dataless_subs'].index)}.",
         f"- **{len(h['half_missing'])} half-missing cells** (one quantile present, the",
         "  other NaN): PGE BROWNS VALLEY (months 2-3) and PGE SOQUEL (months 3, 5, 10),",
@@ -239,8 +245,9 @@ def fit_marginals(sub: pd.DataFrame) -> pd.DataFrame:
     # collapsing to spurious zero-width cells
     lo = np.minimum(sub.min_load.values, sub.max_load.values)
     hi = np.maximum(sub.min_load.values, sub.max_load.values)
-    sub["mu"] = (lo + hi) / 2
-    sub["sigma"] = (hi - lo) / (2 * Z90)
+    # shared with src/load_projection/envelopes.py so there is one definition of
+    # the marginal fit; bit-identical to the former in-line closed form
+    sub["mu"], sub["sigma"] = fit_normal(np.stack([lo, hi]), LEGACY_PERCENTILES)
     sub["unif_width"] = (hi - lo) / 0.8
     sub["unif_a"] = lo - sub["unif_width"] / 8
     sub["unif_b"] = hi + sub["unif_width"] / 8
@@ -310,9 +317,9 @@ def caiso_year_decomposition(c: pd.DataFrame, year_start: int, year_end: int) ->
     print("=" * 70)
     print("annual mean CAISO demand (MW) - net demand is nearly flat, no strong trend:")
     print(c.groupby("year")["demand_mwh"].mean().round(0).to_string())
-    print(f"\nmedian across 288 cells (MW):")
+    print(f"\nmedian across {N_CELLS} cells (MW):")
     tbl = pd.DataFrame({
-        f"{y0}-{y1} (full, ~{len(c) // 288} obs/cell)": full.median(),
+        f"{y0}-{y1} (full, ~{len(c) // N_CELLS} obs/cell)": full.median(),
         f"{year_start}-{year_end} (selected)": window.median(),
     })
     print(tbl.round(0).to_string())
