@@ -4,8 +4,8 @@ Input is one row per (bus-list bus, sub-node), as in `data/example.csv`::
 
     bus_id,bus_label,name,lat,long,source,utility,base_kv,
     bus_number_x,summer_load,'ID',bus_number_y,winter_load,Count
-    32766,LIVE OAK,LIVE OAK,37.916422,-122.3026386,utility_attributes,pge,115,
-    32766,22.14,'1 ',32766,18.92,6
+    21005,MESQUITE,Mesquite,33.02737,-114.987,basin,iid,34.5,
+    21005,0.44,'1 ',21005,-0.036,1
 
 Output is the Approach 3 contract:
 
@@ -394,10 +394,10 @@ def match_by_name(df, prof, norm, unusable=None, basin=None,
                   sub_coords=None):
     """Exact-then-normalized name match, refusing a name several utilities use.
 
-    Ambiguity is decided on `norm(name)`, NOT on the verbatim string. Our fleet
-    carries pge "LIVE OAK" and sce "Live Oak", which differ only in CASE: a
-    verbatim index treats them as two distinct names and would silently resolve
-    "LIVE OAK" to pge on that coincidence alone. `norm` is the project's single
+    Ambiguity is decided on `norm(name)`, NOT on the verbatim string. The fleet
+    carries names that differ only in CASE between utilities; a verbatim index
+    treats those as two distinct names and would silently resolve one of them on
+    that coincidence alone. `norm` is the project's single
     name-match definition (it also strips P.T., the word "substation" and
     punctuation), and under it those two collide and are refused unless the row
     supplies `utility` -- which is the standing "names are refused, not guessed"
