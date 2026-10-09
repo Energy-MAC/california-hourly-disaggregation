@@ -506,28 +506,16 @@ example name is shared across utilities.
 
 ### `# VERIFIED` — the bus NAME is not a reliable join key
 
-On `data/example.csv` the row is named `LIVE OAK`, but its coordinates sit **4 m**
-from PG&E's profiled `EL CERRITO G`, while the nearest substation actually called
-Live Oak is **161 km** away in Sutter County (four Live Oaks exist statewide: pge
-Kern, pge Sutter, sce LA, smud Sacramento; none near these coordinates). The two
-keys resolve to different substations with different load:
-
-| candidate | reached by | mean `avg_load` | peak `max_load` |
-|---|---|---|---|
-| `pge / EL CERRITO G` | coordinates, 4 m | 34.89 MW | 53.93 MW |
-| `pge / LIVE OAK` | name | 5.14 MW | 15.15 MW |
-
-So `bus_label`/`name` is the bus **label** and need not equal a utility
-substation name. **`--match coords` is the default**, the name is kept as a
-cross-check, and any bus whose two keys disagree by more than
-`--max-name-dist-km` (25 km) is reported in `reference/column_audit.txt` rather
-than silently resolved. Do not switch the default to `name` without re-running
-`--audit` on the real file.
+A substation NAME is not a unique key in California: `Mission` is three distinct
+stations, `Potrero` three, `Newhall` and `Antelope` two each, and by bare name
+the nearest same-name candidates sit 6-1,035 km apart (`ANTELOPE` 188 km,
+`BELMONT` 501 km, `LINCOLN` 143 km). That is why `load_station` is rule 0 and
+the name route is only the fallback; see "`load_station` is the join key".
 
 A second, subtler finding: ambiguity must be decided on `norm(name)`, not the
-verbatim string. Our fleet carries pge `"LIVE OAK"` and sce `"Live Oak"`, which
-differ only in CASE, so a verbatim index treats them as two names and would
-resolve on that coincidence alone. `ingest_bus_nodes.match_by_name` uses the
+verbatim string. The fleet carries names that differ only in CASE, which a
+verbatim index would treat as two distinct names and resolve on that
+coincidence alone. `ingest_bus_nodes.match_by_name` uses the
 project's single `norm` definition.
 
 ### `load_station` is the join key (2026-10-08)

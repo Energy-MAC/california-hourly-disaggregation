@@ -126,35 +126,37 @@ shape. A mapping covering a small share of buses is not a coverage gap in the
 load; it is a smaller share of load whose *hourly shape* is measurement-driven,
 and `reference/column_audit.txt` states that share explicitly.
 
-### 1. The bus name and the bus coordinates disagree in the supplied file
+### 1. How a bus is matched, and why not by coordinates
 
-The example bus is named `LIVE OAK`, but its coordinates sit **4 m** from PG&E's
-metered substation `EL CERRITO G`. The nearest substation actually *called* Live
-Oak is **161 km** away in Sutter County. (There are four Live Oaks in
-California — PG&E Kern, PG&E Sutter, SCE Los Angeles, SMUD Sacramento — and none
-is near these coordinates.)
+Matching runs in this order:
 
-The two candidate substations are not interchangeable:
+1. **`load_station`** — the key supplied with the bus list, naming the metered
+   substation to join on together with `utility`. A blank value means "no load
+   profile exists for this station", not a failed lookup.
+2. **`station_name`** — exact match against the metered fleet, then the basin
+   name dictionary. Used only where `load_station` is blank.
+3. Coordinates — available, but **off by default**.
 
-| candidate | how it was reached | mean load | peak |
-|---|---|---|---|
-| `pge / EL CERRITO G` | coordinates, 4 m | 34.89 MW | 53.93 MW |
-| `pge / LIVE OAK` | name | 5.14 MW | 15.15 MW |
+A substation name is not a unique key in California: `Mission` is three distinct
+stations, `Potrero` three, `Newhall` and `Antelope` two each, and by bare name
+the nearest same-name candidates sit **6 to 1,035 km apart**. That is why the
+`load_station` key exists and why the name route is only a fallback.
 
-**This package used the coordinates**, on the reasoning that a bus *name* is
-a bus label and need not equal a utility substation name, whereas the coordinate
-is a measured location. `reference/column_audit.txt` lists every bus where the
-two keys disagree. **Please check that list** — if a name is in fact the
-authoritative key for your bus list, the package must be rebuilt with
-`--match name`, and the shapes will change.
+Coordinates are not used because proximity is not identity. The nearest metered
+substation within a few kilometres is routinely a *different* station — and
+SDG&E coordinates in particular carry a median error of 1.3 km even on exact
+name matches. `reference/column_audit.txt` lists every bus where the name route
+and the (unused) coordinate route would differ; those are informational, not
+defects.
 
 ### 2. Negative sub-node loads
 
-Sub-node `EE` carries a negative load (summer −7.74, winter −1.85), which reads
-as net generation rather than demand. The default handling is `net-base`:
+Some sub-nodes carry a negative load, which reads as net generation (or an
+energy-efficiency adjustment) rather than demand. The default handling is
+`net-base`:
 
-- the **bus** is allocated its signed sibling **net** (winter 96.40, not the
-  positive-only 98.25), and
+- the **bus** is allocated its signed sibling **net** rather than the sum of its
+  positive siblings, and
 - that net is split among the bus's **positive** sub-nodes only, so the negative
   sub-node is written as literal `0.0`.
 
